@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP SIJPA-fer</title>
+        <title>SIJPA::Bienvenida</title>
+        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <header class="cabecera">
+            <img id="logo" src="img/logo.png" alt="Logo Inegi">
+            <img id="titulo" src="img/titulo.png" alt="Logo Inegi">
+        </header>
+        <div id="doscolores"></div>
     </body>
 </html>

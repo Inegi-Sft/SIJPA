@@ -12,32 +12,71 @@ and open the template in the editor.
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0;
 }
 
 body{
     margin: 0;
+    background-color: #C5C5C5;
+    font-family: Myriad Pro;
+    color: #003057;
+    font-size: 18px;
 }
 
 .cabecera{
     background-color: #27251F;
     margin: 0;
     width: 100%;
-    text-align: center;
+    position: fixed;
 }
 
 .cabecera #logo{
-    height: 100px;
+    height: 50px;
     margin: 5px 20px;
-    float: left;
 }
 
 .cabecera #titulo{
-    height: 65px;
-    margin: 20px 0;
+    height: 35px;
+    margin: 5px;
 }
 
-#doscolores{
+.cabecera #doscolores{
     height: 7px;
     background-color: #706F6F;
     border-right: 500px solid #0077CB;
+}
+
+.contenedor{
+    text-align: center;
+    margin: 20px;
+}
+
+.contenedor h1{
+    font-size: 35px;
+    padding: 25px 0;
+}
+
+.contenedor h2{
+    font-size: 25px;
+    padding: 15px 0;
+}
+
+.contenedor .parrafo{
+    text-align: justify;
+    padding: 10px;
+    margin-bottom:20px;
+}
+
+.contenedor input{
+    margin:20px;
+}
+
+.contenedor input[type=submit]{
+    background-color: #0077CB;
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    width: 10%;
+    height: 40px;
+    font-size: 16px;
 }

@@ -17,12 +17,49 @@
         <section class="contenedor">
             <h1>Datos Generales</h1>
             <form action="" method="post">
-                <label for="nombre">Nombre(s):</label>
-                <input type="text" name="nombre" id="nombre">
-                <label for="appellidoP">Apellido Paterno:</label>
-                <input type="text" name="appellidoP" id="appellidoP">
-                <label for="appellidoM">Apellido Materno:</label>
-                <input type="text" name="appellidoM" id="appellidoM">
+                <table class="tablaFormu" border="1">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label for="seleccion">Ejercicio:</label>
+                            <select name="seleccion" id="seleccion">
+                                <option value="vacio">--Seleccionar--</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="causasPena" id="causasPena" placeholder="Causas Penales">
+                        </td>
+                        <td>
+                            <input type="text" name="mediProteccion" id="mediProteccion" placeholder="Medidas Proteccion">
+                        </td>
+                        <td>
+                            <input type="text" name="providenPrecauto" id="providenPrecauto" placeholder="Providencias Precautorias">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="actosInvestiga" id="actosInvestiga" placeholder="Actos de Investigación Previa">
+                        </td>
+                        <td>
+                            <input type="text" name="excusa" id="excusa" placeholder="Excusa">
+                        </td>
+                        <td>
+                            <input type="text" name="recursa" id="recursa" placeholder="Recursación">
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                
+                
+                
             </form>
         </section>
     </body>

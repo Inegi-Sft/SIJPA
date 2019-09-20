@@ -18,7 +18,7 @@ and open the template in the editor.
 body{
     margin: 0;
     background-color: #C5C5C5;
-    font-family: Myriad Pro;
+    font-family: Arial;
     color: #003057;
     font-size: 18px;
 }
@@ -66,6 +66,10 @@ body{
     margin-bottom:20px;
 }
 
+.contenedor .tablaFormu{
+    width: 100%;
+}
+
 .contenedor input{
     margin:20px;
 }
@@ -95,10 +99,9 @@ body{
     padding: 2px 5px;
     border-radius: 5px;
     box-shadow: 0 1px #fff;
-    width: 15%;
+    width: 60%;
     height: 30px;
     font-size: 16px;
-    font-weight: bold;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -106,7 +109,22 @@ body{
     transition: all 0.3s ease;
 }
 
-input[type=text]:focus {
-    box-shadow: 0 0 5px 5px rgba(55, 166, 155, 0.3);
+.contenedor input[type=text]:focus{
+    box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
     outline: 0;
+}
+
+.contenedor select{
+   border: 1px solid #0077CB;
+   font-size: 14px;
+   padding: 2px 5px;
+   width: 60%;
+   height: 30px;
+   font-weight: bold;
+   margin: 20px;
+   -webkit-transition: all 0.3s ease;
+   -moz-transition: all 0.3s ease;
+   -o-transition: all 0.3s ease;
+   -ms-transition: all 0.3s ease;
+   transition: all 0.3s ease;
 }

@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20/09/2019, 11:43:59 AM
+    Author     : FERMIN.GOMEZ
+*/
+.pestana {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+/* Style the buttons that are used to open the pestana Content */
+.pestana button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.pestana button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current pestanalink class */
+.pestana button.active {
+    background-color: #ccc;
+}
+
+/* Style the pestana Content */
+.pestanaContent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}

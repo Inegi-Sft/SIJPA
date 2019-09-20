@@ -48,7 +48,7 @@ body{
 
 .contenedor{
     text-align: center;
-    margin: 20px;
+    margin: 0 20px 0 20px;
 }
 
 .contenedor h1{
@@ -73,10 +73,21 @@ body{
 
 .contenedor input[type=submit]{
     background-color: #0077CB;
+    color: #FFFFFF;
     border: none;
     border-radius: 5px;
-    color: #FFFFFF;
     width: 10%;
     height: 40px;
     font-size: 16px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.contenedor input[type=submit]:hover{
+    background-color: #FFFFFF;
+    color: #0077CB;
+    width: 15%;
 }

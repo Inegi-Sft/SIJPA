@@ -128,3 +128,7 @@ body{
    -ms-transition: all 0.3s ease;
    transition: all 0.3s ease;
 }
+
+label{
+    display: block;
+}

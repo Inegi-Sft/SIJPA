@@ -17,7 +17,7 @@
         <section class="contenedor">
             <h1>Datos Generales</h1>
             <form action="" method="post">
-                <table class="tablaFormu" border="1">
+                <table class="tablaFormu">
                     <tr>
                         <td></td>
                         <td>
@@ -54,12 +54,24 @@
                             <input type="text" name="recursa" id="recursa" placeholder="Recursación">
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="otras" id="otras" placeholder="Otras cargas de Trabajo">
+                        </td>
+                        <td>
+                            <input type="text" name="causasPenaPend" id="causasPenaPend" placeholder="Causas Pendientes Concluir">
+                        </td>
+                        <td>
+                            <input type="text" name="causasPenaPend" id="causasPenaPend" placeholder="Causas P. Pendientes Concluir">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="text" name="causasPenaBaja" id="causasPenaBaja" placeholder="Causas P. Bajas de Sistema"></td>
+                        <td></td>
+                    </tr>
                 </table>
-                
-                
-                
-                
-                
+                <input type="submit" name="guardar" id="guardar" value="Guardar">
             </form>
         </section>
     </body>

@@ -37,7 +37,7 @@
                 solicite el Instituto..."
             </p>
             <form action="datosGral.jsp" method="post">
-                <input type="submit" name="aceptar" id="aceptar" value="Acepto"> 
+                <input type="submit" name="aceptar" id="aceptar" value="Acepto">
             </form>
         </section>
     </body>

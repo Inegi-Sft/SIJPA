@@ -16,6 +16,14 @@
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
             <h1>Datos Generales</h1>
+            <form action="" method="post">
+                <label for="nombre">Nombre(s):</label>
+                <input type="text" name="nombre" id="nombre">
+                <label for="appellidoP">Apellido Paterno:</label>
+                <input type="text" name="appellidoP" id="appellidoP">
+                <label for="appellidoM">Apellido Materno:</label>
+                <input type="text" name="appellidoM" id="appellidoM">
+            </form>
         </section>
     </body>
 </html>

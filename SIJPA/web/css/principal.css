@@ -90,3 +90,23 @@ body{
     color: #0077CB;
     width: 15%;
 }
+
+.contenedor input[type=text]{
+    padding: 2px 5px;
+    border-radius: 5px;
+    box-shadow: 0 1px #fff;
+    width: 15%;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+input[type=text]:focus {
+    box-shadow: 0 0 5px 5px rgba(55, 166, 155, 0.3);
+    outline: 0;
+}

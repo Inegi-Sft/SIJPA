@@ -7,6 +7,7 @@ and open the template in the editor.
     Created on : 18/09/2019, 03:17:07 PM
     Author     : CARLOS.SANCHEZG
 */
+@import "pestanas.css";
 
 *{
     -webkit-box-sizing: border-box;
@@ -17,7 +18,8 @@ and open the template in the editor.
 
 body{
     margin: 0;
-    background-color: #C5C5C5;
+    /*background-color: #C5C5C5;*/
+    background-image: url("../img/t2.jpg");
     font-family: Arial;
     color: #003057;
     font-size: 18px;
@@ -95,7 +97,7 @@ body{
     width: 15%;
 }
 
-.contenedor input[type=text]{
+.contenedor input[type=text], .contenedor input[type=date]{
     padding: 2px 5px;
     border-radius: 5px;
     box-shadow: 0 1px #fff;
@@ -109,8 +111,13 @@ body{
     transition: all 0.3s ease;
 }
 
+
 .contenedor input[type=text]:focus{
     box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
+}
+
+input[type=text]:focus, input[type=text]:focus {
+    box-shadow: 0 0 5px 5px rgba(55, 166, 155, 0.3);
     outline: 0;
 }
 

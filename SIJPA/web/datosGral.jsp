@@ -17,7 +17,7 @@
         <section class="contenedor">
             <h1>Datos Generales</h1>
             <form action="" method="post">
-                <table class="tablaFormu">
+                <table class="tablaFormu" border="0">
                     <tr>
                         <td></td>
                         <td>
@@ -34,40 +34,52 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="causasPena" id="causasPena" placeholder="Causas Penales">
+                            <label for="causasPena">Causas Penales:</label>
+                            <input type="text" name="causasPena" id="causasPena" placeholder="Causas Penales" required>
                         </td>
                         <td>
-                            <input type="text" name="mediProteccion" id="mediProteccion" placeholder="Medidas Proteccion">
+                            <label for="mediProteccion">Medidas de Protección:</label>
+                            <input type="text" name="mediProteccion" id="mediProteccion" placeholder="Medidas Proteccion" required>
                         </td>
                         <td>
-                            <input type="text" name="providenPrecauto" id="providenPrecauto" placeholder="Providencias Precautorias">
+                            <label for="providenPrecauto">Providencias Precautorias:</label>
+                            <input type="text" name="providenPrecauto" id="providenPrecauto" placeholder="Providencias Precautorias" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="actosInvestiga" id="actosInvestiga" placeholder="Actos de Investigación Previa">
+                            <label for="actosInvestiga">Prueba Anticipada:</label>
+                            <input type="text" name="pruebaAnti" id="pruebaAnti" placeholder="Prueba Anticipada" required>
                         </td>
                         <td>
-                            <input type="text" name="excusa" id="excusa" placeholder="Excusa">
+                            <label for="actosInvestiga">Actos investigación con Autorizacion Previa:</label>
+                            <input type="text" name="actosInvestiga" id="actosInvestiga" placeholder="Actos de Investigación Previa" required>
                         </td>
                         <td>
-                            <input type="text" name="recursa" id="recursa" placeholder="Recursación">
+                            <label for="excusa">Excusas:</label>
+                            <input type="text" name="excusa" id="excusa" placeholder="Excusa" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="otras" id="otras" placeholder="Otras cargas de Trabajo">
+                            <label for="recusa">Recusación:</label>
+                            <input type="text" name="recusa" id="recusa" placeholder="Recusación" required>
                         </td>
                         <td>
-                            <input type="text" name="causasPenaPend" id="causasPenaPend" placeholder="Causas Pendientes Concluir">
+                            <label for="otras">Otras Cargas:</label>
+                            <input type="text" name="otras" id="otras" placeholder="Otras cargas de Trabajo" required>
                         </td>
                         <td>
-                            <input type="text" name="causasPenaPend" id="causasPenaPend" placeholder="Causas P. Pendientes Concluir">
+                            <label for="causasPenaPend">Causas Penales Pendientes de Conclusión:</label>
+                            <input type="text" name="causasPenaPend" id="causasPenaPend" placeholder="Causas Pendientes Concluir" required>
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label for="causasPenaBaja">Causas Penales Bajas de Sistema:</label>
+                            <input type="text" name="causasPenaBaja" id="causasPenaBaja" placeholder="Causas P. Bajas de Sistema" required>
+                        </td>
                         <td></td>
-                        <td><input type="text" name="causasPenaBaja" id="causasPenaBaja" placeholder="Causas P. Bajas de Sistema"></td>
                         <td></td>
                     </tr>
                 </table>

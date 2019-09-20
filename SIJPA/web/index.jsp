@@ -36,7 +36,9 @@
                 de proporcionar la información básica que hubieren obtenido en el ejercicio de sus funciones y sirva para generar Nacional, que les 
                 solicite el Instituto..."
             </p>
-            <input type="submit" name="aceptar" value="Acepto">
+            <form action="datosGral.jsp" method="post">
+                <input type="submit" name="aceptar" id="aceptar" value="Acepto"> 
+            </form>
         </section>
     </body>
 </html>

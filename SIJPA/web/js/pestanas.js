@@ -8,7 +8,6 @@ document.getElementById("p1").style.display = "block";
 document.getElementById("btn1").click();
 
 function openPestana(evt, pestana) {
-    // Declare all variables
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them

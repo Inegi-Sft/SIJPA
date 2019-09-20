@@ -12,7 +12,7 @@
         <title>SIJPA::Juzgados</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body >
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
             <h1>Juzgados</h1>
@@ -28,8 +28,12 @@
             <form action="" method="post">
                 <!-- Contenido pestañas -->
                 <div id="p1" class="pestanaContent">
-                    <h3>Datos del Juez</h3>
-                    <p>London is the capital city of England.</p>
+                    <br/><h3>Datos del Juez</h3><br/>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre(s)" required/>
+                    <input type="text" name="apaterno" id="apaterno" placeholder="Apellido Paterno" required/>
+                    <input type="text" name="amaterno" id="amaterno" placeholder="Apellido Materno" required/>
+                    <label for="fGestion">Fecha inicio gestion:</label>
+                    <input type="date" name="fGestion" id="fGestion" />
                 </div>
 
                 <div id="p2" class="pestanaContent">

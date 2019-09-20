@@ -9,8 +9,9 @@ and open the template in the editor.
 */
 .pestana {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    border: 1px solid #AAA;
+    background-color:#EAEAEA;
+    border-bottom: none;
 }
 /* Style the buttons that are used to open the pestana Content */
 .pestana button {
@@ -30,13 +31,14 @@ and open the template in the editor.
 
 /* Create an active/current pestanalink class */
 .pestana button.active {
-    background-color: #ccc;
+    background-color: #fff;
 }
 
 /* Style the pestana Content */
 .pestanaContent {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #AAA;
     border-top: none;
+    background-color: #fff;
 }

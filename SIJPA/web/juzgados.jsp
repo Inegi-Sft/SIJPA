@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
         <title>SIJPA::Juzgados</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/pestanas.js"></script>
     </head>
     <body >
         <%@include file="cabecera.jsp"%>
@@ -18,7 +19,7 @@
             <h1>Juzgados</h1>
 
             <div class="pestana">
-                <button class="pestanaLinks" onclick="openPestana(event, 'p1')" id="btn1">Datos del Juez</button>
+                <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1" style="display: block">Datos del Juez</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Datos Órgano Jurisdiccional</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Forma de Organizacion del Órgano</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p4')">Datos Geográficos</button>
@@ -27,7 +28,7 @@
 
             <form action="" method="post">
                 <!-- Contenido pestañas -->
-                <div id="p1" class="pestanaContent">
+                <div id="p1" class="pestanaContent" style="display: block">
                     <br/><h3>Datos del Juez</h3><br/>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombre(s)" required/>
                     <input type="text" name="apaterno" id="apaterno" placeholder="Apellido Paterno" required/>
@@ -55,6 +56,5 @@
                 </div>
             </form>
         </section>
-        <script type="text/javascript" src="js/pestanas.js"></script>
     </body>
 </html>

@@ -100,7 +100,8 @@ body{
     width: 15%;
 }
 
-.contenedor input[type=text], .contenedor input[type=date]{
+.contenedor input[type=text], .contenedor input[type=date], .contenedor input[type=number], 
+.contenedor input[type=tel], .contenedor input[type=email]{
     padding: 2px 5px;
     border-radius: 5px;
     box-shadow: 0 1px #fff;
@@ -115,7 +116,8 @@ body{
 }
 
 
-.contenedor input[type=text]:focus{
+.contenedor input[type=text]:focus, .contenedor input[type=date]:focus, .contenedor input[type=number]:focus, 
+.contenedor input[type=tel]:focus, .contenedor input[type=email]:focus{
     box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
 }
 

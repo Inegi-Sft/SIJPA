@@ -26,7 +26,7 @@
                 <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos de quien captura</button>
             </div>
 
-            <form action="" method="post">
+            <form action="#" method="post">
                 <!-- Contenido pestañas -->
                 <div id="p1" class="pestanaContent" style="display: block">
                     <br/><h3>Datos del Juez</h3><br/>
@@ -49,7 +49,7 @@
                             <td></td>
                             <td>
                                 <label for="fGestion">Fecha inicio gestion:</label>
-                                <input type="date" name="fGestion" id="fGestion" />
+                                <input type="date" class="txtMedia" name="fGestion" id="fGestion" />
                             </td>
                             <td></td>
                         </tr>
@@ -66,11 +66,11 @@
                             </td>
                             <td>
                                 <label for="numJuzgado">Número de Juzgado</label>
-                                <input type="number" name="numJuzgado" id="numJuzgado" required/>
+                                <input type="number" class="txtMedia" name="numJuzgado" id="numJuzgado" required/>
                             </td>
                             <td>
                                 <label for="numDistrito">Número del Distrito Judicial</label>
-                                <select name="numDistrito" id="numDistrito" required>
+                                <select name="numDistrito" class="txtMedia" id="numDistrito" required>
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         NumerosRomanos nRomanosR = new NumerosRomanos(1, 99);
@@ -85,8 +85,8 @@
                         <tr>
                             <td>
                                 <label for="">Lada y Teléfono del Juzgado</label>
-                                <input type="number" name="lada" id="lada" placeholder="Lada"/>
-                                <input type="tel" name="tel" id="tel" placeholder="Telefono"/>
+                                <input type="number" class="txtSmall" name="lada" id="lada" placeholder="Lada"/>
+                                <input type="tel" class="txtMedia" name="tel" id="tel" placeholder="Telefono"/>
                             </td>
                             <td>
                                 <label for="correo">Correo del Juzgado:</label>
@@ -183,12 +183,12 @@
                             </td>
                             <td>
                                 <label for="">No. Exterior / No. Interiior</label>
-                                <input type="text" class="num" name="noExterior" id="noExterior" />
-                                <input type="text" class="num" name="noInterior" id="noInterior" />
+                                <input type="text" class="txtSmall" name="noExterior" id="noExterior" />
+                                <input type="text" class="txtSmall" name="noInterior" id="noInterior" />
                             </td>
                             <td>
                                 <label for="cp">Codigo Postal</label>
-                                <input type="number" class="num2" name="cp" id="cp" />
+                                <input type="number" class="txtMedia" name="cp" id="cp" />
                             </td>
                         </tr>
                     </table>

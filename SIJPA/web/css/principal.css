@@ -43,8 +43,8 @@ body{
 
 .cabecera #doscolores{
     height: 7px;
-    background-color: #706F6F;
-    border-right: 500px solid #0077CB;
+    background-color: #003057;
+    border-right: 50em solid #0077CB;
 }
 
 .contenedor{
@@ -54,7 +54,7 @@ body{
 
 .contenedor h1{
     font-size: 35px;
-    padding: 25px 0;
+    padding: 20px 0;
 }
 
 .contenedor h2{
@@ -120,10 +120,12 @@ body{
 }
 
 .contenedor select{
+   background-color: #27251F;
+   color: #fff;
    border: 1px solid #0077CB;
    font-size: 14px;
    padding: 2px 5px;
-   width: 60%;
+   width: 300px;
    height: 30px;
    margin:0 20px 20px 20px;
    -webkit-transition: all 0.3s ease;

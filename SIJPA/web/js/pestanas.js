@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 
-document.getElementById("p1").style.display = "block";
-document.getElementById("btn1").click();
-
 function openPestana(evt, pestana) {
     var i, tabcontent, tablinks;
 

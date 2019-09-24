@@ -29,7 +29,7 @@
             <form action="#" method="post">
                 <!-- Contenido pestañas -->
                 <div id="p1" class="pestanaContent" style="display: block">
-                    <br/><h3>Datos del Juez</h3><br/>
+                    <h3>Datos del Juez</h3>
                     <table  class="tablaFormu">
                         <tr>
                             <td>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div id="p2" class="pestanaContent">
-                    <br/><h3>Datos Órgano Jurisdiccional</h3><br/>
+                    <h3>Datos Órgano Jurisdiccional</h3>
                     <table  class="tablaFormu">
                         <tr>
                             <td>
@@ -98,7 +98,7 @@
                 </div>
 
                 <div id="p3" class="pestanaContent">
-                    <br/><h3>Forma de Organizacion del Órgano</h3><br/>
+                    <h3>Forma de Organizacion del Órgano</h3>
                     <table  class="tablaFormu">
                         <tr>
                             <td></td>
@@ -132,7 +132,7 @@
                     </table>
                 </div>
                 <div id="p4" class="pestanaContent">
-                    <br><h3>Datos Geográficos</h3><br>
+                    <h3>Datos Geográficos</h3>
                     <table  class="tablaFormu" >
                         <tr>
                             <td>
@@ -194,7 +194,7 @@
                     </table>
                 </div>
                 <div id="p5" class="pestanaContent">
-                    <br><h3>Datos de quien captura</h3><br>
+                    <h3>Datos de quien captura</h3>
                     <table  class="tablaFormu">
                         <tr>
                             <td>

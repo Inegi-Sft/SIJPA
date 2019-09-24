@@ -22,7 +22,7 @@
                     <tr>
                         <td>
                             <label for="seleccion">Ejercicio:</label>
-                            <select name="seleccion" id="seleccion">
+                            <select name="seleccion" id="seleccion" class="txtMedia">
                                 <option value="vacio">--Seleccionar--</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>

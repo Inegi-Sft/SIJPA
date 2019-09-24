@@ -151,3 +151,6 @@ label{
     font-weight: bold;
     margin: 20px auto 10px auto;
 }
+
+.txtSmall{ width: 70px;}
+.txtMedia{ width: 160px;}

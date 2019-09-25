@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 @import "pestanas.css";
 @import "menu.css";
+@import "Tablas.css";
 
 *{
     -webkit-box-sizing: border-box;
@@ -153,6 +154,20 @@ label{
     margin: 20px auto 10px auto;
 }
 
-.txtSmall{ width: 70px;}
-.txtMedia{ width: 160px;} 
-.txtLong{ width: 300px;}
+.contenedor .txtSmall{ width: 70px;}
+.contenedor .txtMedia{ width: 160px;}
+.contenedor .txtLong{ width: 300px;}
+
+.comentarios{
+    margin: 0 auto;
+    width: 85%;
+}
+
+.comentarios h2{
+    text-align: left;
+}
+
+.comentarios textarea{
+    width: 100%;
+    height: 100px;
+}

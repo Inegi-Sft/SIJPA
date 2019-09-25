@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/09/2019, 12:04:33 PM
+    Author     : CESAR.OSORIO
+*/
+
+.tablasRegis {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 85%;
+  margin: 20px auto;
+}
+
+.tablasRegis td, .tablasRegis th {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+.tablasRegis tr{background-color: #fff;}
+
+.tablasRegis tr:nth-child(even){background-color: #f2f2f2;}
+
+.tablasRegis tr:hover {background-color: #ddd;}
+
+.tablasRegis th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0077C8;
+  color: white;
+}
+
+.tablasRegis tr input, .tablasRegis tr select{
+    margin: 5px;
+}

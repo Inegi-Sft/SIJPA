@@ -9,19 +9,21 @@ and open the template in the editor.
 */
 .pestana {
     overflow: hidden;
-    border: 1px solid #AAA;
-    background-color:#EAEAEA;
+    background-color: transparent;
     border-bottom: none;
 }
 /* Style the buttons that are used to open the pestana Content */
 .pestana button {
-    background-color: inherit;
+    background-color: #706F6F;
+    color: #fff;
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
+    border-radius: 0 20px 0 0;
+    margin: 0 1px 0 0;
 }
 
 /* Change background color of buttons on hover */
@@ -32,13 +34,21 @@ and open the template in the editor.
 /* Create an active/current pestanalink class */
 .pestana button.active {
     background-color: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+    border-bottom: none;
+/*    border-color: #000;
+    border-width: 5px;*/
 }
 
 /* Style the pestana Content */
 .pestanaContent {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #AAA;
+    border: 1px solid #aaa;
     border-top: none;
     background-color: #fff;
 }
+
+.contenedor .pestanaContent .txtSmall{ width: 70px;}
+.contenedor .pestanaContent .txtMedia{ width: 160px;}

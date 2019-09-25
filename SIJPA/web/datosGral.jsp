@@ -4,6 +4,7 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="ConexionDB.Conexion_Mysql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,6 @@
             <form action="" method="post">
                 <table class="tablaFormu" border="0">
                     <tr>
-                        <td></td>
                         <td>
                             <label for="seleccion">Ejercicio:</label>
                             <select name="seleccion" id="seleccion">
@@ -30,9 +30,6 @@
                                 <option value="2020">2020</option>
                             </select>
                         </td>
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td>
                             <label for="causasPena">Causas Penales:</label>
                             <input type="text" name="causasPena" id="causasPena" placeholder="Causas Penales" required>
@@ -41,12 +38,12 @@
                             <label for="mediProteccion">Medidas de Protección:</label>
                             <input type="text" name="mediProteccion" id="mediProteccion" placeholder="Medidas Proteccion" required>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <label for="providenPrecauto">Providencias Precautorias:</label>
                             <input type="text" name="providenPrecauto" id="providenPrecauto" placeholder="Providencias Precautorias" required>
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <label for="actosInvestiga">Prueba Anticipada:</label>
                             <input type="text" name="pruebaAnti" id="pruebaAnti" placeholder="Prueba Anticipada" required>
@@ -55,12 +52,12 @@
                             <label for="actosInvestiga">Actos investigación con Autorizacion Previa:</label>
                             <input type="text" name="actosInvestiga" id="actosInvestiga" placeholder="Actos de Investigación Previa" required>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <label for="excusa">Excusas:</label>
                             <input type="text" name="excusa" id="excusa" placeholder="Excusa" required>
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <label for="recusa">Recusación:</label>
                             <input type="text" name="recusa" id="recusa" placeholder="Recusación" required>
@@ -69,17 +66,16 @@
                             <label for="otras">Otras Cargas:</label>
                             <input type="text" name="otras" id="otras" placeholder="Otras cargas de Trabajo" required>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <label for="causasPenaPend">Causas Penales Pendientes de Conclusión:</label>
                             <input type="text" name="causasPenaPend" id="causasPenaPend" placeholder="Causas Pendientes Concluir" required>
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <label for="causasPenaBaja">Causas Penales Bajas de Sistema:</label>
                             <input type="text" name="causasPenaBaja" id="causasPenaBaja" placeholder="Causas P. Bajas de Sistema" required>
                         </td>
-                        <td></td>
                         <td></td>
                     </tr>
                 </table>

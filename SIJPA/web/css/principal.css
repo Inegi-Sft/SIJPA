@@ -8,6 +8,7 @@ and open the template in the editor.
     Author     : CARLOS.SANCHEZG
 */
 @import "pestanas.css";
+@import "menu.css";
 
 *{
     -webkit-box-sizing: border-box;
@@ -109,7 +110,7 @@ body{
     padding: 2px 5px;
     border-radius: 5px;
     box-shadow: 0 1px #fff;
-    width: 300px;
+    /*width: 300px;*/
     height: 30px;
     font-size: 16px;
     -webkit-transition: all 0.3s ease;
@@ -131,7 +132,7 @@ body{
    border: 1px solid #0077CB;
    font-size: 14px;
    padding: 2px 5px;
-   width: 300px;
+   /*width: 300px;*/
    height: 30px;
    margin:0 20px 20px 20px;
    -webkit-transition: all 0.3s ease;
@@ -153,5 +154,5 @@ label{
 }
 
 .txtSmall{ width: 70px;}
-.txtMedia{ width: 160px;}
+.txtMedia{ width: 160px;} 
 .txtLong{ width: 300px;}

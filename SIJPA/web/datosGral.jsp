@@ -12,10 +12,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Datos Generales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <script src="js/menu.js" type="text/javascript"></script>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
+            <div>
+                <%@include file="menu.jsp"%>
+            </div>
             <h1>Datos Generales</h1>
             <form action="" method="post">
                 <table class="tablaFormu" border="0">
@@ -32,49 +36,49 @@
                         </td>
                         <td>
                             <label for="causasPena">Causas Penales:</label>
-                            <input type="text" name="causasPena" id="causasPena" placeholder="Causas Penales" required>
+                            <input type="text" name="causasPena" id="causasPena" class="txtMedia" required>
                         </td>
                         <td>
                             <label for="mediProteccion">Medidas de Protección:</label>
-                            <input type="text" name="mediProteccion" id="mediProteccion" placeholder="Medidas Proteccion" required>
+                            <input type="text" name="mediProteccion" id="mediProteccion" class="txtMedia" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="providenPrecauto">Providencias Precautorias:</label>
-                            <input type="text" name="providenPrecauto" id="providenPrecauto" placeholder="Providencias Precautorias" required>
+                            <input type="text" name="providenPrecauto" id="providenPrecauto" class="txtMedia" required>
                         </td>
                         <td>
                             <label for="actosInvestiga">Prueba Anticipada:</label>
-                            <input type="text" name="pruebaAnti" id="pruebaAnti" placeholder="Prueba Anticipada" required>
+                            <input type="text" name="pruebaAnti" id="pruebaAnti" class="txtMedia" required>
                         </td>
                         <td>
                             <label for="actosInvestiga">Actos investigación con Autorizacion Previa:</label>
-                            <input type="text" name="actosInvestiga" id="actosInvestiga" placeholder="Actos de Investigación Previa" required>
+                            <input type="text" name="actosInvestiga" id="actosInvestiga" class="txtMedia" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="excusa">Excusas:</label>
-                            <input type="text" name="excusa" id="excusa" placeholder="Excusa" required>
+                            <input type="text" name="excusa" id="excusa" class="txtMedia" required>
                         </td>
                         <td>
                             <label for="recusa">Recusación:</label>
-                            <input type="text" name="recusa" id="recusa" placeholder="Recusación" required>
+                            <input type="text" name="recusa" id="recusa" class="txtMedia" required>
                         </td>
                         <td>
                             <label for="otras">Otras Cargas:</label>
-                            <input type="text" name="otras" id="otras" placeholder="Otras cargas de Trabajo" required>
+                            <input type="text" name="otras" id="otras" class="txtMedia" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="causasPenaPend">Causas Penales Pendientes de Conclusión:</label>
-                            <input type="text" name="causasPenaPend" id="causasPenaPend" placeholder="Causas Pendientes Concluir" required>
+                            <input type="text" name="causasPenaPend" id="causasPenaPend" class="txtMedia" required>
                         </td>
                         <td>
                             <label for="causasPenaBaja">Causas Penales Bajas de Sistema:</label>
-                            <input type="text" name="causasPenaBaja" id="causasPenaBaja" placeholder="Causas P. Bajas de Sistema" required>
+                            <input type="text" name="causasPenaBaja" id="causasPenaBaja" class="txtMedia" required>
                         </td>
                         <td></td>
                     </tr>

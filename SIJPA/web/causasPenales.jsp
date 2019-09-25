@@ -11,42 +11,90 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/datatables.min.css">
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/funciones.js"></script>
+        <script type="text/javascript" src="js/datatables.min.js"></script>
+        
+       
     </head>
     <body>
         <%@include file="cabecera.jsp" %>
         <section class="contenedor">
             <h1>Causas Penales</h1>
-            <table id="example" class="display" style="width:100%">
+            <span class="totExp">Total de Causas Penales:</span>
+            <!--<span class="addExp"><a href="#" ><img src="img/add3.png" width="20" height="20" />Agregar Expediente</a></span>-->
+            
+            <table id="causas" class="myTable">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th colspan="10" class="filaBtn" style="border: 0px;">
+                            <button class="add"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Expediente</th>
+                        <th>Tipo de Accion de Remision</th>
+                        <th>Adolescentes</th>
+                        <th>Victimas</th>
+                        <th>Conductas Antisociales</th>
+                        <th>Organo Competente</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Inconsistencias</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
+                        <td>fer</td>
+                        <td>1</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>2</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
                     </tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </tfoot>
             </table>
         </section>
     </body>

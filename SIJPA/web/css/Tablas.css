@@ -12,13 +12,48 @@ and open the template in the editor.
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 85%;
-  margin: 20px auto;
+  margin: 80px auto;
 }
 
 .tablasRegis td, .tablasRegis th {
   border: 1px solid #ddd;
   padding: 5px;
 }
+/*.tablasRegis .boton{
+    text-align: right;
+    background-image: url(../img/t2.jpg);
+    border: 0;
+}*/
+/* css para boton dentro de un th*/
+.btnTabla{
+    background-color: #0077CB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    width: 11%;
+    height: 33px;
+    font-size: 14px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+.btnTabla img{
+    vertical-align: text-bottom ;
+}
+.btnTabla{
+    position: fixed;
+    top: 193px;
+    right: 121px;    
+}
+.btnTabla:hover{
+    background-color: #00CBCB;
+    color: #FFFFFF;
+    width: 14%;
+}
+/**/
 
 .tablasRegis tr{background-color: #fff;}
 
@@ -30,7 +65,7 @@ and open the template in the editor.
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #0077C8;
+  background-color: #003057;
   color: white;
 }
 

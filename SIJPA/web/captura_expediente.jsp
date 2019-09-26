@@ -39,7 +39,7 @@
                             <input type="date" name="fIngreso" id="fIngreso" class="txtMedia" required>
                         </td>
                         <td>
-                            <label for="compe">Competencia</label>
+                            <label for="compe">Organo Competente</label>
                             <select name="compe" id="compe" class="txtSelect">
                                 <option value="0">Seleccione</option>
                                 <%

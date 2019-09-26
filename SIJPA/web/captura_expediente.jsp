@@ -40,8 +40,8 @@
                         </td>
                         <td>
                             <label for="compe">Competencia</label>
-                            <select name="compe" id="compe" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                            <select name="compe" id="compe" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%
                                     //conexion a base
                                 %>
@@ -61,8 +61,8 @@
                     <tr>
                         <td>
                             <label for="ExpAcomu" >Expediente acumulado</label>
-                            <select name="ExpAcomu" id="ExpAcomu" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                            <select name="ExpAcomu" id="ExpAcomu" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %>
@@ -114,99 +114,99 @@
                     <th>ID</th><th>Tipo de audiencias</th><th>Aplica</th><th>Cantidad</th>
                     </tr>
                     <tr>
-                        <td>1</td><td>Audiencia inicial </td><td> <select name="Aplaudi1" id="Aplica1" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>1</td><td>Audiencia inicial </td><td> <select name="Aplaudi1" id="Aplica1" class="txtSelect">
+                                <option value="0" >Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi1" id="Cantaudi1" ></td>
                     </tr>
                     <tr>
-                        <td>2</td><td>Audiencia para solicitar orden de aprehensión</td><td><select name="Aplaudi2" id="Aplica2" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>2</td><td>Audiencia para solicitar orden de aprehensión</td><td><select name="Aplaudi2" id="Aplica2" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi2" id="Cantaudi2" ></td>
                     </tr>
                     <tr>
-                        <td>3</td><td>Audiencia para solicitar orden de comparecencia </td><td><select name="Aplaudi3" id="Aplica3" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>3</td><td>Audiencia para solicitar orden de comparecencia </td><td><select name="Aplaudi3" id="Aplica3" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi3" id="Cantaudi3" ></td>
                     </tr>
                     <tr>
-                        <td>4</td><td>Audiencia de sobreseimiento</td><td><select name="Aplica4" id="Aplaudi4" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>4</td><td>Audiencia de sobreseimiento</td><td><select name="Aplica4" id="Aplaudi4" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi4" id="Cantaudi4" ></td>
                     </tr>
                     <tr>
-                        <td>5</td><td>Audiencia de suspensión del proceso</td><td><select name="Aplica5" id="Aplaudi5" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>5</td><td>Audiencia de suspensión del proceso</td><td><select name="Aplica5" id="Aplaudi5" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi5" id="Cantaudi5" ></td>
                     </tr>
                     <tr>
-                        <td>6</td><td>Audiencia de reapertura del proceso</td><td><select name="Aplica6" id="Aplaudi6" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>6</td><td>Audiencia de reapertura del proceso</td><td><select name="Aplica6" id="Aplaudi6" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi6" id="Cantaudi6" ></td>
                     </tr>
                     <tr>
-                        <td>7</td><td>Audiencia de acumulación de procesos</td><td><select name="Aplica7" id="Aplaudi7" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>7</td><td>Audiencia de acumulación de procesos</td><td><select name="Aplica7" id="Aplaudi7" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi7" id="7" ></td>
                     </tr>
                     <tr>
-                        <td>8</td><td>Audiencia de separación de procesos</td><td><select name="Aplica8" id="Aplaudi8" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>8</td><td>Audiencia de separación de procesos</td><td><select name="Aplica8" id="Aplaudi8" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi8" id="Cantaudi8" ></td>
                     </tr>
                     <tr>
-                        <td>9</td><td>Audiencia de revisión de medidas cautelares</td><td><select name="Aplica9" id="Aplaudi9" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>9</td><td>Audiencia de revisión de medidas cautelares</td><td><select name="Aplica9" id="Aplaudi9" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi9" id="Cantaudi9" ></td>
                     </tr>
                     <tr>
-                        <td>10</td><td>Audiencia de solicitud de acuerdo reparatorio</td><td><select name="Aplica10" id="Aplaudi10" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>10</td><td>Audiencia de solicitud de acuerdo reparatorio</td><td><select name="Aplica10" id="Aplaudi10" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi10" id="Cantaudi10" ></td>
                     </tr>
                     <tr>
-                        <td>11</td><td>Audiencia de solicitud de suspensión condicional del proceso</td><td><select name="Aplaudi11" id="Aplica11" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>11</td><td>Audiencia de solicitud de suspensión condicional del proceso</td><td><select name="Aplaudi11" id="Aplica11" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi11" id="Cantaudi11" ></td>
                     </tr>
                     <tr>
-                        <td>12</td><td>Audiencia de procedimiento abreviado</td><td><select name="Aplica12" id="Aplaudi12" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>12</td><td>Audiencia de procedimiento abreviado</td><td><select name="Aplica12" id="Aplaudi12" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi12" id="Cantaudi12" ></td>
                     </tr>
                     <tr>
-                        <td>13</td><td>Audiencia intermedia </td><td><select name="Aplica13" id="Aplaudi13" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>13</td><td>Audiencia intermedia </td><td><select name="Aplica13" id="Aplaudi13" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi13" id="Cantaudi13" ></td>
                     </tr>
                     <tr>
-                        <td>14</td><td>Otro tipo de audiencia </td><td><select name="Aplica14" id="Aplaudi14" class="txtSmall">
-                                <option value="0">--Seleccione--</option>
+                        <td>14</td><td>Otro tipo de audiencia </td><td><select name="Aplica14" id="Aplaudi14" class="txtSelect">
+                                <option value="0">Seleccione</option>
                                 <%                                        
                                     //conexion a base
                                 %></td><td><input type="number" name="Cantaudi14" id="Cantaudi14" ></td>

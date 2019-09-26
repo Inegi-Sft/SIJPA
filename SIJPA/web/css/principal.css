@@ -157,6 +157,7 @@ label{
 .contenedor .txtSmall{ width: 70px;}
 .contenedor .txtMedia{ width: 160px;}
 .contenedor .txtLong{ width: 300px;}
+.contenedor .txtSelect{width: 105px;}
 
 .comentarios{
     margin: 0 auto;

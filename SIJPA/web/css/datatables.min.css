@@ -19,7 +19,7 @@
 
 .myTable th, .myTable td{
     border: 1px solid #ddd;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .myTable tr{
@@ -65,7 +65,12 @@ table.dataTable tbody th,table.dataTable tbody td{
     transition: all 0.3s ease;
 }
 #causas_filter, #causas_length{
-    height: 50px;
+    height: 60px;
+    
+}
+#causas_filter{
+    position: fixed;
+    right: 15%;
 }
 .add{
     background-color: #0077CB;
@@ -85,18 +90,17 @@ table.dataTable tbody th,table.dataTable tbody td{
 .add img{
     vertical-align: text-bottom ;
 }
+.add{
+    position: fixed;
+    top: 193px;
+    right: 20px;
+    
+}
 .add:hover{
     background-color: #00CBCB;
     color: #FFFFFF;
     width: 14%;
 }
-.filaBtn{
-    text-align: right;
-    background-image:  url("../img/t2.jpg");
-    margin: 0 0 0 0;
-    padding:  0 0 0 0px;
-}
-
 .totExp{
     display: block;
     float: left;

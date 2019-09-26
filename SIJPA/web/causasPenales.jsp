@@ -15,23 +15,15 @@
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/funciones.js"></script>
         <script type="text/javascript" src="js/datatables.min.js"></script>
-        
-       
     </head>
     <body>
         <%@include file="cabecera.jsp" %>
         <section class="contenedor">
             <h1>Causas Penales</h1>
             <span class="totExp">Total de Causas Penales:</span>
-            <!--<span class="addExp"><a href="#" ><img src="img/add3.png" width="20" height="20" />Agregar Expediente</a></span>-->
-            
+            <button class="add"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</button>
             <table id="causas" class="myTable">
                 <thead>
-                    <tr>
-                        <th colspan="10" class="filaBtn" style="border: 0px;">
-                            <button class="add"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</button>
-                        </th>
-                    </tr>
                     <tr>
                         <th>Expediente</th>
                         <th>Tipo de Accion de Remision</th>
@@ -69,6 +61,90 @@
                         <td>asdf</td>
                         <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>3</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td>asdf</td>
+                        <td><a href="#"><img src='img/editar.png'/></a></td>
+                        <td><a href="#"><img src='img/delete.png'/></a></td>
                     </tr>
                     <tr>
                         <td>asdf</td>

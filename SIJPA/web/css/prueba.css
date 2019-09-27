@@ -9,13 +9,23 @@ and open the template in the editor.
 */
 
 /* IMPORTANT STUFF */
-
-section {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+nav {
+    width: 275px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.site-wrap {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.push-wrap {
+    -webkit-transition: all 300ms ease 0;
+    -moz-transition: all 300ms ease 0;
+    -o-transition: all 300ms ease 0;
+    transition: all 300ms ease 0;
 
     -webkit-transform: translate(0, 0);
     -moz-transform: translate(0, 0);
@@ -29,8 +39,7 @@ section {
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
-
-.show-nav section {
+.show-nav .push-wrap {
     -webkit-transform: translate(275px, 0);
     -moz-transform: translate(275px, 0);
     -ms-transform: translate(275px, 0);
@@ -44,31 +53,28 @@ section {
     transform: translate3d(275px, 0, 0);
 }
 
+
+
 /* BASE CSS */
+body {
+    background: #e3e3e3;
+    margin: 0;
+}
+a {
+    transition: all 300ms ease;
+}
 nav {
-    width: 280px;
-    /*height: 100%;*/
-    position: absolute;
-    top: 72px;
-    left: 0;
-    background: #706F6F;
+    background: #2b343f;
     text-align: center;
     -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
     -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
     box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
 }
-
 nav ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-
 nav ul li a {
     display: block;
     text-decoration: none !important;
@@ -77,57 +83,41 @@ nav ul li a {
     font-size: 18px;
     color: #fff;
 }
-
 nav ul li a:hover {
-    background: #00CBCB;
+    background: #4EFFFF;
     color: #000;
 }
-
-section {
-    background-image: url("../img/t2.jpg");
+article {
+    position: relative;
+    min-height: 1500px;
+    background: #e3e3e3;
+    z-index: 9;
+    width: 100%;
 }
-
-section .toggle-nav {
-    height: 50px;
-    width: 80px;
+article h1 {
+    text-align: center;
+    margin: 0;
+}
+article p {
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 40px;
+}
+article a.toggle-nav {
     position: absolute;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.toggle-nav-inner{
-    top: 10px;
-}
-
-.toggle-nav-inner, .toggle-nav-inner:after, .toggle-nav-inner:before {
-    background-color: #0077CB;
-    position: absolute;
-    width: 40px;
-    height: 4px;
-    border-radius: 5px;
-    content: '';
+    font-size: 25px;
+    color: rgb(255, 139, 139);
+    top: 0;
     left: 0;
-    transition-timing-function: ease;
-    transition-duration: .3s;
-    transition-property: transform,opacity;
+    background: #444;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
 }
-
-.toggle-nav-inner:before {
-    top: 10px;
+article a.toggle-nav:hover {
+    color: red; 
 }
-
-.toggle-nav-inner:after {
-    top: 20px;
-}
-
-.toggle-nav.open .toggle-nav-inner {
-    transform: translate3d(0,10px,0) rotate(45deg);
-}
-
-.toggle-nav.open .toggle-nav-inner:before {
-    transform: translate3d(0,-10px,0) rotate(90deg);
-}
-
-.toggle-nav.open .toggle-nav-inner:after {
-    transform: translate3d(0,-20px,0) rotate(-90deg);
+i {
+    color: pink;
 }

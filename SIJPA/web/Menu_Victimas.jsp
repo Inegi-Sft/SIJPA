@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="css/jquery.fancybox.css">
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="js/funciones.js"></script>
         <script type="text/javascript" src="js/datatables.min.js"></script>
     </head>

@@ -1,4 +1,4 @@
-/*body.compensate-for-scrollbar {
+body.compensate-for-scrollbar {
     overflow: hidden;
 }
 
@@ -120,7 +120,7 @@
 
 .fancybox-slide {
     -webkit-backface-visibility: hidden;
-     Using without prefix would break IE11 
+    Using without prefix would break IE11 
     display: none;
     height: 100%;
     left: 0;
@@ -892,4 +892,4 @@
     .fancybox-thumbs__list a {
         max-width: calc(100% - 10px);
     }
-}*/
+}

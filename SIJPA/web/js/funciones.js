@@ -30,9 +30,16 @@ $(document).ready(function () {
     });
     
     $('.exp').fancybox({
-        
         autoDimensions: true,
-        height: '1500',
+        height: '1500px',
         type: 'iframe'
     }); 
+//$('#exp').fancybox({
+//            'width'         : 500,
+//            'height'         : 700, 
+//            'autoScale'         : true,
+//            'transitionIn'      : 'elastic',
+//            'transitionOut'      : 'elastic',
+//            'type'            : 'iframe'
+//         });
 });

@@ -8,11 +8,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+ 
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Víctimas</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/datatables.min.css">
+        <link rel="stylesheet" href="css/jquery.fancybox.css">
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.fancybox.js"></script>
         <script type="text/javascript" src="js/funciones.js"></script>
         <script type="text/javascript" src="js/datatables.min.js"></script>
     </head>
@@ -22,7 +27,7 @@
         <section class="contenedor">
             <h1>Víctimas</h1>
             <span class="totExp">Total de Victimas:</span>
-            <button class="btnTabla"><img src="img/add3.png" width="20" height="20" /> Agregar Víctima</button>
+            <button class="btnTabla" name="agrgavic" id="agegavic"><img src="img/add3.png" width="20" height="20" /> Agregar Víctima</button>
             <table id="victima" class="tablasRegis">
                 <thead>
 <!--                    <tr>
@@ -51,7 +56,9 @@
 
 
 
-            </table>      
+            </table>    
+            
+            <a class='exp' href='victimas.jsp'><img src='imagenes/editar.png'></a> 
 
         </section>    
     </body>

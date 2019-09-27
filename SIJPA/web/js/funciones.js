@@ -28,4 +28,11 @@ $(document).ready(function () {
             }
         }
     });
+    
+    $('.exp').fancybox({
+        
+        autoDimensions: true,
+        height: '1500',
+        type: 'iframe'
+    }); 
 });

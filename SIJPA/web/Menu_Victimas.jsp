@@ -59,7 +59,7 @@
 
             </table>    
             
-            <a class='exp' href='victimas.jsp'><img src='imagenes/editar.png'></a> 
+            <a class='exp' href='victimas.jsp'><img src='img/add.png'></a> 
 
         </section>    
     </body>

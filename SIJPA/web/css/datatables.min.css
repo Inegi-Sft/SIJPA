@@ -69,7 +69,7 @@ table.dataTable tbody th,table.dataTable tbody td{
     
 }
 #causas_filter{
-    position: fixed;
+    position: relative;
     right: 15%;
 }
 .add{
@@ -91,7 +91,7 @@ table.dataTable tbody th,table.dataTable tbody td{
     vertical-align: text-bottom ;
 }
 .add{
-    position: fixed;
+    position: absolute;
     top: 193px;
     right: 20px;
     

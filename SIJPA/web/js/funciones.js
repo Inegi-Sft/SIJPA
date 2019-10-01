@@ -31,8 +31,8 @@ $(document).ready(function () {
     
     $('.exp').fancybox({
         autoDimensions: true,
-        height: '1500px',
-        type: 'iframe'
+        type: 'iframe',
+        height : '3000px'
     }); 
 //$('#exp').fancybox({
 //            'width'         : 500,

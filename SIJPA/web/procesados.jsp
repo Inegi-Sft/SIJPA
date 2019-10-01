@@ -23,7 +23,7 @@
                         <tr>
                             <td>
                                 <label for="presentacionAdo">Tipo presentacion adolescente</label>
-                                <select name="presentacionAdo" id="presentacionAdo" required>
+                                <select class="selPro"  name="presentacionAdo" id="presentacionAdo" required>
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -32,7 +32,7 @@
                             </td>
                             <td>
                                 <label for="tipoDetencion">Tipo de detencion</label>
-                                <select name="tipoDetencion" id="tipoDetencion" required>
+                                <select class="selPro" name="tipoDetencion" id="tipoDetencion" required>
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -41,7 +41,7 @@
                             </td>
                             <td>
                                 <label for="imputable">Imputabilidad</label>
-                                <select name="imputable" id="imputable" required>
+                                <select class="selPro" name="imputable" id="imputable" required>
                                     <option value="0">--Seleccione--</option>
                                     <%                                //conexion a base
                                     %>
@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 <label for="participacion">Grado de participacion</label>
-                                <select name="participacion" id="participacion" >
+                                <select class="selPro" name="participacion" id="participacion" >
                                     <option value="0">--Seleccione--</option>
                                     <%                                //conexion a base
                                     %>
@@ -59,7 +59,7 @@
                         <tr>
                             <td>
                                 <label for="reincidencia">Condicion de reincidencia</label>
-                                <select name="reincidencia" id="reincidencia">
+                                <select class="selPro" name="reincidencia" id="reincidencia">
                                     <option value="0">--Seleccione--</option>
                                     <%                                //conexion a base
                                     %>
@@ -67,7 +67,7 @@
                             </td>
                             <td>
                                 <label for="psicofisico">Estado psicofisico al momento de cometer la conducta</label>
-                                <select name="psicofisico" id="psicofisico">
+                                <select class="selPro" name="psicofisico" id="psicofisico">
                                     <option value="0">--Seleccione--</option>
                                     <%                                //conexion a base
                                     %>
@@ -75,7 +75,7 @@
                             </td>
                             <td>
                                 <label for="interprete">¿Requirió traductor y/o intérprete?</label>
-                                <select name="interprete" id="interprete">
+                                <select class="selPro" name="interprete" id="interprete">
                                     <option value="0">--Seleccione--</option>
                                     <%                                //conexion a base
                                     %>
@@ -83,7 +83,7 @@
                             </td>
                             <td>
                                 <label for="defensor">Tipo de defensor</label>
-                                <select name="defensor" id="defensor">
+                                <select class="selPro" name="defensor" id="defensor">
                                     <option value="0">--Seleccione--</option>
                                     <%                                //conexion a base
                                     %>
@@ -93,68 +93,71 @@
                         <tr>
                             <td>
                                 <label for="representante">Tipo de representante legal</label>
-                                <select name="representante" id="representante">
+                                <select class="selPro" name="representante" id="representante">
                                     <option value="0">--Seleccione--</option>
                                     <% //conexion a base
                                     %>
                                 </select>
                             </td>
-                            <td colspan="3">
-                                <label>Delitos atribuidos al adolescente</label>
-                                <table border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Conducta antisocial</th>
-                                            <th>No. Victimas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%                                            //conexion a bd
-                                        %>
-                                        <tr>
-                                            <td>000/2019-d1</td>
-                                            <td>Algo</td>
-                                            <td>
-                                                <select name="noVict" id="noVict">
-                                                    <option value="0">0</option>
-                                                    <% //conexion a base
-                                                    %>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000/2019-d2</td>
-                                            <td>Algo</td>
-                                            <td>
-                                                <select name="noVict" id="noVict">
-                                                    <option value="0">0</option>
-                                                    <% //conexion a base
-                                                    %>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <td colspan="3" align="center">
+                                <label class="lblColor">Delitos atribuidos al adolescente</label>
+                                <table class="tblDelitos">
+                                    <tr>
+                                        <th width="150">Id</th>
+                                        <th width="400">Conducta antisocial</th>
+                                        <th width="120">No. Victimas</th>
+                                    </tr>
+                                    <%                                            //conexion a bd
+                                    %>
+                                    <tr>
+                                        <td >000/2019-d1</td>
+                                        <td >Algoa asdf as df asd fasd fas dfasdfasdfasdf as fdsa</td>
+                                        <td >
+                                            <select name="noVict" id="noVict">
+                                                <option value="0">0</option>
+                                                <option value="0">12</option>
+                                                <option value="0">24</option>
+                                                <% //conexion a base
+                                                %>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>004000/2019-d2</td>
+                                        <td>Algo</td>
+                                        <td>
+                                            <select name="noVict" id="noVict">
+                                                <option value="0">0</option>
+                                                <% //conexion a base
+                                                %>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>         
                             </td>
                         </tr>
                     </table>
-                </fieldset>
+                </fieldset><br>
                 <fieldset>
                     <legend>Características sociodemográficas </legend>
-                    <table>
+                    <table class="tablaFormu">
                         <tr>
-                            <td>
-                                <label for="nombre">Nombre(s)</label>
-                                <input type="text" name="nombre" id="nombre" required/>
-                            </td>
-                            <td>
-                                <label for="apaterno">Apellido Paterno</label>
-                                <input type="text" name="apaterno" id="apaterno" />
-                            </td>
-                            <td>
-                                <label for="amaterno">Apellido Materno</label>
-                                <input type="text" name="amaterno" id="amaterno" />
+                            <td colspan="3">
+                                <fieldset>
+                                    <legend>Nombre del adolescente</legend>
+                                    <div class="cols">
+                                        <label for="nombre">Nombre(s)</label>
+                                        <input type="text" name="nombre" id="nombre" required/>
+                                    </div>
+                                    <div class="cols">
+                                        <label for="apaterno">Apellido Paterno</label>
+                                        <input type="text" name="apaterno" id="apaterno" />
+                                    </div>
+                                    <div class="cols">
+                                        <label for="amaterno">Apellido Materno</label>
+                                        <input type="text" name="amaterno" id="amaterno" />
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
                                 <label for="curp">Curp</label>
@@ -164,10 +167,9 @@
                         <tr>
                             <td>
                                 <label for="sexo">Sexo</label>
-                                <select name="sexo" id="sexo" required>
+                                <select class="selPro" name="sexo" id="sexo" required>
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
@@ -182,77 +184,79 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>
-                                <label for="nPais">Pais</label>
-                                <select name="nPais" id="nPais">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="nEntidad">Entidad</label>
-                                <select name="nEntidad" id="nEntidad">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="nMunicipio">Municipio o Demarcacion Territorial</label>
-                                <select name="nMunicipio" id="nMunicipio">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
-                                </select>
+                            <td colspan="3">
+                                <fieldset>
+                                    <legend>Lugar de nacimiento</legend>
+                                    <div class="cols">
+                                        <label for="nPais">Pais</label>
+                                        <select class="selPro" name="nPais" id="nPais">
+                                            <option value="0">--Seleccione--</option>
+                                            <%                                        //conexion a base
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols">
+                                        <label for="nEntidad">Entidad</label>
+                                        <select class="selPro" name="nEntidad" id="nEntidad">
+                                            <option value="0">--Seleccione--</option>
+                                            <%                                        //conexion a base
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols">
+                                        <label for="nMunicipio">Municipio o Demarcacion Territorial</label>
+                                        <select class="selPro" name="nMunicipio" id="nMunicipio">
+                                            <option value="0">--Seleccione--</option>
+                                            <%                                        //conexion a base
+                                            %>
+                                        </select>
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
                                 <label for="nacionalidad">Nacionalidad</label>
-                                <select name="nacionalidad" id="nacionalidad">
+                                <select class="selPro" name="nacionalidad" id="nacionalidad">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label for="residencia">Lugar de residencia</label>
-                                <select name="residencia" id="residencia">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="rEntidad">Entidad</label>
-                                <select name="rEntidad" id="rEntidad">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="rMunicipio">Municipio</label>
-                                <select name="rMunicipio" id="rMunicipio">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
-                                </select>
+                            <td colspan="3">
+                                <fieldset>
+                                    <legend>Lugar habitual de residencia</legend>
+                                    <div class="cols">
+                                        <label for="residencia">Lugar de residencia</label>
+                                        <select class="selPro" name="residencia" id="residencia">
+                                            <option value="0">--Seleccione--</option>
+                                            <%                                        //conexion a base
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols">
+                                        <label for="rEntidad">Entidad</label>
+                                        <select class="selPro" name="rEntidad" id="rEntidad">
+                                            <option value="0">--Seleccione--</option>
+                                            <%                                        //conexion a base
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols">
+                                        <label for="rMunicipio">Municipio</label>
+                                        <select class="selPro" name="rMunicipio" id="rMunicipio">
+                                            <option value="0">--Seleccione--</option>
+                                            <%                                        //conexion a base
+                                            %>
+                                        </select>
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
                                 <label for="edoCivil">Situación conyugal</label>
-                                <select name="edoCivil" id="edoCivil">
+                                <select class="selPro" name="edoCivil" id="edoCivil">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
@@ -260,37 +264,33 @@
                         <tr>
                             <td>
                                 <label for="discapacidad">¿Tiene alguna discapacidad?</label>
-                                <select name="discapacidad" id="discapacidad">
+                                <select class="selPro" name="discapacidad" id="discapacidad">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select> 
                             </td>
                             <td>
                                 <label for="alfabet">Condicion alfabetismo</label>
-                                <select name="alfabet" id="alfabet">
+                                <select class="selPro" name="alfabet" id="alfabet">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="estudios">Grado de Estudios</label>
-                                <select name="estudios" id="estudios">
+                                <select class="selPro" name="estudios" id="estudios">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="condiEstudiante">Condición de estudiante</label>
-                                <select name="condiEstudiante" id="condiEstudiante">
+                                <select class="selPro" name="condiEstudiante" id="condiEstudiante">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
@@ -298,37 +298,33 @@
                         <tr>
                             <td>
                                 <label for="hablaEsp">Dominio del español</label>
-                                <select name="hablaEsp" id="hablaEsp">
+                                <select class="selPro" name="hablaEsp" id="hablaEsp">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="poblaIndigena">¿Pertenece a alguna población indígena?</label>
-                                <select name="poblaIndigena" id="poblaIndigena">
+                                <select class="selPro" name="poblaIndigena" id="poblaIndigena">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="puebloIndigena">Tipo de pueblo indígena</label>
-                                <select name="puebloIndigena" id="puebloIndigena">
+                                <select class="selPro" name="puebloIndigena" id="puebloIndigena">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="hablaIndigena">¿Habla lengua indígena o dialecto?</label>
-                                <select name="hablaIndigena" id="hablaIndigena">
+                                <select class="selPro" name="hablaIndigena" id="hablaIndigena">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
@@ -336,44 +332,40 @@
                         <tr>
                             <td>
                                 <label for="lenguaIndigena">Familia lingüística</label>
-                                <select name="lenguaIndigena" id="lenguaIndigena">
+                                <select class="selPro" name="lenguaIndigena" id="lenguaIndigena">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="ocupacion">Ocupación</label>
-                                <select name="ocupacion" id="ocupacion">
+                                <select class="selPro" name="ocupacion" id="ocupacion">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
+                                    <%                                        //conexion a base
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="condicionActi">Condicion de Actividad</label>
-                                <select name="condicionActi" id="condicionActi">
+                                <select class="selPro" name="condicionActi" id="condicionActi">
                                     <option value="0">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
+                                    <%                                        //conexion a base
+%>
                                 </select>
                             </td>
                             <td></td>
                         </tr>
-                        <tr>
-                            <td colspan="4">
-                               <label for="comentarios">Comentarios:</label>
-                               <textarea name="comentarios" id="comentarios"></textarea>
-                            </td>
-                        </tr>
                     </table>
                 </fieldset>
+                <div class="comentarios">
+                    <h2>Comentarios</h2>
+                    <textarea name="comentarios" id="comentarios"></textarea>
+                </div>
                 <br/>
-                <input type="submit" name="guardar" value="Guardar"/>
+                <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
+            <br/><br/><br/>
         </section>
     </body>
 </html>

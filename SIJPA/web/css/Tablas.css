@@ -37,3 +37,65 @@ and open the template in the editor.
 .tablasRegis tr input, .tablasRegis tr select{
     margin: 5px;
 }
+
+fieldset{
+    background-color: #fff;
+    /*background-color: #EBF4FA;*/
+    border-color:  #0077CB;
+    border-radius: 8px;
+    
+}
+fieldset legend{
+    color: #0077CB;
+    text-align: left;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.tblDelitos {
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 0px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+.tblDelitos th{
+    text-align: center;
+    background-color: #0077C8;
+    color: white;
+    padding: 5px;
+}
+.tblDelitos td, .tblDelitos th {
+  border: 1px solid #ddd;
+}
+.contenedor .tablaFormu .tblDelitos td{
+  width: auto;
+}
+.tblDelitos tr{background-color: #fff;}
+.tblDelitos tr:nth-child(even){background-color: #EBF4FA;}
+.tblDelitos tr:hover {background-color: #d8e5f1;}
+.tblDelitos tr select{
+   margin: 5px;
+   background-color: #003057;
+   height: 25px;
+}
+.tablaFormu .selPro{
+   margin: 5px;
+   background-color: #003057;
+}
+.lblColor{
+    color: #0077C8;
+}
+.tablaFormu .cols{
+    float: left;
+}
+.tablaFormu fieldset{
+    border-style: dotted;
+    border-right: none;
+    border-left: none;
+    background-color: #EBF4FA;
+/*    background-color: #eee;*/
+}
+.tablaFormu fieldset legend{
+    font-size: 18px;
+}

@@ -20,7 +20,7 @@
             <form action="" method="post">
                 <div>
                     <fieldset>
-                        <legend style="text-align: left">Caracteristicas Generales</legend>
+                        <legend>Caracteristicas Generales</legend>
                         <table class="tablaFormu" border="0">
                             <tr>
                                 <td>
@@ -29,7 +29,7 @@
                                 </td>
                                 <td>
                                     <label for="tipo_victima">Tipo de Víctima</label>
-                                    <select name="tipo_victima" id="tipo_victima" class="txtSelect" required="">
+                                    <select name="tipo_victima" id="tipo_victima" class="txtSelect selPro"  required="">
                                         <option value="0">Seleccione</option>
                                         <option value="1">Persona física</option>
                                         <option value="2">Persona moral</option>
@@ -45,7 +45,7 @@
                                 </td>    
                                 <td>
                                     <label for="tvic_moral">Tipo de Víctima Moral</label>
-                                    <select name="tvic_moral" id="tvic_moral" class="txtSelect">
+                                    <select name="tvic_moral" id="tvic_moral" class="txtSelect selPro">
                                         <option value="0">Seleccione</option>
                                         <%
                                             //conección a base
@@ -54,7 +54,7 @@
                                 </td>
                                 <td>
                                     <label for="sexo">Sexo</label>
-                                    <select name="sexo" id="sexo" class="txtSelect">
+                                    <select name="sexo" id="sexo" class="txtSelect selPro">
                                         <option value="0">Seleccione</option>
                                         <option value="0">Hombre</option>
                                         <option value="0">Mujer</option>
@@ -77,7 +77,7 @@
                                 </td>
                                 <td>
                                     <label for="tvic_moral">Condición de vulnerabilidad</label>
-                                    <select name="vulnera" id="vulnera" class="txtSelect">
+                                    <select name="vulnera" id="vulnera" class="txtSelect selPro">
                                         <option value="0">Seleccione</option>
                                         <%
                                             //conección a base
@@ -86,36 +86,125 @@
                                 </td>  
                                 <td>
                                     <label for="naciona">Nacionalidad</label>
-                                    <select name="naciona" id="naciona" class="txtMedia">
+                                    <select name="naciona" id="naciona" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
+                                    </select>
                                 </td>
                             </tr>
-                        </table>   
+                            <tr>
+                                <td colspan="2" >
+                                    <fieldset>
+                                        <legend>Defensa</legend>
+                                        <div class="cols">
+                                            <label for="Con_Asesor">¿Contó con asesor jurídico?</label>
+                                            <select name="Con_Asesor" id="Con_Asesor" class="txtSelect selPro">
+                                                <option value="0">Seleccione</option>
+                                                <%                                            //conección a base
+                                                %>    
+                                            </select>
+                                        </div>
+                                        <div class="cols">
+                                            <label for="Asesor">Asesor Jurídico</label>
+                                            <select name="Asesor" id="Asesor" class="txtSelect selPro">
+                                                <option value="0">Seleccione</option>
+                                                <%                                            //conección a base
+                                                %>    
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+
+                        </table>         
+
+                    </fieldset><br/>
+                    <fieldset>
+                        <legend >Delitos cometidos a la víctima</legend>
+                        <center>
+                            <table class="tblDelitos">
+                                <tr>
+                                    <th width="300">Procesado Clave</th>
+                                    <th width="300">Delito Clave</th>
+                                    <th width="300">Delito</th>
+                                    <th width="120">Delito cometido</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        select para traer procesado_clave
+                                    </td>
+                                    <td>
+                                        select para traer delito_clave
+                                    </td>
+                                    <td>
+                                        select para traer el nombre de delito
+                                    </td>
+                                    <td>
+                                        <select name="delicometido" id="delicometido" class="txtSelect selPro">
+                                            <option value="0">Seleccione</option>
+                                            <%                                            //conección a base
+                                            %>    
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+
                     </fieldset>
 
                     <fieldset>
-                        <legend style="text-align: left">Lugar de nacimiento</legend>
+                        <legend style="text-align: left">Relación del Procesado con la Víctima</legend>
+                        <center>
+                            <table class="tblDelitos">
+                                <tr>
+                                    <th width="300">Procesado Clave</th>
+                                    <th width="300">Relación</th>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        select para traer procesado_clave
+                                    </td>
+
+                                    <td>
+                                        <select name="relacion" id="relacion" class="txtSelect selPro">
+                                            <option value="0">Seleccione</option>
+                                            <%                                            //conección a base
+                                            %>    
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+
+                    </fieldset>
+
+
+                    <fieldset>
+                        <legend>Lugar de nacimiento</legend>
                         <table class="tablaFormu" border="0">   
                             <tr>
                                 <td>
                                     <label for="Pnacimiento">País</label>
-                                    <select name="Pnacimiento" id="Pnacimiento" class="txtMedia">
+                                    <select name="Pnacimiento" id="Pnacimiento" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="Enacimiento">Entidad</label>
-                                    <select name="Enacimiento" id="Enacimiento" class="txtMedia">
+                                    <select name="Enacimiento" id="Enacimiento" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="Mnacimiento">Municipio</label>
-                                    <select name="Mnacimiento" id="Mnacimiento" class="txtMedia">
+                                    <select name="Mnacimiento" id="Mnacimiento" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
@@ -126,26 +215,26 @@
                     </fieldset>
 
                     <fieldset>
-                        <legend style="text-align: left">Lugar habitual de residencia</legend>
+                        <legend>Lugar habitual de residencia</legend>
                         <table class="tablaFormu" border="0"> 
                             <tr>
                                 <td>
                                     <label for="Preside">País</label>
-                                    <select name="Preside" id="Preside" class="txtMedia">
+                                    <select name="Preside" id="Preside" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="Ereside">Entidad</label>
-                                    <select name="Ereside" id="Ereside" class="txtMedia">
+                                    <select name="Ereside" id="Ereside" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="Mreside">Municipio</label>
-                                    <select name="Mreside" id="Mreside" class="txtMedia">
+                                    <select name="Mreside" id="Mreside" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
@@ -154,26 +243,26 @@
                         </table>
                     </fieldset>
                     <fieldset>
-                        <legend style="text-align: left">Características especificas para víctimas personas físicas</legend> 
+                        <legend>Características especificas para víctimas personas físicas</legend> 
                         <table class="tablaFormu" border="0">
                             <tr>
                                 <td>
                                     <label for="conyugal">Situación conyugal</label>
-                                    <select name="conyugal" id="conyugal" class="txtMedia">
+                                    <select name="conyugal" id="conyugal" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="discapacidad">¿Cuenta con alguna condición de discapacidad?</label>
-                                    <select name="discapacidad" id="discapacidad" class="txtMedia">
+                                    <select name="discapacidad" id="discapacidad" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="alfabetismo">Condición de alfabetismo</label>
-                                    <select name="alfabetismo" id="alfabetismo" class="txtMedia">
+                                    <select name="alfabetismo" id="alfabetismo" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
@@ -181,7 +270,7 @@
 
                                 <td>
                                     <label for="estudios">Grado de estudios </label>
-                                    <select name="estudios" id="estudios" class="txtMedia">
+                                    <select name="estudios" id="estudios" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
@@ -190,14 +279,14 @@
                             <tr>
                                 <td>
                                     <label for="interprete">¿Requirió de intérprete?</label>
-                                    <select name="interprete" id="interprete" class="txtMedia">
+                                    <select name="interprete" id="interprete" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="hablaesp">Dominio del español</label>
-                                    <select name="hablaesp" id="hablaesp" class="txtMedia">
+                                    <select name="hablaesp" id="hablaesp" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
@@ -205,14 +294,14 @@
 
                                 <td>
                                     <label for="indigena">Habla lengua indígena o dialecto </label>
-                                    <select name="indigena" id="indigena" class="txtMedia">
+                                    <select name="indigena" id="indigena" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="familia"> Familia lingüísticas</label>
-                                    <select name="familia" id="familia" class="txtMedia">
+                                    <select name="familia" id="familia" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
@@ -221,62 +310,109 @@
                             <tr>
                                 <td>
                                     <label for="ocupa">Ocupación</label>
-                                    <select name="ocupa" id="ocupa" class="txtMedia">
+                                    <select name="ocupa" id="ocupa" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
                                 <td>
                                     <label for="relacion">Tipo de relación con el imputado</label>
-                                    <select name="relacion" id="relacion" class="txtMedia">
+                                    <select name="relacion" id="relacion" class="txtMedia selPro">
                                         <option value="0">Seleccione</option>
                                         <%                                        //conección a base
                                         %>   
                                 </td>
-                                <td>
-                                    <label for="dictamedida">¿Se le dictaron medidas de protección?</label>
-                                    <select name="dictamedida" id="dictamedida" class="txtMedia">
-                                        <option value="0">Seleccione</option>
-                                        <%                                        //conección a base
-                                        %>   
-                                </td>
-                                <td>
-                                    <label for="mprotec">Tipo de medidas de protección</label>
-                                    <select name="mprotec" id="mprotec" class="txtMedia">
-                                        <option value="0">Seleccione</option>
-                                        <%                                        //conección a base
-                                        %>   
-                                </td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        </table>        
-                        <table class="tablaFormu" border="0">
                             <tr>
-                                <td>
-                                    <label for="delimujer">¿Se le dictaron medidas de protección por delitos que impliquen violencia contra las mujeres?</label>
-                                    <select name="delimujer" id="delimujer" class="txtMedia">
-                                        <option value="0">Seleccione</option>
-                                        <%                                        //conección a base
-                                        %>   
-                                </td>
-                                <td>
-                                    <label for="mpmujer">Tipo de medidas de protección por delitos que impliquen violencia contra las mujeres</label>
-                                    <select name="mpmujer" id="mpmujer" class="txtMedia">
-                                        <option value="0">Seleccione</option>
-                                        <%                                        //conección a base
+                                <td colspan="4">
+                                    <fieldset>
+                                        <legend>Medidas de Protección</legend>
+                                        <table border="0" class="tblDelitos2">
+                                            <tr>
+                                                <td width="250">
+                                                    <label for="mProtect">¿Se le dictaron medidas de protección?</label>
+                                                    <select name="mProtect" id="mProtect" class="txtMedia selPro">
+                                                        <option value="0">Seleccione</option>
+                                                        <%                                        //conección a base
+                                                        %>   
+                                                    </select>
+
+                                                </td>
+                                                <td colspan="3">
+                                                    <table name="Mprotec" id="Mprotec" class="tblDelitos" border="1" >
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Tipo de medidas de protección</th>
+                                                            <th>¿Aplicó la medida de protección?</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                1
+                                                            </td>
+                                                            <td>
+                                                                Auxilio inmediato por integrantes de instituciones policiales, al domicilio en donde se localice o se encuentre la víctima u ofendido en el momento de solicitarlo
+                                                            </td>
+                                                            <td>
+                                                                <select name="relacion" id="relacion" class="txtMedia selPro">
+                                                                    <option value="1">Si</option>
+                                                                    <option value="2" selected>No</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="250">
+                                                    <label for="mProtect">¿Se le dictaron medidas de protección por delitos que impliquen violencia contra las mujeres?</label>
+                                                    <select name="mujProtect" id="mujProtect" class="txtMedia selPro">
+                                                        <option value="0">Seleccione</option>
+                                                        <%                                        //conección a base
 %>   
+                                                    </select>
+
+                                                </td>
+                                                <td colspan="3">
+                                                    <table name="Mujprotec" id="Mujprotec" class="tblDelitos" border="1" >
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Tipo de medidas de protección por delitos que impliquen violencia contra las mujeres</th>
+                                                            <th>¿Aplicó la medida de protección?</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                1
+                                                            </td>
+                                                            <td>
+                                                                Acceso al domicilio en común, de autoridades policíacas o de personas que auxilien a la víctima a tomar sus pertenencias personales y las de sus hijas e hijos
+                                                            </td>
+                                                            <td>
+                                                                <select name="relacion" id="relacion" class="txtMedia">
+                                                                   <option value="1">Si</option>
+                                                                    <option value="2" selected>No</option>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </fieldset>
                                 </td>
                             </tr>
-                        </table>
-                        </fieldset>
-                            </div>   
-                            <div class="comentarios">
-                                <h2>Comentarios</h2>
-                                <textarea name="Comentavic" id="Comentavic"></textarea>
-                            </div>
-                                 <br>
+                        </table> 
+                </div>   
+                <div class="comentarios">
+                    <h2>Comentarios</h2>
+                    <textarea name="Comentavic" id="Comentavic"></textarea>
+                </div>
+                <br>
                 <input type="submit" name="guardarvic" id="guardarvic" value="Guardar Víctima">
-                            </form>
-                            </section>    
+            </form>
+        </section>    
 
-                            </body>
-                            </html>
+    </body>
+</html>

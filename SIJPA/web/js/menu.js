@@ -22,16 +22,6 @@ $(document).ready(function () {
         }
     });
 
-//    $(function () {
-//        $(window).scroll(function () {
-//            if ($(window).scrollTop() > 80) {
-//                $("nav").css("top","0");
-//            }else{
-//                $("nav").css("top","72px");
-//            }
-//        });
-//    });
-
     $('.toggle-nav').click(function () {
         $('.toggle-nav').toggleClass('open');
     });

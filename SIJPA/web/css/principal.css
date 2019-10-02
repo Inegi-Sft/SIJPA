@@ -58,7 +58,11 @@ body{
 
 .contenedor{
     text-align: center;
-    /*margin: 0 20px 0 20px;*/
+    /*margin: 0 20px;*/
+}
+
+.contenedor form{
+    margin: 0 20px;
 }
 
 .contenedor h1{

@@ -50,7 +50,7 @@ nav {
     /*height: 100%;*/
     position: absolute;
     top: 72px;
-    left: 0;
+    left: 0px;
     background: #706F6F;
     text-align: center;
     -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
@@ -88,10 +88,10 @@ section {
 }
 
 section .toggle-nav {
-    height: 50px;
-    width: 80px;
+    height: 40px;
+    width: 40px;
     position: absolute;
-    margin: 10px;
+    margin: 0 20px;
     cursor: pointer;
 }
 

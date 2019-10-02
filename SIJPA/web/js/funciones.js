@@ -29,19 +29,14 @@ $(document).ready(function () {
         }
     });
     
-    
-    
-    $('.exp').fancybox({
-        autoDimensions: true,
-        type: 'iframe',
-        height : '3000px'
-    }); 
-//$('#exp').fancybox({
-//            'width'         : 500,
-//            'height'         : 700, 
-//            'autoScale'         : true,
-//            'transitionIn'      : 'elastic',
-//            'transitionOut'      : 'elastic',
-//            'type'            : 'iframe'
-//         });
+    $('.pop').fancybox({
+        'type':  'iframe',
+        'overlayShow': true,
+        'iframe':{
+            'css':{
+                'width': '1100px',
+                'height': '500px'
+            }
+        }
+    });
 });

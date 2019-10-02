@@ -12,8 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Datos Generales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="js/menu.js" type="text/javascript"></script>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>

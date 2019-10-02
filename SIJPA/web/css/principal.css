@@ -153,7 +153,11 @@ body{
 .contenedor select:focus{
     box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
 }
-
+.contenedor input[type="checkbox"]{
+    width:19px;
+    height:19px;
+    margin: 0 4px 0 0;
+}
 label{
     width: 300px;
     display: block;
@@ -165,7 +169,8 @@ label{
 .contenedor .txtMedia{ width: 160px;}
 .contenedor .txtLong{ width: 300px;}
 .contenedor .txtSelect{width: 105px;}
-.contenedor .txtExBig{width: 700px;}
+.contenedor .txtExBig{width: 800px;}
+.contenedor .lblExBig{width: auto;}
 
 .comentarios{
     margin: 0 auto;
@@ -184,9 +189,18 @@ label{
     box-shadow: 0 1px #fff;
     font-size: 16px;
 }
+.noIdentificada label{
+    font-size: 14px;
+    display: inline;
+    color: #0077CB;
+    vertical-align: text-top;
+}
+.noIdentificada{
+    margin-top: -15px;
+}
 .btnFlotante{
-    display: block;
-    position:fixed;
+/*    display: block;
+    position: fixed;
     bottom: 0px;
-    right: 43%;
+    right: 43%;*/
 }

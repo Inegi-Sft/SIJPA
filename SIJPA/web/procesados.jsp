@@ -365,7 +365,6 @@
                 <br/>
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
-            <br/><br/><br/>
         </section>
     </body>
 </html>

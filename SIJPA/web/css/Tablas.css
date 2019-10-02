@@ -106,6 +106,9 @@ fieldset legend{
 .contenedor .tablaFormu .tblDelitos td{
   width: auto;
 }
+.contenedor .tablaFormu .tblDelitos2 td{
+  width: auto;
+}
 .tblDelitos tr{background-color: #fff;}
 .tblDelitos tr:nth-child(even){background-color: #EBF4FA;}
 .tblDelitos tr:hover {background-color: #d8e5f1;}
@@ -133,4 +136,5 @@ fieldset legend{
 }
 .tablaFormu fieldset legend{
     font-size: 18px;
+    text-align: left;
 }

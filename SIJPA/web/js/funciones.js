@@ -29,6 +29,8 @@ $(document).ready(function () {
         }
     });
     
+    
+    
     $('.exp').fancybox({
         autoDimensions: true,
         type: 'iframe',

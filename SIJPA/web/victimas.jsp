@@ -70,6 +70,9 @@
                                 <td>
                                     <label for="fnacimiento">Fecha de Nacimiento</label>
                                     <input type="date" name="fnacimiento" id="fnacimiento" class="txtMedia" required>
+                                   <div class="noIdentificada">
+                                    <input type="checkbox" id="chkOcurrencia"><label>No identificada</label>
+                                </div>
                                 </td>
                                 <td>
                                     <label for="edad">Edad</label>

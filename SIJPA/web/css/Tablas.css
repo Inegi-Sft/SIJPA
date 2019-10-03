@@ -127,6 +127,13 @@ fieldset legend{
 .tablaFormu .cols{
     float: left;
 }
+.cols{
+    float: left;
+}
+.contenedor .selPro{
+   margin: 5px;
+   background-color: #003057;
+}
 .tablaFormu fieldset{
     border-style: dotted;
     border-right: none;

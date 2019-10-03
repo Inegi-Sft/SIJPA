@@ -10,7 +10,7 @@ and open the template in the editor.
 
 /* IMPORTANT STUFF */
 
-section {
+/*.toggle-nav {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -30,7 +30,7 @@ section {
     transform: translate3d(0, 0, 0);
 }
 
-.show-nav section {
+.show-nav .toggle-nav {
     -webkit-transform: translate(275px, 0);
     -moz-transform: translate(275px, 0);
     -ms-transform: translate(275px, 0);
@@ -42,20 +42,21 @@ section {
     -ms-transform: translate3d(275px, 0, 0);
     -o-transform: translate3d(275px, 0, 0);
     transform: translate3d(275px, 0, 0);
-}
+}*/
 
 /* BASE CSS */
-nav {
+nav{
+    margin: 0 0 0 -280px;
     width: 280px;
-    /*height: 100%;*/
     position: absolute;
-    top: 72px;
+    /*top: 72px;*/
     left: 0px;
-    background: #706F6F;
+    background: #27251F;
     text-align: center;
-    -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
-    box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+/*    -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(119, 119, 119, 0.5);
+    -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(119, 119, 119, 0.5);
+    box-shadow: inset -1.5em 0 1.5em -0.75em rgba(119, 119, 119, 0.5);*/
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -67,6 +68,10 @@ nav ul {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+nav ul li{
+    border-bottom: 1px solid #706F6F;
 }
 
 nav ul li a {
@@ -83,16 +88,17 @@ nav ul li a:hover {
     color: #000;
 }
 
-section {
-    background-image: url("../img/t2.jpg");
-}
-
-section .toggle-nav {
+.toggle-nav {
     height: 40px;
     width: 40px;
     position: absolute;
-    margin: 0 20px;
     cursor: pointer;
+    margin: 0 20px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .toggle-nav-inner{

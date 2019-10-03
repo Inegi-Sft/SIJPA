@@ -21,168 +21,48 @@
     </head>
     <body>
         <%@include file="cabecera.jsp" %>
-        <div class="control">
-            <%@include file="menu.jsp"%>
-            <section class="contenedor">
-                <div class="toggle-nav">
-                    <div class="toggle-nav-inner"></div>
-                </div>
-                <h1>Causas Penales</h1>
-                <form action="#" method="post">
-                    <span class="totExp">Total de Causas Penales:</span>
-                    <button class="add"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</button>
-                    <table id="causas" class="myTable">
-                        <thead>
-                            <tr>
-                                <th>Expediente</th>
-                                <th>Tipo de Accion de Remision</th>
-                                <th>Adolescentes</th>
-                                <th>Victimas</th>
-                                <th>Conductas Antisociales</th>
-                                <th>Organo Competente</th>
-                                <th>Fecha Ingreso</th>
-                                <th>Inconsistencias</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>asdf</td>
-                                <td>2</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a class="pop" href="juzgados.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                                <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>2</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a id="dedo" href="#"><img src='img/editar.png' title="Modificar"/></a></td>
-                                <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                            <tr>
-                                <td>asdf</td>
-                                <td>3</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
-                                <td><a href="#"><img src='img/editar.png'/></a></td>
-                                <td><a href="#"><img src='img/delete.png'/></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </section>
-        </div>
+        <%@include file="menu.jsp"%>
+        <section class="contenedor">
+            <div class="toggle-nav">
+                <div class="toggle-nav-inner"></div>
+            </div>
+            <h1>Causas Penales</h1>
+            <form action="#" method="post">
+                <span class="totExp">Total de Causas Penales:</span>
+                <button class="add"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</button>
+                <table id="causas" class="myTable">
+                    <thead>
+                        <tr>
+                            <th>Expediente</th>
+                            <th>Tipo de Accion de Remision</th>
+                            <th>Adolescentes</th>
+                            <th>Victimas</th>
+                            <th>Conductas Antisociales</th>
+                            <th>Organo Competente</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Inconsistencias</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(int x = 1; x < 20; x++){%>
+                        <tr>
+                            <td>asdf</td>
+                            <td>2</td>
+                            <td>asdf</td>
+                            <td>asdf</td>
+                            <td>asdf</td>
+                            <td>asdf</td>
+                            <td>asdf</td>
+                            <td>asdf</td>
+                            <td><a class="pop" href="juzgados.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
+                            <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </form>
+        </section>
     </body>
 </html>

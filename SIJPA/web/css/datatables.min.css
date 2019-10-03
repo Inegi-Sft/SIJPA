@@ -73,6 +73,9 @@ table.dataTable tbody th,table.dataTable tbody td{
     right: 15%;
 }
 .add{
+    position: absolute;
+    top: 190px;
+    right: 20px;
     background-color: #0077CB;
     color: #FFFFFF;
     border: none;
@@ -87,19 +90,17 @@ table.dataTable tbody th,table.dataTable tbody td{
     transition: all 0.3s ease;
     z-index: 1000;
 }
-.add img{
-    vertical-align: text-bottom ;
-}
-.add{
-    position: absolute;
-    top: 120px;
-    right: 20px;
-}
+
 .add:hover{
     background-color: #00CBCB;
     color: #FFFFFF;
     width: 14%;
 }
+
+.add img{
+    vertical-align: text-bottom ;
+}
+
 .totExp{
     display: block;
     float: left;

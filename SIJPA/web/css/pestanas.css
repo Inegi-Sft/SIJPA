@@ -11,6 +11,7 @@ and open the template in the editor.
     overflow: hidden;
     background-color: transparent;
     border-bottom: none;
+    margin: 0 20px;
 }
 /* Style the buttons that are used to open the pestana Content */
 .pestana button {
@@ -48,5 +49,6 @@ and open the template in the editor.
     border: 1px solid #aaa;
     border-top: none;
     background-color: #fff;
+    border-radius: 0 10px 10px 10px;
 }
 

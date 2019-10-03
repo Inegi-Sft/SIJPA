@@ -8,17 +8,22 @@ $(document).ready(function () {
     // Normal Clicks
     $(function () {
         $('.toggle-nav').click(function () {
-            $('body').toggleClass('show-nav');
+            if($(this).hasClass('open')){
+                $('nav').css('margin','0');
+                $(this).css('margin','0 0 0 300px');
+            }else{
+                $('nav').removeAttr('style');
+                $(this).removeAttr('style');
+            }
             return false;
         });
     });
     
     $('.contenedor').click(function(){
-        if($('body').hasClass('show-nav')){
-            $('body').removeClass('show-nav');
+        if($('.toggle-nav').hasClass('open')){
             $('.toggle-nav').toggleClass('open');
-        }else{
-            
+            $('nav').removeAttr('style');
+            $('.toggle-nav').removeAttr('style');
         }
     });
 

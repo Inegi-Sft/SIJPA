@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
     $('#causas').DataTable({
-        "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todo"]],
+        "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "Todo"]],
         "language": {
             "decimal": "",
             "emptyTable": "No hay información",

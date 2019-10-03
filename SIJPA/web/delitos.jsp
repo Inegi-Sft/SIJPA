@@ -67,7 +67,7 @@
                                 <label for="fechaReclaDel">Fecha de reclasificacion del delito</label>
                                 <input type="date" name="fechaReclaDel" id="fechaReclaDel"/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkfechaReclaDel"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechaReclaDel"><label>No identificada</label>
                                 </div>
                             </td>
                         </tr>

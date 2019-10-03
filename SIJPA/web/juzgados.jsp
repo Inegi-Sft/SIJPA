@@ -51,6 +51,9 @@
                             <td>
                                 <label for="fGestion">Fecha inicio gestion:</label>
                                 <input type="date" class="txtMedia" name="fGestion" id="fGestion" />
+                                <div class="noIdentificada">
+                                    <input type="checkbox" id="chkFechaInicioG"><label>No identificada</label>
+                                </div>
                             </td>
                             <td></td>
                         </tr>
@@ -71,7 +74,7 @@
                             </td>
                             <td>
                                 <label for="numDistrito">Número del Distrito Judicial</label>
-                                <select name="numDistrito" class="txtMedia" id="numDistrito" required>
+                                <select name="numDistrito" class="txtMedia selPro" id="numDistrito" required>
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         NumerosRomanos nRomanosR = new NumerosRomanos(1, 99);
@@ -85,9 +88,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="">Lada y Teléfono del Juzgado</label>
-                                <input type="number" class="txtSmall" name="lada" id="lada" placeholder="Lada"/>
-                                <input type="tel" class="txtMedia" name="tel" id="tel" placeholder="Telefono"/>
+                                <label for="tel">Teléfono del Juzgado</label>
+                                <input type="number" class="txtMedia" name="tel" id="tel" placeholder="Telefono"/>
                             </td>
                             <td>
                                 <label for="correo">Correo del Juzgado:</label>
@@ -105,7 +107,7 @@
                             <td></td>
                             <td>
                                 <label for="fOrganiza">Forma de Organizacion</label>
-                                <select name="fOrganiza" id="fOrganiza">
+                                <select class="selPro" name="fOrganiza" id="fOrganiza">
                                     <option value="0">--Seleccione--</option>
                                     <option value="1">Región judicial</option>
                                     <option value="2">Distrito judicial</option>
@@ -138,7 +140,7 @@
                         <tr>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
-                                <select name="entidad" id="entidad">
+                                <select class="selPro" name="entidad" id="entidad">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -147,7 +149,7 @@
                             </td>
                             <td>
                                 <label for="vialidad">Vialidad</label>
-                                <select name="vialidad" id="vialidad">
+                                <select class="selPro" name="vialidad" id="vialidad">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -156,7 +158,7 @@
                             </td>
                             <td>
                                 <label for="asentamiento">Asentamiento Humano</label>
-                                <select name="asentamiento" id="asentamiento">
+                                <select class="selPro" name="asentamiento" id="asentamiento">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -167,7 +169,7 @@
                         <tr>
                             <td>
                                 <label for="municipio">Municipio o Delegacion</label>
-                                <select name="municipio" id="municipio">
+                                <select class="selPro" name="municipio" id="municipio">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base

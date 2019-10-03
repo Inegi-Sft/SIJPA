@@ -16,6 +16,9 @@
         <%@include file="cabecera.jsp" %>
         <section class="contenedor">
             <h1>Procesados</h1>
+            <span class="nota">NOTA: El Adolescente procesado se identificará,con el número de expediente seguido de un "-p" más el número consecutivo del Adolescente Procesado registrado.
+               Es decir, si es el primer Adolescente Procesado del expediente 10/2016 su identificador será 10/2016-p1
+            </span>
             <form action="#" method="post">
                 <fieldset>
                     <legend>Situación jurídica del adolescente: </legend>
@@ -180,6 +183,9 @@
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
                                 <input type="date" class="txtMedia" name="fNacimiento" id="fNacimiento" />
+                                <div class="noIdentificada">
+                                    <input type="checkbox" id="chkFechaNac"><label>No identificada</label>
+                                </div>
                             </td>
                             <td></td>
                         </tr>
@@ -204,7 +210,7 @@
                                         </select>
                                     </div>
                                     <div class="cols">
-                                        <label for="nMunicipio">Municipio o Demarcacion Territorial</label>
+                                        <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
                                         <select class="selPro" name="nMunicipio" id="nMunicipio">
                                             <option value="0">--Seleccione--</option>
                                             <%                                        //conexion a base

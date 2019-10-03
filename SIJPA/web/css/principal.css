@@ -198,6 +198,15 @@ label{
 .noIdentificada{
     margin-top: -15px;
 }
+.nota{
+    width:460px;
+    text-align: justify;
+    font-size: 13px;
+    color: darkred;
+    position: absolute;
+    top: 1%;
+    right: 1%;
+}
 .btnFlotante{
 /*    display: block;
     position: fixed;

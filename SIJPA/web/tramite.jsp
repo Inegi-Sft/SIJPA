@@ -18,52 +18,53 @@
             <h1>Pendientes de resolución </h1>
             <form action="" method="post">
                 <!--<center>-->
-                    <fieldset style="width: 600px; margin-left: 26%;">
-                        <legend style="text-align: left;">Estatus</legend>
+                <fieldset style="width: 600px; margin-left: 26%;">
+                    <legend style="text-align: left;">Estatus</legend>
 
-                        <table style="text-align: center;" border="0" width="300">
-                            <tr>
-                                <td>
-                                    <label for="pClave">Procesado Clave</label>
-                                    <select name="pClave" id="pClave" class="txtMedia selPro">
-                                        <option value="0">Seleccione</option>
-                                        <%
-                                            //conección a base
-                                        %>    
-                                    </select><br/>
-                                    <input type="text" name="nomProc"  id="nomProc" disabled />
-                                </td>
+                    <table style="text-align: center;" border="0" width="300">
+                        <tr>
+                            <td>
+                                <label for="pClave">Procesado Clave</label>
+                                <select name="pClave" id="pClave" class="txtMedia selPro">
+                                    <option value="0">Seleccione</option>
+                                    <%
+                                        //conección a base
+                                    %>    
+                                </select><br/>
+                                <input type="text" name="nomProc"  id="nomProc" disabled />
+                            </td>
 
-                                <td>
-                                    <label for="eProcesal">Etapa procesal</label>
-                                    <select name="eProcesal" id="eProcesal" class="txtMedia selPro">
-                                        <option value="0">Seleccione</option>
-                                        <%
-                                            //conección a base
-%>    
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="eMotivo">Especifique el motivo</label>
-                                    <input type="text" name="eMotivo"  id="eMotivo" class="txtExlong" required  />
-                                </td>
-                                <td>
-                                    <label for="uActua">Fecha de la última actuación</label>
+                            <td>
+                                <label for="eProcesal">Etapa procesal</label>
+                                <select name="eProcesal" id="eProcesal" class="txtMedia selPro">
+                                    <option value="0">Seleccione</option>
+                                    <%
+                                        //conección a base
+                                    %>    
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="eMotivo">Especifique el motivo</label>
+                                <input type="text" name="eMotivo"  id="eMotivo" class="txtExlong" required  />
+                            </td>
+                            <td>
+                                <label for="uActua">Fecha de la última actuación</label>
 
-                                    <input type="date" name="uActua" id="uActua" class="txtMedia" required>
-                                    <div class="noIdentificada">
-                                        <input type="checkbox" id="chkOcurrencia"><label>No identificada</label>
-                                    </div>
-                                </td>
-                            </tr>
+                                <input type="date" name="uActua" id="uActua" class="txtMedia" required>
+                                <div class="noIdentificada">
+                                    <input type="checkbox" id="chkOcurrencia"><label>No identificada</label>
+                                </div>
+                            </td>
+                        </tr>
 
-                        </table>
+                    </table>
 
-                    </fieldset>
+                </fieldset>
                 <!--</center>-->
-
+                <br>
+                <input type="submit" name="guardar" id="guardar" value="Guardar">
 
             </form>
         </section>

@@ -74,7 +74,7 @@ and open the template in the editor.
 }
 
 fieldset{
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.6);
     /*background-color: #EBF4FA;*/
     border-color:  #0077CB;
     border-radius: 8px;

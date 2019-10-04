@@ -23,19 +23,18 @@
 }
 
 .myTable tr{
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.6);
 }
 table.dataTable tbody th,table.dataTable tbody td{
     padding:5px 8px
 }
 
 .myTable tr:nth-child(even){
-    background-color: #EBF4FA;
-    /*background-color: #eff5fa;*/
+    background-color: rgba(170,255,250,0.6);
 }
 
 .myTable tr:hover{
-    background-color: #d8e5f1;
+    background-color: #C4C4C4;
 }
 
 .myTable th{
@@ -139,7 +138,7 @@ table.dataTable thead .sorting_desc_disabled{
     background-image:url("../img/sort_desc_disabled.png")
 }
 table.dataTable tbody tr{
-    background-color:#ffffff
+    background-color:rgba(255,255,255,0.6);
 }
 table.dataTable tbody tr.selected{
     background-color:#B0BED9

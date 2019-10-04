@@ -18,9 +18,6 @@
         <div class="control">
             <%@include file="menu.jsp"%>
             <section class="contenedor">
-                <div class="toggle-nav">
-                    <div class="toggle-nav-inner"></div>
-                </div>
                 <h1>Datos Generales</h1>
                 <form action="" method="post">
                     <table class="tablaFormu" border="0">

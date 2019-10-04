@@ -39,8 +39,9 @@ body{
 }
 
 .cabecera #titulo{
-    height: 35px;
-    margin: 5px;
+    float: right;
+    height: 50px;
+    margin: 5px 20px;;
 }
 
 .cabecera #doscolores{

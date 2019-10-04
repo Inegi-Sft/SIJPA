@@ -11,13 +11,13 @@ and open the template in the editor.
 .tablasRegis {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 85%;
-  margin: 80px auto;
+  /*width: 85%;*/
+  margin: 10px auto;
 }
 
 .tablasRegis td, .tablasRegis th {
   border: 1px solid #ddd;
-  padding: 5px;
+  padding: 0px;
 }
 /*.tablasRegis .boton{
     text-align: right;
@@ -64,7 +64,7 @@ and open the template in the editor.
 .tablasRegis th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
   background-color: #003057;
   color: white;
 }

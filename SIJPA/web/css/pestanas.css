@@ -44,6 +44,7 @@ and open the template in the editor.
 
 /* Style the pestana Content */
 .pestanaContent {
+    margin: 0 20px;
     display: none;
     padding: 6px 12px;
     border: 1px solid #aaa;

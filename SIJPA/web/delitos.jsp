@@ -172,7 +172,7 @@
                                         </select>
                                     </div>
                                     <div class="cols">
-                                        <label class="lblExBig">Municipio o demarcación territorial</label>
+                                        <label class="lblExBig">Municipio/Demarcación territorial</label>
                                         <select class="selPro" name="municipio" id="municipio">
                                             <option value="0">--Seleccione--</option>
                                             <%    //conexion a base

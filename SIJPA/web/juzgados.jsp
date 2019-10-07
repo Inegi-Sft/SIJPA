@@ -20,7 +20,7 @@
         <section class="contenedor">
             <h1>Juzgados</h1>
             <div class="pestana">
-                <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1" style="display: block">Datos del Juez</button>
+                <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1">Datos del Juez</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Datos Órgano Jurisdiccional</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Forma de Organizacion del Órgano</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p4')">Datos Geográficos</button>
@@ -45,9 +45,6 @@
                                 <label for="amaterno">Apellido Materno</label>
                                 <input type="text" name="amaterno" id="amaterno" required/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td></td>
                             <td>
                                 <label for="fGestion">Fecha inicio gestion:</label>
                                 <input type="date" class="txtMedia" name="fGestion" id="fGestion" />
@@ -55,7 +52,6 @@
                                     <input type="checkbox" id="chkFechaInicioG"><label>No identificada</label>
                                 </div>
                             </td>
-                            <td></td>
                         </tr>
                     </table>
                 </div>
@@ -165,8 +161,6 @@
                                     %>
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <label for="municipio">Municipio o Delegacion</label>
                                 <select class="selPro" name="municipio" id="municipio">
@@ -175,6 +169,12 @@
                                         //conexion a base
                                     %>
                                 </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="cp">Codigo Postal</label>
+                                <input type="number" class="txtMedia" name="cp" id="cp" />
                             </td>
                             <td>
                                 <label for="nomVialidad">Nombre de la Vialidad</label>
@@ -185,17 +185,10 @@
                                 <input type="text" name="nomAsentamiento" id="nomAsentamiento"/>
                                 
                             </td>
-                        </tr>
-                        <tr>
-                            <td></td>
                             <td>
                                 <label for="">No. Exterior / No. Interiior</label>
                                 <input type="text" class="txtSmall" name="noExterior" id="noExterior" />
                                 <input type="text" class="txtSmall" name="noInterior" id="noInterior" />
-                            </td>
-                            <td>
-                                <label for="cp">Codigo Postal</label>
-                                <input type="number" class="txtMedia" name="cp" id="cp" />
                             </td>
                         </tr>
                     </table>

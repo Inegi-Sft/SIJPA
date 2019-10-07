@@ -21,7 +21,7 @@ and open the template in the editor.
 body{
     /*background: #706F6F;*/
     background-image: url("../img/fondo_final.png");
-    background-size: cover;
+    /*background-size: cover;*/
     font-family: Arial;
     color: #003057;
     font-size: 18px;
@@ -78,13 +78,6 @@ body{
     margin-bottom:20px;
 }
 
-.contenedor .tablaFormu{
-    width: 100%;
-}
-.contenedor .tablaFormu td{
-    width: 33%;
-}
-
 .contenedor input{
     margin:0 20px 20px 20px;
 }
@@ -115,9 +108,8 @@ body{
     padding: 2px 5px;
     border-radius: 5px;
     box-shadow: 0 1px #fff;
-    /*width: 300px;*/
     height: 30px;
-    font-size: 16px;
+    font-size: 14px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -137,7 +129,6 @@ body{
     border: 1px solid #0077CB;
     font-size: 14px;
     padding: 2px 5px;
-    /*width: 300px;*/
     height: 30px;
     margin:0 20px 20px 20px;
     -webkit-transition: all 0.3s ease;
@@ -150,14 +141,17 @@ body{
 .contenedor select:focus{
     box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
 }
+
 .contenedor input[type="checkbox"]{
     width:19px;
     height:19px;
     margin: 0 4px 0 0;
 }
-label{
+
+.contenedor label{
     width: 300px;
     display: block;
+    font-size: 18px;
     font-weight: bold;
     margin: 20px auto 10px auto;
 }
@@ -168,6 +162,19 @@ label{
 .contenedor .txtSelect{width: 105px;}
 .contenedor .txtExBig{width: 800px;}
 .contenedor .lblExBig{width: auto;}
+
+fieldset{
+    background-color: rgba(255,255,255,0.6);
+    border-color:  #0077CB;
+    border-radius: 8px;
+}
+
+fieldset legend{
+    color: #0077CB;
+    text-align: left;
+    font-weight: bold;
+    font-size: 20px;
+}
 
 .comentarios{
     margin: 0 auto;
@@ -186,29 +193,26 @@ label{
     box-shadow: 0 1px #fff;
     font-size: 16px;
 }
+
 .noIdentificada label{
-    font-size: 14px;
+    font-size: 13px;
     display: inline;
     color: #0077CB;
     vertical-align: text-top;
 }
+
 .noIdentificada{
     margin-top: -15px;
 }
+
 .nota{
     width:460px;
     text-align: justify;
     font-size: 13px;
     color: darkred;
     position: absolute;
-    top: 1%;
+    top: 75px;
     right: 1%;
-}
-.btnFlotante{
-/*    display: block;
-    position: fixed;
-    bottom: 0px;
-    right: 43%;*/
 }
 
 .contenedor img{

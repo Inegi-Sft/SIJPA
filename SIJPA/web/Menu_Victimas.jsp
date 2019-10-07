@@ -8,9 +8,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-
- 
-        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Víctimas</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
@@ -18,7 +15,6 @@
         <link rel="stylesheet" href="css/jquery.fancybox.css">
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.fancybox.js"></script>
-        <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="js/funciones.js"></script>
         <script type="text/javascript" src="js/datatables.min.js"></script>
     </head>

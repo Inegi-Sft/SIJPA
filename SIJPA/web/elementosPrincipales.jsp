@@ -11,11 +11,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Elementos del Expediente</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <link href="css/jquery.fancybox.min.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
         <script type="text/javascript" src="js/pestanas.js"></script>
+        <script type="text/javascript" src="js/funciones.js"></script>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
+            
+            <a class="btnCerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1" style="display: block">Expediente</button>
@@ -32,7 +38,7 @@
             </div>
             <div id="p2" class="pestanaContent">
                 <h1>Delitos</h1>
-                <table id="causas" class="myTable" border="1">
+                <table class="tablasRegis">
                     <tr>
                         <th>Delito clave</th>
                         <th>Delito (Cod. Penal)</th>
@@ -46,6 +52,7 @@
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
+                    <tr>
                         <td>0002/2019-d1</td>
                         <td>Homicidio</td>
                         <td>Homicidio</td>
@@ -55,10 +62,11 @@
                         <td>Con Arma blanca</td>
                         <td>1</td>
                         <td>2</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a class="pop" href="delitos.jsp"><img src='img/editar.png' title="Editar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
+                    
                     </tr>
+                    <tr>
                         <td>0002/2019-d2</td>
                         <td>Lesiones</td>
                         <td>Lesiones</td>
@@ -68,14 +76,14 @@
                         <td>Con Arma blanca</td>
                         <td>1</td>
                         <td>2</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a class="pop" href="delitos.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
+                    </tr>
                 </table>
             </div>
             <div id="p3" class="pestanaContent">
                 <h1>Adolescentes</h1>
-                <table id="causas" class="myTable" border="1">
+                <table class="tablasRegis">
                     <tr>
                         <th>Adolescente clave</th>
                         <th>Tipo de Presentación</th>
@@ -91,23 +99,14 @@
                         <td>Hombre</td>
                         <td>15-08-1987</td>
                         <td>Ciudad Valles, San Luis Potosi</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a class="pop" href="procesados.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
-                    <tr>
-                        <td>0002/2019-p2</td>
-                        <td>Detenido</td>
-                        <td>Mujer</td>
-                        <td>15-08-1987</td>
-                        <td>Ciudad Valles, San Luis Potosi</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
+                    </tr>
                 </table>
             </div>
             <div id="p4" class="pestanaContent">
                 <h1>Victimas</h1>
-                <table id="causas" class="myTable" border="1">
+                <table class="tablasRegis">
                     <tr>
                         <th>Victima clave</th>
                         <th>Tipo de Víctima</th>
@@ -123,23 +122,14 @@
                         <td>Hombre</td>
                         <td>15-08-1987</td>
                         <td>Ciudad Valles, San Luis Potosi</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a class="pop" href="victimas.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
-                    <tr>
-                        <td>0002/2019-v2</td>
-                        <td>Persona Fisica</td>
-                        <td>Mujer</td>
-                        <td>15-08-1987</td>
-                        <td>Ciudad Valles, San Luis Potosi</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
+                    </tr>
                 </table>
             </div>
             <div id="p5" class="pestanaContent">
                 <h1>Etapa Inicial</h1>
-                <table id="causas" class="myTable" border="1">
+                <table class="tablasRegis">
                     <tr>
                         <th>Adolescente clave</th>
                         <th>Control detencion</th>
@@ -155,26 +145,37 @@
                         <td>Si</td>
                         <td>Vinculación a proceso</td>
                         <td>No</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a class="pop" href="etapaInicial.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
-                    <tr>
-                        <td>0002/2019-p2</td>
-                        <td>Si</td>
-                        <td>No</td>
-                        <td>No vinculacion a proceso</td>
-                        <td>No</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
+                    </tr>
                 </table>
             </div>
             <div id="p6" class="pestanaContent">
-                <h1>. . . . Trabajando en ello . . .</h1>
+                <h1>Etapa Intermedia</h1>
+                <table class="tablasRegis">
+                    <tr>
+                        <th>Adolescente clave</th>
+                        <th>Audiencia intermedia</th>
+                        <th>Escrito acusación</th>
+                        <th>Presentacion medios prueba</th>
+                        <th>Acuerdos probatorios</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    <tr>
+                        <td>0002/2019-c2</td>
+                        <td>Si</td>
+                        <td>No</td>
+                        <td>Si</td>
+                        <td>No</td>
+                        <td><a class="pop" href="etapaIntermedia.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
+                    </tr>
+                </table>
             </div>
             <div id="p7" class="pestanaContent">
                 <h1>Resoluciones dictadas</h1>
-                <table id="causas" class="myTable" border="1">
+                <table class="tablasRegis">
                     <tr>
                         <th>Conclusión clave</th>
                         <th>Fecha conclusión</th>
@@ -184,26 +185,18 @@
                         <th>Eliminar</th>
                     </tr>
                     <tr>
-                        <td>0002/2019-c1</td>
-                        <td>12/07/2019</td>
-                        <td>0002/2019-p1</td>
-                        <td>Sobreseimiento</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
-                    <tr>
                         <td>0002/2019-c2</td>
                         <td>15/04/2019</td>
                         <td>0002/2019-p2</td>
                         <td>Suspension condicional del proceso</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a class="pop" href="conclusiones.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
+                    </tr>
                 </table>
             </div>
             <div id="p8" class="pestanaContent">
                 <h1>Pendientes de resolución</h1>
-                <table id="causas" class="myTable" border="1">
+                <table class="tablasRegis">
                     <tr>
                         <th>Tramite clave</th>
                         <th>Etapa procesal</th>
@@ -217,17 +210,9 @@
                         <td>Investigacion</td>
                         <td>0002/2019-p1</td>
                         <td>27/09/2019</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
+                        <td><a class="pop" href="tramite.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
-                    <tr>
-                        <td>0002/2019-t2</td>
-                        <td>Intermedia</td>
-                        <td>0002/2019-p2</td>
-                        <td>12/01/2019</td>
-                        <td><a href="#"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    <tr>
+                    </tr>
                 </table>
             </div>
         </section>

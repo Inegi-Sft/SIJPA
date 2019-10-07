@@ -77,6 +77,8 @@ table.dataTable tbody th,table.dataTable tbody td{
     right: 15%;
 }
 .add{
+    vertical-align: bottom;
+    text-decoration: none;
     position: absolute;
     top: 190px;
     right: 20px;
@@ -85,7 +87,8 @@ table.dataTable tbody th,table.dataTable tbody td{
     border: none;
     border-radius: 5px;
     width: 13%;
-    height: 30px;
+    height: 33px;
+    padding: 5px;
     font-size: 14px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -99,10 +102,12 @@ table.dataTable tbody th,table.dataTable tbody td{
     background-color: #00CBCB;
     color: #FFFFFF;
     width: 14%;
+    cursor: pointer;
 }
 
 .add img{
-    vertical-align: text-bottom ;
+    /*vertical-align: bottom;*/
+    vertical-align: text-bottom;
 }
 
 .totExp{

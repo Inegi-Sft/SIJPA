@@ -11,12 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery.fancybox.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/datatables.min.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/datatables.min.js"></script>
-        <script type="text/javascript" src="js/funciones.js"></script>
-        <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="js/funcion-DataTable.js"></script>
         <script type="text/javascript" src="js/menu.js"></script>
     </head>
     <body>
@@ -29,7 +27,7 @@
             <h1>Causas Penales</h1>
             <form action="#" method="post">
                 <span class="totExp">Total de Causas Penales:</span>
-                <button class="add"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</button>
+                <a class="add" href="elementosPrincipales.jsp"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</a>
                 <table id="causas" class="myTable">
                     <thead>
                         <tr>
@@ -56,7 +54,7 @@
                             <td>asdf</td>
                             <td>asdf</td>
                             <td>asdf</td>
-                            <td><a class="pop" href="juzgados.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
+                            <td><a href="elementosPrincipales.jsp"><img src='img/editar.png' title="Editar"/></a></td>
                             <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
                         </tr>
                         <%}%>

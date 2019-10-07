@@ -218,4 +218,27 @@ fieldset legend{
 .contenedor img{
     width: 20px;
 }
-
+.btnCerrar {
+    float: right;
+    margin:20px 25px;
+    box-shadow:inset 0px 1px 0px 0px #54a3f7;
+    background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+    background-color:#007dc1;
+    border-radius:3px;
+    border:1px solid #124d77;
+    cursor:pointer;
+    color:#ffffff;
+    font-weight:  bolder;
+    font-size:16px;
+    padding:6px 20px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #154682;
+}
+.btnCerrar:hover {
+    background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+    background-color:#0061a7;
+}
+.btnCerrar:active {
+    position:relative;
+    top:1px;
+}

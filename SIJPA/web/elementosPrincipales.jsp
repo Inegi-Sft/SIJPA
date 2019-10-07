@@ -45,8 +45,6 @@
                         <th>Delito (Norma Tec.)</th>
                         <th>Grado</th>
                         <th>Comisión</th>
-                        <th>Acción</th>
-                        <th>Elemento para comisión</th>
                         <th>No. Adolescentes</th>
                         <th>No. Victimas</th>
                         <th>Editar</th>
@@ -58,8 +56,6 @@
                         <td>Homicidio</td>
                         <td>Consumado</td>
                         <td>Doloso</td>
-                        <td>Con violencia</td>
-                        <td>Con Arma blanca</td>
                         <td>1</td>
                         <td>2</td>
                         <td><a class="pop" href="delitos.jsp"><img src='img/editar.png' title="Editar"/></a></td>
@@ -72,8 +68,6 @@
                         <td>Lesiones</td>
                         <td>Consumado</td>
                         <td>Doloso</td>
-                        <td>Con violencia</td>
-                        <td>Con Arma blanca</td>
                         <td>1</td>
                         <td>2</td>
                         <td><a class="pop" href="delitos.jsp"><img src='img/editar.png' title="Modificar"/></a></td>

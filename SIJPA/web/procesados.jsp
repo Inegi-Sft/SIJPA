@@ -13,7 +13,7 @@
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <%--<%@include file="cabecera.jsp" %>--%>
+        <%@include file="cabecera.jsp" %>
         <section class="contenedor">
             <h1>Procesados</h1>
             <span class="nota">NOTA: El Adolescente procesado se identificará con el número de expediente seguido de un "-p" más el número consecutivo del Adolescente Procesado registrado.

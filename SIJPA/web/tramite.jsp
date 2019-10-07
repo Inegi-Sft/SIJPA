@@ -47,7 +47,7 @@
                         <tr>
                             <td>
                                 <label for="eMotivo">Especifique el motivo</label>
-                                <input type="text" name="eMotivo"  id="eMotivo" class="txtExlong" required  />
+                                <input type="text" name="eMotivo"  id="eMotivo" class="txtLong" required  />
                             </td>
                             <td>
                                 <label for="uActua">Fecha de la última actuación</label>

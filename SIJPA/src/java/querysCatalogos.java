@@ -47,7 +47,7 @@ public class querysCatalogos extends HttpServlet {
             out.println("<h1>Servlet querysCatalogos at " + request.getContextPath() + "</h1>");
             out.println("Pruebas:<br>");
             out.println("Consultas:<br>");
-            re = cat.findPrivLibertad();
+            re = cat.findAlfabetismo();
             for (int x = 0; x <= re.size(); x++ ) {
                 out.println(x + ".-" + re.get(x) + "<br>");
             }

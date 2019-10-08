@@ -4,6 +4,7 @@
     Author     : CESAR.OSORIO
 --%>
 
+<%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,6 +15,10 @@
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
     <body style="zoom: .9;">
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista = new ArrayList();
+        %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Víctimas</h1>
@@ -43,9 +48,12 @@
                             <td>
                                 <label for="tvic_moral">Tipo de Víctima Moral</label>
                                 <select name="tvic_moral" id="tvic_moral" class="txtSelect txtMedia">
-                                    <option value="0">Seleccione</option>
+                                    <option value="">Seleccione</option>
                                     <%
-                                        //conección a base
+                                        lista = cat.findAlfabetismo();
+                                        for (String[]ls:lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");    
+                                        }
                                     %>    
                                 </select>
                             </td>

@@ -12,11 +12,6 @@ and open the template in the editor.
     width: 100%;
 }
 
-.tablaFormu .cols{
-    /*float: left;*/
-    display: inline-block;
-}
-
 .tablasRegis {
     border-collapse: collapse;
     width: 85%;

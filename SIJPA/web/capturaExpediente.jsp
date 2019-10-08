@@ -10,7 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Expediente</title>
-        <!--<link href="css/principal.css" rel="stylesheet" type="text/css"/>-->
+        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/pestanas.js"></script>
     </head>
     <body>
         <%--<%@include file="cabecera.jsp"%>--%>
@@ -95,7 +96,7 @@
                 </fieldset><br/>
                 <fieldset>
                     <legend>Contenidos del expediente de la causa penal</legend>
-                    <table>
+                    <table class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="Tdelitos">Total de delitos</label>
@@ -108,11 +109,6 @@
                             <td>
                                 <label for="Tvictimas">Total de víctimas</label>
                                 <input type="number" name="Tvictimas" id="Tvictimas" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-
                             </td>
                         </tr>
                     </table>

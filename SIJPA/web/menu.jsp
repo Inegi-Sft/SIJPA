@@ -5,10 +5,10 @@
 --%>
 
 <nav>
-  <ul>
-    <li><a href="#">Home</a></li> 
-    <li><a href="#">About</a></li> 
-    <li><a href="#">Services</a></li>
-    <li><a href="#">Contact</a></li> 
-  </ul>
+    <ul>
+        <li><a href="causasPenales.jsp">Causas Penales</a></li> 
+        <li><a href="juzgados.jsp">Juzgados</a></li> 
+        <li><a href="datosGral.jsp">Datos Generales</a></li>
+        <li><a href="#">Base de Datos</a></li> 
+    </ul>
 </nav>

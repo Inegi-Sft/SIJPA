@@ -13,11 +13,21 @@
         <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
         <title>SIJPA::Juzgados</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="js/pestanas.js"></script>
+        <link href="css/jquery.fancybox.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/datatables.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/datatables.min.js"></script>
+        <script type="text/javascript" src="js/funciones.js"></script>
+        <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
     </head>
     <body >
         <%@include file="cabecera.jsp"%>
+        <%@include file="menu.jsp"%>
         <section class="contenedor">
+            <div class="toggle-nav">
+                <div class="toggle-nav-inner"></div>
+            </div>
             <h1>Juzgados</h1>
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1">Datos del Juez</button>

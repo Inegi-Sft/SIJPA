@@ -454,7 +454,8 @@ public class catalogos {
         }
         return lista;
     }
-     public ArrayList findInstrComision() {
+
+    public ArrayList findInstrComision() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_INSTRUMENTO_COMISION ORDER BY 1";
@@ -469,7 +470,8 @@ public class catalogos {
         }
         return lista;
     }
-     public ArrayList findLinguisticas() {
+
+    public ArrayList findLinguisticas() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_linguisticas ORDER BY 1";
@@ -484,8 +486,8 @@ public class catalogos {
         }
         return lista;
     }
-     
-     public ArrayList findMedCautelares() {
+
+    public ArrayList findMedCautelares() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES ORDER BY 1";
@@ -500,7 +502,7 @@ public class catalogos {
         }
         return lista;
     }
-     
+
     public ArrayList findMedMujer() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -516,7 +518,8 @@ public class catalogos {
         }
         return lista;
     }
-   public ArrayList findMedProteccion() {
+
+    public ArrayList findMedProteccion() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION ORDER BY 1";
@@ -530,8 +533,9 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    }  
-   public ArrayList findMediosPrueba() {
+    }
+
+    public ArrayList findMediosPrueba() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA ORDER BY 1";
@@ -546,7 +550,8 @@ public class catalogos {
         }
         return lista;
     }
-   public ArrayList findModalidad() {
+
+    public ArrayList findModalidad() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_MODALIDAD ORDER BY 1";
@@ -561,8 +566,8 @@ public class catalogos {
         }
         return lista;
     }
-   
-   public ArrayList findMulta() {
+
+    public ArrayList findMulta() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_MULTA ORDER BY 1";
@@ -577,8 +582,8 @@ public class catalogos {
         }
         return lista;
     }
-   
-   public ArrayList findMunicipios() {
+
+    public ArrayList findMunicipios() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_MUNICIPIOS ORDER BY 1";
@@ -593,7 +598,7 @@ public class catalogos {
         }
         return lista;
     }
-   
+
     public ArrayList findNacionalidad() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -609,8 +614,8 @@ public class catalogos {
         }
         return lista;
     }
-    
-     public ArrayList findNoPrivacion() {
+
+    public ArrayList findNoPrivacion() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_NOPRIVACION_LIBERTAD ORDER BY 1";
@@ -625,8 +630,8 @@ public class catalogos {
         }
         return lista;
     }
-    
-     public ArrayList findNumero() {
+
+    public ArrayList findNumero() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_NUMERO ORDER BY 1";
@@ -641,7 +646,7 @@ public class catalogos {
         }
         return lista;
     }
-     
+
     public ArrayList findOcupacion() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -657,8 +662,8 @@ public class catalogos {
         }
         return lista;
     }
-    
-     public ArrayList findPais() {
+
+    public ArrayList findPais() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_PAIS ORDER BY 1";
@@ -673,7 +678,7 @@ public class catalogos {
         }
         return lista;
     }
-     
+
     public ArrayList findPlazoCierre() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -689,7 +694,7 @@ public class catalogos {
         }
         return lista;
     }
-    
+
     public ArrayList findPConstitucional() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -705,9 +710,8 @@ public class catalogos {
         }
         return lista;
     }
-   
-        
-     public ArrayList findPrivLibertad() {
+
+    public ArrayList findPrivLibertad() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_PRIVACION_LIBERTAD ORDER BY 1";
@@ -722,7 +726,7 @@ public class catalogos {
         }
         return lista;
     }
-    
+
     public ArrayList findProcedimiento() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -738,6 +742,7 @@ public class catalogos {
         }
         return lista;
     }
+
     public ArrayList findProcAbreviado() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -753,7 +758,7 @@ public class catalogos {
         }
         return lista;
     }
-    
+
     public ArrayList findPIndigena() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -769,7 +774,7 @@ public class catalogos {
         }
         return lista;
     }
-    
+
     public ArrayList findRelImputado() {
         conn.Conectar();
         lista = new ArrayList<String>();
@@ -785,8 +790,8 @@ public class catalogos {
         }
         return lista;
     }
-    
-     public ArrayList findRePDano() {
+
+    public ArrayList findRePDano() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_REPARACION_DANO ORDER BY 1";
@@ -800,9 +805,9 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    } 
-    
-         public ArrayList findRepLegal() {
+    }
+
+    public ArrayList findRepLegal() {
         conn.Conectar();
         lista = new ArrayList<String>();
         sql = "SELECT * FROM CATALOGOS_REPRESENTANTE_LEGAL ORDER BY 1";
@@ -817,8 +822,5 @@ public class catalogos {
         }
         return lista;
     }
-    
-    
+
 }
- 
-     

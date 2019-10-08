@@ -3,6 +3,7 @@
     Created on : 24/09/2019, 09:42:00 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +14,10 @@
         <%@include file="librerias.jsp" %>
     </head>
     <body>
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista = new ArrayList();
+        %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
             <h2>Expediente</h2>
@@ -45,8 +50,11 @@
                                 <select name="Pparticular" id="Pparticular" class="txtMedia">
                                     <option value="0">--Seleccione--</option>
                                     <%
-                                        //conexion a base
-                                    %>
+                                        lista = cat.findResSimple();
+                                        for (int x = 0; x < 2; x++) {
+                                            out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                        }
+                                    %>  
                                 </select>
                             </td>
                             <td>
@@ -54,24 +62,35 @@
                                 <select name="compe" id="compe" class="txtMedia">
                                     <option value="0">Seleccione</option>
                                     <%
-                                        //conexion a base
-                                    %>
+                                        lista = cat.findResSimple();
+                                        for (int x = 0; x < 2; x++) {
+                                            out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                        }
+                                    %>  
                                 </select>
                             </td>
                             <td>
                                 <label for="Tincompe">Tipo de incompetencia</label>
                                 <select name="Tincompe" id="Tincompe" class="txtMedia">
                                     <option value="0">--Seleccione--</option>
-                                    <%                                    //conexion a base
-                                    %>
+                                    <%
+                                        lista = cat.findIncompetencia();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %>  
                                 </select>
                             </td>
                             <td>
                                 <label for="ExpAcomu" >Expediente acumulado</label>
                                 <select name="ExpAcomu" id="ExpAcomu" class="txtMedia">
                                     <option value="0">Seleccione</option>
-                                    <%                                    //conexion a base
-                                    %>
+                                    <%
+                                        lista = cat.findResSimple();
+                                        for (int x = 0; x < 2; x++) {
+                                            out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                        }
+                                    %>  
                                 </select>
                             </td>
                         </tr>             
@@ -84,8 +103,12 @@
                                 <label for="Tprocedi" >Tipo de procedimiento</label>
                                 <select name="Tprocedi" id="Tprocedi" class="txtMedia" required>
                                     <option value="0">--Seleccione--</option>
-                                    <%                                    //conexion a base
-                                    %>
+                                    <%
+                                        lista = cat.findProcedimiento();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %>  
                                 </select>
                             </td>
                             <td></td>

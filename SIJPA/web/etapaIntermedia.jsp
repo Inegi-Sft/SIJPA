@@ -3,7 +3,8 @@
     Created on : 7/10/2019, 09:58:11 AM
     Author     : CESAR.OSORIO
 --%>
-
+<%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,10 @@
         <%@include file="librerias.jsp" %>
     </head>
     <body style="zoom: .9;">
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista = new ArrayList();
+        %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Etapa Intermedia</h1>
@@ -26,8 +31,11 @@
                                     <select class="selPro" name="audiInterme" id="audiInterme">
                                         <option value="0">--Seleccione--</option>
                                         <%
-                                            //conexion a base
-                                        %>
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>
                                     <label for="fechaCtrlDeten">Fecha de la audiencia intermedia</label>
                                     <input type="date" name="fechaAudiinter" id="fechaAudiinter"/>
@@ -49,8 +57,11 @@
                                     <select class="selPro" name="correEscrito" id="correEscrito">
                                         <option value="0">--Seleccione--</option>
                                         <%
-                                            //conexion a base
-                                        %>
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>
                                     <label for="fechaCtrlDeten">Fecha de corrección del escrito de acusación</label>
                                     <input type="date" name="fechaCorreccion" id="fechaCorreccion"/>
@@ -64,8 +75,12 @@
                                     <label for="audiInterme">¿Hubo solicitud de asesor coadyuvante?</label>
                                     <select class="selPro" name="asesorCoady" id="asesorCoady">
                                         <option value="0">--Seleccione--</option>
-                                        <%                                            //conexion a base
-                                        %>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>
                                     <label for="fechaCtrlDeten">Fecha de la solicitud del asesor coadyuvante</label>
                                     <input type="date" name="fechaCoady" id="fechaCoady"/>
@@ -84,16 +99,24 @@
                                                 <label for="audiInterme">¿Hubo presentación de medios de prueba?</label>
                                                 <select class="selPro" name="mediosPrueba" id="mediosPrueba">
                                                     <option value="0">--Seleccione--</option>
-                                                    <%                                            //conexion a base
-                                                    %>
+                                                    <%
+                                                        lista = cat.findResSimple();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                        }
+                                                    %> 
                                                 </select>
                                             </td>
                                             <td>
                                                 <label for="audiInterme">Tipos de  medios de prueba (excluidos o aceptados)</label>
                                                 <select class="selPro" name="tipoPrueba" id="tipoPrueba">
                                                     <option value="0">--Seleccione--</option>
-                                                    <%                                            //conexion a base
-                                                    %>
+                                                    <%
+                                                        lista = cat.findMediosPrueba();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                        }
+                                                    %> 
                                                 </select>
                                             </td>
 
@@ -105,16 +128,24 @@
                                 <label for="audiInterme">Exclusión de medios de prueba</label>
                                 <select class="selPro" name="excuMedios" id="excuMedios">
                                     <option value="0">--Seleccione--</option>
-                                    <%                                            //conexion a base
-                                    %>
+                                    <%
+                                        lista = cat.findResSimple();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %> 
                                 </select>
                             </td>
                             <td>
                                 <label for="audiInterme">¿Contó con acuerdos probatorios?</label>
                                 <select class="selPro" name="acuerdosProba" id="acuerdosProba">
                                     <option value="0">--Seleccione--</option>
-                                    <%                                            //conexion a base
-%>
+                                    <%
+                                        lista = cat.findResSimple();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %> 
                                 </select>
                             </td>
                         </tr>

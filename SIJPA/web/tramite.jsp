@@ -3,6 +3,7 @@
     Created on : 3/10/2019, 09:32:06 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +14,10 @@
         <%@include file="librerias.jsp" %>
     </head>
     <body style="zoom: .9;">
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista = new ArrayList();
+        %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Pendientes de resolución </h1>
@@ -37,8 +42,11 @@
                                 <label for="eProcesal">Etapa procesal</label>
                                 <select name="eProcesal" id="eProcesal" class="txtMedia selPro">
                                     <option value="0">Seleccione</option>
-                                    <%
-                                        //conección a base
+                                     <%
+                                        lista = cat.findEtapaProcesal();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
                                     %>    
                                 </select>
                             </td>

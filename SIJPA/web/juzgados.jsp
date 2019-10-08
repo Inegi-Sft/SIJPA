@@ -6,6 +6,7 @@
 
 <%@page import="clasesAuxiliar.NumerosRomanos"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.catalogos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,10 @@
         <script type="text/javascript" src="js/menu.js"></script>
     </head>
     <body >
+        <%
+            catalogos cat=new catalogos();
+            ArrayList<String[]> lista;
+        %>
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
@@ -81,7 +86,7 @@
                             <td>
                                 <label for="numDistrito">Número del Distrito Judicial</label>
                                 <select name="numDistrito" class="txtMedia selPro" id="numDistrito" required>
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         NumerosRomanos nRomanosR = new NumerosRomanos(1, 99);
                                         ArrayList<NumerosRomanos> alnRomanosR = nRomanosR.getNumerosRomanos();
@@ -114,12 +119,13 @@
                             <td>
                                 <label for="fOrganiza">Forma de Organizacion</label>
                                 <select class="selPro" name="fOrganiza" id="fOrganiza">
-                                    <option value="0">--Seleccione--</option>
-                                    <option value="1">Región judicial</option>
-                                    <option value="2">Distrito judicial</option>
-                                    <option value="3">Partido judicial</option>
-                                    <option value="4">Cobertura estatal</option>
-                                    <option value="5">Otro</option>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista=cat.findSexos();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                        }
+                                    %>
                                 </select>
                             </td>
                             <td></td>

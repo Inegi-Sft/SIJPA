@@ -121,7 +121,7 @@
                         </tr>
                         <tr>
                             <td>1</td><td>Audiencia inicial </td><td>
-                                <input class="chkAplica" type="checkbox" name="aplAudi" id="aplAudi1" style="background-color:#2196F3"/> </td><td><input type="number" name="Cantaudi1" id="Cantaudi1" class="txtSmall"></td>
+                                <input class="chkAplica" type="checkbox" name="aplAudi" id="aplAudi1"/> </td><td><input type="number" name="Cantaudi1" id="Cantaudi1" class="txtSmall"></td>
                         </tr>
                         <tr>
                             <td>2</td><td>Audiencia para solicitar orden de aprehensión</td><td>

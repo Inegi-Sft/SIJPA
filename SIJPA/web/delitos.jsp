@@ -11,9 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Delitos</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        </style>
     </head>
-    <body>
-        <%@include file="cabecera.jsp" %>
+    <body style="zoom: .9;">
+        <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Delitos</h1>
             <form action="" method="post">

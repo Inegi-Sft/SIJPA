@@ -12,8 +12,8 @@
         <title>SIJPA::Resoluciones</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <%@include file="cabecera.jsp" %>
+    <body style="zoom: .9;">
+        <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el juez de control</h1>
             <form action="" method="post">

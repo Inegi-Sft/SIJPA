@@ -11,11 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Expediente</title>
         <!--<link href="css/principal.css" rel="stylesheet" type="text/css"/>-->
-        <!--<script type="text/javascript" src="js/pestanas.js"></script>-->
     </head>
     <body>
         <%--<%@include file="cabecera.jsp"%>--%>
-        <section class="contenedor">
+        <section class="contenedor" style="zoom: .9;">
             <h1>Expediente</h1>
             <form action="" method="post">
                 <fieldset>

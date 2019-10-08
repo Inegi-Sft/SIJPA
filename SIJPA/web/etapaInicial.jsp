@@ -12,8 +12,8 @@
         <title>SIJPA::Etapa Inicial</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <%@include file="cabecera.jsp" %>
+    <body style="zoom: .9;">
+        <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Etapa Inicial</h1>
             <form action="" method="post">
@@ -169,8 +169,8 @@
 %>
                                         </select>
                                     </div>
-                                    <div  style="float: left;width: 75%;">
-                                        <table class="tblDelitos">
+                                    <div  style="float: right;width: 76%;">
+                                        <table class="tablasRegis">
                                             <tr>
                                                 <th width="20">Id</th>
                                                 <th width="450">Medida Cautelar</th>

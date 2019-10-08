@@ -19,13 +19,13 @@ import java.util.logging.Logger;
 public class catalogos {
 
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String> lista;
+    ArrayList<String[]> lista;
     String sql;
     ResultSet resul;
 
     public ArrayList<String[]> findSexos() {
         conn.Conectar();
-        ArrayList<String[]> lista = new ArrayList();
+         lista = new ArrayList();
         sql = "SELECT * FROM CATALOGOS_SEXO ORDER BY 1";
         resul = conn.consultar(sql);
         try {
@@ -825,12 +825,12 @@ public class catalogos {
 
     public ArrayList findResidencia() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_RESIDENCIA ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -841,12 +841,12 @@ public class catalogos {
 
     public ArrayList findResSimple() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_RESPUESTA_SIMPLE ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -857,12 +857,12 @@ public class catalogos {
 
     public ArrayList findSexo() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_SEXO ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -873,12 +873,12 @@ public class catalogos {
 
     public ArrayList findSobreseimiento() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_SOBRESEIMIENTO ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -889,12 +889,12 @@ public class catalogos {
 
     public ArrayList findTiempoInterna() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIEMPO_INTERNAMIENTO ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -905,12 +905,12 @@ public class catalogos {
 
     public ArrayList findTipoAudiencias() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_AUDIENCIAS ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -921,12 +921,12 @@ public class catalogos {
 
     public ArrayList findTipoConsigna() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_CONCIGNACION ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -937,12 +937,12 @@ public class catalogos {
 
     public ArrayList findTipoDefensor() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_DEFENSOR ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -953,12 +953,12 @@ public class catalogos {
 
     public ArrayList findTipoDetencion() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_DETENCION ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -969,12 +969,12 @@ public class catalogos {
 
     public ArrayList findTipoImpugna() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_IMPUGNACION ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -985,12 +985,12 @@ public class catalogos {
 
     public ArrayList findTipoResolucion() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_RESOLUCION ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -1001,12 +1001,12 @@ public class catalogos {
 
     public ArrayList findTipoSobrese() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_SOBRESEIMIENTO ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -1017,12 +1017,12 @@ public class catalogos {
 
     public ArrayList findTipoVictima() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_TIPO_VICTIMA ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -1033,12 +1033,12 @@ public class catalogos {
 
     public ArrayList findVialidad() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_VIALIDAD ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -1049,12 +1049,12 @@ public class catalogos {
 
     public ArrayList findVicMoral() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_VICTIMA_MORAL ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -1065,12 +1065,12 @@ public class catalogos {
 
     public ArrayList findVulnera() {
         conn.Conectar();
-        lista = new ArrayList<String>();
+        lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_VULNERABILIDAD ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(resul.getString("DESCRIPCION"));
+                lista.add(new String[]{resul.getString(1),resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {

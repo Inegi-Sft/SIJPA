@@ -21,6 +21,7 @@
         <script type="text/javascript" src="js/funciones.js"></script>
         <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
         <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript" src="js/pestanas.js"></script>
     </head>
     <body >
         <%
@@ -85,7 +86,7 @@
                             </td>
                             <td>
                                 <label for="numDistrito">Número del Distrito Judicial</label>
-                                <select name="numDistrito" class="txtMedia selPro" id="numDistrito" required>
+                                <select name="numDistrito" class="txtMedia txtMedia" id="numDistrito" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         NumerosRomanos nRomanosR = new NumerosRomanos(1, 99);
@@ -118,7 +119,7 @@
                             <td></td>
                             <td>
                                 <label for="fOrganiza">Forma de Organizacion</label>
-                                <select class="selPro" name="fOrganiza" id="fOrganiza">
+                                <select class="txtMedia" name="fOrganiza" id="fOrganiza">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista=cat.findSexos();
@@ -152,7 +153,7 @@
                         <tr>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
-                                <select class="selPro" name="entidad" id="entidad">
+                                <select class="txtMedia" name="entidad" id="entidad">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -161,7 +162,7 @@
                             </td>
                             <td>
                                 <label for="vialidad">Vialidad</label>
-                                <select class="selPro" name="vialidad" id="vialidad">
+                                <select class="txtMedia" name="vialidad" id="vialidad">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -170,7 +171,7 @@
                             </td>
                             <td>
                                 <label for="asentamiento">Asentamiento Humano</label>
-                                <select class="selPro" name="asentamiento" id="asentamiento">
+                                <select class="txtMedia" name="asentamiento" id="asentamiento">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -179,7 +180,7 @@
                             </td>
                             <td>
                                 <label for="municipio">Municipio o Delegacion</label>
-                                <select class="selPro" name="municipio" id="municipio">
+                                <select class="txtMedia" name="municipio" id="municipio">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base

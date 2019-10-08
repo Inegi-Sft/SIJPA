@@ -169,8 +169,8 @@
 %>
                                         </select>
                                     </div>
-                                    <div  style="float: right;width: 76%;">
-                                        <table class="tablasRegis">
+                                    <div  style="float: left;width: 75%;">
+                                        <table class="tblDelitos" >
                                             <tr>
                                                 <th width="20">Id</th>
                                                 <th width="450">Medida Cautelar</th>
@@ -180,30 +180,21 @@
                                                 <td>1</td>
                                                 <td>El resguardo en su domicilio con las modalidades que el órgano Jurisdiccional disponga</td>
                                                 <td>
-                                                    <select name="aplica" id="aplica">
-                                                        <option value="Si">Si</option>
-                                                        <option value="No" selected>No</option>
-                                                    </select>
+                                                    <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>Garantía económica para asegurar la comparecencia</td>
                                                 <td>
-                                                    <select name="aplica" id="aplica">
-                                                        <option value="Si">Si</option>
-                                                        <option value="No" selected>No</option>
-                                                    </select>
+                                                    <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>La prohibición de convivir, acercarse o comunicarse con determinadas personas, con las víctimas, ofendidos o testigos, siempre que no se afecte el derecho de defensa</td>
                                                 <td>
-                                                    <select name="aplica" id="aplica">
-                                                        <option value="Si">Si</option>
-                                                        <option value="No" selected>No</option>
-                                                    </select>
+                                                    <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
                                                 </td>
                                             </tr>
                                         </table>

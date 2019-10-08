@@ -343,10 +343,11 @@
                                 en donde se localice o se encuentre la víctima u ofendido en el momento de solicitarlo
                             </td>
                             <td>
-                                <select name="medidaPro" id="medidaPro" class="txtMedia">
-                                    <option value="1">Si</option>
-                                    <option value="2" selected>No</option>
-                                </select>
+                                <!--                                <select name="medidaPro" id="medidaPro" class="txtMedia">
+                                                                    <option value="1">Si</option>
+                                                                    <option value="2" selected>No</option>
+                                                                </select>-->
+                                <input type="checkbox" name="aplicaMedida" id="aplicaMedida" />
                             </td>
                         </tr>
                     </table>
@@ -373,10 +374,11 @@
                                 Acceso al domicilio en común, de autoridades policíacas o de personas que auxilien a la víctima a tomar sus pertenencias personales y las de sus hijas e hijos
                             </td>
                             <td>
-                                <select name="medidaProMuj" id="medidaProMuj" class="txtMedia">
-                                    <option value="1">Si</option>
-                                    <option value="2" selected>No</option>
-                                </select>
+                                <!--                                <select name="medidaProMuj" id="medidaProMuj" class="txtMedia">
+                                                                    <option value="1">Si</option>
+                                                                    <option value="2" selected>No</option>
+                                                                </select>-->
+                                <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj" />
                             </td>
                         </tr>
                     </table>

@@ -114,7 +114,7 @@
                                 <select class="txtMedia" name="fOrganiza" id="fOrganiza">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findSexos();
+                                        lista=cat.findForOrganiza();
                                         for (String[] ls : lista) {
                                             out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
                                         }
@@ -148,7 +148,10 @@
                                 <select class="txtMedia" name="entidad" id="entidad">
                                     <option value="0">--Seleccione--</option>
                                     <%
-                                        //conexion a base
+                                        lista=cat.findEntidades();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                        }
                                     %>
                                 </select>
                             </td>

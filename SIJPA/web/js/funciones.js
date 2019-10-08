@@ -10,7 +10,7 @@ $(document).ready(function () {
         'iframe': {
             'css': {
                 'width': '1400px',
-                'height': '570px'
+                'height': '560px'
             }
         }
     });

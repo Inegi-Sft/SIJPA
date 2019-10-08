@@ -21,7 +21,7 @@
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
             
-            <a class="btnCerrar" href="causasPenales.jsp" >X</a>
+            <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1" style="display: block">Expediente</button>

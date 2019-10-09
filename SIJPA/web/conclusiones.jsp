@@ -24,7 +24,6 @@
             <form action="" method="post">
                 <fieldset>
                     <legend>Resolución</legend>
-
                     <label for="idProcesado">Id Adolescente</label>
                     <select class="txtMedia" name="idProcesado" id="idProcesado">
                         <option value="0">--Seleccione--</option>

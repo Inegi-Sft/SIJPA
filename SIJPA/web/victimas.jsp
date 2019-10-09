@@ -164,8 +164,36 @@
                         </tr>
                     </table>
                 </fieldset>
-              
- 
+                <br/>
+                <fieldset>
+                    <legend>Relación de la Victima con el Procesado</legend>
+                    <table class="tablasRegis">
+                        <tr>
+                            <th>Victima Clave</th>
+                            <th>Procesado Clave</th>
+                            <th width="750">Relación</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                select para traer victima_clave
+                            </td>
+                            <td>
+                                select para traer procesado_clave
+                            </td>
+                            <td>
+                                <%                                    
+                                    lista = cat.findRelImputado();
+                                    for (String[] ls : lista) {
+                                        out.println("<div class='chkCat'>");
+                                        out.println("<input type='checkbox' id='chkFechaReclaDel'>");
+                                        out.println("<label>" + ls[1] + "</label>");
+                                        out.println("</div>");
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
                 <br/>
                 <fieldset>
                     <legend>Características especificas para víctimas personas físicas</legend> 
@@ -331,10 +359,8 @@
                                     %> 
                                 </select>
                             </td>
-
                         </tr>
                         <tr>
-
                             <td>
                                 <label for="indigena">Habla lengua indígena o dialecto </label>
                                 <select name="indigena" id="indigena" class="txtMedia">
@@ -372,7 +398,6 @@
                                 </select>
                             </td>
                             <td>
-
                             </td>
                         </tr>
                     </table> 

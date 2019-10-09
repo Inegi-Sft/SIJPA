@@ -107,11 +107,10 @@ body{
     width: 15%;
 }
 
-.contenedor input[type=text], .contenedor input[type=date], .contenedor input[type=number], 
+.contenedor input, .contenedor input[type=text], .contenedor input[type=date], .contenedor input[type=number], 
 .contenedor input[type=tel], .contenedor input[type=email]{
     padding: 2px 5px;
     border-radius: 5px;
-    box-shadow: 0 1px #fff;
     height: 30px;
     font-size: 14px;
     -webkit-transition: all 0.3s ease;
@@ -157,7 +156,6 @@ body{
 .contenedor .txtSmall{ width: 70px;}
 .contenedor .txtMedia{ width: 160px;}
 .contenedor .txtLong{ width: 300px;}
-.contenedor .txtSelect{width: 105px;}
 .contenedor .txtExBig{width: 800px;}
 .contenedor .lblExBig{width: auto;}
 
@@ -195,17 +193,6 @@ fieldset legend{
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
-}
-
-.noIdentificada label{
-    font-size: 13px;
-    display: inline;
-    color: #0077CB;
-    vertical-align: text-top;
-}
-
-.noIdentificada{
-    margin-top: -15px;
 }
 
 .nota{
@@ -255,10 +242,22 @@ fieldset legend{
     top:1px;
 }
 
+.noIdentificada{
+    margin-top: -15px;
+}
+
+.noIdentificada label{
+    font-size: 13px;
+    display: inline;
+    color: #0077CB;
+    vertical-align: text-top;
+}
+
 .contenedor input[type="checkbox"]{
     width:19px;
     height:19px;
     margin: 0 4px 0 0;
+    border: none;
 }
 
 .contenedor input[type="checkbox"].chkAplica{
@@ -269,4 +268,16 @@ fieldset legend{
 
 .contenedor input[type="checkbox"].chkAplica:checked {
     background: #0077CB;
+}
+
+.contenedor .chkCat{
+    width: 360px;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    text-align: left;
+}
+
+.contenedor .chkCat label{
+    display: inline;
 }

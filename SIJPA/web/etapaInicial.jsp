@@ -27,7 +27,7 @@
                         <tr>
                             <td colspan="4">
                                 <label for="idProcesado">Id Adolescente</label>
-                                <select class="selPro" name="idProcesado" id="idProcesado" required>
+                                <select class="txtMedia" name="idProcesado" id="idProcesado" required>
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         //conexion a base
@@ -40,10 +40,9 @@
                             <td>
                                 <fieldset>
                                     <label for="ctrlDetencion">¿Hubo control de detención?</label>
-                                    <select class="selPro" name="ctrlDetencion" id="ctrlDetencion">
+                                    <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion">
                                         <option value="0">--Seleccione--</option>
-                                        <%
-                                            lista = cat.findResSimple();
+                                        <%                                            lista = cat.findResSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -59,22 +58,22 @@
                             </td>
                             <td>
                                 <label for="legalDeten">¿Se calificó como legal la detención?</label>
-                                <select class="selPro" name="legalDeten" id="legalDeten">
+                                <select class="txtMedia" name="legalDeten" id="legalDeten">
                                     <option value="0">--Seleccione--</option>
                                     <%
-                                            lista = cat.findResSimple();
-                                            for (String[] ls : lista) {
-                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                            }
-                                        %> 
+                                        lista = cat.findResSimple();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %> 
                                 </select>    
                             </td>
                             <td>
                                 <fieldset>
                                     <label for="audiInicial">¿Hubo audiencia inicial?</label>
-                                    <select class="selPro" name="audiInicial" id="audiInicial">
+                                    <select class="txtMedia" name="audiInicial" id="audiInicial">
                                         <option value="0">--Seleccione--</option>
-                                         <%
+                                        <%
                                             lista = cat.findResSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
@@ -83,9 +82,9 @@
                                     </select>    
 
                                     <label for="conducAudi">Forma de conducción en la audiencia inicial</label>
-                                    <select class="selPro" name="conducAudi" id="conducAudi">
+                                    <select class="txtMedia" name="conducAudi" id="conducAudi">
                                         <option value="0">--Seleccione--</option>
-                                       <%
+                                        <%
                                             lista = cat.findFormConduccion();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
@@ -107,7 +106,27 @@
                             <td>
                                 <fieldset>
                                     <label for="declaro">¿El adolescente declaró?</label>
-                                    <select class="selPro" name="declaro" id="declaro">
+                                    <select class="txtMedia" name="declaro" id="declaro">
+                                        <option value="0">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                    <label for="fechDeclara">Fecha de declaración</label>
+                                    <input type="date" name="fechDeclara" id="fechDeclara"/>
+                                    <div class="noIdentificada">
+                                        <input type="checkbox" id="chkFechDeclara"><label>No identificada</label>
+                                    </div>
+
+                                </fieldset>
+                            </td>
+                            <td>
+                                <fieldset>
+                                    <label for="huboPlazo">¿Hubo plazo constitucional?</label>
+                                    <select class="txtMedia" name="huboPlazo" id="huboPlazo">
                                         <option value="0">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -117,46 +136,64 @@
                                         %> 
                                     </select>
                                     <label for="plazo">Tiempo del plazo constitucional</label>
-                                    <select class="selPro" name="plazo" id="plazo">
+                                    <select class="txtMedia" name="plazo" id="plazo">
                                         <option value="0">--Seleccione--</option>
-                                        <%                                //conexion a base
-                                        %>
+                                        <%
+                                            lista = cat.findPConstitucional();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>
                                 </fieldset>
                             </td>
-                            <td>
+                            <td colspan="2">
                                 <fieldset>
-                                    <label for="autoVin">Resolución del auto de vinculación a proceso</label>
-                                    <select class="selPro" name="autoVin" id="autoVin">
+                                    <label for="autoVin" style="width:400px;">Resolución del auto de vinculación a proceso</label>
+                                    <select class="txtMedia" name="autoVin" id="autoVin">
                                         <option value="0">--Seleccione--</option>
-                                        <%                                //conexion a base
-                                        %>
+                                        <%
+                                            lista = cat.findAutoVinculacion();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>
-                                    <label for="fechAuto">Fecha en que se dictó el auto de vinculación a proceso</label>
+                                    <label for="fechAuto" style="width:500px;">Fecha en que se dictó el auto de vinculación a proceso</label>
                                     <input type="date" name="fechAuto" id="fechAuto"/>
                                     <div class="noIdentificada">
                                         <input type="checkbox" id="chkFechaAuto"><label>No identificada</label>
                                     </div>
                                 </fieldset>
                             </td>
+                        </tr>
+                        <tr>
                             <td colspan="2">
                                 <fieldset>
                                     <table style="border-spacing: 0; ">
                                         <tr>
                                             <td>
                                                 <label for="soliPlazo" class="lblExBig">¿Se solicitó el plazo para el cierre de investigación complementaria?</label>
-                                                <select class="selPro" name="soliPlazo" id="soliPlazo">
+                                                <select class="txtMedia" name="soliPlazo" id="soliPlazo">
                                                     <option value="0">--Seleccione--</option>
-                                                    <%                                //conexion a base
-                                                    %>
+                                                    <%
+                                                        lista = cat.findResSimple();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                        }
+                                                    %> 
                                                 </select>
                                             </td>
                                             <td>
                                                 <label for="plazoFijadoC">Plazo fijado para el cierre de la investigación</label>
-                                                <select class="selPro" name="plazoFijadoC" id="plazoFijadoC">
+                                                <select class="txtMedia" name="plazoFijadoC" id="plazoFijadoC">
                                                     <option value="0">--Seleccione--</option>
-                                                    <%   //conexion a base
-                                                    %>
+                                                    <%
+                                                        lista = cat.findPlazoCierre();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                        }
+                                                    %> 
                                                 </select>
                                             </td>
                                         </tr>
@@ -180,49 +217,55 @@
                                     </table>
                                 </fieldset>
                             </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td colspan="4"><br/>
                                 <fieldset style="background-color: #fff;">
                                     <legend>Medidas Cautelares</legend>
                                     <div class="cols">
-                                        <label for="drecretaMC">¿Se decretó medida cautelar?</label>
-                                        <select class="selPro" name="drecretaMC" id="drecretaMC">
+                                        <label for="drecretaMC" >¿Se decretó medida cautelar?</label>
+                                        <select class="txtMedia" name="drecretaMC" id="drecretaMC">
                                             <option value="0">--Seleccione--</option>
-                                            <%   //conexion a base
-%>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %> 
                                         </select>
                                     </div>
-                                    <div  style="float: left;width: 75%;">
-                                        <table class="tblDelitos" >
-                                            <tr>
-                                                <th width="20">Id</th>
-                                                <th width="450">Medida Cautelar</th>
-                                                <th width="70">Decretada</th>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>El resguardo en su domicilio con las modalidades que el órgano Jurisdiccional disponga</td>
-                                                <td>
-                                                    <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Garantía económica para asegurar la comparecencia</td>
-                                                <td>
-                                                    <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>La prohibición de convivir, acercarse o comunicarse con determinadas personas, con las víctimas, ofendidos o testigos, siempre que no se afecte el derecho de defensa</td>
-                                                <td>
-                                                    <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                    <!--<div  style="float: right;width: 70%;">-->
+                                    <table class="tablasRegis" >
+                                        <tr>
+                                            <th width="20">Id</th>
+                                            <th width="450">Medida Cautelar</th>
+                                            <th width="70">Decretada</th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>El resguardo en su domicilio con las modalidades que el órgano Jurisdiccional disponga</td>
+                                            <td>
+                                                <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Garantía económica para asegurar la comparecencia</td>
+                                            <td>
+                                                <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>La prohibición de convivir, acercarse o comunicarse con determinadas personas, con las víctimas, ofendidos o testigos, siempre que no se afecte el derecho de defensa</td>
+                                            <td>
+                                                <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!--</div>-->
                                 </fieldset>
                             </td>
                         </tr>

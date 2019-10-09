@@ -21,7 +21,8 @@ and open the template in the editor.
 body{
     /*background: #706F6F;*/
     background-image: url("../img/fondo_final.png");
-    /*background-size: cover;*/
+    background-attachment: fixed;
+    background-size: cover;
     font-family: Arial;
     color: #003057;
     font-size: 18px;
@@ -94,6 +95,7 @@ body{
     width: 10%;
     height: 40px;
     font-size: 16px;
+    margin: 20px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -271,7 +273,7 @@ fieldset legend{
 }
 
 .contenedor .chkCat{
-    width: 360px;
+    width: 280px;
     display: inline-block;
     vertical-align: top;
     float: left;
@@ -280,6 +282,8 @@ fieldset legend{
 
 .contenedor .chkCat label{
     display: inline;
+    font-size: 14px;
+}
 }
 .contenedor .selectize-control{
     text-align: left;

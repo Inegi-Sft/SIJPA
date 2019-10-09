@@ -241,7 +241,6 @@
                         </tr>
                     </table>
                 </div>
-                <br>
                 <input type="submit" name="guardar" id="guardar" value="Guardar">
             </form>
         </section>

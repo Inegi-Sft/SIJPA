@@ -25,7 +25,6 @@
                 <!--<center>-->
                 <fieldset >
                     <legend style="text-align: left;">Estatus</legend>
-
                     <table class="tablaFormu">
                         <tr>
                             <td>
@@ -66,14 +65,9 @@
                                 </div>
                             </td>
                         </tr>
-
                     </table>
-
                 </fieldset>
-                <!--</center>-->
-                <br>
                 <input type="submit" name="guardar" id="guardar" value="Guardar">
-
             </form>
         </section>
     </body>

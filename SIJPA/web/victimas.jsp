@@ -171,7 +171,7 @@
                         <tr>
                             <th>Victima Clave</th>
                             <th>Procesado Clave</th>
-                            <th width="750">Relación</th>
+                            <th width="600">Relación</th>
                         </tr>
                         <tr>
                             <td>
@@ -471,8 +471,7 @@
                     <h2>Comentarios</h2>
                     <textarea name="Comentavic" id="Comentavic"></textarea>
                 </div>
-                <br>
-                <input type="submit" name="guardarvic" id="guardarvic" value="Guardar Víctima">
+                <input type="submit" name="guardarvic" id="guardarvic" value="Guardar">
             </form>
         </section>    
     </body>

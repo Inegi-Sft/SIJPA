@@ -491,7 +491,6 @@
                     <h2>Comentarios</h2>
                     <textarea name="comentarios" id="comentarios"></textarea>
                 </div>
-                <br/>
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>

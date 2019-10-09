@@ -21,7 +21,7 @@
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
-            <h1>Delitos</h1>
+            <h2>Delitos</h2>
             <form action="" method="post">
                 <fieldset>
                     <legend>Identificación del tipo penal</legend>
@@ -261,7 +261,6 @@
                     <h2>Comentarios</h2>
                     <textarea name="comentarios" id="comentarios"></textarea>
                 </div>
-                <br/>
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>                        
             </form>
         </section>

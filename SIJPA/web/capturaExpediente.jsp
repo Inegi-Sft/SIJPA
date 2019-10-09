@@ -24,7 +24,7 @@
             <form action="" method="post">
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
-                    <table class="tablaFormu" border="0">
+                    <table class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="jClave">Juzgado Clave:</label>
@@ -48,7 +48,7 @@
                             <td>
                                 <label for="Pparticular" >¿La causa penal deriva de acción penal por particular?</label>
                                 <select name="Pparticular" id="Pparticular" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (int x = 0; x < 2; x++) {
@@ -60,7 +60,7 @@
                             <td>
                                 <label for="compe">Organo Competente</label>
                                 <select name="compe" id="compe" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (int x = 0; x < 2; x++) {
@@ -72,7 +72,7 @@
                             <td>
                                 <label for="Tincompe">Tipo de incompetencia</label>
                                 <select name="Tincompe" id="Tincompe" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findIncompetencia();
                                         for (String[] ls : lista) {
@@ -84,7 +84,7 @@
                             <td>
                                 <label for="ExpAcomu" >Expediente acumulado</label>
                                 <select name="ExpAcomu" id="ExpAcomu" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (int x = 0; x < 2; x++) {
@@ -102,7 +102,7 @@
                             <td>
                                 <label for="Tprocedi" >Tipo de procedimiento</label>
                                 <select name="Tprocedi" id="Tprocedi" class="txtMedia" required>
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findProcedimiento();
                                         for (String[] ls : lista) {
@@ -165,7 +165,6 @@
                     <h2>Comentarios</h2>
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>
                 </div>
-                <br>
                 <input type="submit" name="guardar" id="guardar" value="Guardar">
             </form>
         </section>

@@ -54,7 +54,6 @@
                         <td>2</td>
                         <td><a class="pop" href="delitos.jsp"><img src='img/editar.png' title="Editar"/></a></td>
                         <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-
                     </tr>
                     <tr>
                         <td>0002/2019-d2</td>

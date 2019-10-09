@@ -1068,7 +1068,7 @@ public class catalogos {
         return lista;
     }
 
-    public ArrayList findVulnerabilidad() {
+    public ArrayList findVulnera() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_VULNERABILIDAD ORDER BY 1";

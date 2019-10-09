@@ -33,8 +33,8 @@
                             </td>
                             <td>
                                 <label for="tipo_victima">Tipo de Víctima</label>
-                                <select name="tipo_victima" id="tipo_victima" class="txtSelect txtMedia"  required="">
-                                    <option value="">Seleccione</option>
+                                <select name="tipo_victima" id="tipo_victima" class="txtMedia"  required="">
+                                    <option value="">--Seleccione--</option>
                                     <option value="1">1.- Persona física</option>
                                     <option value="2">2.- Persona moral</option>
                                     <optgroup label="Otro tipo de víctima">
@@ -47,8 +47,8 @@
                             </td>    
                             <td>
                                 <label for="tvic_moral">Tipo de Víctima Moral</label>
-                                <select name="tvic_moral" id="tvic_moral" class="txtSelect txtMedia">
-                                    <option value="">Seleccione</option>
+                                <select name="tvic_moral" id="tvic_moral" class="txtMedia">
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findAlfabetismo();
                                         for (String[] ls : lista) {
@@ -59,8 +59,8 @@
                             </td>
                             <td>
                                 <label for="sexo">Sexo</label>
-                                <select name="sexo" id="sexo" class="txtSelect txtMedia">
-                                    <option value="">Seleccione</option>
+                                <select name="sexo" id="sexo" class="txtMedia">
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findSexo();
                                         for (String[] ls : lista) {
@@ -81,8 +81,8 @@
                             </td>
                             <td>
                                 <label for="tvic_moral">Condición de vulnerabilidad</label>
-                                <select name="vulnera" id="vulnera" class="txtSelect txtMedia">
-                                    <option value="">Seleccione</option>
+                                <select name="vulnera" id="vulnera" class="txtMedia">
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findVulnera();
                                         for (String[] ls : lista) {
@@ -94,7 +94,7 @@
                             <td>
                                 <label for="naciona">Nacionalidad</label>
                                 <select name="naciona" id="naciona" class="txtMedia txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findNacionalidad();
                                         for (String[] ls : lista) {
@@ -110,8 +110,8 @@
                                     <legend>Defensa</legend>
                                     <div class="cols">
                                         <label for="Con_Asesor">¿Contó con asesor jurídico?</label>
-                                        <select name="Con_Asesor" id="Con_Asesor" class="txtSelect txtMedia">
-                                            <option value="">Seleccione</option>
+                                        <select name="Con_Asesor" id="Con_Asesor" class="txtMedia">
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findResSimple();
                                                 for (String[] ls : lista) {
@@ -122,8 +122,8 @@
                                     </div>
                                     <div class="cols">
                                         <label for="Asesor">Asesor Jurídico</label>
-                                        <select name="Asesor" id="Asesor" class="txtSelect txtMedia">
-                                            <option value="">Seleccione</option>
+                                        <select name="Asesor" id="Asesor" class="txtMedia">
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findTipoDefensor();
                                                 for (String[] ls : lista) {
@@ -164,32 +164,8 @@
                         </tr>
                     </table>
                 </fieldset>
-                <br/>
-                <fieldset>
-                    <legend>Relación del Procesado con la Víctima</legend>
-                    <table class="tablasRegis">
-                        <tr>
-                            <th>Procesado Clave</th>
-                            <th>Relación</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                select para traer procesado_clave
-                            </td>
-                            <td>
-                                <select name="relacionPro" id="relacionPro" class="txtSelect">
-                                    <option value="">Seleccione</option>
-                                    <%
-                                        lista = cat.findRelImputado();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>     
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
+              
+ 
                 <br/>
                 <fieldset>
                     <legend>Características especificas para víctimas personas físicas</legend> 
@@ -201,7 +177,7 @@
                                     <div class="cols">
                                         <label for="Pnacimiento">País</label>
                                         <select name="Pnacimiento" id="Pnacimiento" class="txtMedia txtMedia">
-                                            <option value="">Seleccione</option>
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
                                                 for (String[] ls : lista) {
@@ -213,7 +189,7 @@
                                     <div class="cols">       
                                         <label for="Enacimiento">Entidad</label>
                                         <select name="Enacimiento" id="Enacimiento" class="txtMedia">
-                                            <option value="">Seleccione</option>
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
@@ -225,7 +201,7 @@
                                     <div class="cols"> 
                                         <label for="Mnacimiento">Municipio</label>
                                         <select name="Mnacimiento" id="Mnacimiento" class="txtMedia">
-                                            <option value="">Seleccione</option>
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findMunicipios();
                                                 for (String[] ls : lista) {
@@ -239,7 +215,7 @@
                             <td>
                                 <label for="conyugal">Situación conyugal</label>
                                 <select name="conyugal" id="conyugal" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEdoCivil();
                                         for (String[] ls : lista) {
@@ -256,7 +232,7 @@
                                     <div class="cols"> 
                                         <label for="Preside">País</label>
                                         <select name="Preside" id="Preside" class="txtMedia">
-                                            <option value="">Seleccione</option>
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
                                                 for (String[] ls : lista) {
@@ -268,7 +244,7 @@
                                     <div class="cols">   
                                         <label for="Ereside">Entidad</label>
                                         <select name="Ereside" id="Ereside" class="txtMedia">
-                                            <option value="">Seleccione</option>
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
@@ -280,7 +256,7 @@
                                     <div class="cols"> 
                                         <label for="Mreside">Municipio</label>
                                         <select name="Mreside" id="Mreside" class="txtMedia">
-                                            <option value="">Seleccione</option>
+                                            <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findMunicipios();
                                                 for (String[] ls : lista) {
@@ -295,7 +271,7 @@
                             <td>
                                 <label for="discapacidad">¿Cuenta con alguna condición de discapacidad?</label>
                                 <select name="discapacidad" id="discapacidad" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (String[] ls : lista) {
@@ -309,7 +285,7 @@
                             <td>
                                 <label for="alfabetismo">Condición de alfabetismo</label>
                                 <select name="alfabetismo" id="alfabetismo" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findAlfabetismo();
                                         for (String[] ls : lista) {
@@ -322,7 +298,7 @@
                             <td>
                                 <label for="estudios">Grado de estudios </label>
                                 <select name="estudios" id="estudios" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findGEstudios();
                                         for (String[] ls : lista) {
@@ -334,7 +310,7 @@
                             <td>
                                 <label for="interprete">¿Requirió de intérprete?</label>
                                 <select name="interprete" id="interprete" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (String[] ls : lista) {
@@ -346,7 +322,7 @@
                             <td>
                                 <label for="hablaesp">Dominio del español</label>
                                 <select name="hablaesp" id="hablaesp" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findDomEspanol();
                                         for (String[] ls : lista) {
@@ -362,7 +338,7 @@
                             <td>
                                 <label for="indigena">Habla lengua indígena o dialecto </label>
                                 <select name="indigena" id="indigena" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (String[] ls : lista) {
@@ -374,7 +350,7 @@
                             <td>
                                 <label for="familia"> Familia lingüísticas</label>
                                 <select name="familia" id="familia" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findPIndigena();
                                         for (String[] ls : lista) {
@@ -386,7 +362,7 @@
                             <td>
                                 <label for="ocupa">Ocupación</label>
                                 <select name="ocupa" id="ocupa" class="txtMedia">
-                                    <option value="">Seleccione</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findOcupacion();
                                         for (String[] ls : lista) {
@@ -396,16 +372,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="relacionIm">Tipo de relación con el imputado</label>
-                                <select name="relacionIm" id="relacionIm" class="txtMedia">
-                                    <option value="">Seleccione</option>
-                                    <%
-                                        lista = cat.findRelImputado();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>        
-                                </select>
+
                             </td>
                         </tr>
                     </table> 
@@ -414,7 +381,7 @@
                     <legend>Medidas Protección</legend>
                     <label for="mProtect" class="lblExBig">¿Se le dictaron medidas de protección?</label>
                     <select name="mProtect" id="mProtect" class="txtMedia">
-                        <option value="">Seleccione</option>
+                        <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
                             for (String[] ls : lista) {
@@ -450,7 +417,7 @@
                     <legend>Medidas de Protección Violencia Mujeres</legend>
                     <label for="mujProtect" class="lblExBig">¿Se le dictaron medidas de protección por delitos que impliquen violencia contra las mujeres?</label>
                     <select name="mujProtect" id="mujProtect" class="txtMedia">
-                        <option value="">Seleccione</option>
+                        <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
                             for (String[] ls : lista) {

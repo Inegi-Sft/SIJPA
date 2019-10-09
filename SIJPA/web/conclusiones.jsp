@@ -3,7 +3,8 @@
     Created on : 3/10/2019, 02:16:37 PM
     Author     : FERMIN.GOMEZ
 --%>
-
+<%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,10 @@
         <%@include file="librerias.jsp" %>
     </head>
     <body style="zoom: .9;">
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista = new ArrayList();
+        %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el juez de control</h1>
@@ -21,7 +26,7 @@
                     <legend>Resolución</legend>
 
                     <label for="idProcesado">Id Adolescente</label>
-                    <select class="selPro" name="idProcesado" id="idProcesado">
+                    <select class="txtMedia" name="idProcesado" id="idProcesado">
                         <option value="0">--Seleccione--</option>
                         <%
                             //conexion a base
@@ -36,68 +41,98 @@
                     </div>
                     <div class="cols">
                         <label for="tipoConclusion">Tipo de resolución (Conclusión o terminación)</label>
-                        <select class="selPro" name="tipoConclusion" id="tipoConclusion">
+                        <select class="txtMedia" name="tipoConclusion" id="tipoConclusion">
                             <option value="0">--Seleccione--</option>
-                            <%
-                                //conexion a base
-                            %>
+                            <%                                lista = cat.findTipoResolucion();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                     <div class="cols">
                         <label for="tipoSobreseimto">Tipo de sobreseimiento</label>
-                        <select class="selPro" name="tipoSobreseimto" id="tipoSobreseimto">
+                        <select class="txtMedia" name="tipoSobreseimto" id="tipoSobreseimto">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findTipoSobrese();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                     <div class="cols">
                         <label for="proceSobreseimto">Procedencia del sobreseimiento</label>
-                        <select class="selPro" name="proceSobreseimto" id="proceSobreseimto">
+                        <select class="txtMedia" name="proceSobreseimto" id="proceSobreseimto">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findSobreseimiento();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                 </fieldset><br/>
                 <fieldset>
                     <legend>Procedimiento abreviado</legend>
                     <label for="huboProsedimto">¿Hubo procedimiento abreviado?</label>
-                    <select class="selPro" name="huboProsedimto" id="huboProsedimto">
+                    <select class="txtMedia" name="huboProsedimto" id="huboProsedimto">
                         <option value="0">--Seleccione--</option>
-                        <%                                //conexion a base
-                        %>
+                        <%
+                            lista = cat.findResSimple();
+                            for (String[] ls : lista) {
+                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                            }
+                        %> 
                     </select><br/>
                     <div class="cols">
                         <label for="tipoMedidaPA">Tipo de medida en el procedimiento abreviado</label>
-                        <select class="selPro" name="tipoMedidaPA" id="tipoMedidaPA">
+                        <select class="txtMedia" name="tipoMedidaPA" id="tipoMedidaPA">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findProcAbreviado();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                     <div class="cols">
                         <label for="tipoMedidaPL">Tipo de medidas privativa de la libertad</label>
-                        <select class="selPro" name="tipoMedidaPL" id="tipoMedidaPL">
+                        <select class="txtMedia" name="tipoMedidaPL" id="tipoMedidaPL">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findPrivLibertad();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                     <div class="cols">
                         <label for="tipoMedidaNPL">Tipo de medidas no privativa de la libertad</label>
-                        <select class="selPro" name="tipoMedidaNPL" id="tipoMedidaNPL">
+                        <select class="txtMedia" name="tipoMedidaNPL" id="tipoMedidaNPL">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findNoPrivacion();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                     <div class="cols">
                         <label for="internamiento">Tiempo en internamiento</label>
-                        <select class="selPro" name="internamiento" id="internamiento">
+                        <select class="txtMedia" name="internamiento" id="internamiento">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findTiempoInterna();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                 </fieldset><br/>
@@ -105,25 +140,37 @@
                     <legend>Reparación del daño</legend>
                     <div class="cols">
                         <label for="reparaDanio">¿Hubo reparación del daño?</label>
-                        <select class="selPro" name="reparaDanio" id="reparaDanio">
+                        <select class="txtMedia" name="reparaDanio" id="reparaDanio">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findResSimple();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                     <div class="cols">
                         <label for="tipoReparaD">Tipo de reparación del daño</label>
-                        <select class="selPro" name="tipoReparaD" id="tipoReparaD">
+                        <select class="txtMedia" name="tipoReparaD" id="tipoReparaD">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
-                            %>
+                            <%
+                                lista = cat.findRePDano();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
                         </select>
                     </div>
                     <div class="cols">
                         <label for="montoReparaD">Monto de la reparación impuesta</label>
-                        <select class="selPro" name="montoReparaD" id="montoReparaD">
+                        <select class="txtMedia" name="montoReparaD" id="montoReparaD">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
+                            <%
+                                lista = cat.findMulta();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
                             %>
                         </select>
                     </div>
@@ -132,17 +179,25 @@
                     <legend>Impugnación</legend>
                     <div class="cols">
                         <label for="impugnacion">¿La resolución fue impugnada?</label>
-                        <select class="selPro" name="impugnacion" id="impugnacion">
+                        <select class="txtMedia" name="impugnacion" id="impugnacion">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
+                            <%
+                                lista = cat.findResSimple();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
                             %>
                         </select>
                     </div>
                     <div class="cols">
                         <label for="tipoImpugnacion">Tipo de impugnación</label>
-                        <select class="selPro" name="tipoImpugnacion" id="tipoImpugnacion">
+                        <select class="txtMedia" name="tipoImpugnacion" id="tipoImpugnacion">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
+                            <%
+                                lista = cat.findTipoImpugna();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
                             %>
                         </select>
                     </div>
@@ -155,9 +210,13 @@
                     </div>
                     <div class="cols">
                         <label for="personaImpugna">¿Por quién fue impugnada la resolución?</label>
-                        <select class="selPro" name="personaImpugna" id="personaImpugna">
+                        <select class="txtMedia" name="personaImpugna" id="personaImpugna">
                             <option value="0">--Seleccione--</option>
-                            <%                                //conexion a base
+                            <%
+                                lista = cat.findImpugResolucion();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
                             %>
                         </select>
                     </div>

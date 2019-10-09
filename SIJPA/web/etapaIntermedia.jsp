@@ -28,7 +28,7 @@
                             <td>
                                 <fieldset>
                                     <label for="audiInterme">¿Hubo celebración de la audiencia intermedia?</label>
-                                    <select class="selPro" name="audiInterme" id="audiInterme">
+                                    <select class="txtMedia" name="audiInterme" id="audiInterme">
                                         <option value="0">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -54,7 +54,7 @@
                             <td>
                                 <fieldset>
                                     <label for="audiInterme">¿Hubo solicitud de corrección del escrito de acusación?</label>
-                                    <select class="selPro" name="correEscrito" id="correEscrito">
+                                    <select class="txtMedia" name="correEscrito" id="correEscrito">
                                         <option value="0">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -73,7 +73,7 @@
                             <td>
                                 <fieldset>
                                     <label for="audiInterme">¿Hubo solicitud de asesor coadyuvante?</label>
-                                    <select class="selPro" name="asesorCoady" id="asesorCoady">
+                                    <select class="txtMedia" name="asesorCoady" id="asesorCoady">
                                         <option value="0">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -97,7 +97,7 @@
                                         <tr>
                                             <td>
                                                 <label for="audiInterme">¿Hubo presentación de medios de prueba?</label>
-                                                <select class="selPro" name="mediosPrueba" id="mediosPrueba">
+                                                <select class="txtMedia" name="mediosPrueba" id="mediosPrueba">
                                                     <option value="0">--Seleccione--</option>
                                                     <%
                                                         lista = cat.findResSimple();
@@ -109,7 +109,7 @@
                                             </td>
                                             <td>
                                                 <label for="audiInterme">Tipos de  medios de prueba (excluidos o aceptados)</label>
-                                                <select class="selPro" name="tipoPrueba" id="tipoPrueba">
+                                                <select class="txtMedia" name="tipoPrueba" id="tipoPrueba">
                                                     <option value="0">--Seleccione--</option>
                                                     <%
                                                         lista = cat.findMediosPrueba();
@@ -126,7 +126,7 @@
                             </td>
                             <td>
                                 <label for="audiInterme">Exclusión de medios de prueba</label>
-                                <select class="selPro" name="excuMedios" id="excuMedios">
+                                <select class="txtMedia" name="excuMedios" id="excuMedios">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
@@ -138,7 +138,7 @@
                             </td>
                             <td>
                                 <label for="audiInterme">¿Contó con acuerdos probatorios?</label>
-                                <select class="selPro" name="acuerdosProba" id="acuerdosProba">
+                                <select class="txtMedia" name="acuerdosProba" id="acuerdosProba">
                                     <option value="0">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();

@@ -60,7 +60,7 @@
                             <td>
                                 <label for="compe">Organo Competente</label>
                                 <select name="compe" id="compe" class="txtMedia">
-                                    <option value="0">Seleccione</option>
+                                    <option value="0">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (int x = 0; x < 2; x++) {
@@ -84,7 +84,7 @@
                             <td>
                                 <label for="ExpAcomu" >Expediente acumulado</label>
                                 <select name="ExpAcomu" id="ExpAcomu" class="txtMedia">
-                                    <option value="0">Seleccione</option>
+                                    <option value="0">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (int x = 0; x < 2; x++) {

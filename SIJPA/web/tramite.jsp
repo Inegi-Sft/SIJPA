@@ -41,8 +41,8 @@
 
                             <td>
                                 <label for="eProcesal">Etapa procesal</label>
-                                <select name="eProcesal" id="eProcesal" class="txtMedia selPro">
-                                    <option value="0">Seleccione</option>
+                                <select name="eProcesal" id="eProcesal" class="txtMedia">
+                                    <option value="0">--Seleccione--</option>
                                      <%
                                         lista = cat.findEtapaProcesal();
                                         for (String[] ls : lista) {

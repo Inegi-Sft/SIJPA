@@ -23,8 +23,9 @@
             <h1>Pendientes de resolución </h1>
             <form action="" method="post">
                 <!--<center>-->
-                <fieldset>
-                    <legend>Estatus</legend>
+                <fieldset >
+                    <legend style="text-align: left;">Estatus</legend>
+
                     <table class="tablaFormu">
                         <tr>
                             <td>

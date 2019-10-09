@@ -3,7 +3,8 @@
     Created on : 2/10/2019, 12:00:12 PM
     Author     : FERMIN.GOMEZ
 --%>
-
+<%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,10 @@
         <%@include file="librerias.jsp" %>
     </head>
     <body style="zoom: .9;">
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista = new ArrayList();
+        %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Etapa Inicial</h1>
@@ -38,8 +43,11 @@
                                     <select class="selPro" name="ctrlDetencion" id="ctrlDetencion">
                                         <option value="0">--Seleccione--</option>
                                         <%
-                                            //conexion a base
-                                        %>
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>
 
                                     <label for="fechaCtrlDeten">Fecha de audiencia de control de detención</label>
@@ -53,8 +61,12 @@
                                 <label for="legalDeten">¿Se calificó como legal la detención?</label>
                                 <select class="selPro" name="legalDeten" id="legalDeten">
                                     <option value="0">--Seleccione--</option>
-                                    <%                                    //conexion a base
-                                    %>
+                                    <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                 </select>    
                             </td>
                             <td>
@@ -62,15 +74,23 @@
                                     <label for="audiInicial">¿Hubo audiencia inicial?</label>
                                     <select class="selPro" name="audiInicial" id="audiInicial">
                                         <option value="0">--Seleccione--</option>
-                                        <%                                    //conexion a base
-                                        %>
+                                         <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>    
 
                                     <label for="conducAudi">Forma de conducción en la audiencia inicial</label>
                                     <select class="selPro" name="conducAudi" id="conducAudi">
                                         <option value="0">--Seleccione--</option>
-                                        <%                                    //conexion a base
-                                        %>
+                                       <%
+                                            lista = cat.findFormConduccion();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>    
                                 </fieldset>
                             </td>
@@ -89,8 +109,12 @@
                                     <label for="declaro">¿El adolescente declaró?</label>
                                     <select class="selPro" name="declaro" id="declaro">
                                         <option value="0">--Seleccione--</option>
-                                        <%                                //conexion a base
-                                        %>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
                                     </select>
                                     <label for="plazo">Tiempo del plazo constitucional</label>
                                     <select class="selPro" name="plazo" id="plazo">

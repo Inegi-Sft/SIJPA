@@ -156,7 +156,7 @@ public class catalogos {
         return lista;
     }
 
-    public ArrayList CondEstudiante() {
+    public ArrayList findCondEstudiante() {
         conn.Conectar();
         lista = new ArrayList();
         sql = "SELECT * FROM CATALOGOS_CONDICION_ESTUDIANTE ORDER BY 1";
@@ -927,7 +927,7 @@ public class catalogos {
     public ArrayList findTipoConsigna() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_CONCIGNACION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_TIPO_CONSIGNACION ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1068,7 +1068,7 @@ public class catalogos {
         return lista;
     }
 
-    public ArrayList findVulnera() {
+    public ArrayList findVulnerabilidad() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_VULNERABILIDAD ORDER BY 1";

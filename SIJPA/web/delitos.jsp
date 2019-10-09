@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.catalogos"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +16,10 @@
         </style>
     </head>
     <body style="zoom: .9;">
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista;
+        %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Delitos</h1>
@@ -24,10 +30,13 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>
-                                <select class="txtMedia"  name="delitoCP" id="delitoCP" required>
+                                <select class="txtExBig"  name="delitoCP" id="delitoCP" required>
                                     <option value="0">--Seleccione--</option>
                                     <%
-                                        //conexion a base
+                                        lista=cat.findCodNorma();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                        }
                                     %>
                                 </select>
                             </td>

@@ -195,7 +195,7 @@ public class catalogos {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2), resul.getString(3)});
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
             }
             conn.close();
         } catch (SQLException ex) {

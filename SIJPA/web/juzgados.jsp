@@ -187,7 +187,7 @@
                         <tr>
                             <td>
                                 <label for="municipio">Municipio o Delegacion</label>
-                                <select class="txtMedia" name="municipio" id="municipio">
+                                <select class="txtMedia" name="municipio" id="municipioJ">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista=cat.findMunicipios();

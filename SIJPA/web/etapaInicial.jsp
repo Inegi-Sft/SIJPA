@@ -222,7 +222,7 @@
                         </tr>
                         <tr>
                             <td colspan="4"><br/>
-                                <fieldset style="background-color: #fff;">
+                                <fieldset >
                                     <legend>Medidas Cautelares</legend>
                                     <div class="cols">
                                         <label for="drecretaMC" >¿Se decretó medida cautelar?</label>
@@ -236,36 +236,28 @@
                                             %> 
                                         </select>
                                     </div>
-                                    <!--<div  style="float: right;width: 70%;">-->
                                     <table class="tablasRegis" >
                                         <tr>
                                             <th width="20">Id</th>
                                             <th width="450">Medida Cautelar</th>
                                             <th width="70">Decretada</th>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>El resguardo en su domicilio con las modalidades que el órgano Jurisdiccional disponga</td>
-                                            <td>
-                                                <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Garantía económica para asegurar la comparecencia</td>
-                                            <td>
-                                                <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>La prohibición de convivir, acercarse o comunicarse con determinadas personas, con las víctimas, ofendidos o testigos, siempre que no se afecte el derecho de defensa</td>
-                                            <td>
-                                                <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
-                                            </td>
+                                        <%
+                                            lista = cat.findMedCautelares();
+                                            for (String[] ls : lista) {
+                                                out.println("<tr>");
+                                                out.println("<td>" + ls[0] + "</td>");
+                                                out.println("<td>" + ls[1] + "</td>");
+                                                out.println("<td>"); %>
+                                                <input type="checkbox" name="apliMedidaCau" id="apliMedidaCau<%out.print(ls[0]);%>" />
+                                        <%      out.println("</td>");
+                                                out.println("</tr>");
+                                            }
+                                        %>
+
+
                                         </tr>
                                     </table>
-                                    <!--</div>-->
                                 </fieldset>
                             </td>
                         </tr>

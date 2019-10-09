@@ -144,16 +144,21 @@
                             <th>Aplica Si/No</th>
                             <th>Cantidad</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Audiencia inicial</td>
-                            <td>
-                                <input class="chkAplica" type="checkbox" name="aplAudi" id="aplAudi1"/> 
-                            </td>
-                            <td>
-                                <input type="number" name="Cantaudi1" id="Cantaudi1" class="txtSmall">
-                            </td>
-                        </tr>
+                        <%
+                            lista = cat.findMedCautelares();
+                            for (String[] ls : lista) {
+                                out.println("<tr>");
+                                out.println("<td>" + ls[0] + "</td>");
+                                out.println("<td>" + ls[1] + "</td>");
+                                out.println("<td>"); %>
+                                    <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" />
+                        <%      out.println("</td>");
+                                out.println("<td>"); %>
+                                    <input type="number" name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall"/>
+                        <%      out.println("</td>");
+                                out.println("</tr>");
+                            }
+                        %>
                     </table>
                 </fieldset>
                 <div class="comentarios">

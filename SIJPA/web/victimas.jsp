@@ -84,7 +84,7 @@
                                 <select name="vulnera" id="vulnera" class="txtMedia">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findVulnera();
+                                        lista = cat.findVulnerabilidad();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -181,7 +181,7 @@
                                 select para traer procesado_clave
                             </td>
                             <td>
-                                <%                                    
+                                <%
                                     lista = cat.findRelImputado();
                                     for (String[] ls : lista) {
                                         out.println("<div class='chkCat'>");
@@ -420,22 +420,19 @@
                             <th>Tipo de medidas de protección</th>
                             <th>¿Aplicó la medida de protección?</th>
                         </tr>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                Auxilio inmediato por integrantes de instituciones policiales, al domicilio 
-                                en donde se localice o se encuentre la víctima u ofendido en el momento de solicitarlo
-                            </td>
-                            <td>
-                                <!--                                <select name="medidaPro" id="medidaPro" class="txtMedia">
-                                                                    <option value="1">Si</option>
-                                                                    <option value="2" selected>No</option>
-                                                                </select>-->
-                                <input type="checkbox" name="aplicaMedida" id="aplicaMedida" />
-                            </td>
-                        </tr>
+                        <%
+                            lista = cat.findMedProteccion();
+                            for (String[] ls : lista) {
+                                out.println("<tr>");
+                                out.println("<td>" + ls[0] + "</td>");
+                                out.println("<td>" + ls[1] + "</td>");
+                                out.println("<td>"); %>
+                                    <input type="checkbox" name="aplicaMedida" id="aplicaMedida<%out.print(ls[0]);%>" />
+                        <%      out.println("</td>");
+                                out.println("</tr>");
+                            }
+                        %>
+
                     </table>
                 </fieldset><br>
                 <fieldset>
@@ -456,21 +453,18 @@
                             <th>Tipo de medidas de protección por delitos que impliquen violencia contra las mujeres</th>
                             <th>¿Aplicó la medida de protección?</th>
                         </tr>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                Acceso al domicilio en común, de autoridades policíacas o de personas que auxilien a la víctima a tomar sus pertenencias personales y las de sus hijas e hijos
-                            </td>
-                            <td>
-                                <!--                                <select name="medidaProMuj" id="medidaProMuj" class="txtMedia">
-                                                                    <option value="1">Si</option>
-                                                                    <option value="2" selected>No</option>
-                                                                </select>-->
-                                <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj" />
-                            </td>
-                        </tr>
+                        <%
+                            lista = cat.findMedMujer();
+                            for (String[] ls : lista) {
+                                out.println("<tr>");
+                                out.println("<td>" + ls[0] + "</td>");
+                                out.println("<td>" + ls[1] + "</td>");
+                                out.println("<td>"); %>
+                                    <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj<%out.print(ls[0]);%>" />
+                        <%      out.println("</td>");
+                                out.println("</tr>");
+                            }
+                        %> 
                     </table>
                 </fieldset>
                 <div class="comentarios">

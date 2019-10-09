@@ -16,6 +16,12 @@ $(document).ready(function () {
     });
     
     $('#delitoCP').selectize();
+    $('#municipioD').selectize();
+    $('#municipioJ').selectize();
+    $('#nMunicipio').selectize();
+    $('#rMunicipio').selectize();
+    $('#Mnacimiento').selectize();
+    $('#Mreside').selectize();
     
 });
 

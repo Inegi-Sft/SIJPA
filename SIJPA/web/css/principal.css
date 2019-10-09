@@ -281,3 +281,9 @@ fieldset legend{
 .contenedor .chkCat label{
     display: inline;
 }
+.contenedor .selectize-control{
+    text-align: left;
+}
+.contenedor .selectize-control{
+    width: auto;
+}

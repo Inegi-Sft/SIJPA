@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Pendientes de resolución </title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <%@include file="librerias.jsp" %>
     </head>
     <body style="zoom: .9;">
         <%--<%@include file="cabecera.jsp"%>--%>
@@ -18,10 +18,9 @@
             <h1>Pendientes de resolución </h1>
             <form action="" method="post">
                 <!--<center>-->
-                <fieldset style="width: 600px; margin-left: 26%;">
-                    <legend style="text-align: left;">Estatus</legend>
-
-                    <table style="text-align: center;" border="0" width="300">
+                <fieldset>
+                    <legend>Estatus</legend>
+                    <table class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="pClave">Procesado Clave</label>

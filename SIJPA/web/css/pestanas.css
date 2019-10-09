@@ -52,7 +52,9 @@ and open the template in the editor.
     border-top: none;
     background-color: rgba(255,255,255,0.6);
     border-radius: 0 10px 10px 10px;
+    margin: 0 20px;
 }
+
 form div.pestanaContent {
     margin: 0 0px;
 }

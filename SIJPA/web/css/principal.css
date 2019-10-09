@@ -65,12 +65,13 @@ body{
 }
 
 .contenedor h2{
-    font-size: 25px;
+    font-size: 30px;
     padding: 15px 0;
     text-shadow: grey 5px 5px 5px;
 }
 
 .contenedor h3{
+    font-size: 25px;
     padding: 15px 0;
     text-shadow: grey 5px 5px 5px;
 }
@@ -145,12 +146,6 @@ body{
     box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
 }
 
-.contenedor input[type="checkbox"]{
-    width:19px;
-    height:19px;
-    margin: 0 4px 0 0;
-}
-
 .contenedor label{
     width: 300px;
     display: block;
@@ -167,7 +162,7 @@ body{
 .contenedor .lblExBig{width: auto;}
 
 fieldset{
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.4);
     border-color:  #0077CB;
     border-radius: 8px;
 }
@@ -249,19 +244,29 @@ fieldset legend{
     text-decoration:none;
     text-shadow:0px 1px 0px #154682;
 }
+
 .btnCerrar:hover {
     background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
     background-color:#0061a7;
 }
+
 .btnCerrar:active {
     position:relative;
     top:1px;
 }
+
+.contenedor input[type="checkbox"]{
+    width:19px;
+    height:19px;
+    margin: 0 4px 0 0;
+}
+
 .contenedor input[type="checkbox"].chkAplica{
-    width:25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     margin: 5px 0 0 0;
 }
+
 .contenedor input[type="checkbox"].chkAplica:checked {
-  background: #0077CB;
+    background: #0077CB;
 }

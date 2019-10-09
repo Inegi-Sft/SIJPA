@@ -11,14 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Datos Generales</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery.fancybox.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/datatables.min.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="js/datatables.min.js"></script>
-        <script type="text/javascript" src="js/funciones.js"></script>
-        <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
-        <script type="text/javascript" src="js/menu.js"></script>
+        <%@include file="librerias.jsp" %>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>

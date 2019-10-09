@@ -13,15 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
         <title>SIJPA::Juzgados</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery.fancybox.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/datatables.min.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="js/datatables.min.js"></script>
-        <script type="text/javascript" src="js/funciones.js"></script>
-        <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
-        <script type="text/javascript" src="js/menu.js"></script>
-        <script type="text/javascript" src="js/pestanas.js"></script>
+        <%@include file="librerias.jsp" %>
     </head>
     <body >
         <%
@@ -40,13 +32,13 @@
                 <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Datos Órgano Jurisdiccional</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Forma de Organizacion del Órgano</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p4')">Datos Geográficos</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos de quien captura</button>
+                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos Captura</button>
             </div>
 
             <form action="#" method="post">
                 <!-- Contenido pestañas -->
                 <div id="p1" class="pestanaContent" style="display: block">
-                    <h3>Datos del Juez</h3>
+                    <h2>Datos del Juez</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td>
@@ -73,7 +65,7 @@
                 </div>
 
                 <div id="p2" class="pestanaContent">
-                    <h3>Datos Órgano Jurisdiccional</h3>
+                    <h2>Datos Órgano Jurisdiccional</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td>
@@ -113,7 +105,7 @@
                 </div>
 
                 <div id="p3" class="pestanaContent">
-                    <h3>Forma de Organizacion del Órgano</h3>
+                    <h2>Forma de Organizacion del Órgano</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td></td>
@@ -148,7 +140,7 @@
                     </table>
                 </div>
                 <div id="p4" class="pestanaContent">
-                    <h3>Datos Geográficos</h3>
+                    <h2>Datos Geográficos</h2>
                     <table  class="tablaFormu" >
                         <tr>
                             <td>
@@ -211,7 +203,7 @@
                     </table>
                 </div>
                 <div id="p5" class="pestanaContent">
-                    <h3>Datos de quien captura</h3>
+                    <h2>Datos Captura</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td>

@@ -12,8 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
         <title>SIJPA::Juzgados</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="js/pestanas.js"></script>
+        <%@include file="librerias.jsp" %>
     </head>
     <body >
         <%@include file="cabecera.jsp"%>

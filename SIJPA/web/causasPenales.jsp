@@ -11,11 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-        <link href="css/datatables.min.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="js/datatables.min.js"></script>
-        <script type="text/javascript" src="js/funcion-DataTable.js"></script>
-        <script type="text/javascript" src="js/menu.js"></script>
+        <%@include file="librerias.jsp" %>
     </head>
     <body>
         <%@include file="cabecera.jsp" %>

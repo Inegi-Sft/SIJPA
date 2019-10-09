@@ -14,4 +14,8 @@ $(document).ready(function () {
             }
         }
     });
+    
+    $('#delitoCP').selectize();
+    
 });
+

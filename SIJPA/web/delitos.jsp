@@ -13,7 +13,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Delitos</title>
         <%@include file="librerias.jsp" %>
-        </style>
     </head>
     <body style="zoom: .9;">
         <%
@@ -30,12 +29,12 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>
-                                <select class="txtExBig"  name="delitoCP" id="delitoCP" required>
-                                    <option value="0">--Seleccione--</option>
+                                <select class="txtExBig"  name="delitoCP" id="delitoCP" placeholder="Selecciona el delito..." required>
+                                    <option value=""></option>
                                     <%
-                                        lista=cat.findCodNorma();
+                                        lista = cat.findCodNorma();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>

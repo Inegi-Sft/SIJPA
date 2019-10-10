@@ -16,7 +16,7 @@
     <body>
         <%
             catalogos cat = new catalogos();
-            ArrayList<String[]> lista = new ArrayList();
+            ArrayList<String[]> lista;
         %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
@@ -48,11 +48,11 @@
                             <td>
                                 <label for="Pparticular" >¿La causa penal deriva de acción penal por particular?</label>
                                 <select name="Pparticular" id="Pparticular" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
-                                        for (int x = 0; x < 2; x++) {
-                                            out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>"+ ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>  
                                 </select>

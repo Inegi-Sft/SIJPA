@@ -151,10 +151,10 @@
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>"); %>
-                                    <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" />
+                                <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" onChange="comprobar(this,'cantAudi<%out.print(ls[0]);%>');"/>
                         <%      out.println("</td>");
                                 out.println("<td>"); %>
-                                    <input type="number" name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall"/>
+                                <input type="number" disabled="true" name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall"/>
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }

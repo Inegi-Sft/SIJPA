@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
+    //despliega ventana modal
     $('.pop').fancybox({
         'type': 'iframe',
         'overlayShow': true,
@@ -14,7 +15,8 @@ $(document).ready(function () {
             }
         }
     });
-    
+
+    //Auto acompletado
     $('#delitoCP').selectize();
     $('#municipioD').selectize();
     $('#municipioJ').selectize();
@@ -22,6 +24,13 @@ $(document).ready(function () {
     $('#rMunicipio').selectize();
     $('#Mnacimiento').selectize();
     $('#Mreside').selectize();
-    
+
 });
 
+//Habilita text de Audiencias en Expedientes
+function comprobar(obj, idTxt){
+    if (obj.checked)
+        document.getElementById(idTxt).disabled = false;
+    else
+        document.getElementById(idTxt).disabled = true;
+}

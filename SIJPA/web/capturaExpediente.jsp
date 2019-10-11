@@ -16,7 +16,7 @@
     <body>
         <%
             catalogos cat = new catalogos();
-            ArrayList<String[]> lista = new ArrayList();
+            ArrayList<String[]> lista;
         %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
@@ -51,8 +51,8 @@
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
-                                        for (int x = 0; x < 2; x++) {
-                                            out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>"+ ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>  
                                 </select>
@@ -150,16 +150,12 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>"); 
-                        %>
-                        <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" />
-                        <%      
-                                out.println("</td>");
-                                out.println("<td>"); 
-                        %>
-                        <input type="number" name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall"/>
-                        <%      
-                                out.println("</td>");
+                                out.println("<td>"); %>
+                                <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" onChange="comprobar(this,'cantAudi<%out.print(ls[0]);%>');"/>
+                        <%      out.println("</td>");
+                                out.println("<td>"); %>
+                                <input type="number" disabled="true" name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall"/>
+                        <%      out.println("</td>");
                                 out.println("</tr>");
                             }
                         %>

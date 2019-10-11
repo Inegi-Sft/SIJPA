@@ -18,6 +18,7 @@ $(document).ready(function () {
         }
     });
 
+
     //Auto acompletado
     $('#delitoCP').selectize();
     $('#municipioD').selectize();
@@ -28,69 +29,12 @@ $(document).ready(function () {
     $('#Mreside').selectize();
 
     /******************** Funciones para Etapa Intermedia***************************/
+=======
+>>>>>>> 09017ef 11/10/2019 Se agregaron funciones a Intermedia Julio
 
-
-    $('#audiInterme').change(function () {
-        if ($('#audiInterme').val() !== '1') {
-            $('#lblfechaAudiinter').fadeOut("slow");
-            $('#fechaAudiinter').fadeOut("slow");
-            $('#nifechaAudiinter').fadeOut("slow");
-        } else {
-            $('#lblfechaAudiinter').fadeIn("slow");
-            $('#fechaAudiinter').fadeIn("slow").val("");
-            $('#nifechaAudiinter').fadeIn("slow");
-        }
-    });
-
-    $('#correEscrito').change(function () {
-        if ($('#correEscrito').val() !== '1') {
-            $('#lblfechaCtrlDeten').fadeOut("slow");
-            $('#fechaCorreccion').fadeOut("slow");
-            $('#nifechaCtrlDeten').fadeOut("slow");
-        } else {
-            $('#lblfechaCtrlDeten').fadeIn("slow");
-            $('#fechaCorreccion').fadeIn("slow").val("");
-            $('#nifechaCtrlDeten').fadeIn("slow");
-        }
-    });
-
-    $('#asesorCoady').change(function () {
-        if ($('#asesorCoady').val() !== '1') {
-            $('#lblfechaCoady').fadeOut("slow");
-            $('#fechaCoady').fadeOut("slow");
-            $('#nifechaCoady').fadeOut("slow");
-        } else {
-            $('#lblfechaCoady').fadeIn("slow");
-            $('#fechaCoady').fadeIn("slow").val("");
-            $('#nifechaCoady').fadeIn("slow");
-        }
-    });
-
-    $('#mediosPrueba').change(function () {
-        if ($('#mediosPrueba').val() !== '1') {
-            $('#lbltipoPrueba').fadeOut("slow");
-            $('#tipoPrueba').fadeOut("slow");
-        } else {
-            $('#lbltipoPrueba').fadeIn("slow");
-            $('#tipoPrueba').fadeIn("slow").val('');
-        }
-    });
-
-
-    $('#guardaInter').click(function () {
-        var aInter = $('#audiInterme').val();
-        var fInter = $('#fechaAudiinter').val()
-        if (aInter === '1' && fInter === "") {
-            if ($('#chkAudiinter').prop('ckecked')) {
-            } else {
-                alert("Selecciona la fecha de audiencia intermedia");
-            }}
-    });
-
-    /*************Fin de Funciones para Etapa Intermedia***************************/
 });
+    /********************FUNCIONES ETAPA INTERMEDIA***************************/
 
-<<<<<<< Upstream, based on origin/master
 //Habilita text de Audiencias en Expedientes
 function comprobar(obj, idTxt){
     if (obj.checked)
@@ -103,6 +47,30 @@ function comprobar(obj, idTxt){
 
 
 
+=======
+//Respuestas simples y fechas con NI
+function respuestaSimple(idSelect, idLbl, idDate, idNI) {
+    if ($(idSelect).val() !== '1') {
+        $(idLbl).fadeOut("slow");
+        $(idDate).val("1899-09-09").fadeOut("slow");
+        $(idNI).fadeOut("slow");
+    } else {
+        $(idLbl).fadeIn("slow");
+        $(idDate).fadeIn("slow");
+        $(idNI).fadeIn("slow");
+    }
+}
+//Respuestas simples a esconder otra variable
+function respuestaSelect(idSelect, idLabel, idResp) {
+    if ($(idSelect).val() !== '1') {
+        $(idLabel).fadeOut("slow");
+        $(idResp).val('-2').fadeOut("slow");
+    } else {
+        $(idLabel).fadeIn("slow");
+        $(idResp).val('').fadeIn("slow");
+    }
+}
+>>>>>>> 09017ef 11/10/2019 Se agregaron funciones a Intermedia Julio
 // Fechas No identificadas
 function fechaNoIdent(idChk, idTxtDate) {
     if ($(idChk).is(":checked")) {
@@ -114,4 +82,5 @@ function fechaNoIdent(idChk, idTxtDate) {
     }
 }
 
->>>>>>> 903f32f 10/10/2019 Se agregaron funciones a Intermedia Julio
+/*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
+

@@ -28,7 +28,7 @@
                             <td>
                                 <fieldset>
                                     <label for="audiInterme">¿Hubo celebración de la audiencia intermedia?</label>
-                                    <select class="txtMedia" name="audiInterme" id="audiInterme" required>
+                                    <select class="txtMedia" name="audiInterme" id="audiInterme" onchange="respuestaSimple('#audiInterme','#lblfechaAudiinter','#fechaAudiinter','#nifechaAudiinter')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -38,7 +38,7 @@
                                         %> 
                                     </select>
                                     <label for="fechaCtrlDeten" id="lblfechaAudiinter">Fecha de la audiencia intermedia</label>
-                                    <input type="date" name="fechaAudiinter" id="fechaAudiinter"/>
+                                    <input type="date" name="fechaAudiinter" id="fechaAudiinter" required/>
                                     <div class="noIdentificada" id="nifechaAudiinter">
                                         <input type="checkbox" id="chkAudiinter" onclick="fechaNoIdent('#chkAudiinter','#fechaAudiinter')"><label>No identificada</label>
                                     </div> 
@@ -46,7 +46,7 @@
                             </td>
                             <td>
                                 <label for="fechaEscrito">Fecha del escrito de acusación</label>
-                                <input type="date" name="fechaEscrito" id="fechaEscrito"/>
+                                <input type="date" name="fechaEscrito" id="fechaEscrito" required/>
                                 <div class="noIdentificada">
                                     <input type="checkbox" id="chkEscrito" onclick="fechaNoIdent('#chkEscrito','#fechaEscrito')"><label>No identificada</label>
                                 </div> 
@@ -54,7 +54,7 @@
                             <td>
                                 <fieldset>
                                     <label for="audiInterme">¿Hubo solicitud de corrección del escrito de acusación?</label>
-                                    <select class="txtMedia" name="correEscrito" id="correEscrito" required>
+                                    <select class="txtMedia" name="correEscrito" id="correEscrito" onchange="respuestaSimple('#correEscrito','#lblfechaCtrlDeten','#fechaCorreccion','#nifechaCtrlDeten')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -64,7 +64,7 @@
                                         %> 
                                     </select>
                                     <label for="fechaCtrlDeten" id="lblfechaCtrlDeten">Fecha de corrección del escrito de acusación</label>
-                                    <input type="date" name="fechaCorreccion" id="fechaCorreccion"/>
+                                    <input type="date" name="fechaCorreccion" id="fechaCorreccion" required/>
                                     <div class="noIdentificada" id="nifechaCtrlDeten">
                                         <input type="checkbox" id="chkCorreccion" onclick="fechaNoIdent('#chkCorreccion','#fechaCorreccion')"><label>No identificada</label>
                                     </div> 
@@ -73,7 +73,7 @@
                             <td>
                                 <fieldset>
                                     <label for="audiInterme">¿Hubo solicitud de asesor coadyuvante?</label>
-                                    <select class="txtMedia" name="asesorCoady" id="asesorCoady" required>
+                                    <select class="txtMedia" name="asesorCoady" id="asesorCoady" onchange="respuestaSimple('#asesorCoady','#lblfechaCoady','#fechaCoady','#nifechaCoady')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -97,7 +97,7 @@
                                         <tr>
                                             <td>
                                                 <label for="mediosPrueba">¿Hubo presentación de medios de prueba?</label>
-                                                <select class="txtMedia" name="mediosPrueba" id="mediosPrueba" required>
+                                                <select class="txtMedia" name="mediosPrueba" id="mediosPrueba" onchange="respuestaSelect('#mediosPrueba','#lbltipoPrueba','#tipoPrueba')" required>
                                                     <option value="">--Seleccione--</option>
                                                     <%
                                                         lista = cat.findResSimple();

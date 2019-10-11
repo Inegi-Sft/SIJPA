@@ -59,7 +59,7 @@
                             </td>
                             <td>
                                 <label for="reclasificaDel">¿Hubo reclasificación del delito?</label>
-                                <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel">
+                                <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" >
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();

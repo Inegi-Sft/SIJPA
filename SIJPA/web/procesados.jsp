@@ -240,7 +240,7 @@
                                     </div>
                                     <div class="cols">
                                         <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
-                                        <select class="txtMedia" name="nMunicipio" id="nMunicipio">
+                                        <select class="txtMedia" name="nMunicipio" id="nMunicipio" placeholder="Seleccione el municipio. . .">
                                             <option value="">--Seleccione--</option>
                                         </select>
                                     </div>
@@ -289,7 +289,7 @@
                                     </div>
                                     <div class="cols">
                                         <label for="rMunicipio">Municipio</label>
-                                        <select class="txtMedia" name="rMunicipio" id="rMunicipio">
+                                        <select class="txtMedia" name="rMunicipio" id="rMunicipio" placeholder="Seleccione el municipio. . .">
                                             <option value="">--Seleccione--</option>
                                         </select>
                                     </div>

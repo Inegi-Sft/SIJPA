@@ -30,6 +30,7 @@ $(document).ready(function () {
 });
 /********************FUNCIONES ETAPA INTERMEDIA***************************/
 
+/***************************** PARA CAPTURA EXPEDIENTES *********************/
 //Habilita text de Audiencias en Expedientes
 function comprobar(obj, idTxt) {
     if (obj.checked)
@@ -128,3 +129,13 @@ function llenaMun(idEnt,idMun) {
 
 };
 /***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************************/
+// Fechas No identificadas
+function fechaNoIdent(idChk, idTxtDate) {
+    if ($(idChk).is(":checked")) {
+        $(idTxtDate).val("1899-09-09");
+        $(idTxtDate).prop("disabled", true);
+    } else {
+        $(idTxtDate).val("");
+        $(idTxtDate).prop("disabled", false);
+    }
+}

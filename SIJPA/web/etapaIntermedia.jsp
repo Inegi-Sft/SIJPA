@@ -40,7 +40,8 @@
                                     <label for="fechaCtrlDeten">Fecha de la audiencia intermedia</label>
                                     <input type="date" name="fechaAudiinter" id="fechaAudiinter"/>
                                     <div class="noIdentificada">
-                                        <input type="checkbox" id="chkAudiinter"><label>No identificada</label>
+                                        <input type="checkbox" id="chkAudiinter">
+                                        <label>No identificada</label>
                                     </div> 
                                 </fieldset>
                             </td>
@@ -48,7 +49,8 @@
                                 <label for="fechaEscrito">Fecha del escrito de acusación</label>
                                 <input type="date" name="fechaEscrito" id="fechaEscrito"/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkEscrito"><label>No identificada</label>
+                                    <input type="checkbox" id="chkEscrito">
+                                    <label>No identificada</label>
                                 </div> 
                             </td>
                             <td>
@@ -66,7 +68,8 @@
                                     <label for="fechaCtrlDeten">Fecha de corrección del escrito de acusación</label>
                                     <input type="date" name="fechaCorreccion" id="fechaCorreccion"/>
                                     <div class="noIdentificada">
-                                        <input type="checkbox" id="chkCorreccion"><label>No identificada</label>
+                                        <input type="checkbox" id="chkCorreccion">
+                                        <label>No identificada</label>
                                     </div> 
                                 </fieldset>
                             </td>
@@ -85,7 +88,8 @@
                                     <label for="fechaCtrlDeten">Fecha de la solicitud del asesor coadyuvante</label>
                                     <input type="date" name="fechaCoady" id="fechaCoady"/>
                                     <div class="noIdentificada">
-                                        <input type="checkbox" id="chkCoady"><label>No identificada</label>
+                                        <input type="checkbox" id="chkCoady">
+                                        <label>No identificada</label>
                                     </div> 
                                 </fieldset>
                             </td>

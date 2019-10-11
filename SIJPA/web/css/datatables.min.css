@@ -52,9 +52,6 @@ table.dataTable tbody th,table.dataTable tbody td{
 .myTable td img{
     width: 15px;
 }
-.contenedor select{
-    width: 60px;
-}
 .contenedor input{
     width: 200px;
     height: 30px;

@@ -14,14 +14,34 @@ $(document).ready(function () {
             }
         }
     });
-    
+
     $('#delitoCP').selectize();
-    $('#municipioD').selectize();
-    $('#municipioJ').selectize();
-    $('#nMunicipio').selectize();
-    $('#rMunicipio').selectize();
+    //$('#municipioD').selectize();
+    //$('#municipioJ').selectize();
+    //$('#nMunicipio').selectize();
+    //$('#rMunicipio').selectize();
     $('#Mnacimiento').selectize();
     $('#Mreside').selectize();
-    
+
 });
 
+function llenaMun(idEnt, idMun) {
+    var enti = $(idEnt).val();
+    if (enti !== '') {
+        $.ajax({
+            url: "obtenMunicipios.jsp",
+            dataType: 'html',
+            type: "post",
+            data: {enti: enti},
+            success: function (response) {
+                console.log("Respuesta del servidor: ", response);
+            }
+        }).done(function (data) {
+            $(idMun).html(data);
+            //$('#municipioJ').selectize();
+        });
+    }else{
+        $(idMun).empty().append("<option value='0'>--Seleccione--</option>");
+    }
+
+};

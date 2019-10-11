@@ -141,6 +141,7 @@ body{
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    border-radius: 5px;
 }
 
 .contenedor select:focus, .contenedor textarea:focus{
@@ -284,10 +285,12 @@ fieldset legend{
     display: inline;
     font-size: 14px;
 }
-}
+
 .contenedor .selectize-control{
     text-align: left;
+    margin: 0 auto;
 }
-.contenedor .selectize-control{
-    width: auto;
+
+::placeholder{
+    color: #C3C3C3;
 }

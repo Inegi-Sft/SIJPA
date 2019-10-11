@@ -84,7 +84,7 @@
                                 <select name="vulnera" id="vulnera" class="txtMedia">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findVulnerabilidad();
+                                        lista = cat.findVulnera();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -185,7 +185,7 @@
                                     lista = cat.findRelImputado();
                                     for (String[] ls : lista) {
                                         out.println("<div class='chkCat'>");
-                                        out.println("<input type='checkbox' id='chkFechaReclaDel'>");
+                                        out.println("<input type='checkbox' value='" + ls[0] + "' id='chkRela" + ls[0] + "'>");
                                         out.println("<label>" + ls[1] + "</label>");
                                         out.println("</div>");
                                     }

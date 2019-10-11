@@ -106,7 +106,8 @@
                                 <label for="fechaFormuImpu">Fecha de formulación de la imputacion</label>
                                 <input type="date" name="fechaFormuImpu" id="fechaFormuImpu"/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechaFormuImpu"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechaFormuImpu">
+                                    <label>No identificada</label>
                                 </div>
                             </td>
                         </tr>
@@ -130,7 +131,8 @@
                                         <label for="fechDeclara">Fecha de declaración</label>
                                         <input type="date" name="fechDeclara" id="fechDeclara"/>
                                         <div class="noIdentificada">
-                                            <input type="checkbox" id="chkFechDeclara"><label>No identificada</label>
+                                            <input type="checkbox" id="chkFechDeclara">
+                                            <label>No identificada</label>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -187,7 +189,8 @@
                                         <label for="fechAuto">Fecha en que se dictó el auto de vinculación a proceso</label>
                                         <input type="date" name="fechAuto" id="fechAuto"/>
                                         <div class="noIdentificada">
-                                            <input type="checkbox" id="chkFechaAuto"><label>No identificada</label>
+                                            <input type="checkbox" id="chkFechaAuto">
+                                            <label>No identificada</label>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -229,7 +232,8 @@
                                 <label for="fechSoliPlazo" class="lblExBig">Fecha de la solicitud del plazo</label>
                                 <input type="date" name="fechSoliPlazo" id="fechSoliPlazo"/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechSoliPlazo"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechSoliPlazo">
+                                    <label>No identificada</label>
                                 </div>
 
                             </td>
@@ -237,7 +241,8 @@
                                 <label for="fechCierreI" class="lblExBig">Fecha del cierre de la investigación</label>
                                 <input type="date" name="fechCierreI" id="fechCierreI"/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechCierreI"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechCierreI">
+                                    <label>No identificada</label>
                                 </div>
                             </td>
                         </tr>

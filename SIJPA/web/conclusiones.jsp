@@ -41,14 +41,16 @@
                                 <label for="fechaReso">Fecha en que se dictó la resolución</label>
                                 <input type="date" name="fechaReso" id="fechaReso"/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechaReso"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechaReso">
+                                    <label>No identificada</label>
                                 </div>
                             </td>
                             <td>
                                 <label for="tipoConclusion">Tipo de resolución (Conclusión o terminación)</label>
                                 <select class="txtMedia" name="tipoConclusion" id="tipoConclusion">
                                     <option value="0">--Seleccione--</option>
-                                    <%                                lista = cat.findTipoResolucion();
+                                    <%                                
+                                        lista = cat.findTipoResolucion();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -226,7 +228,8 @@
                                 <label for="fechaImpugnacion">Fecha de la impugnación </label>
                                 <input type="date" name="fechaImpugnacion" id="fechaImpugnacion"/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechaImpugnacion"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechaImpugnacion">
+                                    <label>No identificada</label>
                                 </div>
                             </td>
                             <td>

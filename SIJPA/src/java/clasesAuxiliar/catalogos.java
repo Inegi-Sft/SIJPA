@@ -30,7 +30,7 @@ public class catalogos {
     public ArrayList findAlfabetismo() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ALFABETISMO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_ALFABETISMO WHERE ALFABETISMO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -47,7 +47,7 @@ public class catalogos {
     public ArrayList findAsentHumano() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ASENTAMIENTO_HUMANO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_ASENTAMIENTO_HUMANO WHERE ASENTAMIENTO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -63,7 +63,7 @@ public class catalogos {
     public ArrayList findAutoVinculacion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_AUTO_VINCULACION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_AUTO_VINCULACION WHERE AUTO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -143,7 +143,7 @@ public class catalogos {
     public ArrayList findCondActividad() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CONDICION_ACTIVIDAD ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_CONDICION_ACTIVIDAD where CONDICION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -159,7 +159,7 @@ public class catalogos {
     public ArrayList findCondEstudiante() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CONDICION_ESTUDIANTE ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_CONDICION_ESTUDIANTE where CONDICION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -207,7 +207,7 @@ public class catalogos {
     public ArrayList findDomEspanol() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_DOMINIO_ESPANOL ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_DOMINIO_ESPANOL where DOMINIO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -223,7 +223,7 @@ public class catalogos {
     public ArrayList findEntidades() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ENTIDADES ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_ENTIDADES where ENTIDAD_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -239,7 +239,7 @@ public class catalogos {
     public ArrayList findEdoCivil() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ESTADO_CIVIL ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_ESTADO_CIVIL where ESTADO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -255,7 +255,7 @@ public class catalogos {
     public ArrayList findEdoPsicoFisico() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ESTADO_PSICOFISICO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_ESTADO_PSICOFISICO where ESTADO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -399,7 +399,7 @@ public class catalogos {
     public ArrayList findImpugResolucion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_IMPUGNA_RESOLUCION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_IMPUGNA_RESOLUCION where IMPUGNA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -463,7 +463,7 @@ public class catalogos {
     public ArrayList findLinguisticas() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_linguisticas ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_LINGUISTICAS WHERE LINGUISTICA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -479,7 +479,7 @@ public class catalogos {
     public ArrayList findMedCautelares() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES WHERE CAUTELARES_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -495,7 +495,7 @@ public class catalogos {
     public ArrayList findMedMujer() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_MUJER ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_MUJER WHERE MUJERES_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -511,7 +511,7 @@ public class catalogos {
     public ArrayList findMedProteccion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION WHERE MEDIDAS_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -559,7 +559,7 @@ public class catalogos {
     public ArrayList findMulta() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MULTA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MULTA WHERE MULTA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -591,7 +591,7 @@ public class catalogos {
     public ArrayList findNacionalidad() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_NACIONALIDAD ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_NACIONALIDAD WHERE NACIONALIDAD_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -623,7 +623,7 @@ public class catalogos {
     public ArrayList findNumero() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_NUMERO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_NUMERO WHERE NUMERO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -639,7 +639,7 @@ public class catalogos {
     public ArrayList findOcupacion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_OCUPACION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_OCUPACION WHERE OCUPACION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -655,7 +655,7 @@ public class catalogos {
     public ArrayList findPais() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PAIS ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_PAIS WHERE PAIS_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -751,7 +751,7 @@ public class catalogos {
     public ArrayList findPIndigena() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PUEBLO_INDIGENA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_PUEBLO_INDIGENA WHERE PUEBLO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -799,7 +799,7 @@ public class catalogos {
     public ArrayList findRePDano() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_REPARACION_DANO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_REPARACION_DANO WHERE REPARACION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -831,7 +831,7 @@ public class catalogos {
     public ArrayList findResidencia() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_RESIDENCIA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_RESIDENCIA WHERE RESIDENCIA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -863,7 +863,7 @@ public class catalogos {
     public ArrayList findSexo() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_SEXO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_SEXO WHERE SEXO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -879,7 +879,7 @@ public class catalogos {
     public ArrayList findSobreseimiento() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_SOBRESEIMIENTO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_SOBRESEIMIENTO WHERE SOBRESEIMIENTO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -895,7 +895,7 @@ public class catalogos {
     public ArrayList findTiempoInterna() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIEMPO_INTERNAMIENTO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_TIEMPO_INTERNAMIENTO WHERE INTERNAMIENTO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1055,7 +1055,7 @@ public class catalogos {
     public ArrayList findVicMoral() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_VICTIMA_MORAL ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_VICTIMA_MORAL WHERE MORAL_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1071,7 +1071,7 @@ public class catalogos {
     public ArrayList findVulnerabilidad() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_VULNERABILIDAD ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_VULNERABILIDAD WHERE VULNERABILIDAD_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

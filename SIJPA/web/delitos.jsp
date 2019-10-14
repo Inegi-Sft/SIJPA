@@ -21,7 +21,7 @@
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
-            <h2>Delitos</h2>
+            <h1>Delitos</h1>
             <form action="" method="post">
                 <fieldset>
                     <legend>Identificación del tipo penal</legend>
@@ -29,7 +29,7 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>
-                                <select class="txtExBig"  name="delitoCP" id="delitoCP" placeholder="--Selecciona el delito--" required>
+                                <select class="demo-default txtExBig"  name="delitoCP" id="delitoCP" placeholder="--Selecciona el delito--" required>
                                     <option value=""></option>
                                     <%
                                         lista = cat.findCodNorma();
@@ -209,7 +209,7 @@
                                     <legend>Lugar de ocurrencia</legend>
                                     <div class="cols">
                                         <label>Entidad Federativa</label>
-                                        <select class="txtMedia" name="entidad" id="entidadD" onchange="llenaMun('#entidadD', '#municipioD')">
+                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD','#municipioD')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -221,7 +221,7 @@
                                     </div>
                                     <div class="cols">
                                         <label class="lblExBig">Municipio/Demarcación territorial</label>
-                                        <select class="txtMedia" name="municipio" id="municipioD">
+                                        <select class="txtMedia" name="municipioD" id="municipioD">
                                             <option value="">--Seleccione--</option>
                                         </select>
                                     </div>
@@ -255,6 +255,7 @@
                     <h2>Comentarios</h2>
                     <textarea name="comentarios" id="comentarios"></textarea>
                 </div>
+                <br/>
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>                        
             </form>
         </section>

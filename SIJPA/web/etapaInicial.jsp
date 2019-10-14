@@ -20,12 +20,12 @@
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
-            <h2>Etapa Inicial</h2>
+            <h1>Etapa Inicial</h1>
             <form action="" method="post">
                 <fieldset>
                     <table class="tablaFormu">
                         <tr>
-                            <td colspan="2">
+                            <td colspan="4">
                                 <label for="idProcesado">Id Adolescente</label>
                                 <select class="txtMedia" name="idProcesado" id="idProcesado">  
                                     <option value="">--Seleccione--</option>
@@ -33,35 +33,32 @@
                                         //conexion a base
                                     %>
                                 </select>
+                                <hr style="border: 1px solid #0077CB;margin-top: 10px;"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <fieldset>
-                                    <legend>Control de Detención</legend>
-                                    <div class="cols">
-                                        <label for="ctrlDetencion">¿Hubo control de detención?</label>
-                                        <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion">
-                                            <option value="">--Seleccione--</option>
-                                            <%                                            lista = cat.findResSimple();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
-                                            %> 
-                                        </select>
-                                    </div>
-                                    <div class="cols">
-                                        <label for="fechaCtrlDeten" class="lblExBig">Fecha de audiencia de control de detención</label>
-                                        <input type="date" name="fechaCtrlDeten" id="fechaCtrlDeten"/>
-                                        <div class="noIdentificada">
-                                            <input type="checkbox" id="chkFechaCtrlDeten"><label>No identificada</label>
-                                        </div>
+                                    <label for="ctrlDetencion">¿Hubo control de detención?</label>
+                                    <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion" onchange="respuestaSimple('#ctrlDetencion', '#lbCtrlDeten', '#fechaCtrlDeten', '#chkFechaCtrlDeten')" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+
+                                    <label for="fechaCtrlDeten" id="lbCtrlDeten">Fecha de audiencia de control de detención</label>
+                                    <input type="date" name="fechaCtrlDeten" id="fechaCtrlDeten" required/>
+                                    <div class="noIdentificada" id="chkFechaCtrlDeten">
+                                        <input type="checkbox" id="chkCtrlDeten" onclick="fechaNoIdent('#chkCtrlDeten', '#fechaCtrlDeten')"><label>No identificada</label>
                                     </div> 
                                 </fieldset>
                             </td>
                             <td>
                                 <label for="legalDeten">¿Se calificó como legal la detención?</label>
-                                <select class="txtMedia" name="legalDeten" id="legalDeten">
+                                <select class="txtMedia" name="legalDeten" id="legalDeten" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
@@ -262,103 +259,13 @@
                             </td>
                         </tr>
                     </table>
-                </fieldset><br>
-                <fieldset>
-                    <legend>Plazo de Cierre</legend>
-                    <table class="tablaFormu">
-                        <tr>
-                            <td>
-                                <label for="soliPlazo" class="lblExBig">¿Se solicitó el plazo para el cierre de investigación complementaria?</label>
-                                <select class="txtMedia" name="soliPlazo" id="soliPlazo">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findResSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %> 
-                                </select>
-                            </td>
-                            <td>
-                                <label for="plazoFijadoC" class="lblExBig">Plazo fijado para el cierre de la investigación</label>
-                                <select class="txtMedia" name="plazoFijadoC" id="plazoFijadoC">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findPlazoCierre();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %> 
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="fechSoliPlazo" class="lblExBig">Fecha de la solicitud del plazo</label>
-                                <input type="date" name="fechSoliPlazo" id="fechSoliPlazo"/>
-                                <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechSoliPlazo">
-                                    <label>No identificada</label>
-                                </div>
-
-                            </td>
-                            <td>
-                                <label for="fechCierreI" class="lblExBig">Fecha del cierre de la investigación</label>
-                                <input type="date" name="fechCierreI" id="fechCierreI"/>
-                                <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechCierreI">
-                                    <label>No identificada</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset><br>
-                <fieldset>
-                    <legend>Medidas Cautelares</legend>
-                    <label for="drecretaMC" >¿Se decretó medida cautelar?</label>
-                        <select class="txtMedia" name="drecretaMC" id="drecretaMC">
-                            <option value="">--Seleccione--</option>
-                            <%
-                                lista = cat.findResSimple();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                        <table class="tablasRegis" >
-                            <tr>
-                                <th>Id</th>
-                                <th>Medida Cautelar</th>
-                                <th>Decretada</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>El resguardo en su domicilio con las modalidades que el órgano Jurisdiccional disponga</td>
-                                <td>
-                                    <input type="checkbox" name="apliMedidacau" id="apliMedidacau" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Garantía económica para asegurar la comparecencia</td>
-                                <td>
-                                    <input type="checkbox" name="aseguCompa" id="aseguCompa" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>La prohibición de convivir, acercarse o comunicarse con determinadas personas, con las víctimas, ofendidos o testigos, siempre que no se afecte el derecho de defensa</td>
-                                <td>
-                                    <input type="checkbox" name="apliMedidacau3" id="apliMedidacau3" />
-                                </td>
-                            </tr>
-                        </table>
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>
                     <textarea name="comentarios" id="comentarios"></textarea>
                 </div>
-                <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
+                <br/>
+                <input type="submit" name="guardar" value="Guardar" class="btnFlotante" onclick="return medidasCaute('#drecretaMC')"/>
             </form>
         </section>
     </body>

@@ -572,10 +572,10 @@ public class catalogos {
         return lista;
     }
 
-    public ArrayList findMunicipios(int entidad) {
+    public ArrayList findMunicipios(int enti) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MUNICIPIOS WHERE ENTIDAD_ID = " + entidad + " ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MUNICIPIOS WHERE ENTIDAD_ID = " + enti + " ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1068,7 +1068,7 @@ public class catalogos {
         return lista;
     }
 
-    public ArrayList findVulnera() {
+    public ArrayList findVulnerabilidad() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_VULNERABILIDAD WHERE VULNERABILIDAD_ID <> -2 ORDER BY 1";

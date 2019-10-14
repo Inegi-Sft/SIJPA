@@ -6,7 +6,7 @@
 /* global selecChk */
 
 $(document).ready(function () {
-    //despliega ventana modal
+//despliega ventana modal
     $('.pop').fancybox({
         'type': 'iframe',
         'overlayShow': true,
@@ -17,14 +17,14 @@ $(document).ready(function () {
             }
         }
     });
-
+    //Auto acompletado
     $('#delitoCP').selectize();
     //$('#municipioD').selectize();
     //$('#municipioJ').selectize();
     //$('#nMunicipio').selectize();
     //$('#rMunicipio').selectize();
-    $('#Mnacimiento').selectize();
-    $('#Mreside').selectize();
+    //$('#Mnacimiento').selectize();
+    //$('#Mreside').selectize();
     /******************** Funciones para Etapa Intermedia***************************/
 
 });

@@ -105,32 +105,10 @@ function medidasCaute(idChk) {
         }
     }
 }
-//Respuestas simples y fechas con NI
-function respuestaSimple(idSelect, idLbl, idDate, idNI) {
-    if ($(idSelect).val() !== '1') {
-        $(idLbl).fadeOut("slow");
-        $(idDate).val("1899-09-09").fadeOut("slow");
-        $(idNI).fadeOut("slow");
-    } else {
-        $(idLbl).fadeIn("slow");
-        $(idDate).fadeIn("slow");
-        $(idNI).fadeIn("slow");
-    }
-}
-//Respuestas simples a esconder otra variable
-function respuestaSelect(idSelect, idLabel, idResp) {
-    if ($(idSelect).val() !== '1') {
-        $(idLabel).fadeOut("slow");
-        $(idResp).val('-2').fadeOut("slow");
-    } else {
-        $(idLabel).fadeIn("slow");
-        $(idResp).val('').fadeIn("slow");
-    }
-}
-
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
 
-function llenaMun(idEnt, idMun) {
+/*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
+function llenaMun(idEnt,idMun) {
     var enti = $(idEnt).val();
     if (enti !== '') {
         $.ajax({
@@ -150,3 +128,4 @@ function llenaMun(idEnt, idMun) {
     }
 
 };
+/***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************************/

@@ -100,7 +100,6 @@ function medidasCaute(idChk) {
             alert("Selecciona por lo menos una Medida Cautelar");
             return false;
         } else {
-
             return true;
         }
     }

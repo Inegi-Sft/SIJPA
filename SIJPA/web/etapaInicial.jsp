@@ -208,11 +208,8 @@
                                     <input type="checkbox" id="chkFechCierreI" onclick="fechaNoIdent('#chkFechCierreI', '#fechCierreI')" ><label>No identificada</label>
                                 </div>
                             </td>
-
                         </tr>
-
                         <tr>
-
                             <td colspan="4"><br/>
                                 <fieldset>
                                     <legend>Medidas Cautelares</legend>
@@ -228,10 +225,8 @@
                                             %> 
                                         </select>
                                     </div>
-                                    </br>
-
+                                    <br>
                                     <div id="tabMedidaCautelar" hidden >
-
                                         <table class="tablasRegis" id="tableMcau">
                                             <tr>
                                                 <th width="20">Id</th>
@@ -250,8 +245,6 @@
                                                     out.println("</tr>");
                                                 }
                                             %>
-
-
                                             </tr>
                                         </table>
                                     </div>

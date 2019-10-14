@@ -39,6 +39,7 @@ function comprobar(obj, idTxt) {
         document.getElementById(idTxt).disabled = true;
 }
 
+/******************************FUNCIONES ETAPA INTERMEDIA***************************/
 //Respuestas simples y fechas con NI
 function respuestaSimple(idSelect, idLbl, idDate, idNI) {
     if ($(idSelect).val() !== '1') {
@@ -60,16 +61,6 @@ function respuestaSelect(idSelect, idLabel, idResp) {
     } else {
         $(idLabel).fadeIn("slow");
         $(idResp).val('').fadeIn("slow");
-    }
-}
-// Fechas No identificadas
-function fechaNoIdent(idChk, idTxtDate) {
-    if ($(idChk).is(":checked")) {
-        $(idTxtDate).val("1899-09-09");
-        $(idTxtDate).prop("disabled", true);
-    } else {
-        $(idTxtDate).val("");
-        $(idTxtDate).prop("disabled", false);
     }
 }
 

@@ -19,10 +19,10 @@ $(document).ready(function () {
     });
     //Auto acompletado
     $('#delitoCP').selectize();
-    $('#municipioD').selectize();
-    $('#municipioJ').selectize();
-    $('#nMunicipio').selectize();
-    $('#rMunicipio').selectize();
+//    $('#municipioD').selectize();
+//    $('#municipioJ').selectize();
+//    $('#nMunicipio').selectize();
+//    $('#rMunicipio').selectize();
     $('#Mnacimiento').selectize();
     $('#Mreside').selectize();
     /******************** Funciones para Etapa Intermedia***************************/
@@ -39,15 +39,16 @@ function comprobar(obj, idTxt) {
 }
 
 //Respuestas simples y fechas con NI
-function respuestaSimple(idSelect, idLbl, idDate, idNI) {
+function respuestaSimple(idSelect, idLbl, idDate, idNI, idchk) {
     if ($(idSelect).val() !== '1') {
         $(idLbl).fadeOut("slow");
         $(idDate).val("1899-09-09").fadeOut("slow");
         $(idNI).fadeOut("slow");
     } else {
         $(idLbl).fadeIn("slow");
-        $(idDate).val("").fadeIn("slow");
         $(idNI).fadeIn("slow");
+        $(idchk).prop('checked', false);
+        $(idDate).val("").prop("disabled", false).fadeIn("slow");
     }
 }
 //Respuestas simples a esconder otra variable
@@ -82,6 +83,7 @@ function despliegaTabla(idChk, idTable) {
         $(idTable).fadeIn("slow");
     }
 }
+
 
 function medidasCaute(idChk) {
     if (($(idChk).val === 1) || $(idChk).val() === '') {

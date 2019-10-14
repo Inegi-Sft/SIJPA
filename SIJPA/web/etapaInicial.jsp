@@ -40,19 +40,21 @@
                             <td>
                                 <fieldset>
                                     <label for="ctrlDetencion">¿Hubo control de detención?</label>
-                                    <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion" onchange="respuestaSimple('#ctrlDetencion', '#lbCtrlDeten', '#fechaCtrlDeten', '#chkFechaCtrlDeten')" required>
+                                    <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion" onchange="respuestaSimple('#ctrlDetencion', '#lbCtrlDeten1', '#fechaCtrlDeten', '#chkFechaCtrlDeten', '#chkCtrlDeten')" required>
                                         <option value="">--Seleccione--</option>
-                                        <%                                            lista = cat.findResSimple();
+                                        <% lista = cat.findResSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
                                         %> 
                                     </select>
-
-                                    <label for="fechaCtrlDeten" id="lbCtrlDeten">Fecha de audiencia de control de detención</label>
-                                    <input type="date" name="fechaCtrlDeten" id="fechaCtrlDeten" required/>
-                                    <div class="noIdentificada" id="chkFechaCtrlDeten">
+                                    <div id="lbCtrlDeten1" hidden>
+                                        <label for="fechaCtrlDeten" id="lbCtrlDeten"  >Fecha de audiencia de control de detención</label>
+                                    </div>
+                                    <input type="date" name="fechaCtrlDeten" id="fechaCtrlDeten" hidden required/>
+                                    <div class="noIdentificada" id="chkFechaCtrlDeten" hidden="">
                                         <input type="checkbox" id="chkCtrlDeten" onclick="fechaNoIdent('#chkCtrlDeten', '#fechaCtrlDeten')"><label>No identificada</label>
+
                                     </div> 
                                 </fieldset>
                             </td>
@@ -71,7 +73,7 @@
                             <td>
                                 <fieldset>
                                     <label for="audiInicial">¿Hubo audiencia inicial?</label>
-                                    <select class="txtMedia" name="audiInicial" id="audiInicial" onchange="respuestaSelect('#audiInicial', '#lbAudiIni', '#conducAudi')" required>
+                                    <select class="txtMedia" name="audiInicial" id="audiInicial" onchange="respuestaSelect('#audiInicial', '#lbAudiIni1', '#conducAudi')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -80,9 +82,10 @@
                                             }
                                         %> 
                                     </select>    
-
-                                    <label for="conducAudi" id="lbAudiIni">Forma de conducción en la audiencia inicial</label>
-                                    <select class="txtMedia" name="conducAudi" id="conducAudi" required>
+                                    <div id="lbAudiIni1" hidden>
+                                        <label for="conducAudi" id="lbAudiIni">Forma de conducción en la audiencia inicial</label>
+                                    </div>
+                                    <select class="txtMedia" name="conducAudi" id="conducAudi" hidden required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findFormConduccion();
@@ -106,7 +109,7 @@
                             <td>
                                 <fieldset>
                                     <label for="declaro">¿El adolescente declaró?</label>
-                                    <select class="txtMedia" name="declaro" id="declaro" onchange="respuestaSimple('#declaro', '#lbfechDeclara', '#fechDeclara', '#chkDeclara')" required>
+                                    <select class="txtMedia" name="declaro" id="declaro" onchange="respuestaSimple('#declaro', '#lbfechDeclara1', '#fechDeclara', '#chkDeclara', '#chkFechDeclara')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -115,9 +118,11 @@
                                             }
                                         %> 
                                     </select>
-                                    <label for="lbfechDeclara" id="lbfechDeclara">Fecha de declaración</label>
-                                    <input type="date" name="fechDeclara" id="fechDeclara" required/>
-                                    <div class="noIdentificada" id="chkDeclara">
+                                    <div id="lbfechDeclara1" hidden>
+                                         <label for="lbfechDeclara" id="lbfechDeclara">Fecha de declaración</label>
+                                    </div>
+                                    <input type="date" name="fechDeclara" id="fechDeclara" hidden required/>
+                                    <div class="noIdentificada" id="chkDeclara" hidden>
                                         <input type="checkbox" id="chkFechDeclara" onclick="fechaNoIdent('#chkFechDeclara', '#fechDeclara')"><label>No identificada</label>
                                     </div>
 
@@ -126,7 +131,7 @@
                             <td>
                                 <fieldset>
                                     <label for="huboPlazo">¿Hubo plazo constitucional?</label>
-                                    <select class="txtMedia" name="huboPlazo" id="huboPlazo" onchange="respuestaSelect('#huboPlazo', '#lbPlazo', '#plazo')" required>
+                                    <select class="txtMedia" name="huboPlazo" id="huboPlazo" onchange="respuestaSelect('#huboPlazo', '#lbPlazo1', '#plazo')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -135,8 +140,12 @@
                                             }
                                         %> 
                                     </select>
+                               
+                                    <div id="lbPlazo1" hidden>
                                     <label for="plazo" id="lbPlazo">Tiempo del plazo constitucional</label>
-                                    <select class="txtMedia" name="plazo" id="plazo" required>
+                                    </div>
+                                   
+                                    <select class="txtMedia" name="plazo" id="plazo" hidden required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findPConstitucional();
@@ -150,7 +159,7 @@
                             <td colspan="2">
                                 <fieldset>
                                     <label for="autoVin" style="width:400px;">Resolución del auto de vinculación a proceso</label>
-                                    <select class="txtMedia" name="autoVin" id="autoVin" onchange="respuestaSimple('#autoVin', '#lbfechAuto', '#fechAuto', '#chkAuto')" required>
+                                    <select class="txtMedia" name="autoVin" id="autoVin" onchange="respuestaSimple('#autoVin', '#lbfechAuto1', '#fechAuto', '#chkAuto', '#chkFechaAuto')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findAutoVinculacion();
@@ -159,9 +168,11 @@
                                             }
                                         %> 
                                     </select>
+                                    <div id="lbfechAuto1" hidden>
                                     <label for="fechAuto" id="lbfechAuto" style="width:500px;">Fecha en que se dictó el auto de vinculación a proceso</label>
-                                    <input type="date" name="fechAuto" id="fechAuto" required/>
-                                    <div class="noIdentificada" id="chkAuto">
+                                    </div>
+                                    <input type="date" name="fechAuto" id="fechAuto" hidden required/>
+                                    <div class="noIdentificada" id="chkAuto" hidden>
                                         <input type="checkbox" id="chkFechaAuto" onclick="fechaNoIdent('#chkFechaAuto', '#fechAuto')"><label>No identificada</label>
                                     </div>
                                 </fieldset>
@@ -172,7 +183,7 @@
                             <td colspan="2">
                                 <fieldset>
                                     <label for="soliPlazo" class="lblExBig">¿Se solicitó el plazo para el cierre de investigación complementaria?</label>
-                                    <select class="txtMedia" name="soliPlazo" id="soliPlazo" onchange="respuestaSimple('#soliPlazo', '#lbfechSoliPlazo', '#fechSoliPlazo', '#chkfechSoliPlazo')" required>
+                                    <select class="txtMedia" name="soliPlazo" id="soliPlazo" onchange="respuestaSimple('#soliPlazo', '#lbfechSoliPlazo1', '#fechSoliPlazo', '#chkfechSoliPlazo','#chkFechSoliPlazo')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -181,9 +192,11 @@
                                             }
                                         %> 
                                     </select>
+                                    <div id="lbfechSoliPlazo1" hidden>
                                     <label for="fechSoliPlazo" id="lbfechSoliPlazo">Fecha de la solicitud del plazo</label>
-                                    <input type="date" name="fechSoliPlazo" id="fechSoliPlazo" required/>
-                                    <div class="noIdentificada" id="chkfechSoliPlazo">
+                                    </div>
+                                    <input type="date" name="fechSoliPlazo" id="fechSoliPlazo" hidden required/>
+                                    <div class="noIdentificada" id="chkfechSoliPlazo" hidden>
                                         <input type="checkbox" id="chkFechSoliPlazo" onclick="fechaNoIdent('#chkFechSoliPlazo', '#fechSoliPlazo')"><label>No identificada</label>
                                     </div>
                                 </fieldset>

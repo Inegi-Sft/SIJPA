@@ -687,7 +687,7 @@ public class catalogos {
     public ArrayList findPConstitucional() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PLAZO_CONSTITUCIONAL ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_PLAZO_CONSTITUCIONAL WHERE PLAZO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

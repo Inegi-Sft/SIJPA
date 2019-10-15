@@ -69,7 +69,6 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
-
 });
 
 /***************************** PARA CAPTURA EXPEDIENTES *********************/
@@ -85,21 +84,24 @@ function comprobar(obj, idTxt) {
         document.getElementById(idTxt).disabled = false;
     else
         document.getElementById(idTxt).disabled = true;
-}
+};
+/*****************************FIN PARA CAPTURA EXPEDIENTES *********************/
 
 /******************************FUNCIONES ETAPA INTERMEDIA***************************/
 //Respuestas simples y fechas con NI
-function respuestaSimple(idSelect, idLbl, idDate, idNI) {
+function respuestaSimple(idSelect, idLbl, idDate, idNI, idchk) {
     if ($(idSelect).val() !== '1') {
         $(idLbl).fadeOut("slow");
         $(idDate).val("1899-09-09").fadeOut("slow");
         $(idNI).fadeOut("slow");
     } else {
         $(idLbl).fadeIn("slow");
-        $(idDate).val("").fadeIn("slow");
         $(idNI).fadeIn("slow");
+        $(idchk).prop('checked', false);
+        $(idDate).val("").prop("disabled", false).fadeIn("slow");
     }
-}
+};
+
 //Respuestas simples a esconder otra variable
 function respuestaSelect(idSelect, idLabel, idResp) {
     if ($(idSelect).val() !== '1') {
@@ -110,8 +112,32 @@ function respuestaSelect(idSelect, idLabel, idResp) {
         $(idLabel).fadeIn("slow");
         $(idResp).val('').fadeIn("slow");
     }
-}
+};
 
+function respuestaSelectbis() {
+    switch ($('#tipoMedidaPA').val()) {
+        case '1':
+            $('#dTipoMedidaPL').fadeIn("slow");
+            $('#dTipoMedidaNPL').hide();
+            $('#tipoMedidaPL').val('');
+            break;
+        case '2':
+            $('#dTipoMedidaNPL').fadeIn("slow");
+            $('#dTipoMedidaPL').hide();
+            $('#Dinternamiento').hide();
+            $('#tipoMedidaNPL').val('');
+            $('#internamiento').val('');
+            break;
+        default:
+            $('#tipoMedidaPL').val('-2');
+            $('#tipoMedidaNPL').val('-2');
+            $('#dTipoMedidaPL').fadeOut("slow");
+            $('#dTipoMedidaNPL').fadeOut("slow");
+            $('#Dinternamiento').hide();
+            $('#internamiento').val('');
+            break;
+    }
+};
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
 
 /**************************FUNCION ETAPA INICIAL *****************************************/
@@ -127,7 +153,7 @@ function despliegaTabla(idChk, idTable) {
     } else {
         $(idTable).fadeIn("slow");
     }
-}
+};
 
 function medidasCaute(idChk) {
     if (($(idChk).val === 1) || $(idChk).val() === '') {
@@ -149,8 +175,8 @@ function medidasCaute(idChk) {
             return true;
         }
     }
-}
-/*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
+};
+/*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 /*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
 /***
@@ -177,9 +203,69 @@ function llenaMun(idEnt,idMun) {
     } else {
         $(idMun).empty().append("<option value='0'>--Seleccione--</option>");
     }
-
 };
 /***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************************/
+
+/*******************FUNCIONES DE CONCLUSIONES**********************************/
+function resSobreseimiento() {
+    if ($('#tipoConclusion').val() === '1') {
+        $('#idSobre').fadeIn('slow');
+        $('#proceSobre').fadeIn('slow');
+        $('#tipoSobreseimto').val('');
+        $('#proceSobreseimto').val('');
+    } else {
+        $('#idSobre').fadeOut('slow');
+        $('#proceSobre').fadeOut('slow');
+        $('#tipoSobreseimto').val('-2');
+        $('#proceSobreseimto').val('-2');
+    }
+};
+
+function rInternamiento() {
+    if (($('#tipoMedidaPL').val() === '2') || ($('#tipoMedidaPL').val() === '3')) {
+        $('#Dinternamiento').fadeIn("slow");
+        $('#internamiento').val('').fadeIn("slow");
+    } else {
+        $('#Dinternamiento').fadeOut("slow");
+        $('#internamiento').val('-2');
+        $('#internamiento').fadeOut("slow");
+    }
+};
+
+function respuestaRepara() {
+    if ($('#reparaDanio').val() === '1') {
+        $('#tipoRepara').fadeIn("slow");
+        $('#tipoReparaD').val('');
+    } else {
+        $('#tipoRepara').fadeOut("slow");
+        $('#tipoReparaD').val('-2');
+        $('#montoRepara').fadeOut("slow");
+        $('#montoReparaD').val('-2');
+    }
+};
+
+function pagoCosa() {
+    if ($('#tipoReparaD').val() === '2') {
+        $('#montoRepara').fadeIn("slow");
+        $('#montoReparaD').val('');
+    } else {
+        $('#montoRepara').fadeOut("slow");
+        $('#montoReparaD').val('-2');
+    }
+};
+
+function impugna() {
+    if ($('#impugnacion').val() === '1') {
+        $('#tipoImpugna').val('').fadeIn("slow");
+        $('#fechaImpugna').val('').fadeIn("slow");
+        $('#quienImpugna').val('').fadeIn("slow");
+    } else {
+        $('#tipoImpugna').val('-2').fadeOut("slow");
+        $('#fechaImpugna').val("1899-09-09").fadeOut("slow");
+        $('#quienImpugna').val('-2').fadeOut("slow");
+    }
+};
+/*******************FIN FUNCIONES DE CONCLUSIONES**********************************/
 
 /****************************** FUNCIONES PROCESADOS ******************************/
 //para respuesta simple, oculta el select contenido en un div
@@ -255,5 +341,4 @@ function fechaNoIdent(idChk, idTxtDate) {
         $(idTxtDate).val("");
         $(idTxtDate).prop("disabled", false);
     }
-}
-
+};

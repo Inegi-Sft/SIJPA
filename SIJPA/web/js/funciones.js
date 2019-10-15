@@ -25,7 +25,8 @@ $(document).ready(function () {
 //    $('#rMunicipio').selectize();
     $('#Mnacimiento').selectize();
     $('#Mreside').selectize();
-    /******************** Funciones para Etapa Intermedia***************************/
+    $('.oculto').hide();
+    
 
 });
 /********************FUNCIONES ETAPA INTERMEDIA***************************/
@@ -60,6 +61,31 @@ function respuestaSelect(idSelect, idLabel, idResp) {
     } else {
         $(idLabel).fadeIn("slow");
         $(idResp).val('').fadeIn("slow");
+    }
+}
+
+function respuestaSelectbis() {
+    switch ($('#tipoMedidaPA').val()) {
+        case '1':
+            $('#dTipoMedidaPL').fadeIn("slow");
+            $('#dTipoMedidaNPL').hide();
+            $('#tipoMedidaPL').val('');
+            break;
+        case '2':
+            $('#dTipoMedidaNPL').fadeIn("slow");
+            $('#dTipoMedidaPL').hide();
+            $('#Dinternamiento').hide();
+            $('#tipoMedidaNPL').val('');
+            $('#internamiento').val('');
+            break;
+        default:
+            $('#tipoMedidaPL').val('-2');
+            $('#tipoMedidaNPL').val('-2');
+            $('#dTipoMedidaPL').fadeOut("slow");
+            $('#dTipoMedidaNPL').fadeOut("slow");
+            $('#Dinternamiento').hide();
+            $('#internamiento').val('');
+            break;
     }
 }
 // Fechas No identificadas
@@ -105,5 +131,62 @@ function medidasCaute(idChk) {
 
             return true;
         }
+    }
+}
+
+
+/*******************FUNCIONES DE CONCLUSIONES**********************************/
+function resSobreseimiento() {
+    if ($('#tipoConclusion').val() === '1') {
+        $('#idSobre').fadeIn('slow');
+        $('#proceSobre').fadeIn('slow');
+        $('#tipoSobreseimto').val('');
+        $('#proceSobreseimto').val('');
+    } else {
+        $('#idSobre').fadeOut('slow');
+        $('#proceSobre').fadeOut('slow');
+        $('#tipoSobreseimto').val('-2');
+        $('#proceSobreseimto').val('-2');
+    }
+}
+function rInternamiento() {
+    if (($('#tipoMedidaPL').val() === '2') || ($('#tipoMedidaPL').val() === '3')) {
+        $('#Dinternamiento').fadeIn("slow");
+        $('#internamiento').val('').fadeIn("slow");
+    } else {
+        $('#Dinternamiento').fadeOut("slow");
+        $('#internamiento').val('-2');
+        $('#internamiento').fadeOut("slow");
+    }
+}
+function respuestaRepara() {
+    if ($('#reparaDanio').val() === '1') {
+        $('#tipoRepara').fadeIn("slow");
+        $('#tipoReparaD').val('');
+    } else {
+        $('#tipoRepara').fadeOut("slow");
+        $('#tipoReparaD').val('-2');
+        $('#montoRepara').fadeOut("slow");
+        $('#montoReparaD').val('-2');
+    }
+}
+function pagoCosa() {
+    if ($('#tipoReparaD').val() === '2') {
+        $('#montoRepara').fadeIn("slow");
+        $('#montoReparaD').val('');
+    } else {
+        $('#montoRepara').fadeOut("slow");
+        $('#montoReparaD').val('-2');
+    }
+}
+function impugna() {
+    if ($('#impugnacion').val() === '1') {
+        $('#tipoImpugna').val('').fadeIn("slow");
+        $('#fechaImpugna').val('').fadeIn("slow");
+        $('#quienImpugna').val('').fadeIn("slow");
+    } else {
+        $('#tipoImpugna').val('-2').fadeOut("slow");
+        $('#fechaImpugna').val("1899-09-09").fadeOut("slow");
+        $('#quienImpugna').val('-2').fadeOut("slow");
     }
 }

@@ -59,7 +59,7 @@
                                             %>  
                                         </select>
                                     </div>
-                                    <div class="cols">
+                                    <div class="cols oculta">
                                         <label for="Tincompe">Tipo de incompetencia</label>
                                         <select name="Tincompe" id="Tincompe" class="txtMedia">
                                             <option value="0">--Seleccione--</option>
@@ -87,12 +87,12 @@
                                             %>  
                                         </select>
                                     </div>
-                                    <div class="cols">
+                                    <div class="cols oculta">
                                         <label for="ExpRefe">Expediente al que hace referencia</label>
                                         <input type="text" name="ExpRefe" id="ExpRefe" required>
                                     </div>
                                 </fieldset>
-                            </td>0
+                            </td>
                         </tr>             
                         <tr>
                             <td>

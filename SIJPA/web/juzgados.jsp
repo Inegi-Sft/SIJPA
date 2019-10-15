@@ -8,6 +8,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,11 +16,14 @@
         <title>SIJPA::Juzgados</title>
         <%@include file="librerias.jsp" %>
     </head>
+    
     <body >
-        <%
-            catalogos cat=new catalogos();
-            ArrayList<String[]> lista;
-        %>
+    <%
+        catalogos cat = new catalogos();
+        ArrayList<String[]> lista;
+        
+        String idEntidad=request.getParameter("entidad");
+    %>
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
@@ -31,11 +35,11 @@
                 <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1">Datos del Juez</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Datos Órgano Jurisdiccional</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Forma de Organizacion del Órgano</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p4')">Datos Geográficos</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos Captura</button>
+                <button class="pestanaLinks" onclick="openPestana(event, 'p4')" id="btn4">Datos Geográficos</button>
+                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos Captura</button>               
             </div>
 
-            <form action="#" method="post">
+            <form action="juzgados.jsp" method="post" name="formJuzgados">
                 <!-- Contenido pestañas -->
                 <div id="p1" class="pestanaContent" style="display: block">
                     <h2>Datos del Juez</h2>
@@ -55,9 +59,9 @@
                             </td>
                             <td>
                                 <label for="fGestion">Fecha inicio gestion:</label>
-                                <input type="date" class="txtMedia" name="fGestion" id="fGestion" />
+                                <input type="date" class="txtMedia" name="fGestion" id="fGestion" required/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechaInicioG"><label>No identificada</label>
+                                    <input type="checkbox" name="chkFechaInicioG" id="chkFechaInicioG" onclick="fechaNoIdent('#chkFechaInicioG', '#fGestion');"><label>No identificada</label>
                                 </div>
                             </td>
                         </tr>
@@ -78,13 +82,13 @@
                             </td>
                             <td>
                                 <label for="numDistrito">Número del Distrito Judicial</label>
-                                <select name="numDistrito" class="txtMedia txtMedia" id="numDistrito" required>
+                                <select name="numDistrito" class="txtMedia" id="numDistrito" required>
                                     <option value="">--Seleccione--</option>
-                                    <%
+                                    <%   
                                         NumerosRomanos nRomanosR = new NumerosRomanos(1, 99);
                                         ArrayList<NumerosRomanos> alnRomanosR = nRomanosR.getNumerosRomanos();
                                         for (NumerosRomanos nR : alnRomanosR) {
-                                            out.println("<option value='"+nR.nArabigo+"'>"+nR+"</option>");
+                                            out.println("<option value='" + nR.nArabigo + "'>" + nR + "</option>");
                                         }
                                     %>
                                 </select>
@@ -111,10 +115,10 @@
                             <td></td>
                             <td>
                                 <label for="fOrganiza">Forma de Organizacion</label>
-                                <select class="txtMedia" name="fOrganiza" id="fOrganiza">
+                                <select class="txtMedia" name="fOrganiza" id="fOrganiza" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findForOrganiza();
+                                        lista = cat.findForOrganiza();
                                         for (String[] ls : lista) {
                                             out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
@@ -124,18 +128,22 @@
                             <td></td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>
-                                <label for="regJudicial">Nombre de la Región Judicial</label>
-                                <input type="text" name="regJudicial" id="regJudicial"/>
+                                <div id="dRegJudicial" hidden>
+                                    <label for="regJudicial">Nombre de la Región Judicial</label>
+                                    <input type="text" name="regJudicial" id="regJudicial"/>
+                                </div>
+                                <div id="dDistJudicial" hidden>
+                                    <label for="distJudicial">Nombre del Distrito Judicial</label>
+                                    <input type="text" name="distJudicial" id="distJudicial"/>
+                                </div>
+                                <div id="dPartJudicial" hidden>
+                                    <label for="partJudicial">Nombre del Partido Judicial</label>
+                                    <input type="text" name="partJudicial" id="partJudicial" />
+                                </div>
                             </td>
-                            <td>
-                                <label for="distJudicial">Nombre del Distrito Judicial</label>
-                                <input type="text" name="distJudicial" id="distJudicial"/>
-                            </td>
-                            <td>
-                                <label for="partJudicial">Nombre del Partido Judicial</label>
-                                <input type="text" name="partJudicial" id="partJudicial" />
-                            </td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
@@ -145,22 +153,23 @@
                         <tr>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
-                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ','#municipioJ')">
+                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ','#municipioJ')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findEntidades();
+                                        lista = cat.findEntidades();
                                         for (String[] ls : lista) {
                                             out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
                                     %>
                                 </select>
+                                <input type="hidden" name="bandera" value="1"/>
                             </td>
                             <td>
                                 <label for="vialidad">Vialidad</label>
-                                <select class="txtMedia" name="vialidad" id="vialidad">
+                                <select class="txtMedia" name="vialidad" id="vialidad" required>
                                     <option value="">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findVialidad();
+                                    <%                                        
+                                        lista = cat.findVialidad();
                                         for (String[] ls : lista) {
                                             out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
@@ -169,10 +178,10 @@
                             </td>
                             <td>
                                 <label for="asentamiento">Asentamiento Humano</label>
-                                <select class="txtMedia" name="asentamiento" id="asentamiento">
+                                <select class="txtMedia" name="asentamiento" id="asentamiento" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findAsentHumano();
+                                        lista = cat.findAsentHumano();
                                         for (String[] ls : lista) {
                                             out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
@@ -187,7 +196,7 @@
                         <tr>
                             <td>
                                 <label for="municipio">Municipio o Delegacion</label>
-                                <select class="txtMedia" name="municipioJ" id="municipioJ">
+                                <select class="txtMedia" name="municipioJ" id="municipioJ" required>
                                     <option value="">--Seleccione--</option>
                                 </select>
                             </td>
@@ -198,7 +207,7 @@
                             <td>
                                 <label for="nomAsentamiento">Nombre del Asentamiento Humano</label>
                                 <input type="text" name="nomAsentamiento" id="nomAsentamiento"/>
-                                
+
                             </td>
                             <td>
                                 <label for="">No. Exterior / No. Interiior</label>
@@ -238,6 +247,6 @@
                 <br>
                 <input type="submit" name="guardar" id="guardar" value="Guardar">
             </form>
-        </section>
+        </section>                       
     </body>
 </html>

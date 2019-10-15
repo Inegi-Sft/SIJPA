@@ -116,7 +116,7 @@
                                     <%
                                         lista=cat.findForOrganiza();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
                                     %>
                                 </select>
@@ -145,12 +145,12 @@
                         <tr>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
-                                <select class="txtMedia" name="entidad" id="entidad">
+                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ','#municipioJ')">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista=cat.findEntidades();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
                                     %>
                                 </select>
@@ -162,7 +162,7 @@
                                     <%
                                         lista=cat.findVialidad();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
                                     %>
                                 </select>
@@ -174,7 +174,7 @@
                                     <%
                                         lista=cat.findAsentHumano();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
+                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
                                         }
                                     %>
                                 </select>
@@ -187,14 +187,8 @@
                         <tr>
                             <td>
                                 <label for="municipio">Municipio o Delegacion</label>
-                                <select class="txtMedia" name="municipio" id="municipioJ">
+                                <select class="txtMedia" name="municipioJ" id="municipioJ">
                                     <option value="">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findMunicipios();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[1]+"</option>");
-                                        }
-                                    %>
                                 </select>
                             </td>
                             <td>

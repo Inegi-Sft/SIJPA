@@ -216,7 +216,7 @@
                                     </div>
                                     <div class="cols">       
                                         <label for="Enacimiento">Entidad</label>
-                                        <select name="Enacimiento" id="Enacimiento" class="txtMedia">
+                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia" onchange="llenaMun('#Enacimiento','#Mnacimiento')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -228,14 +228,8 @@
                                     </div>
                                     <div class="cols"> 
                                         <label for="Mnacimiento">Municipio</label>
-                                        <select name="Mnacimiento" id="Mnacimiento" class="txtMedia">
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findMunicipios();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
-                                                }
-                                            %>      
+                                        <select name="Mnacimiento" id="Mnacimiento" name="Mnacimiento" class="txtMedia">
+                                            <option value="">--Seleccione--</option>      
                                         </select>
                                     </div>
                                 </fieldset>
@@ -271,7 +265,7 @@
                                     </div>
                                     <div class="cols">   
                                         <label for="Ereside">Entidad</label>
-                                        <select name="Ereside" id="Ereside" class="txtMedia">
+                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia" onchange="llenaMun('#Ereside','#Mreside')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -283,14 +277,8 @@
                                     </div>
                                     <div class="cols"> 
                                         <label for="Mreside">Municipio</label>
-                                        <select name="Mreside" id="Mreside" class="txtMedia">
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findMunicipios();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
-                                                }
-                                            %>      
+                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia">
+                                            <option value="">--Seleccione--</option>      
                                         </select>
                                     </div>
 
@@ -405,7 +393,7 @@
                 <fieldset>
                     <legend>Medidas Protección</legend>
                     <label for="mProtect" class="lblExBig">¿Se le dictaron medidas de protección?</label>
-                    <select name="mProtect" id="mProtect" class="txtMedia">
+                    <select name="mProtect" id="mProtect" class="txtMedia" onchange="despliegaTabla('#mProtect','#MedidasPro')">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
@@ -414,7 +402,7 @@
                             }
                         %>  
                     </select>
-                    <table id="MedidasPro" class="tablasRegis">
+                    <table id="MedidasPro" class="tablasRegis" hidden>
                         <tr>
                             <th>ID</th>
                             <th>Tipo de medidas de protección</th>
@@ -432,13 +420,12 @@
                                 out.println("</tr>");
                             }
                         %>
-
                     </table>
                 </fieldset><br>
                 <fieldset>
                     <legend>Medidas de Protección Violencia Mujeres</legend>
                     <label for="mujProtect" class="lblExBig">¿Se le dictaron medidas de protección por delitos que impliquen violencia contra las mujeres?</label>
-                    <select name="mujProtect" id="mujProtect" class="txtMedia">
+                    <select name="mujProtect" id="mujProtect" class="txtMedia" onchange="despliegaTabla('#mujProtect','#MujPro')">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
@@ -447,7 +434,7 @@
                             }
                         %>  
                     </select>
-                    <table id="MujPro" class="tablasRegis">
+                    <table id="MujPro" class="tablasRegis" hidden>
                         <tr>
                             <th>ID</th>
                             <th>Tipo de medidas de protección por delitos que impliquen violencia contra las mujeres</th>

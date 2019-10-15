@@ -24,7 +24,7 @@
             <form action="" method="post">
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
-                    <table class="tablaFormu" border="0">
+                    <table class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="jClave">Juzgado Clave:</label>
@@ -45,59 +45,67 @@
                         </tr>
 
                         <tr>
+                            <td colspan="2">
+                                <fieldset>
+                                    <div class="cols">
+                                        <label for="compe">Organo Competente</label>
+                                        <select name="compe" id="compe" class="txtMedia">
+                                            <option value="0">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (int x = 0; x < 2; x++) {
+                                                    out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                                }
+                                            %>  
+                                        </select>
+                                    </div>
+                                    <div class="cols">
+                                        <label for="Tincompe">Tipo de incompetencia</label>
+                                        <select name="Tincompe" id="Tincompe" class="txtMedia">
+                                            <option value="0">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findIncompetencia();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>  
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </td>
+                            <td colspan="2">
+                                <fieldset>
+                                    <div class="cols">
+                                        <label for="ExpAcomu" >Expediente acumulado</label>
+                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia">
+                                            <option value="0">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (int x = 0; x < 2; x++) {
+                                                    out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                                }
+                                            %>  
+                                        </select>
+                                    </div>
+                                    <div class="cols">
+                                        <label for="ExpRefe">Expediente al que hace referencia</label>
+                                        <input type="text" name="ExpRefe" id="ExpRefe" required>
+                                    </div>
+                                </fieldset>
+                            </td>0
+                        </tr>             
+                        <tr>
                             <td>
-                                <label for="Pparticular" >¿La causa penal deriva de acción penal por particular?</label>
+                                <label for="Pparticular" class="lblExBig">¿La causa penal deriva de acción penal por particular?</label>
                                 <select name="Pparticular" id="Pparticular" class="txtMedia">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>"+ ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>  
-                                </select>
-                            </td>
-                            <td>
-                                <label for="compe">Organo Competente</label>
-                                <select name="compe" id="compe" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findResSimple();
-                                        for (int x = 0; x < 2; x++) {
-                                            out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
-                                        }
-                                    %>  
-                                </select>
-                            </td>
-                            <td>
-                                <label for="Tincompe">Tipo de incompetencia</label>
-                                <select name="Tincompe" id="Tincompe" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findIncompetencia();
-                                        for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>  
                                 </select>
-                            </td>
-                            <td>
-                                <label for="ExpAcomu" >Expediente acumulado</label>
-                                <select name="ExpAcomu" id="ExpAcomu" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findResSimple();
-                                        for (int x = 0; x < 2; x++) {
-                                            out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
-                                        }
-                                    %>  
-                                </select>
-                            </td>
-                        </tr>             
-                        <tr>
-                            <td>
-                                <label for="ExpRefe">Expediente al que hace referencia</label>
-                                <input type="text" name="ExpRefe" id="ExpRefe" required>
                             </td>
                             <td>
                                 <label for="Tprocedi" >Tipo de procedimiento</label>
@@ -151,10 +159,10 @@
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>"); %>
-                                <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" onChange="comprobar(this,'cantAudi<%out.print(ls[0]);%>');"/>
+                        <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" onChange="comprobar(this, 'cantAudi<%out.print(ls[0]);%>');"/>
                         <%      out.println("</td>");
-                                out.println("<td>"); %>
-                                <input type="number" disabled="true" name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall"/>
+                            out.println("<td>"); %>
+                        <input type="number" disabled="true" name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall"/>
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }

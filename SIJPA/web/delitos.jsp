@@ -29,12 +29,12 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>
-                                <select class="demo-default"  name="delitoCP" id="delitoCP" placeholder=" Selecciona el delito . . ." required>
+                                <select class="demo-default txtExBig"  name="delitoCP" id="delitoCP" placeholder="--Selecciona el delito--" required>
                                     <option value=""></option>
                                     <%
                                         lista = cat.findCodNorma();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -46,7 +46,7 @@
                                     <%
                                         lista = cat.findFuero();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -64,7 +64,7 @@
                                     <%
                                         lista = cat.findResSimple();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -78,7 +78,7 @@
                                     <%
                                         lista = cat.findDelNorma();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select> 
@@ -104,7 +104,7 @@
                                     <%
                                         lista = cat.findConsumacion();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -116,7 +116,7 @@
                                     <%
                                         lista = cat.findCalifDelito();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -128,7 +128,7 @@
                                     <%
                                         lista = cat.findConcurso();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -140,7 +140,7 @@
                                     <%
                                         lista = cat.findClasificacion();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -154,7 +154,7 @@
                                     <%
                                         lista = cat.findFormComision();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -166,7 +166,7 @@
                                     <%
                                         lista = cat.findFormAccion();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -178,7 +178,7 @@
                                     <%
                                         lista = cat.findModalidad();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -190,7 +190,7 @@
                                     <%
                                         lista = cat.findInstrComision();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -209,26 +209,20 @@
                                     <legend>Lugar de ocurrencia</legend>
                                     <div class="cols">
                                         <label>Entidad Federativa</label>
-                                        <select class="txtMedia" name="entidad" id="entidad">
+                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD','#municipioD')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>
                                         </select>
                                     </div>
                                     <div class="cols">
                                         <label class="lblExBig">Municipio/Demarcación territorial</label>
-                                        <select class="txtMedia" name="municipio" id="municipioD">
+                                        <select class="txtMedia" name="municipioD" id="municipioD">
                                             <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findMunicipios();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
-                                                }
-                                            %>
                                         </select>
                                     </div>
                                 </fieldset>

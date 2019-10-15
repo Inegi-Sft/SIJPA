@@ -59,7 +59,7 @@
                             </td>
                             <td>
                                 <label for="fGestion">Fecha inicio gestion:</label>
-                                <input type="date" class="txtMedia" name="fGestion" id="fGestion" />
+                                <input type="date" class="txtMedia" name="fGestion" id="fGestion" required/>
                                 <div class="noIdentificada">
                                     <input type="checkbox" name="chkFechaInicioG" id="chkFechaInicioG" onclick="fechaNoIdent('#chkFechaInicioG', '#fGestion');"><label>No identificada</label>
                                 </div>
@@ -115,7 +115,7 @@
                             <td></td>
                             <td>
                                 <label for="fOrganiza">Forma de Organizacion</label>
-                                <select class="txtMedia" name="fOrganiza" id="fOrganiza">
+                                <select class="txtMedia" name="fOrganiza" id="fOrganiza" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findForOrganiza();
@@ -153,7 +153,7 @@
                         <tr>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
-                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ','#municipioJ')">
+                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ','#municipioJ')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEntidades();
@@ -166,7 +166,7 @@
                             </td>
                             <td>
                                 <label for="vialidad">Vialidad</label>
-                                <select class="txtMedia" name="vialidad" id="vialidad">
+                                <select class="txtMedia" name="vialidad" id="vialidad" required>
                                     <option value="">--Seleccione--</option>
                                     <%                                        
                                         lista = cat.findVialidad();
@@ -178,7 +178,7 @@
                             </td>
                             <td>
                                 <label for="asentamiento">Asentamiento Humano</label>
-                                <select class="txtMedia" name="asentamiento" id="asentamiento">
+                                <select class="txtMedia" name="asentamiento" id="asentamiento" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findAsentHumano();
@@ -196,7 +196,7 @@
                         <tr>
                             <td>
                                 <label for="municipio">Municipio o Delegacion</label>
-                                <select class="txtMedia" name="municipioJ" id="municipioJ">
+                                <select class="txtMedia" name="municipioJ" id="municipioJ" required>
                                     <option value="">--Seleccione--</option>
                                 </select>
                             </td>

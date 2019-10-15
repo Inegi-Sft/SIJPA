@@ -14,7 +14,7 @@
         <title>SIJPA::Procesados</title>
         <%@include file="librerias.jsp" %>
     </head>
-    <body style="zoom: .9;">
+    <body style="zoom: .85;">
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
@@ -30,29 +30,33 @@
                     <legend>Situación jurídica del adolescente</legend>
                     <table class="tablaFormu">
                         <tr>
-                            <td>
-                                <label for="presentacionAdo">Tipo presentacion adolescente</label>
-                                <select class="txtMedia"  name="presentacionAdo" id="presentacionAdo" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findTipoConsigna();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>"+ ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="tipoDetencion">Tipo de detencion</label>
-                                <select class="txtMedia" name="tipoDetencion" id="tipoDetencion" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findTipoDetencion();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
-                                </select>
+                            <td colspan="2">
+                                <fieldset>
+                                    <div class="cols">
+                                        <label for="presentAdo">Tipo presentacion adolescente</label>
+                                        <select class="txtMedia"  name="presentAdo" id="presentAdo" required onchange="respuestaSimpleSelect('#presentAdo', '#dTipoDetencion', '#tipoDetencion');">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findTipoConsigna();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols oculto" id="dTipoDetencion">
+                                        <label for="tipoDetencion">Tipo de detencion</label>
+                                        <select class="txtMedia" name="tipoDetencion" id="tipoDetencion" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findTipoDetencion();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
                                 <label for="imputable">Imputabilidad</label>
@@ -205,7 +209,7 @@
                                 <label for="fNacimiento">Fecha nacimiento</label>
                                 <input type="date" class="txtMedia" name="fNacimiento" id="fNacimiento" />
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechaNac"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechaNac" onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento');"><label>No identificada</label>
                                 </div>
                             </td>
                             <td></td>
@@ -216,7 +220,7 @@
                                     <legend>Lugar de nacimiento</legend>
                                     <div class="cols">
                                         <label for="nPais">Pais</label>
-                                        <select class="txtMedia" name="nPais" id="nPais">
+                                        <select class="txtMedia" name="nPais" id="nPais" required onchange="lugarNacimiento('#nPais', '#dNEntidad', '#dNMunicipio', '#nEntidad', '#nMunicipio');">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
@@ -226,9 +230,9 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols">
+                                    <div class="cols oculto" id="dNEntidad">
                                         <label for="nEntidad">Entidad</label>
-                                        <select class="txtMedia" name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad','#nMunicipio')">
+                                        <select class="txtMedia" name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -238,9 +242,9 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols">
+                                    <div class="cols oculto" id="dNMunicipio">
                                         <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
-                                        <select class="txtMedia" name="nMunicipio" id="nMunicipio" placeholder="Seleccione el municipio. . .">
+                                        <select class="txtMedia" name="nMunicipio" id="nMunicipio" required>
                                             <option value="">--Seleccione--</option>
                                         </select>
                                     </div>
@@ -265,31 +269,31 @@
                                     <legend>Lugar habitual de residencia</legend>
                                     <div class="cols">
                                         <label for="residencia">Lugar de residencia</label>
-                                        <select class="txtMedia" name="residencia" id="residencia">
+                                        <select class="txtMedia" name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#rEntidad', '#rMunicipio');" required >
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista=cat.findResidencia();
+                                                lista = cat.findResidencia();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols">
+                                    <div class="cols oculto" id="dREntidad">
                                         <label for="rEntidad">Entidad</label>
-                                        <select class="txtMedia" name="rEntidad" id="rEntidad" onchange="llenaMun('#rEntidad','#rMunicipio')">
+                                        <select class="txtMedia" name="rEntidad" id="rEntidad" onchange="llenaMun('#rEntidad', '#rMunicipio')" required>
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista=cat.findEntidades();
+                                                lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols">
+                                    <div class="cols oculto" id="dRMunicipio">
                                         <label for="rMunicipio">Municipio</label>
-                                        <select class="txtMedia" name="rMunicipio" id="rMunicipio" placeholder="Seleccione el municipio. . .">
+                                        <select class="txtMedia" name="rMunicipio" id="rMunicipio" required>
                                             <option value="">--Seleccione--</option>
                                         </select>
                                     </div>
@@ -300,9 +304,9 @@
                                 <select class="txtMedia" name="edoCivil" id="edoCivil">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findEdoCivil();
+                                        lista = cat.findEdoCivil();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -314,9 +318,9 @@
                                 <select class="txtMedia" name="discapacidad" id="discapacidad">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findResSimple();
+                                        lista = cat.findResSimple();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select> 
@@ -326,9 +330,9 @@
                                 <select class="txtMedia" name="alfabet" id="alfabet">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findAlfabetismo();
+                                        lista = cat.findAlfabetismo();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -338,9 +342,9 @@
                                 <select class="txtMedia" name="estudios" id="estudios">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findGEstudios();
+                                        lista = cat.findGEstudios();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -350,9 +354,9 @@
                                 <select class="txtMedia" name="condiEstudiante" id="condiEstudiante">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findCondEstudiante();
+                                        lista = cat.findCondEstudiante();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -364,88 +368,100 @@
                                 <select class="txtMedia" name="hablaEsp" id="hablaEsp">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista=cat.findDomEspanol();
+                                        lista = cat.findDomEspanol();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
                             </td>
-                            <td>
-                                <label for="poblaIndigena">¿Pertenece a alguna población indígena?</label>
-                                <select class="txtMedia" name="poblaIndigena" id="poblaIndigena">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findResSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="puebloIndigena">Tipo de pueblo indígena</label>
-                                <select class="txtMedia" name="puebloIndigena" id="puebloIndigena">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findPIndigena();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="hablaIndigena">¿Habla lengua indígena o dialecto?</label>
-                                <select class="txtMedia" name="hablaIndigena" id="hablaIndigena">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findResSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="lenguaIndigena">Familia lingüística</label>
-                                <select class="txtMedia" name="lenguaIndigena" id="lenguaIndigena">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findLinguisticas();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="ocupacion">Ocupación</label>
-                                <select class="txtMedia" name="ocupacion" id="ocupacion">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findOcupacion();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="condicionActi">Condicion de Actividad</label>
-                                <select class="txtMedia" name="condicionActi" id="condicionActi">
-                                    <option value="0">--Seleccione--</option>
-                                    <%
-                                        lista=cat.findCondActividad();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>" +ls[0]+ ".- " +ls[1]+"</option>");
-                                        }
-                                    %>
-                                </select>
+                            <td colspan="2">
+                                <fieldset>
+                                    <div class="cols lblExBig">
+                                        <label for="poblaIndigena" class="lblExBig">¿Pertenece a alguna población indígena?</label>
+                                        <select class="txtMedia" name="poblaIndigena" id="poblaIndigena" onchange="respuestaSimpleSelect('#poblaIndigena', '#dPuebloIndigena', '#puebloIndigena');" required="">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols oculto" id="dPuebloIndigena">
+                                        <label for="puebloIndigena">Tipo de pueblo indígena</label>
+                                        <select class="txtMedia" name="puebloIndigena" id="puebloIndigena">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findPIndigena();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                </fieldset>
                             </td>
                             <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <fieldset>
+                                    <div class="cols lblExBig">
+                                        <label for="hablaIndigena" class="lblExBig">¿Habla lengua indígena o dialecto?</label>
+                                        <select class="txtMedia" name="hablaIndigena" id="hablaIndigena" onchange="respuestaSimpleSelect('#hablaIndigena','#dLenguaIndigena','#lenguaIndigena');">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols lblExBig oculto" id="dLenguaIndigena">
+                                        <label for="lenguaIndigena">Familia lingüística</label>
+                                        <select class="txtMedia" name="lenguaIndigena" id="lenguaIndigena">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findLinguisticas();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </td>
+                            <td colspan="2">
+                                <fieldset>
+                                    <div class="cols lblExBig">
+                                        <label for="ocupacion">Ocupación</label>
+                                        <select class="txtMedia" name="ocupacion" id="ocupacion" onchange="ocupacionAdo('#ocupacion','#dCondicionActi','#condicionActi');">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findOcupacion();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="cols lblExBig oculto" id="dCondicionActi">
+                                        <label for="condicionActi">Condicion de Actividad</label>
+                                        <select class="txtMedia" name="condicionActi" id="condicionActi">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findCondActividad();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </td>
                         </tr>
                     </table>
                 </fieldset>

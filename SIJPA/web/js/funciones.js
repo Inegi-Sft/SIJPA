@@ -17,6 +17,7 @@ $(document).ready(function () {
             }
         }
     });
+
     //Auto acompletado
     $('#delitoCP').selectize();
     //$('#municipioD').selectize();
@@ -25,12 +26,17 @@ $(document).ready(function () {
     //$('#rMunicipio').selectize();
     //$('#Mnacimiento').selectize();
     //$('#Mreside').selectize();
-    /******************** Funciones para Etapa Intermedia***************************/
 
 });
 /********************FUNCIONES ETAPA INTERMEDIA***************************/
 
 //Habilita text de Audiencias en Expedientes
+/***
+ * 
+ * @param {type} obj
+ * @param {type} idTxt
+ * @returns {undefined}
+ */
 function comprobar(obj, idTxt) {
     if (obj.checked)
         document.getElementById(idTxt).disabled = false;
@@ -75,6 +81,12 @@ function fechaNoIdent(idChk, idTxtDate) {
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
 
 /**************************FUNCION ETAPA INICIAL *****************************************/
+/***
+ * 
+ * @param {type} idChk
+ * @param {type} idTable
+ * @returns {undefined}
+ */
 function despliegaTabla(idChk, idTable) {
     if ($(idChk).val() !== '1') {
         $(idTable).fadeOut("slow");
@@ -107,6 +119,12 @@ function medidasCaute(idChk) {
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
 
 /*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
+/***
+ * 
+ * @param {type} idEnt
+ * @param {type} idMun
+ * @returns {undefined}
+ */
 function llenaMun(idEnt,idMun) {
     var enti = $(idEnt).val();
     if (enti !== '') {

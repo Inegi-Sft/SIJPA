@@ -37,8 +37,6 @@ $(document).ready(function () {
     $('.oculto').hide();
     $('.dependiente').val('-2');
     $('.depenFecha').val('1899-09-09');
-    //Auto acompletado
-    $('#delitoCP').selectize();
   
     /***************************** FUNCIONES JUZGADOS *******************************/
     //select forma de organizacion

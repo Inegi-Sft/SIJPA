@@ -17,6 +17,9 @@ $(document).ready(function () {
             }
         }
     });
+    
+    /**********************Tramite******************/
+    
 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
     $('.oculto').hide();

@@ -17,6 +17,21 @@ $(document).ready(function () {
             }
         }
     });
+    //Auto acompletado
+    $('#delitoCP').selectize({
+        render: {
+            option: function (data, escape) {
+                return '<div data-norma="' + data.norma + '">' + data.text + '</div>';
+            }
+        },
+        onChange: function (value) {
+            var vNorma = this.getOption(value).data('norma');
+            llenaNormaT(vNorma);
+        },
+        onBlur: function () {
+            this.clearCache();
+        }
+    });
 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
     $('.oculto').hide();
@@ -238,6 +253,28 @@ function impugna() {
         $('#personaImpugna').val('-2').prop("required", false);
     }
 }
+
+//llena el select de norma tecnica de acuerdo con el select codigo penal
+function llenaNormaT(vNorma) {
+    if (vNorma !== '') {
+        $.ajax({
+            url: "obtenNormaTec.jsp",
+            dataType: 'html',
+            type: "post",
+            data: {norma: vNorma},
+            success: function (response) {
+                console.log("Respuesta del servidor: ", response);
+            }
+        }).done(function (data) {
+            $('#delitoNT').html(data);
+        });
+    } else {
+        $('#delitoNT').empty().append("<option value='0'>--Seleccione--</option>");
+    }
+
+}
+/*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
+
 /*******************FIN DE FUNCIONES DE CONCLUSIONES**********************************/
 
 /*******************FUNCIONES DE EXPEDIENTES**********************************/

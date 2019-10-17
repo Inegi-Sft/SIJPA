@@ -38,12 +38,6 @@ $(document).ready(function () {
 
     //Auto acompletado
     $('#delitoCP').selectize();
-    //$('#municipioD').selectize();
-    //$('#municipioJ').selectize();
-    //$('#nMunicipio').selectize();
-    //$('#rMunicipio').selectize();
-    //$('#Mnacimiento').selectize();
-    //$('#Mreside').selectize();
   
     /***************************** FUNCIONES JUZGADOS *******************************/
     //select forma de organizacion
@@ -89,12 +83,6 @@ $(document).ready(function () {
 
 /***************************** PARA CAPTURA EXPEDIENTES *********************/
 //Habilita text de Audiencias en Expedientes
-/***
- * 
- * @param {type} obj
- * @param {type} idTxt
- * @returns {undefined}
- */
 function comprobar(obj, idTxt) {
     if (obj.checked)
         document.getElementById(idTxt).disabled = false;
@@ -130,12 +118,7 @@ function respuestaSelect(idSelect, idLabel, idResp) {
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
 
 /**************************FUNCION ETAPA INICIAL *****************************************/
-/***
- * 
- * @param {type} idChk
- * @param {type} idTable
- * @returns {undefined}
- */
+
 function despliegaTabla(idChk, idTable) {
     if ($(idChk).val() !== '1') {
         $(idTable).fadeOut("slow");
@@ -165,15 +148,19 @@ function medidasCaute(idChk) {
         }
     }
 }
-/*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
+function fechaEnProceso(idChk, idTxtDate) {
+    if ($(idChk).is(":checked")) {
+        $(idTxtDate).val("1699-09-09");
+        $(idTxtDate).prop("disabled", true);
+    } else {
+        $(idTxtDate).val("");
+        $(idTxtDate).prop("disabled", false);
+    }
+}
+/*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 /*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
-/***
- * 
- * @param {type} idEnt
- * @param {type} idMun
- * @returns {undefined}
- */
+
 function llenaMun(idEnt,idMun) {
     var enti = $(idEnt).val();
     if (enti !== '') {

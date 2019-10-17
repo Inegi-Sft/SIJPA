@@ -237,7 +237,7 @@ function ocupacionAdo(idSelect, idDiv, idSelOculta) {
 
 /***************************** FUNCIONES DELITOS *******************************/
 function respuestaSimpleFecha(idSelSimple, idDiv, idDateOculta) {
-    if ($(idSelSimple).val() == '1') {
+    if ($(idSelSimple).val() === '1') {
         $(idDiv).fadeIn("slow");
         $(idDateOculta).val("");
     } else {

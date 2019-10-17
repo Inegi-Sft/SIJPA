@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="cols oculto" id="idSobre" >
                                     <label for="tipoSobreseimto" >Tipo de sobreseimiento</label>
-                                    <select class="txtMedia" name="tipoSobreseimto" id="tipoSobreseimto"  required>
+                                    <select class="txtMedia dependiente" name="tipoSobreseimto" id="tipoSobreseimto">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findTipoSobrese();
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="cols oculto" id="proceSobre"  >
                                     <label for="proceSobreseimto">Procedencia del sobreseimiento</label>
-                                    <select class="txtMedia" name="proceSobreseimto" id="proceSobreseimto"  required>
+                                    <select class="txtMedia dependiente" name="proceSobreseimto" id="proceSobreseimto">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findSobreseimiento();
@@ -97,7 +97,7 @@
                             <td>
                                 <div class="cols oculto" id="dTipoMedidaPA" >
                                     <label for="tipoMedidaPA">Tipo de medida en el procedimiento abreviado</label>
-                                    <select class="txtMedia" name="tipoMedidaPA" id="tipoMedidaPA" onchange="respuestaSelectbis()" required hidden>
+                                    <select class="txtMedia dependiente" name="tipoMedidaPA" id="tipoMedidaPA" onchange="respuestaSelectbis()">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findProcAbreviado();
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="cols oculto" id="dTipoMedidaPL">
                                     <label for="tipoMedidaPL">Tipo de medidas privativa de la libertad</label>
-                                    <select class="txtMedia" name="tipoMedidaPL" id="tipoMedidaPL"  onchange="rInternamiento()" required>
+                                    <select class="txtMedia dependiente" name="tipoMedidaPL" id="tipoMedidaPL"  onchange="rInternamiento()" >
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findPrivLibertad();
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="cols oculto" id="dTipoMedidaNPL">
                                     <label for="tipoMedidaNPL" id="DtipoMedidaNPL">Tipo de medidas no privativa de la libertad</label>
-                                    <select class="txtMedia" name="tipoMedidaNPL" id="tipoMedidaNPL" required>
+                                    <select class="txtMedia dependiente" name="tipoMedidaNPL" id="tipoMedidaNPL" >
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findNoPrivacion();
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="cols oculto" id="Dinternamiento">
                                     <label for="internamiento">Tiempo en internamiento</label>
-                                    <select class="txtMedia" name="internamiento" id="internamiento" required>
+                                    <select class="txtMedia dependiente" name="internamiento" id="internamiento">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findTiempoInterna();
@@ -154,7 +154,7 @@
                             <td>
                                 <div class="cols">
                                     <label for="reparaDanio">¿Hubo reparación del daño?</label>
-                                    <select class="txtMedia" name="reparaDanio" id="reparaDanio" onchange="respuestaRepara()" required>
+                                    <select class="txtMedia" name="reparaDanio" id="reparaDanio" onchange="respuestaSelect('#reparaDanio', '#tipoRepara', '#tipoReparaD')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="cols oculto" id="tipoRepara" >
                                     <label for="tipoReparaD">Tipo de reparación del daño</label>
-                                    <select class="txtMedia" name="tipoReparaD" id="tipoReparaD" onchange="pagoCosa()" required>
+                                    <select class="txtMedia dependiente" name="tipoReparaD" id="tipoReparaD" onchange="pagoCosa()" >
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findRePDano();
@@ -178,7 +178,7 @@
                                 </div>
                                 <div class="cols oculto" id="montoRepara" >
                                     <label for="montoReparaD">Monto de la reparación impuesta</label>
-                                    <select class="txtMedia" name="montoReparaD" id="montoReparaD" required>
+                                    <select class="txtMedia dependiente" name="montoReparaD" id="montoReparaD">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findMulta();
@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="cols oculto" id="tipoImpugna">
                                     <label for="tipoImpugnacion">Tipo de impugnación</label>
-                                    <select class="txtMedia" name="tipoImpugnacion" id="tipoImpugnacion" required>
+                                    <select class="txtMedia dependiente" name="tipoImpugnacion" id="tipoImpugnacion">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findTipoImpugna();
@@ -223,14 +223,14 @@
                                 </div>
                                 <div class="cols oculto" id="fechaImpugna">
                                     <label for="fechaImpugnacion">Fecha de la impugnación </label>
-                                    <input type="date" name="fechaImpugnacion" id="fechaImpugnacion" required/>
+                                    <input type="date" name="fechaImpugnacion" id="fechaImpugnacion" class="depenFecha"/>
                                     <div class="noIdentificada">
                                         <input type="checkbox" id="chkFechaImpugnacion" onclick="fechaNoIdent('#chkFechaImpugnacion', '#fechaImpugnacion')"><label>No identificada</label>
                                     </div>
                                 </div>
                                 <div class="cols oculto" id="quienImpugna">
                                     <label for="personaImpugna">¿Por quién fue impugnada la resolución?</label>
-                                    <select class="txtMedia" name="personaImpugna" id="personaImpugna" required>
+                                    <select class="txtMedia dependiente" name="personaImpugna" id="personaImpugna">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findImpugResolucion();

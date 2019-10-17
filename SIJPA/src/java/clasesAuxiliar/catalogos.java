@@ -319,7 +319,7 @@ public class catalogos {
     public ArrayList findFormConduccion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_FORMA_CONDUCCION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_FORMA_CONDUCCION WHERE CONDUCCION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -431,7 +431,7 @@ public class catalogos {
     public ArrayList findIncompetencia() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_INCOMPETENCIA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_INCOMPETENCIA WHERE INCOMPETENCIA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -527,7 +527,7 @@ public class catalogos {
     public ArrayList findMediosPrueba() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA WHERE PRUEBA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

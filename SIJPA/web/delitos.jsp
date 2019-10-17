@@ -25,7 +25,7 @@
             <form action="" method="post">
                 <fieldset>
                     <legend>Identificación del tipo penal</legend>
-                    <table class="tablaFormu">
+                    <table class="tablaFormu" >
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>
@@ -57,17 +57,26 @@
                                 <label class="lblExBig" for="articuloCP">Artículo y/o fracción de acuerdo con el código penal</label>
                                 <input class="txtExBig" type="text"  name="articuloCP" id="articuloCP" required/>
                             </td>
-                            <td>
-                                <label for="reclasificaDel">¿Hubo reclasificación del delito?</label>
-                                <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findResSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
-                                </select>
+                            <td rowspan="2">
+                                <fieldset>
+                                    <label for="reclasificaDel">¿Hubo reclasificación del delito?</label>
+                                    <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel');">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %>
+                                    </select>
+                                    <div class="oculto" id="dFechaReclaDel">
+                                        <label for="fechaReclaDel">Fecha de reclasificacion del delito</label>
+                                        <input type="date" name="fechaReclaDel" id="fechaReclaDel"/>
+                                        <div class="noIdentificada">
+                                            <input type="checkbox" id="chkFechaReclaDel" onclick="fechaNoIdent('#chkFechaReclaDel', '#fechaReclaDel');"><label>No identificada</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </td>
                         </tr>
                         <tr>
@@ -82,13 +91,6 @@
                                         }
                                     %>
                                 </select> 
-                            </td>
-                            <td>
-                                <label for="fechaReclaDel">Fecha de reclasificacion del delito</label>
-                                <input type="date" name="fechaReclaDel" id="fechaReclaDel"/>
-                                <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechaReclaDel"><label>No identificada</label>
-                                </div>
                             </td>
                         </tr>
                     </table>
@@ -209,7 +211,7 @@
                                     <legend>Lugar de ocurrencia</legend>
                                     <div class="cols">
                                         <label>Entidad Federativa</label>
-                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD','#municipioD')">
+                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD', '#municipioD')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();

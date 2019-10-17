@@ -39,22 +39,51 @@ $(document).ready(function () {
     $('.depenFecha').val('1899-09-09');
     //Auto acompletado
     $('#delitoCP').selectize();
-    //$('#municipioD').selectize();
-    //$('#municipioJ').selectize();
-    //$('#nMunicipio').selectize();
-    //$('#rMunicipio').selectize();
-    //$('#Mnacimiento').selectize();
-    //$('#Mreside').selectize();
+  
+    /***************************** FUNCIONES JUZGADOS *******************************/
+    //select forma de organizacion
+    $("#fOrganiza").change(function () {
+        switch ($("#fOrganiza").val()) {
+            case '1':
+                $("#dRegJudicial").fadeIn("slow");
+                $("#regJudicial").val("");
+                $("#dDistJudicial").hide();
+                $("#distJudicial").val("-2");
+                $("#dPartJudicial").hide();
+                $("#partJudicial").val("-2");
+                break;
+            case '2':
+                $("#dRegJudicial").hide();
+                $("#regJudicial").val("-2");
+                $("#dDistJudicial").fadeIn("slow");
+                $("#distJudicial").val("");
+                $("#dPartJudicial").hide();
+                $("#partJudicial").val("-2");
+                break;
+            case '3':
+                $("#dRegJudicial").hide();
+                $("#regJudicial").val("-2");
+                $("#dDistJudicial").hide();
+                $("#distJudicial").val("-2");
+                $("#dPartJudicial").fadeIn("slow");
+                $("#partJudicial").val("");
+                break;
+        }
+        if ($("#fOrganiza").val() > 3 || $("#fOrganiza").val() == "") {
+            $("#dRegJudicial").fadeOut("slow");
+            $("#regJudicial").val("-2");
+            $("#dDistJudicial").fadeOut("slow");
+            $("#distJudicial").val("-2");
+            $("#dPartJudicial").fadeOut("slow");
+            $("#partJudicial").val("-2");
+        }
+    });
+    /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
+
 });
 
 /***************************** PARA CAPTURA EXPEDIENTES *********************/
 //Habilita text de Audiencias en Expedientes
-/***
- * 
- * @param {type} obj
- * @param {type} idTxt
- * @returns {undefined}
- */
 function comprobar(obj, idTxt) {
     if (obj.checked) {
         document.getElementById(idTxt).disabled = false;
@@ -124,12 +153,7 @@ function fechaNoIdent(idChk, idTxtDate) {
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
 
 /**************************FUNCION ETAPA INICIAL *****************************************/
-/***
- * 
- * @param {type} idChk
- * @param {type} idTable
- * @returns {undefined}
- */
+
 function despliegaTabla(idChk, idTable) {
     if ($(idChk).val() === '1') {
         $(idTable).fadeIn("slow");
@@ -157,16 +181,20 @@ function medidasCaute(idChk) {
     } else {
         return true;
     }
-};
+}
+function fechaEnProceso(idChk, idTxtDate) {
+    if ($(idChk).is(":checked")) {
+        $(idTxtDate).val("1699-09-09");
+        $(idTxtDate).prop("disabled", true);
+    } else {
+        $(idTxtDate).val("");
+        $(idTxtDate).prop("disabled", false);
+    }
+}
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 /*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
-/***
- * 
- * @param {type} idEnt
- * @param {type} idMun
- * @returns {undefined}
- */
+
 function llenaMun(idEnt,idMun) {
     var enti = $(idEnt).val();
     if (enti !== '') {

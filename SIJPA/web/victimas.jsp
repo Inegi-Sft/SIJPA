@@ -22,123 +22,46 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Víctimas</h1>
-            <form action="#" method="post">
+            <form action="" method="post" id="victimasF">
                 <fieldset>
                     <legend>Caracteristicas Generales</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="victima_clave">Víctima Clave</label>
-                                <input type="text" name="victima_clave" id="victima_clave" required />
+                                <div class="cols">
+                                    <label for="victima_clave">Víctima Clave</label>
+                                    <input type="text" name="victima_clave" id="victima_clave" required />
+                                </div>
+                                <div class="cols">
+                                    <label for="tipo_victima">Tipo de Víctima</label>
+                                    <select name="tipo_victima" id="tipo_victima" class="txtMedia"  required>
+                                        <option value="">--Seleccione--</option>
+                                        <option value="1">1.- Persona física</option>
+                                        <option value="2">2.- Persona moral</option>
+                                        <optgroup label="Otro tipo de víctima">
+                                            <option value="3">3.- Sociedad</option>
+                                            <option value="4">4.- Estado</option>
+                                            <option value="5">5.- Otro</option>
+                                            <option value="9">9.- No identificado</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="tipoMoral">
+                                    <label for="tvic_moral">Tipo de Víctima Moral</label>
+                                    <select name="tvic_moral" id="tvic_moral" class="txtMedia dependiente">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findVicMoral();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %>    
+                                    </select>
+                                </div>
                             </td>
-                            <td>
-                                <label for="tipo_victima">Tipo de Víctima</label>
-                                <select name="tipo_victima" id="tipo_victima" class="txtMedia"  required="">
-                                    <option value="">--Seleccione--</option>
-                                    <option value="1">1.- Persona física</option>
-                                    <option value="2">2.- Persona moral</option>
-                                    <optgroup label="Otro tipo de víctima">
-                                        <option value="3">3.- Sociedad</option>
-                                        <option value="4">4.- Estado</option>
-                                        <option value="5">5.- Otro</option>
-                                        <option value="9">9.- No identificado</option>
-                                    </optgroup>
-                                </select>
-                            </td>    
-                            <td>
-                                <label for="tvic_moral">Tipo de Víctima Moral</label>
-                                <select name="tvic_moral" id="tvic_moral" class="txtMedia">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findAlfabetismo();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>    
-                                </select>
-                            </td>
-                            <td>
-                                <label for="sexo">Sexo</label>
-                                <select name="sexo" id="sexo" class="txtMedia">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findSexo();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>    
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="fnacimiento">Fecha de Nacimiento</label>
-                                <input type="date" name="fnacimiento" id="fnacimiento" class="txtMedia" required>
-                            </td>
-                            <td>
-                                <label for="edad">Edad</label>
-                                <input type="number" name="edad" id="edad" class="txtSelect">
-                            </td>
-                            <td>
-                                <label for="tvic_moral">Condición de vulnerabilidad</label>
-                                <select name="vulnera" id="vulnera" class="txtMedia">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findVulnerabilidad();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>   
-                                </select>
-                            </td>  
-                            <td>
-                                <label for="naciona">Nacionalidad</label>
-                                <select name="naciona" id="naciona" class="txtMedia txtMedia">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findNacionalidad();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>     
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" >
-                                <fieldset>
-                                    <legend>Defensa</legend>
-                                    <div class="cols">
-                                        <label for="Con_Asesor">¿Contó con asesor jurídico?</label>
-                                        <select name="Con_Asesor" id="Con_Asesor" class="txtMedia">
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findResSimple();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
-                                            %>      
-                                        </select>
-                                    </div>
-                                    <div class="cols">
-                                        <label for="Asesor">Asesor Jurídico</label>
-                                        <select name="Asesor" id="Asesor" class="txtMedia">
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findTipoDefensor();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
-                                            %>        
-                                        </select>
-                                    </div>
-                                </fieldset>
-                            </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </table>
-                </fieldset><br/>
+                </fieldset>
                 <fieldset>
                     <legend >Delitos cometidos a la víctima</legend>
                     <table class="tablasRegis">
@@ -164,7 +87,33 @@
                         </tr>
                     </table>
                 </fieldset>
-                <br/>
+                <fieldset>
+                    <legend>Defensa</legend>
+                    <div class="cols">
+                        <label for="con_asesor">¿Contó con Asesor Jurídico?</label>
+                        <select name="con_asesor" id="con_asesor" class="txtMedia" required>
+                            <option value="">--Seleccione--</option>
+                            <%
+                                lista = cat.findResSimple();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %>      
+                        </select>
+                    </div>
+                    <div class="cols oculto" id="asesorJuri">
+                        <label for="asesor">Asesor Jurídico</label>
+                        <select name="asesor" id="asesor" class="txtMedia dependiente">
+                            <option value="">--Seleccione--</option>
+                            <%
+                                lista = cat.findTipoDefensor();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %>        
+                        </select>
+                    </div>
+                </fieldset>
                 <fieldset>
                     <legend>Relación de la Victima con el Procesado</legend>
                     <table class="tablasRegis">
@@ -185,7 +134,7 @@
                                     lista = cat.findRelImputado();
                                     for (String[] ls : lista) {
                                         out.println("<div class='chkCat'>");
-                                        out.println("<input type='checkbox' id='chkFechaReclaDel'>");
+                                        out.println("<input type='checkbox' name='chkFechaReclaDel' id='chkFechaReclaDel'>");
                                         out.println("<label>" + ls[1] + "</label>");
                                         out.println("</div>");
                                     }
@@ -194,17 +143,54 @@
                         </tr>
                     </table>
                 </fieldset>
-                <br/>
-                <fieldset>
-                    <legend>Características especificas para víctimas personas físicas</legend> 
+                <fieldset class="oculto" id="victiFisicas">
+                    <legend>Características especificas para víctimas personas físicas</legend>
                     <table class="tablaFormu">
+                        <tr>
+                            <td>
+                                <label for="sexo">Sexo</label>
+                                <select name="sexo" id="sexo" class="txtMedia">
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findSexo();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td>
+                                <label for="fnacimiento">Fecha de Nacimiento</label>
+                                <input type="date" name="fnacimiento" id="fnacimiento" class="txtMedia depenFecha">
+                                <div class="noIdentificada" id="chkFechaCtrlDeten">
+                                    <input type="checkbox" id="chkVictFisica" onchange="fechaNoIdent('#chkVictFisica', '#fnacimiento')">
+                                    <label>No identificada</label>
+                                </div>
+                            </td>
+                            <td>
+                                <label for="edad">Edad</label>
+                                <input type="number" name="edad" id="edad" class="txtMedia">
+                            </td>
+                            <td>
+                                <label for="tvic_moral">Condición de vulnerabilidad</label>
+                                <select name="vulnera" id="vulnera" class="txtMedia">
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findVulnerabilidad();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %>   
+                                </select>
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="3">
                                 <fieldset>
                                     <legend>Lugar de nacimiento</legend>
-                                    <div class="cols">
+                                    <div class="cols" id="paisNaci">
                                         <label for="Pnacimiento">País</label>
-                                        <select name="Pnacimiento" id="Pnacimiento" class="txtMedia txtMedia">
+                                        <select name="Pnacimiento" id="Pnacimiento" class="txtMedia">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
@@ -214,9 +200,9 @@
                                             %>  
                                         </select>
                                     </div>
-                                    <div class="cols">       
+                                    <div class="cols oculto" id="estaNaci">       
                                         <label for="Enacimiento">Entidad</label>
-                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia" onchange="llenaMun('#Enacimiento','#Mnacimiento')">
+                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia" onchange="llenaMun('#Enacimiento', '#Mnacimiento')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -226,9 +212,58 @@
                                             %>     
                                         </select>
                                     </div>
-                                    <div class="cols"> 
+                                    <div class="cols oculto" id="munNaci"> 
                                         <label for="Mnacimiento">Municipio</label>
                                         <select name="Mnacimiento" id="Mnacimiento" name="Mnacimiento" class="txtMedia">
+                                            <option value="">--Seleccione--</option>      
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </td>
+                            <td>
+                                <label for="naciona">Nacionalidad</label>
+                                <select name="naciona" id="naciona" class="txtMedia">
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findNacionalidad();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %>     
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <fieldset>
+                                    <legend>Lugar habitual de residencia</legend>
+                                    <div class="cols" id="paisResi"> 
+                                        <label for="Preside">País</label>
+                                        <select name="Preside" id="Preside" class="txtMedia">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findPais();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>    
+                                        </select>
+                                    </div>
+                                    <div class="cols oculto" id="estaResi">   
+                                        <label for="Ereside">Entidad</label>
+                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia" onchange="llenaMun('#Ereside', '#Mreside')">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findEntidades();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>      
+                                        </select>
+                                    </div>
+                                    <div class="cols oculto" id="munResi"> 
+                                        <label for="Mreside">Municipio</label>
+                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia">
                                             <option value="">--Seleccione--</option>      
                                         </select>
                                     </div>
@@ -248,42 +283,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
-                                <fieldset>
-                                    <legend>Lugar habitual de residencia</legend>
-                                    <div class="cols"> 
-                                        <label for="Preside">País</label>
-                                        <select name="Preside" id="Preside" class="txtMedia">
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findPais();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
-                                            %>    
-                                        </select>
-                                    </div>
-                                    <div class="cols">   
-                                        <label for="Ereside">Entidad</label>
-                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia" onchange="llenaMun('#Ereside','#Mreside')">
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findEntidades();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
-                                            %>      
-                                        </select>
-                                    </div>
-                                    <div class="cols"> 
-                                        <label for="Mreside">Municipio</label>
-                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia">
-                                            <option value="">--Seleccione--</option>      
-                                        </select>
-                                    </div>
-
-                                </fieldset>
-                            </td>
                             <td>
                                 <label for="discapacidad">¿Cuenta con alguna condición de discapacidad?</label>
                                 <select name="discapacidad" id="discapacidad" class="txtMedia">
@@ -296,8 +295,6 @@
                                     %>   
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <label for="alfabetismo">Condición de alfabetismo</label>
                                 <select name="alfabetismo" id="alfabetismo" class="txtMedia">
@@ -310,7 +307,6 @@
                                     %>  
                                 </select>
                             </td>
-
                             <td>
                                 <label for="estudios">Grado de estudios </label>
                                 <select name="estudios" id="estudios" class="txtMedia">
@@ -335,6 +331,8 @@
                                     %> 
                                 </select>
                             </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <label for="hablaesp">Dominio del español</label>
                                 <select name="hablaesp" id="hablaesp" class="txtMedia">
@@ -347,31 +345,33 @@
                                     %> 
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="indigena">Habla lengua indígena o dialecto </label>
-                                <select name="indigena" id="indigena" class="txtMedia">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findResSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %> 
-                                </select>
-                            </td>
-                            <td>
-                                <label for="familia"> Familia lingüísticas</label>
-                                <select name="familia" id="familia" class="txtMedia">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findPIndigena();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>   
-                                </select>
+                            <td colspan="2">
+                                <fieldset>
+                                    <div class="cols">
+                                        <label for="indigena">Habla lengua indígena o dialecto </label>
+                                        <select name="indigena" id="indigena" class="txtMedia">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %> 
+                                        </select>
+                                    </div>
+                                    <div class="cols oculto" id="famLingui">
+                                        <label for="familia"> Familia lingüísticas</label>
+                                        <select name="familia" id="familia" class="txtMedia">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findPIndigena();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>   
+                                        </select>
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
                                 <label for="ocupa">Ocupación</label>
@@ -385,15 +385,13 @@
                                     %>   
                                 </select>
                             </td>
-                            <td>
-                            </td>
                         </tr>
-                    </table> 
-                </fieldset><br>
-                <fieldset>
+                    </table>
+                </fieldset>
+                <fieldset class="oculto" id="mediProtec">
                     <legend>Medidas Protección</legend>
                     <label for="mProtect" class="lblExBig">¿Se le dictaron medidas de protección?</label>
-                    <select name="mProtect" id="mProtect" class="txtMedia" onchange="despliegaTabla('#mProtect','#MedidasPro')">
+                    <select name="mProtect" id="mProtect" class="txtMedia" onchange="despliegaTabla('#mProtect', '#MedidasPro')">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
@@ -415,17 +413,17 @@
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>"); %>
-                                    <input type="checkbox" name="aplicaMedida" id="aplicaMedida<%out.print(ls[0]);%>" />
+                        <input type="checkbox" name="aplicaMedida" id="aplicaMedida" />
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }
                         %>
                     </table>
-                </fieldset><br>
-                <fieldset>
+                </fieldset>
+                <fieldset class="oculto" id="mediProtecMuj">
                     <legend>Medidas de Protección Violencia Mujeres</legend>
                     <label for="mujProtect" class="lblExBig">¿Se le dictaron medidas de protección por delitos que impliquen violencia contra las mujeres?</label>
-                    <select name="mujProtect" id="mujProtect" class="txtMedia" onchange="despliegaTabla('#mujProtect','#MujPro')">
+                    <select name="mujProtect" id="mujProtect" class="txtMedia" onchange="despliegaTabla('#mujProtect', '#MujPro')">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
@@ -447,7 +445,7 @@
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>"); %>
-                                    <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj<%out.print(ls[0]);%>" />
+                        <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj" />
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }
@@ -458,9 +456,8 @@
                     <h2>Comentarios</h2>
                     <textarea name="Comentavic" id="Comentavic"></textarea>
                 </div>
-                <br>
                 <input type="submit" name="guardarvic" id="guardarvic" value="Guardar Víctima">
             </form>
-        </section>    
+        </section>
     </body>
 </html>

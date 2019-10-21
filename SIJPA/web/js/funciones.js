@@ -28,8 +28,6 @@ $(document).ready(function () {
 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
     $('.oculto').hide();
-    $('.dependiente').val('-2');
-    $('.depenFecha').val('1899-09-09');
   
     /***************************** FUNCIONES JUZGADOS *******************************/
     //select forma de organizacion

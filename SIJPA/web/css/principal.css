@@ -255,6 +255,12 @@ fieldset legend{
     vertical-align: text-top;
 }
 
+.contenedor input[type="radio"]{
+    width:19px;
+    height:19px;
+    margin: 0 4px 0 0;
+    border: none;
+}
 .contenedor input[type="checkbox"]{
     width:19px;
     height:19px;

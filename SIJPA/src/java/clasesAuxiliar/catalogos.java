@@ -111,11 +111,11 @@ public class catalogos {
     public ArrayList findCodNorma() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CODIGO_NORMA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_CODIGO_NORMA WHERE ID NOT IN (129,151,189,255,351,380,516) ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+                lista.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -188,10 +188,10 @@ public class catalogos {
         return lista;
     }
 
-    public ArrayList findDelNorma() {
+    public ArrayList findDelNorma(int id) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_DELITOS_NORMA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_DELITOS_NORMA WHERE ID="+id;
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -319,7 +319,7 @@ public class catalogos {
     public ArrayList findFormConduccion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_FORMA_CONDUCCION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_FORMA_CONDUCCION WHERE CONDUCCION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -431,7 +431,7 @@ public class catalogos {
     public ArrayList findIncompetencia() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_INCOMPETENCIA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_INCOMPETENCIA WHERE INCOMPETENCIA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -527,7 +527,7 @@ public class catalogos {
     public ArrayList findMediosPrueba() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA WHERE PRUEBA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

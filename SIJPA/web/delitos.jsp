@@ -41,7 +41,7 @@
                             </td>
                             <td>
                                 <label for="fuero">Fuero</label>
-                                <select class="txtMedia"  name="fuero" id="fuero">
+                                <select class="txtMedia"  name="fuero" id="fuero" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findFuero();
@@ -60,7 +60,7 @@
                             <td rowspan="2">
                                 <fieldset>
                                     <label for="reclasificaDel">¿Hubo reclasificación del delito?</label>
-                                    <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel');">
+                                    <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel','#chkFechaReclaDel');" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -205,7 +205,7 @@
                                     <legend>Lugar de ocurrencia</legend>
                                     <div class="cols lblExBig">
                                         <label>Entidad Federativa</label>
-                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaNormaT('entidadD',)">
+                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD','#municipioD')" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -217,7 +217,7 @@
                                     </div>
                                     <div class="cols lblExBig">
                                         <label class="lblExBig">Municipio/Demarcación territorial</label>
-                                        <select class="txtMedia" name="municipioD" id="municipioD">
+                                        <select class="txtMedia" name="municipioD" id="municipioD" required>
                                             <option value="">--Seleccione--</option>
                                         </select>
                                     </div>

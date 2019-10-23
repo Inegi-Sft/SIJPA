@@ -22,10 +22,7 @@ public class Conexion_Mysql {
      
     public Connection getConexion() { 
         return conexion; 
-    }    
-    public void setConexion(Connection conexion) { 
-        this.conexion = conexion; 
-    }  
+    } 
     
     public boolean Conectar() { 
         try { 
@@ -55,7 +52,7 @@ public class Conexion_Mysql {
             sentencia.executeUpdate(sql); 
             getConexion().commit(); 
             sentencia.close();
-             
+            close();
         } catch (SQLException e) { 
             System.out.print("ERROR SQL"); 
             return false; 

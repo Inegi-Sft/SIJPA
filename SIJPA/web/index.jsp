@@ -4,7 +4,14 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="clasesAuxiliar.comprubaUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    comprubaUsuario comUsu = new comprubaUsuario();
+    if(comUsu.findUsuario()){
+        response.sendRedirect("datosGral.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +19,12 @@
         <title>SIJPA::Bienvenida</title>
         <%@include file="librerias.jsp" %>
     </head>
-    <body>
+    <body onload="splashIn()">
+        <%
+            if(request.getParameter("errorbd") != null){
+                out.println("<script>alert('Error con la Base de Datos, favor de chacarlo')</script>");
+            }
+        %>
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
             <h1>BIENVENIDOS A SIJPA</h1>
@@ -36,9 +48,12 @@
                 de proporcionar la información básica que hubieren obtenido en el ejercicio de sus funciones y sirva para generar Nacional, que les 
                 solicite el Instituto..."
             </p>
-            <form action="datosGral.jsp" method="post">
+            <form action="insrtUsuario" method="post">
                 <input type="submit" name="aceptar" id="aceptar" value="Acepto">
             </form>
         </section>
+        <div id="splash">
+            <img src="img/logo_sijpa.png">
+        </div>
     </body>
 </html>

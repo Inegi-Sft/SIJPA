@@ -1,12 +1,5 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/* global selecChk */
-
 $(document).ready(function () {
-//despliega ventana modal
+    //despliega ventana modal
     $('.pop').fancybox({
         'type': 'iframe',
         'overlayShow': true,
@@ -35,9 +28,6 @@ $(document).ready(function () {
 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
     $('.oculto').hide();
-
-    //Auto acompletado
-    $('#delitoCP').selectize();
   
     /***************************** FUNCIONES JUZGADOS *******************************/
     //select forma de organizacion
@@ -91,58 +81,208 @@ $(document).ready(function () {
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
 
+    /*---------------------------- VICTIMAS ----------------------------*/
+    $('#tipo_victima').change(function () {
+        switch ($(this).val()) {
+            case '1':
+                $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
+                $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
+                break;
+            case '2':
+                $('#mediProtec').fadeIn('slow');
+                $('#mProtect').val('').prop('required', true);
+
+                $('#victiFisicas, #mediProtecMuj').fadeOut('slow');
+                $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mujProtect').val('').prop('required', false);
+                break;
+            default:
+                $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
+                $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
+                break;
+        }
+    });
+
+    $('#Pnacimiento').change(function () {
+        if ($(this).val() === '1') {
+            $('#estaNaci, #munNaci').fadeIn('slow');
+            $('#Enacimiento, #Mnacimiento').val('').prop('required', true);
+        } else {
+            $('#estaNaci, #munNaci').fadeOut('slow');
+            $('#Enacimiento, #Mnacimiento').val().prop('required', true);
+        }
+    });
+
+    $('#Preside').change(function () {
+        if ($(this).val() === '1') {
+            $('#estaResi, #munResi').fadeIn('slow');
+            $('#Ereside, #Mreside').val('').prop('required', true);
+        } else {
+            $('#estaResi, #munResi').fadeOut('slow');
+            $('#Ereside, #Mreside').val().prop('required', true);
+        }
+    });
+
+    $('#indigena').change(function () {
+        if ($(this).val() === '1') {
+            $('#famLingui').fadeIn('slow');
+            $('#familia').val('').prop('required', true);
+        } else {
+            $('#famLingui').fadeOut('slow');
+            $('#familia').val('').prop('required', false);
+        }
+    });
+
+    $('#con_asesor').change(function () {
+        if ($(this).val() === '1') {
+            $('#asesorJuri').fadeIn('slow');
+            $('#asesor').val('').prop('required', true);
+        } else {
+            $('#asesorJuri').fadeOut('slow');
+            $('#asesor').val('').prop('required', false);
+        }
+    });
+
+    $('#victimasF').submit(function (e) {
+        if ($('#chkFechaReclaDel:checked').length === 0) {
+            e.preventDefault();
+            alert('Selecciona al menos una opcion de Tipo de Relacion Victima con Procesado');
+            $('#chkFechaReclaDel').focus();
+        }
+        
+        if ($('#mProtect').val() === '1') {
+            if ($('#aplicaMedida:checked').length === 0) {
+                e.preventDefault();
+                alert('Selecciona al menos una opcion de Medidas de Proteción');
+                $('#mProtect').focus();
+            }
+        }
+        
+        if ($('#mujProtect').val() === '1') {
+            if ($('#aplicaMedidaMuj:checked').length === 0) {
+                e.preventDefault();
+                alert('Selecciona al menos una opcion de Medidas de Proteción contra Mujeres');
+                $('#mujProtect').focus();
+            }
+        }
+    });
+    /*---------------------------- FIN VICTIMAS ----------------------------*/
 });
+
+/********************splash del inicio del sistema***********************/
+function splashIn(){
+    //despliega splash screen al principio del sistema
+    $('body').css('overflow','hidden');
+    setTimeout(function (){
+        $('body').css('overflow','auto');
+    },4500);
+    $('#splash').delay(4000).slideUp('slow');
+    //termina splash screen
+};
+/******************** fin splash del inicio del sistema***********************/
 
 /***************************** PARA CAPTURA EXPEDIENTES *********************/
 //Habilita text de Audiencias en Expedientes
+/***
+ * @param {type} obj
+ * @param {type} idTxt
+ * @returns {undefined}
+ */
 function comprobar(obj, idTxt) {
-    if (obj.checked)
+    if (obj.checked) {
         document.getElementById(idTxt).disabled = false;
-    else
+    }else {
         document.getElementById(idTxt).disabled = true;
-}
+    }
+};
+/*****************************FIN PARA CAPTURA EXPEDIENTES *********************/
 
 /******************************FUNCIONES ETAPA INTERMEDIA***************************/
 //Respuestas simples y fechas con NI
-function respuestaSimple(idSelect, idLbl, idDate, idNI) {
+/***
+ * @param {type} idSelect
+ * @param {type} idLbl
+ * @param {type} idDate
+ * @param {type} idNI
+ * @param {type} idchk
+ * @returns {undefined}
+ */
+function respuestaSimple(idSelect, idLbl, idDate, idNI, idchk) {
     if ($(idSelect).val() !== '1') {
         $(idLbl).fadeOut("slow");
         $(idDate).val("1899-09-09").fadeOut("slow");
         $(idNI).fadeOut("slow");
-    } else {
-        $(idLbl).fadeIn("slow");
-        $(idDate).val("").fadeIn("slow");
-        $(idNI).fadeIn("slow");
     }
-}
-//Respuestas simples a esconder otra variable
-function respuestaSelect(idSelect, idLabel, idResp) {
-    if ($(idSelect).val() !== '1') {
-        $(idLabel).fadeOut("slow");
-        $(idResp).val('-2');
-        $(idResp).fadeOut("slow");
-    } else {
-        $(idLabel).fadeIn("slow");
-        $(idResp).val('').fadeIn("slow");
-    }
-}
+};
 
+//Respuestas simples a esconder otra variable
+function respuestaSelect(idSelect, idDiv, idResp) {
+    if ($(idSelect).val() === '1') {
+        $(idDiv).fadeIn("slow");
+        $(idResp).val('').prop("required", true);
+    } else {
+        $(idDiv).fadeOut("slow");
+        $(idResp).val('-2').prop("required", false);
+    }
+};
+
+function respuestaSelectbis() {
+    switch ($('#tipoMedidaPA').val()) {
+        case '1':
+            $('#dTipoMedidaPL').fadeIn("slow");
+            $('#dTipoMedidaNPL').fadeOut("slow");
+            $('#tipoMedidaPL').val('').prop("required", true);
+            $('#tipoMedidaNPL').val('-2').prop("required", false);
+            break;
+        case '2':
+            $('#dTipoMedidaPL').fadeOut("slow");
+            $('#dTipoMedidaNPL').fadeIn("slow");
+            $('#tipoMedidaNPL').val('').prop("required", true);
+            $('#tipoMedidaPL').val('-2').prop("required", false);
+            $('#Dinternamiento').hide();
+            $('#internamiento').val('-2').prop("required", false);
+            break;
+        default:
+            $('#dTipoMedidaPL').fadeOut("slow");
+            $('#dTipoMedidaNPL').fadeOut("slow");
+            $('#Dinternamiento').fadeOut("slow");
+            $('#tipoMedidaPL').val('-2').prop("required", false);
+            $('#tipoMedidaNPL').val('-2').prop("required", false);
+            $('#internamiento').val('-2').prop("required", false);
+            break;
+    }
+};
+
+// Fechas No identificadas
+function fechaNoIdent(idChk, idTxtDate) {
+    if ($(idChk).is(":checked")) {
+        $(idTxtDate).val("1899-09-09");
+        $(idTxtDate).prop("disabled", true);
+    } else {
+        $(idTxtDate).val("");
+        $(idTxtDate).prop("disabled", false);
+    }
+};
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
 
 /**************************FUNCION ETAPA INICIAL *****************************************/
-
+/***
+ * @param {type} idChk
+ * @param {type} idTable
+ * @returns {undefined}
+ */
 function despliegaTabla(idChk, idTable) {
-    if ($(idChk).val() !== '1') {
-        $(idTable).fadeOut("slow");
-    } else {
+    if ($(idChk).val() === '1') {
         $(idTable).fadeIn("slow");
+    } else {
+        $(idTable).fadeOut("slow");
     }
-}
+};
 
 function medidasCaute(idChk) {
-    if (($(idChk).val === 1) || $(idChk).val() === '') {
-        return true;
-    } else {
+    if ($(idChk).val() === '1') {
         var i = 0;
         if ($("#apliMedidaCau99").is(":checked")) {
             i = 1;
@@ -158,9 +298,12 @@ function medidasCaute(idChk) {
         } else {
             return true;
         }
+    } else {
+        return true;
     }
-}
-function fechaEnProceso(idChkNi,idChkEP, idTxtDate) {
+};
+  
+  function fechaEnProceso(idChkNi,idChkEP, idTxtDate) {
     if ($(idChkNi).is(":checked")) { 
         $(idTxtDate).val("1899-09-09");
         $(idTxtDate).prop("disabled", true);
@@ -178,11 +321,16 @@ function fechaEnProceso(idChkNi,idChkEP, idTxtDate) {
     }else {
         $(idChkNi).prop("disabled", false);
     }
-}
+};
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
-/*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
 
+/*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
+/***
+ * @param {type} idEnt
+ * @param {type} idMun
+ * @returns {undefined}
+ */
 function llenaMun(idEnt,idMun) {
     var enti = $(idEnt).val();
     if (enti !== '') {
@@ -201,14 +349,87 @@ function llenaMun(idEnt,idMun) {
     } else {
         $(idMun).empty().append("<option value='0'>--Seleccione--</option>");
     }
-
 };
 /***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************************/
 
+/*******************FUNCIONES DE CONCLUSIONES**********************************/
+function resSobreseimiento() {
+    if ($('#tipoConclusion').val() === '1') {
+        $('#idSobre').fadeIn('slow');
+        $('#proceSobre').fadeIn('slow');
+        $('#tipoSobreseimto').val('').prop("required", true);
+        $('#proceSobreseimto').val('').prop("required", true);
+    } else {
+        $('#idSobre').fadeOut('slow');
+        $('#proceSobre').fadeOut('slow');
+        $('#tipoSobreseimto').val('-2').prop("required", false);
+        $('#proceSobreseimto').val('-2').prop("required", false);
+    }
+};
+
+function rInternamiento() {
+    if (($('#tipoMedidaPL').val() === '2') || ($('#tipoMedidaPL').val() === '3')) {
+        $('#Dinternamiento').fadeIn("slow");
+        $('#internamiento').val('').prop("required", true);
+    } else {
+        $('#Dinternamiento').fadeOut("slow");
+        $('#internamiento').val('-2').prop("required", false);
+    }
+};
+
+function respuestaRepara() {
+    if ($('#reparaDanio').val() === '1') {
+        $('#tipoRepara').fadeIn("slow");
+        $('#tipoReparaD').val('');
+    } else {
+        $('#tipoRepara').fadeOut("slow");
+        $('#tipoReparaD').val('-2');
+        $('#montoRepara').fadeOut("slow");
+        $('#montoReparaD').val('-2');
+    }
+};
+
+function pagoCosa() {
+    if ($('#tipoReparaD').val() === '2') {
+        $('#montoRepara').fadeIn("slow");
+        $('#montoReparaD').val('').prop("required", true);
+    } else {
+        $('#montoRepara').fadeOut("slow");
+        $('#montoReparaD').val('-2').prop("required", false);
+    }
+};
+
+function impugna() {
+    if ($('#impugnacion').val() === '1') {
+        $('#tipoImpugna').fadeIn("slow");
+        $('#fechaImpugna').fadeIn("slow");
+        $('#quienImpugna').fadeIn("slow");
+        $('#tipoImpugnacion').val('').prop("required", true);
+        $('#fechaImpugnacion').val("").prop("disabled", false).prop("required", true);
+        $('#chkFechaImpugnacion').prop("checked", false);
+        $('#personaImpugna').val('').prop("required", true);
+    } else {
+        $('#tipoImpugna').fadeOut("slow");
+        $('#fechaImpugna').fadeOut("slow");
+        $('#quienImpugna').fadeOut("slow");
+        $('#tipoImpugnacion').val('-2').prop("required", false);
+        $('#fechaImpugnacion').val("1899-09-09").prop("required", false);
+        $('#personaImpugna').val('-2').prop("required", false);
+    }
+};
+/*******************FIN FUNCIONES DE CONCLUSIONES**********************************/
+
 /****************************** FUNCIONES PROCESADOS ******************************/
 //para respuesta simple, oculta el select contenido en un div
+/***
+ * 
+ * @param {type} idSelSimple
+ * @param {type} idDiv
+ * @param {type} idSelOculta
+ * @returns {undefined}
+ */
 function respuestaSimpleSelect(idSelSimple, idDiv, idSelOculta) {
-    if ($(idSelSimple).val() == '1') {
+    if ($(idSelSimple).val() === '1') {
         $(idDiv).fadeIn("slow");
         $(idSelOculta).prop("required",true);
         $(idSelOculta).val("");
@@ -217,10 +438,10 @@ function respuestaSimpleSelect(idSelSimple, idDiv, idSelOculta) {
         $(idSelOculta).val("-2");
         $(idSelOculta).prop("required",false);
     }
-};
+}; 
 
 function lugarNacimiento(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
-    if ($(idSelect).val() == '1') {
+    if ($(idSelect).val() === '1') {
         $(idDivE).fadeIn("slow");
         $(idDivM).fadeIn("slow");
         $(idSelEnti).prop("required",true);
@@ -238,7 +459,7 @@ function lugarNacimiento(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
 };
 
 function lugarResidencia(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
-    if ($(idSelect).val() == '1' || $(idSelect).val() == '2') {
+    if ($(idSelect).val() === '1' || $(idSelect).val() === '2') {
         $(idDivE).fadeIn("slow");
         $(idDivM).fadeIn("slow");
         $(idSelEnti).prop("required",true);
@@ -267,7 +488,75 @@ function ocupacionAdo(idSelect, idDiv, idSelOculta) {
 };
 /*---------------------------- FIN FUNCIONES PROCESADOS --------------------------*/
 
+/*******************FUNCIONES DE EXPEDIENTES**********************************/
+function competencia() {
+    if ($('#compe').val() === '1') {
+        $('#tipoIncopetencia').fadeOut("slow");
+        $('#Tincompe').val('-2').prop('required', false);
+        $('#expAcomulado').fadeIn("slow");
+        $('#ExpAcomu').val('').prop("required", true);
+        $('#idparticular').fadeIn("slow");
+        $('#Pparticular').val('').prop("required", true);
+        $('#divProcedimiento').fadeIn("slow");
+        $('#Tprocedi').val('').prop("required", true);
+        $('#totalElementos').fadeIn("slow");
+        $('#Tdelitos').val('').prop("required", true);
+        $('#Tadolescentes').val('').prop("required", true);
+        $('#Tvictimas').val('').prop("required", true);
+        $('#totalAudiencias').fadeIn("slow");
+    } else {
+        $('#tipoIncopetencia').fadeIn("slow");
+        $('#Tincompe').val('').prop('required', true);
+        $('#expAcomulado').fadeOut("slow");
+        $('#ExpAcomu').val('-2').prop("required", false);
+        $('#idparticular').fadeOut("slow");
+        $('#Pparticular').val('-2').prop("required", false);
+        $('#divProcedimiento').fadeOut("slow");
+        $('#Tprocedi').val('-2').prop("required", false);
+        $('#totalElementos').fadeOut("slow");
+        $('#Tdelitos').val('-2').prop("required", false);
+        $('#Tadolescentes').val('-2').prop("required", false);
+        $('#Tvictimas').val('-2').prop("required", false);
+        $('#totalAudiencias').fadeOut("slow");
+    }
+};
+  
+function expacumula() {
+    if ($('#ExpAcomu').val() === '1') {
+        $('#expReferen').fadeIn("slow");
+        $('#ExpRefe').val('').prop("required", true);
+    } else {
+        $('#expReferen').fadeOut("slow");
+        $('#ExpRefe').val('-2').prop("required", false);
+    }
+};
+  
+function audien(idChk) {
+    if ($(idChk).val() === '1') {
+        var i = 0;
+        for (var x = 1; x < 15; x++) {
+            if ($("#aplAudi" + x).is(":checked")) {
+                i = i + 1;
+            }
+        }
+    }
+    if (i === 0) {
+        alert("Selecciona por lo menos una Audiencia");
+        return false;
+    } else {
+        return true;
+    }
+};
+/*------------------------- FIN FUNCIONES DE EXPEDIENTES--------------------*/
+
 /***************************** FUNCIONES DELITOS *******************************/
+/***
+ * 
+ * @param {type} idSelSimple
+ * @param {type} idDiv
+ * @param {type} idDateOculta
+ * @returns {undefined}
+ */
 function respuestaSimpleFecha(idSelSimple, idDiv, idDateOculta,idChk) {
     if ($(idSelSimple).val() === '1') {
         $(idDiv).fadeIn("slow");
@@ -279,7 +568,8 @@ function respuestaSimpleFecha(idSelSimple, idDiv, idDateOculta,idChk) {
         $(idDateOculta).val("1799-09-09");
         $(idChk).prop("checked",false);
     }
-}
+};
+      
 //llena el select de norma tecnica de acuerdo con el select codigo penal
 function llenaNormaT(vNorma) {
     if (vNorma !== '') {
@@ -297,12 +587,17 @@ function llenaNormaT(vNorma) {
     } else {
         $('#delitoNT').empty().append("<option value='0'>--Seleccione--</option>");
     }
-
-}
+};
 /*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
-
+      
 /***************************** FUNCIONES GENERALES *********************************/
 // Fechas No identificadas
+/***
+ * 
+ * @param {type} idChk
+ * @param {type} idTxtDate
+ * @returns {undefined}
+ */
 function fechaNoIdent(idChk, idTxtDate) {
     if ($(idChk).is(":checked")) {
         $(idTxtDate).val("1899-09-09");
@@ -311,5 +606,4 @@ function fechaNoIdent(idChk, idTxtDate) {
         $(idTxtDate).val("");
         $(idTxtDate).prop("disabled", false);
     }
-}
-
+};

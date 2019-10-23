@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import ConexionDB.Conexion_Mysql;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author CARLOS.SANCHEZG
  */
-@WebServlet(urlPatterns = {"/delitosPrueba"})
-public class delitosPrueba extends HttpServlet {
+@WebServlet(urlPatterns = {"/insrtUsuario"})
+public class insrtUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,21 +28,35 @@ public class delitosPrueba extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * 
      */
+    Conexion_Mysql conn = new Conexion_Mysql();
+    String sql;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        if(request.getParameter("aceptar") != null){
+            conn.Conectar();
+            sql = "INSERT INTO USUARIOS(USUARIO,ESTATUS) VALUES('" + System.getProperty("user.name") + "', 1)";
+            if(conn.escribir(sql)){
+                response.sendRedirect("datosGral.jsp");
+            }else{
+                response.sendRedirect("index.jsp?errorbd=si");
+            }
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
-        /*Recibes variables*/
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet delitosPrueba</title>");            
+            out.println("<title>Servlet insrtUsuario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet delitosPrueba at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet insrtUsuario at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {

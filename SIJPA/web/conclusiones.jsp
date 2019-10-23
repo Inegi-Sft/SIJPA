@@ -26,199 +26,223 @@
                     <legend>Resolución</legend>
                     <label for="idProcesado">Id Adolescente</label>
                     <select class="txtMedia" name="idProcesado" id="idProcesado">
-                        <option value="0">--Seleccione--</option>
+                        <option value="">--Seleccione--</option>
                         <%
                             //conexion a base
                         %>
-                    </select><br/>
-                    <div class="cols">
-                        <label for="fechaReso">Fecha en que se dictó la resolución</label>
-                        <input type="date" name="fechaReso" id="fechaReso"/>
-                        <div class="noIdentificada">
-                            <input type="checkbox" id="chkFechaReso"><label>No identificada</label>
-                        </div>
-                    </div>
-                    <div class="cols">
-                        <label for="tipoConclusion">Tipo de resolución (Conclusión o terminación)</label>
-                        <select class="txtMedia" name="tipoConclusion" id="tipoConclusion">
-                            <option value="0">--Seleccione--</option>
-                            <%                                lista = cat.findTipoResolucion();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="tipoSobreseimto">Tipo de sobreseimiento</label>
-                        <select class="txtMedia" name="tipoSobreseimto" id="tipoSobreseimto">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findTipoSobrese();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="proceSobreseimto">Procedencia del sobreseimiento</label>
-                        <select class="txtMedia" name="proceSobreseimto" id="proceSobreseimto">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findSobreseimiento();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
+                    </select>
+                    <table class="tablaFormu" >
+                        <tr>
+                            <td>
+                                <div class="cols">
+                                    <label for="fechaReso">Fecha en que se dictó la resolución</label>
+                                    <input type="date" name="fechaReso" id="fechaReso" required/>
+                                    <div class="noIdentificada">
+                                        <input type="checkbox" id="chkFechaReso" onclick="fechaNoIdent('#chkFechaReso', '#fechaReso')"><label>No identificada</label>
+                                    </div>
+                                </div>
+                                <div class="cols">
+                                    <label for="tipoConclusion">Tipo de resolución (Conclusión o terminación)</label>
+                                    <select class="txtMedia" name="tipoConclusion" id="tipoConclusion" onchange="resSobreseimiento()" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%  lista = cat.findTipoResolucion();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="idSobre" >
+                                    <label for="tipoSobreseimto" >Tipo de sobreseimiento</label>
+                                    <select class="txtMedia dependiente" name="tipoSobreseimto" id="tipoSobreseimto">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findTipoSobrese();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="proceSobre"  >
+                                    <label for="proceSobreseimto">Procedencia del sobreseimiento</label>
+                                    <select class="txtMedia dependiente" name="proceSobreseimto" id="proceSobreseimto">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findSobreseimiento();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </fieldset><br/>
                 <fieldset>
                     <legend>Procedimiento abreviado</legend>
                     <label for="huboProsedimto">¿Hubo procedimiento abreviado?</label>
-                    <select class="txtMedia" name="huboProsedimto" id="huboProsedimto">
-                        <option value="0">--Seleccione--</option>
+                    <select class="txtMedia" name="huboProsedimto" id="huboProsedimto" onchange="respuestaSelect('#huboProsedimto', '#dTipoMedidaPA', '#tipoMedidaPA')" required>
+                        <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
                             for (String[] ls : lista) {
                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                             }
                         %> 
-                    </select><br/>
-                    <div class="cols">
-                        <label for="tipoMedidaPA">Tipo de medida en el procedimiento abreviado</label>
-                        <select class="txtMedia" name="tipoMedidaPA" id="tipoMedidaPA">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findProcAbreviado();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="tipoMedidaPL">Tipo de medidas privativa de la libertad</label>
-                        <select class="txtMedia" name="tipoMedidaPL" id="tipoMedidaPL">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findPrivLibertad();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="tipoMedidaNPL">Tipo de medidas no privativa de la libertad</label>
-                        <select class="txtMedia" name="tipoMedidaNPL" id="tipoMedidaNPL">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findNoPrivacion();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="internamiento">Tiempo en internamiento</label>
-                        <select class="txtMedia" name="internamiento" id="internamiento">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findTiempoInterna();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
+                    </select>
+                    <table class="tablaFormu" border="0">
+                        <tr>
+                            <td>
+                                <div class="cols oculto" id="dTipoMedidaPA" >
+                                    <label for="tipoMedidaPA">Tipo de medida en el procedimiento abreviado</label>
+                                    <select class="txtMedia dependiente" name="tipoMedidaPA" id="tipoMedidaPA" onchange="respuestaSelectbis()">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findProcAbreviado();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="dTipoMedidaPL">
+                                    <label for="tipoMedidaPL">Tipo de medidas privativa de la libertad</label>
+                                    <select class="txtMedia dependiente" name="tipoMedidaPL" id="tipoMedidaPL"  onchange="rInternamiento()" >
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findPrivLibertad();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="dTipoMedidaNPL">
+                                    <label for="tipoMedidaNPL" id="DtipoMedidaNPL">Tipo de medidas no privativa de la libertad</label>
+                                    <select class="txtMedia dependiente" name="tipoMedidaNPL" id="tipoMedidaNPL" >
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findNoPrivacion();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="Dinternamiento">
+                                    <label for="internamiento">Tiempo en internamiento</label>
+                                    <select class="txtMedia dependiente" name="internamiento" id="internamiento">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findTiempoInterna();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </fieldset><br/>
                 <fieldset>
                     <legend>Reparación del daño</legend>
-                    <div class="cols">
-                        <label for="reparaDanio">¿Hubo reparación del daño?</label>
-                        <select class="txtMedia" name="reparaDanio" id="reparaDanio">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findResSimple();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="tipoReparaD">Tipo de reparación del daño</label>
-                        <select class="txtMedia" name="tipoReparaD" id="tipoReparaD">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findRePDano();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="montoReparaD">Monto de la reparación impuesta</label>
-                        <select class="txtMedia" name="montoReparaD" id="montoReparaD">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findMulta();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %>
-                        </select>
-                    </div>
+                    <table class="tablaFormu" >
+                        <tr>
+                            <td>
+                                <div class="cols">
+                                    <label for="reparaDanio">¿Hubo reparación del daño?</label>
+                                    <select class="txtMedia" name="reparaDanio" id="reparaDanio" onchange="respuestaSelect('#reparaDanio', '#tipoRepara', '#tipoReparaD')" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="tipoRepara" >
+                                    <label for="tipoReparaD">Tipo de reparación del daño</label>
+                                    <select class="txtMedia dependiente" name="tipoReparaD" id="tipoReparaD" onchange="pagoCosa()" >
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findRePDano();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="montoRepara" >
+                                    <label for="montoReparaD">Monto de la reparación impuesta</label>
+                                    <select class="txtMedia dependiente" name="montoReparaD" id="montoReparaD">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findMulta();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </fieldset><br/>
                 <fieldset>
                     <legend>Impugnación</legend>
-                    <div class="cols">
-                        <label for="impugnacion">¿La resolución fue impugnada?</label>
-                        <select class="txtMedia" name="impugnacion" id="impugnacion">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findResSimple();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %>
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="tipoImpugnacion">Tipo de impugnación</label>
-                        <select class="txtMedia" name="tipoImpugnacion" id="tipoImpugnacion">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findTipoImpugna();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %>
-                        </select>
-                    </div>
-                    <div class="cols">
-                        <label for="fechaImpugnacion">Fecha de la impugnación </label>
-                        <input type="date" name="fechaImpugnacion" id="fechaImpugnacion"/>
-                        <div class="noIdentificada">
-                            <input type="checkbox" id="chkFechaImpugnacion"><label>No identificada</label>
-                        </div>
-                    </div>
-                    <div class="cols">
-                        <label for="personaImpugna">¿Por quién fue impugnada la resolución?</label>
-                        <select class="txtMedia" name="personaImpugna" id="personaImpugna">
-                            <option value="0">--Seleccione--</option>
-                            <%
-                                lista = cat.findImpugResolucion();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %>
-                        </select>
-                    </div>
+                    <table class="tablaFormu" >
+                        <tr>
+                            <td>
+                                <div class="cols">
+                                    <label for="impugnacion">¿La resolución fue impugnada?</label>
+                                    <select class="txtMedia" name="impugnacion" id="impugnacion" onchange="impugna()" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="tipoImpugna">
+                                    <label for="tipoImpugnacion">Tipo de impugnación</label>
+                                    <select class="txtMedia dependiente" name="tipoImpugnacion" id="tipoImpugnacion">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findTipoImpugna();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                                <div class="cols oculto" id="fechaImpugna">
+                                    <label for="fechaImpugnacion">Fecha de la impugnación </label>
+                                    <input type="date" name="fechaImpugnacion" id="fechaImpugnacion" class="depenFecha"/>
+                                    <div class="noIdentificada">
+                                        <input type="checkbox" id="chkFechaImpugnacion" onclick="fechaNoIdent('#chkFechaImpugnacion', '#fechaImpugnacion')"><label>No identificada</label>
+                                    </div>
+                                </div>
+                                <div class="cols oculto" id="quienImpugna">
+                                    <label for="personaImpugna">¿Por quién fue impugnada la resolución?</label>
+                                    <select class="txtMedia dependiente" name="personaImpugna" id="personaImpugna">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findImpugResolucion();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>

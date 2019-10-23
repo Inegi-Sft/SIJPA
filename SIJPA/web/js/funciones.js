@@ -1,5 +1,5 @@
 $(document).ready(function () {
-//despliega ventana modal
+    //despliega ventana modal
     $('.pop').fancybox({
         'type': 'iframe',
         'overlayShow': true,
@@ -158,6 +158,18 @@ $(document).ready(function () {
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
 });
+
+/********************splash del inicio del sistema***********************/
+function splashIn(){
+    //despliega splash screen al principio del sistema
+    $('body').css('overflow','hidden');
+    setTimeout(function (){
+        $('body').css('overflow','auto');
+    },4500);
+    $('#splash').delay(4000).slideUp('slow');
+    //termina splash screen
+};
+/******************** fin splash del inicio del sistema***********************/
 
 /***************************** PARA CAPTURA EXPEDIENTES *********************/
 //Habilita text de Audiencias en Expedientes

@@ -22,7 +22,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Víctimas</h1>
-            <form action="" method="post" id="victimasF">
+            <form action="victimas" method="post" id="victimasF">
                 <fieldset>
                     <legend>Caracteristicas Generales</legend>
                     <table class="tablaFormu">

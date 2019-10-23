@@ -26,8 +26,8 @@
                     <tr>
                         <td>
                             <label for="seleccion">Ejercicio:</label>
-                            <select name="seleccion" id="seleccion" class="txtMedia">
-                                <option value="vacio">--Seleccionar--</option>
+                            <select name="seleccion" id="seleccion" class="txtMedia" required>
+                                <option value="">--Seleccionar--</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>

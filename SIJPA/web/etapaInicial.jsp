@@ -218,8 +218,8 @@
                                 <label for="fechCierreI" >Fecha del cierre de la investigación</label>
                                 <input type="date" name="fechCierreI" id="fechCierreI" required/>
                                 <div class="noIdentificada">
-                                    <input type="radio" name="cierreI" id="chkFechCierreI" onclick="fechaNoIdent('#chkFechCierreI', '#fechCierreI')" ><label>No identificada</label><br/>
-                                    <input type="radio" name="cierreI" id="chkEnProceso" onclick="fechaEnProceso('#chkEnProceso', '#fechCierreI')" ><label>En proceso de investigación</label>
+                                    <input type="checkbox" id="chkFechCierreI" onclick="fechaEnProceso('#chkFechCierreI','#chkEnProceso', '#fechCierreI')" ><label>No identificada</label><br/>
+                                    <input type="checkbox"  id="chkEnProceso" onclick="fechaEnProceso('#chkFechCierreI','#chkEnProceso', '#fechCierreI')" ><label>En proceso de investigación</label>
                                 </div>
                             </td>
                         </tr>

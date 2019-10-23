@@ -36,34 +36,46 @@ $(document).ready(function () {
             case '1':
                 $("#dRegJudicial").fadeIn("slow");
                 $("#regJudicial").val("");
+                $("#regJudicial").prop("required",true);
                 $("#dDistJudicial").hide();
                 $("#distJudicial").val("-2");
+                $("#distJudicial").prop("required",false);
                 $("#dPartJudicial").hide();
+                $("#partJudicial").prop("required",false);
                 $("#partJudicial").val("-2");
                 break;
             case '2':
                 $("#dRegJudicial").hide();
                 $("#regJudicial").val("-2");
+                $("#regJudicial").prop("required",false);
                 $("#dDistJudicial").fadeIn("slow");
+                $("#distJudicial").prop("required",true);
                 $("#distJudicial").val("");
                 $("#dPartJudicial").hide();
+                $("#partJudicial").prop("required",false);
                 $("#partJudicial").val("-2");
                 break;
             case '3':
                 $("#dRegJudicial").hide();
+                $("#regJudicial").prop("required",false);
                 $("#regJudicial").val("-2");
                 $("#dDistJudicial").hide();
+                $("#distJudicial").prop("required",false);
                 $("#distJudicial").val("-2");
                 $("#dPartJudicial").fadeIn("slow");
+                $("#partJudicial").prop("required",true);
                 $("#partJudicial").val("");
                 break;
         }
         if ($("#fOrganiza").val() > 3 || $("#fOrganiza").val() === "") {
             $("#dRegJudicial").fadeOut("slow");
+            $("#regJudicial").prop("required",false);
             $("#regJudicial").val("-2");
             $("#dDistJudicial").fadeOut("slow");
+            $("#distJudicial").prop("required",false);
             $("#distJudicial").val("-2");
             $("#dPartJudicial").fadeOut("slow");
+            $("#partJudicial").prop("required",false);
             $("#partJudicial").val("-2");
         }
     });
@@ -291,13 +303,23 @@ function medidasCaute(idChk) {
     }
 };
   
-  function fechaEnProceso(idChk, idTxtDate) {
-    if ($(idChk).is(":checked")) {
-        $(idTxtDate).val("1699-09-09");
+  function fechaEnProceso(idChkNi,idChkEP, idTxtDate) {
+    if ($(idChkNi).is(":checked")) { 
+        $(idTxtDate).val("1899-09-09");
         $(idTxtDate).prop("disabled", true);
+        $(idChkEP).prop("disabled", true);
     } else {
         $(idTxtDate).val("");
         $(idTxtDate).prop("disabled", false);
+        $(idChkEP).prop("disabled", false);
+    } 
+    
+    if ($(idChkEP).is(":checked")) {
+        $(idTxtDate).val("1699-09-09");
+        $(idTxtDate).prop("disabled", true);
+        $(idChkNi).prop("disabled", true);
+    }else {
+        $(idChkNi).prop("disabled", false);
     }
 };
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
@@ -422,11 +444,15 @@ function lugarNacimiento(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
     if ($(idSelect).val() === '1') {
         $(idDivE).fadeIn("slow");
         $(idDivM).fadeIn("slow");
+        $(idSelEnti).prop("required",true);
+        $(idSelMuni).prop("required",true);
         $(idSelEnti).val("");
         $(idSelMuni).val("");
     } else {
         $(idDivE).fadeOut("slow");
         $(idDivM).fadeOut("slow");
+        $(idSelEnti).prop("required",false);
+        $(idSelMuni).prop("required",false);
         $(idSelEnti).val("-2");
         $(idSelMuni).val("-2");
     }
@@ -436,11 +462,15 @@ function lugarResidencia(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
     if ($(idSelect).val() === '1' || $(idSelect).val() === '2') {
         $(idDivE).fadeIn("slow");
         $(idDivM).fadeIn("slow");
+        $(idSelEnti).prop("required",true);
+        $(idSelMuni).prop("required",true);
         $(idSelEnti).val("");
         $(idSelMuni).val("");
     } else {
         $(idDivE).fadeOut("slow");
         $(idDivM).fadeOut("slow");
+        $(idSelEnti).prop("required",false);
+        $(idSelMuni).prop("required",false);
         $(idSelEnti).val("-2");
         $(idSelMuni).val("-2");
     }
@@ -527,15 +557,16 @@ function audien(idChk) {
  * @param {type} idDateOculta
  * @returns {undefined}
  */
-function respuestaSimpleFecha(idSelSimple, idDiv, idDateOculta) {
+function respuestaSimpleFecha(idSelSimple, idDiv, idDateOculta,idChk) {
     if ($(idSelSimple).val() === '1') {
         $(idDiv).fadeIn("slow");
-        $(idDateOculta).prop("required",true);
-        $(idDateOculta).val("");
+        $(idChk).prop("checked",false);
+        $(idDateOculta).val("").prop("disabled", false).prop("required", true); 
     } else {
         $(idDiv).fadeOut("slow");
         $(idDateOculta).prop("required",false);
         $(idDateOculta).val("1799-09-09");
+        $(idChk).prop("checked",false);
     }
 };
       

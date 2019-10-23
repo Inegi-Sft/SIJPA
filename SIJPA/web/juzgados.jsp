@@ -202,11 +202,11 @@
                             </td>
                             <td>
                                 <label for="nomVialidad">Nombre de la Vialidad</label>
-                                <input type="text" name="nomVialidad" id="nomVialidad" />
+                                <input type="text" name="nomVialidad" id="nomVialidad" required/>
                             </td>
                             <td>
                                 <label for="nomAsentamiento">Nombre del Asentamiento Humano</label>
-                                <input type="text" name="nomAsentamiento" id="nomAsentamiento"/>
+                                <input type="text" name="nomAsentamiento" id="nomAsentamiento" required/>
 
                             </td>
                             <td>
@@ -223,7 +223,7 @@
                         <tr>
                             <td>
                                 <label for="nombreCap">Nombre(s)</label>
-                                <input type="text" name="nombreCap" id="nombreCap" />
+                                <input type="text" name="nombreCap" id="nombreCap" required/>
                             </td>
                             <td>
                                 <label for="apaternoCap">Apellido Paterno</label>

@@ -6,6 +6,8 @@
 /* global selecChk */
 
 $(document).ready(function () {
+    $('select > option[value=-2]').hide();
+    
 //despliega ventana modal
     $('.pop').fancybox({
         'type': 'iframe',
@@ -30,7 +32,7 @@ $(document).ready(function () {
     //$('#Mreside').selectize();
 });
 
-/***************************** PARA CAPTURA EXPEDIENTES *********************/
+/***************************** PARA CAPTURA EXPEDIENTES ************************/
 //Habilita text de Audiencias en Expedientes
 /***
  * 
@@ -45,8 +47,19 @@ function comprobar(obj, idTxt) {
         document.getElementById(idTxt).disabled = true;
     }
 }
+function etapaInter(){
+if($('#audiInterme').val()==='1'){
+    $('#divfechaAudiinter,#divfechaEscrito').fadeIn("slow");
+    $('#chkAudiinter,#chkEscrito').prop("checked", false);
+    $('#fechaAudiinter,#fechaEscrito').val("").prop("disabled", false).prop("required", true);
+} else {
+     $('#divfechaAudiinter,#divfechaEscrito').fadeOut("slow");
+    $('#chkAudiinter,#chkEscrito').prop("checked", false);
+    $('#fechaAudiinter,#fechaEscrito').val("1899-09-09").prop("disabled", false).prop("required", false);
+}
+}
 //Respuestas simples y fechas con NI
-function resSimpleFech(idSelect, idDiv, idDate, idChk) {
+function respuestaSimpleFecha(idSelect, idDiv, idDate, idChk) {
     if ($(idSelect).val() === '1') {
         $(idDiv).fadeIn("slow");
         $(idChk).prop("checked", false);
@@ -56,7 +69,7 @@ function resSimpleFech(idSelect, idDiv, idDate, idChk) {
         $(idChk).prop("checked", false);
         $(idDate).val("1899-09-09").prop("required", false);
     }
-};
+}
 
 //Respuestas simples a esconder otra variable
 function respuestaSelect(idSelect, idDiv, idResp) {
@@ -85,12 +98,8 @@ function respuestaSelectbis() {
             $('#internamiento').val('-2').prop("required", false);
             break;
         default:
-            $('#dTipoMedidaPL').fadeOut("slow");
-            $('#dTipoMedidaNPL').fadeOut("slow");
-            $('#Dinternamiento').fadeOut("slow");
-            $('#tipoMedidaPL').val('-2').prop("required", false);
-            $('#tipoMedidaNPL').val('-2').prop("required", false);
-            $('#internamiento').val('-2').prop("required", false);
+            $('#dTipoMedidaPL,#dTipoMedidaNPL,#Dinternamiento').fadeOut("slow");
+            $('#tipoMedidaPL,#tipoMedidaNPL,#internamiento').val('-2').prop("required", false);
             break;
     }
 }
@@ -104,9 +113,9 @@ function fechaNoIdent(idChk, idTxtDate) {
         $(idTxtDate).prop("disabled", false);
     }
 }
-/*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
+/*****************************FIN DE FUNCIONES ETAPA INTERMEDIA*****************/
 
-/**************************FUNCION ETAPA INICIAL *****************************************/
+/**************************FUNCION ETAPA INICIAL *******************************/
 /***
  * 
  * @param {type} idChk
@@ -140,17 +149,17 @@ function medidasCaute(idChk) {
     } else {
         return true;
     }
-};
-/*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
+}
+/*****************************FIN DE FUNCIONES ETAPA INICIAL********************/
 
-/*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
+/*****************************FUNCIONES LLENAR MUNICIPIOS***********************/
 /***
  * 
  * @param {type} idEnt
  * @param {type} idMun
  * @returns {undefined}
  */
-function llenaMun(idEnt,idMun) {
+function llenaMun(idEnt, idMun) {
     var enti = $(idEnt).val();
     if (enti !== '') {
         $.ajax({
@@ -168,24 +177,28 @@ function llenaMun(idEnt,idMun) {
     } else {
         $(idMun).empty().append("<option value='0'>--Seleccione--</option>");
     }
-};
-/***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************************/
+}
+/***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************/
 
-/*******************FUNCIONES DE CONCLUSIONES**********************************/
+/*******************FUNCIONES DE CONCLUSIONES***********************************/
 function resSobreseimiento() {
     if ($('#tipoConclusion').val() === '1') {
-        $('#idSobre').fadeIn('slow');
-        $('#proceSobre').fadeIn('slow');
-        $('#tipoSobreseimto').val('').prop("required", true);
-        $('#proceSobreseimto').val('').prop("required", true);
+        $('#idSobre,#proceSobre').fadeIn("slow");
+        $('#tipoSobreseimto,#proceSobreseimto').val('').prop("required", true);
     } else {
-        $('#idSobre').fadeOut('slow');
-        $('#proceSobre').fadeOut('slow');
-        $('#tipoSobreseimto').val('-2').prop("required", false);
-        $('#proceSobreseimto').val('-2').prop("required", false);
+        $('#idSobre,#proceSobre').fadeOut('slow');
+        $('#tipoSobreseimto,#proceSobreseimto').val('-2').prop("required", false);
     }
-};
-
+}
+function proceAbreviado(){
+    if($('#huboProsedimto').val() === '1'){
+        $('#dTipoMedidaPA').fadeIn("slow");
+        $('#tipoMedidaPA').val('').prop("required", true);
+    } else {
+         $('#dTipoMedidaPA,#dTipoMedidaNPL,#dTipoMedidaPL,#Dinternamiento').fadeOut("slow");
+        $('#tipoMedidaPA,#tipoMedidaPL,#internamiento,#tipoMedidaNPL').val('-2').prop("required", false);
+    }
+}
 function rInternamiento() {
     if (($('#tipoMedidaPL').val() === '2') || ($('#tipoMedidaPL').val() === '3')) {
         $('#Dinternamiento').fadeIn("slow");
@@ -194,20 +207,16 @@ function rInternamiento() {
         $('#Dinternamiento').fadeOut("slow");
         $('#internamiento').val('-2').prop("required", false);
     }
-};
-
+}
 function respuestaRepara() {
     if ($('#reparaDanio').val() === '1') {
         $('#tipoRepara').fadeIn("slow");
-        $('#tipoReparaD').val('');
+        $('#tipoReparaD').val('').prop("required", true);
     } else {
-        $('#tipoRepara').fadeOut("slow");
-        $('#tipoReparaD').val('-2');
-        $('#montoRepara').fadeOut("slow");
-        $('#montoReparaD').val('-2');
+        $('#montoRepara,#tipoRepara').fadeOut("slow");
+        $('#montoReparaD,#tipoReparaD').val('-2').prop("required", false);        
     }
-};
-
+}
 function pagoCosa() {
     if ($('#tipoReparaD').val() === '2') {
         $('#montoRepara').fadeIn("slow");
@@ -216,59 +225,39 @@ function pagoCosa() {
         $('#montoRepara').fadeOut("slow");
         $('#montoReparaD').val('-2').prop("required", false);
     }
-};
-
+}
 function impugna() {
     if ($('#impugnacion').val() === '1') {
-        $('#tipoImpugna').fadeIn("slow");
-        $('#fechaImpugna').fadeIn("slow");
-        $('#quienImpugna').fadeIn("slow");
-        $('#tipoImpugnacion').val('').prop("required", true);
+        $('#tipoImpugna,#fechaImpugna,#quienImpugna').fadeIn("slow");
+        $('#tipoImpugnacion,#personaImpugna').val('').prop("required", true);
         $('#fechaImpugnacion').val("").prop("disabled", false).prop("required", true);
         $('#chkFechaImpugnacion').prop("checked", false);
-        $('#personaImpugna').val('').prop("required", true);
     } else {
-        $('#tipoImpugna').fadeOut("slow");
-        $('#fechaImpugna').fadeOut("slow");
-        $('#quienImpugna').fadeOut("slow");
-        $('#tipoImpugnacion').val('-2').prop("required", false);
+        $('#tipoImpugna,#fechaImpugna,#quienImpugna').fadeOut("slow");
+        $('#tipoImpugnacion,#personaImpugna').val('-2').prop("required", false);
         $('#fechaImpugnacion').val("1899-09-09").prop("required", false);
-        $('#personaImpugna').val('-2').prop("required", false);
     }
 }
-/*******************FIN DE FUNCIONES DE CONCLUSIONES**********************************/
+/*******************FIN DE FUNCIONES DE CONCLUSIONES****************************/
 
-/*******************FUNCIONES DE EXPEDIENTES**********************************/
+/*******************FUNCIONES DE EXPEDIENTES************************************/
 function competencia() {
-    if ($('#compe').val() === '1') {
-        $('#tipoIncopetencia').fadeOut("slow");
-        $('#Tincompe').val('-2').prop('required', false);
-        $('#expAcomulado').fadeIn("slow");
-        $('#ExpAcomu').val('').prop("required", true);
-        $('#idparticular').fadeIn("slow");
-        $('#Pparticular').val('').prop("required", true);
-        $('#divProcedimiento').fadeIn("slow");
-        $('#Tprocedi').val('').prop("required", true);
-        $('#totalElementos').fadeIn("slow");
-        $('#Tdelitos').val('').prop("required", true);
-        $('#Tadolescentes').val('').prop("required", true);
-        $('#Tvictimas').val('').prop("required", true);
-        $('#totalAudiencias').fadeIn("slow");
-    } else {
-        $('#tipoIncopetencia').fadeIn("slow");
-        $('#Tincompe').val('').prop('required', true);
-        $('#expAcomulado').fadeOut("slow");
-        $('#ExpAcomu').val('-2').prop("required", false);
-        $('#idparticular').fadeOut("slow");
-        $('#Pparticular').val('-2').prop("required", false);
-        $('#divProcedimiento').fadeOut("slow");
-        $('#Tprocedi').val('-2').prop("required", false);
-        $('#totalElementos').fadeOut("slow");
-        $('#Tdelitos').val('-2').prop("required", false);
-        $('#Tadolescentes').val('-2').prop("required", false);
-        $('#Tvictimas').val('-2').prop("required", false);
-        $('#totalAudiencias').fadeOut("slow");
+    switch ($('#compe').val()) {
+        case '1':
+            $('#tipoIncopetencia').fadeOut("slow");
+            $('#Tincompe').val('-2').prop('required', false);
+            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeIn("slow");
+            $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
+            $('#ExpAcomu, #Pparticular, #Tprocedi').val('').prop("required", true);
+            break;
+        case '2':
+            $('#tipoIncopetencia').fadeIn("slow");
+            $('#Tincompe').val('').prop("required", true);
+            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeOut("slow");
+            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
+            break;
     }
+
 }
 function expacumula() {
     if ($('#ExpAcomu').val() === '1') {
@@ -279,20 +268,29 @@ function expacumula() {
         $('#ExpRefe').val('-2').prop("required", false);
     }
 }
-function audien(idChk) {
-    if ($(idChk).val() === '1') {
-        var i = 0;
-        for (var x = 1; x < 15; x++) {
-            if ($("#aplAudi" + x).is(":checked")) {
-                i = i + 1;
-            }
-        }
-    }
-    if (i === 0) {
-        alert("Selecciona por lo menos una Audiencia");
-        return false;
-    } else {
-        return true;
-    }
+//function audien(idChk) {
+//    if ($(idChk).val() === '1') {
+//        var i = 0;
+//        for (var x = 1; x < 15; x++) {
+//            if ($("#aplAudi" + x).is(":checked")) {
+//                i = i + 1;
+//            }
+//        }
+//    }
+//    if (i === 0) {
+//        alert("Selecciona por lo menos una Audiencia");
+//        return false;
+//    } else {
+//        return true;
+//    }
+//}
+function expeAudiencia() {
+    if($('#compe').val()===2)
+    $('#expedientesF').submit(function(e){
+       if($('#aplAudi:checked').length===0){
+           e.preventDefault();
+           alert("Selecciona por lo menos una Audiencia");
+       } 
+    });
 }
-
+/*************************FIN DE FUNCIONES DE EXPEDIENTES***********************/

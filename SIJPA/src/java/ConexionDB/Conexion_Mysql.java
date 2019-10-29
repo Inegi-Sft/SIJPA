@@ -53,11 +53,11 @@ public class Conexion_Mysql {
             Statement sentencia; 
             sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             sentencia.executeUpdate(sql); 
-            getConexion().commit(); 
+//            getConexion().commit(); 
             sentencia.close();
              
         } catch (SQLException e) { 
-            System.out.print("ERROR SQL"); 
+            System.out.println("ERROR SQL"+ e); 
             return false; 
         }         
         return true; 

@@ -5,6 +5,7 @@
  */
 
 $(document).ready(function () {
+    //'#causas,
     $('#causas').DataTable({
         "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "Todo"]],
         "language": {
@@ -28,4 +29,5 @@ $(document).ready(function () {
             }
         }
     });
+   
 });

@@ -12,6 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Resoluciones</title>
         <%@include file="librerias.jsp" %>
+        <% 
+            if(request.getParameter("error") != null){
+                out.println("<script>alert('error en el proceso de guardado')</script>");
+            }else if(request.getParameter("seinserto") != null){
+                out.println("<script>parent.$.fancybox.close()</script>");
+            }
+        %>
     </head>
     <body style="zoom: .9;">
         <%
@@ -21,7 +28,7 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el juez de control</h1>
-            <form action="" method="post">
+            <form action="insrtconclusiones" method="post">
                 <fieldset>
                     <legend>Resolución</legend>
                     <label for="idProcesado">Id Adolescente</label>
@@ -83,7 +90,7 @@
                 <fieldset>
                     <legend>Procedimiento abreviado</legend>
                     <label for="huboProsedimto">¿Hubo procedimiento abreviado?</label>
-                    <select class="txtMedia" name="huboProsedimto" id="huboProsedimto" onchange="respuestaSelect('#huboProsedimto', '#dTipoMedidaPA', '#tipoMedidaPA')" required>
+                    <select class="txtMedia" name="huboProsedimto" id="huboProsedimto" onchange="proceAbreviado()" required>
                         <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findResSimple();
@@ -154,7 +161,7 @@
                             <td>
                                 <div class="cols">
                                     <label for="reparaDanio">¿Hubo reparación del daño?</label>
-                                    <select class="txtMedia" name="reparaDanio" id="reparaDanio" onchange="respuestaSelect('#reparaDanio', '#tipoRepara', '#tipoReparaD')" required>
+                                    <select class="txtMedia" name="reparaDanio" id="reparaDanio" onchange="respuestaRepara()" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();

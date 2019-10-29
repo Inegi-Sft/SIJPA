@@ -21,7 +21,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Pendientes de resolución </h1>
-            <form action="" method="post">
+            <form action="insrttramite" method="post">
                 <!--<center>-->
                 <fieldset >
                     <legend style="text-align: left;">Estatus</legend>
@@ -42,7 +42,7 @@
                             <td>
                                 <label for="eProcesal">Etapa procesal</label>
                                 <select name="eProcesal" id="eProcesal" class="txtMedia">
-                                    <option value="0">--Seleccione--</option>
+                                    <option value="">--Seleccione--</option>
                                      <%
                                         lista = cat.findEtapaProcesal();
                                         for (String[] ls : lista) {
@@ -62,7 +62,7 @@
 
                                 <input type="date" name="uActua" id="uActua" class="txtMedia" required>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkOcurrencia"><label>No identificada</label>
+                                    <input type="checkbox" id="chkOcurrencia" onclick="fechaNoIdent('#chkOcurrencia', '#uActua');"><label>No identificada</label>
                                 </div>
                             </td>
                         </tr>

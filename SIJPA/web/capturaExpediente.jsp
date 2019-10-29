@@ -12,6 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Expediente</title>
         <%@include file="librerias.jsp" %>
+        <% 
+            if(request.getParameter("error") != null){
+                out.println("<script>alert('error en el proceso de guardado')</script>");
+            }else if(request.getParameter("seinserto") != null){
+                out.println("<script>parent.$.fancybox.close()</script>");
+            }
+        %>
     </head>
     <body>
         <%
@@ -21,7 +28,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
             <h2>Expediente</h2>
-            <form action="" method="post">
+            <form action="insrtExpediente" method="post" id="expedientesF">
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
                     <table class="tablaFormu">
@@ -55,7 +62,7 @@
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findResSimple();
-                                                for (int x = 0; x < 2; x++) {
+                                                for (int x = 0; x < 3; x++) {
                                                     out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
                                                 }
                                             %>  
@@ -75,11 +82,11 @@
                                     </div>
                                     <div class="cols oculto" id="expAcomulado">
                                         <label for="ExpAcomu" >Expediente acumulado</label>
-                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia dependiente" onchange="expacumula()" >
+                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia dependiente" onchange="expacumula()">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findResSimple();
-                                                for (int x = 0; x < 2; x++) {
+                                                for (int x = 0; x < 3; x++) {
                                                     out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
                                                 }
                                             %>  
@@ -87,7 +94,7 @@
                                     </div>
                                     <div class="cols oculto" id="expReferen">
                                         <label for="ExpRefe">Expediente al que hace referencia</label>
-                                        <input type="text" name="ExpRefe" id="ExpRefe" class="dependiente">
+                                        <input type="text" name="ExpRefe" id="ExpRefe" class="dependiente" value="-2">
                                     </div>
                                 </fieldset>
                             </td>
@@ -97,7 +104,7 @@
                                 <div class="cols">
                                     <label for="Pparticular" class="lblExBig">¿La causa penal deriva de acción penal por particular?</label>
                                     <select name="Pparticular" id="Pparticular" class="txtMedia dependiente" >
-                                        <option value="">--Seleccione--</option>
+                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
                                             for (String[] ls : lista) {
@@ -109,7 +116,7 @@
                                 <div class="cols" id="divProcedimiento">
                                     <label for="Tprocedi" >Tipo de procedimiento</label>
                                     <select name="Tprocedi" id="Tprocedi" class="txtMedia dependiente" >
-                                        <option value="">--Seleccione--</option>
+                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findProcedimiento();
                                             for (String[] ls : lista) {
@@ -159,10 +166,10 @@
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>"); %>
-                        <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi<%out.print(ls[0]);%>" onChange="comprobar(this, 'cantAudi<%out.print(ls[0]);%>');"/>
+                        <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi" value="<%out.print(ls[0]);%>" onChange="comprobar(this, 'cantAudi<%out.print(ls[0]);%>');"/>
                         <%      out.println("</td>");
                             out.println("<td>"); %>
-                        <input type="number" disabled name="cantAudi" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall" required/>
+                        <input type="number" disabled name="cantAudi<%out.print(ls[0]);%>" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall" required/>
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }
@@ -174,7 +181,7 @@
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>
                 </div>
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Guardar" onclick=" return audien('#compe')">
+                <input type="submit" name="guardar" id="guardar" value="Guardar" onclick=" expeAudiencia()">
             </form>
         </section>
     </body>

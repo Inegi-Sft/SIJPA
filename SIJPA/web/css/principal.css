@@ -22,7 +22,7 @@ body{
     /*background: #706F6F;*/
     background-image: url("../img/fondo_final.png");
     background-attachment: fixed;
-    /*background-size: cover;*/
+    background-size: cover;
     font-family: Arial;
     color: #003057;
     font-size: 18px;

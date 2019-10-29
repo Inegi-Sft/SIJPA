@@ -3,7 +3,9 @@
     Created on : 4/10/2019, 11:24:50 AM
     Author     : FERMIN.GOMEZ
 --%>
-
+<%@page import="clasesAuxiliar.conclusiones"%>
+<%@page import="clasesAuxiliar.tramite"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,8 +13,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Elementos del Expediente</title>
         <%@include file="librerias.jsp" %>
+        <%
+            if (request.getParameter("error") != null) {
+                out.println("<script>alert('error en el proceso de guardado')</script>");
+            } else if (request.getParameter("seinserto") != null) {
+                out.println("<script>parent.$.fancybox.close(); window.location='elementosPrincipales.jsp';</script>");
+//                out.println("$('#p8').load($('tramite.jsp #tramiteRegis'))</script>");
+//                out.println("<script type='text/javascript'>window.location='elementosPrincipales.jsp';</script>");
+            }
+        %>
     </head>
     <body>
+        <%
+            tramite tram = new tramite();
+            ArrayList<String[]> trami = new ArrayList();
+
+            conclusiones conclusion = new conclusiones();
+            ArrayList<String[]> conc = new ArrayList();
+        %>
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
@@ -71,7 +89,7 @@
             </div>
             <div id="p3" class="pestanaContent">
                 <h2>Adolescentes</h2>
-                <table class="tablasRegis">
+                <table id="tramiteRegis" class="tablasRegis">
                     <tr>
                         <th>Adolescente clave</th>
                         <th>Tipo de Presentación</th>
@@ -172,35 +190,47 @@
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
-                    <tr>
-                        <td>0002/2019-c2</td>
-                        <td>15/04/2019</td>
-                        <td>0002/2019-p2</td>
-                        <td>Suspension condicional del proceso</td>
-                        <td><a class="pop" href="conclusiones.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    </tr>
+                    <tbody>
+                        <%  conc = conclusion.findConcluTabla();
+                            for (String[] tm : conc) {
+                                out.println("<tr>");
+                                out.println("<td>" + tm[0] + "</td>");
+                                out.println("<td>" + tm[1] + "</td>");
+                                out.println("<td>" + tm[2] + "</td>");
+                                out.println("<td>" + tm[3] + "</td>");
+                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                out.println("</tr>");
+                            }
+                        %>
+                    </tbody>
                 </table>
             </div>
             <div id="p8" class="pestanaContent">
                 <h2>Pendientes de resolución</h2>
-                <table class="tablasRegis">
+                <table class="tablasRegis" id="tramiteRegis">
                     <tr>
-                        <th>Tramite clave</th>
+                        <th>Procesado clave</th>
                         <th>Etapa procesal</th>
-                        <th>Adolescente clave</th>
+                        <th>Motivo</th>
                         <th>Fecha última actuación</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
-                    <tr>
-                        <td>0002/2019-t1</td>
-                        <td>Investigacion</td>
-                        <td>0002/2019-p1</td>
-                        <td>27/09/2019</td>
-                        <td><a class="pop" href="tramite.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    </tr>
+                    <tbody>
+                        <%  trami = tram.findTramite();
+                            for (String[] tm : trami) {
+                                out.println("<tr>");
+                                out.println("<td>" + tm[4] + "</td>");
+                                out.println("<td>" + tm[5] + "</td>");
+                                out.println("<td>" + tm[6] + "</td>");
+                                out.println("<td>" + tm[7] + "</td>");
+                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                out.println("</tr>");
+                            }
+                        %>
+                    </tbody>
                 </table>
             </div>
         </section>

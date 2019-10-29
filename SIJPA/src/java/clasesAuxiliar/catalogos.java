@@ -911,7 +911,7 @@ public class catalogos {
     public ArrayList findTipoAudiencias() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_AUDIENCIAS ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_TIPO_AUDIENCIAS WHERE AUDIENCIA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

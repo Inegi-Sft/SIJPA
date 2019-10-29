@@ -40,7 +40,7 @@
                             <td>
                                 <fieldset>
                                     <label for="ctrlDetencion">¿Hubo control de detención?</label>
-                                    <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion" onchange="resSimpleFech('#ctrlDetencion', '#lbCtrlDeten1', '#fechaCtrlDeten', '#chkCtrlDeten', '#chkCtrlDeten')" required>
+                                    <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion" onchange="respuestaSimpleFecha('#ctrlDetencion', '#lbCtrlDeten1', '#fechaCtrlDeten', '#chkCtrlDeten', '#chkCtrlDeten')" required>
                                         <option value="">--Seleccione--</option>
                                         <% lista = cat.findResSimple();
                                             for (String[] ls : lista) {
@@ -111,7 +111,7 @@
                             <td>
                                 <fieldset>
                                     <label for="declaro">¿El adolescente declaró?</label>
-                                    <select class="txtMedia" name="declaro" id="declaro" onchange="resSimpleFech('#declaro', '#lbfechDeclara1', '#fechDeclara', '#chkFechDeclara')" required>
+                                    <select class="txtMedia" name="declaro" id="declaro" onchange="respuestaSimpleFecha('#declaro', '#lbfechDeclara1', '#fechDeclara', '#chkFechDeclara')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -159,7 +159,7 @@
                             <td colspan="2">
                                 <fieldset>
                                     <label for="autoVin" style="width:400px;">Resolución del auto de vinculación a proceso</label>
-                                    <select class="txtMedia" name="autoVin" id="autoVin" onchange="resSimpleFech('#autoVin', '#lbfechAuto1', '#fechAuto', '#chkFechaAuto')" required>
+                                    <select class="txtMedia" name="autoVin" id="autoVin" onchange="respuestaSimpleFecha('#autoVin', '#lbfechAuto1', '#fechAuto', '#chkFechaAuto')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findAutoVinculacion();
@@ -183,7 +183,7 @@
                             <td colspan="2">
                                 <fieldset>
                                     <label for="soliPlazo" class="lblExBig">¿Se solicitó el plazo para el cierre de investigación complementaria?</label>
-                                    <select class="txtMedia" name="soliPlazo" id="soliPlazo" onchange="resSimpleFech('#soliPlazo', '#lbfechSoliPlazo1', '#fechSoliPlazo', '#chkFechSoliPlazo')" required>
+                                    <select class="txtMedia" name="soliPlazo" id="soliPlazo" onchange="respuestaSimpleFecha('#soliPlazo', '#lbfechSoliPlazo1', '#fechSoliPlazo', '#chkFechSoliPlazo')" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();

@@ -12,8 +12,22 @@
         <title>SIJPA::Causas Penales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
+        <style type="text/css">
+            .load {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 999;
+                background: url('img/loading-35.gif') 50% 50% no-repeat rgb(249,249,249);
+                opacity: .8;
+            }
+        </style>
     </head>
     <body>
+        <div class="load"></div>
+
         <%@include file="cabecera.jsp" %>
         <%@include file="menu.jsp"%>
         <% 
@@ -51,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%for(int x = 1; x < 20; x++){%>
+                        <%for (int x = 1; x < 20; x++) {%>
                         <tr>
                             <td>asdf</td>
                             <td>2</td>
@@ -69,5 +83,10 @@
                 </table>
             </form>
         </section>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".load").fadeOut("slow");;
+               });
+        </script>
     </body>
 </html>

@@ -188,6 +188,7 @@ function respuestaSimpleFecha(idSelect, idDiv, idDate, idChk) {
         $(idDiv).fadeOut("slow");
         $(idChk).prop("checked", false);
         $(idDate).val("1899-09-09").prop("required", false);
+    }
 };
 /*****************************FIN PARA CAPTURA EXPEDIENTES *********************/
 

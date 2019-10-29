@@ -561,21 +561,3 @@ function llenaNormaT(vNorma) {
     }
 };
 /*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
-      
-/***************************** FUNCIONES GENERALES *********************************/
-// Fechas No identificadas
-/***
- * 
- * @param {type} idChk
- * @param {type} idTxtDate
- * @returns {undefined}
- */
-//function fechaNoIdent(idChk, idTxtDate) {
-//    if ($(idChk).is(":checked")) {
-//        $(idTxtDate).val("1899-09-09");
-//        $(idTxtDate).prop("disabled", true);
-//    } else {
-//        $(idTxtDate).val("");
-//        $(idTxtDate).prop("disabled", false);
-//    }
-//};

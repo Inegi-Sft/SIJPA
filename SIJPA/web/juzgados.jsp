@@ -15,15 +15,20 @@
         <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
         <title>SIJPA::Juzgados</title>
         <%@include file="librerias.jsp" %>
+        <% 
+            if(request.getParameter("errorJuzgado") != null){
+                out.println("<script>alert('Clave duplicada: El juzgado, distrito, entidad, municipio ya existe \n verificar')</script>");
+            }else if(request.getParameter("errorInforme") != null){
+                out.println("<script>alert('Lo datos de datos generales no se puede insertar \n verificar')</script>");
+            }
+        %>
     </head>
-    
+
     <body >
-    <%
-        catalogos cat = new catalogos();
-        ArrayList<String[]> lista;
-        
-        String idEntidad=request.getParameter("entidad");
-    %>
+        <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista;
+        %>
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
@@ -36,10 +41,11 @@
                 <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Datos Órgano Jurisdiccional</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Forma de Organizacion del Órgano</button>
                 <button class="pestanaLinks" onclick="openPestana(event, 'p4')" id="btn4">Datos Geográficos</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos Captura</button>               
+                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos del Capturador</button>
+                <button class="pestanaLinks" onclick="openPestana(event, 'p6')">Datos Generales</button>
             </div>
 
-            <form action="juzgados.jsp" method="post" name="formJuzgados">
+            <form action="insrtJuzgados" method="post" name="formJuzgados">
                 <!-- Contenido pestañas -->
                 <div id="p1" class="pestanaContent" style="display: block">
                     <h2>Datos del Juez</h2>
@@ -84,7 +90,7 @@
                                 <label for="numDistrito">Número del Distrito Judicial</label>
                                 <select name="numDistrito" class="txtMedia" id="numDistrito" required>
                                     <option value="">--Seleccione--</option>
-                                    <%   
+                                    <%
                                         NumerosRomanos nRomanosR = new NumerosRomanos(1, 99);
                                         ArrayList<NumerosRomanos> alnRomanosR = nRomanosR.getNumerosRomanos();
                                         for (NumerosRomanos nR : alnRomanosR) {
@@ -120,7 +126,7 @@
                                     <%
                                         lista = cat.findForOrganiza();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -130,17 +136,17 @@
                         <tr>
                             <td></td>
                             <td>
-                                <div id="dRegJudicial" hidden>
+                                <div id="dRegJudicial" class="oculto">
                                     <label for="regJudicial">Nombre de la Región Judicial</label>
                                     <input type="text" name="regJudicial" id="regJudicial"/>
                                 </div>
-                                <div id="dDistJudicial" hidden>
+                                <div id="dDistJudicial" class="oculto">
                                     <label for="distJudicial">Nombre del Distrito Judicial</label>
                                     <input type="text" name="distJudicial" id="distJudicial"/>
                                 </div>
-                                <div id="dPartJudicial" hidden>
+                                <div id="dPartJudicial" class="oculto">
                                     <label for="partJudicial">Nombre del Partido Judicial</label>
-                                    <input type="text" name="partJudicial" id="partJudicial" />
+                                    <input type="text" name="partJudicial" id="partJudicial"/>
                                 </div>
                             </td>
                             <td></td>
@@ -153,12 +159,12 @@
                         <tr>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
-                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ','#municipioJ')" required>
+                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEntidades();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -168,10 +174,10 @@
                                 <label for="vialidad">Vialidad</label>
                                 <select class="txtMedia" name="vialidad" id="vialidad" required>
                                     <option value="">--Seleccione--</option>
-                                    <%                                        
+                                    <%
                                         lista = cat.findVialidad();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -183,7 +189,7 @@
                                     <%
                                         lista = cat.findAsentHumano();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='"+ls[0]+"'>"+ls[0]+ ".- " +ls[1]+"</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -202,15 +208,15 @@
                             </td>
                             <td>
                                 <label for="nomVialidad">Nombre de la Vialidad</label>
-                                <input type="text" name="nomVialidad" id="nomVialidad" />
+                                <input type="text" name="nomVialidad" id="nomVialidad" required/>
                             </td>
                             <td>
                                 <label for="nomAsentamiento">Nombre del Asentamiento Humano</label>
-                                <input type="text" name="nomAsentamiento" id="nomAsentamiento"/>
+                                <input type="text" name="nomAsentamiento" id="nomAsentamiento" required/>
 
                             </td>
                             <td>
-                                <label for="">No. Exterior / No. Interiior</label>
+                                <label for="">No. Exterior / No. Interior</label>
                                 <input type="text" class="txtSmall" name="noExterior" id="noExterior" />
                                 <input type="text" class="txtSmall" name="noInterior" id="noInterior" />
                             </td>
@@ -218,27 +224,91 @@
                     </table>
                 </div>
                 <div id="p5" class="pestanaContent">
-                    <h2>Datos Captura</h2>
+                    <h2>Datos del Capturador</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="nombreCap">Nombre(s)</label>
-                                <input type="text" name="nombreCap" id="nombreCap" />
+                                <input type="text" name="nombreCap" id="nombreCap" required/>
                             </td>
                             <td>
                                 <label for="apaternoCap">Apellido Paterno</label>
-                                <input type="text" name="apaternoCap" id="apaternoCap" />
+                                <input type="text" name="apaternoCap" id="apaternoCap" required/>
                             </td>
                             <td>
                                 <label for="amaternoCap">Apellido Materno</label>
-                                <input type="text" name="amaternoCap" id="amaternoCap"/>
+                                <input type="text" name="amaternoCap" id="amaternoCap"required/>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 <label for="Cargo">Cargo</label>
-                                <input type="text" name="cargo" id="cargo" />
+                                <input type="text" name="cargo" id="cargo" required/>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="p6" class="pestanaContent">
+                    <h2>Datos Generales</h2>
+                    <table class="tablaFormu">
+                        <tr>
+                            <td>
+                                <label for="ejercicio">Ejercicio:</label>
+                                <select name="ejercicio" id="ejercicio" class="txtMedia" required>
+                                    <option value="">--Seleccionar--</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label for="causasPena">Causas Penales:</label>
+                                <input type="text" name="causasPena" id="causasPena" class="txtMedia">
+                            </td>
+                            <td>
+                                <label for="mediProteccion">Medidas de Protección:</label>
+                                <input type="text" name="mediProteccion" id="mediProteccion" class="txtMedia">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="providenPrecauto">Providencias Precautorias:</label>
+                                <input type="text" name="providenPrecauto" id="providenPrecauto" class="txtMedia">
+                            </td>
+                            <td>
+                                <label for="actosInvestiga">Prueba Anticipada:</label>
+                                <input type="text" name="pruebaAnti" id="pruebaAnti" class="txtMedia">
+                            </td>
+                            <td>
+                                <label for="actosInvestiga">Actos investigación con Autorizacion Previa:</label>
+                                <input type="text" name="actosInvestiga" id="actosInvestiga" class="txtMedia">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="excusa">Excusas:</label>
+                                <input type="text" name="excusa" id="excusa" class="txtMedia">
+                            </td>
+                            <td>
+                                <label for="recusa">Recusación:</label>
+                                <input type="text" name="recusa" id="recusa" class="txtMedia">
+                            </td>
+                            <td>
+                                <label for="otras">Otras Cargas:</label>
+                                <input type="text" name="otras" id="otras" class="txtMedia">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="causasPenaPend">Causas Penales Pendientes de Conclusión:</label>
+                                <input type="text" name="causasPenaPend" id="causasPenaPend" class="txtMedia">
+                            </td>
+                            <td>
+                                <label for="causasPenaBaja">Causas Penales Bajas de Sistema:</label>
+                                <input type="text" name="causasPenaBaja" id="causasPenaBaja" class="txtMedia">
                             </td>
                             <td></td>
                         </tr>

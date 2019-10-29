@@ -28,6 +28,21 @@ body{
     font-size: 18px;
 }
 
+#splash{
+    background-color: rgba(0,0,0,1);
+    color: #fff;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#splash img{
+    position: relative;
+    margin-top: 10vh;
+}
+
 .cabecera{
     background-color: #27251F;
     width: 100%;
@@ -43,6 +58,12 @@ body{
     float: right;
     height: 50px;
     margin: 5px 20px;;
+}
+
+.cabecera #usu{
+    float: right;
+    color: #FFF;
+    margin: 40px 10px 0 10px;
 }
 
 .cabecera #doscolores{
@@ -61,13 +82,13 @@ body{
 
 .contenedor h1{
     font-size: 35px;
-    padding: 20px 0;
+    padding: 15px 0;
     text-shadow: grey 5px 5px 5px;
 }
 
 .contenedor h2{
     font-size: 30px;
-    padding: 15px 0;
+    padding: 12px 0;
     text-shadow: grey 5px 5px 5px;
 }
 
@@ -80,7 +101,7 @@ body{
 .contenedor .parrafo{
     text-align: justify;
     padding: 10px;
-    margin:0 20px 20px 20px;
+    margin:0 20px 10px 20px;
 }
 
 .contenedor input{
@@ -95,6 +116,7 @@ body{
     width: 10%;
     height: 40px;
     font-size: 16px;
+    cursor: pointer;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -131,6 +153,7 @@ body{
     background-color: #27251F;
     color: #fff;
     border: 1px solid #0077CB;
+    border-radius: 5px;
     font-size: 14px;
     padding: 2px 5px;
     height: 30px;
@@ -164,6 +187,7 @@ fieldset{
     background-color: rgba(255,255,255,0.4);
     border-color:  #0077CB;
     border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 fieldset legend{
@@ -254,6 +278,12 @@ fieldset legend{
     vertical-align: text-top;
 }
 
+.contenedor input[type="radio"]{
+    width:19px;
+    height:19px;
+    margin: 0 4px 0 0;
+    border: none;
+}
 .contenedor input[type="checkbox"]{
     width:19px;
     height:19px;
@@ -285,4 +315,18 @@ fieldset legend{
 .contenedor .selectize-control{
     text-align: left;
     margin: 0 auto;
+}
+
+#juzClave{
+    float: left;
+    margin: 0;
+    text-align: left;
+}
+
+#juzClave label, #juzClave select{
+    margin: 0;
+}
+
+#juzClave label{
+    margin-bottom: 10px;
 }

@@ -22,26 +22,26 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Delitos</h1>
-            <form action="" method="post">
+            <form action="" method="post" name="formDelitos">
                 <fieldset>
                     <legend>Identificación del tipo penal</legend>
                     <table class="tablaFormu" >
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>
-                                <select class="demo-default txtExBig"  name="delitoCP" id="delitoCP" placeholder="--Selecciona el delito--" required>
-                                    <option value=""></option>
+                                <select  class="demo-default txtExBig" name="delitoCP" id="delitoCP" placeholder="--Seleccione--"  required>
+                                    <option value="" ></option>
                                     <%
                                         lista = cat.findCodNorma();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "' data-data='{\"norma\":\"" + ls[2] +"\"}'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
                             </td>
                             <td>
                                 <label for="fuero">Fuero</label>
-                                <select class="txtMedia"  name="fuero" id="fuero">
+                                <select class="txtMedia"  name="fuero" id="fuero" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findFuero();
@@ -60,7 +60,7 @@
                             <td rowspan="2">
                                 <fieldset>
                                     <label for="reclasificaDel">¿Hubo reclasificación del delito?</label>
-                                    <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel');">
+                                    <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel','#chkFechaReclaDel');" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -82,14 +82,8 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoNT">Delito de acuerdo con la Norma Técnica</label>
-                                <select class="txtMedia"  name="delitoNT" id="delitoNT" required>
+                                <select class="lblExBig"  name="delitoNT" id="delitoNT" required>
                                     <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findDelNorma();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
                                 </select> 
                             </td>
                         </tr>
@@ -201,17 +195,17 @@
                         <tr>
                             <td>
                                 <label for="ocurrencia">Fecha de ocurrencia</label>
-                                <input type="date" name="ocurrencia" id="ocurrencia"/>
+                                <input type="date" name="ocurrencia" id="ocurrencia" required/>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkOcurrencia"><label>No identificada</label>
+                                    <input type="checkbox" id="chkOcurrencia" onclick="fechaNoIdent('#chkOcurrencia', '#ocurrencia');"><label>No identificada</label>
                                 </div>
                             </td>
                             <td colspan="2">
                                 <fieldset>
                                     <legend>Lugar de ocurrencia</legend>
-                                    <div class="cols">
+                                    <div class="cols lblExBig">
                                         <label>Entidad Federativa</label>
-                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD', '#municipioD')">
+                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD','#municipioD')" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -221,14 +215,17 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols">
+                                    <div class="cols lblExBig">
                                         <label class="lblExBig">Municipio/Demarcación territorial</label>
-                                        <select class="txtMedia" name="municipioD" id="municipioD">
+                                        <select class="txtMedia" name="municipioD" id="municipioD" required>
                                             <option value="">--Seleccione--</option>
                                         </select>
                                     </div>
                                 </fieldset>
                             </td>
+                            <td></td>
+                        </tr>
+                        <tr>
                             <td>
                                 <label for="numAdo">Número de adolescentes por este delito </label>
                                 <select class="txtMedia" name="numAdo" id="numAdo">
@@ -237,8 +234,6 @@
                                     %>
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <label for="numVic">Número de víctimas por este delito </label>
                                 <select class="txtMedia" name="numVic" id="numVic">
@@ -247,7 +242,6 @@
                                     %>
                                 </select>
                             </td>
-                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>

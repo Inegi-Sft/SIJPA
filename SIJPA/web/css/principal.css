@@ -60,6 +60,12 @@ body{
     margin: 5px 20px;;
 }
 
+.cabecera #usu{
+    float: right;
+    color: #FFF;
+    margin: 40px 10px 0 10px;
+}
+
 .cabecera #doscolores{
     height: 7px;
     background-color: #706F6F;
@@ -147,6 +153,7 @@ body{
     background-color: #27251F;
     color: #fff;
     border: 1px solid #0077CB;
+    border-radius: 5px;
     font-size: 14px;
     padding: 2px 5px;
     height: 30px;
@@ -308,4 +315,18 @@ fieldset legend{
 .contenedor .selectize-control{
     text-align: left;
     margin: 0 auto;
+}
+
+#juzClave{
+    float: left;
+    margin: 0;
+    text-align: left;
+}
+
+#juzClave label, #juzClave select{
+    margin: 0;
+}
+
+#juzClave label{
+    margin-bottom: 10px;
 }

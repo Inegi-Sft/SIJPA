@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author CARLOS.SANCHEZG
  */
-public class comprubaUsuario {
+public class usuario {
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
     ResultSet rs;
@@ -27,7 +27,7 @@ public class comprubaUsuario {
             rs = conn.consultar(sql);
             return rs.next();
         } catch (SQLException ex) {
-            Logger.getLogger(comprubaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }

@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $('select > option[value=-2]').hide(); 
+    
     //despliega ventana modal
     $('.pop').fancybox({
         'type': 'iframe',
@@ -35,48 +37,26 @@ $(document).ready(function () {
         switch ($("#fOrganiza").val()) {
             case '1':
                 $("#dRegJudicial").fadeIn("slow");
-                $("#regJudicial").val("");
-                $("#regJudicial").prop("required",true);
-                $("#dDistJudicial").hide();
-                $("#distJudicial").val("-2");
-                $("#distJudicial").prop("required",false);
-                $("#dPartJudicial").hide();
-                $("#partJudicial").prop("required",false);
-                $("#partJudicial").val("-2");
+                $("#regJudicial").val("").prop("required",true);
+                $("#dDistJudicial,#dPartJudicial").hide();
+                $("#distJudicial,#partJudicial").val("-2").prop("required",false);
                 break;
             case '2':
-                $("#dRegJudicial").hide();
-                $("#regJudicial").val("-2");
-                $("#regJudicial").prop("required",false);
+                $("#dRegJudicial,#dPartJudicial").hide();
+                $("#regJudicial,#partJudicial").val("-2").prop("required",false);
                 $("#dDistJudicial").fadeIn("slow");
-                $("#distJudicial").prop("required",true);
-                $("#distJudicial").val("");
-                $("#dPartJudicial").hide();
-                $("#partJudicial").prop("required",false);
-                $("#partJudicial").val("-2");
+                $("#distJudicial").val("").prop("required",true);
                 break;
             case '3':
-                $("#dRegJudicial").hide();
-                $("#regJudicial").prop("required",false);
-                $("#regJudicial").val("-2");
-                $("#dDistJudicial").hide();
-                $("#distJudicial").prop("required",false);
-                $("#distJudicial").val("-2");
+                $("#dRegJudicial,#dDistJudicial").hide();
+                $("#regJudicial,#distJudicial").val("-2").prop("required",false);
                 $("#dPartJudicial").fadeIn("slow");
-                $("#partJudicial").prop("required",true);
-                $("#partJudicial").val("");
+                $("#partJudicial").val("").prop("required",true);
                 break;
         }
         if ($("#fOrganiza").val() > 3 || $("#fOrganiza").val() === "") {
-            $("#dRegJudicial").fadeOut("slow");
-            $("#regJudicial").prop("required",false);
-            $("#regJudicial").val("-2");
-            $("#dDistJudicial").fadeOut("slow");
-            $("#distJudicial").prop("required",false);
-            $("#distJudicial").val("-2");
-            $("#dPartJudicial").fadeOut("slow");
-            $("#partJudicial").prop("required",false);
-            $("#partJudicial").val("-2");
+            $("#dRegJudicial,#dDistJudicial,#dPartJudicial").fadeOut("slow");
+            $("#regJudicial,#distJudicial,#partJudicial").val("-2").prop("required",false);
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
@@ -598,12 +578,12 @@ function llenaNormaT(vNorma) {
  * @param {type} idTxtDate
  * @returns {undefined}
  */
-function fechaNoIdent(idChk, idTxtDate) {
-    if ($(idChk).is(":checked")) {
-        $(idTxtDate).val("1899-09-09");
-        $(idTxtDate).prop("disabled", true);
-    } else {
-        $(idTxtDate).val("");
-        $(idTxtDate).prop("disabled", false);
-    }
-};
+//function fechaNoIdent(idChk, idTxtDate) {
+//    if ($(idChk).is(":checked")) {
+//        $(idTxtDate).val("1899-09-09");
+//        $(idTxtDate).prop("disabled", true);
+//    } else {
+//        $(idTxtDate).val("");
+//        $(idTxtDate).prop("disabled", false);
+//    }
+//};

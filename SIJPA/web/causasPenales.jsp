@@ -16,12 +16,23 @@
     <body>
         <%@include file="cabecera.jsp" %>
         <%@include file="menu.jsp"%>
+        <% 
+            if(request.getAttribute("juzgadoClave") != null){
+                out.println("<h1>" + request.getAttribute("juzgadoClave") + "</h1>");
+            }
+        %>
         <section class="contenedor">
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>Causas Penales</h1>
             <form action="#" method="post">
+                <div id="juzClave">
+                    <label for="cusaPenal">Juzgado Clave:</label>
+                    <select name="cusaPenal" class="txtLong" id="causaPenal">
+                        <option value="">--Seleccione--</option>
+                    </select>
+                </div>
                 <span class="totExp">Total de Causas Penales:</span>
                 <a class="add" href="elementosPrincipales.jsp"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</a>
                 <table id="causas" class="myTable">

@@ -7,11 +7,13 @@
 import ConexionDB.Conexion_Mysql;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,15 +34,17 @@ public class insrtUsuario extends HttpServlet {
      */
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
+    ResultSet rs;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String userName = System.getProperty("user.name");
         
         if(request.getParameter("aceptar") != null){
             conn.Conectar();
-            sql = "INSERT INTO USUARIOS(USUARIO,ESTATUS) VALUES('" + System.getProperty("user.name") + "', 1)";
+            sql = "INSERT INTO USUARIOS(USUARIO,ESTATUS) VALUES('" + userName + "', 1)";
             if(conn.escribir(sql)){
-                response.sendRedirect("datosGral.jsp");
+                response.sendRedirect("juzgados.jsp");
             }else{
                 response.sendRedirect("index.jsp?errorbd=si");
             }
@@ -63,6 +67,7 @@ public class insrtUsuario extends HttpServlet {
             out.close();
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -14,7 +14,6 @@
     border-spacing: 0;
     width: auto;
     text-align: center;
-
 }
 
 .myTable th, .myTable td{
@@ -61,26 +60,28 @@ table.dataTable tbody th,table.dataTable tbody td{
 }
 #causas_filter, #causas_length{
     height: 60px;
-    
+}
+#causas_filter label, #causas_length label{
+    margin: 20px 10px 20px 0;
+    text-align: left;
 }
 #causas_filter{
     position: relative;
     right: 15%;
 }
 .add{
-    vertical-align: bottom;
     text-decoration: none;
-    position: absolute;
-    top: 180px;
-    right: 20px;
+    position: relative;
+    float: right;
+    top: 80px;
     background-color: #0077CB;
     color: #FFFFFF;
     border: none;
     border-radius: 5px;
-    width: 13%;
-    height: 33px;
+    width: 15%;
+    height: 30px;
     padding: 5px;
-    font-size: 14px;
+    font-size: 15px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -92,18 +93,23 @@ table.dataTable tbody th,table.dataTable tbody td{
 .add:hover{
     background-color: #00CBCB;
     color: #FFFFFF;
-    width: 14%;
+    width: 16%;
     cursor: pointer;
 }
 
 .add img{
-    /*vertical-align: bottom;*/
     vertical-align: text-bottom;
 }
 
 .totExp{
-    display: block;
+    position: relative;
     float: left;
+    left: 5%;
+    top: 80px;
+    height: 30px;
+    padding: 5px;
+    font-weight: bolder;
+    font-size: 19px;
 }
 table.dataTable{
     width:100%;margin:0 auto;clear:both;border-collapse:separate;border-spacing:0

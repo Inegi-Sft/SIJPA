@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author CESAR.OSORIO
  */
-public class conclusiones {
+public class showConclusiones {
 
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> conc;
@@ -39,7 +39,7 @@ public class conclusiones {
             conn.close();
         }
         catch (SQLException ex) {
-            Logger.getLogger(tramite.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conc;
 
@@ -58,7 +58,7 @@ public class conclusiones {
             conn.close();
         }
         catch (SQLException ex) {
-            Logger.getLogger(tramite.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conc;
 

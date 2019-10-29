@@ -3,8 +3,8 @@
     Created on : 4/10/2019, 11:24:50 AM
     Author     : FERMIN.GOMEZ
 --%>
-<%@page import="clasesAuxiliar.conclusiones"%>
-<%@page import="clasesAuxiliar.tramite"%>
+<%@page import="clasesAuxiliar.showConclusiones"%>
+<%@page import="clasesAuxiliar.showTramite"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,10 +25,10 @@
     </head>
     <body>
         <%
-            tramite tram = new tramite();
+            showTramite tram = new showTramite();
             ArrayList<String[]> trami = new ArrayList();
 
-            conclusiones conclusion = new conclusiones();
+            showConclusiones conclusion = new showConclusiones();
             ArrayList<String[]> conc = new ArrayList();
         %>
         <%@include file="cabecera.jsp"%>

@@ -164,6 +164,45 @@ function splashIn() {
 /******************** fin splash del inicio del sistema***********************/
 
 /***************************** PARA CAPTURA EXPEDIENTES *********************/
+function competencia() {
+    switch ($('#compe').val()) {
+        case '1':
+            $('#tipoIncopetencia').fadeOut("slow");
+            $('#Tincompe').val('-2').prop('required', false);
+            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeIn("slow");
+            $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
+            $('#ExpAcomu, #Pparticular, #Tprocedi').val('').prop("required", true);
+            break;
+        case '2':
+            $('#tipoIncopetencia').fadeIn("slow");
+            $('#Tincompe').val('').prop("required", true);
+            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeOut("slow");
+            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
+            break;
+    }
+
+}
+
+function expacumula() {
+    if ($('#ExpAcomu').val() === '1') {
+        $('#expReferen').fadeIn("slow");
+        $('#ExpRefe').val('').prop("required", true);
+    } else {
+        $('#expReferen').fadeOut("slow");
+        $('#ExpRefe').val('-2').prop("required", false);
+    }
+}
+
+function expeAudiencia() {
+    if($('#compe').val()===2)
+    $('#expedientesF').submit(function(e){
+       if($('#aplAudi:checked').length===0){
+           e.preventDefault();
+           alert("Selecciona por lo menos una Audiencia");
+       } 
+    });
+}
+
 //Habilita text de Audiencias en Expedientes
 /***
  * @param {type} obj
@@ -255,18 +294,18 @@ function fechaNoIdent(idChk, idTxtDate) {
     }
 }
 
-function etapaInter() {
-    if ($('#audiInterme').val() === '1') {
-        $('#divfechaAudiinter,#divfechaEscrito').fadeIn("slow");
-        $('#chkAudiinter,#chkEscrito').prop("checked", false);
-        $('#fechaAudiinter,#fechaEscrito').val("").prop("disabled", false).prop("required", true);
-    } else {
-        $('#divfechaAudiinter,#divfechaEscrito').fadeOut("slow");
-        $('#chkAudiinter,#chkEscrito').prop("checked", false);
-        $('#fechaAudiinter,#fechaEscrito').val("1899-09-09").prop("disabled", false).prop("required", false);
-    }
+function etapaInter(){
+  if($('#audiInterme').val()==='1'){
+      $('#divfechaAudiinter,#divfechaEscrito').fadeIn("slow");
+      $('#chkAudiinter,#chkEscrito').prop("checked", false);
+      $('#fechaAudiinter,#fechaEscrito').val("").prop("disabled", false).prop("required", true);
+  } else {
+       $('#divfechaAudiinter,#divfechaEscrito').fadeOut("slow");
+      $('#chkAudiinter,#chkEscrito').prop("checked", false);
+      $('#fechaAudiinter,#fechaEscrito').val("1899-09-09").prop("disabled", false).prop("required", false);
+  }
 }
-/*****************************FIN DE FUNCIONES ETAPA INTERMEDIA***************************/
+/*****************************FIN DE FUNCIONES ETAPA INTERMEDIA*****************/
 
 /**************************FUNCION ETAPA INICIAL *******************************/
 /***
@@ -474,7 +513,6 @@ function lugarResidencia(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
         $(idSelMuni).val("-2");
     }
 }
-;
 
 //numeral 10 indica no ejercia ninguna ocupacion
 function ocupacionAdo(idSelect, idDiv, idSelOculta) {
@@ -487,46 +525,6 @@ function ocupacionAdo(idSelect, idDiv, idSelOculta) {
     }
 }
 /*---------------------------- FIN FUNCIONES PROCESADOS --------------------------*/
-
-/*******************FUNCIONES DE EXPEDIENTES************************************/
-function competencia() {
-    switch ($('#compe').val()) {
-        case '1':
-            $('#tipoIncopetencia').fadeOut("slow");
-            $('#Tincompe').val('-2').prop('required', false);
-            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeIn("slow");
-            $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
-            $('#ExpAcomu, #Pparticular, #Tprocedi').val('').prop("required", true);
-            break;
-        case '2':
-            $('#tipoIncopetencia').fadeIn("slow");
-            $('#Tincompe').val('').prop("required", true);
-            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeOut("slow");
-            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
-            break;
-    }
-}
-
-function expacumula() {
-    if ($('#ExpAcomu').val() === '1') {
-        $('#expReferen').fadeIn("slow");
-        $('#ExpRefe').val('').prop("required", true);
-    } else {
-        $('#expReferen').fadeOut("slow");
-        $('#ExpRefe').val('-2').prop("required", false);
-    }
-}
-
-function expeAudiencia() {
-    if ($('#compe').val() === 2)
-        $('#expedientesF').submit(function (e) {
-            if ($('#aplAudi:checked').length === 0) {
-                e.preventDefault();
-                alert("Selecciona por lo menos una Audiencia");
-            }
-        });
-}
-/*************************FIN DE FUNCIONES DE EXPEDIENTES***********************/
 
 /***************************** FUNCIONES DELITOS *******************************/
 /***

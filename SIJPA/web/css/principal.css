@@ -239,6 +239,11 @@ fieldset legend{
     vertical-align: top;
     width: 350px;
 }
+.colsx{
+    display: inline-block;
+    vertical-align: top;
+    width: 335px;;
+}
 
 .btnCerrar {
     float: right;

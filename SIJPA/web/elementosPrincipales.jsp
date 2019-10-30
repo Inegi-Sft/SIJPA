@@ -5,6 +5,8 @@
 --%>
 <%@page import="clasesAuxiliar.showConclusiones"%>
 <%@page import="clasesAuxiliar.showTramite"%>
+
+<%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,20 +18,22 @@
         <%
             if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
-            } else if (request.getParameter("seinserto") != null) {
-                out.println("<script>parent.$.fancybox.close(); window.location='elementosPrincipales.jsp';</script>");
-//                out.println("$('#p8').load($('tramite.jsp #tramiteRegis'))</script>");
-//                out.println("<script type='text/javascript'>window.location='elementosPrincipales.jsp';</script>");
+            } 
+            if (request.getParameter("insertado") != null) {
+                //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
+                out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
+
             }
         %>
     </head>
     <body>
         <%
-            showTramite tram = new showTramite();
-            ArrayList<String[]> trami = new ArrayList();
-
+            showProcesados proce=new showProcesados();
             showConclusiones conclusion = new showConclusiones();
-            ArrayList<String[]> conc = new ArrayList();
+            showTramite tram = new showTramite();
+            ArrayList<String[]> trami = new ArrayList(); 
+            ArrayList<String[]> conc = new ArrayList(); 
+            ArrayList<String[]> list;
         %>
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
@@ -95,19 +99,26 @@
                         <th>Tipo de Presentación</th>
                         <th>Sexo</th>
                         <th>Fecha nacimiento</th>
-                        <th>Lugar nacimiento</th>
+                        <th>Grado de estudios</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
-                    <tr>
-                        <td>0002/2019-p1</td>
-                        <td>Detenido</td>
-                        <td>Hombre</td>
-                        <td>15-08-1987</td>
-                        <td>Ciudad Valles, San Luis Potosi</td>
-                        <td><a class="pop" href="procesados.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    </tr>
+                <%    
+                    list = proce.findProcesados("BORRAME/2019");
+                    for (String[] ls : list) {
+                %>
+                        <tr>
+                            <td><%=ls[0]%></td>
+                            <td><%=ls[1]%></td>
+                            <td><%=ls[2]%></td>
+                            <td><%=ls[3]%></td>
+                            <td><%=ls[4]%></td>
+                            <td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td>
+                            <td><a href="#"><img onclick="deleteProcesado('<%=ls[0]%>')" src="img/delete.png" title="Eliminar"/></a></td>
+                        </tr>
+                <%
+                    }
+                %>
                 </table>
             </div>
             <div id="p4" class="pestanaContent">
@@ -236,3 +247,13 @@
         </section>
     </body>
 </html>
+<<<<<<< Upstream, based on origin/master
+            showTramite tram = new showTramite();
+            ArrayList<String[]> trami = new ArrayList();
+
+            showConclusiones conclusion = new showConclusiones();
+            ArrayList<String[]> conc = new ArrayList();
+=======
+            showProcesados proce = new showProcesados();
+            ArrayList<String[]> list;
+>>>>>>> 08dc58f 30/10/2019 Se descarga la ultima actualizacion --Fer

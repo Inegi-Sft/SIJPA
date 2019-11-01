@@ -3,8 +3,13 @@
     Created on : 4/10/2019, 11:24:50 AM
     Author     : FERMIN.GOMEZ
 --%>
-<%@page import="clasesAuxiliar.conclusiones"%>
-<%@page import="clasesAuxiliar.tramite"%>
+<%@page import="clasesAuxiliar.showVictimas"%>
+<%@page import="clasesAuxiliar.showProcesados"%>
+<%@page import="clasesAuxiliar.showDelitos"%>
+<%@page import="clasesAuxiliar.showConclusiones"%>
+<%@page import="clasesAuxiliar.showTramite"%>
+
+<%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,23 +21,29 @@
         <%
             if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
-            }/* else if (request.getParameter("seinserto") != null) {
-                out.println("<script>"
-                        + "parent.$.fancybox.close();"
-                        + "location.reload();"
-                        + "</script>");
-//                out.println("$('#p8').load($('tramite.jsp #tramiteRegis'))</script>");
-//                out.println("<script type='text/javascript'>window.location='elementosPrincipales.jsp';</script>");
-            }*/
+            } 
+            if (request.getParameter("insertado") != null) {
+                //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
+                out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
+            }
         %>
     </head>
     <body>
-        <%
-            tramite tram = new tramite();
-            ArrayList<String[]> trami = new ArrayList();
+        <%           
+            showDelitos delito = new showDelitos();
+            ArrayList<String[]>  deli = new ArrayList();
+            
+            showProcesados procesa = new showProcesados();
+            ArrayList<String[]>  proce = new ArrayList();
+            
+            showVictimas victi = new showVictimas();
+            ArrayList<String[]> vic = new ArrayList();
 
-            conclusiones conclusion = new conclusiones();
+            showConclusiones conclusion = new showConclusiones();
             ArrayList<String[]> conc = new ArrayList();
+            
+            showTramite tram = new showTramite();
+            ArrayList<String[]> trami = new ArrayList();
         %>
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
@@ -53,69 +64,69 @@
             </div>
             <div id="p2" class="pestanaContent">
                 <h2>Delitos</h2>
-                <table class="tablasRegis">
-                    <tr>
-                        <th>Delito clave</th>
-                        <th>Delito (Cod. Penal)</th>
-                        <th>Delito (Norma Tec.)</th>
-                        <th>Grado</th>
-                        <th>Comisión</th>
-                        <th>No. Adolescentes</th>
-                        <th>No. Victimas</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                    <tr>
-                        <td>0002/2019-d1</td>
-                        <td>Homicidio</td>
-                        <td>Homicidio</td>
-                        <td>Consumado</td>
-                        <td>Doloso</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td><a class="pop" href="delitos.jsp"><img src='img/editar.png' title="Editar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-
-                    </tr>
-                    <tr>
-                        <td>0002/2019-d2</td>
-                        <td>Lesiones</td>
-                        <td>Lesiones</td>
-                        <td>Consumado</td>
-                        <td>Doloso</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td><a class="pop" href="delitos.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    </tr>
+                <table class="tablasRegis" id="tablaDeli">
+                    <thead>
+                        <tr>
+                            <th>Delito clave</th>
+                            <th>Delito (Cod. Penal)</th>
+                            <th>Delito (Norma Tec.)</th>
+                            <th>Grado</th>
+                            <th>Comisión</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>  
+                    <tbody>
+                        
+                        <%-- 
+                            deli = delito.findDeliTabla();
+                            for (String[] tm : deli) {
+                                out.println("<tr>");
+                                out.println("<td>" + tm[0] + "</td>");
+                                out.println("<td>" + tm[1] + "</td>");
+                                out.println("<td>" + tm[2] + "</td>");
+                                out.println("<td>" + tm[3] + "</td>");
+                                out.println("<td>" + tm[4] + "</td>");
+                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("</tr>");
+                            }
+                        --%>
+                        
+                     </tbody>
                 </table>
             </div>
             <div id="p3" class="pestanaContent">
                 <h2>Adolescentes</h2>
-                <table id="tramiteRegis" class="tablasRegis">
-                    <tr>
-                        <th>Adolescente clave</th>
-                        <th>Tipo de Presentación</th>
-                        <th>Sexo</th>
-                        <th>Fecha nacimiento</th>
-                        <th>Lugar nacimiento</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                    <tr>
-                        <td>0002/2019-p1</td>
-                        <td>Detenido</td>
-                        <td>Hombre</td>
-                        <td>15-08-1987</td>
-                        <td>Ciudad Valles, San Luis Potosi</td>
-                        <td><a class="pop" href="procesados.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    </tr>
+                <table id="tablaProcesa" class="tablasRegis">
+                    <thead> 
+                        <tr>
+                            <th>Adolescente clave</th>
+                            <th>Tipo de Presentación</th>
+                            <th>Sexo</th>
+                            <th>Fecha nacimiento</th>
+                            <th>Grado de estudios</th>
+                            <th>Editar</th>
+                        </tr>
+                   </thead> 
+                    <tbody>
+                        <%--  proce = procesa.findProcesasdosTabla();
+                            for (String[] tm : proce) {
+                                out.println("<tr>");
+                                out.println("<td>" + tm[0] + "</td>");
+                                out.println("<td>" + tm[1] + "</td>");
+                                out.println("<td>" + tm[2] + "</td>");
+                                out.println("<td>" + tm[3] + "</td>");
+                                out.println("<td>" + tm[4] + "</td>");
+                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("</tr>");
+                            }
+                        --%>
+                     </tbody>
                 </table>
             </div>
             <div id="p4" class="pestanaContent">
                 <h2>Victimas</h2>
-                <table class="tablasRegis">
+                <table class="tablasRegis" id="tablaVictimas">
+                    <thead> 
                     <tr>
                         <th>Victima clave</th>
                         <th>Tipo de Víctima</th>
@@ -123,17 +134,22 @@
                         <th>Fecha nacimiento</th>
                         <th>Lugar nacimiento</th>
                         <th>Editar</th>
-                        <th>Eliminar</th>
                     </tr>
-                    <tr>
-                        <td>0002/2019-v1</td>
-                        <td>Persona Fisica</td>
-                        <td>Hombre</td>
-                        <td>15-08-1987</td>
-                        <td>Ciudad Valles, San Luis Potosi</td>
-                        <td><a class="pop" href="victimas.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                        <%--  vic = victi.findVictimasTabla();
+                            for (String[] tm : vic) {
+                                out.println("<tr>");
+                                out.println("<td>" + tm[0] + "</td>");
+                                out.println("<td>" + tm[1] + "</td>");
+                                out.println("<td>" + tm[2] + "</td>");
+                                out.println("<td>" + tm[3] + "</td>");
+                                out.println("<td>" + tm[4] + "</td>");
+                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("</tr>");
+                            }
+                        --%>
+                     </tbody>
                 </table>
             </div>
             <div id="p5" class="pestanaContent">
@@ -146,7 +162,6 @@
                         <th>Auto vinculacion</th>
                         <th>Medida cautelar</th>
                         <th>Editar</th>
-                        <th>Eliminar</th>
                     </tr>
                     <tr>
                         <td>0002/2019-p1</td>
@@ -155,7 +170,6 @@
                         <td>Vinculación a proceso</td>
                         <td>No</td>
                         <td><a class="pop" href="etapaInicial.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
                     </tr>
                 </table>
             </div>
@@ -169,7 +183,6 @@
                         <th>Presentacion medios prueba</th>
                         <th>Acuerdos probatorios</th>
                         <th>Editar</th>
-                        <th>Eliminar</th>
                     </tr>
                     <tr>
                         <td>0002/2019-c2</td>
@@ -178,63 +191,59 @@
                         <td>Si</td>
                         <td>No</td>
                         <td><a class="pop" href="etapaIntermedia.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                        <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
                     </tr>
                 </table>
             </div>
             <div id="p7" class="pestanaContent">
                 <h2>Resoluciones dictadas</h2>
-                <table class="tablasRegis">
+                <table class="tablasRegis" id="tablaConclu">
+                    <thead>
                     <tr>
                         <th>Conclusión clave</th>
                         <th>Fecha conclusión</th>
                         <th>Adolescente clave</th>
                         <th>Tipo conclusión/terminación</th>
                         <th>Editar</th>
-                        <th>Eliminar</th>
                     </tr>
+                    </thead>
                     <tbody>
-                        <%  conc = conclusion.findConcluTabla();
+                        <%--  conc = conclusion.findConcluTabla();
                             for (String[] tm : conc) {
                                 out.println("<tr>");
                                 out.println("<td>" + tm[0] + "</td>");
                                 out.println("<td>" + tm[1] + "</td>");
                                 out.println("<td>" + tm[2] + "</td>");
                                 out.println("<td>" + tm[3] + "</td>");
-                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                out.println("<td><a class='pop' href='conclusiones.jsp?pc=" + tm[2] + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                 out.println("</tr>");
                             }
-                        %>
+                        --%>
                     </tbody>
                 </table>
             </div>
             <div id="p8" class="pestanaContent">
                 <h2>Pendientes de resolución</h2>
-                <table class="tablasRegis" id="tramiteTabla">
+                <table class="tablasRegis" id="tramiteRegis">
                     <thead>
-                        <tr>
-                            <th>Procesado clave</th>
-                            <th>Etapa procesal</th>
-                            <th>Motivo</th>
-                            <th>Fecha última actuación</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
-                        </tr>
+                    <tr>
+                        <th>Procesado clave</th>
+                        <th>Etapa procesal</th>
+                        <th>Motivo</th>
+                        <th>Fecha última actuación</th>
+                        <th>Editar</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <%  trami = tram.findTramite();
+                        <%--  trami = tram.findTramite();
                             for (String[] tm : trami) {
                                 out.println("<tr>");
                                 out.println("<td>" + tm[4] + "</td>");
                                 out.println("<td>" + tm[5] + "</td>");
                                 out.println("<td>" + tm[6] + "</td>");
                                 out.println("<td>" + tm[7] + "</td>");
-                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
-                                out.println("</tr>");
+                                out.println("<td><a class='pop' href='tramite.jsp?pc=" + tm[4] + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                             }
-                        %>
+                        --%>
                     </tbody>
                 </table>
             </div>

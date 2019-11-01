@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author CESAR.OSORIO
  */
-public class tramite {
+public class showTramite {
     
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> trami;
@@ -36,7 +36,7 @@ public class tramite {
             conn.close();
         }
         catch (SQLException ex) {
-            Logger.getLogger(tramite.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return trami;
     } 

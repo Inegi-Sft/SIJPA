@@ -13,6 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Procesados</title>
         <%@include file="librerias.jsp" %>
+        <%
+            if (request.getParameter("insertado") != null) {
+                out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
+            }
+        %>
     </head>
     <body style="zoom: .85;">
         <%
@@ -25,7 +30,7 @@
             <span class="nota">NOTA: El Adolescente procesado se identificará con el número de expediente seguido de un "-p" más el número consecutivo del Adolescente Procesado registrado.
                 Es decir, si es el primer Adolescente Procesado del expediente 10/2016 su identificador será 10/2016-p1
             </span>
-            <form action="#" method="post">
+            <form action="insrtProcesados" method="post">
                 <fieldset>
                     <legend>Situación jurídica del adolescente</legend>
                     <table class="tablaFormu">
@@ -166,29 +171,33 @@
                     <legend>Características sociodemográficas </legend>
                     <table class="tablaFormu">
                         <tr>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <fieldset>
                                     <legend>Nombre del adolescente</legend>
-                                    <div class="cols">
+                                    <div class="colsx">
                                         <label for="nombre">Nombre(s)</label>
                                         <input type="text" name="nombre" id="nombre" required/>
                                     </div>
-                                    <div class="cols">
+                                    <div class="colsx">
                                         <label for="apaterno">Apellido Paterno</label>
-                                        <input type="text" name="apaterno" id="apaterno" />
+                                        <input type="text" name="apaterno" id="apaterno" required/>
                                     </div>
-                                    <div class="cols">
+                                    <div class="colsx">
                                         <label for="amaterno">Apellido Materno</label>
-                                        <input type="text" name="amaterno" id="amaterno" />
+                                        <input type="text" name="amaterno" id="amaterno" required/>
+                                    </div>
+                                    <div class="colsx">
+                                        <label for="alias">Alias</label>
+                                        <input type="text" name="alias" id="alias" required/>
                                     </div>
                                 </fieldset>
                             </td>
-                            <td>
-                                <label for="curp">Curp</label>
-                                <input type="text" name="curp" id="curp" />
-                            </td>
                         </tr>
                         <tr>
+                            <td>
+                                <label for="curp">Curp</label>
+                                <input type="text" name="curp" id="curp" required/>
+                            </td>
                             <td>
                                 <label for="sexo">Sexo</label>
                                 <select class="txtMedia" name="sexo" id="sexo" required>
@@ -203,7 +212,7 @@
                             </td>
                             <td>
                                 <label for="edad">Edad</label>
-                                <input type="number" class="txtSmall" name="edad" id="edad" />
+                                <input type="number" class="txtSmall" name="edad" id="edad" required/>
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
@@ -212,13 +221,12 @@
                                     <input type="checkbox" id="chkFechaNac" onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento');"><label>No identificada</label>
                                 </div>
                             </td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td colspan="3">
                                 <fieldset>
                                     <legend>Lugar de nacimiento</legend>
-                                    <div class="cols">
+                                    <div class="colsx">
                                         <label for="nPais">Pais</label>
                                         <select class="txtMedia" name="nPais" id="nPais" required onchange="lugarNacimiento('#nPais', '#dNEntidad', '#dNMunicipio', '#nEntidad', '#nMunicipio');">
                                             <option value="">--Seleccione--</option>
@@ -230,7 +238,7 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols oculto" id="dNEntidad">
+                                    <div class="colsx oculto" id="dNEntidad">
                                         <label for="nEntidad">Entidad</label>
                                         <select class="txtMedia" name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')" required>
                                             <option value="">--Seleccione--</option>
@@ -242,7 +250,7 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols oculto" id="dNMunicipio">
+                                    <div class="colsx oculto" id="dNMunicipio">
                                         <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
                                         <select class="txtMedia" name="nMunicipio" id="nMunicipio" required>
                                             <option value="">--Seleccione--</option>
@@ -267,7 +275,7 @@
                             <td colspan="3">
                                 <fieldset>
                                     <legend>Lugar habitual de residencia</legend>
-                                    <div class="cols">
+                                    <div class="colsx">
                                         <label for="residencia">Lugar de residencia</label>
                                         <select class="txtMedia" name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#rEntidad', '#rMunicipio');" required >
                                             <option value="">--Seleccione--</option>
@@ -279,7 +287,7 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols oculto" id="dREntidad">
+                                    <div class="colsx oculto" id="dREntidad">
                                         <label for="rEntidad">Entidad</label>
                                         <select class="txtMedia" name="rEntidad" id="rEntidad" onchange="llenaMun('#rEntidad', '#rMunicipio')" required>
                                             <option value="">--Seleccione--</option>
@@ -291,7 +299,7 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols oculto" id="dRMunicipio">
+                                    <div class="colsx oculto" id="dRMunicipio">
                                         <label for="rMunicipio">Municipio</label>
                                         <select class="txtMedia" name="rMunicipio" id="rMunicipio" required>
                                             <option value="">--Seleccione--</option>
@@ -301,7 +309,7 @@
                             </td>
                             <td>
                                 <label for="edoCivil">Situación conyugal</label>
-                                <select class="txtMedia" name="edoCivil" id="edoCivil">
+                                <select class="txtMedia" name="edoCivil" id="edoCivil" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEdoCivil();
@@ -365,7 +373,7 @@
                         <tr>
                             <td>
                                 <label for="hablaEsp">Dominio del español</label>
-                                <select class="txtMedia" name="hablaEsp" id="hablaEsp">
+                                <select class="txtMedia" name="hablaEsp" id="hablaEsp" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findDomEspanol();
@@ -410,7 +418,7 @@
                                 <fieldset>
                                     <div class="cols lblExBig">
                                         <label for="hablaIndigena" class="lblExBig">¿Habla lengua indígena o dialecto?</label>
-                                        <select class="txtMedia" name="hablaIndigena" id="hablaIndigena" onchange="respuestaSimpleSelect('#hablaIndigena','#dLenguaIndigena','#lenguaIndigena');">
+                                        <select class="txtMedia" name="hablaIndigena" id="hablaIndigena" onchange="respuestaSimpleSelect('#hablaIndigena', '#dLenguaIndigena', '#lenguaIndigena');">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findResSimple();
@@ -438,7 +446,7 @@
                                 <fieldset>
                                     <div class="cols lblExBig">
                                         <label for="ocupacion">Ocupación</label>
-                                        <select class="txtMedia" name="ocupacion" id="ocupacion" onchange="ocupacionAdo('#ocupacion','#dCondicionActi','#condicionActi');">
+                                        <select class="txtMedia" name="ocupacion" id="ocupacion" onchange="ocupacionAdo('#ocupacion', '#dCondicionActi', '#condicionActi');">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findOcupacion();

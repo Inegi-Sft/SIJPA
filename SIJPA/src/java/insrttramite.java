@@ -15,14 +15,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author CESAR.OSORIO
  */
 @WebServlet(urlPatterns = {"/insrttramite"})
 public class insrttramite extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,7 +35,7 @@ public class insrttramite extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+      
         String procesado_clave = request.getParameter("pClave");
         String etapaProcesal = request.getParameter("eProcesal");
         String motivo = request.getParameter("eMotivo");
@@ -123,5 +121,4 @@ public class insrttramite extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

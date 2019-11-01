@@ -234,7 +234,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                        
                         <%--  trami = tram.findTramite();
                             for (String[] tm : trami) {
                                 out.println("<tr>");

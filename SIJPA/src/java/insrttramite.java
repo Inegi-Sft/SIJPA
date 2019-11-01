@@ -36,47 +36,51 @@ public class insrttramite extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-            String procesado_clave = request.getParameter("pClave");
-            String etapaProcesal = request.getParameter("eProcesal");
-            String motivo = request.getParameter("eMotivo");
-            String fechaActua;
+        String procesado_clave = request.getParameter("pClave");
+        String etapaProcesal = request.getParameter("eProcesal");
+        String motivo = request.getParameter("eMotivo");
+        String fechaActua;
 
-            if (request.getParameter("uActua") != null) {
-                fechaActua = request.getParameter("uActua");
-            } else {
-                fechaActua = "1899-09-09";
-            }
-            try {
-                conn.Conectar();
-                sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES( 12,12001,1,1,'002/2018-P13'," + etapaProcesal + ",'" + motivo + "','" + fechaActua + "',5)";
-                System.out.println(sql);
-                if (conn.escribir(sql)) {
-                    conn.close();
-                    response.sendRedirect("elementosPrincipales.jsp");
-                } else {
-                    //regresa a insrttramite y maca error
-                    conn.close();
-                    response.sendRedirect("tramite.jsp?error=si");
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet tramite</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+        if (request.getParameter("uActua") != null) {
+            fechaActua = request.getParameter("uActua");
+        } else {
+            fechaActua = "1899-09-09";
         }
 
+        try {
+            conn.Conectar();
+            sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES( 12,12001,1,1,'002/2018-P14'," + etapaProcesal + ",'" + motivo + "','" + fechaActua + "',5)";
+            if (conn.escribir(sql)) {
+                String [] lista = null;
+                System.out.println(sql);
+                conn.close();
+                
+                lista[0] = etapaProcesal;
+                lista[1] = motivo;
+                lista[2] = fechaActua;
+//                response.setContentType("text/html;charset=UTF-8");
+//                PrintWriter out = response.getWriter();
+//                try {
+//                    /* TODO output your page here. You may use following sample code. */
+//                    out.println("<tr>");
+//                    out.println("<td>002/2018-P14</td>");
+//                    out.println("<td>" + etapaProcesal + "</td>");
+//                    out.println("<td>" + motivo + "</td>");
+//                    out.println("<td>" + fechaActua + "</td>");
+//                    out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+//                    out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
+//                    out.println("</tr>");
+//                } finally {
+//                    out.close();
+//                }
+            } else {
+                //regresa a insrttramite y maca error
+                conn.close();
+                //response.sendRedirect("tramite.jsp?error=si");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -117,13 +121,4 @@ public class insrttramite extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void alert(String correcto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void Alert(String pc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

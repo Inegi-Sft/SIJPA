@@ -191,7 +191,7 @@ public class catalogos {
     public ArrayList findDelNorma(int norma) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_DELITOS_NORMA WHERE ID = " + norma + "  ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_DELITOS_NORMA WHERE ID = " + norma + " ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

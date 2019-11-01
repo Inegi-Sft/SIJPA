@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -105,8 +106,13 @@ public class insrtJuzgados extends HttpServlet {
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                         conn.close();
-                        request.setAttribute("juzgadoClave", juzgadoClave);
-                        request.getRequestDispatcher("causasPenales.jsp").forward(request, response);
+                        HttpSession sesion = request.getSession();
+                        sesion.setMaxInactiveInterval(-1);
+                        sesion.setAttribute("entidad", entidadJ);
+                        sesion.setAttribute("municipio", municipioJ);
+                        sesion.setAttribute("distrito", numDistrito);
+                        sesion.setAttribute("juzgado", numJuzgado);
+                        
                 }else{
                     conn.close();
                     response.sendRedirect("juzgados.jsp?errorInforme=si");

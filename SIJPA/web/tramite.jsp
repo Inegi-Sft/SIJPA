@@ -21,7 +21,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Pendientes de resolución </h1>
-            <form action="insrttramite" method="post">
+            <form action="insrttramite" method="post" id="formtramite">
                 <!--<center>-->
                 <fieldset >
                     <legend style="text-align: left;">Estatus</legend>
@@ -66,14 +66,10 @@
                                 </div>
                             </td>
                         </tr>
-
                     </table>
-
                 </fieldset>
-                <!--</center>-->
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Guardar">
-
+                <input type="button" name="guardar" id="guardarTram" value="Guardar">
             </form>
         </section>
     </body>

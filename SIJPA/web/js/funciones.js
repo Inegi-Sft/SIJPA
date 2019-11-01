@@ -152,6 +152,24 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
+    
+    $('#guardarTram').click(function (e){
+        $('#tramiteRegis tbody').append('<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>');
+        $.ajax({
+            type: 'post',
+            url: 'insrttramite',
+            data: $('#formtramite').serialize(),
+            
+            beforeSend: function (x) {
+                //$.fancybox().close();
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+//                parent.$('#tramiteTabla tbody').append(response);
+//                parent.$.fancybox.close();
+            }
+        });
+    });
 });
 
 /********************splash del inicio del sistema***********************/
@@ -387,7 +405,6 @@ function llenaMun(idEnt, idMun) {
             }
         }).done(function (data) {
             $(idMun).html(data);
-            //$('#municipioJ').selectize();
         });
     } else {
         $(idMun).empty().append("<option value='0'>--Seleccione--</option>");

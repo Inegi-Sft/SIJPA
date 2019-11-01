@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
+/** 
  * @author CESAR.OSORIO
  */
 public class showProcesados {
@@ -50,24 +49,29 @@ public class showProcesados {
         return proce;
     } 
     
-    public ArrayList findProcesasdosTabla(){
-        conn.Conectar();
-        proce = new ArrayList();
-        sql = "SELECT P.PROCESADO_CLAVE, CTC.DESCRIPCION, CS.DESCRIPCION, P.FECHA_NACIMIENTO, CONCAT(CM.DESCRIPCION,', ',CE.DESCRIPCION)"
-                + "  FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION CTC, CATALOGOS_SEXO CS, CATALOGOS_MUNICIPIOS CM, CATALOGOS_ENTIDADES CE WHERE "
-                + " P.TIPO_CONSIGNACION = CTC.CONSIGNACION_ID AND P.SEXO = CS.SEXO_ID AND P.NACIMIENTO_MUNICIPIO = CM.MUNICIPIO_ID AND P.NACIMIENTO_ENTIDAD = CE.ENTIDAD_ID";
-        resul = conn.consultar(sql);
+    public ArrayList findProcesasdosTabla(String exp){
         try {
-            while(resul.next()){
-                proce.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3),
-                    resul.getString(4),resul.getString(5)});
+            conn.Conectar();
+            lista = new ArrayList();
+            
+            sql = "SELECT P.*,TP.*, S.*, GE.*"
+                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
+                + " WHERE TP.CONSIGNACION_ID=P.TIPO_CONSIGNACION"
+                + " AND S.SEXO_ID=P.SEXO"
+                + " AND GE.GRADO_ID=P.ULTIMO_GRADO_ESTUDIOS"
+                + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
+            
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(new String[]{
+                    rs.getString("PROCESADO_CLAVE"), rs.getString("TP.DESCRIPCION"), rs.getString("S.DESCRIPCION"), 
+                    rs.getString("FECHA_NACIMIENTO"), rs.getString("GE.DESCRIPCION")
+                });
             }
             conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (SQLException ex) {
-            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return proce;
+        return lista;
     } 
-    
 }

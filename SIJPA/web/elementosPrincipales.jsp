@@ -8,6 +8,8 @@
 <%@page import="clasesAuxiliar.showDelitos"%>
 <%@page import="clasesAuxiliar.showConclusiones"%>
 <%@page import="clasesAuxiliar.showTramite"%>
+
+<%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,9 +21,10 @@
         <%
             if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
-            } else { out.println("<script>openPestana(event,'p8')</script>");
-//                out.println("$('#p8').load($('tramite.jsp #tramiteRegis'))</script>");
-//                out.println("<script type='text/javascript'>window.location='elementosPrincipales.jsp';</script>");
+            } 
+            if (request.getParameter("insertado") != null) {
+                //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
+                out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
             }
         %>
     </head>
@@ -95,15 +98,15 @@
                 <h2>Adolescentes</h2>
                 <table id="tablaProcesa" class="tablasRegis">
                     <thead> 
-                    <tr>
-                        <th>Adolescente clave</th>
-                        <th>Tipo de Presentación</th>
-                        <th>Sexo</th>
-                        <th>Fecha nacimiento</th>
-                        <th>Lugar nacimiento</th>
-                        <th>Editar</th>
-                    </tr>
-               </thead> 
+                        <tr>
+                            <th>Adolescente clave</th>
+                            <th>Tipo de Presentación</th>
+                            <th>Sexo</th>
+                            <th>Fecha nacimiento</th>
+                            <th>Grado de estudios</th>
+                            <th>Editar</th>
+                        </tr>
+                   </thead> 
                     <tbody>
                         <%--  proce = procesa.findProcesasdosTabla();
                             for (String[] tm : proce) {

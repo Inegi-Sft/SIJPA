@@ -105,8 +105,9 @@ public class insrtJuzgados extends HttpServlet {
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                         conn.close();
-                        request.setAttribute("juzgadoClave", juzgadoClave);
-                        request.getRequestDispatcher("causasPenales.jsp").forward(request, response);
+//                        request.setAttribute("juzgadoClave", juzgadoClave);
+//                        request.getRequestDispatcher("causasPenales.jsp").forward(request, response);
+                        response.sendRedirect("causasPenales.jsp");
                 }else{
                     conn.close();
                     response.sendRedirect("juzgados.jsp?errorInforme=si");

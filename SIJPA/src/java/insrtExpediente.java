@@ -40,6 +40,12 @@ public class insrtExpediente extends HttpServlet {
             throws ServletException, IOException, SQLException {
 
         String juzgado_clave = request.getParameter("jClave");
+        String jDividido[] = juzgado_clave.split("-"); //Esto separa en un array basándose en el separador que le pases
+        String jEntidad = jDividido[0];
+        String jMunicipio = jDividido[1];
+        String jDistrito = jDividido[2];
+        String jNumero = jDividido[3];
+        
         String carpInvestiga = request.getParameter("CarpInves");
         String expediente_clave = request.getParameter("expClave");
         String fecha_ingreso;
@@ -57,33 +63,36 @@ public class insrtExpediente extends HttpServlet {
         String totalDeli = request.getParameter("Tdelitos");
         String totalAdo = request.getParameter("Tadolescentes");
         String totalVic = request.getParameter("Tvictimas");
+        String totalConclu = request.getParameter("Tconclusiones");
         String comentario = request.getParameter("ComentaExpe");
         String[] chk = request.getParameterValues("aplAudi");
 //        
         try {
             conn.Conectar();
-            sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES (12,12001,1,1,'" + expediente_clave + "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso
-                    + "'," + particular + "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," + tProcedimiento
-                    + "," + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "',6)";
+            sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
+                    +",'" + expediente_clave + "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
+                    + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
+                    + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ","+ totalConclu +",'" + comentario + "', (select YEAR(NOW())) )";
 
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 if(competencia == 1 ){
                 for (int i = 0; i < chk.length; i++) {
                     String valor = "cantAudi" + chk[i];
-                    sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES (12,12001,1,1," + chk[i] + "," + request.getParameter(valor) + ",'" + expediente_clave + "')";
+                    sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
+                            + "'" + expediente_clave + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
                     System.out.println(sql);
                     if (!conn.escribir(sql)) {
                         conn.close();
-                        response.sendRedirect("capturaExpediente.jsp?error=si");
+                        response.sendRedirect("elementosPrincipales.jsp?error=si");
                     }
                 }
                 }
                 conn.close();
-                response.sendRedirect("capturaExpediente.jsp?seinserto=si");
+                response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
             } else {
                 conn.close();
-                response.sendRedirect("capturaExpediente.jsp?error=si");
+                response.sendRedirect("elementosPrincipales.jsp?error=si");
             }
 
         } catch (SQLException ex) {

@@ -16,14 +16,16 @@
         <title>SIJPA::Elementos del Expediente</title>
         <%@include file="librerias.jsp" %>
         <%
+            String juzgado=request.getParameter("juzgado");//recupera el juzgado clave proveniente de causasPenales.jsp
+            
             if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
             } 
             if (request.getParameter("insertado") != null) {
                 //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
                 out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
-
             }
+            
         %>
     </head>
     <body>
@@ -247,13 +249,3 @@
         </section>
     </body>
 </html>
-<<<<<<< Upstream, based on origin/master
-            showTramite tram = new showTramite();
-            ArrayList<String[]> trami = new ArrayList();
-
-            showConclusiones conclusion = new showConclusiones();
-            ArrayList<String[]> conc = new ArrayList();
-=======
-            showProcesados proce = new showProcesados();
-            ArrayList<String[]> list;
->>>>>>> 08dc58f 30/10/2019 Se descarga la ultima actualizacion --Fer

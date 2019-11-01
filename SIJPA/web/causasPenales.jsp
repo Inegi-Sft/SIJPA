@@ -4,6 +4,9 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="clasesAuxiliar.showCausasPenales"%>
+<%@page import="clasesAuxiliar.showJuzgados"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,48 +15,57 @@
         <title>SIJPA::Causas Penales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
-        <style type="text/css">
-            .load {
-                position: fixed;
-                left: 0px;
-                top: 0px;
-                width: 100%;
-                height: 100%;
-                z-index: 999;
-                background: url('img/loading-35.gif') 50% 50% no-repeat rgb(249,249,249);
-                opacity: .8;
-            }
-        </style>
+        <%
+            String juzgado=request.getParameter("juzgado");
+            
+            showJuzgados juz = new showJuzgados();
+            showCausasPenales cp = new showCausasPenales();
+            
+            ArrayList<String[]> lsCausas = new ArrayList();
+            ArrayList<String> lista;
+           
+//            request.getAttribute("juzgadoClave")
+        %>
     </head>
     <body>
         <div class="load"></div>
-
         <%@include file="cabecera.jsp" %>
         <%@include file="menu.jsp"%>
-        <% 
-            if(request.getAttribute("juzgadoClave") != null){
-                out.println("<h1>" + request.getAttribute("juzgadoClave") + "</h1>");
-            }
-        %>
+        
         <section class="contenedor">
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>Causas Penales</h1>
-            <form action="#" method="post">
+            <form action="elementosPrincipales.jsp" name="formEnviaJuz" method="post">
+                <input type="hidden" name="juzgado" value="<%=juzgado%>" />
+            </form>
+            <form action="causasPenales.jsp" name="formCP" method="post">
                 <div id="juzClave">
-                    <label for="cusaPenal">Juzgado Clave:</label>
-                    <select name="cusaPenal" class="txtLong" id="causaPenal">
+                    <label for="juzgado">Juzgado Clave:</label>
+                    <select name="juzgado" id="juzgado" class="txtLong" id="juzgado" onchange="formCP.submit();">
                         <option value="">--Seleccione--</option>
+                        <%
+                            lista = juz.findJuzgados();
+                            for (String ls : lista) {
+                                out.println("<option value='" + ls + "'");
+                                if(ls.equals(juzgado)){
+                                    out.println(" selected ");
+                                }
+                                out.println( ">" + ls + "</option>");
+                            }
+                        %>
                     </select>
                 </div>
                 <span class="totExp">Total de Causas Penales:</span>
-                <a class="add" href="elementosPrincipales.jsp"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</a>
+                <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
+                <a class="add" href="#" onclick="validaAddCausa();"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</a>
+               
                 <table id="causas" class="myTable">
                     <thead>
                         <tr>
                             <th>Expediente</th>
-                            <th>Tipo de Accion de Remision</th>
+                            <th>Tipo de Procedimiento</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
                             <th>Conductas Antisociales</th>
@@ -65,28 +77,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%for (int x = 1; x < 20; x++) {%>
+                <%
+                    lista = cp.findCausasPorJuzgado(juzgado);
+                    out.println("entra aqui: "+lsCausas);
+                    for (String[] lis : lsCausas) {
+                        out.println("ahora "+lis[0]);
+                    }
+                    
+                    for (String[] ls : lsCausas) {
+                %>
                         <tr>
-                            <td>asdf</td>
-                            <td>2</td>
-                            <td>asdf</td>
-                            <td>asdf</td>
-                            <td>asdf</td>
-                            <td>asdf</td>
-                            <td>asdf</td>
-                            <td>asdf</td>
+                            <td><%=ls[0]%></td>
+                            <td><%=ls[1]%></td>
+                            <td><%=ls[2]%></td>
+                            <td><%=ls[3]%></td>
+                            <td><%=ls[4]%></td>
+                            <td><%=ls[5]%></td>
+                            <td><%=ls[6]%></td>
+                            <td>--</td>
                             <td><a href="elementosPrincipales.jsp"><img src='img/editar.png' title="Editar"/></a></td>
                             <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
                         </tr>
-                        <%}%>
+                <% 
+                    }
+                %>
                     </tbody>
                 </table>
             </form>
         </section>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $(".load").fadeOut("slow");;
-               });
-        </script>
     </body>
 </html>

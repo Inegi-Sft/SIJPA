@@ -12,10 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Expediente</title>
         <%@include file="librerias.jsp" %>
-        <% 
-            if(request.getParameter("error") != null){
+        <%
+            if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
-            }else if(request.getParameter("seinserto") != null){
+            } else if (request.getParameter("seinserto") != null) {
                 out.println("<script>parent.$.fancybox.close()</script>");
             }
         %>
@@ -104,7 +104,7 @@
                                 <div class="cols">
                                     <label for="Pparticular" class="lblExBig">¿La causa penal deriva de acción penal por particular?</label>
                                     <select name="Pparticular" id="Pparticular" class="txtMedia dependiente" >
-                                         <option value="">--Seleccione--</option>
+                                        <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
                                             for (String[] ls : lista) {
@@ -116,7 +116,7 @@
                                 <div class="cols" id="divProcedimiento">
                                     <label for="Tprocedi" >Tipo de procedimiento</label>
                                     <select name="Tprocedi" id="Tprocedi" class="txtMedia dependiente" >
-                                         <option value="">--Seleccione--</option>
+                                        <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findProcedimiento();
                                             for (String[] ls : lista) {
@@ -137,15 +137,22 @@
                         <tr>
                             <td>
                                 <label for="Tdelitos">Total de delitos</label>
-                                <input type="number" name="Tdelitos" id="Tdelitos" class="dependiente">
+                                <input type="number" name="Tdelitos" id="Tdelitos" class="dependiente" onblur="numeroDelitos()">
+
                             </td>
                             <td>
                                 <label for="Tadolescentes">Total de adolescentes</label>
-                                <input type="number" name="Tadolescentes" id="Tadolescentes" class="dependiente">
+                                <input type="number" name="Tadolescentes" id="Tadolescentes" class="dependiente" onblur="numeroProcesados()">
                             </td>
                             <td>
                                 <label for="Tvictimas">Total de víctimas</label>
-                                <input type="number" name="Tvictimas" id="Tvictimas" class="dependiente">
+                                <input type="number" name="Tvictimas" id="Tvictimas" class="dependiente" onblur="numeroVictimas()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan=3>
+                                <label for="Tvictimas">Total de adolescentes concluidos</label>
+                                <input type="number" name="Tconclusiones" id="Tconclusiones" class="dependiente" onblur="Tconclu()">
                             </td>
                         </tr>
                     </table>

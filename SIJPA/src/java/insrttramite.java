@@ -15,14 +15,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author CESAR.OSORIO
  */
 @WebServlet(urlPatterns = {"/insrttramite"})
 public class insrttramite extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,35 +35,32 @@ public class insrttramite extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+      
+            String procesado_clave = request.getParameter("pClave");
+            String etapaProcesal = request.getParameter("eProcesal");
+            String motivo = request.getParameter("eMotivo");
+            String fechaActua;
 
-        String procesado_clave = request.getParameter("pClave");
-        String etapaProcesal = request.getParameter("eProcesal");
-        String motivo = request.getParameter("eMotivo");
-        String fechaActua;
-
-        if (request.getParameter("uActua") != null) {
-            fechaActua = request.getParameter("uActua");
-        } else {
-            fechaActua = "1899-09-09";
-        }
-
-        try {
-            conn.Conectar();
-            sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES( 12,12001,1,1,'002/2018-P14'," + etapaProcesal + ",'" + motivo + "','" + fechaActua + "',5)";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
-                conn.close();
-               response.sendRedirect("elementosPrincipales.jsp?seinserto=si");      
-                
+            if (request.getParameter("uActua") != null) {
+                fechaActua = request.getParameter("uActua");
             } else {
-                //regresa a insrttramite y maca error
-                conn.close();
-                response.sendRedirect("tramite.jsp?error=si");
+                fechaActua = "1899-09-09";
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+            try {
+                conn.Conectar();
+                sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES( 12,12001,1,1,'002/2018-P13'," + etapaProcesal + ",'" + motivo + "','" + fechaActua + "',5)";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    conn.close();
+                    response.sendRedirect("elementosPrincipales.jsp");
+                } else {
+                    //regresa a insrttramite y maca error
+                    conn.close();
+                    response.sendRedirect("tramite.jsp?error=si");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
+            }
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -76,7 +71,6 @@ public class insrttramite extends HttpServlet {
             out.println("<title>Servlet tramite</title>");
             out.println("</head>");
             out.println("<body>");
-
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -125,6 +119,10 @@ public class insrttramite extends HttpServlet {
     }// </editor-fold>
 
     private void alert(String correcto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void Alert(String pc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

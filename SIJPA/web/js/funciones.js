@@ -10,6 +10,9 @@ $(document).ready(function () {
                 'width': '1400px',
                 'height': '560px'
             }
+        },
+        afterClose: function(){
+            parent.location.reload("true");
         }
     });
     //Auto acompletado
@@ -567,3 +570,48 @@ function llenaNormaT(vNorma) {
     }
 }
 /*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
+function numeroDelitos() {
+    $('#tablaDeli tbody').empty();
+    var expediente = $('#expClave').val();
+    var delitos = $('#Tdelitos').val();
+    for(var i=1; i<=delitos; i++){ 
+    $('#tablaDeli tbody').append('<tr><td>'+ expediente +'-D'+ i +'</td><td></td><td></td><td></td>\n\
+    <td></td><td><a class="pop" href="delitos.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    }
+}; 
+function numeroProcesados() {
+    $('#tablaProcesa tbody').empty();
+    var expediente = $('#expClave').val();
+    var procesados = $('#Tadolescentes').val();
+    for(var i=1; i<=procesados; i++){ 
+    $('#tablaProcesa tbody').append('<tr><td>'+ expediente +'-P'+ i +'</td><td></td><td></td><td></td>\n\
+    <td></td><td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    }
+}; 
+function numeroVictimas() {
+    $('#tablaVictimas tbody').empty();
+    var expediente = $('#expClave').val();
+    var victimas = $('#Tvictimas').val();
+    for(var i=1; i<=victimas; i++){ 
+    $('#tablaVictimas tbody').append('<tr><td>'+ expediente +'-V'+ i +'</td><td></td><td></td><td></td>\n\
+    <td></td><td><a class="pop" href="victimas.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    }
+}; 
+function Tconclu() {
+    $('#tablaConclu tbody').empty();
+    $('#tramiteRegis tbody').empty();
+    var procesados = $('#Tadolescentes').val();
+    var tconclu = $('#Tconclusiones').val();
+    var tot=procesados-tconclu;
+    for(var i=1; i<=tconclu; i++){ 
+    $('#tablaConclu tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+    <td><a class="pop" href="conclusiones.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    }
+    for(var i=1; i<=tot; i++){ 
+    $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+    <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    }
+}; 
+
+
+        

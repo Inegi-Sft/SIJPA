@@ -29,7 +29,7 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>
-                                <select  class="demo-default txtExBig" name="delitoCP" id="delitoCP" placeholder="--Seleccione--"  required>
+                                <select  class="demo-default txtExBig" name="delitoCP" id="delitoCP" placeholder="--Seleccione--" required>
                                     <option value="" ></option>
                                     <%
                                         lista = cat.findCodNorma();

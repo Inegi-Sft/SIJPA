@@ -4,6 +4,8 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.catalogos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,10 @@
         </style>
     </head>
     <body>
+         <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista;
+        %>
         <div class="load"></div>
 
         <%@include file="cabecera.jsp" %>
@@ -45,6 +51,12 @@
                     <label for="cusaPenal">Juzgado Clave:</label>
                     <select name="cusaPenal" class="txtLong" id="causaPenal">
                         <option value="">--Seleccione--</option>
+                        <%
+                                            lista = cat.findJuzgado();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + "</option>");
+                                            }
+                                        %>  
                     </select>
                 </div>
                 <span class="totExp">Total de Causas Penales:</span>

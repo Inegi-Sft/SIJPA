@@ -52,7 +52,7 @@ public class showProcesados {
     public ArrayList findProcesasdosTabla(String exp){
         try {
             conn.Conectar();
-            lista = new ArrayList();
+            proce = new ArrayList();
             
             sql = "SELECT P.*,TP.*, S.*, GE.*"
                 + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
@@ -61,17 +61,17 @@ public class showProcesados {
                 + " AND GE.GRADO_ID=P.ULTIMO_GRADO_ESTUDIOS"
                 + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
             
-            rs = conn.consultar(sql);
-            while (rs.next()) {
-                lista.add(new String[]{
-                    rs.getString("PROCESADO_CLAVE"), rs.getString("TP.DESCRIPCION"), rs.getString("S.DESCRIPCION"), 
-                    rs.getString("FECHA_NACIMIENTO"), rs.getString("GE.DESCRIPCION")
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                proce.add(new String[]{
+                    resul.getString("PROCESADO_CLAVE"), resul.getString("TP.DESCRIPCION"), resul.getString("S.DESCRIPCION"), 
+                    resul.getString("FECHA_NACIMIENTO"), resul.getString("GE.DESCRIPCION")
                 });
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;
+        return proce;
     } 
 }

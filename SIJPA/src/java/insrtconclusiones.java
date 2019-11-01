@@ -37,53 +37,53 @@ public class insrtconclusiones extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
 
-        String procesado_clave = request.getParameter("idProcesado");
-        String fechaResolu;
-        String tipoResolu = request.getParameter("tipoConclusion");
-        String tipoSobre = request.getParameter("tipoSobreseimto");
-        String proceSobre = request.getParameter("proceSobreseimto");
-        String procedimiento = request.getParameter("huboProsedimto");
-        String tipoProcedimiento = request.getParameter("tipoMedidaPA");
-        String privativa = request.getParameter("tipoMedidaPL");
-        String noprivativa = request.getParameter("tipoMedidaNPL");
-        String internamiento = request.getParameter("internamiento");
-        String reparacion = request.getParameter("reparaDanio");
-        String tipoRepara = request.getParameter("tipoReparaD");
-        String multa = request.getParameter("montoReparaD");
-        String impugnacion = request.getParameter("impugnacion");
-        String tipoImpugnacion = request.getParameter("tipoImpugnacion");
-        String fechaImpugna;
-        String personaImpugna = request.getParameter("personaImpugna");
-        String comentario = request.getParameter("comentarios");
-        if (request.getParameter("fechaReso") != null) {
-            fechaResolu = request.getParameter("fechaReso");
-        } else {
-            fechaResolu = "1899-09-09";
-        }
-        if (request.getParameter("fechaImpugnacion") != null) {
-            fechaImpugna = request.getParameter("fechaImpugnacion");
-        } else {
-            fechaImpugna = "1899-09-09";
-        }
-        try {
-            conn.Conectar();
-            sql = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES (12,12001,1,1,'002/2018-P14','002/2018-C14','" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre
-                    + "," + procedimiento + "," + tipoProcedimiento + "," + privativa + "," + noprivativa + "," + internamiento + "," + reparacion + "," + tipoRepara
-                    + "," + multa + "," + impugnacion + "," + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "',6)";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
-                conn.close();
-                response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
-
+            String procesado_clave = request.getParameter("idProcesado");
+            String fechaResolu;
+            String tipoResolu = request.getParameter("tipoConclusion");
+            String tipoSobre = request.getParameter("tipoSobreseimto");
+            String proceSobre = request.getParameter("proceSobreseimto");
+            String procedimiento = request.getParameter("huboProsedimto");
+            String tipoProcedimiento = request.getParameter("tipoMedidaPA");
+            String privativa = request.getParameter("tipoMedidaPL");
+            String noprivativa = request.getParameter("tipoMedidaNPL");
+            String internamiento = request.getParameter("internamiento");
+            String reparacion = request.getParameter("reparaDanio");
+            String tipoRepara = request.getParameter("tipoReparaD");
+            String multa = request.getParameter("montoReparaD");
+            String impugnacion = request.getParameter("impugnacion");
+            String tipoImpugnacion = request.getParameter("tipoImpugnacion");
+            String fechaImpugna;
+            String personaImpugna = request.getParameter("personaImpugna");
+            String comentario = request.getParameter("comentarios");
+            if (request.getParameter("fechaReso") != null) {
+                fechaResolu = request.getParameter("fechaReso");
             } else {
-                //regresa a insrttramite y maca error
-                conn.close();
-                response.sendRedirect("conclusiones.jsp?error=si");
+                fechaResolu = "1899-09-09";
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            if (request.getParameter("fechaImpugnacion") != null) {
+                fechaImpugna = request.getParameter("fechaImpugnacion");
+            } else {
+                fechaImpugna = "1899-09-09";
+            }
+            try {
+                conn.Conectar();
+                sql = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES (12,12001,1,1,'002/2018-P14','002/2018-C14','" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre
+                        + "," + procedimiento + "," + tipoProcedimiento + "," + privativa + "," + noprivativa + "," + internamiento + "," + reparacion + "," + tipoRepara
+                        + "," + multa + "," + impugnacion + "," + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "',6)";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    conn.close();
+                    response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
+                } else {
+                    //regresa a insrttramite y maca error
+                    conn.close();
+                    response.sendRedirect("conclusiones.jsp?error=si");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
+            }
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -94,23 +94,6 @@ public class insrtconclusiones extends HttpServlet {
             out.println("<title>Servlet insrtconclusiones</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + "Fecha resolucion:" + fechaResolu + "<br>" +
-        "  tipo_resolucion: " +  tipoResolu  +"<br>" +
-        "  tipo_sobre: " +  tipoSobre  +"<br>" +
-        "  procedencia_sobre: " +  proceSobre  +"<br>" +
-        "  procedimiento: " +  procedimiento  +"<br>" +
-        "  tipo_procedimiento: " +  tipoProcedimiento  +"<br>" +
-        "  privativa: " +  privativa  +"<br>" +
-        "  no_privativa: " +  noprivativa  +"<br>" +
-        "  internamiento: " +  internamiento  +"<br>" +
-        "  reparación: " +  reparacion  +"<br>" +
-        "  tipo_repara: " +  tipoRepara +"<br>" +
-        "  multa: " +  multa  +"<br>" +
-        "  impugnación: " +  impugnacion  +"<br>" +
-        "  tipo_impugna: " +  tipoImpugnacion  +"<br>" +
-        "  fecha_impugna: " +  fechaImpugna +"<br>" +
-        "  persona_impugna: " +  personaImpugna  +"<br>" +
-        "  comentario:" +  comentario + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {

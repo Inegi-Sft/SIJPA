@@ -28,7 +28,6 @@ public class Conexion_Mysql {
         try { 
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://10.15.130.11:3306/sijpa_db";
-
             conexion = (Connection) DriverManager.getConnection(url,"julio","julio2019");
             if (conexion != null) { 
                 System.out.println("Conexion oracle exitosa!");

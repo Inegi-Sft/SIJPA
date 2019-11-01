@@ -28,6 +28,10 @@
         %>
     </head>
     <body>
+         <%
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista;
+        %>
         <div class="load"></div>
         <%@include file="cabecera.jsp" %>
         <%@include file="menu.jsp"%>

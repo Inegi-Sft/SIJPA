@@ -335,4 +335,27 @@ fieldset legend{
 #juzClave label{
     margin-bottom: 10px;
 }
- 
+
+.load {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background: url('../img/loading-35.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+}
+.msjAviso{
+    position: absolute;
+    top: 180px;
+    right: 1%;
+    color: #ff0000;
+    width: 17%;
+    font-size: 15px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}

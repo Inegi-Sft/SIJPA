@@ -19,6 +19,8 @@
         <title>SIJPA::Elementos del Expediente</title>
         <%@include file="librerias.jsp" %>
         <%
+            String juzgado=request.getParameter("juzgado");//recupera el juzgado clave proveniente de causasPenales.jsp
+            
             if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
             } 
@@ -26,6 +28,7 @@
                 //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
                 out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
             }
+            
         %>
     </head>
     <body>

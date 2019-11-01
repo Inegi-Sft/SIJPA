@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $('select > option[value=-2]').hide();
-
+    $('select > option[value=-2]').hide();  
+    $(".load").fadeOut("slow");//proceso de carga para causas penales
     //despliega ventana modal
     $('.pop').fancybox({
         'type': 'iframe',
@@ -587,6 +587,16 @@ function llenaNormaT(vNorma) {
     }
 }
 /*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
+
+//Funcion para Causas Penales: comprueba que primero se haya seleccionado un juzgado clave antes de agrecar una causa penal
+function validaAddCausa(){
+    if($("#juzgado").val()!==""){
+        document.formEnviaJuz.submit();
+    }else{
+        $(".msjAviso").fadeIn("slow");
+    }
+}
+
 function numeroDelitos() {
     $('#tablaDeli tbody').empty();
     var expediente = $('#expClave').val();
@@ -629,6 +639,3 @@ function Tconclu() {
     <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }; 
-
-
-        

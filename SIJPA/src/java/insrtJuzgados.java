@@ -106,13 +106,9 @@ public class insrtJuzgados extends HttpServlet {
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                         conn.close();
-                        HttpSession sesion = request.getSession();
-                        sesion.setMaxInactiveInterval(-1);
-                        sesion.setAttribute("entidad", entidadJ);
-                        sesion.setAttribute("municipio", municipioJ);
-                        sesion.setAttribute("distrito", numDistrito);
-                        sesion.setAttribute("juzgado", numJuzgado);
-                        
+//                        request.setAttribute("juzgadoClave", juzgadoClave);
+//                        request.getRequestDispatcher("causasPenales.jsp").forward(request, response);
+                        response.sendRedirect("causasPenales.jsp");
                 }else{
                     conn.close();
                     response.sendRedirect("juzgados.jsp?errorInforme=si");

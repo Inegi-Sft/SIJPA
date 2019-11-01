@@ -17,9 +17,9 @@
         <%@include file="librerias.jsp" %>
         <% 
             if(request.getParameter("errorJuzgado") != null){
-                out.println("<script>alert('Clave duplicada: El juzgado, distrito, entidad, municipio ya existe \n verificar')</script>");
+                out.println("<script>alert('Clave duplicada: El juzgado, distrito, entidad, municipio ya existe  verificar')</script>");
             }else if(request.getParameter("errorInforme") != null){
-                out.println("<script>alert('Lo datos de datos generales no se puede insertar \n verificar')</script>");
+                out.println("<script>alert('Lo datos de datos generales no se puede insertar verificar')</script>");
             }
         %>
     </head>

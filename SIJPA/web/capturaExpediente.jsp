@@ -29,13 +29,14 @@
         <section class="contenedor" style="zoom: .9;">
             <h2>Expediente</h2>
             <form action="insrtExpediente" method="post" id="expedientesF">
+                
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="jClave">Juzgado Clave:</label>
-                                <input type="text" name="jClave" id="jClave" required>
+                                <input type="text" name="jClave" id="jClave" value="<%=juzgado%>" readonly required>
                             </td>
                             <td>
                                 <label for="CarpInves">No. Carpeta Investigación</label>
@@ -147,6 +148,12 @@
                             <td>
                                 <label for="Tvictimas">Total de víctimas</label>
                                 <input type="number" name="Tvictimas" id="Tvictimas" class="dependiente" onblur="numeroVictimas()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan=3>
+                                <label for="Tvictimas">Total de adolescentes concluidos</label>
+                                <input type="number" name="Tconclusiones" id="Tconclusiones" class="dependiente" onblur="Tconclu()">
                             </td>
                         </tr>
                         <tr>

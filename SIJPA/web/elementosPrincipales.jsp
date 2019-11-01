@@ -16,11 +16,14 @@
         <%
             if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
-            } else if (request.getParameter("seinserto") != null) {
-                out.println("<script>parent.$.fancybox.close(); window.location='elementosPrincipales.jsp';</script>");
+            }/* else if (request.getParameter("seinserto") != null) {
+                out.println("<script>"
+                        + "parent.$.fancybox.close();"
+                        + "location.reload();"
+                        + "</script>");
 //                out.println("$('#p8').load($('tramite.jsp #tramiteRegis'))</script>");
 //                out.println("<script type='text/javascript'>window.location='elementosPrincipales.jsp';</script>");
-            }
+            }*/
         %>
     </head>
     <body>
@@ -208,15 +211,17 @@
             </div>
             <div id="p8" class="pestanaContent">
                 <h2>Pendientes de resolución</h2>
-                <table class="tablasRegis" id="tramiteRegis">
-                    <tr>
-                        <th>Procesado clave</th>
-                        <th>Etapa procesal</th>
-                        <th>Motivo</th>
-                        <th>Fecha última actuación</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
+                <table class="tablasRegis" id="tramiteTabla">
+                    <thead>
+                        <tr>
+                            <th>Procesado clave</th>
+                            <th>Etapa procesal</th>
+                            <th>Motivo</th>
+                            <th>Fecha última actuación</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <%  trami = tram.findTramite();
                             for (String[] tm : trami) {

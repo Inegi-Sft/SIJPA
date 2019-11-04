@@ -170,7 +170,39 @@ $(document).ready(function () {
             }
         });
     });
+    //Guarda Expedientes
+    $('#formExpedientes').submit(function (e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if($('#compe').val()==='1'){
+            if($('#aplAudi:checked').length===0){
+                alert("Selecciona por lo menos una Audiencia");
+                return false;
+            }
+        }
+        $.ajax({
+            type: 'post',
+            url: 'insrtExpediente',
+            data: $('#formExpedientes').serialize(),
+            beforeSend: function (x) {
+                //$.fancybox().close();
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+                alert("Guardado con exito!!!");
+                $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
+                $("#guardarExp").prop("hidden",true);
+                openPestana('btn2', 'p2');
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
+            }
+        });
+    });
 });
+
+
 
 /********************splash del inicio del sistema***********************/
 function splashIn() {
@@ -191,14 +223,14 @@ function competencia() {
             $('#tipoIncopetencia').fadeOut("slow");
             $('#Tincompe').val('-2').prop('required', false);
             $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeIn("slow");
-            $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
+            $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('').prop("required", true);
             $('#ExpAcomu, #Pparticular, #Tprocedi').val('').prop("required", true);
             break;
         case '2':
             $('#tipoIncopetencia').fadeIn("slow");
             $('#Tincompe').val('').prop("required", true);
             $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeOut("slow");
-            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
+            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('-2').prop("required", false);
             break;
     }
 
@@ -214,15 +246,7 @@ function expacumula() {
     }
 }
 
-function expeAudiencia() {
-    if($('#compe').val()===2)
-    $('#expedientesF').submit(function(e){
-       if($('#aplAudi:checked').length===0){
-           e.preventDefault();
-           alert("Selecciona por lo menos una Audiencia");
-       } 
-    });
-}
+
 
 //Habilita text de Audiencias en Expedientes
 /***

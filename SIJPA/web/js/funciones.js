@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('select > option[value=-2]').hide();  
+    $('select > option[value=-2]').hide();
     $(".load").fadeOut("slow");//proceso de carga para causas penales
     //despliega ventana modal
     $('.pop').fancybox({
@@ -11,7 +11,7 @@ $(document).ready(function () {
                 'height': '560px'
             }
         },
-        afterClose: function(){
+        afterClose: function () {
             parent.location.reload("true");
         }
     });
@@ -152,19 +152,18 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
-    
-    $('#guardarTram').click(function (e){
+
+    $('#guardarTram').click(function (e) {
         $('#tramiteRegis tbody').append('<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>');
         $.ajax({
             type: 'post',
             url: 'insrttramite',
             data: $('#formtramite').serialize(),
-            
             beforeSend: function (x) {
                 //$.fancybox().close();
             },
             success: function (response) {
-                console.log("Respuesta del servidor",response);
+                console.log("Respuesta del servidor", response);
 //                parent.$('#tramiteTabla tbody').append(response);
 //                parent.$.fancybox.close();
             }
@@ -215,13 +214,13 @@ function expacumula() {
 }
 
 function expeAudiencia() {
-    if($('#compe').val()===2)
-    $('#expedientesF').submit(function(e){
-       if($('#aplAudi:checked').length===0){
-           e.preventDefault();
-           alert("Selecciona por lo menos una Audiencia");
-       } 
-    });
+    if ($('#compe').val() === 2)
+        $('#expedientesF').submit(function (e) {
+            if ($('#aplAudi:checked').length === 0) {
+                e.preventDefault();
+                alert("Selecciona por lo menos una Audiencia");
+            }
+        });
 }
 
 //Habilita text de Audiencias en Expedientes
@@ -315,16 +314,16 @@ function fechaNoIdent(idChk, idTxtDate) {
     }
 }
 
-function etapaInter(){
-  if($('#audiInterme').val()==='1'){
-      $('#divfechaAudiinter,#divfechaEscrito').fadeIn("slow");
-      $('#chkAudiinter,#chkEscrito').prop("checked", false);
-      $('#fechaAudiinter,#fechaEscrito').val("").prop("disabled", false).prop("required", true);
-  } else {
-       $('#divfechaAudiinter,#divfechaEscrito').fadeOut("slow");
-      $('#chkAudiinter,#chkEscrito').prop("checked", false);
-      $('#fechaAudiinter,#fechaEscrito').val("1899-09-09").prop("disabled", false).prop("required", false);
-  }
+function etapaInter() {
+    if ($('#audiInterme').val() === '1') {
+        $('#divfechaAudiinter,#divfechaEscrito').fadeIn("slow");
+        $('#chkAudiinter,#chkEscrito').prop("checked", false);
+        $('#fechaAudiinter,#fechaEscrito').val("").prop("disabled", false).prop("required", true);
+    } else {
+        $('#divfechaAudiinter,#divfechaEscrito').fadeOut("slow");
+        $('#chkAudiinter,#chkEscrito').prop("checked", false);
+        $('#fechaAudiinter,#fechaEscrito').val("1899-09-09").prop("disabled", false).prop("required", false);
+    }
 }
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA*****************/
 
@@ -589,10 +588,10 @@ function llenaNormaT(vNorma) {
 /*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
 
 //Funcion para Causas Penales: comprueba que primero se haya seleccionado un juzgado clave antes de agrecar una causa penal
-function validaAddCausa(){
-    if($("#juzgado").val()!==""){
+function validaAddCausa() {
+    if ($("#juzgado").val() !== "") {
         document.formEnviaJuz.submit();
-    }else{
+    } else {
         $(".msjAviso").fadeIn("slow");
     }
 }
@@ -601,41 +600,45 @@ function numeroDelitos() {
     $('#tablaDeli tbody').empty();
     var expediente = $('#expClave').val();
     var delitos = $('#Tdelitos').val();
-    for(var i=1; i<=delitos; i++){ 
-    $('#tablaDeli tbody').append('<tr><td>'+ expediente +'-D'+ i +'</td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= delitos; i++) {
+        $('#tablaDeli tbody').append('<tr><td>' + expediente + '-D' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="delitos.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-}; 
+}
+;
 function numeroProcesados() {
     $('#tablaProcesa tbody').empty();
     var expediente = $('#expClave').val();
     var procesados = $('#Tadolescentes').val();
-    for(var i=1; i<=procesados; i++){ 
-    $('#tablaProcesa tbody').append('<tr><td>'+ expediente +'-P'+ i +'</td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= procesados; i++) {
+        $('#tablaProcesa tbody').append('<tr><td>' + expediente + '-P' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-}; 
+}
+;
 function numeroVictimas() {
     $('#tablaVictimas tbody').empty();
     var expediente = $('#expClave').val();
     var victimas = $('#Tvictimas').val();
-    for(var i=1; i<=victimas; i++){ 
-    $('#tablaVictimas tbody').append('<tr><td>'+ expediente +'-V'+ i +'</td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= victimas; i++) {
+        $('#tablaVictimas tbody').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="victimas.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-}; 
+}
+;
 function Tconclu() {
     $('#tablaConclu tbody').empty();
     $('#tramiteRegis tbody').empty();
     var procesados = $('#Tadolescentes').val();
     var tconclu = $('#Tconclusiones').val();
-    var tot=procesados-tconclu;
-    for(var i=1; i<=tconclu; i++){ 
-    $('#tablaConclu tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+    var tot = procesados - tconclu;
+    for (var i = 1; i <= tconclu; i++) {
+        $('#tablaConclu tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
     <td><a class="pop" href="conclusiones.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-    for(var i=1; i<=tot; i++){ 
-    $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= tot; i++) {
+        $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
     <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-}; 
+}
+;

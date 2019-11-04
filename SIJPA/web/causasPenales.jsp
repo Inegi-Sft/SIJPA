@@ -28,10 +28,6 @@
         %>
     </head>
     <body>
-         <%
-            catalogos cat = new catalogos();
-            ArrayList<String[]> lista;
-        %>
         <div class="load"></div>
         <%@include file="cabecera.jsp" %>
         <%@include file="menu.jsp"%>
@@ -64,7 +60,6 @@
                 <span class="totExp">Total de Causas Penales:</span>
                 <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
                 <a class="add" href="#" onclick="validaAddCausa();"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</a>
-               
                 <table id="causas" class="myTable">
                     <thead>
                         <tr>
@@ -87,7 +82,6 @@
                     for (String[] lis : lsCausas) {
                         out.println("ahora "+lis[0]);
                     }
-                    
                     for (String[] ls : lsCausas) {
                 %>
                         <tr>

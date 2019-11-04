@@ -32,7 +32,6 @@ public class showCausasPenales {
                 + " WHERE TP.PROCEDIMIENTO_ID=E.TIPO_PROCEDIMIENTO"
                 + " AND C.RESPUESTA_ID=E.COMPETENCIA"
                 + " AND JUZGADO_CLAVE='"+juzgado+"' ORDER BY 1;";
-            
             System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {

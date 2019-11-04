@@ -50,14 +50,14 @@
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
-                <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1" style="display: block">Expediente</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Delitos</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Adolescentes</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p4')">Victimas</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Inicial</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p6')">Intermedia</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p7')">Conclusion y/o Terminacion</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p8')">Tramite</button>
+                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Expediente</button>
+                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2">Delitos</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3">Adolescentes</button>
+                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4">Victimas</button>
+                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5">Inicial</button>
+                <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6">Intermedia</button>
+                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7">Conclusion y/o Terminacion</button>
+                <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8">Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
                 <%@include file="capturaExpediente.jsp"%>

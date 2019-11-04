@@ -37,12 +37,12 @@
             </div>
             <h1>Juzgados</h1>
             <div class="pestana">
-                <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1">Datos del Juez</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Datos Órgano Jurisdiccional</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Forma de Organizacion del Órgano</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p4')" id="btn4">Datos Geográficos</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Datos del Capturador</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p6')">Datos Generales</button>
+                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1">Datos del Juez</button>
+                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2">Datos Órgano Jurisdiccional</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3">Forma de Organizacion del Órgano</button>
+                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4">Datos Geográficos</button>
+                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5">Datos del Capturador</button>
+                <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6">Datos Generales</button>
             </div>
 
             <form action="insrtJuzgados" method="post" name="formJuzgados">

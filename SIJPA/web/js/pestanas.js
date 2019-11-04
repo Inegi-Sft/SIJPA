@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-function openPestana(evt, pestana) {
+function openPestana(btn, pestana) {
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
@@ -21,5 +21,7 @@ function openPestana(evt, pestana) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(pestana).style.display = "block";
-    evt.currentTarget.className += " active";
+  
+    document.getElementById(btn).className += " active";
+//    evt.currentTarget.className += " active";
 }

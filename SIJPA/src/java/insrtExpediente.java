@@ -77,22 +77,22 @@ public class insrtExpediente extends HttpServlet {
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 if(competencia == 1 ){
-                for (int i = 0; i < chk.length; i++) {
-                    String valor = "cantAudi" + chk[i];
-                    sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
-                            + "'" + expediente_clave + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
-                    System.out.println(sql);
-                    if (!conn.escribir(sql)) {
-                        conn.close();
-                        response.sendRedirect("elementosPrincipales.jsp?error=si");
+                    for (int i = 0; i < chk.length; i++) {
+                        String valor = "cantAudi" + chk[i];
+                        sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
+                                + "'" + expediente_clave + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
+                        System.out.println(sql);
+                        if (!conn.escribir(sql)) {
+                            conn.close();
+//                            response.sendRedirect("elementosPrincipales.jsp?error=si");
+                        }
                     }
                 }
-                }
                 conn.close();
-                response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
+//                response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
             } else {
                 conn.close();
-                response.sendRedirect("elementosPrincipales.jsp?error=si");
+//                response.sendRedirect("elementosPrincipales.jsp?error=si");
             }
 
         } catch (SQLException ex) {

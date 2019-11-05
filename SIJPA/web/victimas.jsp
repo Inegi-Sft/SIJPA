@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="cols">
                                     <label for="tipo_victima">Tipo de Víctima</label>
-                                    <select name="tipo_victima" id="tipo_victima" class="txtMedia"  required>
+                                    <select name="tipo_victima" id="tipo_victima" class="txtMedia" required>
                                         <option value="">--Seleccione--</option>
                                         <option value="1">1.- Persona física</option>
                                         <option value="2">2.- Persona moral</option>

@@ -18,24 +18,24 @@
             } else if (request.getParameter("seinserto") != null) {
                 out.println("<script>parent.$.fancybox.close()</script>");
             }
-        %>
-    </head>
-    <body>
-        <%
+            
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
         %>
+    </head>
+    <body>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
             <h2>Expediente</h2>
-            <form action="insrtExpediente" method="post" id="expedientesF">
+            <form  method="post" name="formExpedientes" id="formExpedientes">
+                
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="jClave">Juzgado Clave:</label>
-                                <input type="text" name="jClave" id="jClave" value="<%=juzgado%>" readonly required>
+                                <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" readonly required>
                             </td>
                             <td>
                                 <label for="CarpInves">No. Carpeta Investigación</label>
@@ -155,12 +155,6 @@
                                 <input type="number" name="Tconclusiones" id="Tconclusiones" class="dependiente" onblur="Tconclu()">
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan=3>
-                                <label for="Tvictimas">Total de adolescentes concluidos</label>
-                                <input type="number" name="Tconclusiones" id="Tconclusiones" class="dependiente" onblur="Tconclu()">
-                            </td>
-                        </tr>
                     </table>
                 </fieldset><br/>
                 <fieldset class="oculto" id="totalAudiencias">
@@ -194,7 +188,8 @@
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>
                 </div>
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Guardar" onclick=" expeAudiencia()">
+                <!--<input type="button" name="guardarExp" id="guardarExp" value="Guardar" onclick="expeAudiencia()">-->
+                <input type="submit" name="guardarExp" id="guardarExp" value="Guardar"> 
             </form>
         </section>
     </body>

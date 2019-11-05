@@ -16,34 +16,37 @@
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
         <%
-            String juzgado=request.getParameter("juzgado");
+            String juzgado = "";
+            if(request.getParameter("juzgado") != null){
+                juzgado=request.getParameter("juzgado");
+                session.setAttribute("juzgadoClave", juzgado);
+            }else if(session.getAttribute("juzgadoClave") != null){
+                juzgado = (String) session.getAttribute("juzgadoClave");
+            }
             
             showJuzgados juz = new showJuzgados();
             showCausasPenales cp = new showCausasPenales();
             
-            ArrayList<String[]> lsCausas = new ArrayList();
+            ArrayList<String[]> lsCausas;
             ArrayList<String> lista;
-           
-//            request.getAttribute("juzgadoClave")
+            
+            int totCausas=cp.countTotalCausas();
+            int tCausasJuz=cp.countTotalCausasPorJuzgado(juzgado);
         %>
     </head>
     <body>
         <div class="load"></div>
         <%@include file="cabecera.jsp" %>
         <%@include file="menu.jsp"%>
-        
         <section class="contenedor">
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>Causas Penales</h1>
-            <form action="elementosPrincipales.jsp" name="formEnviaJuz" method="post">
-                <input type="hidden" name="juzgado" value="<%=juzgado%>" />
-            </form>
             <form action="causasPenales.jsp" name="formCP" method="post">
                 <div id="juzClave">
                     <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" class="txtLong" id="juzgado" onchange="formCP.submit();">
+                    <select name="juzgado" id="juzgado" class="txtLong" onchange="formCP.submit();">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = juz.findJuzgados();
@@ -57,7 +60,8 @@
                         %>
                     </select>
                 </div>
-                <span class="totExp">Total de Causas Penales:</span>
+                <span class="totExp">Total de Causas:<%=totCausas%></span>
+                <span class="totExp">Causas de este Juzgado:<%=tCausasJuz%></span>
                 <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
                 <a class="add" href="#" onclick="validaAddCausa();"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</a>
                 <table id="causas" class="myTable">
@@ -77,11 +81,7 @@
                     </thead>
                     <tbody>
                 <%
-                    lista = cp.findCausasPorJuzgado(juzgado);
-                    out.println("entra aqui: "+lsCausas);
-                    for (String[] lis : lsCausas) {
-                        out.println("ahora "+lis[0]);
-                    }
+                    lsCausas = cp.findCausasPorJuzgado(juzgado);
                     for (String[] ls : lsCausas) {
                 %>
                         <tr>

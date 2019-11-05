@@ -71,18 +71,21 @@ $(document).ready(function () {
                 $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
+                
+                $('#tipoMoral').fadeOut('slow');
+                $('#tvic_moral').val('-2').prop('required', false);
                 break;
             case '2':
-                $('#mediProtec').fadeIn('slow');
-                $('#mProtect').val('').prop('required', true);
+                $('#tipoMoral').fadeIn('slow');
+                $('#tvic_moral').val('').prop('required', true);
 
-                $('#victiFisicas, #mediProtecMuj').fadeOut('slow');
+                $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mujProtect').val('').prop('required', false);
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
                 break;
             default:
-                $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
-                $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
+                $('#tvic_moral, #sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
                 break;
         }
@@ -159,9 +162,6 @@ $(document).ready(function () {
             type: 'post',
             url: 'insrttramite',
             data: $('#formtramite').serialize(),
-            beforeSend: function (x) {
-                //$.fancybox().close();
-            },
             success: function (response) {
                 console.log("Respuesta del servidor", response);
 //                parent.$('#tramiteTabla tbody').append(response);
@@ -169,7 +169,37 @@ $(document).ready(function () {
             }
         });
     });
+    
+    //Guarda Expedientes
+    $('#formExpedientes').submit(function (e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if($('#compe').val()==='1'){
+            if($('#aplAudi:checked').length===0){
+                alert("Selecciona por lo menos una Audiencia");
+                return false;
+            }
+        }
+        $.ajax({
+            type: 'post',
+            url: 'insrtExpediente',
+            data: $('#formExpedientes').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+                alert("Guardado con exito!!!");
+                $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
+                $("#guardarExp").prop("hidden",true);
+                openPestana('btn2', 'p2');
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
+            }
+        });
+    });
 });
+
+
 
 /********************splash del inicio del sistema***********************/
 function splashIn() {
@@ -190,14 +220,14 @@ function competencia() {
             $('#tipoIncopetencia').fadeOut("slow");
             $('#Tincompe').val('-2').prop('required', false);
             $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeIn("slow");
-            $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
+            $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('').prop("required", true);
             $('#ExpAcomu, #Pparticular, #Tprocedi').val('').prop("required", true);
             break;
         case '2':
             $('#tipoIncopetencia').fadeIn("slow");
             $('#Tincompe').val('').prop("required", true);
             $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeOut("slow");
-            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
+            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('-2').prop("required", false);
             break;
     }
 
@@ -213,15 +243,7 @@ function expacumula() {
     }
 }
 
-function expeAudiencia() {
-    if ($('#compe').val() === 2)
-        $('#expedientesF').submit(function (e) {
-            if ($('#aplAudi:checked').length === 0) {
-                e.preventDefault();
-                alert("Selecciona por lo menos una Audiencia");
-            }
-        });
-}
+
 
 //Habilita text de Audiencias en Expedientes
 /***
@@ -590,7 +612,7 @@ function llenaNormaT(vNorma) {
 //Funcion para Causas Penales: comprueba que primero se haya seleccionado un juzgado clave antes de agrecar una causa penal
 function validaAddCausa() {
     if ($("#juzgado").val() !== "") {
-        document.formEnviaJuz.submit();
+        window.location.href = "elementosPrincipales.jsp";
     } else {
         $(".msjAviso").fadeIn("slow");
     }

@@ -18,34 +18,63 @@ import java.util.logging.Logger;
  */
 public class showCausasPenales {
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> lista;
+    ArrayList<String[]> causas;
     String sql;
     ResultSet rs;
     
     public ArrayList findCausasPorJuzgado(String juzgado){
         try {
             conn.Conectar();
-            lista = new ArrayList();
+            causas = new ArrayList();
             
             sql = "SELECT E.*,TP.*, C.* "
                 + " FROM DATOS_EXPEDIENTES_ADOJC E, CATALOGOS_PROCEDIMIENTO TP, CATALOGOS_RESPUESTA_SIMPLE C"
                 + " WHERE TP.PROCEDIMIENTO_ID=E.TIPO_PROCEDIMIENTO"
                 + " AND C.RESPUESTA_ID=E.COMPETENCIA"
                 + " AND JUZGADO_CLAVE='"+juzgado+"' ORDER BY 1;";
-            System.out.println(sql);
+            
             rs = conn.consultar(sql);
             while (rs.next()) {
-                lista.add(new String[]{
-                    rs.getString("expediente_clave")
-                    //rs.getString("TP.DESCRIPCION"),rs.getString("TOTAL_PROCESADOS")
-                    //rs.getString("TOTAL_VICTIMAS"),rs.getString("TOTAL_DELITOS"),rs.getString("C.DESCRIPCION"),rs.getString("FECHA_INGRESO")
+                causas.add(new String[]{
+                    rs.getString("expediente_clave"),rs.getString("TP.DESCRIPCION"),rs.getString("TOTAL_PROCESADOS"),
+                    rs.getString("TOTAL_VICTIMAS"),rs.getString("TOTAL_DELITOS"),rs.getString("C.DESCRIPCION"),rs.getString("FECHA_INGRESO")
                 });
-                System.out.println(rs.getString("expediente_clave"));
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;
+        return causas;
+    }
+    public int countTotalCausas(){
+        int total=0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC";
+            
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total=rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public int countTotalCausasPorJuzgado(String juzgado){
+        int total=0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where JUZGADO_CLAVE='"+juzgado+"'";
+            
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total=rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
     }
 }

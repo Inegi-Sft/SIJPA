@@ -28,10 +28,7 @@
         %>
     </head>
     <body>
-         <%
-            catalogos cat = new catalogos();
-            ArrayList<String[]> lista;
-        %>
+        
         <div class="load"></div>
         <%@include file="cabecera.jsp" %>
         <%@include file="menu.jsp"%>
@@ -47,7 +44,7 @@
             <form action="causasPenales.jsp" name="formCP" method="post">
                 <div id="juzClave">
                     <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" class="txtLong" id="juzgado" onchange="formCP.submit();">
+                    <select name="juzgado" id="juzgado" class="txtLong"  onchange="formCP.submit();">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = juz.findJuzgados();

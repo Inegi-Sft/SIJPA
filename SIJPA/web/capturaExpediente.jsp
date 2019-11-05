@@ -156,12 +156,6 @@
                                 <input type="number" name="Tconclusiones" id="Tconclusiones" class="dependiente" onblur="Tconclu()">
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan=3>
-                                <label for="Tvictimas">Total de adolescentes concluidos</label>
-                                <input type="number" name="Tconclusiones" id="Tconclusiones" class="dependiente" onblur="Tconclu()">
-                            </td>
-                        </tr>
                     </table>
                 </fieldset><br/>
                 <fieldset class="oculto" id="totalAudiencias">

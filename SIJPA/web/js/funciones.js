@@ -65,28 +65,31 @@ $(document).ready(function () {
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
 
     /*---------------------------- VICTIMAS ----------------------------*/
-    $('#tipo_victima').change(function () {
+   $('#tipo_victima').change(function () {
         switch ($(this).val()) {
             case '1':
                 $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
-                break;
-            case '2':
-                $('#mediProtec').fadeIn('slow');
-                $('#mProtect').val('').prop('required', true);
+                
+                $('#tipoMoral').fadeOut('slow');
+                $('#tvic_moral').val('-2').prop('required', false);
+                break; 
+                case '2':
+                $('#tipoMoral').fadeIn('slow');
+                $('#tvic_moral').val('').prop('required', true);
 
-                $('#victiFisicas, #mediProtecMuj').fadeOut('slow');
-                $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mujProtect').val('').prop('required', false);
-                break;
-            default:
-                $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
+                $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
                 break;
+            default:
+                $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
+                $('#tvic_moral, #sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
+                break;
         }
-    });
+    }); 
 
     $('#Pnacimiento').change(function () {
         if ($(this).val() === '1') {

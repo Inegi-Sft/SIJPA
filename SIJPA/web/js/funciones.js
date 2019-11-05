@@ -196,7 +196,7 @@ $(document).ready(function () {
             },
             error : function(response) {
                 console.log("Respuesta del servidor",response);
-                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
+                alert('Error al guardar, posible expediente duplicado, cunsulte al administrador');
             }
         });
     });
@@ -663,3 +663,10 @@ function Tconclu() {
     <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }; 
+
+function enviaPagina(pag, juzgado, exp){
+//    alert(pag+"?juzgado="+juzgado+"&"+"exp="+exp);
+    window.location.href="'"+pag+"?juzgado="+juzgado+"&"+"exp="+exp+"'";
+//    alert(pag+" / "+juzgado+" / "+exp);
+    
+}

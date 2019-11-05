@@ -109,7 +109,7 @@ table.dataTable tbody th,table.dataTable tbody td{
     height: 30px;
     padding: 5px;
     font-weight: bolder;
-    font-size: 19px;
+    font-size: 18px;
 }
 table.dataTable{
     width:100%;margin:0 auto;clear:both;border-collapse:separate;border-spacing:0

@@ -32,7 +32,6 @@ public class showCausasPenales {
                 + " WHERE TP.PROCEDIMIENTO_ID=E.TIPO_PROCEDIMIENTO"
                 + " AND C.RESPUESTA_ID=E.COMPETENCIA"
                 + " AND JUZGADO_CLAVE='"+juzgado+"' ORDER BY 1;";
-            
             rs = conn.consultar(sql);
             while (rs.next()) {
                 causas.add(new String[]{
@@ -46,6 +45,7 @@ public class showCausasPenales {
         }
         return causas;
     }
+  
     public int countTotalCausas(){
         int total=0;
         try {

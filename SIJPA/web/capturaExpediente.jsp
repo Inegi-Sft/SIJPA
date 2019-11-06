@@ -29,7 +29,6 @@
         <section class="contenedor" style="zoom: .9;">
             <h2>Expediente</h2>
             <form  method="post" name="formExpedientes" id="formExpedientes">
-                
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
                     <table class="tablaFormu">

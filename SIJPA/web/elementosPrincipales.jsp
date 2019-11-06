@@ -61,6 +61,7 @@
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
                 <%@include file="capturaExpediente.jsp"%>
+                
             </div>
             <div id="p2" class="pestanaContent">
                 <h2>Delitos</h2>
@@ -77,7 +78,7 @@
                     </thead>  
                     <tbody>
                         
-                        <%-- 
+                        <% 
                             deli = delito.findDeliTabla();
                             for (String[] tm : deli) {
                                 out.println("<tr>");
@@ -89,7 +90,7 @@
                                 out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
                                 out.println("</tr>");
                             }
-                        --%>
+                        %>
                         
                      </tbody>
                 </table>
@@ -106,20 +107,23 @@
                             <th>Grado de estudios</th>
                             <th>Editar</th>
                         </tr>
-                   </thead> 
+                    </thead> 
                     <tbody>
-                        <%--  proce = procesa.findProcesasdosTabla();
-                            for (String[] tm : proce) {
-                                out.println("<tr>");
-                                out.println("<td>" + tm[0] + "</td>");
-                                out.println("<td>" + tm[1] + "</td>");
-                                out.println("<td>" + tm[2] + "</td>");
-                                out.println("<td>" + tm[3] + "</td>");
-                                out.println("<td>" + tm[4] + "</td>");
-                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                out.println("</tr>");
-                            }
-                        --%>
+                <%  
+                    proce = procesa.findProcesasdosTabla("002/2018");
+                    for (String[] p : proce) {
+                %>
+                        <tr>
+                            <td><%= p[0] %></td>
+                            <td><%= p[1] %></td>
+                            <td><%= p[2] %></td>
+                            <td><%= p[3] %></td>
+                            <td><%= p[4] %></td>
+                            <td><a class="pop" href="procesadosjsp?juz=<%=juzgado%>&exp=$('#expClave').val()"><img src="img/editar.png" title="Modificar"/></a></td>
+                        </tr>
+                <%
+                    }
+                %>
                      </tbody>
                 </table>
             </div>

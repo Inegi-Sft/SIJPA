@@ -1,20 +1,23 @@
 $(document).ready(function () {
     $('select > option[value=-2]').hide();
     $(".load").fadeOut("slow");//proceso de carga para causas penales
+    
     //despliega ventana modal
-    $('.pop').fancybox({
-        'type': 'iframe',
-        'overlayShow': true,
-        'iframe': {
-            'css': {
-                'width': '1400px',
-                'height': '560px'
+    $('#tablaVictimas, #tablaDeli, #tablaProcesa').on('focusin',function(){
+        $('a.pop').fancybox({
+            'type': 'iframe',
+            'overlayShow': true,
+            'toolbar': false,
+            'smallBtn' : true,
+            'iframe': {
+                'css': {
+                    'width': '1400px',
+                    'height': '560px'
+                }
             }
-        },
-        afterClose: function () {
-            parent.location.reload("true");
-        }
+        });
     });
+    
     //Auto acompletado
     $('#delitoCP').selectize({
         render: {
@@ -155,20 +158,6 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
-
-    $('#guardarTram').click(function (e) {
-        $('#tramiteRegis tbody').append('<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>');
-        $.ajax({
-            type: 'post',
-            url: 'insrttramite',
-            data: $('#formtramite').serialize(),
-            success: function (response) {
-                console.log("Respuesta del servidor", response);
-//                parent.$('#tramiteTabla tbody').append(response);
-//                parent.$.fancybox.close();
-            }
-        });
-    });
     
     //Guarda Expedientes
     $('#formExpedientes').submit(function (e){
@@ -189,7 +178,11 @@ $(document).ready(function () {
                 alert("Guardado con exito!!!");
                 $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
                 $("#guardarExp").prop("hidden",true);
-                openPestana('btn2', 'p2');
+                if(response === 1){
+                    openPestana('btn2', 'p2');
+                }else{
+                    window.location.href = "causasPenales.jsp";
+                }
             },
             error : function(response) {
                 console.log("Respuesta del servidor",response);
@@ -197,6 +190,27 @@ $(document).ready(function () {
             }
         });
     });
+    
+    //Guarda Tramite
+    $('#guardarTram').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrttramite',
+            data: $('#formtramite').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                parent.$('#tramiteTabla tbody').append(response);
+                parent.$.fancybox.close();
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
+            }
+        });
+    });
+    
 });
 
 
@@ -643,7 +657,7 @@ function numeroVictimas() {
     var expediente = $('#expClave').val();
     var victimas = $('#Tvictimas').val();
     for (var i = 1; i <= victimas; i++) {
-        $('#tablaVictimas tbody').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
+        $('#tablaVictimas').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="victimas.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }

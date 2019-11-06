@@ -191,7 +191,30 @@ $(document).ready(function () {
         });
     });
     
-    //Guarda Tramite
+    //Guarda Procesados
+    $('#formProcesados').submit(function (e){
+        e.preventDefault();
+//        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtProcesados',
+            data: $('#formProcesados').serialize(),
+            beforeSend: function (x) {
+                //$.fancybox().close();
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+                alert("Guardado con exito!!!");
+                openPestana('btn4', 'p4');
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
+    });
+  
+  //Guarda Tramite
     $('#guardarTram').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -210,10 +233,7 @@ $(document).ready(function () {
             }
         });
     });
-    
 });
-
-
 
 /********************splash del inicio del sistema***********************/
 function splashIn() {
@@ -256,8 +276,6 @@ function expacumula() {
         $('#ExpRefe').val('-2').prop("required", false);
     }
 }
-
-
 
 //Habilita text de Audiencias en Expedientes
 /***
@@ -676,5 +694,11 @@ function Tconclu() {
         $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
     <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
+}; 
+
+function enviaPagina(pag, juzgado, exp){
+//    alert(pag+"?juzgado="+juzgado+"&"+"exp="+exp);
+    window.location.href="'"+pag+"?juzgado="+juzgado+"&"+"exp="+exp+"'";
+//    alert(pag+" / "+juzgado+" / "+exp);
+    
 }
-;

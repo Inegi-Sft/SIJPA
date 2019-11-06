@@ -39,6 +39,9 @@
 
             showTramite tram = new showTramite();
             ArrayList<String[]> trami = new ArrayList();
+            
+            HttpSession sesion= request.getSession();
+            String expediente =(String) sesion.getAttribute("expediente");
         %>
     </head>
     <body>
@@ -58,9 +61,11 @@
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
                 <%@include file="capturaExpediente.jsp"%>
+                
             </div>
             <div id="p2" class="pestanaContent">
                 <h2>Delitos</h2>
+<!--                <a href="delitos.jsp" class="agregar pop"><img src="img/add.png"/> Agregar</a>-->
                 <table class="tablasRegis" id="tablaDeli">
                     <thead>
                         <tr>
@@ -82,7 +87,7 @@
                                 out.println("<td>" + tm[2] + "</td>");
                                 out.println("<td>" + tm[3] + "</td>");
                                 out.println("<td>" + tm[4] + "</td>");
-                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("<td><a class='pop' href='delitos.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
                                 out.println("</tr>");
                             }
                         --%>
@@ -92,6 +97,7 @@
             </div>
             <div id="p3" class="pestanaContent">
                 <h2>Adolescentes</h2>
+                <!--<a href="procesados.jsp" class="agregar pop"><img src="img/add.png"/> Agregar</a>-->
                 <table id="tablaProcesa" class="tablasRegis">
                     <thead> 
                         <tr>

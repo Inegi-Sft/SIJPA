@@ -30,7 +30,7 @@
             <span class="nota">NOTA: El Adolescente procesado se identificará con el número de expediente seguido de un "-p" más el número consecutivo del Adolescente Procesado registrado.
                 Es decir, si es el primer Adolescente Procesado del expediente 10/2016 su identificador será 10/2016-p1
             </span>
-            <form action="insrtProcesados" method="post">
+            <form action="" method="post" name="formProcesados" id="formProcesados">
                 <fieldset>
                     <legend>Situación jurídica del adolescente</legend>
                     <table class="tablaFormu">
@@ -127,7 +127,7 @@
                             </td>
                             <td>
                                 <label for="defensor">Tipo de defensor</label>
-                                <select class="txtMedia" name="defensor" id="defensor">
+                                <select class="txtMedia" name="defensor" id="defensor" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findTipoDefensor();
@@ -260,7 +260,7 @@
                             </td>
                             <td>
                                 <label for="nacionalidad">Nacionalidad</label>
-                                <select class="txtMedia" name="nacionalidad" id="nacionalidad">
+                                <select class="txtMedia" name="nacionalidad" id="nacionalidad" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findNacionalidad();

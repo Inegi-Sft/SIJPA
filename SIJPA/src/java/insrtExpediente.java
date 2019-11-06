@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,6 +38,8 @@ public class insrtExpediente extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+        
+        HttpSession sesion= request.getSession();
 
         String juzgado_clave = request.getParameter("jClave");
         String jDividido[] = juzgado_clave.split("-"); //Esto separa en un array basándose en el separador que le pases
@@ -44,9 +47,16 @@ public class insrtExpediente extends HttpServlet {
         String jMunicipio = jDividido[1];
         String jDistrito = jDividido[2];
         String jNumero = jDividido[3];
+        String jConcatenado=jEntidad+jMunicipio+jDistrito+jNumero;
+        
+        sesion.setAttribute("entidad", jEntidad);
+        sesion.setAttribute("municipio", jMunicipio);
+        sesion.setAttribute("distrito", jDistrito);
+        sesion.setAttribute("numero", jNumero);
         
         String carpInvestiga = request.getParameter("CarpInves");
         String expediente_clave = request.getParameter("expClave");
+        sesion.setAttribute("expediente", expediente_clave);
         String fecha_ingreso;
         if (request.getParameter("fIngreso") != null) {
             fecha_ingreso = request.getParameter("fIngreso");
@@ -69,7 +79,7 @@ public class insrtExpediente extends HttpServlet {
         try {
             conn.Conectar();
             sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
-                    +",'" + expediente_clave + "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
+                    +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
                     + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
                     + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ","+ totalConclu +",'" + comentario + "', (select YEAR(NOW())) )";
             System.out.println(sql);

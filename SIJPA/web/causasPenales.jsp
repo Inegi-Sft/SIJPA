@@ -59,9 +59,9 @@
                             }
                         %>
                     </select>
+                    <span class="">Causas de este Juzgado: <%=tCausasJuz%></span>
                 </div>
                 <span class="totExp">Total de Causas:<%=totCausas%></span>
-                <span class="totExp">Causas de este Juzgado:<%=tCausasJuz%></span>
                 <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
                 <a class="add" href="#" onclick="validaAddCausa();"><img src="img/add3.png" width="20" height="20" /> Agregar Expediente</a>
                 <table id="causas" class="myTable">
@@ -82,10 +82,15 @@
                     <tbody>
                 <%
                     lsCausas = cp.findCausasPorJuzgado(juzgado);
+                    String juzLimpio="";
+                    if(juzgado!=null){
+                        juzLimpio=juzgado.replace("-", "");
+                    }
                     for (String[] ls : lsCausas) {
+                        String expSimple=ls[0].replace(juzLimpio, "");
                 %>
                         <tr>
-                            <td><%=ls[0]%></td>
+                            <td><%=expSimple%></td>
                             <td><%=ls[1]%></td>
                             <td><%=ls[2]%></td>
                             <td><%=ls[3]%></td>

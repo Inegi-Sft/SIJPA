@@ -4,6 +4,7 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
@@ -16,8 +17,17 @@
     </head>
     <body style="zoom: .9;">
         <%
+            HttpSession sesion= request.getSession();
             catalogos cat = new catalogos();
+            showCausasPenales objExp = new showCausasPenales();
+            
             ArrayList<String[]> lista;
+            String entidad =(String) sesion.getAttribute("entidad");
+            String municipio =(String) sesion.getAttribute("municipio");
+            String distrito =(String) sesion.getAttribute("distrito");
+            String numero =(String) sesion.getAttribute("numero");
+            String jConcatenado =entidad+municipio+distrito+numero;
+            String expediente =(String) sesion.getAttribute("expediente");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
@@ -228,9 +238,13 @@
                         <tr>
                             <td>
                                 <label for="numAdo">Número de adolescentes por este delito </label>
-                                <select class="txtMedia" name="numAdo" id="numAdo">
+                                <select class="txtMedia" name="numAdo" id="numAdo" required>
                                     <option value="">--Seleccione--</option>
-                                    <%    //conexion a base
+                                    <%    
+                                        int totProc=objExp.countTotalProcesados(expediente+jConcatenado);
+                                        for(int i=1; i <= totProc; i++){
+                                            out.println("<option value="+i+">"+i+"</option>");
+                                        }
                                     %>
                                 </select>
                             </td>
@@ -238,7 +252,11 @@
                                 <label for="numVic">Número de víctimas por este delito </label>
                                 <select class="txtMedia" name="numVic" id="numVic">
                                     <option value="">--Seleccione--</option>
-                                    <%    //conexion a base
+                                    <%   
+                                        int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
+                                        for(int i=1; i <= totVic; i++){
+                                            out.println("<option value="+i+">"+i+"</option>");
+                                        }
                                     %>
                                 </select>
                             </td>

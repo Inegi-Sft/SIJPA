@@ -48,6 +48,7 @@ public class insrtExpediente extends HttpServlet {
         String jMunicipio = jDividido[1];
         String jDistrito = jDividido[2];
         String jNumero = jDividido[3];
+        String jConcatenado=jEntidad+jMunicipio+jDistrito+jNumero;
         
         sesion.setAttribute("entidad", jEntidad);
         sesion.setAttribute("municipio", jMunicipio);
@@ -79,7 +80,7 @@ public class insrtExpediente extends HttpServlet {
         try {
             conn.Conectar();
             sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
-                    +",'" + expediente_clave+jEntidad+jMunicipio+jDistrito+jNumero + "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
+                    +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
                     + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
                     + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ","+ totalConclu +",'" + comentario + "', (select YEAR(NOW())) )";
 
@@ -89,7 +90,7 @@ public class insrtExpediente extends HttpServlet {
                     for (int i = 0; i < chk.length; i++) {
                         String valor = "cantAudi" + chk[i];
                         sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
-                                + "'" + expediente_clave + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
+                                + "'" + expediente_clave+jConcatenado + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
                         System.out.println(sql);
                         if (!conn.escribir(sql)) {
                             conn.close();

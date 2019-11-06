@@ -42,6 +42,9 @@
             
             showTramite tram = new showTramite();
             ArrayList<String[]> trami = new ArrayList();
+            
+            HttpSession sesion= request.getSession();
+            String expediente =(String) sesion.getAttribute("expediente");
         %>
     </head>
     <body>
@@ -65,6 +68,7 @@
             </div>
             <div id="p2" class="pestanaContent">
                 <h2>Delitos</h2>
+<!--                <a href="delitos.jsp" class="agregar pop"><img src="img/add.png"/> Agregar</a>-->
                 <table class="tablasRegis" id="tablaDeli">
                     <thead>
                         <tr>
@@ -78,7 +82,7 @@
                     </thead>  
                     <tbody>
                         
-                        <% 
+                        <%--
                             deli = delito.findDeliTabla();
                             for (String[] tm : deli) {
                                 out.println("<tr>");
@@ -87,16 +91,17 @@
                                 out.println("<td>" + tm[2] + "</td>");
                                 out.println("<td>" + tm[3] + "</td>");
                                 out.println("<td>" + tm[4] + "</td>");
-                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("<td><a class='pop' href='delitos.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
                                 out.println("</tr>");
                             }
-                        %>
+                        --%>
                         
                      </tbody>
                 </table>
             </div>
             <div id="p3" class="pestanaContent">
                 <h2>Adolescentes</h2>
+                <!--<a href="procesados.jsp" class="agregar pop"><img src="img/add.png"/> Agregar</a>-->
                 <table id="tablaProcesa" class="tablasRegis">
                     <thead> 
                         <tr>
@@ -109,8 +114,8 @@
                         </tr>
                     </thead> 
                     <tbody>
-                <%  
-                    proce = procesa.findProcesasdosTabla("002/2018");
+                <%--  
+                    proce = procesa.findProcesasdosTabla(expediente);
                     for (String[] p : proce) {
                 %>
                         <tr>
@@ -119,11 +124,11 @@
                             <td><%= p[2] %></td>
                             <td><%= p[3] %></td>
                             <td><%= p[4] %></td>
-                            <td><a class="pop" href="procesadosjsp?juz=<%=juzgado%>&exp=$('#expClave').val()"><img src="img/editar.png" title="Modificar"/></a></td>
+                            <td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td>
                         </tr>
                 <%
                     }
-                %>
+                --%>
                      </tbody>
                 </table>
             </div>

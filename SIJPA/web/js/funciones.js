@@ -152,7 +152,9 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
-
+    
+    /*********************** FUNCIONES PARA INSERTS AJAX **************************/
+    //guarda Tramite
     $('#guardarTram').click(function (e) {
         $('#tramiteRegis tbody').append('<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>');
         $.ajax({
@@ -196,6 +198,29 @@ $(document).ready(function () {
             error : function(response) {
                 console.log("Respuesta del servidor",response);
                 alert('Error al guardar, posible expediente duplicado, cunsulte al administrador');
+            }
+        });
+    });
+    
+    //Guarda Procesados
+    $('#formProcesados').submit(function (e){
+        e.preventDefault();
+//        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtProcesados',
+            data: $('#formProcesados').serialize(),
+            beforeSend: function (x) {
+                //$.fancybox().close();
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+                alert("Guardado con exito!!!");
+                openPestana('btn4', 'p4');
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, cunsulte al administrador!');
             }
         });
     });

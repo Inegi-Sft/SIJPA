@@ -8,7 +8,6 @@
 <%@page import="clasesAuxiliar.showDelitos"%>
 <%@page import="clasesAuxiliar.showConclusiones"%>
 <%@page import="clasesAuxiliar.showTramite"%>
-
 <%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -28,10 +27,7 @@
                 //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
                 out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
             }
-        %>
-    </head>
-    <body>
-        <%           
+            
             showDelitos delito = new showDelitos();
             ArrayList<String[]>  deli = new ArrayList();
             
@@ -50,6 +46,8 @@
             HttpSession sesion= request.getSession();
             String expediente =(String) sesion.getAttribute("expediente");
         %>
+    </head>
+    <body>
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>

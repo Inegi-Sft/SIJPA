@@ -77,4 +77,35 @@ public class showCausasPenales {
         }
         return total;
     }
+    
+    public int countTotalProcesados(String exp){
+        int total=0;
+        try {
+            conn.Conectar();
+            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where EXPEDIENTE_CLAVE='"+exp+"'";
+            
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total=rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    public int countTotalVictimas(String exp){
+        int total=0;
+        try {
+            conn.Conectar();
+            sql = "SELECT TOTAL_VICTIMAS AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where EXPEDIENTE_CLAVE='"+exp+"'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total=rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
 }

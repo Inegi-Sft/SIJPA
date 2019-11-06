@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,13 +37,19 @@ public class insrtProcesados extends HttpServlet {
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
     ResultSet rs;
-
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-
-        int evento = Integer.parseInt(request.getParameter("evento"));
-        String expediente = "BORRAME/2019";
-        String procesado = request.getParameter("procesado");
+        
+        HttpSession sesion= request.getSession();
+        
+        String entidad =(String) sesion.getAttribute("entidad");
+        String municipio =(String) sesion.getAttribute("municipio");
+        String distrito =(String) sesion.getAttribute("distrito");
+        String numero =(String) sesion.getAttribute("numero");
+        String jConcatenado =entidad+municipio+distrito+numero;
+        String expediente =(String) sesion.getAttribute("expediente");
         
         String presentAdo = request.getParameter("presentAdo");
         String tipoDetencion = request.getParameter("tipoDetencion");
@@ -89,83 +96,65 @@ public class insrtProcesados extends HttpServlet {
         String dia = arrayFecha[2];
         String mes = arrayFecha[1];
         String anio = arrayFecha[0];
-        
-        switch (evento) {
-            case 1: //***********************************INSERT*************************************************
-                try {
-                    String proceClave=generaProcesadoClave(expediente)+1;
-                    conn.Conectar();
-                    sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(12,12001,1,1,'"+expediente+"','"+proceClave+"',"
-                            + presentAdo + ","
-                            + tipoDetencion + ","
-                            + imputable + ","
-                            + participacion + ","
-                            + reincidencia + ","
-                            + psicofisico + ","
-                            + interprete + ","
-                            + defensor + ","
-                            + representante + ","
-                            + "'" + apaterno + "',"
-                            + "'" + amaterno + "',"
-                            + "'" + nombre + "',"
-                            + "'" + alias + "',"
-                            + "'" + curp + "',"
-                            + sexo + ","
-                            + edad + ","
-                            + "'" + fNacimiento + "',"
-                            + dia + ","
-                            + mes + ","
-                            + anio + ","
-                            + nPais + ","
-                            + nEntidad + ","
-                            + nMunicipio + ","
-                            + edoCivil + ","
-                            + nacionalidad + ","
-                            + residencia + ","
-                            + rEntidad + ","
-                            + rMunicipio + ","
-                            + discapacidad + ","
-                            + alfabet + ","
-                            + estudios + ","
-                            + condiEstudiante + ","
-                            + hablaEsp + ","
-                            + poblaIndigena + ","
-                            + puebloIndigena + ","
-                            + hablaIndigena + ","
-                            + lenguaIndigena + ","
-                            + ocupacion + ","
-                            + condicionActi + ","
-                            + "'" + comentarios + "',"
-                            + " (select YEAR(NOW())) );";
-
-                    if (conn.escribir(sql)) {// si se inserta redirige a elementosPrincipales.jsp
-                        conn.close();
-                        response.sendRedirect("elementosPrincipales.jsp?insertado=true");
-                    } else {//regresa a procesados.jsp y maca error
-                        conn.close();
-                        response.sendRedirect("procesados.jsp?insertado=false");
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                break;
-
-            case 2: //******************************** DELETE ****************************************************
-                try {
-                    conn.Conectar();
-                    sql = "DELETE FROM DATOS_PROCESADOS_ADOJC WHERE PROCESADO_CLAVE='" + procesado + "';";
-                    if (conn.escribir(sql)) {
-                        conn.close();
-                        response.sendRedirect("elementosPrincipales.jsp?eliminado=true");
-                    } else {
-                        conn.close();
-                        response.sendRedirect("elementosPrincipales.jsp?eliminado=false");
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                break;
+        //***********************************INSERT*************************************************
+        try {
+            String proceClave = generaProcesadoClave(expediente) + 1;
+            conn.Conectar();
+            sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
+                    + expediente +jConcatenado + "','" + proceClave + jConcatenado+"',"
+                    + presentAdo + ","
+                    + tipoDetencion + ","
+                    + imputable + ","
+                    + participacion + ","
+                    + reincidencia + ","
+                    + psicofisico + ","
+                    + interprete + ","
+                    + defensor + ","
+                    + representante + ","
+                    + "'" + apaterno + "',"
+                    + "'" + amaterno + "',"
+                    + "'" + nombre + "',"
+                    + "'" + alias + "',"
+                    + "'" + curp + "',"
+                    + sexo + ","
+                    + edad + ","
+                    + "'" + fNacimiento + "',"
+                    + dia + ","
+                    + mes + ","
+                    + anio + ","
+                    + nPais + ","
+                    + nEntidad + ","
+                    + nMunicipio + ","
+                    + edoCivil + ","
+                    + nacionalidad + ","
+                    + residencia + ","
+                    + rEntidad + ","
+                    + rMunicipio + ","
+                    + discapacidad + ","
+                    + alfabet + ","
+                    + estudios + ","
+                    + condiEstudiante + ","
+                    + hablaEsp + ","
+                    + poblaIndigena + ","
+                    + puebloIndigena + ","
+                    + hablaIndigena + ","
+                    + lenguaIndigena + ","
+                    + ocupacion + ","
+                    + condicionActi + ","
+                    + "'" + comentarios + "',"
+                    + " (select YEAR(NOW())) );";
+            System.out.println(sql);
+            if (conn.escribir(sql)) {// si se inserta redirige a elementosPrincipales.jsp
+                conn.close();
+//                response.sendRedirect("elementosPrincipales.jsp?insertado=true");
+            } else {//regresa a procesados.jsp y maca error
+                conn.close();
+//                response.sendRedirect("procesados.jsp?insertado=false");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -225,7 +214,6 @@ public class insrtProcesados extends HttpServlet {
         }
     }
 
-
     public String verificaVariable(String variable) {
         String verificada = "";
         if (variable == null) {
@@ -237,24 +225,24 @@ public class insrtProcesados extends HttpServlet {
         }
         return verificada;
     }
-    
+
     public String generaProcesadoClave(String exp) throws SQLException {
 
         int maxPro = 0;
-        String procesadoClave="";
-        
+        String procesadoClave = "";
+
         conn.Conectar();
         String sql = "SELECT MAX("
-                            + "SUBSTR( PROCESADO_CLAVE, INSTR(PROCESADO_CLAVE,'P')+1, length(PROCESADO_CLAVE) )" 
-                        + " ) AS NUMERO" 
-                    + " FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"';";
+                                + "SUBSTR( PROCESADO_CLAVE, INSTR(PROCESADO_CLAVE,'P')+1, length(PROCESADO_CLAVE) )"
+                            + " ) AS NUMERO"
+                    + " FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='" + exp + "';";
         rs = conn.consultar(sql);
         if (rs.next()) {
             maxPro = rs.getInt("NUMERO");
         }
-        
-        int newPro=maxPro+1;
-        procesadoClave=exp+"-P"+newPro;
+
+        int newPro = maxPro + 1;
+        procesadoClave = exp + "-P" + newPro;
         return procesadoClave;
     }
 

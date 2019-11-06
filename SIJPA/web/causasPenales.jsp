@@ -85,7 +85,10 @@
                     <tbody>
                 <%
                     lsCausas = cp.findCausasPorJuzgado(juzgado);
-                    String juzLimpio=juzgado.replace("-", "");
+                    String juzLimpio="";
+                    if(juzgado!=null){
+                        juzLimpio=juzgado.replace("-", "");
+                    }
                     for (String[] ls : lsCausas) {
                         String expSimple=ls[0].replace(juzLimpio, "");
                 %>

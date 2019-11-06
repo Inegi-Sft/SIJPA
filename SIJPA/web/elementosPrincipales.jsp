@@ -18,28 +18,25 @@
         <title>SIJPA::Elementos del Expediente</title>
         <%@include file="librerias.jsp" %>
         <%
-            String juzgado=request.getParameter("juzgado");//recupera el juzgado clave proveniente de causasPenales.jsp
-            
             if (request.getParameter("error") != null) {
                 out.println("<script>alert('error en el proceso de guardado')</script>");
-            } 
+            }
             if (request.getParameter("insertado") != null) {
-                //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
                 out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
             }
-            
+
             showDelitos delito = new showDelitos();
-            ArrayList<String[]>  deli = new ArrayList();
-            
+            ArrayList<String[]> deli = new ArrayList();
+
             showProcesados procesa = new showProcesados();
-            ArrayList<String[]>  proce = new ArrayList();
-            
+            ArrayList<String[]> proce = new ArrayList();
+
             showVictimas victi = new showVictimas();
             ArrayList<String[]> vic = new ArrayList();
 
             showConclusiones conclusion = new showConclusiones();
             ArrayList<String[]> conc = new ArrayList();
-            
+
             showTramite tram = new showTramite();
             ArrayList<String[]> trami = new ArrayList();
             
@@ -54,13 +51,13 @@
             <br/>
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Expediente</button>
-                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2">Delitos</button>
-                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3">Adolescentes</button>
-                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4">Victimas</button>
-                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5">Inicial</button>
-                <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6">Intermedia</button>
-                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7">Conclusion y/o Terminacion</button>
-                <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8">Tramite</button>
+                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2" disabled>Delitos</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3" disabled>Adolescentes</button>
+                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Victimas</button>
+                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5" disabled>Inicial</button>
+                <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6" disabled>Intermedia</button>
+                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" disabled>Conclusion y/o Terminacion</button>
+                <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8" disabled>Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
                 <%@include file="capturaExpediente.jsp"%>
@@ -81,8 +78,7 @@
                         </tr>
                     </thead>  
                     <tbody>
-                        
-                        <%--
+                        <%-- 
                             deli = delito.findDeliTabla();
                             for (String[] tm : deli) {
                                 out.println("<tr>");
@@ -95,8 +91,8 @@
                                 out.println("</tr>");
                             }
                         --%>
-                        
-                     </tbody>
+
+                    </tbody>
                 </table>
             </div>
             <div id="p3" class="pestanaContent">
@@ -114,36 +110,33 @@
                         </tr>
                     </thead> 
                     <tbody>
-                <%--  
-                    proce = procesa.findProcesasdosTabla(expediente);
-                    for (String[] p : proce) {
-                %>
-                        <tr>
-                            <td><%= p[0] %></td>
-                            <td><%= p[1] %></td>
-                            <td><%= p[2] %></td>
-                            <td><%= p[3] %></td>
-                            <td><%= p[4] %></td>
-                            <td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td>
-                        </tr>
-                <%
-                    }
-                --%>
-                     </tbody>
+                        <%--  proce = procesa.findProcesasdosTabla();
+                            for (String[] tm : proce) {
+                                out.println("<tr>");
+                                out.println("<td>" + tm[0] + "</td>");
+                                out.println("<td>" + tm[1] + "</td>");
+                                out.println("<td>" + tm[2] + "</td>");
+                                out.println("<td>" + tm[3] + "</td>");
+                                out.println("<td>" + tm[4] + "</td>");
+                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("</tr>");
+                            }
+                        --%>
+                    </tbody>
                 </table>
             </div>
             <div id="p4" class="pestanaContent">
                 <h2>Victimas</h2>
                 <table class="tablasRegis" id="tablaVictimas">
                     <thead> 
-                    <tr>
-                        <th>Victima clave</th>
-                        <th>Tipo de Víctima</th>
-                        <th>Sexo</th>
-                        <th>Fecha nacimiento</th>
-                        <th>Lugar nacimiento</th>
-                        <th>Editar</th>
-                    </tr>
+                        <tr>
+                            <th>Victima clave</th>
+                            <th>Tipo de Víctima</th>
+                            <th>Sexo</th>
+                            <th>Fecha nacimiento</th>
+                            <th>Lugar nacimiento</th>
+                            <th>Editar</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <%--  vic = victi.findVictimasTabla();
@@ -158,7 +151,7 @@
                                 out.println("</tr>");
                             }
                         --%>
-                     </tbody>
+                    </tbody>
                 </table>
             </div>
             <div id="p5" class="pestanaContent">
@@ -207,13 +200,13 @@
                 <h2>Resoluciones dictadas</h2>
                 <table class="tablasRegis" id="tablaConclu">
                     <thead>
-                    <tr>
-                        <th>Conclusión clave</th>
-                        <th>Fecha conclusión</th>
-                        <th>Adolescente clave</th>
-                        <th>Tipo conclusión/terminación</th>
-                        <th>Editar</th>
-                    </tr>
+                        <tr>
+                            <th>Conclusión clave</th>
+                            <th>Fecha conclusión</th>
+                            <th>Adolescente clave</th>
+                            <th>Tipo conclusión/terminación</th>
+                            <th>Editar</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <%--  conc = conclusion.findConcluTabla();
@@ -234,13 +227,13 @@
                 <h2>Pendientes de resolución</h2>
                 <table class="tablasRegis" id="tramiteRegis">
                     <thead>
-                    <tr>
-                        <th>Procesado clave</th>
-                        <th>Etapa procesal</th>
-                        <th>Motivo</th>
-                        <th>Fecha última actuación</th>
-                        <th>Editar</th>
-                    </tr>
+                        <tr>
+                            <th>Procesado clave</th>
+                            <th>Etapa procesal</th>
+                            <th>Motivo</th>
+                            <th>Fecha última actuación</th>
+                            <th>Editar</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <%--  trami = tram.findTramite();

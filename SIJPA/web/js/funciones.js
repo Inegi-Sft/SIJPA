@@ -1,20 +1,23 @@
 $(document).ready(function () {
     $('select > option[value=-2]').hide();
     $(".load").fadeOut("slow");//proceso de carga para causas penales
+    
     //despliega ventana modal
-    $('.pop').fancybox({
-        'type': 'iframe',
-        'overlayShow': true,
-        'iframe': {
-            'css': {
-                'width': '1400px',
-                'height': '560px'
+    $('#tablaVictimas, #tablaDeli, #tablaProcesa').on('focusin',function(){
+        $('a.pop').fancybox({
+            'type': 'iframe',
+            'overlayShow': true,
+            'toolbar': false,
+            'smallBtn' : true,
+            'iframe': {
+                'css': {
+                    'width': '1400px',
+                    'height': '560px'
+                }
             }
-        },
-        afterClose: function () {
-            parent.location.reload("true");
-        }
+        });
     });
+    
     //Auto acompletado
     $('#delitoCP').selectize({
         render: {
@@ -71,18 +74,21 @@ $(document).ready(function () {
                 $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
+                
+                $('#tipoMoral').fadeOut('slow');
+                $('#tvic_moral').val('-2').prop('required', false);
                 break;
             case '2':
-                $('#mediProtec').fadeIn('slow');
-                $('#mProtect').val('').prop('required', true);
+                $('#tipoMoral').fadeIn('slow');
+                $('#tvic_moral').val('').prop('required', true);
 
-                $('#victiFisicas, #mediProtecMuj').fadeOut('slow');
+                $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mujProtect').val('').prop('required', false);
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
                 break;
             default:
-                $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
-                $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
+                $('#tvic_moral, #sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
                 break;
         }
@@ -153,24 +159,6 @@ $(document).ready(function () {
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
     
-    /*********************** FUNCIONES PARA INSERTS AJAX **************************/
-    //guarda Tramite
-    $('#guardarTram').click(function (e) {
-        $('#tramiteRegis tbody').append('<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>');
-        $.ajax({
-            type: 'post',
-            url: 'insrttramite',
-            data: $('#formtramite').serialize(),
-            beforeSend: function (x) {
-                //$.fancybox().close();
-            },
-            success: function (response) {
-                console.log("Respuesta del servidor", response);
-//                parent.$('#tramiteTabla tbody').append(response);
-//                parent.$.fancybox.close();
-            }
-        });
-    });
     //Guarda Expedientes
     $('#formExpedientes').submit(function (e){
         e.preventDefault();
@@ -185,19 +173,20 @@ $(document).ready(function () {
             type: 'post',
             url: 'insrtExpediente',
             data: $('#formExpedientes').serialize(),
-            beforeSend: function (x) {
-                //$.fancybox().close();
-            },
             success: function (response) {
                 console.log("Respuesta del servidor",response);
                 alert("Guardado con exito!!!");
                 $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
                 $("#guardarExp").prop("hidden",true);
-                openPestana('btn2', 'p2');
+                if(response === 1){
+                    openPestana('btn2', 'p2');
+                }else{
+                    window.location.href = "causasPenales.jsp";
+                }
             },
             error : function(response) {
                 console.log("Respuesta del servidor",response);
-                alert('Error al guardar, posible expediente duplicado, cunsulte al administrador');
+                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
     });
@@ -224,9 +213,27 @@ $(document).ready(function () {
             }
         });
     });
+  
+  //Guarda Tramite
+    $('#guardarTram').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrttramite',
+            data: $('#formtramite').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                parent.$('#tramiteTabla tbody').append(response);
+                parent.$.fancybox.close();
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
+            }
+        });
+    });
 });
-
-
 
 /********************splash del inicio del sistema***********************/
 function splashIn() {
@@ -637,7 +644,7 @@ function llenaNormaT(vNorma) {
 //Funcion para Causas Penales: comprueba que primero se haya seleccionado un juzgado clave antes de agrecar una causa penal
 function validaAddCausa() {
     if ($("#juzgado").val() !== "") {
-        document.formEnviaJuz.submit();
+        window.location.href = "elementosPrincipales.jsp";
     } else {
         $(".msjAviso").fadeIn("slow");
     }
@@ -668,7 +675,7 @@ function numeroVictimas() {
     var expediente = $('#expClave').val();
     var victimas = $('#Tvictimas').val();
     for (var i = 1; i <= victimas; i++) {
-        $('#tablaVictimas tbody').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
+        $('#tablaVictimas').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="victimas.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }

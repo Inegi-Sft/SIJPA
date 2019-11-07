@@ -1,20 +1,23 @@
 $(document).ready(function () {
-    $('select > option[value=-2]').hide();  
+    $('select > option[value=-2]').hide();
     $(".load").fadeOut("slow");//proceso de carga para causas penales
+    
     //despliega ventana modal
-    $('.pop').fancybox({
-        'type': 'iframe',
-        'overlayShow': true,
-        'iframe': {
-            'css': {
-                'width': '1400px',
-                'height': '560px'
+    $('#tablaVictimas, #tablaDeli, #tablaProcesa').on('focusin',function(){
+        $('a.pop').fancybox({
+            'type': 'iframe',
+            'overlayShow': true,
+            'toolbar': false,
+            'smallBtn' : true,
+            'iframe': {
+                'css': {
+                    'width': '1400px',
+                    'height': '560px'
+                }
             }
-        },
-        afterClose: function(){
-            parent.location.reload("true");
-        }
+        });
     });
+    
     //Auto acompletado
     $('#delitoCP').selectize({
         render: {
@@ -71,11 +74,10 @@ $(document).ready(function () {
                 $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
-                
                 $('#tipoMoral').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
-                break; 
-                case '2':
+                break;
+            case '2':
                 $('#tipoMoral').fadeIn('slow');
                 $('#tvic_moral').val('').prop('required', true);
 
@@ -156,23 +158,6 @@ $(document).ready(function () {
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
     
-    $('#guardarTram').click(function (e){
-        $('#tramiteRegis tbody').append('<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>');
-        $.ajax({
-            type: 'post',
-            url: 'insrttramite',
-            data: $('#formtramite').serialize(),
-            
-            beforeSend: function (x) {
-                //$.fancybox().close();
-            },
-            success: function (response) {
-                console.log("Respuesta del servidor",response);
-//                parent.$('#tramiteTabla tbody').append(response);
-//                parent.$.fancybox.close();
-            }
-        });
-    });
     //Guarda Expedientes
     $('#formExpedientes').submit(function (e){
         e.preventDefault();
@@ -187,25 +172,67 @@ $(document).ready(function () {
             type: 'post',
             url: 'insrtExpediente',
             data: $('#formExpedientes').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+                alert("Guardado con exito!!!");
+                $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
+                $("#guardarExp").prop("hidden",true);
+                if(response === 1){
+                    openPestana('btn2', 'p2');
+                }else{
+                    window.location.href = "causasPenales.jsp";
+                }
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
+            }
+        });
+    });
+    
+    //Guarda Procesados
+    $('#formProcesados').submit(function (e){
+        e.preventDefault();
+//        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtProcesados',
+            data: $('#formProcesados').serialize(),
             beforeSend: function (x) {
                 //$.fancybox().close();
             },
             success: function (response) {
                 console.log("Respuesta del servidor",response);
                 alert("Guardado con exito!!!");
-                $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
-                $("#guardarExp").prop("hidden",true);
-                openPestana('btn2', 'p2');
+                openPestana('btn4', 'p4');
             },
             error : function(response) {
                 console.log("Respuesta del servidor",response);
-                alert('Error al guardar, posible expediente duplicado, cunsulte al administrador');
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
+    });
+  
+  //Guarda Tramite
+    $('#guardarTram').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrttramite',
+            data: $('#formtramite').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                parent.$('#tramiteTabla tbody').append(response);
+                parent.$.fancybox.close();
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
     });
 });
-
-
 
 /********************splash del inicio del sistema***********************/
 function splashIn() {
@@ -248,8 +275,6 @@ function expacumula() {
         $('#ExpRefe').val('-2').prop("required", false);
     }
 }
-
-
 
 //Habilita text de Audiencias en Expedientes
 /***
@@ -342,16 +367,16 @@ function fechaNoIdent(idChk, idTxtDate) {
     }
 }
 
-function etapaInter(){
-  if($('#audiInterme').val()==='1'){
-      $('#divfechaAudiinter,#divfechaEscrito').fadeIn("slow");
-      $('#chkAudiinter,#chkEscrito').prop("checked", false);
-      $('#fechaAudiinter,#fechaEscrito').val("").prop("disabled", false).prop("required", true);
-  } else {
-       $('#divfechaAudiinter,#divfechaEscrito').fadeOut("slow");
-      $('#chkAudiinter,#chkEscrito').prop("checked", false);
-      $('#fechaAudiinter,#fechaEscrito').val("1899-09-09").prop("disabled", false).prop("required", false);
-  }
+function etapaInter() {
+    if ($('#audiInterme').val() === '1') {
+        $('#divfechaAudiinter,#divfechaEscrito').fadeIn("slow");
+        $('#chkAudiinter,#chkEscrito').prop("checked", false);
+        $('#fechaAudiinter,#fechaEscrito').val("").prop("disabled", false).prop("required", true);
+    } else {
+        $('#divfechaAudiinter,#divfechaEscrito').fadeOut("slow");
+        $('#chkAudiinter,#chkEscrito').prop("checked", false);
+        $('#fechaAudiinter,#fechaEscrito').val("1899-09-09").prop("disabled", false).prop("required", false);
+    }
 }
 /*****************************FIN DE FUNCIONES ETAPA INTERMEDIA*****************/
 
@@ -616,10 +641,10 @@ function llenaNormaT(vNorma) {
 /*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
 
 //Funcion para Causas Penales: comprueba que primero se haya seleccionado un juzgado clave antes de agrecar una causa penal
-function validaAddCausa(){
-    if($("#juzgado").val()!==""){
-        document.formEnviaJuz.submit();
-    }else{
+function validaAddCausa() {
+    if ($("#juzgado").val() !== "") {
+        window.location.href = "elementosPrincipales.jsp";
+    } else {
         $(".msjAviso").fadeIn("slow");
     }
 }
@@ -628,41 +653,44 @@ function numeroDelitos() {
     $('#tablaDeli tbody').empty();
     var expediente = $('#expClave').val();
     var delitos = $('#Tdelitos').val();
-    for(var i=1; i<=delitos; i++){ 
-    $('#tablaDeli tbody').append('<tr><td>'+ expediente +'-D'+ i +'</td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= delitos; i++) {
+        $('#tablaDeli tbody').append('<tr><td>' + expediente + '-D' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="delitos.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-}; 
+}
+;
 function numeroProcesados() {
     $('#tablaProcesa tbody').empty();
     var expediente = $('#expClave').val();
     var procesados = $('#Tadolescentes').val();
-    for(var i=1; i<=procesados; i++){ 
-    $('#tablaProcesa tbody').append('<tr><td>'+ expediente +'-P'+ i +'</td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= procesados; i++) {
+        $('#tablaProcesa tbody').append('<tr><td>' + expediente + '-P' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-}; 
+}
+;
 function numeroVictimas() {
     $('#tablaVictimas tbody').empty();
     var expediente = $('#expClave').val();
     var victimas = $('#Tvictimas').val();
-    for(var i=1; i<=victimas; i++){ 
-    $('#tablaVictimas tbody').append('<tr><td>'+ expediente +'-V'+ i +'</td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= victimas; i++) {
+        $('#tablaVictimas').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
     <td></td><td><a class="pop" href="victimas.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-}; 
+}
+;
 function Tconclu() {
     $('#tablaConclu tbody').empty();
     $('#tramiteRegis tbody').empty();
     var procesados = $('#Tadolescentes').val();
     var tconclu = $('#Tconclusiones').val();
-    var tot=procesados-tconclu;
-    for(var i=1; i<=tconclu; i++){ 
-    $('#tablaConclu tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+    var tot = procesados - tconclu;
+    for (var i = 1; i <= tconclu; i++) {
+        $('#tablaConclu tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
     <td><a class="pop" href="conclusiones.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
-    for(var i=1; i<=tot; i++){ 
-    $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+    for (var i = 1; i <= tot; i++) {
+        $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
     <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }; 

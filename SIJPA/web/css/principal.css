@@ -129,27 +129,6 @@ body{
     color: #FFFFFF;
     width: 15%;
 }
-.contenedor input[type=button]{
-    background-color: #0077CB;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    width: 10%;
-    height: 40px;
-    font-size: 16px;
-    cursor: pointer;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.contenedor input[type=button]:hover{
-    background-color: #00CBCB;
-    color: #FFFFFF;
-    width: 15%;
-}
 
 .contenedor input, .contenedor input[type=text], .contenedor input[type=date], .contenedor input[type=number], 
 .contenedor input[type=tel], .contenedor input[type=email]{
@@ -163,7 +142,6 @@ body{
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-
 
 .contenedor input[type=text]:focus, .contenedor input[type=date]:focus, .contenedor input[type=number]:focus, 
 .contenedor input[type=tel]:focus, .contenedor input[type=email]:focus{
@@ -380,3 +358,7 @@ fieldset legend{
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
+/*.agregar{
+    text-decoration: none;
+    font-size: 15px;
+}*/

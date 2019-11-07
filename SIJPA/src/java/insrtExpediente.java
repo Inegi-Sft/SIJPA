@@ -7,7 +7,6 @@
 import ConexionDB.Conexion_Mysql;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -48,6 +47,7 @@ public class insrtExpediente extends HttpServlet {
         String jMunicipio = jDividido[1];
         String jDistrito = jDividido[2];
         String jNumero = jDividido[3];
+        String jConcatenado=jEntidad+jMunicipio+jDistrito+jNumero;
         
         sesion.setAttribute("entidad", jEntidad);
         sesion.setAttribute("municipio", jMunicipio);
@@ -79,10 +79,9 @@ public class insrtExpediente extends HttpServlet {
         try {
             conn.Conectar();
             sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
-                    +",'" + expediente_clave+jEntidad+jMunicipio+jDistrito+jNumero + "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
+                    +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
                     + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
                     + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ","+ totalConclu +",'" + comentario + "', (select YEAR(NOW())) )";
-
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 if(competencia == 1 ){
@@ -91,40 +90,38 @@ public class insrtExpediente extends HttpServlet {
                         sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
                                 + "'" + expediente_clave + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
                         System.out.println(sql);
-                        if (!conn.escribir(sql)) {
+                        if (conn.escribir(sql)) {
                             conn.close();
-//                            response.sendRedirect("elementosPrincipales.jsp?error=si");
                         }
                     }
                 }
                 conn.close();
-//                response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
+                response.setContentType("text/plain;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                out.write(competencia);
             } else {
                 conn.close();
-//                response.sendRedirect("elementosPrincipales.jsp?error=si");
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(insrtExpediente.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet insrtExpediente</title>");
-            out.println("</head>");
-            out.println("<body>");
-
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+//        PrintWriter out = response.getWriter();
+//        try {
+//
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet insrtExpediente</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//
+//            out.println("</body>");
+//            out.println("</html>");
+//        } finally {
+//            out.close();
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

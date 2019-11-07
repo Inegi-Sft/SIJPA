@@ -18,25 +18,23 @@
             } else if (request.getParameter("seinserto") != null) {
                 out.println("<script>parent.$.fancybox.close()</script>");
             }
-        %>
-    </head>
-    <body>
-        <%
+            
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
         %>
+    </head>
+    <body>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
             <h2>Expediente</h2>
             <form  method="post" name="formExpedientes" id="formExpedientes">
-                
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
                                 <label for="jClave">Juzgado Clave:</label>
-                                <input type="text" name="jClave" id="jClave" value="<%=juzgado%>" readonly required>
+                                <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" readonly required>
                             </td>
                             <td>
                                 <label for="CarpInves">No. Carpeta Investigación</label>

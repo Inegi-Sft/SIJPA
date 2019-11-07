@@ -68,13 +68,12 @@ $(document).ready(function () {
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
 
     /*---------------------------- VICTIMAS ----------------------------*/
-    $('#tipo_victima').change(function () {
+   $('#tipo_victima').change(function () {
         switch ($(this).val()) {
             case '1':
                 $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
-                
                 $('#tipoMoral').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
                 break;
@@ -92,7 +91,7 @@ $(document).ready(function () {
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
                 break;
         }
-    });
+    }); 
 
     $('#Pnacimiento').change(function () {
         if ($(this).val() === '1') {

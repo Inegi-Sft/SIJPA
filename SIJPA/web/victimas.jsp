@@ -4,6 +4,7 @@
     Author     : CESAR.OSORIO
 --%>
 
+<%@page import="clasesAuxiliar.showVictimas"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,11 +19,15 @@
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> lista = new ArrayList();
+
+            showVictimas victi = new showVictimas();
+            ArrayList<String[]> vic = new ArrayList();
+
         %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Víctimas</h1>
-            <form action="victimas" method="post" id="victimasF">
+            <form action="instVictimas" method="post" id="victimasF">
                 <fieldset>
                     <legend>Caracteristicas Generales</legend>
                     <table class="tablaFormu">
@@ -50,8 +55,7 @@
                                     <label for="tvic_moral">Tipo de Víctima Moral</label>
                                     <select name="tvic_moral" id="tvic_moral" class="txtMedia dependiente">
                                         <option value="">--Seleccione--</option>
-                                        <%
-                                            lista = cat.findVicMoral();
+                                        <%                                            lista = cat.findVicMoral();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -71,20 +75,27 @@
                             <th>Delito</th>
                             <th>Delito cometido</th>
                         </tr>
-                        <tr>
-                            <td>
-                                select para traer procesado_clave
-                            </td>
-                            <td>
-                                select para traer delito_clave
-                            </td>
-                            <td>
-                                select para traer el nombre de delito
-                            </td>
-                            <td>
+                        <%
+                            vic = victi.findVdelitos("002/2018");
+                            for (String[] ls : vic) {
+                                out.println("<tr>");
+                                out.println("<td>");
+                                out.println(ls[0] + "<input type='hidden' name='inpPro' value='" + ls[0] + "'/>");
+                                out.println("</td>");
+                                out.println("<td>");
+                                out.println(ls[1]+"<input type='hidden' name='inpDeli' value='" + ls[1] + "'/>");
+                                out.println("</td>");
+                                out.println("<td>");
+                                out.println(ls[2]+"<input type='hidden' name='' value='" + ls[2] + "'/>");
+                                out.println("</td>");
+                                out.println("<td>");
+                        %>
                                 <input class="chkAplica" type="checkbox" name="deliCometido" id="deliCometido"/>
-                            </td>
-                        </tr>
+                        <%
+                                out.println("</td>");
+                                out.println("</tr>");
+                            }
+                        %>
                     </table>
                 </fieldset>
                 <fieldset>
@@ -118,29 +129,29 @@
                     <legend>Relación de la Victima con el Procesado</legend>
                     <table class="tablasRegis">
                         <tr>
-                            <th>Victima Clave</th>
                             <th>Procesado Clave</th>
                             <th width="750">Relación</th>
                         </tr>
-                        <tr>
-                            <td>
-                                select para traer victima_clave
-                            </td>
-                            <td>
-                                select para traer procesado_clave
-                            </td>
-                            <td>
-                                <%
-                                    lista = cat.findRelImputado();
-                                    for (String[] ls : lista) {
-                                        out.println("<div class='chkCat'>");
-                                        out.println("<input type='checkbox' name='chkFechaReclaDel' id='chkFechaReclaDel'>");
-                                        out.println("<label>" + ls[1] + "</label>");
-                                        out.println("</div>");
-                                    }
-                                %>
-                            </td>
-                        </tr>
+                        <%
+                            vic = victi.findVdelitos("002/2018");
+                            for (String[] ls : vic) {
+                                out.println("<tr>");
+                                out.println("<td>");
+                                out.println(ls[0] + "<input type='hidden' name='proRela' value='" + ls[0] + "'/>");
+                                out.println("</td>");
+                                out.println("<td>");
+                                lista = cat.findRelImputado();
+                                for (String[] los : lista) {
+                                    out.println("<div class='chkCat'>");
+                                    out.println("<input type='checkbox' name='chkRelaProce' id='chkRelaProce'>");
+                                    out.println("<label>" + los[1] + "</label>");
+                                    out.println("</div>");
+                                }
+                                out.println("</td>");
+                                out.println("</tr>");
+
+                            }
+                        %>
                     </table>
                 </fieldset>
                 <fieldset class="oculto" id="victiFisicas">

@@ -67,4 +67,45 @@ public class showVictimas {
         return vic;
         
     }
+    
+     public ArrayList findVdelitos(String expe){
+    conn.Conectar();
+        vic = new ArrayList();
+        sql = "SELECT P.PROCESADO_CLAVE, D.DELITO_CLAVE, C.CODIGO FROM DATOS_PROCESADOS_ADOJC P "
+                + "INNER JOIN DATOS_DELITOS_ADOJC D ON P.EXPEDIENTE_CLAVE = D.EXPEDIENTE_CLAVE "
+                + "INNER JOIN CATALOGOS_CODIGO_NORMA C ON D.DELITO_CODIGO_PENAL = C.ID "
+                + "WHERE P.EXPEDIENTE_CLAVE = D.EXPEDIENTE_CLAVE "
+                + "AND P.EXPEDIENTE_CLAVE = '" + expe + "'" ;
+        
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                vic.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3)});
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vic;
+    } 
+     
+      public ArrayList findVprocesados(String expe){
+    conn.Conectar();
+        vic = new ArrayList();
+        sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
+                + "WHERE EXPEDIENTE_CLAVE = '" + expe + "'" ;
+        
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                vic.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3)});
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vic;
+    } 
 }

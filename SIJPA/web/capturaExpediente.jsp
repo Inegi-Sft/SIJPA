@@ -28,7 +28,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
             <h2>Expediente</h2>
-            <form action="insrtExpediente" method="post" id="expedientesF">
+            <form  method="post" name="formExpedientes" id="formExpedientes">
                 
                 <fieldset>
                     <legend>Características del expediente de la causa penal</legend>
@@ -189,7 +189,8 @@
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>
                 </div>
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Guardar" onclick=" expeAudiencia()">
+                <!--<input type="button" name="guardarExp" id="guardarExp" value="Guardar" onclick="expeAudiencia()">-->
+                <input type="submit" name="guardarExp" id="guardarExp" value="Guardar"> 
             </form>
         </section>
     </body>

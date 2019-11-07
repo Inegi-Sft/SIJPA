@@ -28,7 +28,6 @@
                 //out.println("<script type='text/javascript'>window.opener.location.reload();</script>");
                 out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
             }
-            
         %>
     </head>
     <body>
@@ -53,17 +52,18 @@
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
-                <button class="pestanaLinks active" onclick="openPestana(event, 'p1')" id="btn1" style="display: block">Expediente</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p2')">Delitos</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p3')">Adolescentes</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p4')">Victimas</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p5')">Inicial</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p6')">Intermedia</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p7')">Conclusion y/o Terminacion</button>
-                <button class="pestanaLinks" onclick="openPestana(event, 'p8')">Tramite</button>
+                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Expediente</button>
+                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2">Delitos</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3">Adolescentes</button>
+                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4">Victimas</button>
+                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5">Inicial</button>
+                <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6">Intermedia</button>
+                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7">Conclusion y/o Terminacion</button>
+                <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8">Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
                 <%@include file="capturaExpediente.jsp"%>
+                
             </div>
             <div id="p2" class="pestanaContent">
                 <h2>Delitos</h2>
@@ -80,7 +80,7 @@
                     </thead>  
                     <tbody>
                         
-                        <%-- 
+                        <% 
                             deli = delito.findDeliTabla();
                             for (String[] tm : deli) {
                                 out.println("<tr>");
@@ -92,7 +92,7 @@
                                 out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
                                 out.println("</tr>");
                             }
-                        --%>
+                        %>
                         
                      </tbody>
                 </table>
@@ -109,20 +109,23 @@
                             <th>Grado de estudios</th>
                             <th>Editar</th>
                         </tr>
-                   </thead> 
+                    </thead> 
                     <tbody>
-                        <%--  proce = procesa.findProcesasdosTabla();
-                            for (String[] tm : proce) {
-                                out.println("<tr>");
-                                out.println("<td>" + tm[0] + "</td>");
-                                out.println("<td>" + tm[1] + "</td>");
-                                out.println("<td>" + tm[2] + "</td>");
-                                out.println("<td>" + tm[3] + "</td>");
-                                out.println("<td>" + tm[4] + "</td>");
-                                out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                out.println("</tr>");
-                            }
-                        --%>
+                <%  
+                    proce = procesa.findProcesasdosTabla("002/2018");
+                    for (String[] p : proce) {
+                %>
+                        <tr>
+                            <td><%= p[0] %></td>
+                            <td><%= p[1] %></td>
+                            <td><%= p[2] %></td>
+                            <td><%= p[3] %></td>
+                            <td><%= p[4] %></td>
+                            <td><a class="pop" href="procesadosjsp?juz=<%=juzgado%>&exp=$('#expClave').val()"><img src="img/editar.png" title="Modificar"/></a></td>
+                        </tr>
+                <%
+                    }
+                %>
                      </tbody>
                 </table>
             </div>

@@ -35,7 +35,8 @@ $(document).ready(function () {
     });
 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
-    $('.oculto').hide();
+    $('.oculto').val('-2').hide();
+    $('.dependiente').val('-2');
 
     /***************************** FUNCIONES JUZGADOS *******************************/
     //select forma de organizacion
@@ -82,13 +83,15 @@ $(document).ready(function () {
                 $('#tvic_moral').val('').prop('required', true);
 
                 $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
-                $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
+                $('#sexo, #edad, #vulnera, #Pnacimiento, #estaNaci, #munNaci, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #ocupa, #mProtect, #mujProtect').val('-2').prop('required', false);
+                   $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
             default:
                 $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
-                $('#tvic_moral, #sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', false);
+                $('#tvic_moral, #sexo, #edad, #vulnera, #Pnacimiento, #estaNaci, #munNaci, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #mProtect, #mujProtect').val('-2').prop('required', false);
+                       $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
         }
     }); 
@@ -99,7 +102,7 @@ $(document).ready(function () {
             $('#Enacimiento, #Mnacimiento').val('').prop('required', true);
         } else {
             $('#estaNaci, #munNaci').fadeOut('slow');
-            $('#Enacimiento, #Mnacimiento').val().prop('required', true);
+            $('#Enacimiento, #Mnacimiento').val('-2').prop('required', false);
         }
     });
 
@@ -109,7 +112,7 @@ $(document).ready(function () {
             $('#Ereside, #Mreside').val('').prop('required', true);
         } else {
             $('#estaResi, #munResi').fadeOut('slow');
-            $('#Ereside, #Mreside').val().prop('required', true);
+            $('#Ereside, #Mreside').val('-2').prop('required', false);
         }
     });
 
@@ -119,7 +122,7 @@ $(document).ready(function () {
             $('#familia').val('').prop('required', true);
         } else {
             $('#famLingui').fadeOut('slow');
-            $('#familia').val('').prop('required', false);
+            $('#familia').val('-2').prop('required', false);
         }
     });
 
@@ -134,10 +137,10 @@ $(document).ready(function () {
     });
 
     $('#victimasF').submit(function (e) {
-        if ($('#chkFechaReclaDel:checked').length === 0) {
+        if ($('#chkRelaProce:checked').length === 0) {
             e.preventDefault();
             alert('Selecciona al menos una opcion de Tipo de Relacion Victima con Procesado');
-            $('#chkFechaReclaDel').focus();
+            $('#chkRelaProce').focus();
         }
 
         if ($('#mProtect').val() === '1') {

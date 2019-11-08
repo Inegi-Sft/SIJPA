@@ -69,7 +69,7 @@
                     </table>
                 </fieldset>
                 <br>
-                <input type="button" name="guardar" id="guardarTram" value="Guardar">
+                <input type="submit" name="guardar" id="guardarTram" value="Guardar">
             </form>
         </section>
     </body>

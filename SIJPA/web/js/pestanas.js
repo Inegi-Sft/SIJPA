@@ -21,7 +21,7 @@ function openPestana(btn, pestana) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(pestana).style.display = "block";
-  
     document.getElementById(btn).className += " active";
+    document.getElementById(btn).disabled = false;
 //    evt.currentTarget.className += " active";
 }

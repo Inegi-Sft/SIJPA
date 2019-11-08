@@ -177,10 +177,8 @@ $(document).ready(function () {
                 alert("Guardado con exito!!!");
                 $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
                 $("#guardarExp").prop("hidden",true);
-                if(response === 1){
+                if(response === '1'){
                     openPestana('btn2', 'p2');
-                }else{
-                    window.location.href = "causasPenales.jsp";
                 }
             },
             error : function(response) {
@@ -224,9 +222,6 @@ $(document).ready(function () {
             type: 'post',
             url: 'insrtProcesados',
             data: $('#formProcesados').serialize(),
-            beforeSend: function (x) {
-                //$.fancybox().close();
-            },
             success: function (response) {
                 console.log("Respuesta del servidor",response);
                 alert("Guardado con exito!!!");

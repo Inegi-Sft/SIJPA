@@ -12,13 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Expediente</title>
         <%@include file="librerias.jsp" %>
-        <%
-            if (request.getParameter("error") != null) {
-                out.println("<script>alert('error en el proceso de guardado')</script>");
-            } else if (request.getParameter("seinserto") != null) {
-                out.println("<script>parent.$.fancybox.close()</script>");
-            }
-            
+        <%  
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
         %>
@@ -171,12 +165,16 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>"); %>
+                                out.println("<td>"); 
+                        %>
                         <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi" value="<%out.print(ls[0]);%>" onChange="comprobar(this, 'cantAudi<%out.print(ls[0]);%>');"/>
-                        <%      out.println("</td>");
-                            out.println("<td>"); %>
+                        <%      
+                                out.println("</td>");
+                                out.println("<td>"); 
+                        %>
                         <input type="number" disabled name="cantAudi<%out.print(ls[0]);%>" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall" required/>
-                        <%      out.println("</td>");
+                        <%      
+                                out.println("</td>");
                                 out.println("</tr>");
                             }
                         %>
@@ -187,7 +185,6 @@
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>
                 </div>
                 <br>
-                <!--<input type="button" name="guardarExp" id="guardarExp" value="Guardar" onclick="expeAudiencia()">-->
                 <input type="submit" name="guardarExp" id="guardarExp" value="Guardar"> 
             </form>
         </section>

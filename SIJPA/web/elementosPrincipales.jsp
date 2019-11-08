@@ -18,13 +18,6 @@
         <title>SIJPA::Elementos del Expediente</title>
         <%@include file="librerias.jsp" %>
         <%
-            if (request.getParameter("error") != null) {
-                out.println("<script>alert('error en el proceso de guardado')</script>");
-            }
-            if (request.getParameter("insertado") != null) {
-                out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
-            }
-
             showDelitos delito = new showDelitos();
             ArrayList<String[]> deli = new ArrayList();
 

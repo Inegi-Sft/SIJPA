@@ -56,7 +56,7 @@ public class insrtDelitos extends HttpServlet {
         String delitoNT=request.getParameter("delitoNT");
         String fuero=request.getParameter("fuero");
         String reclasificaDel=request.getParameter("reclasificaDel");
-        String fechaReclaDel=request.getParameter("fechaReclaDel");
+        String fechaReclaDel=verificaVariable(request.getParameter("fechaReclaDel"));
         String consumacion=request.getParameter("consumacion");
         String calificacion=request.getParameter("calificacion");
         String concurso=request.getParameter("concurso");
@@ -65,17 +65,15 @@ public class insrtDelitos extends HttpServlet {
         String accion=request.getParameter("accion");
         String modalidad=request.getParameter("modalidad");
         String instrumentos=request.getParameter("instrumentos");
-        String ocurrencia=request.getParameter("ocurrencia");
+        String ocurrencia=verificaVariable(request.getParameter("ocurrencia"));
         String entidadD=request.getParameter("entidadD");
         String municipioD=request.getParameter("municipioD");
         String numAdo=request.getParameter("numAdo");
         String numVic=request.getParameter("numVic");
         String comentarios=request.getParameter("comentarios");
-        if (ocurrencia == null) {
-            ocurrencia = "1899-09-09";
-        }
+        
         try {
-            String delitoClave = generaDelitoClave(expediente) + 1;
+            String delitoClave = generaDelitoClave(expediente,jConcatenado);
             conn.Conectar();
             sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
                     + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
@@ -93,7 +91,7 @@ public class insrtDelitos extends HttpServlet {
                     + accion + ","
                     + modalidad + ","
                     + instrumentos + ","
-                    + ocurrencia + ","
+                    + "'" + ocurrencia + "',"
                     + entidadD + ","
                     + municipioD + ","
                     + numAdo + ","
@@ -131,24 +129,46 @@ public class insrtDelitos extends HttpServlet {
         }
     }
     
-    public String generaDelitoClave(String exp) throws SQLException {
+    public String generaDelitoClave(String exp, String jConcatenado) throws SQLException {
 
         int maxDel = 0;
         String delitoClave = "";
 
         conn.Conectar();
         String sql = "SELECT MAX("
-                                + "SUBSTR( DELITO_CLAVE, INSTR(DELITO_CLAVE,'D')+1, length(DELITO_CLAVE) )"
+                                + "SUBSTR("
+                                        + " REPLACE( DELITO_CLAVE,'"+jConcatenado+"','') ,"
+                                        + " INSTR( DELITO_CLAVE,'D')+1 ,"
+                                        + " LENGTH( REPLACE(DELITO_CLAVE,'"+jConcatenado+"',''))"
+                                    + " )"
                             + " ) AS NUMERO"
-                    + " FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE='" + exp + "';";
+                    + " FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE='" +exp+jConcatenado+ "';";
+//        String sql = "SELECT MAX("
+//                                + "SUBSTR( DELITO_CLAVE, INSTR(DELITO_CLAVE,'D')+1, length(DELITO_CLAVE) )"
+//                            + " ) AS NUMERO"
+//                    + " FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE='" +exp+jConcatenado+ "';";
+        System.out.println(sql);
         rs = conn.consultar(sql);
         if (rs.next()) {
             maxDel = rs.getInt("NUMERO");
         }
 
         int newDel = maxDel + 1;
-        delitoClave = exp + "-D" + newDel;
+        delitoClave = exp.replace(jConcatenado, "") + "-D" + newDel;
+        
         return delitoClave;
+        
+    }
+    public String verificaVariable(String variable) {
+        String verificada = "";
+        if (variable == null) {
+            verificada = "1899-09-09";
+        } else if (variable.equals("")) {
+            verificada = "1899-09-09";
+        } else {
+            verificada = variable;
+        }
+        return verificada;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

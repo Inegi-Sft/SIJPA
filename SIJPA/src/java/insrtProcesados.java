@@ -98,7 +98,7 @@ public class insrtProcesados extends HttpServlet {
         String anio = arrayFecha[0];
         //***********************************INSERT*************************************************
         try {
-            String proceClave = generaProcesadoClave(expediente) + 1;
+            String proceClave = generaProcesadoClave(expediente, jConcatenado);
             conn.Conectar();
             sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
                     + expediente +jConcatenado + "','" + proceClave + jConcatenado+"',"
@@ -226,23 +226,27 @@ public class insrtProcesados extends HttpServlet {
         return verificada;
     }
 
-    public String generaProcesadoClave(String exp) throws SQLException {
+    public String generaProcesadoClave(String exp, String jConcatenado) throws SQLException {
 
         int maxPro = 0;
         String procesadoClave = "";
 
         conn.Conectar();
         String sql = "SELECT MAX("
-                                + "SUBSTR( PROCESADO_CLAVE, INSTR(PROCESADO_CLAVE,'P')+1, length(PROCESADO_CLAVE) )"
+                                + "SUBSTR("
+                                        + " REPLACE( PROCESADO_CLAVE,'"+jConcatenado+"','') ,"
+                                        + " INSTR( PROCESADO_CLAVE,'P')+1 ,"
+                                        + " LENGTH( REPLACE(PROCESADO_CLAVE,'"+jConcatenado+"',''))"
+                                    + " )"
                             + " ) AS NUMERO"
-                    + " FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='" + exp + "';";
+                    + " FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='" +exp+jConcatenado+ "';";
         rs = conn.consultar(sql);
         if (rs.next()) {
             maxPro = rs.getInt("NUMERO");
         }
 
         int newPro = maxPro + 1;
-        procesadoClave = exp + "-P" + newPro;
+        procesadoClave = exp.replace(jConcatenado, "") + "-P" + newPro;
         return procesadoClave;
     }
 

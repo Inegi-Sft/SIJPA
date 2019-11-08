@@ -12,7 +12,7 @@ $(document).ready(function () {
             }
         },
         afterClose: function(){
-            parent.location.reload("true");
+//            parent.location.reload("true");
         }
     });
     //Auto acompletado
@@ -203,6 +203,32 @@ $(document).ready(function () {
         });
     });
     
+    //Guarda Delitos
+    $('#formDelitos').submit(function (e){
+        e.preventDefault();
+//        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtDelitos',
+            data: $('#formDelitos').serialize(),
+            beforeSend: function (x) {
+                parent.$.fancybox.close();
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+                alert("Guardado con exito!!!");
+//                parent.$.fancybox.close();
+                openPestana('btn3', 'p3');
+                
+                
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
+    });
+    
     //Guarda Procesados
     $('#formProcesados').submit(function (e){
         e.preventDefault();
@@ -217,6 +243,7 @@ $(document).ready(function () {
             success: function (response) {
                 console.log("Respuesta del servidor",response);
                 alert("Guardado con exito!!!");
+                parent.$.fancybox.close();
                 openPestana('btn4', 'p4');
             },
             error : function(response) {
@@ -225,6 +252,9 @@ $(document).ready(function () {
             }
         });
     });
+    
+    
+    /*----------------------- FIN FUNCIONES PARA INSERTS AJAX --------------------------*/
 });
 
 

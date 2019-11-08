@@ -77,6 +77,8 @@ public class insrtExpediente extends HttpServlet {
         String[] chk = request.getParameterValues("aplAudi");
 //        
         try {
+            response.setContentType("text/plain;charset=UTF-8");
+            PrintWriter out = response.getWriter();
             conn.Conectar();
             sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
                     +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
@@ -92,13 +94,12 @@ public class insrtExpediente extends HttpServlet {
                         System.out.println(sql);
                         if (conn.escribir(sql)) {
                             conn.close();
+                            out.write(request.getParameter("compe"));
                         }
                     }
                 }
                 conn.close();
-                response.setContentType("text/plain;charset=UTF-8");
-                PrintWriter out = response.getWriter();
-                out.write(competencia);
+                out.write(request.getParameter("compe"));
             } else {
                 conn.close();
             }

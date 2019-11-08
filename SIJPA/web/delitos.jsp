@@ -32,7 +32,7 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Delitos</h1>
-            <form action="" method="post" name="formDelitos">
+            <form action="" method="post" name="formDelitos" id="formDelitos">
                 <fieldset>
                     <legend>Identificación del tipo penal</legend>
                     <table class="tablaFormu" >

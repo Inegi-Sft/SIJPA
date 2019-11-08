@@ -98,7 +98,7 @@ public class showCausasPenales {
         try {
             conn.Conectar();
             sql = "SELECT TOTAL_VICTIMAS AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where EXPEDIENTE_CLAVE='"+exp+"'";
-            System.out.println(sql);
+            
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total=rs.getInt("TOTAL");

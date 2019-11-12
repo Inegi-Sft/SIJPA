@@ -90,18 +90,15 @@ public class showDelitos {
             conn.Conectar();
             deli = new ArrayList();
             
-            sql = "SELECT D.DELITO_CLAVE,TP.*, S.*, GE.*"
-                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
-                + " WHERE TP.CONSIGNACION_ID=P.TIPO_CONSIGNACION"
-                + " AND S.SEXO_ID=P.SEXO"
-                + " AND GE.GRADO_ID=P.ULTIMO_GRADO_ESTUDIOS"
+            sql = "SELECT D.DELITO_CLAVE, CN.CODIGO"
+                + " FROM DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
+                + " WHERE D.DELITO_CODIGO_PENAL=CN.ID"
                 + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
             
             resul = conn.consultar(sql);
             while (resul.next()) {
                 deli.add(new String[]{
-                    resul.getString("PROCESADO_CLAVE"), resul.getString("TP.DESCRIPCION"), resul.getString("S.DESCRIPCION"), 
-                    resul.getString("FECHA_NACIMIENTO"), resul.getString("GE.DESCRIPCION")
+                    resul.getString("DELITO_CLAVE"), resul.getString("CODIGO"), 
                 });
             }
             conn.close();

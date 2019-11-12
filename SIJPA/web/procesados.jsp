@@ -4,6 +4,8 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="clasesAuxiliar.showCausasPenales"%>
+<%@page import="clasesAuxiliar.showDelitos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
@@ -21,9 +23,19 @@
     </head>
     <body style="zoom: .85;">
         <%
-            catalogos cat = new catalogos();
-            ArrayList<String[]> lista;
+            HttpSession sesion= request.getSession();
             
+            catalogos cat = new catalogos();
+            showDelitos sd= new showDelitos();
+            showCausasPenales objExp = new showCausasPenales();
+            
+            ArrayList<String[]> lista;        
+            String entidad =(String) sesion.getAttribute("entidad");
+            String municipio =(String) sesion.getAttribute("municipio");
+            String distrito =(String) sesion.getAttribute("distrito");
+            String numero =(String) sesion.getAttribute("numero");
+            String jConcatenado =entidad+municipio+distrito+numero;
+            String expediente =(String) sesion.getAttribute("expediente");
             String procesadoClave =request.getParameter("proceClave");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
@@ -168,6 +180,17 @@
                             <th>Conducta antisocial</th>
                             <th>No. Victimas</th>
                         </tr>
+                        <%
+                            int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
+                            lista = sd.findDelitosExp(expediente+jConcatenado);
+                            for (String[] ls : lista) {
+                                out.println("<tr>");
+                                out.println("<td>"+ ls[0].replace(jConcatenado, "")+"</td>");
+                                out.println("<td>"+ ls[1]+"</td>");
+                                out.println("<td></td>");
+                                out.println("</tr>");
+                            }
+                        %>
                     </table>
                 </fieldset><br>
                 <fieldset>

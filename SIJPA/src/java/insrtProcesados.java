@@ -37,10 +37,7 @@ public class insrtProcesados extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    showCausasPenales cp= new showCausasPenales();
-    showProcesados sp= new showProcesados();
     Conexion_Mysql conn = new Conexion_Mysql();
-    
     String sql;
     ResultSet rs;
     int proceExp;

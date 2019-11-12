@@ -78,6 +78,21 @@ public class showCausasPenales {
         return total;
     }
     
+    public int countTotalDelitos(String exp){
+        int total=0;
+        try {
+            conn.Conectar();
+            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where EXPEDIENTE_CLAVE='"+exp+"'";
+            
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total=rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
     public int countTotalProcesados(String exp){
         int total=0;
         try {

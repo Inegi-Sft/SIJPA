@@ -49,7 +49,7 @@ public class showProcesados {
         return proce;
     } 
     
-    public ArrayList findProcesasdosTabla(String exp){
+    public ArrayList findProcesadosTabla(String exp){
         try {
             conn.Conectar();
             proce = new ArrayList();
@@ -70,8 +70,27 @@ public class showProcesados {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proce;
     } 
+    
+    public int countProcesadosInsertados(String exp){
+        int total=0;
+        try {
+            conn.Conectar();
+            
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE = '"+exp+"';";
+            
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                total=resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
 }

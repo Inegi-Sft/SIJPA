@@ -28,6 +28,8 @@
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
+            
+            String procesadoClave =request.getParameter("proceClave");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
@@ -36,6 +38,7 @@
                 Es decir, si es el primer Adolescente Procesado del expediente 10/2016 su identificador será 10/2016-p1
             </span>
             <form action="" method="post" name="formProcesados" id="formProcesados">
+                <input type="hidden" name="procesadoClave" value="<%=procesadoClave %>"/>
                 <fieldset>
                     <legend>Situación jurídica del adolescente</legend>
                     <table class="tablaFormu">

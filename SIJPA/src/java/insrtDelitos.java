@@ -5,6 +5,8 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showCausasPenales;
+import clasesAuxiliar.showDelitos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -35,9 +37,14 @@ public class insrtDelitos extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
+    showCausasPenales cp= new showCausasPenales();
+    showDelitos sd= new showDelitos();
     Conexion_Mysql conn = new Conexion_Mysql();
+    
     String sql;
     ResultSet rs;
+    int deliExp;
+    int deliInsertados;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,6 +58,7 @@ public class insrtDelitos extends HttpServlet {
         String jConcatenado =entidad+municipio+distrito+numero;
         String expediente =(String) sesion.getAttribute("expediente");
         
+        String delitoClave =request.getParameter("delitoClave");
         String delitoCP=request.getParameter("delitoCP");
         String articuloCP=request.getParameter("articuloCP");
         String delitoNT=request.getParameter("delitoNT");
@@ -73,7 +81,10 @@ public class insrtDelitos extends HttpServlet {
         String comentarios=request.getParameter("comentarios");
         
         try {
-            String delitoClave = generaDelitoClave(expediente,jConcatenado);
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+            //String delitoClave = generaDelitoClave(expediente,jConcatenado);
             conn.Conectar();
             sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
                     + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
@@ -99,10 +110,15 @@ public class insrtDelitos extends HttpServlet {
                     + "'" + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
-            if (conn.escribir(sql)) {// si se inserta redirige a elementosPrincipales.jsp
+            if (conn.escribir(sql)) {
+                
+                deliExp=cp.countTotalDelitos(expediente +jConcatenado);// delitos regstrados en expedientes
+                deliInsertados=sd.countDelitosInsertados(expediente +jConcatenado);// delitos insertados en la tabla de delitos
+                if(deliExp==deliInsertados){//si hay la misma cantidad regresa una variable para mostrar la pestaña de Procesados
+                    out.write("DelitosComplete");
+                }
                 conn.close();
-//                response.sendRedirect("elementosPrincipales.jsp?insertado=true");
-            } else {//regresa a procesados.jsp y maca error
+            } else {
                 conn.close();
 //                response.sendRedirect("procesados.jsp?insertado=false");
             }
@@ -111,22 +127,22 @@ public class insrtDelitos extends HttpServlet {
         }
 
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet insrtDelitos</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet insrtDelitos at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+//        response.setContentType("text/html;charset=UTF-8");
+//        PrintWriter out = response.getWriter();
+//        try {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet insrtDelitos</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet insrtDelitos at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        } finally {
+//            out.close();
+//        }
     }
     
     public String generaDelitoClave(String exp, String jConcatenado) throws SQLException {
@@ -170,7 +186,7 @@ public class insrtDelitos extends HttpServlet {
         }
         return verificada;
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

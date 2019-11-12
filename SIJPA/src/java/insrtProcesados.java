@@ -5,7 +5,6 @@
  */
 
 import ConexionDB.Conexion_Mysql;
-import clasesAuxiliar.catalogos;
 import clasesAuxiliar.showProcesados;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,9 +37,14 @@ public class insrtProcesados extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    showCausasPenales cp= new showCausasPenales();
+    showProcesados sp= new showProcesados();
     Conexion_Mysql conn = new Conexion_Mysql();
+    
     String sql;
     ResultSet rs;
+    int proceExp;
+    int proceInsertados;
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -106,7 +110,6 @@ public class insrtProcesados extends HttpServlet {
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            //String proceClave = generaProcesadoClave(expediente, jConcatenado);
             conn.Conectar();
             sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
                     + expediente +jConcatenado + "','" + proceClave + jConcatenado+"',"
@@ -152,7 +155,7 @@ public class insrtProcesados extends HttpServlet {
                     + "'" + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
-            if (conn.escribir(sql)) {// si se inserta redirige a elementosPrincipales.jsp
+            if (conn.escribir(sql)) {
                 conn.close();
                 showProcesados pro = new showProcesados();
                 ArrayList<String[]> lis = new ArrayList<String[]>();
@@ -167,7 +170,6 @@ public class insrtProcesados extends HttpServlet {
                 out.write(resp.toJSONString());
             } else {//regresa a procesados.jsp y maca error
                 conn.close();
-//                response.sendRedirect("procesados.jsp?insertado=false");
             }
         } catch (IOException ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
@@ -186,30 +188,6 @@ public class insrtProcesados extends HttpServlet {
             verificada = variable;
         }
         return verificada;
-    }
-
-    public String generaProcesadoClave(String exp, String jConcatenado) throws SQLException {
-
-        int maxPro = 0;
-        String procesadoClave = "";
-
-        conn.Conectar();
-        String sql = "SELECT MAX("
-                                + "SUBSTR("
-                                        + " REPLACE( PROCESADO_CLAVE,'"+jConcatenado+"','') ,"
-                                        + " INSTR( PROCESADO_CLAVE,'P')+1 ,"
-                                        + " LENGTH( REPLACE(PROCESADO_CLAVE,'"+jConcatenado+"',''))"
-                                    + " )"
-                            + " ) AS NUMERO"
-                    + " FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='" +exp+jConcatenado+ "';";
-        rs = conn.consultar(sql);
-        if (rs.next()) {
-            maxPro = rs.getInt("NUMERO");
-        }
-
-        int newPro = maxPro + 1;
-        procesadoClave = exp.replace(jConcatenado, "") + "-P" + newPro;
-        return procesadoClave;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

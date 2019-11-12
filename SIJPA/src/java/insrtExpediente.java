@@ -35,6 +35,7 @@ public class insrtExpediente extends HttpServlet {
      */
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
+    boolean insrtExpe;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -76,7 +77,7 @@ public class insrtExpediente extends HttpServlet {
         String totalConclu = request.getParameter("Tconclusiones");
         String comentario = request.getParameter("ComentaExpe");
         String[] chk = request.getParameterValues("aplAudi");
-//        
+      
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -93,17 +94,17 @@ public class insrtExpediente extends HttpServlet {
                         sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
                                 + "'" + expediente_clave+jConcatenado + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
                         System.out.println(sql);
-                        if (conn.escribir(sql)) {
-                            conn.close();
-                            out.write(request.getParameter("compe"));
-                        }
+                        insrtExpe=conn.escribir(sql);
+                    }
+                    if (insrtExpe) {
+                        conn.close();
+                        out.write(request.getParameter("compe"));
                     }
                 }
                 conn.close();
             } else {
                 conn.close();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(insrtExpediente.class.getName()).log(Level.SEVERE, null, ex);
         }

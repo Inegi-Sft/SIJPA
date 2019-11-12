@@ -28,11 +28,13 @@
             String numero =(String) sesion.getAttribute("numero");
             String jConcatenado =entidad+municipio+distrito+numero;
             String expediente =(String) sesion.getAttribute("expediente");
+            String delitoClave =request.getParameter("deliClave");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Delitos</h1>
             <form action="" method="post" name="formDelitos" id="formDelitos">
+                <input type="hidden" name="delitoClave" value="<%=delitoClave %>"/>
                 <fieldset>
                     <legend>Identificación del tipo penal</legend>
                     <table class="tablaFormu" >
@@ -92,7 +94,7 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoNT">Delito de acuerdo con la Norma Técnica</label>
-                                <select class="lblExBig"  name="delitoNT" id="delitoNT" required>
+                                <select class="lblExBig" name="delitoNT" id="delitoNT" required>
                                     <option value="">--Seleccione--</option>
                                 </select> 
                             </td>

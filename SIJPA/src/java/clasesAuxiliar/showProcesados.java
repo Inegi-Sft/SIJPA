@@ -70,7 +70,7 @@ public class showProcesados {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proce;
     }

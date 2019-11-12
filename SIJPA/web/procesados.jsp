@@ -16,6 +16,11 @@
         <title>SIJPA::Procesados</title>
         <%@include file="librerias.jsp" %>
         <%
+            String proceClave = "", posicion = "";
+            if(request.getParameter("proceClave") != null || request.getParameter("posicion") != null){
+                proceClave = request.getParameter("proceClave");
+                posicion = request.getParameter("posicion");
+            }
             if (request.getParameter("insertado") != null) {
                 out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
             }
@@ -49,6 +54,16 @@
                 <fieldset>
                     <legend>Situación jurídica del adolescente</legend>
                     <table class="tablaFormu">
+                        <tr>
+                            <td>
+                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"
+                            </td>
+                            <td colspan="2">
+                                <label>Procesado Clave</label>
+                                <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly/>
+                            </td>
+                            <td></td>
+                        </tr>
                         <tr>
                             <td colspan="2">
                                 <fieldset>
@@ -92,7 +107,7 @@
                             </td>
                             <td>
                                 <label for="participacion">Grado de participacion</label>
-                                <select class="txtMedia" name="participacion" id="participacion" >
+                                <select class="txtMedia" name="participacion" id="participacion" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findGParticipacion();
@@ -106,7 +121,7 @@
                         <tr>
                             <td>
                                 <label for="reincidencia">Condicion de reincidencia</label>
-                                <select class="txtMedia" name="reincidencia" id="reincidencia">
+                                <select class="txtMedia" name="reincidencia" id="reincidencia" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findReincidencia();
@@ -118,7 +133,7 @@
                             </td>
                             <td>
                                 <label for="psicofisico">Estado psicofisico al momento de cometer la conducta</label>
-                                <select class="txtMedia" name="psicofisico" id="psicofisico">
+                                <select class="txtMedia" name="psicofisico" id="psicofisico" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEdoPsicoFisico();
@@ -130,7 +145,7 @@
                             </td>
                             <td>
                                 <label for="interprete">¿Requirió traductor y/o intérprete?</label>
-                                <select class="txtMedia" name="interprete" id="interprete">
+                                <select class="txtMedia" name="interprete" id="interprete" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
@@ -156,7 +171,7 @@
                         <tr>
                             <td>
                                 <label for="representante">Tipo de representante legal</label>
-                                <select class="txtMedia" name="representante" id="representante">
+                                <select class="txtMedia" name="representante" id="representante" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findRepLegal();

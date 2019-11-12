@@ -20,6 +20,7 @@ public class showProcesados {
     ArrayList<String[]> proce;
     String sql;
     ResultSet resul;
+    int conteoPro;
     
     public ArrayList findProcesados(){
         conn.Conectar();
@@ -49,23 +50,22 @@ public class showProcesados {
         return proce;
     } 
     
-    public ArrayList findProcesadosTabla(String exp){
+    public ArrayList findProcesasdosTabla(String pro){
         try {
             conn.Conectar();
             proce = new ArrayList();
-            
             sql = "SELECT P.*,TP.*, S.*, GE.*"
                 + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
                 + " WHERE TP.CONSIGNACION_ID=P.TIPO_CONSIGNACION"
                 + " AND S.SEXO_ID=P.SEXO"
                 + " AND GE.GRADO_ID=P.ULTIMO_GRADO_ESTUDIOS"
-                + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
+                + " AND P.PROCESADO_CLAVE = '" + pro + "';";
             
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proce.add(new String[]{
-                    resul.getString("PROCESADO_CLAVE"), resul.getString("TP.DESCRIPCION"), resul.getString("S.DESCRIPCION"), 
-                    resul.getString("FECHA_NACIMIENTO"), resul.getString("GE.DESCRIPCION")
+                    resul.getString("TP.DESCRIPCION"), resul.getString("S.DESCRIPCION"), 
+                    resul.getString("P.FECHA_NACIMIENTO"), resul.getString("GE.DESCRIPCION")
                 });
             }
             conn.close();
@@ -73,24 +73,21 @@ public class showProcesados {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proce;
-    } 
+    }
     
-    public int countProcesadosInsertados(String exp){
-        int total=0;
-        try {
+    public int countProcesados(String exp){
+        try{
             conn.Conectar();
-            
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE = '"+exp+"';";
-            
+            conteoPro = 0;
+            sql = "SELECT COUNT(*) FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                total=resul.getInt("TOTAL");
+                conteoPro = resul.getInt(1);
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return total;
+        return conteoPro;
     }
-    
 }

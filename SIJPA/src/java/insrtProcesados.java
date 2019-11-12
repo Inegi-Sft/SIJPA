@@ -5,12 +5,12 @@
  */
 
 import ConexionDB.Conexion_Mysql;
-import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showProcesados;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -50,7 +51,8 @@ public class insrtProcesados extends HttpServlet {
             throws ServletException, IOException, SQLException {
         
         HttpSession sesion= request.getSession();
-        
+        //posicion de la fila de la tabla.vista donde se inserta el dato
+        String posicion = request.getParameter("posicion");
         String entidad =(String) sesion.getAttribute("entidad");
         String municipio =(String) sesion.getAttribute("municipio");
         String distrito =(String) sesion.getAttribute("distrito");
@@ -58,7 +60,7 @@ public class insrtProcesados extends HttpServlet {
         String jConcatenado =entidad+municipio+distrito+numero;
         String expediente =(String) sesion.getAttribute("expediente");
         
-        String proceClave =request.getParameter("procesadoClave");
+        String proceClave = request.getParameter("proceClave");
         String presentAdo = request.getParameter("presentAdo");
         String tipoDetencion = request.getParameter("tipoDetencion");
         String imputable = request.getParameter("imputable");
@@ -106,10 +108,8 @@ public class insrtProcesados extends HttpServlet {
         String anio = arrayFecha[0];
         //***********************************INSERT*************************************************
         try {
-            response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            
-//            String proceClave = generaProcesadoClave(expediente, jConcatenado);
             conn.Conectar();
             sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
                     + expediente +jConcatenado + "','" + proceClave + jConcatenado+"',"
@@ -156,36 +156,26 @@ public class insrtProcesados extends HttpServlet {
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
             if (conn.escribir(sql)) {
-                
-                proceExp=cp.countTotalProcesados(expediente +jConcatenado);// procesados regstrados en expedientes
-                proceInsertados=sp.countProcesadosInsertados(expediente +jConcatenado);// procesados insertados en la tabla de delitos
-                if(proceExp==proceInsertados){//si hay la misma cantidad regresa una variable para mostrar la pestaña de victimas
-                    out.write("ProcesadosComplete");
-                }
                 conn.close();
-            } else {
+                showProcesados pro = new showProcesados();
+                ArrayList<String[]> lis = new ArrayList<String[]>();
+                lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
+                JSONArray resp = new JSONArray();
+                resp.add(posicion);
+                resp.add(lis.get(0)[0]);
+                resp.add(lis.get(0)[1]);
+                resp.add(lis.get(0)[2]);
+                resp.add(lis.get(0)[3]);
+                resp.add(pro.countProcesados(expediente + jConcatenado));
+                out.write(resp.toJSONString());
+            } else {//regresa a procesados.jsp y maca error
                 conn.close();
             }
-        } catch (Exception ex) {
+        } catch (IOException ex) {
+            Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet insrtProcesados</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet insrtProcesados at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
     }
 
     public String verificaVariable(String variable) {
@@ -198,30 +188,6 @@ public class insrtProcesados extends HttpServlet {
             verificada = variable;
         }
         return verificada;
-    }
-
-    public String generaProcesadoClave(String exp, String jConcatenado) throws SQLException {
-
-        int maxPro = 0;
-        String procesadoClave = "";
-
-        conn.Conectar();
-        String sql = "SELECT MAX("
-                                + "SUBSTR("
-                                        + " REPLACE( PROCESADO_CLAVE,'"+jConcatenado+"','') ,"
-                                        + " INSTR( PROCESADO_CLAVE,'P')+1 ,"
-                                        + " LENGTH( REPLACE(PROCESADO_CLAVE,'"+jConcatenado+"',''))"
-                                    + " )"
-                            + " ) AS NUMERO"
-                    + " FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='" +exp+jConcatenado+ "';";
-        rs = conn.consultar(sql);
-        if (rs.next()) {
-            maxPro = rs.getInt("NUMERO");
-        }
-
-        int newPro = maxPro + 1;
-        procesadoClave = exp.replace(jConcatenado, "") + "-P" + newPro;
-        return procesadoClave;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

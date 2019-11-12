@@ -54,6 +54,7 @@ public class insrtExpediente extends HttpServlet {
         sesion.setAttribute("municipio", jMunicipio);
         sesion.setAttribute("distrito", jDistrito);
         sesion.setAttribute("numero", jNumero);
+        sesion.setMaxInactiveInterval(-1);
         
         String carpInvestiga = request.getParameter("CarpInves");
         String expediente_clave = request.getParameter("expClave");
@@ -76,22 +77,22 @@ public class insrtExpediente extends HttpServlet {
         String totalConclu = request.getParameter("Tconclusiones");
         String comentario = request.getParameter("ComentaExpe");
         String[] chk = request.getParameterValues("aplAudi");
-//        
+      
         try {
-            response.setContentType("text/plain;charset=UTF-8");
+            response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
             sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
                     +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
                     + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
-                    + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ","+ totalConclu +",'" + comentario + "', (select YEAR(NOW())) )";
+                    + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ","+ totalConclu +",'" + comentario + "', (select YEAR(NOW())))";
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 if(competencia == 1 ){
                     for (int i = 0; i < chk.length; i++) {
                         String valor = "cantAudi" + chk[i];
                         sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
-                                + "'" +expediente_clave+jConcatenado+ "',"+ chk[i] + "," + request.getParameter(valor) + ")";
+                                + "'" + expediente_clave+jConcatenado + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
                         System.out.println(sql);
                         insrtExpe=conn.escribir(sql);
                     }
@@ -101,30 +102,12 @@ public class insrtExpediente extends HttpServlet {
                     }
                 }
                 conn.close();
-                //out.write(request.getParameter("compe"));
             } else {
                 conn.close();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(insrtExpediente.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        PrintWriter out = response.getWriter();
-//        try {
-//
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet insrtExpediente</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

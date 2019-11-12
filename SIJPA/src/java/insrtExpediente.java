@@ -35,6 +35,7 @@ public class insrtExpediente extends HttpServlet {
      */
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
+    boolean insrtExpe;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -90,16 +91,17 @@ public class insrtExpediente extends HttpServlet {
                     for (int i = 0; i < chk.length; i++) {
                         String valor = "cantAudi" + chk[i];
                         sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
-                                + "'" + expediente_clave + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
+                                + "'" +expediente_clave+jConcatenado+ "',"+ chk[i] + "," + request.getParameter(valor) + ")";
                         System.out.println(sql);
-                        if (conn.escribir(sql)) {
-                            conn.close();
-                            out.write(request.getParameter("compe"));
-                        }
+                        insrtExpe=conn.escribir(sql);
+                    }
+                    if (insrtExpe) {
+                        conn.close();
+                        out.write(request.getParameter("compe"));
                     }
                 }
                 conn.close();
-                out.write(request.getParameter("compe"));
+                //out.write(request.getParameter("compe"));
             } else {
                 conn.close();
             }

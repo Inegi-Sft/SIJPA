@@ -100,7 +100,7 @@ public class instVictimas extends HttpServlet {
                 for(int j=0; j < procesadoRela.length; j++){
                     for(int k=0; k < chkRela.length; k++){
                         sql="INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz + ",'002/2018'"
-                                + ""
+                                + "";
                     }
                 }
             }

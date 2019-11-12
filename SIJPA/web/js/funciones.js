@@ -191,21 +191,18 @@ $(document).ready(function () {
     //Guarda Delitos
     $('#formDelitos').submit(function (e){
         e.preventDefault();
-//        e.stopImmediatePropagation();
+        e.stopImmediatePropagation();
         $.ajax({
             type: 'post',
             url: 'insrtDelitos',
             data: $('#formDelitos').serialize(),
-            beforeSend: function (x) {
-                parent.$.fancybox.close();
-            },
             success: function (response) {
                 console.log("Respuesta del servidor",response);
                 alert("Guardado con exito!!!");
-//                parent.$.fancybox.close();
-                openPestana('btn3', 'p3');
-                
-                
+                parent.$.fancybox.close();
+                if(response === 'DelitosComplete'){
+                    openPestana('btn3', 'p3');
+                }
             },
             error : function(response) {
                 console.log("Respuesta del servidor",response);
@@ -217,7 +214,7 @@ $(document).ready(function () {
     //Guarda Procesados
     $('#formProcesados').submit(function (e){
         e.preventDefault();
-//        e.stopImmediatePropagation();
+        e.stopImmediatePropagation();
         $.ajax({
             type: 'post',
             url: 'insrtProcesados',
@@ -226,7 +223,9 @@ $(document).ready(function () {
                 console.log("Respuesta del servidor",response);
                 alert("Guardado con exito!!!");
                 parent.$.fancybox.close();
-                openPestana('btn4', 'p4');
+                if(response === 'ProcesadosComplete'){
+                    openPestana('btn4', 'p4');
+                }
             },
             error : function(response) {
                 console.log("Respuesta del servidor",response);
@@ -679,7 +678,7 @@ function numeroDelitos() {
     var delitos = $('#Tdelitos').val();
     for (var i = 1; i <= delitos; i++) {
         $('#tablaDeli tbody').append('<tr><td>' + expediente + '-D' + i + '</td><td></td><td></td><td></td>\n\
-    <td></td><td><a class="pop" href="delitos.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    <td></td><td><a class="pop" href="delitos.jsp?deliClave='+expediente+'-D'+i+'"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }
 ;
@@ -689,7 +688,7 @@ function numeroProcesados() {
     var procesados = $('#Tadolescentes').val();
     for (var i = 1; i <= procesados; i++) {
         $('#tablaProcesa tbody').append('<tr><td>' + expediente + '-P' + i + '</td><td></td><td></td><td></td>\n\
-    <td></td><td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    <td></td><td><a class="pop" href="procesados.jsp?proceClave='+expediente+'-P'+i+'"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }
 ;
@@ -699,7 +698,7 @@ function numeroVictimas() {
     var victimas = $('#Tvictimas').val();
     for (var i = 1; i <= victimas; i++) {
         $('#tablaVictimas').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
-    <td></td><td><a class="pop" href="victimas.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    <td></td><td><a class="pop" href="victimas.jsp?victiClave='+expediente+'-V'+i+'"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }
 ;
@@ -719,9 +718,3 @@ function Tconclu() {
     }
 }; 
 
-function enviaPagina(pag, juzgado, exp){
-//    alert(pag+"?juzgado="+juzgado+"&"+"exp="+exp);
-    window.location.href="'"+pag+"?juzgado="+juzgado+"&"+"exp="+exp+"'";
-//    alert(pag+" / "+juzgado+" / "+exp);
-    
-}

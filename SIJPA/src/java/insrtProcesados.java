@@ -5,6 +5,8 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showCausasPenales;
+import clasesAuxiliar.showProcesados;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -34,9 +36,14 @@ public class insrtProcesados extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    showCausasPenales cp= new showCausasPenales();
+    showProcesados sp= new showProcesados();
     Conexion_Mysql conn = new Conexion_Mysql();
+    
     String sql;
     ResultSet rs;
+    int proceExp;
+    int proceInsertados;
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -51,6 +58,7 @@ public class insrtProcesados extends HttpServlet {
         String jConcatenado =entidad+municipio+distrito+numero;
         String expediente =(String) sesion.getAttribute("expediente");
         
+        String proceClave =request.getParameter("procesadoClave");
         String presentAdo = request.getParameter("presentAdo");
         String tipoDetencion = request.getParameter("tipoDetencion");
         String imputable = request.getParameter("imputable");
@@ -98,7 +106,10 @@ public class insrtProcesados extends HttpServlet {
         String anio = arrayFecha[0];
         //***********************************INSERT*************************************************
         try {
-            String proceClave = generaProcesadoClave(expediente, jConcatenado);
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+//            String proceClave = generaProcesadoClave(expediente, jConcatenado);
             conn.Conectar();
             sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
                     + expediente +jConcatenado + "','" + proceClave + jConcatenado+"',"
@@ -144,74 +155,37 @@ public class insrtProcesados extends HttpServlet {
                     + "'" + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
-            if (conn.escribir(sql)) {// si se inserta redirige a elementosPrincipales.jsp
+            if (conn.escribir(sql)) {
+                
+                proceExp=cp.countTotalProcesados(expediente +jConcatenado);// procesados regstrados en expedientes
+                proceInsertados=sp.countProcesadosInsertados(expediente +jConcatenado);// procesados insertados en la tabla de delitos
+                if(proceExp==proceInsertados){//si hay la misma cantidad regresa una variable para mostrar la pestaña de victimas
+                    out.write("ProcesadosComplete");
+                }
                 conn.close();
-//                response.sendRedirect("elementosPrincipales.jsp?insertado=true");
-            } else {//regresa a procesados.jsp y maca error
+            } else {
                 conn.close();
-//                response.sendRedirect("procesados.jsp?insertado=false");
             }
         } catch (Exception ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet insrtProcesados</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet insrtProcesados at " + request.getContextPath() + "</h1>");
-            /*out.println(sql);
-            out.println("<br>presentacion: " + presentAdo);
-            out.println("<br>tipo detencion: " + tipoDetencion);
-            out.println("<br>imputable: " + imputable);
-            out.println("<br>participacion: " + participacion);
-            out.println("<br>reincidencia: " + reincidencia);
-            out.println("<br>psicofisico: " + psicofisico);
-            out.println("<br>interprete: " + interprete);
-            out.println("<br>defensor: " + defensor);
-            out.println("<br>representante: " + representante);
-            out.println("<br>apaterno: " + apaterno);
-            out.println("<br>amaterno: " + amaterno);
-            out.println("<br>nombre: " + nombre);
-            out.println("<br>alias: " + alias);
-            out.println("<br>curp: " + curp);
-            out.println("<br>sexo: " + sexo);
-            out.println("<br>edad: " + edad);
-            out.println("<br>nacimiento: " + fNacimiento);
-            out.println("<br>dia: " + dia);
-            out.println("<br>mes: " + mes);
-            out.println("<br>anio: " + anio);
-            out.println("<br>nac pais: " + nPais);
-            out.println("<br>nac entidad: " + nEntidad);
-            out.println("<br>nac Municipio: " + nMunicipio);
-            out.println("<br>edo civil: " + edoCivil);
-            out.println("<br>nacionalidad: " + nacionalidad);
-            out.println("<br>residencia: " + residencia);
-            out.println("<br>resi Entidad: " + rEntidad);
-            out.println("<br>resi Municipio: " + rMunicipio);
-            out.println("<br>discapacidad: " + discapacidad);
-            out.println("<br>alfabet: " + alfabet);
-            out.println("<br>estudios: " + estudios);
-            out.println("<br>condi Estudiante: " + condiEstudiante);
-            out.println("<br>habla esp: " + hablaEsp);
-            out.println("<br>poblacion Indigena: " + poblaIndigena);
-            out.println("<br>pueblo Indig: " + puebloIndigena);
-            out.println("<br>habla Indi: " + hablaIndigena);
-            out.println("<br>lengua Indige: " + lenguaIndigena);
-            out.println("<br>ocupacion: " + ocupacion);
-            out.println("<br>condicionActiv: " + condicionActi);
-            out.println("<br>comentarios: " + comentarios);*/
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+//        response.setContentType("text/html;charset=UTF-8");
+//        PrintWriter out = response.getWriter();
+//        try {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet insrtProcesados</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet insrtProcesados at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        } finally {
+//            out.close();
+//        }
     }
 
     public String verificaVariable(String variable) {

@@ -34,17 +34,25 @@ public class instVictimas extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
+    String sqlVictimas, sqlVDelitos, sqlVProce, sqlVmedidas, sqlVmedidasMuj;
+    boolean insertaVDeli;
+    boolean insertaVProce;
+    boolean insertavmedida;
+    boolean insertavmedidaMuj;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
         HttpSession sesion = request.getSession();
-
-        String entidadJuz = (String) sesion.getAttribute("entidad");
-        String municipioJuz = (String) sesion.getAttribute("municipio");
-        String distritoJuz = (String) sesion.getAttribute("distrito");
-        String numeroJuz = (String) sesion.getAttribute("numero");
+        String entidadJuz = "12";
+        String municipioJuz = "12001";
+        String distritoJuz = "1";
+        String numeroJuz = "1";
+        String expediente_clave = "002/2018";
+//        String entidadJuz = (String) sesion.getAttribute("entidad");
+//        String municipioJuz = (String) sesion.getAttribute("municipio");
+//        String distritoJuz = (String) sesion.getAttribute("distrito");
+//        String numeroJuz = (String) sesion.getAttribute("numero");
         String victima_clave = request.getParameter("victima_clave");
         String tipo_victima = request.getParameter("tipo_victima");
         String victima_moral = request.getParameter("tvic_moral");
@@ -60,11 +68,11 @@ public class instVictimas extends HttpServlet {
         String vulnerabilidad = request.getParameter("vulnera");
         String paisNacimiento = request.getParameter("Pnacimiento");
         String entidadNacimiento = request.getParameter("Enacimiento");
-        String muniNacimiento = request.getParameter("Mnacimiento");
+        String muniNacimiento = verificaVariable(request.getParameter("Mnacimiento"));
         String nacionalidad = request.getParameter("naciona");
         String paisResi = request.getParameter("Preside");
         String entidadResi = request.getParameter("Ereside");
-        String municipioResi = request.getParameter("Mreside");
+        String municipioResi = verificaVariable(request.getParameter("Mreside"));
         String conyugal = request.getParameter("conyugal");
         String discapacidad = request.getParameter("discapacidad");
         String alfabetismo = request.getParameter("alfabetismo");
@@ -79,37 +87,63 @@ public class instVictimas extends HttpServlet {
         String[] deli = request.getParameterValues("inpDeli");
         String[] chk = request.getParameterValues("deliCometido");
         String[] procesadoRela = request.getParameterValues("proRela");
-        String[] chkRela = request.getParameterValues("chkRelaProce");
+        int vmedidas = Integer.parseInt(request.getParameter("mProtect"));
+        String[] chkvmedida = request.getParameterValues("aplicaMedida");
+        int vmedidaMujer = Integer.parseInt(request.getParameter("mujProtect"));
+        String[] chkvmedidaMujer = request.getParameterValues("aplicaMedidaMuj");
 
         try {
             conn.Conectar();
-            sql = "INSERT INTO DATOS_VICTIMAS_ADOJC  VALUES(" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz + ",'002/2018'"
-                    + "," + victima_clave + "," + tipo_victima + "," + victima_moral + "," + sexo + "," + fecha_nacimiento + "," + edad + "," + vulnerabilidad
+            sqlVictimas = "INSERT INTO DATOS_VICTIMAS_ADOJC  VALUES(" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz + ",'" + expediente_clave
+                    + "','" + victima_clave + "'," + tipo_victima + "," + victima_moral + "," + sexo + ",'" + fecha_nacimiento + "'," + edad + "," + vulnerabilidad
                     + "," + paisNacimiento + "," + entidadNacimiento + "," + muniNacimiento + "," + nacionalidad + "," + paisResi + "," + entidadResi + "," + municipioResi
                     + "," + conyugal + "," + discapacidad + "," + alfabetismo + "," + estudios + "," + interprete + "," + espanol + "," + indigena + "," + familia
-                    + "," + ocupacion + asesor + "," + comentarios + "6" + "(select YEAR(NOW()))" + ")";
-
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
+                    + "," + ocupacion + "," + asesor + ",'" + comentarios + "',6)";
+            System.out.println(sqlVictimas);
+            if (conn.escribir(sqlVictimas)) {
                 for (int i = 0; i < chk.length; i++) {
-                    sql = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES " + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz + ",'002/2018'"
-                            + "," + victima_clave + "," + procesa[i] + "," + deli[i] + ",'Si',6)";
-
-                    System.out.println(sql);
-            if(conn.escribir(sql)){
-                for(int j=0; j < procesadoRela.length; j++){
-                    for(int k=0; k < chkRela.length; k++){
-                        sql="INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz + ",'002/2018'"
-                                + "";
-                    }
+                    sqlVDelitos = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz + ",'" + expediente_clave
+                            + "','" + victima_clave + "','" + procesa[i] + "','" + deli[i] + "','Si')";
+                    insertaVDeli = conn.escribir(sqlVDelitos);
+                    System.out.println(sqlVDelitos);
                 }
-            }
-                    if (conn.escribir(sql)) {
-                        conn.close();
-                        response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
+                if (insertaVDeli) {
+                    for (int j = 0; j < procesadoRela.length; j++) {
+                        String[] chkRela = request.getParameterValues("chkRelaProce" + j);
+                        for (int k = 0; k < chkRela.length; k++) {
+                            sqlVProce = "INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz + ",'" + expediente_clave
+                                    + "','" + procesadoRela[j] + "','" + victima_clave + "'," + chkRela[k] + ", 6)";
+                            System.out.println(sqlVProce);
+                            insertaVProce = conn.escribir(sqlVProce);
+                        }
+                    }
+                    if (insertaVProce) {
+                        if (vmedidas == 1) {
+                            for (int i = 0; i < chkvmedida.length; i++) {
+                                sqlVmedidas = "INSERT INTO DATOS_VMEDIDAS_ADOJC VALUES (" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz
+                                        + ",'" + expediente_clave + "','" + victima_clave + "'," + chkvmedida[i] + ")";
+                                System.out.println(sqlVmedidas);
+                                insertavmedida = conn.escribir(sqlVmedidas);
+                            }
+                            if (insertavmedida) {
+                                if (vmedidaMujer == 1) {
+                                    for (int i = 0; i < chkvmedidaMujer.length; i++) {
+                                        sqlVmedidasMuj = "INSERT INTO DATOS_VMEDIDAS_DMUJ_ADOJC VALUES (" + entidadJuz + "," + municipioJuz + "," + distritoJuz + "," + numeroJuz
+                                                + ",'" + expediente_clave + "','" + victima_clave + "'," + chkvmedidaMujer[i] + ")";
+                                        System.out.println(sqlVmedidasMuj);
+                                        insertavmedidaMuj = conn.escribir(sqlVmedidasMuj);
+                                    }
+                                    if (insertavmedidaMuj) {
+                                        conn.close();
+                                        response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 conn.close();
+                response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
             } else {
                 //regresa a insrttramite y maca error
                 conn.close();
@@ -118,8 +152,8 @@ public class instVictimas extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType(
+                "text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
@@ -137,6 +171,18 @@ public class instVictimas extends HttpServlet {
         }
     }
 
+    public String verificaVariable(String variable) {
+        String verificada = "";
+        if (variable == null) {
+            verificada = "-2";
+        } else if (variable.equals("")) {
+            verificada = "-2";
+        } else {
+            verificada = variable;
+        }
+        return verificada;
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -151,8 +197,10 @@ public class instVictimas extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(instVictimas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(instVictimas.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -169,8 +217,10 @@ public class instVictimas extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(instVictimas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(instVictimas.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

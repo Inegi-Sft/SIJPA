@@ -99,7 +99,7 @@ public class showVictimas {
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
-                vic.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3)});
+                vic.add(new String[]{resul.getString(1)});
             }
             conn.close();
         }

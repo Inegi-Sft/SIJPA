@@ -83,14 +83,14 @@
                                 out.println(ls[0] + "<input type='hidden' name='inpPro' value='" + ls[0] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                out.println(ls[1]+"<input type='hidden' name='inpDeli' value='" + ls[1] + "'/>");
+                                out.println(ls[1] + "<input type='hidden' name='inpDeli' value='" + ls[1] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                out.println(ls[2]+"<input type='hidden' name='' value='" + ls[2] + "'/>");
+                                out.println(ls[2] + "<input type='hidden' name='' value='" + ls[2] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
                         %>
-                                <input class="chkAplica" type="checkbox" name="deliCometido" id="deliCometido"/>
+                        <input class="chkAplica" type="checkbox" name="deliCometido" id="deliCometido"/>
                         <%
                                 out.println("</td>");
                                 out.println("</tr>");
@@ -133,7 +133,8 @@
                             <th width="750">Relación</th>
                         </tr>
                         <%
-                            vic = victi.findVdelitos("002/2018");
+                            vic = victi.findVprocesados("002/2018");
+                            int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
@@ -143,13 +144,14 @@
                                 lista = cat.findRelImputado();
                                 for (String[] los : lista) {
                                     out.println("<div class='chkCat'>");
-                                    out.println("<input type='checkbox' name='chkRelaProce' id='chkRelaProce'>");
+                                    out.println("<input type='checkbox' name='chkRelaProce" + i + "' id='chkRelaProce' value=" + los[0] + ">");
                                     out.println("<label>" + los[1] + "</label>");
                                     out.println("</div>");
+
                                 }
                                 out.println("</td>");
                                 out.println("</tr>");
-
+                                i++;
                             }
                         %>
                     </table>
@@ -213,7 +215,7 @@
                                     </div>
                                     <div class="cols oculto" id="estaNaci">       
                                         <label for="Enacimiento">Entidad</label>
-                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia" onchange="llenaMun('#Enacimiento', '#Mnacimiento')">
+                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia dependiente" onchange="llenaMun('#Enacimiento', '#Mnacimiento')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -225,7 +227,7 @@
                                     </div>
                                     <div class="cols oculto" id="munNaci"> 
                                         <label for="Mnacimiento">Municipio</label>
-                                        <select name="Mnacimiento" id="Mnacimiento" name="Mnacimiento" class="txtMedia">
+                                        <select name="Mnacimiento" id="Mnacimiento" name="Mnacimiento" class="txtMedia dependiente">
                                             <option value="">--Seleccione--</option>      
                                         </select>
                                     </div>
@@ -262,7 +264,7 @@
                                     </div>
                                     <div class="cols oculto" id="estaResi">   
                                         <label for="Ereside">Entidad</label>
-                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia" onchange="llenaMun('#Ereside', '#Mreside')">
+                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia dependiente" onchange="llenaMun('#Ereside', '#Mreside')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -274,7 +276,7 @@
                                     </div>
                                     <div class="cols oculto" id="munResi"> 
                                         <label for="Mreside">Municipio</label>
-                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia">
+                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia dependiente">
                                             <option value="">--Seleccione--</option>      
                                         </select>
                                     </div>
@@ -423,8 +425,8 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>"); %>
-                        <input type="checkbox" name="aplicaMedida" id="aplicaMedida" />
+                                out.println("<td>");%>
+                        <input type="checkbox" name="aplicaMedida" id="aplicaMedida" value="<%=ls[0]%>"/>
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }
@@ -455,8 +457,8 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>"); %>
-                        <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj" />
+                                out.println("<td>");%>
+                        <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj" value="<%=ls[0]%>" />
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }

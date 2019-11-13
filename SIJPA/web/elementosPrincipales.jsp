@@ -18,13 +18,6 @@
         <title>SIJPA::Elementos del Expediente</title>
         <%@include file="librerias.jsp" %>
         <%
-            if (request.getParameter("error") != null) {
-                out.println("<script>alert('error en el proceso de guardado')</script>");
-            }
-            if (request.getParameter("insertado") != null) {
-                out.println("<script type='text/javascript'>alert('Registro agregado con exito!');</script>");
-            }
-
             showDelitos delito = new showDelitos();
             ArrayList<String[]> deli = new ArrayList();
 
@@ -65,7 +58,7 @@
             </div>
             <div id="p2" class="pestanaContent">
                 <h2>Delitos</h2>
-<!--                <a href="delitos.jsp" class="agregar pop"><img src="img/add.png"/> Agregar</a>-->
+                <!--<a href="delitos.jsp" class="agregar pop"><img src="img/add.png"/> Agregar</a>-->
                 <table class="tablasRegis" id="tablaDeli">
                     <thead>
                         <tr>

@@ -67,4 +67,47 @@ public class showDelitos {
         return deli;
     } 
     
+    public int countDelitosInsertados(String exp){
+        int total=0;
+        try {
+            conn.Conectar();
+            
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE = '"+exp+"';";
+            
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                total=resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    } 
+    
+    public ArrayList findDelitosExp(String exp){
+        try {
+            conn.Conectar();
+            deli = new ArrayList();
+            
+            sql = "SELECT D.DELITO_CLAVE,TP.*, S.*, GE.*"
+                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
+                + " WHERE TP.CONSIGNACION_ID=P.TIPO_CONSIGNACION"
+                + " AND S.SEXO_ID=P.SEXO"
+                + " AND GE.GRADO_ID=P.ULTIMO_GRADO_ESTUDIOS"
+                + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
+            
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString("PROCESADO_CLAVE"), resul.getString("TP.DESCRIPCION"), resul.getString("S.DESCRIPCION"), 
+                    resul.getString("FECHA_NACIMIENTO"), resul.getString("GE.DESCRIPCION")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    } 
 }

@@ -22,6 +22,7 @@ public class catalogos {
     ArrayList<String[]> lista;
     String sql;
     ResultSet resul;
+    String datoEsp;
 
     /**
      *

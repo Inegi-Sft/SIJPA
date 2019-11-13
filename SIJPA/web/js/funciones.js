@@ -161,6 +161,8 @@ $(document).ready(function () {
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
     
+    /*----------------------- FUNCIONES PARA INSERTS AJAX --------------------------*/
+    
     //Guarda Expedientes
     $('#formExpedientes').submit(function (e){
         e.preventDefault();
@@ -180,10 +182,8 @@ $(document).ready(function () {
                 alert("Guardado con exito!!!");
                 $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
                 $("#guardarExp").prop("hidden",true);
-                if(response === 1){
+                if(response === '1'){
                     openPestana('btn2', 'p2');
-                }else{
-                    window.location.href = "causasPenales.jsp";
                 }
             },
             error : function(response) {
@@ -193,21 +193,54 @@ $(document).ready(function () {
         });
     });
     
+    //Guarda Delitos
+    $('#formDelitos').submit(function (e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtDelitos',
+            data: $('#formDelitos').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor",response);
+                alert("Guardado con exito!!!");
+                parent.$.fancybox.close();
+                if(response === 'DelitosComplete'){
+                    openPestana('btn3', 'p3');
+                }
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
+    });
+    
     //Guarda Procesados
     $('#formProcesados').submit(function (e){
         e.preventDefault();
-//        e.stopImmediatePropagation();
+        e.stopImmediatePropagation();
         $.ajax({
             type: 'post',
             url: 'insrtProcesados',
             data: $('#formProcesados').serialize(),
-            beforeSend: function (x) {
-                //$.fancybox().close();
-            },
             success: function (response) {
-                console.log("Respuesta del servidor",response);
+                console.log("Respuesta del servidor: ",response);
                 alert("Guardado con exito!!!");
-                openPestana('btn4', 'p4');
+                var numProce = parseInt(parent.$('#Tadolescentes').val());
+                if(response !== null && $.isArray(response)){
+                    for(var i = 1; i < 5; i++){
+                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
+                        parent.$('#tablaProcesa tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+                    }
+                    console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
+                    if(response[5] === numProce){
+                        parent.openPestana('btn4','p4');
+                    }else{
+                        alert('Falta por capturar ' + (numProce-response[5]) + ' procesados');
+                    }
+                }
+                parent.$.fancybox.close();
             },
             error : function(response) {
                 console.log("Respuesta del servidor",response);
@@ -235,6 +268,17 @@ $(document).ready(function () {
             }
         });
     });
+    /*----------------------- FIN FUNCIONES PARA INSERTS AJAX --------------------------*/
+    
+    /*----------------------- FUNCIONES PARA EXPEDIENTES --------------------------*/
+    $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').focus(function(e){
+        if($('#expClave').val() === ""){
+            e.stopImmediatePropagation();
+            alert('Favor de capturar el expediente clave para poder agregar los datos siguientes');
+            $('#expClave').focus();
+        }
+    });
+    /*----------------------- FIN FUNCIONES PARA EXPEDIENTES --------------------------*/
 });
 
 /********************splash del inicio del sistema***********************/
@@ -266,7 +310,6 @@ function competencia() {
             $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('-2').prop("required", false);
             break;
     }
-
 }
 
 function expacumula() {
@@ -658,7 +701,7 @@ function numeroDelitos() {
     var delitos = $('#Tdelitos').val();
     for (var i = 1; i <= delitos; i++) {
         $('#tablaDeli tbody').append('<tr><td>' + expediente + '-D' + i + '</td><td></td><td></td><td></td>\n\
-    <td></td><td><a class="pop" href="delitos.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    <td></td><td><a class="pop" href="delitos.jsp?deliClave='+expediente+'-D'+i+'"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }
 ;
@@ -667,8 +710,10 @@ function numeroProcesados() {
     var expediente = $('#expClave').val();
     var procesados = $('#Tadolescentes').val();
     for (var i = 1; i <= procesados; i++) {
-        $('#tablaProcesa tbody').append('<tr><td>' + expediente + '-P' + i + '</td><td></td><td></td><td></td>\n\
-    <td></td><td><a class="pop" href="procesados.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+        var proceClave = expediente + 'P-' + i;
+        $('#tablaProcesa tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td>\n\
+        <td></td><td><a class="pop" href="procesados.jsp?proceClave=' + proceClave + '&posicion=' + (i-1) + '"><img src="img/editar.png" title="Modificar"/>\n\
+        </a></td></tr>');
     }
 }
 ;
@@ -678,7 +723,7 @@ function numeroVictimas() {
     var victimas = $('#Tvictimas').val();
     for (var i = 1; i <= victimas; i++) {
         $('#tablaVictimas').append('<tr><td>' + expediente + '-V' + i + '</td><td></td><td></td><td></td>\n\
-    <td></td><td><a class="pop" href="victimas.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    <td></td><td><a class="pop" href="victimas.jsp?victiClave='+expediente+'-V'+i+'"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
     }
 }
 ;
@@ -698,9 +743,3 @@ function Tconclu() {
     }
 }; 
 
-function enviaPagina(pag, juzgado, exp){
-//    alert(pag+"?juzgado="+juzgado+"&"+"exp="+exp);
-    window.location.href="'"+pag+"?juzgado="+juzgado+"&"+"exp="+exp+"'";
-//    alert(pag+" / "+juzgado+" / "+exp);
-    
-}

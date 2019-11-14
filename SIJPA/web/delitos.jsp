@@ -5,9 +5,10 @@
 --%>
 
 <%@page import="clasesAuxiliar.showCausasPenales"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,28 +17,37 @@
         <%@include file="librerias.jsp" %>
     </head>
     <body style="zoom: .9;">
-        <%
-            HttpSession sesion= request.getSession();
-            catalogos cat = new catalogos();
-            showCausasPenales objExp = new showCausasPenales();
+        <%  
+            String delitoClave = "", posicion = "";
+            if(request.getParameter("delitoClave") != null || request.getParameter("posicion") != null){
+                delitoClave = request.getParameter("delitoClave");
+                posicion = request.getParameter("posicion");
+            }
             
+            catalogos cat = new catalogos();
             ArrayList<String[]> lista;
-            String entidad =(String) sesion.getAttribute("entidad");
-            String municipio =(String) sesion.getAttribute("municipio");
-            String distrito =(String) sesion.getAttribute("distrito");
-            String numero =(String) sesion.getAttribute("numero");
+            showCausasPenales objExp = new showCausasPenales();
+            String entidad =(String) session.getAttribute("entidad");
+            String municipio =(String) session.getAttribute("municipio");
+            String distrito =(String) session.getAttribute("distrito");
+            String numero =(String) session.getAttribute("numero");
             String jConcatenado =entidad+municipio+distrito+numero;
-            String expediente =(String) sesion.getAttribute("expediente");
-            String delitoClave =request.getParameter("deliClave");
+            String expediente =(String) session.getAttribute("expediente");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Delitos</h1>
             <form action="" method="post" name="formDelitos" id="formDelitos">
-                <input type="hidden" name="delitoClave" value="<%=delitoClave %>"/>
                 <fieldset>
                     <legend>Identificación del tipo penal</legend>
                     <table class="tablaFormu" >
+                        <tr>
+                            <td colspan="3">
+                                <label>Delito Clave</label>
+                                <input type="text" name="delitoClave" id="delitoClave" value="<%=delitoClave%>" readonly/>
+                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoCP">Delito de acuerdo con la ley penal</label>

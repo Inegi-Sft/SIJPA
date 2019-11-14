@@ -4,9 +4,9 @@
     Author     : FERMIN.GOMEZ
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,15 +22,12 @@
             if (request.getParameter("insertado") != null) {
                 out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
             }
+            
+            catalogos cat = new catalogos();
+            ArrayList<String[]> lista;
         %>
     </head>
     <body style="zoom: .85;">
-        <%
-            catalogos cat = new catalogos();
-            ArrayList<String[]> lista;
-            
-            String procesadoClave =request.getParameter("proceClave");
-        %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Procesados</h1>
@@ -38,13 +35,12 @@
                 Es decir, si es el primer Adolescente Procesado del expediente 10/2016 su identificador será 10/2016-p1
             </span>
             <form action="" method="post" name="formProcesados" id="formProcesados">
-                <input type="hidden" name="procesadoClave" value="<%=procesadoClave %>"/>
                 <fieldset>
                     <legend>Situación jurídica del adolescente</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"
+                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
                             </td>
                             <td colspan="2">
                                 <label>Procesado Clave</label>

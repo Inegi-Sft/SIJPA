@@ -46,6 +46,7 @@ public class showCausasPenales {
         }
         return causas;
     }
+    
     public int countTotalCausas(){
         int total=0;
         try {
@@ -93,6 +94,7 @@ public class showCausasPenales {
         }
         return total;
     }
+    
     public int countTotalProcesados(String exp){
         int total=0;
         try {
@@ -108,6 +110,7 @@ public class showCausasPenales {
         }
         return total;
     }
+    
     public int countTotalVictimas(String exp){
         int total=0;
         try {

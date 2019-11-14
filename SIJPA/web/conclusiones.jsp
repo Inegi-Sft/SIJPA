@@ -28,7 +28,7 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el juez de control</h1>
-            <form action="insrtconclusiones" method="post">
+            <form action="insrtConclusiones" method="post">
                 <fieldset>
                     <legend>Resolución</legend>
                     <label for="idProcesado">Id Adolescente</label>

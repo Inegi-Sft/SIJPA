@@ -17,13 +17,14 @@ import java.util.logging.Logger;
  * @author CESAR.OSORIO
  */
 public class showVictimas {
-     Conexion_Mysql conn = new Conexion_Mysql();
+    Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> vic;
     String sql;
     ResultSet resul;
+    int conteoVic;
     
     public ArrayList findVictimas(){
-    conn.Conectar();
+        conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT * FROM DATOS_VICTIMAS_ADOJC";
         resul = conn.consultar(sql);
@@ -47,16 +48,21 @@ public class showVictimas {
         return vic;
     } 
     
-    public ArrayList findVictimasTabla(){
+    public ArrayList findVictimasTabla(String victi){
         conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT V.VICTIMA_CLAVE, CTV.DESCRIPCION, CS.DESCRIPCION, V.FECHA_NACIMIENTO, CONCAT(CM.DESCRIPCION,', ',CE.DESCRIPCION) "
                 + "FROM DATOS_VICTIMAS_ADOJC V, CATALOGOS_TIPO_VICTIMA CTV, CATALOGOS_SEXO CS, CATALOGOS_MUNICIPIOS CM, CATALOGOS_ENTIDADES CE "
-                + "WHERE V.TIPO_VICTIMA = CTV.VICTIMA_ID AND V.SEXO = CS.SEXO_ID AND V.NACIMIENTO_MUNICIPIO=CM.MUNICIPIO_ID AND V.NACIMIENTO_ENTIDAD=CE.ENTIDAD_ID";
+                + "WHERE V.TIPO_VICTIMA = CTV.VICTIMA_ID "
+                + "AND V.SEXO = CS.SEXO_ID "
+                + "AND V.NACIMIENTO_MUNICIPIO = CM.MUNICIPIO_ID "
+                + "AND V.NACIMIENTO_ENTIDAD = CE.ENTIDAD_ID "
+                + "AND V.VICTIMA_CLAVE = '" + victi + "';";
         resul = conn.consultar(sql);
          try {
             while(resul.next()){
-                vic.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3),
+                vic.add(new String[]{
+                    resul.getString(2),resul.getString(3),
                     resul.getString(4),resul.getString(5)});
             }
             conn.close();
@@ -68,19 +74,20 @@ public class showVictimas {
         
     }
     
-     public ArrayList findVdelitos(String expe){
-    conn.Conectar();
+    public ArrayList findVdelitos(String exp){
+        conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT P.PROCESADO_CLAVE, D.DELITO_CLAVE, C.CODIGO FROM DATOS_PROCESADOS_ADOJC P "
                 + "INNER JOIN DATOS_DELITOS_ADOJC D ON P.EXPEDIENTE_CLAVE = D.EXPEDIENTE_CLAVE "
                 + "INNER JOIN CATALOGOS_CODIGO_NORMA C ON D.DELITO_CODIGO_PENAL = C.ID "
                 + "WHERE P.EXPEDIENTE_CLAVE = D.EXPEDIENTE_CLAVE "
-                + "AND P.EXPEDIENTE_CLAVE = '" + expe + "'" ;
-        
+                + "AND P.EXPEDIENTE_CLAVE = '" + exp + "'" ;
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
-                vic.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3)});
+                vic.add(new String[]{
+                    resul.getString(1), resul.getString(2),resul.getString(3)
+                });
             }
             conn.close();
         }
@@ -90,16 +97,17 @@ public class showVictimas {
         return vic;
     } 
      
-      public ArrayList findVprocesados(String expe){
-    conn.Conectar();
+    public ArrayList findVprocesados(String exp){
+        conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
-                + "WHERE EXPEDIENTE_CLAVE = '" + expe + "'" ;
-        
+                + "WHERE EXPEDIENTE_CLAVE = '" + exp + "'" ;
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
-                vic.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3)});
+                vic.add(new String[]{
+                    resul.getString(1)
+                });
             }
             conn.close();
         }
@@ -107,5 +115,21 @@ public class showVictimas {
             Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return vic;
-    } 
+    }
+    
+    public int countVictimas(String exp){
+        try{
+            conn.Conectar();
+            conteoVic = 0;
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_VICTIMAS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoVic = resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoVic;
+    }
 }

@@ -13,20 +13,20 @@ function openPestana(btn, pestana) {
     desde un iframe */
     
     // Get all elements with class="tabcontent" and hide them
-    tabcontent = parent.document.getElementsByClassName("pestanaContent");
+    tabcontent = document.getElementsByClassName("pestanaContent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
     // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = parent.document.getElementsByClassName("pestanaLinks");
+    tablinks = document.getElementsByClassName("pestanaLinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
     // Show the current tab, and add an "active" class to the button that opened the tab
-    parent.document.getElementById(pestana).style.display = "block";
-    parent.document.getElementById(btn).className += " active";
-    parent.document.getElementById(btn).disabled=false;
+    document.getElementById(pestana).style.display = "block";
+    document.getElementById(btn).className += " active";
+    document.getElementById(btn).disabled=false;
 //    evt.currentTarget.className += " active";
 }

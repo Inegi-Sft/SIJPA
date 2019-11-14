@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author CESAR.OSORIO
  */
 @WebServlet(urlPatterns = {"/insrtconclusiones"})
-public class insrtconclusiones extends HttpServlet {
+public class insrtConclusiones extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,12 +77,12 @@ public class insrtconclusiones extends HttpServlet {
                     conn.close();
                     response.sendRedirect("elementosPrincipales.jsp?seinserto=si");
                 } else {
-                    //regresa a insrttramite y maca error
+                    //regresa a insrtTramite y maca error
                     conn.close();
                     response.sendRedirect("conclusiones.jsp?error=si");
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(insrtTramite.class.getName()).log(Level.SEVERE, null, ex);
             }
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

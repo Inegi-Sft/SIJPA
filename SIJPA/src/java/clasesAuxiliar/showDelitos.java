@@ -22,6 +22,7 @@ public class showDelitos {
     ArrayList<String[]> deli;
     String sql;
     ResultSet resul;
+    int conteoDel;
     
     public ArrayList findDelitos(){
         conn.Conectar();
@@ -46,18 +47,23 @@ public class showDelitos {
         return deli;
     } 
     
-    public ArrayList findDeliTabla(){
+    public ArrayList findDeliTabla(String del){
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT D.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, CC.DESCRIPCION, CFC.DESCRIPCION, D.NUMERO_PROCESADOS, D.NUMERO_VICTIMAS FROM DATOS_DELITOS_ADOJC D,"
-                + " CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC WHERE "
-                + "D.DELITO_CODIGO_PENAL=CCN.ID AND D.DELITO_NORMA_TECNICA=CDN.ID AND D.GRADO_CONSUMACION=CC.CONSUMACION_ID AND D.FORMA_COMISION=CFC.COMISION_ID";
+        sql = "SELECT D.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, CC.DESCRIPCION, CFC.DESCRIPCION, D.NUMERO_PROCESADOS, D.NUMERO_VICTIMAS "
+                + "FROM DATOS_DELITOS_ADOJC D,CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
+                + "WHERE D.DELITO_CODIGO_PENAL=CCN.ID "
+                + "AND D.DELITO_NORMA_TECNICA=CDN.ID "
+                + "AND D.GRADO_CONSUMACION=CC.CONSUMACION_ID "
+                + "AND D.FORMA_COMISION=CFC.COMISION_ID "
+                + "AND D.DELITO_CLAVE = '" + del + "';";
         resul = conn.consultar(sql);
-        
         try {
             while(resul.next()){
-                deli.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3),
-                    resul.getString(4),resul.getString(5),resul.getString(6),resul.getString(7)});
+                deli.add(new String[]{
+                    resul.getString(2),resul.getString(3),resul.getString(4),
+                    resul.getString(5),resul.getString(6),resul.getString(7)
+                });
             }
             conn.close();
         }
@@ -68,46 +74,20 @@ public class showDelitos {
     } 
     
     public int countDelitosInsertados(String exp){
-        int total=0;
         try {
             conn.Conectar();
-            
+            conteoDel = 0;
             sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE = '"+exp+"';";
-            
             resul = conn.consultar(sql);
             while (resul.next()) {
-                total=resul.getInt("TOTAL");
+                conteoDel=resul.getInt("TOTAL");
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return total;
+        return conteoDel;
     } 
     
-    public ArrayList findDelitosExp(String exp){
-        try {
-            conn.Conectar();
-            deli = new ArrayList();
-            
-            sql = "SELECT D.DELITO_CLAVE,TP.*, S.*, GE.*"
-                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
-                + " WHERE TP.CONSIGNACION_ID=P.TIPO_CONSIGNACION"
-                + " AND S.SEXO_ID=P.SEXO"
-                + " AND GE.GRADO_ID=P.ULTIMO_GRADO_ESTUDIOS"
-                + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
-            
-            resul = conn.consultar(sql);
-            while (resul.next()) {
-                deli.add(new String[]{
-                    resul.getString("PROCESADO_CLAVE"), resul.getString("TP.DESCRIPCION"), resul.getString("S.DESCRIPCION"), 
-                    resul.getString("FECHA_NACIMIENTO"), resul.getString("GE.DESCRIPCION")
-                });
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return deli;
-    } 
+    
 }

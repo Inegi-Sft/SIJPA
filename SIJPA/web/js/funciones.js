@@ -35,6 +35,7 @@ $(document).ready(function () {
     });
 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
+
     $('.oculto').hide();
     $('.dependiente').val('-2');
 

@@ -63,7 +63,8 @@ public class showVictimas {
             while(resul.next()){
                 vic.add(new String[]{
                     resul.getString(2),resul.getString(3),
-                    resul.getString(4),resul.getString(5)});
+                    resul.getString(4),resul.getString(5)
+                });
             }
             conn.close();
         }

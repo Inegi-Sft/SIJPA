@@ -189,28 +189,28 @@
                             <th>Conducta antisocial</th>
                             <th>No. Victimas</th>
                         </tr>
-                    <%
-                        int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
-                        lista = sd.findDelitosExp(expediente+jConcatenado);
-                        for (String[] ls : lista) {
-                    %>
-                            <tr>
-                                <td> <input type="hidden" name="arrayDelito" value="<%= ls[0] %>"/> <%= ls[0].replace(jConcatenado, "") %></td>
-                                <td> <%= ls[1] %> </td>
-                                <td>
-                                    <select class='txtSmall' name='arrayNumVic' required>
-                                        <option value=""> - - - </option>
-                    <%
-                                    for(int i=0; i <= totVic; i++){
-                                        out.println("<option value="+i+">"+i+"</option>");
-                                    }
-                    %>
-                                    </select>
-                                </td>
-                           </tr>
-                    <%
-                        }
-                    %>
+                        <%
+                            int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
+                            lista = sd.findDelitos(expediente+jConcatenado);
+                            for (String[] ls : lista) {
+                        %>
+                                <tr>
+                                    <td> <input type="hidden" name="arrayDelito" value="<%= ls[0] %>"/> <%= ls[0].replace(jConcatenado, "") %></td>
+                                    <td> <%= ls[1] %> </td>
+                                    <td>
+                                        <select class='txtSmall' name='arrayNumVic' required>
+                                            <option value=""> - - - </option>
+                        <%
+                                        for(int i=0; i <= totVic; i++){
+                                            out.println("<option value="+i+">"+i+"</option>");
+                                        }
+                        %>
+                                        </select>
+                                    </td>
+                               </tr>
+                        <%
+                            }
+                        %>
                     </table>
                 </fieldset><br>
                 <fieldset>

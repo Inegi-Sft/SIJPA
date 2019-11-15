@@ -38,7 +38,7 @@ public class insrtProcesados extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql,sqlPDelitos;;
+    String sql,sqlPDelitos;
     ResultSet rs;
     boolean insertPDeli;
     
@@ -114,7 +114,7 @@ public class insrtProcesados extends HttpServlet {
             PrintWriter out = response.getWriter();
             conn.Conectar();
             sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
-                    + expediente +jConcatenado + "','" + proceClave + jConcatenado+"',"
+                    + expediente + jConcatenado + "','" + proceClave + jConcatenado+"',"
                     + presentAdo + ","
                     + tipoDetencion + ","
                     + imputable + ","

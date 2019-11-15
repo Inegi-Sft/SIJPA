@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author CESAR.OSORIO
  */
-@WebServlet(urlPatterns = {"/insrttramite"})
-public class insrttramite extends HttpServlet {
+@WebServlet(urlPatterns = {"/insrtTramite"})
+public class insrtTramite extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -74,12 +74,12 @@ public class insrttramite extends HttpServlet {
 //                    out.close();
 //                }
             } else {
-                //regresa a insrttramite y maca error
+                //regresa a insrtTramite y maca error
                 conn.close();
                 //response.sendRedirect("tramite.jsp?error=si");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(insrttramite.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(insrtTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

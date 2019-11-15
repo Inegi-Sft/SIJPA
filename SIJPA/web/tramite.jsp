@@ -21,7 +21,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Pendientes de resolución </h1>
-            <form action="insrttramite" method="post" id="formtramite">
+            <form action="insrtTramite" method="post" id="formtramite">
                 <!--<center>-->
                 <fieldset >
                     <legend style="text-align: left;">Estatus</legend>

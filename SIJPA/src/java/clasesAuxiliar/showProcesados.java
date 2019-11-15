@@ -73,15 +73,15 @@ public class showProcesados {
         }
         return proce;
     }
-    
+  
     public int countProcesados(String exp){
         try{
             conn.Conectar();
             conteoPro = 0;
-            sql = "SELECT COUNT(*) FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                conteoPro = resul.getInt(1);
+                conteoPro = resul.getInt("TOTAL");
             }
             conn.close();
         } catch (SQLException ex) {

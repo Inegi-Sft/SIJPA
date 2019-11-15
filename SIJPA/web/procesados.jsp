@@ -6,9 +6,9 @@
 
 <%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="clasesAuxiliar.showDelitos"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,24 +24,20 @@
             if (request.getParameter("insertado") != null) {
                 out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
             }
-        %>
-    </head>
-    <body style="zoom: .85;">
-        <%
-            HttpSession sesion= request.getSession();
             
             catalogos cat = new catalogos();
             showDelitos sd= new showDelitos();
             showCausasPenales objExp = new showCausasPenales();
-            
-            ArrayList<String[]> lista;        
-            String entidad =(String) sesion.getAttribute("entidad");
-            String municipio =(String) sesion.getAttribute("municipio");
-            String distrito =(String) sesion.getAttribute("distrito");
-            String numero =(String) sesion.getAttribute("numero");
+            ArrayList<String[]> lista;
+            String entidad =(String) session.getAttribute("entidad");
+            String municipio =(String) session.getAttribute("municipio");
+            String distrito =(String) session.getAttribute("distrito");
+            String numero =(String) session.getAttribute("numero");
             String jConcatenado =entidad+municipio+distrito+numero;
-            String expediente =(String) sesion.getAttribute("expediente");
+            String expediente =(String) session.getAttribute("expediente");
         %>
+    </head>
+    <body style="zoom: .85;">
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Procesados</h1>
@@ -54,7 +50,7 @@
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"
+                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
                             </td>
                             <td colspan="2">
                                 <label>Procesado Clave</label>

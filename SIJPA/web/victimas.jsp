@@ -17,17 +17,30 @@
     </head>
     <body style="zoom: .9;">
         <%
+            String victiClave = "", posicion = "";
+            if(request.getParameter("victiClave") != null || request.getParameter("posicion") != null){
+                victiClave = request.getParameter("victiClave");
+                posicion = request.getParameter("posicion");
+            }
+            if (request.getParameter("insertado") != null) {
+                out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
+            }
             catalogos cat = new catalogos();
             ArrayList<String[]> lista = new ArrayList();
-
             showVictimas victi = new showVictimas();
             ArrayList<String[]> vic = new ArrayList();
+            String entidad =(String) session.getAttribute("entidad");
+            String municipio =(String) session.getAttribute("municipio");
+            String distrito =(String) session.getAttribute("distrito");
+            String numero =(String) session.getAttribute("numero");
+            String jConcatenado =entidad+municipio+distrito+numero;
+            String expediente =(String) session.getAttribute("expediente");
 
         %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Víctimas</h1>
-            <form action="instVictimas" method="post" id="victimasF">
+            <form action="insrtVictimas" method="post" name="formVictimas" id="formVictimas">
                 <fieldset>
                     <legend>Caracteristicas Generales</legend>
                     <table class="tablaFormu">
@@ -35,7 +48,8 @@
                             <td>
                                 <div class="cols">
                                     <label for="victima_clave">Víctima Clave</label>
-                                    <input type="text" name="victima_clave" id="victima_clave" required />
+                                    <input type="text" name="victiClave" id="victiClave" value="<%=victiClave%>" readonly/>
+                                    <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
                                 </div>
                                 <div class="cols">
                                     <label for="tipo_victima">Tipo de Víctima</label>
@@ -55,7 +69,8 @@
                                     <label for="tvic_moral">Tipo de Víctima Moral</label>
                                     <select name="tvic_moral" id="tvic_moral" class="txtMedia dependiente">
                                         <option value="">--Seleccione--</option>
-                                        <%                                            lista = cat.findVicMoral();
+                                        <%                                            
+                                            lista = cat.findVicMoral();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -76,21 +91,21 @@
                             <th>Delito cometido</th>
                         </tr>
                         <%
-                            vic = victi.findVdelitos("002/2018");
+                            vic = victi.findVdelitos(expediente + jConcatenado);
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
                                 out.println(ls[0] + "<input type='hidden' name='inpPro' value='" + ls[0] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                out.println(ls[1]+"<input type='hidden' name='inpDeli' value='" + ls[1] + "'/>");
+                                out.println(ls[1] + "<input type='hidden' name='inpDeli' value='" + ls[1] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                out.println(ls[2]+"<input type='hidden' name='' value='" + ls[2] + "'/>");
+                                out.println(ls[2] + "<input type='hidden' name='' value='" + ls[2] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
                         %>
-                                <input class="chkAplica" type="checkbox" name="deliCometido" id="deliCometido"/>
+                        <input class="chkAplica" type="checkbox" name="deliCometido" id="deliCometido"/>
                         <%
                                 out.println("</td>");
                                 out.println("</tr>");
@@ -133,23 +148,25 @@
                             <th width="750">Relación</th>
                         </tr>
                         <%
-                            vic = victi.findVdelitos("002/2018");
+                            vic = victi.findVprocesados(expediente + jConcatenado);
+                            int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
                                 out.println(ls[0] + "<input type='hidden' name='proRela' value='" + ls[0] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                lista = cat.findRelImputado();
+                                lista = cat.findRelImputado(); 
                                 for (String[] los : lista) {
                                     out.println("<div class='chkCat'>");
-                                    out.println("<input type='checkbox' name='chkRelaProce' id='chkRelaProce'>");
+                                    out.println("<input type='checkbox' name='chkRelaProce" + i + "' id='chkRelaProce' value=" + los[0] + ">");
                                     out.println("<label>" + los[1] + "</label>");
                                     out.println("</div>");
+
                                 }
                                 out.println("</td>");
                                 out.println("</tr>");
-
+                                i++;
                             }
                         %>
                     </table>
@@ -213,7 +230,7 @@
                                     </div>
                                     <div class="cols oculto" id="estaNaci">       
                                         <label for="Enacimiento">Entidad</label>
-                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia" onchange="llenaMun('#Enacimiento', '#Mnacimiento')">
+                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia dependiente" onchange="llenaMun('#Enacimiento', '#Mnacimiento')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -225,7 +242,7 @@
                                     </div>
                                     <div class="cols oculto" id="munNaci"> 
                                         <label for="Mnacimiento">Municipio</label>
-                                        <select name="Mnacimiento" id="Mnacimiento" name="Mnacimiento" class="txtMedia">
+                                        <select name="Mnacimiento" id="Mnacimiento" name="Mnacimiento" class="txtMedia dependiente">
                                             <option value="">--Seleccione--</option>      
                                         </select>
                                     </div>
@@ -262,7 +279,7 @@
                                     </div>
                                     <div class="cols oculto" id="estaResi">   
                                         <label for="Ereside">Entidad</label>
-                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia" onchange="llenaMun('#Ereside', '#Mreside')">
+                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia dependiente" onchange="llenaMun('#Ereside', '#Mreside')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -274,7 +291,7 @@
                                     </div>
                                     <div class="cols oculto" id="munResi"> 
                                         <label for="Mreside">Municipio</label>
-                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia">
+                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia dependiente">
                                             <option value="">--Seleccione--</option>      
                                         </select>
                                     </div>
@@ -423,8 +440,8 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>"); %>
-                        <input type="checkbox" name="aplicaMedida" id="aplicaMedida" />
+                                out.println("<td>");%>
+                        <input type="checkbox" name="aplicaMedida" id="aplicaMedida" value="<%=ls[0]%>"/>
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }
@@ -455,8 +472,8 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>"); %>
-                        <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj" />
+                                out.println("<td>");%>
+                        <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj" value="<%=ls[0]%>" />
                         <%      out.println("</td>");
                                 out.println("</tr>");
                             }
@@ -467,6 +484,7 @@
                     <h2>Comentarios</h2>
                     <textarea name="Comentavic" id="Comentavic"></textarea>
                 </div>
+                <br>
                 <input type="submit" name="guardarvic" id="guardarvic" value="Guardar Víctima">
             </form>
         </section>

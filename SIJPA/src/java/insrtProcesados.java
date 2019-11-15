@@ -42,7 +42,6 @@ public class insrtProcesados extends HttpServlet {
     ResultSet rs;
     boolean insertPDeli;
     
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         
@@ -115,7 +114,7 @@ public class insrtProcesados extends HttpServlet {
             PrintWriter out = response.getWriter();
             conn.Conectar();
             sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
-                    + expediente +jConcatenado + "','" + proceClave + jConcatenado+"',"
+                    + expediente + jConcatenado + "','" + proceClave + jConcatenado+"',"
                     + presentAdo + ","
                     + tipoDetencion + ","
                     + imputable + ","

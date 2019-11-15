@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -50,7 +52,8 @@ public class insrtDelitos extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession sesion= request.getSession();
-        
+        //posicion de la fila de la tabla.vista donde se inserta el dato
+        String posicion = request.getParameter("posicion");
         String entidad =(String) sesion.getAttribute("entidad");
         String municipio =(String) sesion.getAttribute("municipio");
         String distrito =(String) sesion.getAttribute("distrito");
@@ -81,7 +84,7 @@ public class insrtDelitos extends HttpServlet {
         String comentarios=request.getParameter("comentarios");
         
         try {
-            response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             
             //String delitoClave = generaDelitoClave(expediente,jConcatenado);
@@ -111,20 +114,44 @@ public class insrtDelitos extends HttpServlet {
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
             if (conn.escribir(sql)) {
-                
-                deliExp=cp.countTotalDelitos(expediente +jConcatenado);// delitos regstrados en expedientes
-                deliInsertados=sd.countDelitosInsertados(expediente +jConcatenado);// delitos insertados en la tabla de delitos
-                if(deliExp==deliInsertados){//si hay la misma cantidad regresa una variable para mostrar la pestaña de Procesados
-                    out.write("DelitosComplete");
-                }
+                showDelitos deli = new showDelitos();
+                ArrayList<String[]> lis = new ArrayList<String[]>();
+                lis = deli.findDeliTabla(delitoClave + jConcatenado);
+                JSONArray resp = new JSONArray();
+                resp.add(posicion);
+                resp.add(lis.get(0)[0]);
+                resp.add(lis.get(0)[1]);
+                resp.add(lis.get(0)[2]);
+                resp.add(lis.get(0)[3]);
+                resp.add(deli.countDelitosInsertados(expediente + jConcatenado));
+                out.write(resp.toJSONString());
                 conn.close();
             } else {
                 conn.close();
 //                response.sendRedirect("procesados.jsp?insertado=false");
             }
-        } catch (Exception ex) {
+        } catch (IOException ex) {
+            Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        response.setContentType("text/html;charset=UTF-8");
+//        PrintWriter out = response.getWriter();
+//        try {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet insrtDelitos</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet insrtDelitos at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        } finally {
+//            out.close();
+//        }
+        
 
         
 //        response.setContentType("text/html;charset=UTF-8");

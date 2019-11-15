@@ -24,10 +24,10 @@ public class showDelitos {
     ResultSet resul;
     int conteoDel;
     
-    public ArrayList findDelitos(){
+    public ArrayList findDelitos(String exp){
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT * FROM DATOS_DELITOS_ADOJC";
+        sql = "SELECT * FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){

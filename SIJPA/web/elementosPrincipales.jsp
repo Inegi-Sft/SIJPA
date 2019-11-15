@@ -49,7 +49,7 @@
                 <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Victimas</button>
                 <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5" disabled>Inicial</button>
                 <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6" disabled>Intermedia</button>
-                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" disabled>Conclusion y/o Terminacion</button>
+                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" >Conclusion y/o Terminacion</button>
                 <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8" disabled>Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
@@ -95,10 +95,10 @@
                     <thead> 
                         <tr>
                             <th>Adolescente clave</th>
+                            <th>Nombre</th>
                             <th>Tipo de Presentación</th>
                             <th>Sexo</th>
                             <th>Fecha nacimiento</th>
-                            <th>Grado de estudios</th>
                             <th>Editar</th>
                         </tr>
                     </thead> 
@@ -191,12 +191,20 @@
             </div>
             <div id="p7" class="pestanaContent">
                 <h2>Resoluciones dictadas</h2>
+                <table class="dContenido">
+                    <tr>
+                        <td>
+                            <span class="indicador" id="lblNumConclu"></span>
+                            <a href="conclusiones.jsp" class="agregar pop" id="addConclu"><img src="img/add.png"/> Agregar</a>
+                        </td>
+                    </tr>
+                </table>
                 <table class="tablasRegis" id="tablaConclu">
                     <thead>
                         <tr>
-                            <th>Conclusión clave</th>
-                            <th>Fecha conclusión</th>
                             <th>Adolescente clave</th>
+                            <th>Nombre</th>
+                            <th>Fecha conclusión</th>
                             <th>Tipo conclusión/terminación</th>
                             <th>Editar</th>
                         </tr>
@@ -218,6 +226,14 @@
             </div>
             <div id="p8" class="pestanaContent">
                 <h2>Pendientes de resolución</h2>
+                <table class="dContenido">
+                    <tr>
+                        <td>
+                            <span class="indicador" id="lblNumTram">dsfsda</span>
+                            <a href="tramite.jsp" class="agregar pop" id="addTram"><img src="img/add.png"/> Agregar</a>
+                        </td>
+                    </tr>
+                </table>
                 <table class="tablasRegis" id="tramiteRegis">
                     <thead>
                         <tr>

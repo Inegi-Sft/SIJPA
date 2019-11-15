@@ -41,7 +41,6 @@
             String numero =(String) sesion.getAttribute("numero");
             String jConcatenado =entidad+municipio+distrito+numero;
             String expediente =(String) sesion.getAttribute("expediente");
-            String procesadoClave =request.getParameter("proceClave");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
@@ -50,7 +49,6 @@
                 Es decir, si es el primer Adolescente Procesado del expediente 10/2016 su identificador será 10/2016-p1
             </span>
             <form action="" method="post" name="formProcesados" id="formProcesados">
-                <input type="hidden" name="procesadoClave" value="<%=procesadoClave %>"/>
                 <fieldset>
                     <legend>Situación jurídica del adolescente</legend>
                     <table class="tablaFormu">
@@ -195,17 +193,28 @@
                             <th>Conducta antisocial</th>
                             <th>No. Victimas</th>
                         </tr>
-                        <%
-                            int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
-                            lista = sd.findDelitosExp(expediente+jConcatenado);
-                            for (String[] ls : lista) {
-                                out.println("<tr>");
-                                out.println("<td>"+ ls[0].replace(jConcatenado, "")+"</td>");
-                                out.println("<td>"+ ls[1]+"</td>");
-                                out.println("<td></td>");
-                                out.println("</tr>");
-                            }
-                        %>
+                    <%
+                        int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
+                        lista = sd.findDelitosExp(expediente+jConcatenado);
+                        for (String[] ls : lista) {
+                    %>
+                            <tr>
+                                <td> <input type="hidden" name="arrayDelito" value="<%= ls[0] %>"/> <%= ls[0].replace(jConcatenado, "") %></td>
+                                <td> <%= ls[1] %> </td>
+                                <td>
+                                    <select class='txtSmall' name='arrayNumVic' required>
+                                        <option value=""> - - - </option>
+                    <%
+                                    for(int i=0; i <= totVic; i++){
+                                        out.println("<option value="+i+">"+i+"</option>");
+                                    }
+                    %>
+                                    </select>
+                                </td>
+                           </tr>
+                    <%
+                        }
+                    %>
                     </table>
                 </fieldset><br>
                 <fieldset>

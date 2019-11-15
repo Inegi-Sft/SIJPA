@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".load").fadeOut("slow");//proceso de carga para causas penales
     
     //despliega ventana modal
-    $('#tablaVictimas, #tablaDeli, #tablaProcesa').on('focusin',function(){
+    $('#tablaVictimas, #tablaDeli, #tablaProcesa, #tablaConclu, .agregar').on('focusin',function(){
         $('a.pop').fancybox({
             'type': 'iframe',
             'overlayShow': true,
@@ -179,7 +179,7 @@ $(document).ready(function () {
                 alert("Guardado con exito!!!");
                 $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
                 $("#guardarExp").prop("hidden",true);
-                if(response === '1'){
+                if(response === 1){
                     openPestana('btn2', 'p2');
                 }
             },
@@ -235,6 +235,41 @@ $(document).ready(function () {
                         parent.openPestana('btn4','p4');
                     }else{
                         alert('Falta por capturar ' + (numProce-response[5]) + ' procesados');
+                    }
+                }
+                parent.$.fancybox.close();
+            },
+            error : function(response) {
+                console.log("Respuesta del servidor",response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
+    });
+    
+    //Guarda Conclusiones
+    $('#formConclusiones').submit(function (e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtConclusiones',
+            data: $('#formConclusiones').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor: ",response);
+                alert("Guardado con exito!!!");
+                var numConclu = parseInt(parent.$('#Tconclusiones').val());
+                var numProce = parseInt(parent.$('#Tadolescentes').val());
+                if(response !== null && $.isArray(response)){
+                    parent.$('#tablaConclu tbody').append('<tr><td>'+response[0]+'</td><td>'+response[1]+'</td><td>'+response[2]+'</td><td>'+response[3]+'</td>\n\
+                                                        <td><a class="pop" href="conclusiones.jsp?proce='+response[0]+'"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                    console.log('Captu: ' + response[4] + ' Existen: ' + numConclu);
+                    parent.$('#lblNumConclu').text(response[4]+"/"+parent.$('#Tconclusiones').val()+ " Resoluciones");
+                    if(response[4] === numConclu && numConclu<numProce){
+                        parent.openPestana('btn8','p8');
+                        parent.$('#lblNumConclu').css('color','#00BD25');
+                        parent.$('#addConclu').hide();
+                    }else{
+                        alert('Falta por capturar ' + (numConclu-response[4]) + ' resoluciones');
                     }
                 }
                 parent.$.fancybox.close();
@@ -730,13 +765,21 @@ function Tconclu() {
     var procesados = $('#Tadolescentes').val();
     var tconclu = $('#Tconclusiones').val();
     var tot = procesados - tconclu;
-    for (var i = 1; i <= tconclu; i++) {
-        $('#tablaConclu tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
-    <td><a class="pop" href="conclusiones.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
-    }
-    for (var i = 1; i <= tot; i++) {
-        $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
-    <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+    if(tconclu>procesados){
+        alert("El total de conclusiones no puede ser mayor al total de adolescentes");
+        $('#Tconclusiones').val("");
+    }else{
+        $('#lblNumConclu').text($('#tablaConclu tbody tr').length+"/"+$('#Tconclusiones').val()+ " Resoluciones");
+        $('#lblNumTram').text($('#tramiteRegis tbody tr').length+"/"+tot+ " Tramites");
+        
+//        for (var i = 1; i <= tconclu; i++) {
+//            $('#tablaConclu tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+//        <td><a class="pop" href="conclusiones.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+//        }
+//        for (var i = 1; i <= tot; i++) {
+//            $('#tramiteRegis tbody').append('<tr><td></td><td></td><td></td><td></td>\n\
+//        <td><a class="pop" href="tramite.jsp"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+//        }
     }
 }; 
 

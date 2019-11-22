@@ -1,14 +1,14 @@
 $(document).ready(function () {
     $('select > option[value=-2]').hide();
     $(".load").fadeOut("slow");//proceso de carga para causas penales
-    
+
     //despliega ventana modal
-    $('#tablaVictimas, #tablaDeli, #tablaProcesa').on('focusin',function(){
+    $('#tablaVictimas, #tablaDeli, #tablaProcesa, #tablaInicial, #tablaIntermedia').on('focusin', function () {
         $('a.pop').fancybox({
             'type': 'iframe',
             'overlayShow': true,
             'toolbar': false,
-            'smallBtn' : true,
+            'smallBtn': true,
             'iframe': {
                 'css': {
                     'width': '1400px',
@@ -17,7 +17,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     //Auto acompletado
     $('#delitoCP').selectize({
         render: {
@@ -70,7 +70,7 @@ $(document).ready(function () {
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
 
     /*---------------------------- VICTIMAS ----------------------------*/
-   $('#tipo_victima').change(function () {
+    $('#tipo_victima').change(function () {
         switch ($(this).val()) {
             case '1':
                 $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
@@ -95,7 +95,7 @@ $(document).ready(function () {
                 $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
         }
-    }); 
+    });
 
     $('#Pnacimiento').change(function () {
         if ($(this).val() === '1') {
@@ -143,7 +143,7 @@ $(document).ready(function () {
             alert('Selecciona al menos una opcion de Delitos cometidos a la Victima');
             $('#deliCometido').focus();
         }
-        
+
         if ($('#chkRelaProce:checked').length === 0) {
             e.preventDefault();
             alert('Selecciona al menos una opcion de Relacion de la Victima con el Procesado');
@@ -167,15 +167,15 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN VICTIMAS ----------------------------*/
-    
+
     /*----------------------- FUNCIONES PARA INSERTS AJAX --------------------------*/
-    
+
     //Guarda Expedientes
-    $('#formExpedientes').submit(function (e){
+    $('#formExpedientes').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if($('#compe').val()==='1'){
-            if($('#aplAudi:checked').length===0){
+        if ($('#compe').val() === '1') {
+            if ($('#aplAudi:checked').length === 0) {
                 alert("Selecciona por lo menos una Audiencia");
                 return false;
             }
@@ -185,23 +185,23 @@ $(document).ready(function () {
             url: 'insrtExpediente',
             data: $('#formExpedientes').serialize(),
             success: function (response) {
-                console.log("Respuesta del servidor",response);
+                console.log("Respuesta del servidor", response);
                 alert("Guardado con exito!!!");
-                $('#formExpedientes').find('input, textarea, button, select').attr('disabled',true);
-                $("#guardarExp").prop("hidden",true);
-                if(response === 1){
+                $('#formExpedientes').find('input, textarea, button, select').attr('disabled', true);
+                $("#guardarExp").prop("hidden", true);
+                if (response === 1) {
                     parent.openPestana('btn2', 'p2');
                 }
             },
-            error : function(response) {
-                console.log("Respuesta del servidor",response);
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
                 alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
     });
-    
+
     //Guarda Delitos
-    $('#formDelitos').submit(function (e){
+    $('#formDelitos').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         $.ajax({
@@ -209,32 +209,32 @@ $(document).ready(function () {
             url: 'insrtDelitos',
             data: $('#formDelitos').serialize(),
             success: function (response) {
-                console.log("Respuesta del servidor",response);
+                console.log("Respuesta del servidor", response);
                 alert("Guardado con exito!!!");
                 var numDeli = parseInt(parent.$('#Tdelitos').val());
-                if(response !== null && $.isArray(response)){
-                    for(var i = 1; i < 5; i++){
+                if (response !== null && $.isArray(response)) {
+                    for (var i = 1; i < 5; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaDeli tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     console.log('Captu: ' + response[5] + ' Existen: ' + numDeli);
-                    if(response[5] === numDeli){
-                        parent.openPestana('btn3','p3');
-                    }else{
-                        alert('Falta por capturar ' + (numDeli-response[5]) + ' delitos');
+                    if (response[5] === numDeli) {
+                        parent.openPestana('btn3', 'p3');
+                    } else {
+                        alert('Falta por capturar ' + (numDeli - response[5]) + ' delitos');
                     }
                 }
                 parent.$.fancybox.close();
             },
-            error : function(response) {
-                console.log("Respuesta del servidor",response);
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
                 alert('Error al guardar, cunsulte al administrador!');
             }
         });
     });
-    
+
     //Guarda Procesados
-    $('#formProcesados').submit(function (e){
+    $('#formProcesados').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         $.ajax({
@@ -242,32 +242,32 @@ $(document).ready(function () {
             url: 'insrtProcesados',
             data: $('#formProcesados').serialize(),
             success: function (response) {
-                console.log("Respuesta del servidor: ",response);
+                console.log("Respuesta del servidor: ", response);
                 alert("Guardado con exito!!!");
                 var numProce = parseInt(parent.$('#Tadolescentes').val());
-                if(response !== null && $.isArray(response)){
-                    for(var i = 1; i < 5; i++){
+                if (response !== null && $.isArray(response)) {
+                    for (var i = 1; i < 5; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaProcesa tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
-                    if(response[5] === numProce){
-                        parent.openPestana('btn4','p4');
-                    }else{
-                        alert('Falta por capturar ' + (numProce-response[5]) + ' procesados');
+                    if (response[5] === numProce) {
+                        parent.openPestana('btn4', 'p4');
+                    } else {
+                        alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
                     }
                 }
                 parent.$.fancybox.close();
             },
-            error : function(response) {
-                console.log("Respuesta del servidor",response);
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
                 alert('Error al guardar, cunsulte al administrador!');
             }
         });
     });
-    
+
     //Guarda Victimas
-    $('#formVictimas').submit(function (e){
+    $('#formVictimas').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         $.ajax({
@@ -275,31 +275,97 @@ $(document).ready(function () {
             url: 'insrtVictimas',
             data: $('#formVictimas').serialize(),
             success: function (response) {
-                console.log("Respuesta del servidor: ",response);
+                console.log("Respuesta del servidor: ", response);
                 alert("Guardado con exito!!!");
                 var numProce = parseInt(parent.$('#Tvictimas').val());
-                if(response !== null && $.isArray(response)){
-                    for(var i = 1; i < 5; i++){
+                if (response !== null && $.isArray(response)) {
+                    for (var i = 1; i < 5; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaVictimas tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
-                    if(response[5] === numProce){
-                        parent.openPestana('btn7','p7');
-                    }else{
-                        alert('Falta por capturar ' + (numProce-response[5]) + ' victimas');
+                    if (response[5] === numProce) {
+                        parent.openPestana('btn5', 'p5');
+                    } else {
+                        alert('Falta por capturar ' + (numProce - response[5]) + ' victimas');
                     }
                 }
                 parent.$.fancybox.close();
             },
-            error : function(response) {
-                console.log("Respuesta del servidor",response);
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
                 alert('Error al guardar, cunsulte al administrador!');
             }
         });
     });
-  
-  //Guarda Tramite
+
+    //Guarda Inicial
+    $('#fromInicial').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtInicial',
+            data: $('#fromInicial').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor: ", response);
+                alert("Guardado con exito!!!");
+                var numProce = parseInt(parent.$('#Tadolescentes').val());
+                if (response !== null && $.isArray(response)) {
+                    for (var i = 1; i < 5; i++) {
+                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
+                        parent.$('#tablaInicial tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+                    }
+                    console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
+                    if (response[5] === numProce) {
+                        parent.openPestana('btn6', 'p6');
+                    } else {
+                        alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
+                    }
+                }
+                parent.$.fancybox.close();
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
+    });
+
+    //Guarda Intermedia
+    $('#formuMedia').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'insrtIntermedia',
+            data: $('#formuMedia').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor: ", response);
+                alert("Guardado con exito!!!");
+                var numProce = parseInt(parent.$('#Tadolescentes').val());
+                if (response !== null && $.isArray(response)) {
+                    for (var i = 1; i < 5; i++) {
+                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
+                        parent.$('#tablaIntermedia tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+                    }
+                    console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
+                    if (response[5] === numProce) {
+                        parent.openPestana('btn7', 'p7');
+                    } else {
+                        alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
+                    }
+                }
+                parent.$.fancybox.close();
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
+    });
+
+    //Guarda Tramite
     $('#guardarTram').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -312,23 +378,34 @@ $(document).ready(function () {
                 parent.$('#tramiteTabla tbody').append(response);
                 parent.$.fancybox.close();
             },
-            error : function(response) {
-                console.log("Respuesta del servidor",response);
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
                 alert('Error al guardar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
     });
     /*----------------------- FIN FUNCIONES PARA INSERTS AJAX --------------------------*/
-    
+
     /*----------------------- FUNCIONES PARA EXPEDIENTES --------------------------*/
-    $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').focus(function(e){
-        if($('#expClave').val() === ""){
+    $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').focus(function (e) {
+        if ($('#expClave').val() === "") {
             e.stopImmediatePropagation();
             alert('Favor de capturar el expediente clave para poder agregar los datos siguientes');
             $('#expClave').focus();
         }
     });
     /*----------------------- FIN FUNCIONES PARA EXPEDIENTES --------------------------*/
+    /*-----------------------FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/
+    $('#apliMedidaCau13').change(function () {
+        if ($('#apliMedidaCau13').is(":checked")) {
+            $('#especifiqueMC').fadeIn('slow');
+            $('#MCespecificar').val('').prop('required', true);
+        } else {
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
+        }
+    });
+    /*----------------------FIN DE FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/
 });
 
 /********************splash del inicio del sistema***********************/
@@ -349,15 +426,15 @@ function competencia() {
         case '1':
             $('#tipoIncopetencia').fadeOut("slow");
             $('#Tincompe').val('-2').prop('required', false);
-            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeIn("slow");
+            $('#totalElementos, #totalAudiencias').fadeIn("slow");
             $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('').prop("required", true);
-            $('#ExpAcomu, #Pparticular, #Tprocedi').val('').prop("required", true);
+//            $('#ExpAcomu, #Pparticular').val('').prop("required", true);
             break;
         case '2':
             $('#tipoIncopetencia').fadeIn("slow");
             $('#Tincompe').val('').prop("required", true);
-            $('#expAcomulado, #idparticular, #divProcedimiento, #totalElementos, #totalAudiencias').fadeOut("slow");
-            $('#ExpAcomu, #Pparticular, #Tprocedi, #Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('-2').prop("required", false);
+            $('#totalElementos, #totalAudiencias').fadeOut("slow");
+            $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tconclusiones').val('-2').prop("required", false);
             break;
     }
 }
@@ -531,6 +608,10 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
         $(idChkNi).prop("disabled", false);
     }
 }
+;
+
+
+
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 
@@ -686,10 +767,11 @@ function lugarResidencia(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
 function ocupacionAdo(idSelect, idDiv, idSelOculta) {
     if ($(idSelect).val() === '10') {
         $(idDiv).fadeIn("slow");
-        $(idSelOculta).val("");
+        $(idSelOculta).val("").prop("required", true);
     } else {
         $(idDiv).fadeOut("slow");
-        $(idSelOculta).val("-2");
+        $(idSelOculta).val("-2").prop("required", false);
+        ;
     }
 }
 /*---------------------------- FIN FUNCIONES PROCESADOS --------------------------*/
@@ -752,7 +834,7 @@ function numeroDelitos() {
     for (var i = 1; i <= delitos; i++) {
         var delitoClave = expediente + '-D' + i;
         $('#tablaDeli tbody').append('<tr><td>' + delitoClave + '</td><td></td><td></td><td></td>\n\
-        <td></td><td><a class="pop" href="delitos.jsp?delitoClave=' + delitoClave + '&posicion=' + (i-1) + '"><img src="img/editar.png" title="Modificar"/>\n\
+        <td></td><td><a class="pop" href="delitos.jsp?delitoClave=' + delitoClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
         </a></td></tr>');
     }
 }
@@ -764,7 +846,21 @@ function numeroProcesados() {
     for (var i = 1; i <= procesados; i++) {
         var proceClave = expediente + '-P' + i;
         $('#tablaProcesa tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td>\n\
-        <td></td><td><a class="pop" href="procesados.jsp?proceClave=' + proceClave + '&posicion=' + (i-1) + '"><img src="img/editar.png" title="Modificar"/>\n\
+        <td></td><td><a class="pop" href="procesados.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
+        </a></td></tr>');
+    }
+    $('#tablaInicial tbody').empty();
+    for (var i = 1; i <= procesados; i++) {
+        var proceClave = expediente + '-P' + i;
+        $('#tablaInicial tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td>\n\
+        <td></td><td><a class="pop" href="etapaInicial.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
+        </a></td></tr>');
+    }
+    $('#tablaIntermedia tbody').empty();
+    for (var i = 1; i <= procesados; i++) {
+        var proceClave = expediente + '-P' + i;
+        $('#tablaIntermedia tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td>\n\
+        <td></td><td><a class="pop" href="etapaIntermedia.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
         </a></td></tr>');
     }
 }
@@ -776,7 +872,7 @@ function numeroVictimas() {
     for (var i = 1; i <= victimas; i++) {
         var victiClave = expediente + '-V' + i;
         $('#tablaVictimas').append('<tr><td>' + victiClave + '</td><td></td><td></td><td></td>\n\
-        <td></td><td><a class="pop" href="victimas.jsp?victiClave=' + victiClave + '&posicion=' + (i-1) + '"><img src="img/editar.png" title="Modificar"/>\n\
+        <td></td><td><a class="pop" href="victimas.jsp?victiClave=' + victiClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
         </a></td></tr>');
     }
 }

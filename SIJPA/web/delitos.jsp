@@ -17,22 +17,22 @@
         <%@include file="librerias.jsp" %>
     </head>
     <body style="zoom: .9;">
-        <%  
+        <%
             String delitoClave = "", posicion = "";
-            if(request.getParameter("delitoClave") != null || request.getParameter("posicion") != null){
+            if (request.getParameter("delitoClave") != null || request.getParameter("posicion") != null) {
                 delitoClave = request.getParameter("delitoClave");
                 posicion = request.getParameter("posicion");
             }
-            
+
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
             showCausasPenales objExp = new showCausasPenales();
-            String entidad =(String) session.getAttribute("entidad");
-            String municipio =(String) session.getAttribute("municipio");
-            String distrito =(String) session.getAttribute("distrito");
-            String numero =(String) session.getAttribute("numero");
-            String jConcatenado =entidad+municipio+distrito+numero;
-            String expediente =(String) session.getAttribute("expediente");
+            String entidad = (String) session.getAttribute("entidad");
+            String municipio = (String) session.getAttribute("municipio");
+            String distrito = (String) session.getAttribute("distrito");
+            String numero = (String) session.getAttribute("numero");
+            String jConcatenado = entidad + municipio + distrito + numero;
+            String expediente = (String) session.getAttribute("expediente");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
@@ -56,7 +56,7 @@
                                     <%
                                         lista = cat.findCodNorma();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "' data-data='{\"norma\":\"" + ls[2] +"\"}'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "' data-data='{\"norma\":\"" + ls[2] + "\"}'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
@@ -82,7 +82,7 @@
                             <td rowspan="2">
                                 <fieldset>
                                     <label for="reclasificaDel">¿Hubo reclasificación del delito?</label>
-                                    <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel','#chkFechaReclaDel');" required>
+                                    <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel', '#chkFechaReclaDel');" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -222,12 +222,24 @@
                                     <input type="checkbox" id="chkOcurrencia" onclick="fechaNoIdent('#chkOcurrencia', '#ocurrencia');"><label>No identificada</label>
                                 </div>
                             </td>
+                            <td>
+                                <label for="ocurrencia">Sitio de ocurrencia</label>
+                                <select class="txtMedia"  name="sitioOcurrio" id="sitioOcurrio" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findsitioOcurrencia();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %>
+                                </select>
+                            </td>
                             <td colspan="2">
                                 <fieldset>
                                     <legend>Lugar de ocurrencia</legend>
                                     <div class="cols lblExBig">
                                         <label>Entidad Federativa</label>
-                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD','#municipioD')" required>
+                                        <select class="txtMedia" name="entidadD" id="entidadD" onchange="llenaMun('#entidadD', '#municipioD')" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -245,37 +257,13 @@
                                     </div>
                                 </fieldset>
                             </td>
-                            <td></td>
+
                         </tr>
-                        <tr>
-                            <td>
-                                <label for="numAdo">Número de adolescentes por este delito </label>
-                                <select class="txtMedia" name="numAdo" id="numAdo" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%    
-                                        int totProc=objExp.countTotalProcesados(expediente+jConcatenado);
-                                        for(int i=1; i <= totProc; i++){
-                                            out.println("<option value="+i+">"+i+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="numVic">Número de víctimas por este delito </label>
-                                <select class="txtMedia" name="numVic" id="numVic">
-                                    <option value="">--Seleccione--</option>
-                                    <%   
-                                        int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
-                                        for(int i=1; i <= totVic; i++){
-                                            out.println("<option value="+i+">"+i+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+
                     </table>
+                </fieldset>
+                <fieldset>
+
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>

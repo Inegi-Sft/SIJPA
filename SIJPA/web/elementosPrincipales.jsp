@@ -149,28 +149,26 @@
             </div>
             <div id="p5" class="pestanaContent">
                 <h2>Etapa Inicial</h2>
-                <table class="tablasRegis">
-                    <tr>
-                        <th>Adolescente clave</th>
-                        <th>Control detencion</th>
-                        <th>Audiencia inicial</th>
-                        <th>Auto vinculacion</th>
-                        <th>Medida cautelar</th>
-                        <th>Editar</th>
-                    </tr>
-                    <tr>
-                        <td>0002/2019-p1</td>
-                        <td>Si</td>
-                        <td>Si</td>
-                        <td>Vinculación a proceso</td>
-                        <td>No</td>
-                        <td><a class="pop" href="etapaInicial.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                    </tr>
+                <table class="tablasRegis" id="tablaInicial">
+                    <thead>
+                        <tr>
+                            <th>Adolescente clave</th>
+                            <th>Control detencion</th>
+                            <th>¿Se calificó como legal la detención?</th>
+                            <th>¿El adolescente declaró?</th>
+                            <th>Fecha del Cierre de Investigación </th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </div>
             <div id="p6" class="pestanaContent">
                 <h2>Etapa Intermedia</h2>
-                <table class="tablasRegis">
+                <table class="tablasRegis" id="tablaIntermedia">
+                    <thead>
                     <tr>
                         <th>Adolescente clave</th>
                         <th>Audiencia intermedia</th>
@@ -179,14 +177,10 @@
                         <th>Acuerdos probatorios</th>
                         <th>Editar</th>
                     </tr>
-                    <tr>
-                        <td>0002/2019-c2</td>
-                        <td>Si</td>
-                        <td>No</td>
-                        <td>Si</td>
-                        <td>No</td>
-                        <td><a class="pop" href="etapaIntermedia.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </div>
             <div id="p7" class="pestanaContent">

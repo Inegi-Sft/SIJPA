@@ -107,10 +107,9 @@ public class insrtDelitos extends HttpServlet {
                     + instrumentos + ","
                     + "'" + ocurrencia + "',"
                     + entidadD + ","
-                    + municipioD + ","
-                    + numAdo + ","
-                    + numVic + ","
-                    + "'" + comentarios + "',"
+                    + municipioD 
+                    + ",0,0,'"
+                    + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
             if (conn.escribir(sql)) {

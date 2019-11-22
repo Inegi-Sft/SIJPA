@@ -85,7 +85,7 @@ public class insrtExpediente extends HttpServlet {
             sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
                     +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
                     + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
-                    + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ","+ totalConclu +",'" + comentario + "', (select YEAR(NOW())))";
+                    + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 if(competencia == 1 ){

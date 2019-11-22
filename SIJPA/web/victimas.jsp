@@ -86,6 +86,7 @@
                     <table class="tablasRegis">
                         <tr>
                             <th>Procesado Clave</th>
+                            <th>Nombre</th>
                             <th>Delito Clave</th>
                             <th>Delito</th>
                             <th>Delito cometido</th>
@@ -98,10 +99,13 @@
                                 out.println(ls[0] + "<input type='hidden' name='inpPro' value='" + ls[0] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                out.println(ls[1] + "<input type='hidden' name='inpDeli' value='" + ls[1] + "'/>");
+                                out.println(ls[1] + "<input type='hidden' name='inpNom' value='" + ls[1] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                out.println(ls[2] + "<input type='hidden' name='' value='" + ls[2] + "'/>");
+                                out.println(ls[2] + "<input type='hidden' name='inpDeli' value='" + ls[2] + "'/>");
+                                out.println("</td>");
+                                out.println("<td>");
+                                out.println(ls[3] + "<input type='hidden' value='" + ls[3] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
                         %>

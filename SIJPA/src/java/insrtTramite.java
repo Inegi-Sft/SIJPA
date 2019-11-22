@@ -5,9 +5,11 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showTramite;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -15,6 +17,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 /**
  *
  * @author CESAR.OSORIO
@@ -35,29 +39,53 @@ public class insrtTramite extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-        String procesado_clave = request.getParameter("pClave");
+        
+        HttpSession sesion= request.getSession();
+        
+        String entidad =(String) sesion.getAttribute("entidad");
+        String municipio =(String) sesion.getAttribute("municipio");
+        String distrito =(String) sesion.getAttribute("distrito");
+        String numero =(String) sesion.getAttribute("numero");
+        String jConcatenado =entidad+municipio+distrito+numero;
+        String expediente =(String) sesion.getAttribute("expediente");
+        
+        String idProcesado = request.getParameter("idProcesado");
         String etapaProcesal = request.getParameter("eProcesal");
         String motivo = request.getParameter("eMotivo");
-        String fechaActua;
+        String fechaActua=request.getParameter("uActua");
 
-        if (request.getParameter("uActua") != null) {
-            fechaActua = request.getParameter("uActua");
-        } else {
+        if (fechaActua == null) {
             fechaActua = "1899-09-09";
         }
 
         try {
+            response.setContentType("text/json;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
             conn.Conectar();
-            sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES( 12,12001,1,1,'002/2018-P14'," + etapaProcesal + ",'" + motivo + "','" + fechaActua + "',5)";
+            sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES("+entidad+","+municipio+","+distrito+","+numero+","
+                    + "'"+expediente+jConcatenado+"','"+idProcesado+"'," + etapaProcesal + ",'" + motivo + "','" + fechaActua + "', (select YEAR(NOW())) )";
+            System.out.println(sql);
             if (conn.escribir(sql)) {
-                String [] lista = null;
-                System.out.println(sql);
-                conn.close();
+                showTramite pro = new showTramite();
+                ArrayList<String[]> lis = new ArrayList<String[]>();
+                lis = pro.findTramiteProce(idProcesado);
+                JSONArray resp = new JSONArray();
                 
-                lista[0] = etapaProcesal;
-                lista[1] = motivo;
-                lista[2] = fechaActua;
+                resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                resp.add(lis.get(0)[1]);
+                resp.add(lis.get(0)[2]);
+                resp.add(lis.get(0)[3]);
+                resp.add(lis.get(0)[4]);
+                resp.add(pro.countTramiteExp(expediente + jConcatenado));
+                out.write(resp.toJSONString());
+                conn.close();
+            } else {
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(insrtTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //                response.setContentType("text/html;charset=UTF-8");
 //                PrintWriter out = response.getWriter();
 //                try {
@@ -73,14 +101,7 @@ public class insrtTramite extends HttpServlet {
 //                } finally {
 //                    out.close();
 //                }
-            } else {
-                //regresa a insrtTramite y maca error
-                conn.close();
-                //response.sendRedirect("tramite.jsp?error=si");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(insrtTramite.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -364,11 +364,21 @@ fieldset legend{
 }*/
 .indicador{
     text-shadow: grey 3px 3px 5px;
-    color: #D60320 ;
     float: left;
+    display: inline-block;
+}
+.indicador2{
+    text-shadow: grey 3px 3px 5px;
+    color: #D60320 ;
+    display: inline-block;
 }
 .agregar{
     float: right;
+    text-decoration: none;
+    vertical-align: middle;
+}
+.agregar img{
+    vertical-align: text-bottom;
 }
 .dContenido{
     width: 85%;

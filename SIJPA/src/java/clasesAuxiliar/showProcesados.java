@@ -94,8 +94,9 @@ public class showProcesados {
         conn.Conectar();
         proce = new ArrayList();
         sql = "SELECT * FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"' "
-                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"')";
-        System.out.println(sql);
+                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"')"
+                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_TRAMITES_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"')";
+        
         resul = conn.consultar(sql);
         try {
             while(resul.next()){

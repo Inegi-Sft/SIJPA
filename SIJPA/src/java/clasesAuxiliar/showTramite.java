@@ -22,6 +22,7 @@ public class showTramite {
     ArrayList<String[]> trami;
     String sql;
     ResultSet resul;
+    int conteo;
     
     public ArrayList findTramite(){
         conn.Conectar();
@@ -41,4 +42,44 @@ public class showTramite {
         return trami;
     } 
     
+    public ArrayList findTramiteProce(String pro) {
+        conn.Conectar();
+        trami = new ArrayList();
+        sql = "SELECT T.*, P.NOMBRE, P.A_PATERNO, P.A_MATERNO, EP.DESCRIPCION "
+                + " FROM DATOS_TRAMITES_ADOJC T, DATOS_PROCESADOS_ADOJC P, CATALOGOS_ETAPA_PROCESAL EP"
+                + " WHERE T.PROCESADO_CLAVE=P.PROCESADO_CLAVE"
+                + " AND T.ETAPA_PROCESAL=EP.PROCESAL_ID"
+                + " AND T.PROCESADO_CLAVE='"+pro+"'";
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                trami.add(new String[]{
+                    resul.getString("T.PROCESADO_CLAVE"), resul.getString("P.NOMBRE")+" "+resul.getString("P.A_PATERNO")+" "+resul.getString("P.A_MATERNO"),
+                    resul.getString("EP.DESCRIPCION"),resul.getString("T.MOTIVO_TRAMITE"),resul.getString("T.FECHA_ULTIMA_ACTUALIZACION")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showConclusiones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return trami;
+
+    }
+    public int countTramiteExp(String exp) {
+        try{
+            conn.Conectar();
+            conteo = 0;
+            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteo= resul.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteo;
+
+    }
 }

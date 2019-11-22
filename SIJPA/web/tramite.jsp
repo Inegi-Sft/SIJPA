@@ -3,6 +3,7 @@
     Created on : 3/10/2019, 09:32:06 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,13 +16,23 @@
     </head>
     <body style="zoom: .9;">
         <%
+            HttpSession sesion= request.getSession();
+            
             catalogos cat = new catalogos();
+            showProcesados proce=new showProcesados();
             ArrayList<String[]> lista = new ArrayList();
+            
+            String entidad =(String) sesion.getAttribute("entidad");
+            String municipio =(String) sesion.getAttribute("municipio");
+            String distrito =(String) sesion.getAttribute("distrito");
+            String numero =(String) sesion.getAttribute("numero");
+            String jConcatenado =entidad+municipio+distrito+numero;
+            String expediente =(String) sesion.getAttribute("expediente");
         %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Pendientes de resolución </h1>
-            <form action="insrtTramite" method="post" id="formtramite">
+            <form action="" method="post" id="formTramite" name="formTramite">
                 <!--<center>-->
                 <fieldset >
                     <legend style="text-align: left;">Estatus</legend>
@@ -29,19 +40,20 @@
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="pClave">Procesado Clave</label>
-                                <select name="pClave" id="pClave" class="txtMedia selPro">
-                                    <option value="0">Seleccione</option>
-                                    <%
-                                        //conección a base
-                                    %>    
-                                </select><br/>
-                                <input type="text" name="nomProc"  id="nomProc" disabled />
+                                <label for="idProcesado">Id Adolescente</label>
+                                <select name="idProcesado" id="idProcesado" class="lblExBig" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%  lista = proce.findProcesadoExp(expediente+jConcatenado);
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0].replace(jConcatenado, "") + ".- " + ls[1] + "</option>");
+                                        }
+                                    %>     
+                                </select>
                             </td>
 
                             <td>
                                 <label for="eProcesal">Etapa procesal</label>
-                                <select name="eProcesal" id="eProcesal" class="txtMedia">
+                                <select name="eProcesal" id="eProcesal" class="txtMedia" required>
                                     <option value="">--Seleccione--</option>
                                      <%
                                         lista = cat.findEtapaProcesal();

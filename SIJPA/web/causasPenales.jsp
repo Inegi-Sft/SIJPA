@@ -30,7 +30,6 @@
             ArrayList<String[]> lsCausas;
             ArrayList<String> lista;
             
-            int totCausas=cp.countTotalCausas();
             int tCausasJuz=cp.countTotalCausasPorJuzgado(juzgado);
         %>
     </head>

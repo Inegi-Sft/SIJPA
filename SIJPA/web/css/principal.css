@@ -385,3 +385,22 @@ fieldset legend{
     margin: auto;
     margin-bottom: -15px;
 }
+
+a.addJuz{
+    position: relative;
+    left: 35%;
+    text-decoration: none;
+    color: #706F6F;
+    font-weight: bold;
+    text-shadow: grey 5px 5px 5px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+a.addJuz:hover{
+    color: #007dc1;
+    font-size: 20px;
+}

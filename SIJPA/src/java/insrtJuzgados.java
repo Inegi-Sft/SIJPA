@@ -108,7 +108,7 @@ public class insrtJuzgados extends HttpServlet {
                         conn.close();
                         HttpSession sesion = request.getSession();
                         sesion.setAttribute("juzgadoClave", juzgadoClave);
-                        response.sendRedirect("causasPenales.jsp");
+                        response.sendRedirect("juzgados.jsp");
                 }else{
                     conn.close();
                     response.sendRedirect("juzgados.jsp?errorInforme=si");
@@ -120,23 +120,8 @@ public class insrtJuzgados extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet insrtJuzgados</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>" + sql + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
     }
     
     public String verificaVariable(String variable){

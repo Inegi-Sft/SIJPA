@@ -74,7 +74,6 @@ public class insrtExpediente extends HttpServlet {
         String totalDeli = request.getParameter("Tdelitos");
         String totalAdo = request.getParameter("Tadolescentes");
         String totalVic = request.getParameter("Tvictimas");
-        String totalConclu = request.getParameter("Tconclusiones");
         String comentario = request.getParameter("ComentaExpe");
         String[] chk = request.getParameterValues("aplAudi");
       

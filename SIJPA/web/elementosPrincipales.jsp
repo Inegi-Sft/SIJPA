@@ -95,10 +95,10 @@
                     <thead> 
                         <tr>
                             <th>Adolescente clave</th>
+                            <th>Nombre</th>
                             <th>Tipo de Presentación</th>
                             <th>Sexo</th>
                             <th>Fecha nacimiento</th>
-                            <th>Grado de estudios</th>
                             <th>Editar</th>
                         </tr>
                     </thead> 
@@ -185,14 +185,24 @@
             </div>
             <div id="p7" class="pestanaContent">
                 <h2>Resoluciones dictadas</h2>
+                <table class="dContenido">
+                    <tr>
+                        <td>
+                            <span class="indicador" id="lblNumConclu"></span>
+                            <span class="indicador2 proPendientes"></span>
+                            <a href="conclusiones.jsp" class="agregar pop" id="addConclu"><img src="img/add.png"/> Agregar</a>
+                        </td>
+                    </tr>
+                </table>
                 <table class="tablasRegis" id="tablaConclu">
                     <thead>
                         <tr>
-                            <th>Conclusión clave</th>
-                            <th>Fecha conclusión</th>
                             <th>Adolescente clave</th>
+                            <th>Nombre</th>
+                            <th>Fecha conclusión</th>
                             <th>Tipo conclusión/terminación</th>
                             <th>Editar</th>
+                            <th>Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -212,14 +222,25 @@
             </div>
             <div id="p8" class="pestanaContent">
                 <h2>Pendientes de resolución</h2>
-                <table class="tablasRegis" id="tramiteRegis">
+                <table class="dContenido">
+                    <tr>
+                        <td>
+                            <span class="indicador" id="lblNumTram"></span>
+                            <span class="indicador2 proPendientes"></span>
+                            <a href="tramite.jsp" class="agregar pop" id="addTram"><img src="img/add.png"/> Agregar</a>
+                        </td>
+                    </tr>
+                </table>
+                <table class="tablasRegis" id="tablaTramite">
                     <thead>
                         <tr>
                             <th>Procesado clave</th>
+                            <th>Nombre</th>
                             <th>Etapa procesal</th>
                             <th>Motivo</th>
                             <th>Fecha última actuación</th>
                             <th>Editar</th>
+                            <th>Borrar</th>
                         </tr>
                     </thead>
                     <tbody>

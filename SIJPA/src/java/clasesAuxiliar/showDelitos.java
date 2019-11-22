@@ -89,5 +89,26 @@ public class showDelitos {
         return conteoDel;
     } 
     
-    
+    public ArrayList findDelitosExp(String exp){
+        try {
+            conn.Conectar();
+            deli = new ArrayList();
+            
+            sql = "SELECT D.DELITO_CLAVE, CN.CODIGO"
+                + " FROM DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
+                + " WHERE D.DELITO_CODIGO_PENAL=CN.ID"
+                + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
+            
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString("DELITO_CLAVE"), resul.getString("CODIGO"), 
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    } 
 }

@@ -3,6 +3,7 @@
     Created on : 3/10/2019, 02:16:37 PM
     Author     : FERMIN.GOMEZ
 --%>
+<%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,31 +13,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Resoluciones</title>
         <%@include file="librerias.jsp" %>
-        <% 
-            if(request.getParameter("error") != null){
-                out.println("<script>alert('error en el proceso de guardado')</script>");
-            }else if(request.getParameter("seinserto") != null){
-                out.println("<script>parent.$.fancybox.close()</script>");
-            }
-        %>
     </head>
     <body style="zoom: .9;">
         <%
+            HttpSession sesion= request.getSession();
+            
             catalogos cat = new catalogos();
+            showProcesados proce=new showProcesados();
             ArrayList<String[]> lista = new ArrayList();
+            
+            String entidad =(String) sesion.getAttribute("entidad");
+            String municipio =(String) sesion.getAttribute("municipio");
+            String distrito =(String) sesion.getAttribute("distrito");
+            String numero =(String) sesion.getAttribute("numero");
+            String jConcatenado =entidad+municipio+distrito+numero;
+            String expediente =(String) sesion.getAttribute("expediente");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el juez de control</h1>
-            <form action="insrtConclusiones" method="post">
+            <form action="" method="post" name="formConclusiones" id="formConclusiones">
                 <fieldset>
                     <legend>Resolución</legend>
                     <label for="idProcesado">Id Adolescente</label>
-                    <select class="txtMedia" name="idProcesado" id="idProcesado">
+                    <select class="lblExBig" name="idProcesado" id="idProcesado">
                         <option value="">--Seleccione--</option>
-                        <%
-                            //conexion a base
-                        %>
+                        <%  lista = proce.findProcesadoExp(expediente+jConcatenado);
+                            for (String[] ls : lista) {
+                                out.println("<option value='" + ls[0] + "'>" + ls[0].replace(jConcatenado, "") + ".- " + ls[1] + "</option>");
+                            }
+                        %> 
                     </select>
                     <table class="tablaFormu" >
                         <tr>

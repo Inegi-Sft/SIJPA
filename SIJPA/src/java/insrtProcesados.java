@@ -38,8 +38,9 @@ public class insrtProcesados extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
+    String sql,sqlPDelitos;
     ResultSet rs;
+    boolean insertPDeli;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -54,6 +55,7 @@ public class insrtProcesados extends HttpServlet {
         String jConcatenado =entidad+municipio+distrito+numero;
         String expediente =(String) sesion.getAttribute("expediente");
         
+        // VARIABLES PROCESADOS
         String proceClave = request.getParameter("proceClave");
         String presentAdo = request.getParameter("presentAdo");
         String tipoDetencion = request.getParameter("tipoDetencion");
@@ -100,6 +102,12 @@ public class insrtProcesados extends HttpServlet {
         String dia = arrayFecha[2];
         String mes = arrayFecha[1];
         String anio = arrayFecha[0];
+        
+        //VARIABLES PDELITOS
+        String[] arrayDelito = request.getParameterValues("arrayDelito");
+        String[] arrayNumVic = request.getParameterValues("arrayNumVic");
+        
+        
         //***********************************INSERT*************************************************
         try {
             response.setContentType("text/json;charset=UTF-8");
@@ -150,24 +158,35 @@ public class insrtProcesados extends HttpServlet {
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
             if (conn.escribir(sql)) {
-                conn.close();
-                showProcesados pro = new showProcesados();
-                ArrayList<String[]> lis = new ArrayList<String[]>();
-                lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
-                JSONArray resp = new JSONArray();
-                resp.add(posicion);
-                resp.add(lis.get(0)[0]);
-                resp.add(lis.get(0)[1]);
-                resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
-                resp.add(pro.countProcesados(expediente + jConcatenado));
-                out.write(resp.toJSONString());
-            } else {//regresa a procesados.jsp y maca error
+                //INSERT DE PDELITOS
+                for(int i=0; i<arrayDelito.length;i++){
+                    if(!arrayNumVic[i].equals("0")){//inserta el procesado que haya tenido un numero de victimas mayor a 0
+                        sqlPDelitos = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES ("+entidad+","+municipio+","+distrito+","+numero+","
+                                + "'"+expediente +jConcatenado+"','"+arrayDelito[i]+"','"+proceClave+jConcatenado+"',"
+                                +arrayNumVic[i]+", (select YEAR(NOW())) )";
+                        System.out.println(sqlPDelitos);
+                        insertPDeli=conn.escribir(sqlPDelitos);
+                    }
+                }
+                if(insertPDeli){
+                    showProcesados pro = new showProcesados();
+                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[0]);
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(pro.countProcesados(expediente + jConcatenado));
+                    out.write(resp.toJSONString());
+                    conn.close();
+                }
+            } else {
                 conn.close();
             }
-        } catch (IOException ex) {
-            Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

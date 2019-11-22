@@ -46,7 +46,6 @@ public class insrtInicial extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
@@ -165,7 +164,6 @@ public class insrtInicial extends HttpServlet {
                 resp.add(lis.get(0)[3]);
                 resp.add(cat.countInicial(expediente + jConcatenado));
                 out.write(resp.toJSONString());
-
                 conn.close();
             } else {
 
@@ -175,7 +173,6 @@ public class insrtInicial extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(insrtInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

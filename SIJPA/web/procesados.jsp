@@ -4,6 +4,8 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="clasesAuxiliar.showCausasPenales"%>
+<%@page import="clasesAuxiliar.showDelitos"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +26,15 @@
             }
             
             catalogos cat = new catalogos();
+            showDelitos sd= new showDelitos();
+            showCausasPenales objExp = new showCausasPenales();
             ArrayList<String[]> lista;
+            String entidad =(String) session.getAttribute("entidad");
+            String municipio =(String) session.getAttribute("municipio");
+            String distrito =(String) session.getAttribute("distrito");
+            String numero =(String) session.getAttribute("numero");
+            String jConcatenado =entidad+municipio+distrito+numero;
+            String expediente =(String) session.getAttribute("expediente");
         %>
     </head>
     <body style="zoom: .85;">
@@ -179,6 +189,28 @@
                             <th>Conducta antisocial</th>
                             <th>No. Victimas</th>
                         </tr>
+                        <%
+                            int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
+                            lista = sd.findDelitosExp(expediente+jConcatenado);
+                            for (String[] ls : lista) {
+                        %>
+                                <tr>
+                                    <td> <input type="hidden" name="arrayDelito" value="<%= ls[0] %>"/> <%= ls[0].replace(jConcatenado, "") %></td>
+                                    <td> <%= ls[1] %> </td>
+                                    <td>
+                                        <select class='txtSmall' name='arrayNumVic' required>
+                                            <option value=""> - - - </option>
+                        <%
+                                        for(int i=0; i <= totVic; i++){
+                                            out.println("<option value="+i+">"+i+"</option>");
+                                        }
+                        %>
+                                        </select>
+                                    </td>
+                               </tr>
+                        <%
+                            }
+                        %>
                     </table>
                 </fieldset><br>
                 <fieldset>

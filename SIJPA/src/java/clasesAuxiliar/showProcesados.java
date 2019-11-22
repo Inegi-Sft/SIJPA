@@ -58,14 +58,13 @@ public class showProcesados {
                 + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
                 + " WHERE TP.CONSIGNACION_ID=P.TIPO_CONSIGNACION"
                 + " AND S.SEXO_ID=P.SEXO"
-                + " AND GE.GRADO_ID=P.ULTIMO_GRADO_ESTUDIOS"
                 + " AND P.PROCESADO_CLAVE = '" + pro + "';";
             
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proce.add(new String[]{
-                    resul.getString("TP.DESCRIPCION"), resul.getString("S.DESCRIPCION"), 
-                    resul.getString("P.FECHA_NACIMIENTO"), resul.getString("GE.DESCRIPCION")
+                    resul.getString("P.NOMBRE")+" "+resul.getString("P.A_PATERNO")+" "+resul.getString("P.A_MATERNO"),
+                    resul.getString("TP.DESCRIPCION"),resul.getString("S.DESCRIPCION"),resul.getString("P.FECHA_NACIMIENTO")
                 });
             }
             conn.close();
@@ -74,6 +73,7 @@ public class showProcesados {
         }
         return proce;
     }
+  
     public int countProcesados(String exp){
         try{
             conn.Conectar();
@@ -90,4 +90,26 @@ public class showProcesados {
         return conteoPro;
     }
     
+    public ArrayList findProcesadoExp(String exp) {
+        conn.Conectar();
+        proce = new ArrayList();
+        sql = "SELECT * FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"' "
+                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"')"
+                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_TRAMITES_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"')";
+        
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString("PROCESADO_CLAVE"), resul.getString("NOMBRE")+" "+resul.getString("A_PATERNO")+" "+resul.getString("A_MATERNO")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+
+    }
 }

@@ -68,6 +68,8 @@ public class insrtDelitos extends HttpServlet {
         String fuero=request.getParameter("fuero");
         String reclasificaDel=request.getParameter("reclasificaDel");
         String fechaReclaDel=verificaVariable(request.getParameter("fechaReclaDel"));
+        String ocurrencia=verificaVariable(request.getParameter("ocurrencia"));
+        String sitioO=verificaVariable(request.getParameter("sitioO"));
         String consumacion=request.getParameter("consumacion");
         String calificacion=request.getParameter("calificacion");
         String concurso=request.getParameter("concurso");
@@ -76,7 +78,6 @@ public class insrtDelitos extends HttpServlet {
         String accion=request.getParameter("accion");
         String modalidad=request.getParameter("modalidad");
         String instrumentos=request.getParameter("instrumentos");
-        String ocurrencia=verificaVariable(request.getParameter("ocurrencia"));
         String entidadD=request.getParameter("entidadD");
         String municipioD=request.getParameter("municipioD");
         String numAdo=request.getParameter("numAdo");
@@ -97,6 +98,8 @@ public class insrtDelitos extends HttpServlet {
                     + fuero + ","
                     + reclasificaDel + ","
                     + "'" + fechaReclaDel + "',"
+                    + "'" + ocurrencia + "',"
+                    + sitioO + ","
                     + consumacion + ","
                     + calificacion + ","
                     + concurso + ","
@@ -105,11 +108,11 @@ public class insrtDelitos extends HttpServlet {
                     + accion + ","
                     + modalidad + ","
                     + instrumentos + ","
-                    + "'" + ocurrencia + "',"
                     + entidadD + ","
                     + municipioD 
-                    + ",0,0,'"
-                    + comentarios + "',"
+                    + "0,"
+                    + "0,"
+                    + "'" + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
             if (conn.escribir(sql)) {

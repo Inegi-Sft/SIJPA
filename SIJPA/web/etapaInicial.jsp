@@ -15,24 +15,30 @@
     </head>
     <body style="zoom: .9;">
         <%
+            String proceClave = "", posicion = "";
+            if(request.getParameter("proceClave") != null || request.getParameter("posicion") != null){
+                proceClave = request.getParameter("proceClave");
+                posicion = request.getParameter("posicion");
+            }
+            if (request.getParameter("insertado") != null) {
+                out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
+            }
+            
             catalogos cat = new catalogos();
             ArrayList<String[]> lista = new ArrayList();
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Etapa Inicial</h1>
-            <form action="" method="post">
+            <form action="" method="post" name="formInicial" id="formInicial">
                 <fieldset>
                     <table class="tablaFormu">
                         <tr>
                             <td colspan="4">
                                 <label for="idProcesado">Id Adolescente</label>
-                                <select class="txtMedia" name="idProcesado" id="idProcesado">  
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        //conexion a base
-                                    %>
-                                </select>
+                                <input class="txtMedia" name="idProcesado" id="idProcesado" value="<%=proceClave%>" readonly />
+                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
+                              
                                 <hr style="border: 1px solid #0077CB;margin-top: 10px;"/>
                             </td>
                         </tr>
@@ -253,15 +259,26 @@
                                                     out.println("<tr>");
                                                     out.println("<td>" + ls[0] + "</td>");
                                                     out.println("<td>" + ls[1] + "</td>");
-                                                    out.println("<td>"); %>
-                                            <input type="checkbox" name="apliMedidaCau" id="apliMedidaCau<%out.print(ls[0]);%>" />
-                                            <%      out.println("</td>");
+                                                    out.println("<td>");
+                                                    out.println("<input type='checkbox' name='apliMedidaCau' id='apliMedidaCau" + ls[0] + "' value='" + ls[0] + "' />");
+                                                    out.println("</td>");
                                                     out.println("</tr>");
                                                 }
                                             %>
-                                            </tr>
                                         </table>
                                     </div>
+                                            <div id="especifiqueMC" class="oculto">
+                                                <table class="tablaFormu">
+                                                <tr>
+                                                    <td>
+                                                        <label for="MCespecifi" >Especifique otra medida cautelar:</label>
+                                                    </td>
+                                                    <td>
+                                                        <textarea cols="125" rows="4" id="MCespecificar" name="MCespecificar"></textarea>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            </div>
                                 </fieldset>
                             </td>
                         </tr>

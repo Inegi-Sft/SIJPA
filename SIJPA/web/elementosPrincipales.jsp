@@ -49,7 +49,7 @@
                 <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Victimas</button>
                 <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5" disabled>Inicial</button>
                 <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6" disabled>Intermedia</button>
-                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" >Conclusion y/o Terminacion</button>
+                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" disabled>Conclusion y/o Terminacion</button>
                 <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8" disabled>Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
@@ -149,28 +149,26 @@
             </div>
             <div id="p5" class="pestanaContent">
                 <h2>Etapa Inicial</h2>
-                <table class="tablasRegis">
-                    <tr>
-                        <th>Adolescente clave</th>
-                        <th>Control detencion</th>
-                        <th>Audiencia inicial</th>
-                        <th>Auto vinculacion</th>
-                        <th>Medida cautelar</th>
-                        <th>Editar</th>
-                    </tr>
-                    <tr>
-                        <td>0002/2019-p1</td>
-                        <td>Si</td>
-                        <td>Si</td>
-                        <td>Vinculación a proceso</td>
-                        <td>No</td>
-                        <td><a class="pop" href="etapaInicial.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                    </tr>
+                <table class="tablasRegis" id="tablaInicial">
+                    <thead>
+                        <tr>
+                            <th>Adolescente clave</th>
+                            <th>Control detencion</th>
+                            <th>¿Se calificó como legal la detención?</th>
+                            <th>¿El adolescente declaró?</th>
+                            <th>Fecha del Cierre de Investigación </th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </div>
             <div id="p6" class="pestanaContent">
                 <h2>Etapa Intermedia</h2>
-                <table class="tablasRegis">
+                <table class="tablasRegis" id="tablaIntermedia">
+                    <thead>
                     <tr>
                         <th>Adolescente clave</th>
                         <th>Audiencia intermedia</th>
@@ -179,14 +177,10 @@
                         <th>Acuerdos probatorios</th>
                         <th>Editar</th>
                     </tr>
-                    <tr>
-                        <td>0002/2019-c2</td>
-                        <td>Si</td>
-                        <td>No</td>
-                        <td>Si</td>
-                        <td>No</td>
-                        <td><a class="pop" href="etapaIntermedia.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </div>
             <div id="p7" class="pestanaContent">
@@ -195,6 +189,7 @@
                     <tr>
                         <td>
                             <span class="indicador" id="lblNumConclu"></span>
+                            <span class="indicador2 proPendientes"></span>
                             <a href="conclusiones.jsp" class="agregar pop" id="addConclu"><img src="img/add.png"/> Agregar</a>
                         </td>
                     </tr>
@@ -207,6 +202,7 @@
                             <th>Fecha conclusión</th>
                             <th>Tipo conclusión/terminación</th>
                             <th>Editar</th>
+                            <th>Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -229,19 +225,22 @@
                 <table class="dContenido">
                     <tr>
                         <td>
-                            <span class="indicador" id="lblNumTram">dsfsda</span>
+                            <span class="indicador" id="lblNumTram"></span>
+                            <span class="indicador2 proPendientes"></span>
                             <a href="tramite.jsp" class="agregar pop" id="addTram"><img src="img/add.png"/> Agregar</a>
                         </td>
                     </tr>
                 </table>
-                <table class="tablasRegis" id="tramiteRegis">
+                <table class="tablasRegis" id="tablaTramite">
                     <thead>
                         <tr>
                             <th>Procesado clave</th>
+                            <th>Nombre</th>
                             <th>Etapa procesal</th>
                             <th>Motivo</th>
                             <th>Fecha última actuación</th>
                             <th>Editar</th>
+                            <th>Borrar</th>
                         </tr>
                     </thead>
                     <tbody>

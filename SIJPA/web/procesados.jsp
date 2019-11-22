@@ -191,7 +191,7 @@
                         </tr>
                         <%
                             int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
-                            lista = sd.findDelitos(expediente+jConcatenado);
+                            lista = sd.findDelitosExp(expediente+jConcatenado);
                             for (String[] ls : lista) {
                         %>
                                 <tr>

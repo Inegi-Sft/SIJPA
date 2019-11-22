@@ -8,6 +8,7 @@ import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.showVictimas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -42,7 +43,6 @@ public class insrtVictimas extends HttpServlet {
     boolean insertaVProce;
     boolean insertavmedida;
     boolean insertavmedidaMuj;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
@@ -111,7 +111,7 @@ public class insrtVictimas extends HttpServlet {
                             + expediente + jConcatenado + "','" + victiClave + jConcatenado + "','" + procesa[i] + "','"
                             + deli[i] + "','Si')";
                     insertaVDeli = conn.escribir(sqlVDelitos);
-                    System.out.println(sqlVDelitos);
+                    System.out.println(sqlVDelitos);  
                 }
                 if (insertaVDeli) {
                     for (int j = 0; j < procesadoRela.length; j++) {

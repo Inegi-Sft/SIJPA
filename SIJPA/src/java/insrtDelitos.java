@@ -135,41 +135,6 @@ public class insrtDelitos extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet insrtDelitos</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet insrtDelitos at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
-        
-
-        
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet insrtDelitos</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet insrtDelitos at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
     }
     
     public String generaDelitoClave(String exp, String jConcatenado) throws SQLException {

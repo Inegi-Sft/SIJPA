@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class showJuzgados {
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String> lista;
+    ArrayList<String[]> listaTabla;
     String sql;
     ResultSet rs;
     
@@ -24,9 +25,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            
             sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC ORDER BY 1;";
-            
             rs = conn.consultar(sql);
             while (rs.next()) {
                 lista.add(rs.getString(1));
@@ -36,5 +35,24 @@ public class showJuzgados {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
+    }
+    
+    public ArrayList findjuzgadoTabla(){
+        try {
+            conn.Conectar();
+            listaTabla = new ArrayList<String[]>();
+            sql = "SELECT JUZGADO_CLAVE,NOMBRE_ORGANO_JURIS,CONCAT(NOMBRE_JUEZ,' ',APELLIO_PAT_JUEZ,' ',APELLIDO_MAT_JUEZ) AS NOMBRE_JUEZ,ENTIDAD,MUNICIPIO "
+                    + "FROM DATOS_JUZGADOS_ADOJC ORDER BY 1";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                listaTabla.add(new String[]{
+                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaTabla;
     }
 }

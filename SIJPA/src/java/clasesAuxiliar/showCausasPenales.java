@@ -18,9 +18,25 @@ import java.util.logging.Logger;
  */
 public class showCausasPenales {
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> causas;
+    ArrayList<String[]> causas, lista;
+    
     String sql;
-    ResultSet rs;
+    ResultSet rs, resul;
+    public ArrayList findJuez(String juzclave) {
+        conn.Conectar();
+        lista = new ArrayList<String[]>();
+        sql = "SELECT CONCAT(NOMBRE_JUEZ,' ',APELLIO_PAT_JUEZ,' ',APELLIDO_MAT_JUEZ) FROM DATOS_JUZGADOS_ADOJC WHERE JUZGADO_CLAVE ='"+ juzclave + "' ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
     
     public ArrayList findCausasPorJuzgado(String juzgado){
         try {

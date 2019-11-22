@@ -22,7 +22,7 @@ import org.json.simple.JSONArray;
 
 /**
  *
- * @author FERMIN.GOMEZ
+ * @author CESAR.OSORIO
  */
 @WebServlet(urlPatterns = {"/insrtInicial"})
 public class insrtInicial extends HttpServlet {
@@ -39,9 +39,13 @@ public class insrtInicial extends HttpServlet {
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
     boolean insrtPmedida;
-    
+    boolean updateVdeli;
+    int totalProcesa;
+    showInicial cat = new showInicial();
+    ArrayList<String[]> vdeli;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
@@ -107,52 +111,59 @@ public class insrtInicial extends HttpServlet {
         int mcautelar = Integer.parseInt(request.getParameter("drecretaMC"));
         String[] chk = request.getParameterValues("apliMedidaCau");
         String especificar = request.getParameter("MCespecificar");
-        
+
         try {
-            response.setContentType("text/json");
+            response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
-//            out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?><nombre>Linea de Codigo</nombre>");
-            
+
             conn.Conectar();
-            sql = "INSERT INTO DATOS_ETAPAPROC_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + expediente + jConcatenado + "','"
-                    + procesado_clave + jConcatenado + "'," + detencion + ",'" + fechadetencion + "'," + legaldetencion + "," + audiInicial + "," + conducinicial + ",'" + fechaimputa
-                    + "'," + declaro + ",'" + fechadeclara + "'," + plazoconsti + "," + Plazo + "," + autovincula + ",'" + fechavincula + "'," + cierreinvestiga + ",'" + fechaplazo
-                    + "'," + plazofijado + ",'" + fechainvestiga + "',-2,'1899-09-09','1899-09-09',-2,'1899-09-09',-2,'1899-09-09',-2,-2,-2,'" + comentaInicial + "','-2',(select YEAR(NOW())))";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
-                if (mcautelar == 1) {
-                    for (int i = 0; i < chk.length; i++) {
-                        System.out.println("entra");
-                        if (chk[i].equals("13")) {
-                            sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + expediente + jConcatenado + "','"
-                                    + procesado_clave + jConcatenado + "'," + chk[i] + ",'" + especificar + "', (select YEAR(NOW())))";
-                             System.out.println(sql);
-                            insrtPmedida = conn.escribir(sql);
-                        } else {
-                            sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + expediente + jConcatenado + "','"
-                                    + procesado_clave + jConcatenado + "'," + chk[i] + ", -2, (select YEAR(NOW())))";
-                            System.out.println(sql);
-                            insrtPmedida = conn.escribir(sql);
+            totalProcesa = cat.countVdelitos(expediente + jConcatenado);
+            if (totalProcesa == 0) {
+                vdeli = cat.findVdelitos(expediente + jConcatenado);
+                for (String[] ls : vdeli) {
+                    sql = "UPDATE DATOS_DELITOS_ADOJC SET NUMERO_PROCESADOS = " + ls[1] + ", NUMERO_VICTIMAS = " + ls[2] + " WHERE DELITO_CLAVE ='" + ls[0] + "'";
+                    System.out.println(sql);
+                    updateVdeli = conn.escribir(sql);
+                }
+            }
+            if (updateVdeli) {
+                sql = "INSERT INTO DATOS_ETAPAPROC_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + expediente + jConcatenado + "','"
+                        + procesado_clave + jConcatenado + "'," + detencion + ",'" + fechadetencion + "'," + legaldetencion + "," + audiInicial + "," + conducinicial + ",'" + fechaimputa
+                        + "'," + declaro + ",'" + fechadeclara + "'," + plazoconsti + "," + Plazo + "," + autovincula + ",'" + fechavincula + "'," + cierreinvestiga + ",'" + fechaplazo
+                        + "'," + plazofijado + ",'" + fechainvestiga + "',-2,'1899-09-09','1899-09-09',-2,'1899-09-09',-2,'1899-09-09',-2,-2,-2,-2,'" + comentaInicial + "','-2',(select YEAR(NOW())))";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    if (mcautelar == 1) {
+                        for (int i = 0; i < chk.length; i++) {
+                            System.out.println("entra");
+                            if (chk[i].equals("13")) {
+                                sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + expediente + jConcatenado + "','"
+                                        + procesado_clave + jConcatenado + "'," + chk[i] + ",'" + especificar + "', (select YEAR(NOW())))";
+                                System.out.println(sql);
+                                insrtPmedida = conn.escribir(sql);
+                            } else {
+                                sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + expediente + jConcatenado + "','"
+                                        + procesado_clave + jConcatenado + "'," + chk[i] + ", -2, (select YEAR(NOW())))";
+                                System.out.println(sql);
+                                insrtPmedida = conn.escribir(sql);
+                            }
+                        }
+                        if (insrtPmedida) {
+                            conn.close();
                         }
                     }
-                    if (insrtPmedida) {
-                        conn.close();
-                    }
-
                 }
-                showInicial ini = new showInicial();
+                //showInicial inicio = new showInicial();
                 ArrayList<String[]> lis = new ArrayList<String[]>();
-                lis = ini.findInicialTabla(procesado_clave + jConcatenado);
+                lis = cat.findInicialTabla(procesado_clave + jConcatenado);
                 JSONArray resp = new JSONArray();
                 resp.add(posicion);
                 resp.add(lis.get(0)[0]);
                 resp.add(lis.get(0)[1]);
                 resp.add(lis.get(0)[2]);
                 resp.add(lis.get(0)[3]);
-                resp.add(lis.get(0)[4]);
-                resp.add(ini.countInicial(expediente + jConcatenado));
-                    out.write(resp.toJSONString());
-
+                resp.add(cat.countInicial(expediente + jConcatenado));
+                out.write(resp.toJSONString());
                 conn.close();
             } else {
 
@@ -162,21 +173,6 @@ public class insrtInicial extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(insrtInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet insrtInicial</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet insrtInicial at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -191,7 +187,11 @@ public class insrtInicial extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(insrtVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -205,7 +205,11 @@ public class insrtInicial extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(insrtVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

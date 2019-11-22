@@ -15,19 +15,38 @@
     </head>
     <body style="zoom: .9;">
         <%
+            String proceClave = "", posicion = "";
+            if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
+                proceClave = request.getParameter("proceClave");
+                posicion = request.getParameter("posicion");
+            }
+            if (request.getParameter("insertado") != null) {
+                out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
+            }
+
             catalogos cat = new catalogos();
             ArrayList<String[]> lista = new ArrayList();
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Etapa Intermedia</h1>
-            <form action="etapaIntermedia" method="post" id="formuMedia">
+            <form action="" method="post" id="formuMedia" name="formuMedia">
                 <fieldset>
                     <table style="border-spacing: 0; " class="tablaFormu">
+                        <tr>
+                            <td colspan="4">
+                                <label for="idProcesado">Id Adolescente</label>
+                                <input class="txtMedia" name="idProcesado" id="idProcesado" value="<%=proceClave%>" readonly />
+                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
+
+                                <hr style="border: 1px solid #0077CB;margin-top: 10px;"/>
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="2">
                                 <fieldset>
                                     <table class="tablaFormu">
+
                                         <tr>
                                             <td >
                                                 <label for="audiInterme">¿Hubo celebración de la audiencia intermedia?</label>

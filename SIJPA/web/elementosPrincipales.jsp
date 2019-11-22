@@ -151,12 +151,14 @@
                 <h2>Etapa Inicial</h2>
                 <table class="tablasRegis" id="tablaInicial">
                     <thead>
-                        <th>Adolescente clave</th>
-                        <th>Control detencion</th>
-                        <th>¿Se calificó como legal la detención?</th>
-                        <th>¿El adolescente declaró?</th>
-                        <th>Fecha del Cierre de Investigación </th>
-                        <th>Editar</th>
+                        <tr>
+                            <th>Adolescente clave</th>
+                            <th>Control detencion</th>
+                            <th>¿Se calificó como legal la detención?</th>
+                            <th>¿El adolescente declaró?</th>
+                            <th>Fecha del Cierre de Investigación </th>
+                            <th>Editar</th>
+                        </tr>
                     </thead>
                     <tbody>
                         
@@ -165,7 +167,8 @@
             </div>
             <div id="p6" class="pestanaContent">
                 <h2>Etapa Intermedia</h2>
-                <table class="tablasRegis">
+                <table class="tablasRegis" id="tablaIntermedia">
+                    <thead>
                     <tr>
                         <th>Adolescente clave</th>
                         <th>Audiencia intermedia</th>
@@ -174,14 +177,10 @@
                         <th>Acuerdos probatorios</th>
                         <th>Editar</th>
                     </tr>
-                    <tr>
-                        <td>0002/2019-c2</td>
-                        <td>Si</td>
-                        <td>No</td>
-                        <td>Si</td>
-                        <td>No</td>
-                        <td><a class="pop" href="etapaIntermedia.jsp"><img src='img/editar.png' title="Modificar"/></a></td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </div>
             <div id="p7" class="pestanaContent">

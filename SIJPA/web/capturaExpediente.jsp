@@ -3,6 +3,7 @@
     Created on : 24/09/2019, 09:42:00 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,9 +13,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Expediente</title>
         <%@include file="librerias.jsp" %>
-        <%  
+        <%
             catalogos cat = new catalogos();
+            showCausasPenales jue = new showCausasPenales();
             ArrayList<String[]> lista;
+
+            session.setAttribute("entidad", "15");
+            session.setAttribute("municipio", "15013");
+            session.setAttribute("distrito", "10");
+            session.setAttribute("numero", "10");
+            session.setAttribute("expediente", "011/2019");
         %>
     </head>
     <body>
@@ -48,6 +56,21 @@
                         </tr>
                         <tr>
                             <td colspan="4">
+                                <label for="nomJuez">Juez encargado de atender la causa penal</label>
+
+                                <select name="nomJuez" id="nomJuez" class="txtLong" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = jue.findJuez((String) session.getAttribute("juzgadoClave"));
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + "</option>");
+                                        }
+                                    %>  
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
                                 <fieldset>
                                     <div class="cols">
                                         <label for="compe">Organo Competente</label>
@@ -73,9 +96,9 @@
                                             %>  
                                         </select>
                                     </div>
-                                    <div class="cols oculto" id="expAcomulado">
+                                    <div class="cols" id="expAcomulado">
                                         <label for="ExpAcomu" >Expediente acumulado</label>
-                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia dependiente" onchange="expacumula()">
+                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia" onchange="expacumula()" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findResSimple();
@@ -89,39 +112,21 @@
                                         <label for="ExpRefe">Expediente al que hace referencia</label>
                                         <input type="text" name="ExpRefe" id="ExpRefe" class="dependiente" value="-2">
                                     </div>
+                                    <div class="cols" id="idparticular">
+                                        <label for="Pparticular" class="lblExBig">¿La causa penal deriva de acción penal por particular?</label>
+                                        <select name="Pparticular" id="Pparticular" class="txtMedia" required >
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>  
+                                        </select>
+                                    </div>
                                 </fieldset>
                             </td>
-                        </tr>             
-                        <tr>
-                            <td colspan="4" class="oculto" id="idparticular">
-                                <div class="cols">
-                                    <label for="Pparticular" class="lblExBig">¿La causa penal deriva de acción penal por particular?</label>
-                                    <select name="Pparticular" id="Pparticular" class="txtMedia dependiente" >
-                                        <option value="">--Seleccione--</option>
-                                        <%
-                                            lista = cat.findResSimple();
-                                            for (String[] ls : lista) {
-                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                            }
-                                        %>  
-                                    </select>
-                                </div>
-                                <div class="cols" id="divProcedimiento">
-                                    <label for="Tprocedi" >Tipo de procedimiento</label>
-                                    <select name="Tprocedi" id="Tprocedi" class="txtMedia dependiente" >
-                                        <option value="">--Seleccione--</option>
-                                        <%
-                                            lista = cat.findProcedimiento();
-                                            for (String[] ls : lista) {
-                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                            }
-                                        %>  
-                                    </select>
-                                </div>
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        </tr>    
                     </table>
                 </fieldset><br/>
                 <fieldset class="oculto" id="totalElementos">
@@ -159,15 +164,15 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>"); 
+                                out.println("<td>");
                         %>
                         <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi" value="<%out.print(ls[0]);%>" onChange="comprobar(this, 'cantAudi<%out.print(ls[0]);%>');"/>
-                        <%      
-                                out.println("</td>");
-                                out.println("<td>"); 
+                        <%
+                            out.println("</td>");
+                            out.println("<td>");
                         %>
                         <input type="number" disabled name="cantAudi<%out.print(ls[0]);%>" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall" required/>
-                        <%      
+                        <%
                                 out.println("</td>");
                                 out.println("</tr>");
                             }

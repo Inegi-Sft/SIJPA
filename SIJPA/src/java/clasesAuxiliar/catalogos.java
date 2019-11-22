@@ -28,6 +28,7 @@ public class catalogos {
      *
      * @return
      */
+    
     public ArrayList findAlfabetismo() {
         conn.Conectar();
         lista = new ArrayList();
@@ -481,7 +482,7 @@ public class catalogos {
     public ArrayList findMedCautelares() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES WHERE CAUTELARES_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -497,7 +498,7 @@ public class catalogos {
     public ArrayList findMedMujer() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_MUJER ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_MUJER WHERE MUJERES_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -513,7 +514,7 @@ public class catalogos {
     public ArrayList findMedProteccion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION WHERE MEDIDAS_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -866,6 +867,21 @@ public class catalogos {
         conn.Conectar();
         lista = new ArrayList<String[]>();
         sql = "SELECT * FROM CATALOGOS_SEXO ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+     public ArrayList findsitioOcurrencia() {
+        conn.Conectar();
+        lista = new ArrayList<String[]>();
+        sql = "SELECT * FROM CATALOGOS_SITIO_OCURRENCIA ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

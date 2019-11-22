@@ -108,6 +108,8 @@ public class insrtDelitos extends HttpServlet {
                     + accion + ","
                     + modalidad + ","
                     + instrumentos + ","
+                    + entidadD + ","
+                    + municipioD 
                     + "0,"
                     + "0,"
                     + "'" + comentarios + "',"

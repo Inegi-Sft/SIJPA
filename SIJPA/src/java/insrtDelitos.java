@@ -80,8 +80,8 @@ public class insrtDelitos extends HttpServlet {
         String instrumentos=request.getParameter("instrumentos");
         String entidadD=request.getParameter("entidadD");
         String municipioD=request.getParameter("municipioD");
-        String numAdo=request.getParameter("numAdo");
-        String numVic=request.getParameter("numVic");
+        String cosaRobada=request.getParameter("cosaRobada");
+        String contextoSitua=request.getParameter("contextoSitua");
         String comentarios=request.getParameter("comentarios");
         
         try {
@@ -109,9 +109,11 @@ public class insrtDelitos extends HttpServlet {
                     + modalidad + ","
                     + instrumentos + ","
                     + entidadD + ","
-                    + municipioD 
+                    + municipioD + ","
                     + "0,"
                     + "0,"
+                    + cosaRobada + ","
+                    + contextoSitua + ","
                     + "'" + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);

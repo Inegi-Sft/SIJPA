@@ -41,8 +41,8 @@ $(document).ready(function () {
 
     /***************************** FUNCIONES JUZGADOS *******************************/
     //select forma de organizacion
-    $("#fOrganiza").change(function () {
-        switch ($("#fOrganiza").val()) {
+    $("#fDivision").change(function () {
+        switch ($("#fDivision").val()) {
             case '1':
                 $("#dRegJudicial").fadeIn("slow");
                 $("#regJudicial").val("").prop("required", true);
@@ -50,16 +50,16 @@ $(document).ready(function () {
                 $("#distJudicial,#partJudicial").val("-2").prop("required", false);
                 break;
             case '2':
-                $("#dRegJudicial,#dPartJudicial").hide();
-                $("#regJudicial,#partJudicial").val("-2").prop("required", false);
                 $("#dDistJudicial").fadeIn("slow");
                 $("#distJudicial").val("").prop("required", true);
+                $("#dRegJudicial,#dPartJudicial").hide();
+                $("#regJudicial,#partJudicial").val("-2").prop("required", false);
                 break;
             case '3':
-                $("#dRegJudicial,#dDistJudicial").hide();
-                $("#regJudicial,#distJudicial").val("-2").prop("required", false);
                 $("#dPartJudicial").fadeIn("slow");
                 $("#partJudicial").val("").prop("required", true);
+                $("#dRegJudicial,#dDistJudicial").hide();
+                $("#regJudicial,#distJudicial").val("-2").prop("required", false);
                 break;
         }
         if ($("#fOrganiza").val() > 3 || $("#fOrganiza").val() === "") {
@@ -446,6 +446,7 @@ $(document).ready(function () {
         }
     });
     /*----------------------- FIN FUNCIONES PARA EXPEDIENTES --------------------------*/
+    
     /*-----------------------FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/
     $('#apliMedidaCau13').change(function () {
         if ($('#apliMedidaCau13').is(":checked")) {
@@ -872,6 +873,15 @@ function llenaNormaT(vNorma) {
 function validaAddCausa() {
     if ($("#juzgado").val() !== "") {
         window.location.href = "elementosPrincipales.jsp";
+    } else {
+        $(".msjAviso").fadeIn("slow");
+    }
+}
+
+//Funcion para Jueces: comprueba que primero se haya seleccionado un juzgado clave antes de agrecar una un juez
+function validaAddJuez() {
+    if ($("#juzgado").val() !== "") {
+        window.location.href = "capturaJuez.jsp";
     } else {
         $(".msjAviso").fadeIn("slow");
     }

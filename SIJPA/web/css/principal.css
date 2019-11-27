@@ -345,6 +345,7 @@ fieldset legend{
     background: url('../img/loading-35.gif') 50% 50% no-repeat rgb(249,249,249);
     opacity: .8;
 }
+
 .msjAviso{
     position: absolute;
     top: 180px;
@@ -358,28 +359,29 @@ fieldset legend{
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-/*.agregar{
-    text-decoration: none;
-    font-size: 15px;
-}*/
+
 .indicador{
     text-shadow: grey 3px 3px 5px;
     float: left;
     display: inline-block;
 }
+
 .indicador2{
     text-shadow: grey 3px 3px 5px;
     color: #D60320 ;
     display: inline-block;
 }
+
 .agregar{
     float: right;
     text-decoration: none;
     vertical-align: middle;
 }
+
 .agregar img{
     vertical-align: text-bottom;
 }
+
 .dContenido{
     width: 85%;
     margin: auto;
@@ -388,7 +390,7 @@ fieldset legend{
 
 a.addJuz{
     position: relative;
-    left: 35%;
+    left: 36%;
     text-decoration: none;
     color: #706F6F;
     font-weight: bold;
@@ -403,4 +405,35 @@ a.addJuz{
 a.addJuz:hover{
     color: #007dc1;
     font-size: 20px;
+}
+
+#jjc{
+    width: 87%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#jjc label{
+    margin: 0;
+}
+
+#jjc select{
+    margin: 10px 0 0 0;
+}
+
+#jjc a{
+    float: right;
+    text-decoration: none;
+    color: #706F6F;
+    font-weight: bold;
+    text-shadow: grey 5px 5px 5px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+input[type=text]:read-only{
+    background: #ccc;
 }

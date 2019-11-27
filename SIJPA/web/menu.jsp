@@ -8,6 +8,6 @@
     <ul>
         <li><a href="causasPenales.jsp">Causas Penales</a></li> 
         <li><a href="juzgados.jsp">Juzgados</a></li> 
-        <li><a href="#">Base de Datos</a></li> 
+        <li><a href="jueces.jsp">Jueces</a></li> 
     </ul>
 </nav>

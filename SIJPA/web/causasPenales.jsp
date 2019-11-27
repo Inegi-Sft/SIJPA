@@ -66,7 +66,6 @@
                     <thead>
                         <tr>
                             <th>Expediente</th>
-                            <th>Tipo de Procedimiento</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
                             <th>Conductas Antisociales</th>
@@ -94,7 +93,6 @@
                             <td><%=ls[3]%></td>
                             <td><%=ls[4]%></td>
                             <td><%=ls[5]%></td>
-                            <td><%=ls[6]%></td>
                             <td>--</td>
                             <td><a href="elementosPrincipales.jsp"><img src='img/editar.png' title="Editar"/></a></td>
                             <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>

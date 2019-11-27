@@ -28,12 +28,30 @@ $(document).ready(function () {
         onChange: function (value) {
             var vNorma = this.getOption(value).data('norma');
             llenaNormaT(vNorma);
+            
+            if(vNorma===31){//norma tecnica robo a casa habitacion
+                $('#fldsAdicionales').fadeIn("slow");
+                $('#dCosaRobada').fadeIn("slow");
+                $('#dContextoSitua').hide();
+                $('#cosaRobada').val('');
+                $('#contextoSitua').val('-2');
+            }else if(vNorma===1 || vNorma===4){//norma tecnica homicidio o lesiones
+                $('#fldsAdicionales').fadeIn("slow");
+                $('#dContextoSitua').fadeIn("slow");
+                $('#dCosaRobada').hide();
+                $('#contextoSitua').val('');
+                $('#cosaRobada').val('-2');
+            }else{
+                $('#fldsAdicionales').fadeOut("slow");
+                $('#cosaRobada').val('-2');
+                $('#contextoSitua').val('-2');
+            }
         },
         onBlur: function () {
             this.clearCache();
         }
     });
-
+ 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
 
     $('.oculto').hide();
@@ -657,10 +675,58 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
     } else {
         $(idChkNi).prop("disabled", false);
     }
+};
+
+function huboAudiencia(idSelect, idDiv) {
+    if ($(idSelect).val() === '1') {
+        $(idDiv).fadeIn("slow");
+    } else {
+        $(idDiv).fadeOut("slow");
+        $('.oculto').fadeOut("slow");
+//        $(idResp).val('-2').prop("required", false);
+    }
 }
-;
-
-
+function huboCtrlDetencion() {
+    if ($('#ctrlDetencion').val() === '1') {
+        $('#dLegalDeten').fadeIn("slow");
+        $('.ocul2').hide();
+    } else {
+        $('#dFormuImputa').fadeIn("slow");
+        $('.ocul3').hide();
+    }
+}
+function califLegalDetencion() {
+    if ($('#legalDeten').val() === '1') {
+        $('.ocul4').fadeIn("slow");
+//        $('.ocul2').hide();
+    }else if ($('#legalDeten').val() === '2'){
+        $('#dFechaAutoLiber').fadeIn("slow");
+        $('.ocul4').hide();
+    }else{
+        $('#dFechaAutoLiber').fadeOut("slow");
+        $('.ocul4').fadeOut("slow");
+    }
+}
+function califLegalDetencion() {
+    if ($('#legalDeten').val() === '1') {
+        $('#dFechaAutoLiber').fadeOut("slow");
+        $('.ocul4').fadeIn("slow");
+//        $('.ocul2').hide();
+    }else if ($('#legalDeten').val() === '2'){
+        $('#dFechaAutoLiber').fadeIn("slow");
+        $('.ocul4').hide();
+    }else{
+        $('#dFechaAutoLiber').fadeOut("slow");
+        $('.ocul4').fadeOut("slow");
+    }
+}
+function huboFormuImputa() {
+    if ($('#legalDeten').val() === '1') {
+        $('.ocul4').fadeIn("slow");
+    }else{
+        $('.ocul4').fadeOut("slow");
+    }
+}
 
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 

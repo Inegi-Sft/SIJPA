@@ -195,7 +195,17 @@ fieldset legend{
     font-weight: bold;
     font-size: 20px;
 }
+.subField{
+    border-style: dotted;
+    border-right: none;
+    border-left: none;
+    background-color: rgba(235,250,250,0.5);
+}
 
+.subField legend{
+    font-size: 18px;
+    text-align: left;
+}
 .comentarios{
     margin: 0 auto;
     width: 85%;
@@ -242,6 +252,11 @@ fieldset legend{
     display: inline-block;
     vertical-align: top;
     width: 335px;;
+}
+.colsA{
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
 }
 
 .btnCerrar {

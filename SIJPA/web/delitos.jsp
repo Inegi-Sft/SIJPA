@@ -260,21 +260,32 @@
                         </tr>
                     </table>
                 </fieldset><br/>
-                <fieldset>
+                <fieldset hidden id="fldsAdicionales">
                     <legend>Características adicionales</legend>
-                    <label for="numVic">Número de víctimas por este delito </label>
-                    <select class="txtMedia" name="numVic" id="numVic">
-                        <option value="">--Seleccione--</option>
-                        <%   
-                            int totVic=objExp.countTotalVictimas(expediente+jConcatenado);
-                            for(int i=1; i <= totVic; i++){
-                                out.println("<option value="+i+">"+i+"</option>");
-                            }
-                        %>
-                    </select>
-                </fieldset>
-                <fieldset>
-
+                    <div id="dCosaRobada">
+                        <label for="cosaRobada">Tipo de cosa robada</label>
+                        <select class="txtLong" name="cosaRobada" id="cosaRobada" required>
+                            <option value="">--Seleccione--</option>
+                            <%   
+                                lista=cat.findCosaRobada();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %>
+                        </select>
+                    </div>
+                    <div id="dContextoSitua">
+                        <label for="contextoSitua">Contexto situacional</label>
+                        <select class="txtLong" name="contextoSitua" id="contextoSitua" required>
+                            <option value="">--Seleccione--</option>
+                            <%   
+                                lista=cat.findContextoSituacional();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %>
+                        </select>
+                    </div>
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>

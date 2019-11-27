@@ -18,11 +18,11 @@
             showCausasPenales jue = new showCausasPenales();
             ArrayList<String[]> lista;
 
-            session.setAttribute("entidad", "15");
-            session.setAttribute("municipio", "15013");
-            session.setAttribute("distrito", "10");
-            session.setAttribute("numero", "10");
-            session.setAttribute("expediente", "011/2019");
+            session.setAttribute("entidad", "12");
+            session.setAttribute("municipio", "12001");
+            session.setAttribute("distrito", "1");
+            session.setAttribute("numero", "3");
+            session.setAttribute("expediente", "001/2019");
         %>
     </head>
     <body>

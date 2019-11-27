@@ -32,7 +32,7 @@
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
-            <h1>Juzgados</h1>
+            <h1>Órganos Jurisdiccionales</h1>
             <a href="capturaJuzgado.jsp" class="addJuz">Agregar Juzgado <img src="img/add.png" title="Agregar Juzgado"></a>
             <table class="tablasRegis">
                 <tr>

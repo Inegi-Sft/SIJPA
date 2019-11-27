@@ -66,7 +66,6 @@
                     <thead>
                         <tr>
                             <th>Expediente</th>
-                            <th>Tipo de Procedimiento</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
                             <th>Conductas Antisociales</th>

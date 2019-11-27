@@ -75,19 +75,17 @@ public class showVictimas {
         
     }
     
-    public ArrayList findVdelitos(String exp){
+    public ArrayList findDelitos(String exp){
         conn.Conectar();
         vic = new ArrayList();
-        sql = "SELECT P.PROCESADO_CLAVE,CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), D.DELITO_CLAVE, C.CODIGO FROM DATOS_PROCESADOS_ADOJC P "
-                + "INNER JOIN DATOS_DELITOS_ADOJC D ON P.EXPEDIENTE_CLAVE = D.EXPEDIENTE_CLAVE "
+        sql = "SELECT  D.DELITO_CLAVE, C.CODIGO FROM DATOS_DELITOS_ADOJC D "
                 + "INNER JOIN CATALOGOS_CODIGO_NORMA C ON D.DELITO_CODIGO_PENAL = C.ID "
-                + "WHERE P.EXPEDIENTE_CLAVE = D.EXPEDIENTE_CLAVE "
-                + "AND P.EXPEDIENTE_CLAVE = '" + exp + "'" ;
+                + "WHERE D.EXPEDIENTE_CLAVE = '" + exp + "'" ;
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
                 vic.add(new String[]{
-                    resul.getString(1), resul.getString(2),resul.getString(3),resul.getString(4)
+                    resul.getString(1), resul.getString(2)
                 });
             }
             conn.close();

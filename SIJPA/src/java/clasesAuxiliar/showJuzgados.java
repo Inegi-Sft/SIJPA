@@ -41,7 +41,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             listaTabla = new ArrayList<String[]>();
-            sql = "SELECT JUZGADO_CLAVE,NOMBRE_ORGANO_JURIS,CONCAT(NOMBRE_JUEZ,' ',APELLIO_PAT_JUEZ,' ',APELLIDO_MAT_JUEZ) AS NOMBRE_JUEZ,ENTIDAD,MUNICIPIO "
+            sql = "SELECT JUZGADO_CLAVE,JUZGADO_NOMBRE,JUZGADO_NUMERO,ENTIDAD,MUNICIPIO "
                     + "FROM DATOS_JUZGADOS_ADOJC ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {

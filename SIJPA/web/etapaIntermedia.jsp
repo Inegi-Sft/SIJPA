@@ -34,7 +34,7 @@
                 <fieldset>
                     <table style="border-spacing: 0; " class="tablaFormu">
                         <tr>
-                            <td colspan="4">
+                            <td colspan="3">
                                 <label for="idProcesado">Id Adolescente</label>
                                 <input class="txtMedia" name="idProcesado" id="idProcesado" value="<%=proceClave%>" readonly />
                                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
@@ -43,51 +43,28 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <fieldset>
-                                    <table class="tablaFormu">
-
-                                        <tr>
-                                            <td >
-                                                <label for="audiInterme">¿Hubo celebración de la audiencia intermedia?</label>
-                                                <select class="txtMedia" name="audiInterme" id="audiInterme" onchange="etapaInter()" required>
-                                                    <option value="">--Seleccione--</option>
-                                                    <%
-                                                        lista = cat.findResSimple();
-                                                        for (String[] ls : lista) {
-                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                        }
-                                                    %> 
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="oculto" id="divfechaAudiinter">
-                                                    <label for="fechaCtrlDeten" id="lblfechaAudiinter">Fecha de la audiencia intermedia</label>
-                                                    <input type="date" name="fechaAudiinter" id="fechaAudiinter" class="depenFecha"/>
-                                                    <div class="noIdentificada" id="nifechaAudiinter">
-                                                        <input type="checkbox" id="chkAudiinter" onclick="fechaNoIdent('#chkAudiinter', '#fechaAudiinter')"><label>No identificada</label>
-                                                    </div> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div class="oculto" id="divfechaEscrito">
-                                                    <label for="fechaEscrito">Fecha del escrito de acusación</label>
-                                                    <input type="date" name="fechaEscrito" id="fechaEscrito" class="depenFecha"/>
-                                                    <div class="noIdentificada">
-                                                        <input type="checkbox" id="chkEscrito" onclick="fechaNoIdent('#chkEscrito', '#fechaEscrito')"><label>No identificada</label>
-                                                    </div> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </fieldset>
+                            <td>
+                                <div  id="divfechaEscrito">
+                                    <label for="fechaEscrito">Fecha del escrito de acusación</label>
+                                    <input type="date" name="fechaEscrito" id="fechaEscrito" required/>
+                                    <div class="noIdentificada">
+                                        <input type="checkbox" id="chkEscrito" onclick="fechaNoIdent('#chkEscrito', '#fechaEscrito')"><label>No identificada</label>
+                                    </div> 
+                                </div>
                             </td>
                             <td>
-                                <fieldset>
-                                    <label for="audiInterme">¿Hubo solicitud de corrección del escrito de acusación?</label>
-                                    <select class="txtMedia" name="correEscrito" id="correEscrito" onchange="respuestaSimpleFecha('#correEscrito', '#divfechaCtrlDeten', '#fechaCorreccion', '#chkCorreccion')" required>
+                                <div  id="divcontestaEscrito">
+                                    <label for="contestaEscrito">Fecha de contestación a la acusación</label>
+                                    <input type="date" name="contestaEscrito" id="contestaEscrito" required/>
+                                    <div class="noIdentificada">
+                                        <input type="checkbox" id="chkcontestaEscrito" onclick="fechaNoIdent('#chkcontestaEscrito', '#contestaEscrito')"><label>No identificada</label>
+                                    </div> 
+                                </div>
+                            </td>
+                            <td>
+                                <div id="descuProba">
+                                    <label for="audiInterme">¿Hubo descubrimiento probatorio?</label>
+                                    <select class="txtMedia" name="decubreProba" id="decubreProba" required>
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findResSimple();
@@ -96,45 +73,56 @@
                                             }
                                         %> 
                                     </select>
-                                    <div id="divfechaCtrlDeten" class="oculto">
-                                        <label for="fechaCtrlDeten" id="lblfechaCtrlDeten">Fecha de corrección del escrito de acusación</label>
-                                        <input type="date" name="fechaCorreccion" id="fechaCorreccion" class="depenFecha"/>
-                                        <div class="noIdentificada" id="nifechaCtrlDeten">
-                                            <input type="checkbox" id="chkCorreccion" onclick="fechaNoIdent('#chkCorreccion', '#fechaCorreccion')"><label>No identificada</label>
-                                        </div> 
-                                    </div>
-                                </fieldset>
-                            </td>
-                            <td>
-                                <fieldset>
-                                    <label for="audiInterme">¿Hubo solicitud de asesor coadyuvante?</label>
-                                    <select class="txtMedia" name="asesorCoady" id="asesorCoady" onchange="respuestaSimpleFecha('#asesorCoady', '#divfechaCoady', '#fechaCoady', '#chkCoady')" required>
-                                        <option value="">--Seleccione--</option>
-                                        <%
-                                            lista = cat.findResSimple();
-                                            for (String[] ls : lista) {
-                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                            }
-                                        %> 
-                                    </select>
-                                    <div id="divfechaCoady" class="oculto">
-                                        <label for="fechaCtrlDeten" id="lblfechaCoady">Fecha de la solicitud del asesor coadyuvante</label>
-                                        <input type="date" name="fechaCoady" id="fechaCoady" class="depenFecha"/>
-                                        <div class="noIdentificada" id="nifechaCoady">
-                                            <input type="checkbox" id="chkCoady" onclick="fechaNoIdent('#chkCoady', '#fechaCoady')"><label>No identificada</label>
-                                        </div> 
-                                    </div>
-                                </fieldset>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <fieldset>
-                                    <table style="border-spacing: 0; " class="tablaFormu">
+                                    <label for="audiInterme">¿Hubo celebración de la audiencia intermedia?</label>
+                                    <select class="txtMedia" name="audiInterme" id="audiInterme" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                    <div class="oculto" id="divfechaAudiinter">
+                                        <label for="fechaCtrlDeten" id="lblfechaAudiinter">Fecha de la audiencia intermedia</label>
+                                        <input type="date" name="fechaAudiinter" id="fechaAudiinter"/>
+                                        <div class="noIdentificada" id="nifechaAudiinter">
+                                            <input type="checkbox" id="chkAudiinter" onclick="fechaNoIdent('#chkAudiinter', '#fechaAudiinter')"><label>No identificada</label>
+                                        </div> 
+                                    </div>
+                                </fieldset>
+                            </td>
+                            <td>
+                                <div id="dseparaAcusa" class="oculto">
+                                <label for="separaAcusa">¿Hubo separación de la acusación?</label>
+                                <select class="txtMedia" name="separaAcusa" id="separaAcusa"  required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findResSimple();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %> 
+                                </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <fieldset id="fmediosPrueba" class="oculto">
+                                    <legend>Medios Prueba</legend>
+                                    <table class="tablaFormu">
                                         <tr>
-                                            <td>
+                                            <td colspan="3">
+                                                <div id="dmediosPrueba" class="oculto">
                                                 <label for="mediosPrueba">¿Hubo presentación de medios de prueba?</label>
-                                                <select class="txtMedia" name="mediosPrueba" id="mediosPrueba" onchange="respuestaSelect('#mediosPrueba', '#divMediopru', '#tipoPrueba')" required>
+                                                <select class="txtMedia" name="mediosPrueba" id="mediosPrueba" required>
                                                     <option value="">--Seleccione--</option>
                                                     <%
                                                         lista = cat.findResSimple();
@@ -143,14 +131,125 @@
                                                         }
                                                     %> 
                                                 </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="oculto" id="dpruebaMP">
+                                                    <label for="pruebaMP">Medios de prueba presentados por el ministerio público</label>
+                                                    <select class="txtMedia" name="pruebaMP" id="pruebaMP">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findResSimple();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
                                             </td>
                                             <td>
-                                                <div id="divMediopru" class="oculto">
-                                                    <label for="tipoPrueba" id="lbltipoPrueba">Tipos de  medios de prueba (excluidos o aceptados)</label>
-                                                    <select class="txtMedia dependiente" name="tipoPrueba" id="tipoPrueba" >
+                                                <div class="oculto" id="dpruebaAJ">
+                                                    <label for="pruebaAJ">Medios de prueba presentados por el asesor jurídico</label>
+                                                    <select class="txtMedia" name="pruebaAJ" id="pruebaAJ">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findResSimple();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="oculto" id="dpruebaDefensa">
+                                                    <label for="pruebaDefensa">Medios de prueba presentados por la defensa</label>
+                                                    <select class="txtMedia" name="pruebaDefensa" id="pruebaDefensa">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findResSimple();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="oculto" id="dtipoPruebaMP">
+                                                    <label for="tipoPruebaMP">Tipos de medios de prueba presentados por el ministerio público</label>
+                                                    <select class="txtMedia" name="tipoPruebaMP" id="tipoPruebaMP">
                                                         <option value="">--Seleccione--</option>
                                                         <%
                                                             lista = cat.findMediosPrueba();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
+                                                <div class="oculto" id="dresolPruebaMP">
+                                                    <label for="resolPruebaMP">Resolución de los medios de prueba presentados por el ministerio público</label>
+                                                    <select class="txtMedia" name="resolPruebaMP" id="resolPruebaMP">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findResoluMprueba();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="oculto" id="dtipoPruebaJuri">
+                                                    <label for="tipoPruebaJuri">Tipos de medios de prueba presentados por asesor jurídico</label>
+                                                    <select class="txtMedia" name="tipoPruebaJuri" id="tipoPruebaJuri">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findMediosPrueba();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
+                                                <div class="oculto" id="dresolJuridico">
+                                                    <label for="resolJuridico">Resolución de los medios de prueba presentados por asesor jurídico</label>
+                                                    <select class="txtMedia" name="resolJuridico" id="resolJuridico">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findResoluMprueba();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="oculto" id="dtipoPruebaDefen">
+                                                    <label for="tipoPruebaDefen">Tipos de medios de prueba presentados por la defensa</label>
+                                                    <select class="txtMedia" name="tipoPruebaDefen" id="tipoPruebaDefen">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findMediosPrueba();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
+                                                </div>
+                                                <div class="oculto" id="dresolDefensa">
+                                                    <label for="resolDefensa">Resolución de los medios de prueba presentados por la defensa</label>
+                                                    <select class="txtMedia" name="resolDefensa" id="resolDefensa">
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findResoluMprueba();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
@@ -162,9 +261,12 @@
                                     </table>
                                 </fieldset>
                             </td>
+                        </tr>
+                        <tr>
                             <td>
-                                <label for="audiInterme">Exclusión de medios de prueba</label>
-                                <select class="txtMedia" name="excuMedios" id="excuMedios" required>
+                                <div id="dacuerdosProba" class="oculto">
+                                <label for="acuerdosProba">¿Contó con acuerdos probatorios?</label>
+                                <select class="txtMedia" name="acuerdosProba" id="acuerdosProba" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
@@ -173,10 +275,12 @@
                                         }
                                     %> 
                                 </select>
+                                </div>
                             </td>
                             <td>
-                                <label for="audiInterme">¿Contó con acuerdos probatorios?</label>
-                                <select class="txtMedia" name="acuerdosProba" id="acuerdosProba" required="">
+                                <div id="daperturaJO" class="oculto">
+                                <label for="aperturaJO">¿Se dictó auto de apertura a juico oral?</label>
+                                <select class="txtMedia" name="aperturaJO" id="aperturaJO" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findResSimple();
@@ -185,6 +289,9 @@
                                         }
                                     %> 
                                 </select>
+                                </div>
+                            </td>
+                            <td>
                             </td>
                         </tr>
                     </table>

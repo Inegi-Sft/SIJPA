@@ -17,12 +17,6 @@
             catalogos cat = new catalogos();
             showCausasPenales jue = new showCausasPenales();
             ArrayList<String[]> lista;
-
-            session.setAttribute("entidad", "12");
-            session.setAttribute("municipio", "12001");
-            session.setAttribute("distrito", "1");
-            session.setAttribute("numero", "3");
-            session.setAttribute("expediente", "001/2019");
         %>
     </head>
     <body>
@@ -36,7 +30,7 @@
                         <tr>
                             <td>
                                 <label for="jClave">Juzgado Clave:</label>
-                                <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" readonly required>
+                                <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" disabled>
                             </td>
                             <td>
                                 <label for="CarpInves">No. Carpeta Investigación</label>
@@ -46,6 +40,8 @@
                                 <label for="expClave">Expediente Clave</label>
                                 <input type="text" name="expClave" id="expClave" required>
                             </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <label for="fIngreso">Fecha de ingreso</label>
                                 <input type="date" name="fIngreso" id="fIngreso" class="txtMedia" required>
@@ -53,24 +49,59 @@
                                     <input type="checkbox" id="chkFechaIngre" onclick="fechaNoIdent('#chkFechaIngre', '#fIngreso')"><label>No identificada</label>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
+                            <td>
                                 <label for="nomJuez">Juez encargado de atender la causa penal</label>
-
                                 <select name="nomJuez" id="nomJuez" class="txtLong" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = jue.findJuez((String) session.getAttribute("juzgadoClave"));
+                                        if(lista.size() != 0){
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                            }
+                                        }else{
+                                            response.sendRedirect("capturaJuez.jsp");
+                                        }
+                                    %>  
+                                </select>
+                            </td>
+                            <td>
+                                <label for="Pparticular">¿La causa penal deriva de acción penal por particular?</label>
+                                <select name="Pparticular" id="Pparticular" class="txtMedia" required >
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findResSimple();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>  
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">
+                            <td colspan="3">
+                                <fieldset>
+                                    <div class="cols" id="expAcomulado">
+                                        <label for="ExpAcomu" >Expediente acumulado</label>
+                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia" onchange="expacumula()" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (int x = 0; x < 3; x++) {
+                                                    out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                                }
+                                            %>  
+                                        </select>
+                                    </div>
+                                    <div class="cols oculto" id="expReferen">
+                                        <label for="ExpRefe">Expediente al que hace referencia</label>
+                                        <input type="text" name="ExpRefe" id="ExpRefe" class="dependiente" value="-2">
+                                    </div>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
                                 <fieldset>
                                     <div class="cols">
                                         <label for="compe">Organo Competente</label>
@@ -96,37 +127,9 @@
                                             %>  
                                         </select>
                                     </div>
-                                    <div class="cols" id="expAcomulado">
-                                        <label for="ExpAcomu" >Expediente acumulado</label>
-                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia" onchange="expacumula()" required>
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findResSimple();
-                                                for (int x = 0; x < 3; x++) {
-                                                    out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
-                                                }
-                                            %>  
-                                        </select>
-                                    </div>
-                                    <div class="cols oculto" id="expReferen">
-                                        <label for="ExpRefe">Expediente al que hace referencia</label>
-                                        <input type="text" name="ExpRefe" id="ExpRefe" class="dependiente" value="-2">
-                                    </div>
-                                    <div class="cols" id="idparticular">
-                                        <label for="Pparticular" class="lblExBig">¿La causa penal deriva de acción penal por particular?</label>
-                                        <select name="Pparticular" id="Pparticular" class="txtMedia" required >
-                                            <option value="">--Seleccione--</option>
-                                            <%
-                                                lista = cat.findResSimple();
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
-                                            %>  
-                                        </select>
-                                    </div>
                                 </fieldset>
                             </td>
-                        </tr>    
+                        </tr>
                     </table>
                 </fieldset><br/>
                 <fieldset class="oculto" id="totalElementos">
@@ -151,33 +154,20 @@
                 </fieldset><br/>
                 <fieldset class="oculto" id="totalAudiencias">
                     <legend>Audiencias</legend>
-                    <table class="tablasRegis">
-                        <tr>
-                            <th>ID</th>
-                            <th>Tipo de audiencias</th>
-                            <th>Aplica Si/No</th>
-                            <th>Cantidad</th>
-                        </tr>
-                        <%
-                            lista = cat.findTipoAudiencias();
-                            for (String[] ls : lista) {
-                                out.println("<tr>");
-                                out.println("<td>" + ls[0] + "</td>");
-                                out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>");
-                        %>
-                        <input type="checkbox" class="chkAplica" name="aplAudi" id="aplAudi" value="<%out.print(ls[0]);%>" onChange="comprobar(this, 'cantAudi<%out.print(ls[0]);%>');"/>
-                        <%
-                            out.println("</td>");
-                            out.println("<td>");
-                        %>
-                        <input type="number" disabled name="cantAudi<%out.print(ls[0]);%>" id="cantAudi<%out.print(ls[0]);%>" class="txtSmall" required/>
-                        <%
-                                out.println("</td>");
-                                out.println("</tr>");
-                            }
-                        %>
+                    <table class="tablasRegis" id="tAudiencias">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo de audiencias</th>
+                                <th>Juez</th>
+                                <th>Fecha de Celebración</th>
+                                <th>Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
                     </table>
+                    <a id="addAudi" class="addJuz">Agregar Audiencia <img src="img/add.png" title="Agregar Audiencia"></a>
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>

@@ -39,11 +39,13 @@ public class insrtExpediente extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         
         HttpSession sesion= request.getSession();
 
-        String juzgado_clave = request.getParameter("jClave");
-        String jDividido[] = juzgado_clave.split("-"); //Esto separa en un array basándose en el separador que le pases
+        String juzgado_clave = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgado_clave.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jDistrito = jDividido[2];
@@ -54,7 +56,6 @@ public class insrtExpediente extends HttpServlet {
         sesion.setAttribute("municipio", jMunicipio);
         sesion.setAttribute("distrito", jDistrito);
         sesion.setAttribute("numero", jNumero);
-        sesion.setMaxInactiveInterval(-1);
         
         String carpInvestiga = request.getParameter("CarpInves");
         String expediente_clave = request.getParameter("expClave");
@@ -65,17 +66,21 @@ public class insrtExpediente extends HttpServlet {
         } else {
             fecha_ingreso = "1899-09-09";
         }
-        int competencia = Integer.parseInt(request.getParameter("compe"));
-        String incompetencia = request.getParameter("Tincompe");
+        String nomJuez = request.getParameter("nomJuez");
+        String particular = request.getParameter("Pparticular");
         String acomulado = request.getParameter("ExpAcomu");
         String referencia = request.getParameter("ExpRefe");
-        String particular = request.getParameter("Pparticular");
-        String tProcedimiento = request.getParameter("Tprocedi");
+        int competencia = Integer.parseInt(request.getParameter("compe"));
+        String incompetencia = request.getParameter("Tincompe");
         String totalDeli = request.getParameter("Tdelitos");
         String totalAdo = request.getParameter("Tadolescentes");
         String totalVic = request.getParameter("Tvictimas");
         String comentario = request.getParameter("ComentaExpe");
-        String[] chk = request.getParameterValues("aplAudi");
+        //Datos para Taudiencias
+        String[] tipoAudi = request.getParameterValues("tipoAudi");
+        String[] juezAudi = request.getParameterValues("juezAudi");
+        String[] fAudi = request.getParameterValues("fAudi");
+        String[] tiAudi = request.getParameterValues("tiAudi");
       
         try {
             response.setContentType("text/json;charset=UTF-8");
@@ -83,15 +88,15 @@ public class insrtExpediente extends HttpServlet {
             conn.Conectar();
             sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
                     +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
-                    + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
-                    + tProcedimiento + "," + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
+                    + nomJuez + "," + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
+                    + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 if(competencia == 1 ){
-                    for (int i = 0; i < chk.length; i++) {
-                        String valor = "cantAudi" + chk[i];
+                    for (int i = 0; i < tipoAudi.length; i++) {
                         sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
-                                + "'" + expediente_clave+jConcatenado + "',"+ chk[i] + "," + request.getParameter(valor) + ")";
+                                + "'" + expediente_clave+jConcatenado + "',"+ tipoAudi[i] + "," + juezAudi[i] + ",'" + juzgado_clave + "','"
+                                + fAudi[i] + "','" + tiAudi[i] + "')";
                         System.out.println(sql);
                         insrtExpe=conn.escribir(sql);
                     }

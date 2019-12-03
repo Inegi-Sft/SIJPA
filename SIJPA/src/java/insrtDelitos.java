@@ -38,60 +38,64 @@ public class insrtDelitos extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    showCausasPenales cp= new showCausasPenales();
-    showDelitos sd= new showDelitos();
+    showCausasPenales cp = new showCausasPenales();
+    showDelitos sd = new showDelitos();
     Conexion_Mysql conn = new Conexion_Mysql();
-    
-    String sql;
+
+    String sql, sqldcosa, sqlhomicidio;
     ResultSet rs;
     int deliExp;
     int deliInsertados;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession sesion= request.getSession();
+
+        HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
-        String entidad =(String) sesion.getAttribute("entidad");
-        String municipio =(String) sesion.getAttribute("municipio");
-        String distrito =(String) sesion.getAttribute("distrito");
-        String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+distrito+numero;
-        String expediente =(String) sesion.getAttribute("expediente");
-        
-        String delitoClave =request.getParameter("delitoClave");
-        String delitoCP=request.getParameter("delitoCP");
-        String articuloCP=request.getParameter("articuloCP");
-        String delitoNT=request.getParameter("delitoNT");
-        String fuero=request.getParameter("fuero");
-        String reclasificaDel=request.getParameter("reclasificaDel");
-        String fechaReclaDel=verificaVariable(request.getParameter("fechaReclaDel"));
-        String ocurrencia=verificaVariable(request.getParameter("ocurrencia"));
-        String sitioO=verificaVariable(request.getParameter("sitioO"));
-        String consumacion=request.getParameter("consumacion");
-        String calificacion=request.getParameter("calificacion");
-        String concurso=request.getParameter("concurso");
-        String clasificacion=request.getParameter("clasificacion");
-        String comision=request.getParameter("comision");
-        String accion=request.getParameter("accion");
-        String modalidad=request.getParameter("modalidad");
-        String instrumentos=request.getParameter("instrumentos");
-        String entidadD=request.getParameter("entidadD");
-        String municipioD=request.getParameter("municipioD");
-        String cosaRobada=request.getParameter("cosaRobada");
-        String contextoSitua=request.getParameter("contextoSitua");
-        String comentarios=request.getParameter("comentarios");
-        
+        String entidad = (String) sesion.getAttribute("entidad");
+        String municipio = (String) sesion.getAttribute("municipio");
+        String distrito = (String) sesion.getAttribute("distrito");
+        String numero = (String) sesion.getAttribute("numero");
+        String jConcatenado = entidad + municipio + distrito + numero;
+//        String expediente =(String) sesion.getAttribute("expediente");
+        String expediente, delitoClave;
+        expediente = "00001111015522";
+        delitoClave = "0000-D11111015522";
+//        String delitoClave =request.getParameter("delitoClave");
+        String delitoCP = request.getParameter("delitoCP");
+        String articuloCP = request.getParameter("articuloCP");
+        int delitoNT = Integer.parseInt(request.getParameter("delitoNT"));
+        String fuero = request.getParameter("fuero");
+        String reclasificaDel = request.getParameter("reclasificaDel");
+        String fechaReclaDel = verificaVariable(request.getParameter("fechaReclaDel"));
+        String ocurrencia = verificaVariable(request.getParameter("ocurrencia"));
+        String sitioO = verificaVariable(request.getParameter("sitioO"));
+        String consumacion = request.getParameter("consumacion");
+        String calificacion = request.getParameter("calificacion");
+        String concurso = request.getParameter("concurso");
+        String clasificacion = request.getParameter("clasificacion");
+        String comision = request.getParameter("comision");
+        String accion = request.getParameter("accion");
+        String modalidad = request.getParameter("modalidad");
+        String instrumentos = request.getParameter("instrumentos");
+        String entidadD = request.getParameter("entidadD");
+        String municipioD = request.getParameter("municipioD");
+        String[] chkCR = request.getParameterValues("cosaRobada");
+        String[] chkCS = request.getParameterValues("contextoSitua");
+        String comentarios = request.getParameter("comentarios");
+
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            
+
             //String delitoClave = generaDelitoClave(expediente,jConcatenado);
             conn.Conectar();
-            sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
-                    + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
+            sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(11,11015,5,22,'"
+                    //                    entidad+","+municipio+","+distrito+","+numero+",'" 
+                    //                    + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
+                    + expediente + "','"
+                    + delitoClave + "',"
                     + delitoCP + ","
                     + "'" + articuloCP + "',"
                     + delitoNT + ","
@@ -112,12 +116,36 @@ public class insrtDelitos extends HttpServlet {
                     + municipioD + ","
                     + "0,"
                     + "0,"
-                    + cosaRobada + ","
-                    + contextoSitua + ","
                     + "'" + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
+           
             if (conn.escribir(sql)) {
+                if (delitoNT == 31) {
+                    for (int i = 0; i < chkCR.length; i++) {
+                        sql = "INSERT INTO DATOS_DCOSA_ROBADA_ADOJC VALUES (11,11015,5,22,'"
+                                //                         entidad+","+municipio+","+distrito+","+numero+",'" 
+                                //                    + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
+                                + expediente + "','"
+                                + delitoClave + "',"
+                                + chkCR[i] + ");";
+                        System.out.println(sql);
+                        conn.escribir(sql);
+                    }
+                }
+                        if (delitoNT == 1 || delitoNT == 4) {
+                            for (int j = 0; j < chkCS.length; j++) {
+                                sql = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES (11,11015,5,22,'"
+                                        //                         entidad+","+municipio+","+distrito+","+numero+",'" 
+                                        //                    + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
+                                        + expediente + "','"
+                                        + delitoClave + "',"
+                                        + chkCS[j] + ");";
+                                System.out.println(sql);
+                                conn.escribir(sql);
+                            }
+                    }
+                
                 showDelitos deli = new showDelitos();
                 ArrayList<String[]> lis = new ArrayList<String[]>();
                 lis = deli.findDeliTabla(delitoClave + jConcatenado);
@@ -155,9 +183,7 @@ public class insrtDelitos extends HttpServlet {
 //        } finally {
 //            out.close();
 //        }
-        
 
-        
 //        response.setContentType("text/html;charset=UTF-8");
 //        PrintWriter out = response.getWriter();
 //        try {
@@ -175,7 +201,7 @@ public class insrtDelitos extends HttpServlet {
 //            out.close();
 //        }
     }
-    
+
     public String generaDelitoClave(String exp, String jConcatenado) throws SQLException {
 
         int maxDel = 0;
@@ -183,13 +209,13 @@ public class insrtDelitos extends HttpServlet {
 
         conn.Conectar();
         String sql = "SELECT MAX("
-                                + "SUBSTR("
-                                        + " REPLACE( DELITO_CLAVE,'"+jConcatenado+"','') ,"
-                                        + " INSTR( DELITO_CLAVE,'D')+1 ,"
-                                        + " LENGTH( REPLACE(DELITO_CLAVE,'"+jConcatenado+"',''))"
-                                    + " )"
-                            + " ) AS NUMERO"
-                    + " FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE='" +exp+jConcatenado+ "';";
+                + "SUBSTR("
+                + " REPLACE( DELITO_CLAVE,'" + jConcatenado + "','') ,"
+                + " INSTR( DELITO_CLAVE,'D')+1 ,"
+                + " LENGTH( REPLACE(DELITO_CLAVE,'" + jConcatenado + "',''))"
+                + " )"
+                + " ) AS NUMERO"
+                + " FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE='" + exp + jConcatenado + "';";
 //        String sql = "SELECT MAX("
 //                                + "SUBSTR( DELITO_CLAVE, INSTR(DELITO_CLAVE,'D')+1, length(DELITO_CLAVE) )"
 //                            + " ) AS NUMERO"
@@ -202,10 +228,11 @@ public class insrtDelitos extends HttpServlet {
 
         int newDel = maxDel + 1;
         delitoClave = exp.replace(jConcatenado, "") + "-D" + newDel;
-        
+
         return delitoClave;
-        
+
     }
+
     public String verificaVariable(String variable) {
         String verificada = "";
         if (variable == null) {
@@ -217,7 +244,7 @@ public class insrtDelitos extends HttpServlet {
         }
         return verificada;
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

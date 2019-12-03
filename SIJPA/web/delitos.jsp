@@ -262,30 +262,48 @@
                 </fieldset><br/>
                 <fieldset hidden id="fldsAdicionales">
                     <legend>Características adicionales</legend>
-                    <div id="dCosaRobada">
-                        <label for="cosaRobada">Tipo de cosa robada</label>
-                        <select class="txtLong" name="cosaRobada" id="cosaRobada" required>
-                            <option value="">--Seleccione--</option>
-                            <%   
-                                lista=cat.findCosaRobada();
+                            <div id="dCosaRobada" >
+                            <table class="tablasRegis" id="tableCosaRobada">
+                                <tr>
+                                    <th width="20">Id</th>
+                                    <th width="450">Cosa Robada</th>
+                                    <th width="70">Aplica</th>
+                                </tr>
+                                <%
+                                     lista=cat.findCosaRobada();
                                 for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %>
-                        </select>
-                    </div>
-                    <div id="dContextoSitua">
-                        <label for="contextoSitua">Contexto situacional</label>
-                        <select class="txtLong" name="contextoSitua" id="contextoSitua" required>
-                            <option value="">--Seleccione--</option>
-                            <%   
-                                lista=cat.findContextoSituacional();
+                                        out.println("<tr>");
+                                        out.println("<td>" + ls[0] + "</td>");
+                                        out.println("<td>" + ls[1] + "</td>");
+                                        out.println("<td>");
+                                        out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada' value='" + ls[0] + "' />");
+                                        out.println("</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>
+                            </table>
+                        </div>
+                         <div id="dContextoSitua" >
+                            <table class="tablasRegis" id="tableCosaRobada">
+                                <tr>
+                                    <th width="20">Id</th>
+                                    <th width="450">Contexto situacional</th>
+                                    <th width="70">Aplica</th>
+                                </tr>
+                                <%
+                                     lista=cat.findContextoSituacional();
                                 for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %>
-                        </select>
-                    </div>
+                                        out.println("<tr>");
+                                        out.println("<td>" + ls[0] + "</td>");
+                                        out.println("<td>" + ls[1] + "</td>");
+                                        out.println("<td>");
+                                        out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua' value='" + ls[0] + "' />");
+                                        out.println("</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>
+                            </table>
+                        </div>
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>

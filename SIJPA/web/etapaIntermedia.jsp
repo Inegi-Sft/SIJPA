@@ -31,17 +31,12 @@
         <section class="contenedor">
             <h1>Etapa Intermedia</h1>
             <form action="" method="post" id="formuMedia" name="formuMedia">
-                <fieldset>
-                    <table style="border-spacing: 0; " class="tablaFormu">
-                        <tr>
-                            <td colspan="3">
-                                <label for="idProcesado">Id Adolescente</label>
+                  <label for="idProcesado">Id Adolescente</label>
                                 <input class="txtMedia" name="idProcesado" id="idProcesado" value="<%=proceClave%>" readonly />
                                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
-
-                                <hr style="border: 1px solid #0077CB;margin-top: 10px;"/>
-                            </td>
-                        </tr>
+                <fieldset>
+                     <legend>Características de la etapa intermedia</legend>
+                    <table style="border-spacing: 0; " class="tablaFormu">
                         <tr>
                             <td>
                                 <div  id="divfechaEscrito">

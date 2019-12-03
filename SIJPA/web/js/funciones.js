@@ -304,11 +304,9 @@ $(document).ready(function () {
     $('#formExpedientes').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if ($('#compe').val() === '1') {
-            if ($('#aplAudi:checked').length === 0) {
-                alert("Selecciona por lo menos una Audiencia");
-                return false;
-            }
+        if($('#tAudiencias tbody tr').length === 0){
+            alert('Necesita capturar al menos una audiencia');
+            return false;
         }
         $.ajax({
             type: 'post',
@@ -575,6 +573,76 @@ $(document).ready(function () {
             $('#expClave').focus();
         }
     });
+    
+    $('#totalAudiencias').on('focusin', function(){
+        $('#tiAudi').keypress(function(){
+           if($(this).val().length === 2){
+               $(this).val($(this).val() + ':');
+           }
+        });
+        
+        $('#tiAudi').on('input', function () { 
+            this.value = this.value.replace(/[^0-9]/g,':');
+            this.value = this.value.slice(0,5);
+        });
+    });
+    
+    $('#addAudi').click(function(e){
+        e.stopImmediatePropagation();
+        var ultimoReg = $('#tAudiencias tbody tr').length;
+        var tag = '<tr>\n\
+                        <td>' + (ultimoReg + 1) + '</td>\n\
+                        <td>\n\
+                            <select name="tipoAudi" id="tipoAudi" class="txtLong" required>\n\
+                                <option value="">--Seleccione--</option>\n\
+                            </select></td>\n\
+                        <td>\n\
+                            <select name="juezAudi" id="juezAudi" class="txtLong" required>\n\
+                                <option value="">--Seleccione--</option>\n\
+                            </select></td>\n\
+                        <td>\n\
+                            <input type="date" name="fAudi" id="fAudi" class="txtMedia" required>\n\
+                            <div class="noIdentificada" style="margin:0">\n\
+                                <input type="checkbox" id="chkFechaCelebra" onclick="fechaNoIdent(\'#chkFechaCelebra\', \'#fAudi\')">\n\
+                                <label>No identificada</label>\n\
+                            </div>\n\
+                        </td>\n\
+                        <td>\n\
+                            <input type="text" name="tiAudi" id="tiAudi" class="txtSmall" placeholder="hh/mm" required>\n\
+                            <div class="noIdentificada" style="margin:0">\n\
+                                <input type="checkbox" id="chkDuracion" onclick="DuraNoIdent(\'#chkDuracion\', \'#tiAudi\')">\n\
+                                <label>No identificada</label>\n\
+                            </div>\n\
+                        </td>\n\
+                    </tr>';
+        $('#tAudiencias tbody').append(tag);
+        var juzClave = $('#jClave').val();
+        $.ajax({
+            url : 'obtenCatalogo.jsp',
+            dataType: 'html',
+            type: 'post',
+            data: {cat: 'tipoAudi'},
+            succes: function(data){
+                console.log('tipo Audiencias: ' + data);
+            }
+        }).done(function(d){
+            $('#tipoAudi').html(d);
+        });
+        $.ajax({
+            url : 'obtenCatalogo.jsp',
+            dataType: 'html',
+            type: 'post',
+            data: {
+                cat: 'jueces',
+                juzClave: juzClave
+                },
+            succes: function(data){
+                console.log('jueces: ' + data);
+            }
+        }).done(function(d){
+            $('#juezAudi').html(d);
+        });
+    });
     /*----------------------- FIN FUNCIONES PARA EXPEDIENTES --------------------------*/
     
     /*-----------------------FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/
@@ -607,16 +675,20 @@ function splashIn() {
 function competencia() {
     switch ($('#compe').val()) {
         case '1':
-            $('#tipoIncopetencia').fadeOut("slow");
-            $('#Tincompe').val('-2').prop('required', false);
             $('#totalElementos, #totalAudiencias').fadeIn("slow");
             $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
+            $('#tipoIncopetencia').fadeOut("slow");
+            $('#Tincompe').val('-2').prop('required', false);
             break;
         case '2':
             $('#tipoIncopetencia').fadeIn("slow");
             $('#Tincompe').val('').prop("required", true);
             $('#totalElementos, #totalAudiencias').fadeOut("slow");
             $('#Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
+            break;
+        default:
+            $('#totalElementos, #totalAudiencias, #tipoIncopetencia').fadeOut("slow");
+            $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tincompe').val('-2').prop("required", false);
             break;
     }
 }
@@ -715,10 +787,21 @@ function respuestaSelectbis() {
 function fechaNoIdent(idChk, idTxtDate) {
     if ($(idChk).is(":checked")) {
         $(idTxtDate).val("1899-09-09");
-        $(idTxtDate).prop("disabled", true);
+        $(idTxtDate).prop("readonly", true);
     } else {
         $(idTxtDate).val("");
-        $(idTxtDate).prop("disabled", false);
+        $(idTxtDate).prop("readonly", false);
+    }
+}
+
+// Duracion No identificada
+function DuraNoIdent(idChk, idTxtDura) {
+    if ($(idChk).is(":checked")) {
+        $(idTxtDura).val("00:00");
+        $(idTxtDura).prop("readonly", true);
+    } else {
+        $(idTxtDura).val("");
+        $(idTxtDura).prop("readonly", false);
     }
 }
 

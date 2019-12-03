@@ -409,6 +409,7 @@ a.addJuz{
     text-decoration: none;
     color: #706F6F;
     font-weight: bold;
+    cursor: pointer;
     text-shadow: grey 5px 5px 5px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -449,6 +450,12 @@ a.addJuz:hover{
     transition: all 0.3s ease;
 }
 
-input[type=text]:read-only{
-    background: #ccc;
+#jjc a:hover{
+    color: #007dc1;
+    font-size: 20px;
+}
+
+input[type=text]:read-only, input[type=date]:read-only{
+    background: rgb(235, 235, 228);
+    cursor: default;
 }

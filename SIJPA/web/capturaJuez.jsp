@@ -19,8 +19,6 @@
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
             int maxJu = 0;
-            
-            String juzClave = (String) session.getAttribute("juzgadoClave");
         %>
     </head>
     <body>
@@ -43,11 +41,11 @@
                             <td></td>
                             <td>
                                 <label for="juzClaveJuez">Órgano Jurisdiccional</label>
-                                <input type="text" name="juzClaveJuez" id="juzClaveJuez" value="<%=juzClave%>" readonly/>
+                                <input type="text" name="juzClaveJuez" id="juzClaveJuez" value="${sessionScope.juzgadoClave}" disabled/>
                             </td>
                             <td>
                                 <% 
-                                    maxJu = ju.findMaxJuex(juzClave) + 1;
+                                    maxJu = ju.findMaxJuex((String) session.getAttribute("juzgadoClave")) + 1;
                                 %>
                                 <label for="juezID">Juez ID</label>
                                 <input type="text" name="juezID" id="juezID" value="<%=maxJu%>" readonly/>

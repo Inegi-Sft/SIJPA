@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,7 +43,9 @@ public class insrtJuez extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         
-        String juzClaveJuez = request.getParameter("juzClaveJuez");
+        HttpSession sesion= request.getSession();
+        
+        String juzClaveJuez = (String) sesion.getAttribute("juzgadoClave");
         int juezID = Integer.parseInt(request.getParameter("juezID"));
         String nombre = request.getParameter("nombre");
         String apaterno = request.getParameter("apaterno");

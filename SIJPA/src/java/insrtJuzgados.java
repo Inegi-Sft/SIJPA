@@ -6,7 +6,6 @@
 
 import ConexionDB.Conexion_Mysql;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -84,7 +83,7 @@ public class insrtJuzgados extends HttpServlet {
         String causasTram = verificaVariable(request.getParameter("causasTram"));
         String causasBaja = verificaVariable(request.getParameter("causasBaja"));
         
-        juzgadoClave = entidadJ + "-" + municipioJ + "-" + numOrgano + "-" + jurisdiccion;
+        juzgadoClave = entidadJ + "-" + municipioJ + "-" + jurisdiccion + "-" + numOrgano;
         
         try {
             conn.Conectar();
@@ -104,7 +103,6 @@ public class insrtJuzgados extends HttpServlet {
                         conn.close();
                         HttpSession sesion = request.getSession();
                         sesion.setAttribute("juzgadoClave", juzgadoClave);
-                        sesion.setMaxInactiveInterval(-1);
                         response.sendRedirect("jueces.jsp");
                 }else{
                     conn.close();

@@ -12,7 +12,6 @@
 
     if (request.getParameter("norma") != null) {
         norma = Integer.parseInt(request.getParameter("norma"));
-//        out.println("<option value=''>--Seleccione--</option>");
     }
 
     lista = cat.findDelNorma(norma);

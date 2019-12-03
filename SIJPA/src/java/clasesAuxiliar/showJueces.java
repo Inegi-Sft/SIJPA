@@ -18,19 +18,24 @@ import java.util.logging.Logger;
  */
 public class showJueces {
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String> lista;
+    ArrayList<String[]> lista;
     ArrayList<String[]> listaTabla;
     String sql;
     ResultSet rs;
     
-    public ArrayList findJuez(){
+    public ArrayList findJuez(String juzClave){
         try {
             conn.Conectar();
             lista = new ArrayList();
-            sql = "SELECT JUEZ_CLAVE FROM DATOS_JUECES_ADOJC ORDER BY 1;";
+            sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
+                    + "FROM DATOS_JUECES_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
-                lista.add(rs.getString(1));
+                lista.add(new String[]{
+                    rs.getString(1), rs.getString(2)
+                });
             }
             conn.close();
         } catch (SQLException ex) {

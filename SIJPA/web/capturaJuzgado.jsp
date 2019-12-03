@@ -28,11 +28,11 @@
             </div>
             <h1>Captura Órgano Jurisdiccional</h1>
             <div class="pestana">
-                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn2">Datos Principales</button>
-                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn3">Ubicación</button>
-                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn4">Domicilio</button>
-                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn5">Datos del Capturador</button>
-                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn6">Información General</button>
+                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1">Datos Principales</button>
+                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2">Ubicación</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3">Domicilio</button>
+                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4">Datos del Capturador</button>
+                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5">Información General</button>
             </div>
             <form action="insrtJuzgados" method="post" name="formJuzgados">
                 <div id="p1" class="pestanaContent" style="display: block">

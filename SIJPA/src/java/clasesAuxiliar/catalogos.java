@@ -685,6 +685,38 @@ public class catalogos {
         }
         return lista;
     }
+    
+    public ArrayList findCausaSuspencion() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM CATALOGOS_CAUSA_SUSPENCION ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+    public ArrayList findReapertura() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM CATALOGOS_REAPERTURA ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 
     public ArrayList findPConstitucional() {
         conn.Conectar();
@@ -1151,7 +1183,7 @@ public class catalogos {
     public ArrayList findCosaRobada() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_COSA_ROBADA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_COSA_ROBADA WHERE COSA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1183,7 +1215,7 @@ public class catalogos {
     public ArrayList findContextoSituacional() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_CONTEXTO_SITUACIONAL ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_CONTEXTO_SITUACIONAL WHERE CONTEXTO_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

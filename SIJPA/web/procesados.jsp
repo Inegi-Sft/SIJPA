@@ -42,9 +42,6 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Procesados</h1>
-            <span class="nota">NOTA: El Adolescente procesado se identificará con el número de expediente seguido de un "-p" más el número consecutivo del Adolescente Procesado registrado.
-                Es decir, si es el primer Adolescente Procesado del expediente 10/2016 su identificador será 10/2016-p1
-            </span>
             <form action="" method="post" name="formProcesados" id="formProcesados">
                 <fieldset>
                     <legend>Situación jurídica del adolescente</legend>
@@ -58,7 +55,6 @@
                                 <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly/>
                             </td>
                             <td>
-                                
                             </td>
                         </tr>
                         <tr>
@@ -153,7 +149,6 @@
                                 </select>
                             </td>
                             <td>
-
                             </td>
                         </tr>
                         <tr>
@@ -197,7 +192,7 @@
                     </table>
                 </fieldset><br>
                 <fieldset>
-                    <legend>Delitos Atribuidos al adolescentes</legend>
+                    <legend>Delitos Atribuidos al Adolescente</legend>
                     <table class="tablasRegis">
                         <tr>
                              <th>Delito Clave</th>
@@ -584,7 +579,7 @@
                                     </div>
                                          <div class="cols oculto" id="fuenteIngePro">
                                         <label for="indigena"> Fuente de ingresos  </label>
-                                        <select name="fuenteIngresosPro" id="fuenteIngresosPro" class="txtMedia">
+                                        <select name="fuenteIngresosPro" id="fuenteIngresosPro" class="txtMedia" multiple>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findFuenteIngre();

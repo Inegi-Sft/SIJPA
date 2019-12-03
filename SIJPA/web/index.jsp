@@ -11,7 +11,7 @@
     session.setMaxInactiveInterval(-1);
     usuario comUsu = new usuario();
     if(comUsu.findUsuario()){
-        response.sendRedirect("juzgados.jsp");
+        response.sendRedirect("causasPenales.jsp");
     }
 %>
 <!DOCTYPE html>

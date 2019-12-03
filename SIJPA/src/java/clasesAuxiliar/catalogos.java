@@ -1259,5 +1259,21 @@ public class catalogos {
         }
         return lista;
     }
+    
+    public ArrayList findFormConduccion() {
+        conn.Conectar();
+        lista = new ArrayList<String[]>();
+        sql = "SELECT * FROM CATALOGOS_FORMA_CONDUCCION ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 
 }

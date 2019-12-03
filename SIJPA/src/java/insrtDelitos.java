@@ -58,11 +58,8 @@ public class insrtDelitos extends HttpServlet {
         String distrito = (String) sesion.getAttribute("distrito");
         String numero = (String) sesion.getAttribute("numero");
         String jConcatenado = entidad + municipio + distrito + numero;
-//        String expediente =(String) sesion.getAttribute("expediente");
-        String expediente, delitoClave;
-        expediente = "00001111015522";
-        delitoClave = "0000-D11111015522";
-//        String delitoClave =request.getParameter("delitoClave");
+        String expediente =(String) sesion.getAttribute("expediente");
+        String delitoClave =request.getParameter("delitoClave");
         String delitoCP = request.getParameter("delitoCP");
         String articuloCP = request.getParameter("articuloCP");
         int delitoNT = Integer.parseInt(request.getParameter("delitoNT"));
@@ -91,18 +88,20 @@ public class insrtDelitos extends HttpServlet {
 
             //String delitoClave = generaDelitoClave(expediente,jConcatenado);
             conn.Conectar();
-            sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(11,11015,5,22,'"
-                    //                    entidad+","+municipio+","+distrito+","+numero+",'" 
-                    //                    + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
-                    + expediente + "','"
-                    + delitoClave + "',"
-                    + delitoCP + ","
-                    + "'" + articuloCP + "',"
+            sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" 
+                    + entidad + ","
+                    + municipio + ","
+                    + distrito + ","
+                    + numero + ",'" 
+                    + expediente + jConcatenado + "','" 
+                    + delitoClave + jConcatenado + "',"
+                    + delitoCP + ",'"
+                    + articuloCP + "',"
                     + delitoNT + ","
                     + fuero + ","
-                    + reclasificaDel + ","
-                    + "'" + fechaReclaDel + "',"
-                    + "'" + ocurrencia + "',"
+                    + reclasificaDel + ",'"
+                    + fechaReclaDel + "','"
+                    + ocurrencia + "',"
                     + sitioO + ","
                     + consumacion + ","
                     + calificacion + ","
@@ -115,19 +114,21 @@ public class insrtDelitos extends HttpServlet {
                     + entidadD + ","
                     + municipioD + ","
                     + "0,"
-                    + "0,"
-                    + "'" + comentarios + "',"
+                    + "0,'"
+                    + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
            
             if (conn.escribir(sql)) {
                 if (delitoNT == 31) {
                     for (int i = 0; i < chkCR.length; i++) {
-                        sql = "INSERT INTO DATOS_DCOSA_ROBADA_ADOJC VALUES (11,11015,5,22,'"
-                                //                         entidad+","+municipio+","+distrito+","+numero+",'" 
-                                //                    + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
-                                + expediente + "','"
-                                + delitoClave + "',"
+                        sql = "INSERT INTO DATOS_DCOSA_ROBADA_ADOJC VALUES ("
+                                + entidad + ","
+                                + municipio + ","
+                                + distrito + ","
+                                + numero + ",'" 
+                                + expediente +jConcatenado + "','" 
+                                + delitoClave + jConcatenado + "',"
                                 + chkCR[i] + ");";
                         System.out.println(sql);
                         conn.escribir(sql);
@@ -135,12 +136,14 @@ public class insrtDelitos extends HttpServlet {
                 }
                         if (delitoNT == 1 || delitoNT == 4) {
                             for (int j = 0; j < chkCS.length; j++) {
-                                sql = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES (11,11015,5,22,'"
-                                        //                         entidad+","+municipio+","+distrito+","+numero+",'" 
-                                        //                    + expediente +jConcatenado + "','" + delitoClave + jConcatenado+"',"
-                                        + expediente + "','"
-                                        + delitoClave + "',"
-                                        + chkCS[j] + ");";
+                                sql = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES ("
+                                  + entidad + "," 
+                                  + municipio + ","
+                                  + distrito + ","
+                                  + numero + ",'" 
+                                  + expediente +jConcatenado + "','" 
+                                  + delitoClave + jConcatenado + "',"
+                                  + chkCS[j] + ");";
                                 System.out.println(sql);
                                 conn.escribir(sql);
                             }

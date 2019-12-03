@@ -90,7 +90,7 @@
                             <th>Delito cometido</th>
                         </tr>
                         <%
-                            vic = victi.finDdelitos(expediente + jConcatenado);
+                            vic = victi.findDelitos(expediente + jConcatenado);
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");

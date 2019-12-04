@@ -37,7 +37,7 @@
                                 <input type="text" name="CarpInves" id="CarpInves" required>
                             </td>
                             <td>
-                                <label for="expClave">Expediente Clave</label>
+                                <label for="expClave">No. Asunto Asignado</label>
                                 <input type="text" name="expClave" id="expClave" required>
                             </td>
                         </tr>

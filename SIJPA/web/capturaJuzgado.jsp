@@ -87,7 +87,7 @@
                 </div>
 
                 <div id="p2" class="pestanaContent">
-                    <h2>Ubicación</h2>
+                    <h2>División territorial jurisdiccional - Poder Judicial Estatal</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td>
@@ -104,7 +104,7 @@
                                 <input type="hidden" name="bandera" value="1"/>
                             </td>
                             <td>
-                                <label for="municipio">Municipio o Delegacion</label>
+                                <label for="municipio">Municipio o Demarcación Territorial de la CDMX</label>
                                 <select class="txtMedia" name="municipioJ" id="municipioJ" required>
                                     <option value="">--Seleccione--</option>
                                 </select>

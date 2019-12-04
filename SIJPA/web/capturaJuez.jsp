@@ -35,7 +35,7 @@
             <form action="insrtJuez" method="post" name="formJuez">
                 <!--Contenido pestañas--> 
                 <div id="p1" class="pestanaContent" style="display: block">
-                    <h2>Datos del Juez</h2>
+                    <h2>Datos Generales del Juez</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td></td>

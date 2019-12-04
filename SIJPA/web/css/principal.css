@@ -176,9 +176,9 @@ body{
     margin: 20px auto 10px auto;
 }
 
-.contenedor .txtSmall{ width: 70px;}
-.contenedor .txtMedia{ width: 160px;}
-.contenedor .txtLong{ width: 300px;}
+.contenedor .txtSmall{width: 70px;}
+.contenedor .txtMedia{width: 160px;}
+.contenedor .txtLong{width: 300px;}
 .contenedor .txtExBig{width: 800px;}
 .contenedor .lblExBig{width: auto;}
 

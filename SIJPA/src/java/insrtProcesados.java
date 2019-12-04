@@ -38,9 +38,9 @@ public class insrtProcesados extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql,sqlPDelitos;
+    String sql;
     ResultSet rs;
-    boolean insertPDeli;
+    boolean insertP;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -57,15 +57,6 @@ public class insrtProcesados extends HttpServlet {
         
         // VARIABLES PROCESADOS
         String proceClave = request.getParameter("proceClave");
-        String presentAdo = request.getParameter("presentAdo");
-        String tipoDetencion = request.getParameter("tipoDetencion");
-        String imputable = request.getParameter("imputable");
-        String participacion = request.getParameter("participacion");
-        String reincidencia = request.getParameter("reincidencia");
-        String psicofisico = request.getParameter("psicofisico");
-        String interprete = request.getParameter("interprete");
-        String defensor = request.getParameter("defensor");
-        String representante = request.getParameter("representante");
         String nombre = request.getParameter("nombre");
         String apaterno = request.getParameter("apaterno");
         String amaterno = request.getParameter("amaterno");
@@ -74,6 +65,9 @@ public class insrtProcesados extends HttpServlet {
         String sexo = request.getParameter("sexo");
         String edad = request.getParameter("edad");
         String fNacimiento = request.getParameter("fNacimiento");
+        if (fNacimiento == null) {
+            fNacimiento = "1899-09-09";
+        }
         String nPais = request.getParameter("nPais");
         String nEntidad = request.getParameter("nEntidad");
         String nMunicipio = verificaVariable(request.getParameter("nMunicipio"));
@@ -91,17 +85,26 @@ public class insrtProcesados extends HttpServlet {
         String puebloIndigena = request.getParameter("puebloIndigena");
         String hablaIndigena = request.getParameter("hablaIndigena");
         String lenguaIndigena = request.getParameter("lenguaIndigena");
+        String lenExtranjera = request.getParameter("lenExtranjera");
+        String traductorPro = request.getParameter("traductorPro");
+        String ingresosPro = request.getParameter("ingresosPro");
+        String rangoIngresosPro = request.getParameter("rangoIngresosPro");
         String ocupacion = request.getParameter("ocupacion");
         String condicionActi = request.getParameter("condicionActi");
+        String presentAdo = request.getParameter("presentAdo");
+        String tipoDetencion = request.getParameter("tipoDetencion");
+        String formaConduc = request.getParameter("formaConduc");
+        String participacion = request.getParameter("participacion");
+        String reincidencia = request.getParameter("reincidencia");
+        String psicofisico = request.getParameter("psicofisico");
+        String delictivo = request.getParameter("delictivo");
+        String grupoDelictivo = request.getParameter("grupoDelictivo");
+        String defensor = request.getParameter("defensor");
+        String representante = request.getParameter("representante");
         String comentarios = request.getParameter("comentarios");
-        if (fNacimiento == null) {
-            fNacimiento = "1899-09-09";
-        }
-
-        String arrayFecha[] = fNacimiento.split("-"); //Esto separa en un array basándose en el separador que le pases
-        String dia = arrayFecha[2];
-        String mes = arrayFecha[1];
-        String anio = arrayFecha[0];
+        
+        //VARIABLES PINGRESOS
+        String[] chkIngresosPro = request.getParameterValues("chkIngresosPro");
         
         //VARIABLES PDELITOS
         String[] arrayDelito = request.getParameterValues("arrayDelito");
@@ -111,38 +114,27 @@ public class insrtProcesados extends HttpServlet {
         //***********************************INSERT*************************************************
         try {
             response.setContentType("text/json;charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
             sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES("+entidad+","+municipio+","+distrito+","+numero+",'" 
-                    + expediente + jConcatenado + "','" + proceClave + jConcatenado+"',"
-                    + presentAdo + ","
-                    + tipoDetencion + ","
-                    + imputable + ","
-                    + participacion + ","
-                    + reincidencia + ","
-                    + psicofisico + ","
-                    + interprete + ","
-                    + defensor + ","
-                    + representante + ","
-                    + "'" + apaterno + "',"
-                    + "'" + amaterno + "',"
-                    + "'" + nombre + "',"
-                    + "'" + alias + "',"
-                    + "'" + curp + "',"
+                    + expediente + jConcatenado + "','" + proceClave + jConcatenado+"','"
+                    + nombre + "','"
+                    + apaterno + "','"
+                    + amaterno + "','"
+                    + alias + "','"
+                    + curp + "','"
+                    + fNacimiento + "',"
                     + sexo + ","
                     + edad + ","
-                    + "'" + fNacimiento + "',"
-                    + dia + ","
-                    + mes + ","
-                    + anio + ","
                     + nPais + ","
                     + nEntidad + ","
                     + nMunicipio + ","
-                    + edoCivil + ","
                     + nacionalidad + ","
                     + residencia + ","
                     + rEntidad + ","
                     + rMunicipio + ","
+                    + edoCivil + ","
                     + discapacidad + ","
                     + alfabet + ","
                     + estudios + ","
@@ -152,34 +144,61 @@ public class insrtProcesados extends HttpServlet {
                     + puebloIndigena + ","
                     + hablaIndigena + ","
                     + lenguaIndigena + ","
+                    + lenExtranjera + ","
+                    + traductorPro + ","
+                    + ingresosPro + ","
+                    + rangoIngresosPro + ","
                     + ocupacion + ","
                     + condicionActi + ","
-                    + "'" + comentarios + "',"
+                    + presentAdo + ","
+                    + tipoDetencion + ","
+                    + formaConduc + ","
+                    + participacion + ","
+                    + reincidencia + ","
+                    + psicofisico + ","
+                    + delictivo + ","
+                    + grupoDelictivo + ","
+                    + defensor + ","
+                    + representante + ",'"
+                    + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 //INSERT DE PDELITOS
-                for(int i=0; i<arrayDelito.length;i++){
-                    if(!arrayNumVic[i].equals("0")){//inserta el procesado que haya tenido un numero de victimas mayor a 0
-                        sqlPDelitos = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES ("+entidad+","+municipio+","+distrito+","+numero+","
-                                + "'"+expediente +jConcatenado+"','"+arrayDelito[i]+"','"+proceClave+jConcatenado+"',"
-                                +arrayNumVic[i]+", (select YEAR(NOW())) )";
-                        System.out.println(sqlPDelitos);
-                        insertPDeli=conn.escribir(sqlPDelitos);
-                    }
+                for (String chkIngresosPro1 : chkIngresosPro) {
+                    sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJC VALUES(" + entidad + "," + municipio + "," + distrito + "," + numero+",'"
+                            + expediente + jConcatenado + "','" + proceClave + jConcatenado + "'," + chkIngresosPro1 + ","
+                            + "(select YEAR(NOW())) )";
+                    System.out.println(sql);
+                    insertP = conn.escribir(sql);
                 }
-                if(insertPDeli){
-                    showProcesados pro = new showProcesados();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
-                    lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
-                    JSONArray resp = new JSONArray();
-                    resp.add(posicion);
-                    resp.add(lis.get(0)[0]);
-                    resp.add(lis.get(0)[1]);
-                    resp.add(lis.get(0)[2]);
-                    resp.add(lis.get(0)[3]);
-                    resp.add(pro.countProcesados(expediente + jConcatenado));
-                    out.write(resp.toJSONString());
+                if(insertP){
+                    for(int i=0; i<arrayDelito.length;i++){
+                        if(!arrayNumVic[i].equals("0")){//inserta el procesado que haya tenido un numero de victimas mayor a 0
+                            sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'"
+                                    + expediente + jConcatenado + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
+                                    + arrayNumVic[i] + ",(select YEAR(NOW())) )";
+                            System.out.println(sql);
+                            insertP=conn.escribir(sql);
+                        }
+                    }
+                    if(insertP){
+                        showProcesados pro = new showProcesados();
+                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
+                        JSONArray resp = new JSONArray();
+                        resp.add(posicion);
+                        resp.add(lis.get(0)[0]);
+                        resp.add(lis.get(0)[1]);
+                        resp.add(lis.get(0)[2]);
+                        resp.add(lis.get(0)[3]);
+                        resp.add(pro.countProcesados(expediente + jConcatenado));
+                        out.write(resp.toJSONString());
+                        conn.close();
+                    }else{
+                        conn.close();
+                    }
+                }else{
                     conn.close();
                 }
             } else {

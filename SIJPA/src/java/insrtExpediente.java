@@ -96,7 +96,7 @@ public class insrtExpediente extends HttpServlet {
                     for (int i = 0; i < tipoAudi.length; i++) {
                         sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
                                 + "'" + expediente_clave+jConcatenado + "',"+ tipoAudi[i] + "," + juezAudi[i] + ",'" + juzgado_clave + "','"
-                                + fAudi[i] + "','" + tiAudi[i] + "')";
+                                + fAudi[i] + "','" + tiAudi[i] + "', (select YEAR(NOW())))";
                         System.out.println(sql);
                         insrtExpe=conn.escribir(sql);
                     }

@@ -73,10 +73,10 @@ $(document).ready(function () {
                 $("#dRegJudicial,#dDistJudicial").hide();
                 $("#regJudicial,#distJudicial").val("-2").prop("required", false);
                 break;
-        }
-        if ($("#fOrganiza").val() > 3 || $("#fOrganiza").val() === "") {
-            $("#dRegJudicial,#dDistJudicial,#dPartJudicial").fadeOut("slow");
-            $("#regJudicial,#distJudicial,#partJudicial").val("-2").prop("required", false);
+            default:
+                $("#dRegJudicial,#dDistJudicial,#dPartJudicial").fadeOut("slow");
+                $("#regJudicial,#distJudicial,#partJudicial").val("-2").prop("required", false);
+                break;
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
@@ -225,16 +225,21 @@ $(document).ready(function () {
     });
 
     /*---------------------------- FIN VICTIMAS ----------------------------*/
+    
     /*---------------------------------PROCESADOS-------------------------------*/
-    $('#presentAdo').change(function (e) {
+    $('#presentAdo').change(function() {
         switch ($(this).val()) {
             case '1':
                 $('#dTipoDetencion').fadeIn('slow');
                 $('#tipoDetencion').val('').prop('required', true);
+                $('#formCondu').fadeOut('slow');
+                $('#formaConduc').val('-2').prop('required', false);
                 break;
             case '2':
                 $('#formCondu').fadeIn('slow');
                 $('#formaConduc').val('').prop('required', true);
+                $('#dTipoDetencion').fadeOut('slow');
+                $('#tipoDetencion').val('-2').prop('required', false);
                 break;
             default:
                 $('#dTipoDetencion, #formCondu').fadeOut('slow');
@@ -263,16 +268,20 @@ $(document).ready(function () {
             $('#delictivo').prop("disabled", false);
         }
     });
-    $('#ingresosPro').change(function (e) {
+    
+     $('#ingresosPro').change(function (e) {
         if ($(this).val() === '1') {
-            $('#rangoIngePro, #fuenteIngePro').fadeIn('slow');
-            $('#rangoIngresosPro, #fuenteIngresosPro').val('').prop('required', true);
+            $('#rangoIngePro, #fuenteIngrePro').fadeIn('slow');
+            $('#rangoIngresosPro').val('').prop('required', true);
+            $('#chkIngresosPro').prop("checked", false);
         } else {
-            $('#rangoIngePro, #fuenteIngePro').fadeOut('slow');
-            $('#rangoIngresosPro, #fuenteIngresosPro').val('-2').prop('required', false);
+            $('#rangoIngePro, #fuenteIngrePro').fadeOut('slow');
+            $('#rangoIngresosPro').val('-2').prop('required', false);
+             $('#chkIngresosPro').prop("checked", false);
         }
-    });
+    }); 
     /*--------------------------FIN PROCESADOS------------------------------------*/
+    
     /*--------------------------FUNCIONES PARA INICIAL-------------------------*/
     $('#audiInicial').change(function (e) {
         if ($(this).val() === '1') {
@@ -373,7 +382,6 @@ $(document).ready(function () {
             $('#dfechAutoLib').fadeIn('slow');
             $('#fechAutoLib').val('').prop('required', true);
             $('#chkFechaAutoLib').prop("checked", false);
-
         }
     });
 
@@ -436,7 +444,7 @@ $(document).ready(function () {
     });
 
     $('#dictoSobresei').change(function () {
-        if ($(this).val() != '1') {
+        if ($(this).val() !== '1') {
             $('#fSuspencion,#dReapertura,#dAcusacion').fadeIn('slow');
             $('#suspenProceso,#causasSuspension,#huboReapertura,#fechaReapertura,#quienSoliApertura,#formulaAcusacion').val('').prop('required', true);
             $('#dcausasSuspension,#dfechaReapertura,#dquienSoliApertura').fadeOut();
@@ -457,13 +465,13 @@ $(document).ready(function () {
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("").prop("disabled", false).prop("required", true);
             $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO,#tipoPruebaMP,#resolPruebaMP,#tipoPruebaJuri,\n\
-#resolJuridico,#tipoPruebaDefen,#resolDefensa').val('').prop("required", true);
+                #resolJuridico,#tipoPruebaDefen,#resolDefensa').val('').prop("required", true);
         } else {
             $('#divfechaAudiinter,#dseparaAcusa,#fmediosPrueba, #dmediosPrueba,#dacuerdosProba,#daperturaJO').fadeOut('slow');
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("1899-09-09").prop("disabled", false).prop("required", false);
             $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO,#tipoPruebaMP,#resolPruebaMP,#tipoPruebaJuri,\n\
-#resolJuridico,#tipoPruebaDefen,#resolDefensa').val('-2').prop("required", true);
+                #resolJuridico,#tipoPruebaDefen,#resolDefensa').val('-2').prop("required", true);
         }
     });
 
@@ -476,6 +484,7 @@ $(document).ready(function () {
             $('#pruebaMP, #pruebaAJ, #pruebaDefensa, #tipoPruebaMP, #resolPruebaMP,#tipoPruebaJuri,#resolJuridico,#tipoPruebaDefen, #resolDefensa').val('-2').prop('required', false);
         }
     });
+    
     $('#pruebaMP').change(function () {
         if ($(this).val() === '1') {
             $('#dtipoPruebaMP, #dresolPruebaMP').fadeIn('slow');
@@ -485,6 +494,7 @@ $(document).ready(function () {
             $('#tipoPruebaMP, #resolPruebaMP').val('-2').prop('required', false);
         }
     });
+    
     $('#pruebaAJ').change(function () {
         if ($(this).val() === '1') {
             $('#dtipoPruebaJuri,#dresolJuridico').fadeIn('slow');
@@ -494,6 +504,7 @@ $(document).ready(function () {
             $('#tipoPruebaJuri,#resolJuridico').val('-2').prop('required', false);
         }
     });
+    
     $('#pruebaDefensa').change(function () {
         if ($(this).val() === '1') {
             $('#dtipoPruebaDefen, #dresolDefensa').fadeIn('slow');
@@ -504,6 +515,7 @@ $(document).ready(function () {
         }
     });
     /*--------------------------FIN INTERMEDIA------------------------------------*/
+    
     /*----------------------- FUNCIONES PARA INSERTS AJAX --------------------------*/
 
 //Guarda Expedientes
@@ -571,6 +583,13 @@ $(document).ready(function () {
     $('#formProcesados').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        if($('#ingresosPro').val() === '1'){
+            if ($('#chkIngresosPro:checked').length === 0) {
+                alert('Serlecciona al menos una fuente de ingreso del procesado');
+                $('#chkIngresosPro').focus();
+                return false;
+            }
+        }
         $.ajax({
             type: 'post',
             url: 'insrtProcesados',
@@ -1017,7 +1036,6 @@ function DuraNoIdent(idChk, idTxtDura) {
 /**************************FUNCION ETAPA INICIAL *******************************/
 /***
  * @param {type} idChk
- * @param {type} idTable
  * @returns {undefined}
  */
 
@@ -1063,11 +1081,6 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
     }
 }
 ;
-
-
-
-
-
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 
@@ -1355,6 +1368,12 @@ function numeroVictimas() {
 }
 
 /************************ FUNCIONES PARA DELETE AJAX ******************************/
+/***
+ * 
+ * @param {type} fila
+ * @param {type} idProce
+ * @returns {undefined}
+ */
 function deleteConclusion(fila, idProce) {
     var resp = confirm("Realmente deseas eliminar este resgistro?");
     if (resp) {

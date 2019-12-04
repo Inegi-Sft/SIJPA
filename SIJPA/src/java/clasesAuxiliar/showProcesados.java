@@ -40,7 +40,8 @@ public class showProcesados {
                     resul.getString(32),resul.getString(33),resul.getString(34),resul.getString(35),
                     resul.getString(36),resul.getString(37),resul.getString(38),resul.getString(39),
                     resul.getString(40),resul.getString(41),resul.getString(42),resul.getString(43),
-                    resul.getString(44),resul.getString(45),resul.getString(46),resul.getString(47)});
+                    resul.getString(44),resul.getString(45),resul.getString(46),resul.getString(47)
+                });
             }
             conn.close();
         }
@@ -54,17 +55,16 @@ public class showProcesados {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT P.*,TP.*, S.*, GE.*"
-                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TP, CATALOGOS_SEXO S, CATALOGOS_GRADO_ESTUDIOS GE"
-                + " WHERE TP.CONSIGNACION_ID=P.TIPO_CONSIGNACION"
+            sql = "SELECT CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO),TP.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
+                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_IMPUTABILIDAD TP, CATALOGOS_SEXO S"
+                + " WHERE TP.IMPUTABILIDAD_ID=P.PRESENTACION_ADO"
                 + " AND S.SEXO_ID=P.SEXO"
                 + " AND P.PROCESADO_CLAVE = '" + pro + "';";
             
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proce.add(new String[]{
-                    resul.getString("P.NOMBRE")+" "+resul.getString("P.A_PATERNO")+" "+resul.getString("P.A_MATERNO"),
-                    resul.getString("TP.DESCRIPCION"),resul.getString("S.DESCRIPCION"),resul.getString("P.FECHA_NACIMIENTO")
+                    resul.getString(1),resul.getString(2),resul.getString(3),resul.getString(4)
                 });
             }
             conn.close();

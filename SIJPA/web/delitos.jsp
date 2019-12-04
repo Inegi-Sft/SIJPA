@@ -161,11 +161,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="concurso">Concurso</label>
-                                <select class="txtMedia"  name="concurso" id="concurso" required>
+                                <label for="clasificacion">Clasificación en orden al resultado</label>
+                                <select class="txtMedia"  name="clasificacion" id="clasificacion" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findConcurso();
+                                        lista = cat.findClasificacion();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -173,11 +173,11 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="clasificacion">Clasificación en orden al resultado</label>
-                                <select class="txtMedia"  name="clasificacion" id="clasificacion" required>
+                                <label for="concurso">Concurso</label>
+                                <select class="txtMedia"  name="concurso" id="concurso" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findClasificacion();
+                                        lista = cat.findConcurso();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }

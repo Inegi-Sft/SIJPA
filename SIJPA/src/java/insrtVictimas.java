@@ -38,28 +38,30 @@ public class insrtVictimas extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sqlVictimas, sqlVDelitos, sqlVProce, sqlVmedidas, sqlVmedidasMuj;
+    String sqlVictimas, sqlVDelitos, sqlVProce, sqlVmedidas, sqlVmedidasMuj, sqlIngresos;
     boolean insertaVDeli;
     boolean insertaVProce;
     boolean insertavmedida;
     boolean insertavmedidaMuj;
+    boolean insertavingresos;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
-        String entidad =(String) sesion.getAttribute("entidad");
-        String municipio =(String) sesion.getAttribute("municipio");
-        String distrito =(String) sesion.getAttribute("distrito");
-        String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+distrito+numero;
-        String expediente =(String) sesion.getAttribute("expediente");
-        
+        String entidad = (String) sesion.getAttribute("entidad");
+        String municipio = (String) sesion.getAttribute("municipio");
+        String distrito = (String) sesion.getAttribute("distrito");
+        String numero = (String) sesion.getAttribute("numero");
+        String jConcatenado = entidad + municipio + distrito + numero;
+        String expediente = (String) sesion.getAttribute("expediente");
+
         String victiClave = request.getParameter("victiClave");
         String tipo_victima = request.getParameter("tipo_victima");
         String victima_moral = request.getParameter("tvic_moral");
-        String asesor = request.getParameter("con_asesor");
+        String asesor = request.getParameter("asesor");
         String sexo = request.getParameter("sexo");
         String fecha_nacimiento;
         if (request.getParameter("fnacimiento") != null) {
@@ -77,16 +79,17 @@ public class insrtVictimas extends HttpServlet {
         String entidadResi = request.getParameter("Ereside");
         String municipioResi = verificaVariable(request.getParameter("Mreside"));
         String conyugal = request.getParameter("conyugal");
-        String discapacidad = request.getParameter("discapacidad");
         String alfabetismo = request.getParameter("alfabetismo");
         String estudios = request.getParameter("estudios");
-        String interprete = request.getParameter("interprete");
+        String ocupacion = request.getParameter("ocupa");
         String espanol = request.getParameter("hablaesp");
         String indigena = request.getParameter("indigena");
         String familia = request.getParameter("familia");
-        String ocupacion = request.getParameter("ocupa");
+        String extrangera = request.getParameter("extrangera");
+        String interprete = request.getParameter("interprete");
+        int ingresos = Integer.parseInt(request.getParameter("ingresos"));
+        String rangoingresos = request.getParameter("rangoIngresos");
         String comentarios = request.getParameter("Comentavic");
-        String[] procesa = request.getParameterValues("inpPro");
         String[] deli = request.getParameterValues("inpDeli");
         String[] chk = request.getParameterValues("deliCometido");
         String[] procesadoRela = request.getParameterValues("proRela");
@@ -94,6 +97,7 @@ public class insrtVictimas extends HttpServlet {
         String[] chkvmedida = request.getParameterValues("aplicaMedida");
         int vmedidaMujer = Integer.parseInt(request.getParameter("mujProtect"));
         String[] chkvmedidaMujer = request.getParameterValues("aplicaMedidaMuj");
+        String[] chkIngresos = request.getParameterValues("chkIngresos");
 
         try {
             response.setContentType("text/json;charset=UTF-8");
@@ -102,23 +106,23 @@ public class insrtVictimas extends HttpServlet {
             sqlVictimas = "INSERT INTO DATOS_VICTIMAS_ADOJC  VALUES(" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + expediente + jConcatenado
                     + "','" + victiClave + jConcatenado + "'," + tipo_victima + "," + victima_moral + "," + sexo + ",'" + fecha_nacimiento + "'," + edad + ","
                     + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + "," + muniNacimiento + "," + nacionalidad + "," + paisResi + ","
-                    + entidadResi + "," + municipioResi + "," + conyugal + "," + discapacidad + "," + alfabetismo + "," + estudios + "," + interprete 
+                    + entidadResi + "," + municipioResi + "," + conyugal + "," + "," + alfabetismo + "," + estudios + "," + interprete
                     + "," + espanol + "," + indigena + "," + familia + "," + ocupacion + "," + asesor + ",'" + comentarios + "',(select YEAR(NOW())))";
             System.out.println(sqlVictimas);
             if (conn.escribir(sqlVictimas)) {
                 for (int i = 0; i < chk.length; i++) {
-                    sqlVDelitos = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" 
-                            + expediente + jConcatenado + "','" + victiClave + jConcatenado + "','" + procesa[i] + "','"
-                            + deli[i] + "','Si')";
+                    sqlVDelitos = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'"
+                            + expediente + jConcatenado + "','" + victiClave + jConcatenado + "','" + "','"
+                            + deli[i] + "','Si'" + ",(select YEAR(NOW())))";
                     insertaVDeli = conn.escribir(sqlVDelitos);
-                    System.out.println(sqlVDelitos);  
+                    System.out.println(sqlVDelitos);
                 }
                 if (insertaVDeli) {
                     for (int j = 0; j < procesadoRela.length; j++) {
                         String[] chkRela = request.getParameterValues("chkRelaProce" + j);
                         for (int k = 0; k < chkRela.length; k++) {
-                            sqlVProce = "INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" 
-                                    + expediente + jConcatenado + "','" + procesadoRela[j] + "','" + victiClave + jConcatenado 
+                            sqlVProce = "INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'"
+                                    + expediente + jConcatenado + "','" + procesadoRela[j] + "','" + victiClave + jConcatenado
                                     + "'," + chkRela[k] + ", (select YEAR(NOW())))";
                             System.out.println(sqlVProce);
                             insertaVProce = conn.escribir(sqlVProce);
@@ -128,7 +132,7 @@ public class insrtVictimas extends HttpServlet {
                         if (vmedidas == 1) {
                             for (int i = 0; i < chkvmedida.length; i++) {
                                 sqlVmedidas = "INSERT INTO DATOS_VMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero
-                                        + ",'" + expediente + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkvmedida[i] + ")";
+                                        + ",'" + expediente + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkvmedida[i] + "',(select YEAR(NOW())))";
                                 System.out.println(sqlVmedidas);
                                 insertavmedida = conn.escribir(sqlVmedidas);
                             }
@@ -136,12 +140,22 @@ public class insrtVictimas extends HttpServlet {
                                 if (vmedidaMujer == 1) {
                                     for (int i = 0; i < chkvmedidaMujer.length; i++) {
                                         sqlVmedidasMuj = "INSERT INTO DATOS_VMEDIDAS_DMUJ_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + ","
-                                                + numero + ",'" + expediente + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkvmedidaMujer[i] + ")";
+                                                + numero + ",'" + expediente + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkvmedidaMujer[i] + "',(select YEAR(NOW())))";
                                         System.out.println(sqlVmedidasMuj);
                                         insertavmedidaMuj = conn.escribir(sqlVmedidasMuj);
                                     }
                                     if (insertavmedidaMuj) {
-                                        conn.close();
+                                        if (ingresos == 1) {
+                                            for (int i = 0; i < chkIngresos.length; i++) {
+                                                sqlIngresos = "INSERT INTO DATOS_VFUENTE_INGRESOS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + ","
+                                                    + numero + ",'" + expediente + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkIngresos[i] + "',(select YEAR(NOW())))";
+                                                System.out.println(sqlIngresos);
+                                                insertavingresos = conn.escribir(sqlIngresos);
+                                            }
+                                            if (insertavingresos) {
+                                                conn.close();
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -168,7 +182,7 @@ public class insrtVictimas extends HttpServlet {
             Logger.getLogger(insrtVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public String verificaVariable(String variable) {
         String verificada = "";
         if (variable == null) {

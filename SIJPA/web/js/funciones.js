@@ -85,10 +85,10 @@ $(document).ready(function () {
     $('#tipo_victima').change(function () {
         switch ($(this).val()) {
             case '1':
-                $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
+                $('#victiFisicas, #mediProtec').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
-                $('#tipoMoral').fadeOut('slow');
+                $('#tipoMoral,#MedidasPro,#MujPro').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
                 break;
             case '2':
@@ -106,6 +106,19 @@ $(document).ready(function () {
                     #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #mProtect, #mujProtect').val('-2').prop('required', false);
                 $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
+        }
+    });
+    
+     $('#sexo').change(function () {
+        if ($(this).val() === '2') {
+            $('#mujProtect').val('').prop('required',true);
+            $('#mediProtecMuj').fadeIn('slow');
+            $('#MujPro').fadeOut('slow');
+            $('#aplicaMedidaMuj').prop("checked", false);
+        } else {
+            $('#mujProtect').val('-2').prop('required',false);
+             $('#mediProtecMuj').fadeOut('slow');
+            $('#aplicaMedidaMuj').prop("checked", false);
         }
     });
 
@@ -181,11 +194,33 @@ $(document).ready(function () {
 
     $('#ingresos').change(function (e) {
         if ($(this).val() === '1') {
-            $('#rangoInge, #fuenteInge').fadeIn('slow');
-            $('#rangoIngresos, #fuenteIngresos').val('').prop('required', true);
+            $('#rangoInge, #fuenteIngre').fadeIn('slow');
+            $('#rangoIngresos').val('').prop('required', true);
+            $('#chkIngresos').prop("checked", false);
         } else {
-            $('#rangoInge, #fuenteInge').fadeOut('slow');
-            $('#rangoIngresos, #fuenteIngresos').val('-2').prop('required', false);
+            $('#rangoInge, #fuenteIngre').fadeOut('slow');
+            $('#rangoIngresos').val('-2').prop('required', false);
+             $('#chkIngresos').prop("checked", false);
+        }
+    });
+    
+    $('#mProtect').change(function (e) {
+        if ($(this).val() === '1') {
+            $('#MedidasPro').fadeIn('slow');
+            $('#aplicaMedida').prop("checked", false);
+        } else {
+             $('#MedidasPro').fadeOut('slow');
+            $('#aplicaMedida').prop("checked", false);
+        }
+    });
+    
+    $('#mujProtect').change(function (e) {
+        if ($(this).val() === '1') {
+            $('#MujPro').fadeIn('slow');
+            $('#aplicaMedidaMuj').prop("checked", false);
+        } else {
+             $('#MujPro').fadeOut('slow');
+            $('#aplicaMedidaMuj').prop("checked", false);
         }
     });
 

@@ -129,7 +129,8 @@ public class insrtDelitos extends HttpServlet {
                                 + numero + ",'" 
                                 + expediente +jConcatenado + "','" 
                                 + delitoClave + jConcatenado + "',"
-                                + chkCR[i] + ");";
+                                + chkCR[i] 
+                                + " (select YEAR(NOW())) );";
                         System.out.println(sql);
                         conn.escribir(sql);
                     }
@@ -143,7 +144,8 @@ public class insrtDelitos extends HttpServlet {
                                   + numero + ",'" 
                                   + expediente +jConcatenado + "','" 
                                   + delitoClave + jConcatenado + "',"
-                                  + chkCS[j] + ");";
+                                  + chkCS[j] 
+                                  + " (select YEAR(NOW())) );";      
                                 System.out.println(sql);
                                 conn.escribir(sql);
                             }

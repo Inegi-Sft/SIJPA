@@ -459,3 +459,9 @@ input[type=text]:read-only, input[type=date]:read-only{
     background: rgb(235, 235, 228);
     cursor: default;
 }
+
+.fuente {
+    width: 15%;
+    margin: 5px;
+    font-size:smaller;
+}

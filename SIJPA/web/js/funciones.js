@@ -522,10 +522,10 @@ $(document).ready(function () {
     $('#formExpedientes').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if($('#tAudiencias tbody tr').length === 0){
-            alert('Necesita capturar al menos una audiencia');
-            return false;
-        }
+//        if($('#tAudiencias tbody tr').length === 0){
+//            alert('Necesita capturar al menos una audiencia');
+//            return false;
+//        }
         $.ajax({
             type: 'post',
             url: 'insrtExpediente',
@@ -812,62 +812,62 @@ $(document).ready(function () {
         });
     });
     
-    $('#addAudi').click(function(e){
-        e.stopImmediatePropagation();
-        var ultimoReg = $('#tAudiencias tbody tr').length;
-        var tag = '<tr>\n\
-                        <td>' + (ultimoReg + 1) + '</td>\n\
-                        <td>\n\
-                            <select name="tipoAudi" id="tipoAudi" class="txtLong" required>\n\
-                                <option value="">--Seleccione--</option>\n\
-                            </select></td>\n\
-                        <td>\n\
-                            <select name="juezAudi" id="juezAudi" class="txtLong" required>\n\
-                                <option value="">--Seleccione--</option>\n\
-                            </select></td>\n\
-                        <td>\n\
-                            <input type="date" name="fAudi" id="fAudi" class="txtMedia" required>\n\
-                            <div class="noIdentificada" style="margin:0">\n\
-                                <input type="checkbox" id="chkFechaCelebra" onclick="fechaNoIdent(\'#chkFechaCelebra\', \'#fAudi\')">\n\
-                                <label>No identificada</label>\n\
-                            </div>\n\
-                        </td>\n\
-                        <td>\n\
-                            <input type="text" name="tiAudi" id="tiAudi" class="txtSmall" placeholder="hh/mm" required>\n\
-                            <div class="noIdentificada" style="margin:0">\n\
-                                <input type="checkbox" id="chkDuracion" onclick="DuraNoIdent(\'#chkDuracion\', \'#tiAudi\')">\n\
-                                <label>No identificada</label>\n\
-                            </div>\n\
-                        </td>\n\
-                    </tr>';
-        $('#tAudiencias tbody').append(tag);
-        var juzClave = $('#jClave').val();
-        $.ajax({
-            url : 'obtenCatalogo.jsp',
-            dataType: 'html',
-            type: 'post',
-            data: {cat: 'tipoAudi'},
-            succes: function(data){
-                console.log('tipo Audiencias: ' + data);
-            }
-        }).done(function(d){
-            $('#tipoAudi').html(d);
-        });
-        $.ajax({
-            url : 'obtenCatalogo.jsp',
-            dataType: 'html',
-            type: 'post',
-            data: {
-                cat: 'jueces',
-                juzClave: juzClave
-                },
-            succes: function(data){
-                console.log('jueces: ' + data);
-            }
-        }).done(function(d){
-            $('#juezAudi').html(d);
-        });
-    });
+//    $('#addAudi').click(function(e){
+//        e.stopImmediatePropagation();
+//        var ultimoReg = $('#tAudiencias tbody tr').length;
+//        var tag = '<tr>\n\
+//                        <td>' + (ultimoReg + 1) + '</td>\n\
+//                        <td>\n\
+//                            <select name="tipoAudi" id="tipoAudi" class="txtLong" required>\n\
+//                                <option value="">--Seleccione--</option>\n\
+//                            </select></td>\n\
+//                        <td>\n\
+//                            <select name="juezAudi" id="juezAudi" class="txtLong" required>\n\
+//                                <option value="">--Seleccione--</option>\n\
+//                            </select></td>\n\
+//                        <td>\n\
+//                            <input type="date" name="fAudi" id="fAudi" class="txtMedia" required>\n\
+//                            <div class="noIdentificada" style="margin:0">\n\
+//                                <input type="checkbox" id="chkFechaCelebra" onclick="fechaNoIdent(\'#chkFechaCelebra\', \'#fAudi\')">\n\
+//                                <label>No identificada</label>\n\
+//                            </div>\n\
+//                        </td>\n\
+//                        <td>\n\
+//                            <input type="text" name="tiAudi" id="tiAudi" class="txtSmall" placeholder="hh/mm" required>\n\
+//                            <div class="noIdentificada" style="margin:0">\n\
+//                                <input type="checkbox" id="chkDuracion" onclick="DuraNoIdent(\'#chkDuracion\', \'#tiAudi\')">\n\
+//                                <label>No identificada</label>\n\
+//                            </div>\n\
+//                        </td>\n\
+//                    </tr>';
+//        $('#tAudiencias tbody').append(tag);
+//        var juzClave = $('#jClave').val();
+//        $.ajax({
+//            url : 'obtenCatalogo.jsp',
+//            dataType: 'html',
+//            type: 'post',
+//            data: {cat: 'tipoAudi'},
+//            succes: function(data){
+//                console.log('tipo Audiencias: ' + data);
+//            }
+//        }).done(function(d){
+//            $('#tipoAudi').html(d);
+//        });
+//        $.ajax({
+//            url : 'obtenCatalogo.jsp',
+//            dataType: 'html',
+//            type: 'post',
+//            data: {
+//                cat: 'jueces',
+//                juzClave: juzClave
+//                },
+//            succes: function(data){
+//                console.log('jueces: ' + data);
+//            }
+//        }).done(function(d){
+//            $('#juezAudi').html(d);
+//        });
+//    });
     /*----------------------- FIN FUNCIONES PARA EXPEDIENTES --------------------------*/
 
     /*-----------------------FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/

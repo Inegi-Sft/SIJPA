@@ -131,7 +131,7 @@
                             </td>
                         </tr>
                     </table>
-                </fieldset><br/>
+                </fieldset>
                 <fieldset class="oculto" id="totalElementos">
                     <legend>Contenidos del expediente de la causa penal</legend>
                     <table class="tablaFormu">
@@ -151,8 +151,8 @@
                             </td>
                         </tr>
                     </table>
-                </fieldset><br/>
-                <fieldset class="oculto" id="totalAudiencias">
+                </fieldset>
+<!--                <fieldset class="oculto" id="totalAudiencias">
                     <legend>Audiencias</legend>
                     <table class="tablasRegis" id="tAudiencias">
                         <thead>
@@ -168,7 +168,7 @@
                         </tbody>
                     </table>
                     <a id="addAudi" class="addJuz">Agregar Audiencia <img src="img/add.png" title="Agregar Audiencia"></a>
-                </fieldset>
+                </fieldset>-->
                 <div class="comentarios">
                     <h2>Comentarios</h2>
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>

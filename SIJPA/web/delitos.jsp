@@ -104,7 +104,7 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoNT">Delito de acuerdo con la Norma Técnica</label>
-                                <select class="lblExBig" name="delitoNT" id="delitoNT" required>
+                                <select class="txtExBig" name="delitoNT" id="delitoNT" required>
                                     <option value="">--Seleccione--</option>
                                 </select> 
                             </td>

@@ -79,8 +79,8 @@ public class showVictimas {
         conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT  D.DELITO_CLAVE, C.CODIGO FROM DATOS_DELITOS_ADOJC D "
-                + "INNER JOIN CATALOGOS_CODIGO_NORMA C ON D.DELITO_CODIGO_PENAL = C.ID "
-                + "WHERE D.EXPEDIENTE_CLAVE = '" + exp + "'" ;
+                + "INNER JOIN CATALOGOS_CODIGO_NORMA C ON D.DELITO_CODIGO_PENAL = C.ID_CODIGO "
+                + "WHERE D.CAUSA_CLAVE = '" + exp + "'" ;
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
@@ -100,7 +100,7 @@ public class showVictimas {
         conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
-                + "WHERE EXPEDIENTE_CLAVE = '" + exp + "'" ;
+                + "WHERE CAUSA_CLAVE = '" + exp + "'" ;
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
@@ -120,7 +120,7 @@ public class showVictimas {
         try{
             conn.Conectar();
             conteoVic = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_VICTIMAS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_VICTIMAS_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoVic = resul.getInt("TOTAL");

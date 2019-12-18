@@ -80,6 +80,30 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
+    /*----------------------------DELITOS --------------------------------------------*/
+    $('#contextoSitua99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 12; i++) {
+                $('#contextoSitua' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 12; i++) {
+                $('#contextoSitua' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#cosaRobada99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 12; i++) {
+                $('#cosaRobada' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 12; i++) {
+                $('#cosaRobada' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    /*----------------------------FIN DELITOS ----------------------------------------*/
 
     /*---------------------------- VICTIMAS ----------------------------*/
     $('#tipo_victima').change(function () {
@@ -87,7 +111,7 @@ $(document).ready(function () {
             case '1':
                 $('#victiFisicas, #mediProtec').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('').prop('required', true);
                 $('#tipoMoral,#MedidasPro,#MujPro').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
                 break;
@@ -97,27 +121,27 @@ $(document).ready(function () {
 
                 $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
                 $('#sexo, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #ocupa, #mProtect, #mujProtect').val('-2').prop('required', false);
+                    #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('-2').prop('required', false);
                 $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
             default:
                 $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
                 $('#tvic_moral, #sexo, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #mProtect, #mujProtect').val('-2').prop('required', false);
+                    #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #extrangera, #mProtect, #mujProtect').val('-2').prop('required', false);
                 $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
         }
     });
-    
-     $('#sexo').change(function () {
+
+    $('#sexo').change(function () {
         if ($(this).val() === '2') {
-            $('#mujProtect').val('').prop('required',true);
+            $('#mujProtect').val('').prop('required', true);
             $('#mediProtecMuj').fadeIn('slow');
             $('#MujPro').fadeOut('slow');
             $('#aplicaMedidaMuj').prop("checked", false);
         } else {
-            $('#mujProtect').val('-2').prop('required',false);
-             $('#mediProtecMuj').fadeOut('slow');
+            $('#mujProtect').val('-2').prop('required', false);
+            $('#mediProtecMuj').fadeOut('slow');
             $('#aplicaMedidaMuj').prop("checked", false);
         }
     });
@@ -200,34 +224,90 @@ $(document).ready(function () {
         } else {
             $('#rangoInge, #fuenteIngre').fadeOut('slow');
             $('#rangoIngresos').val('-2').prop('required', false);
-             $('#chkIngresos').prop("checked", false);
+            $('#chkIngresos').prop("checked", false);
         }
     });
-    
+
     $('#mProtect').change(function (e) {
         if ($(this).val() === '1') {
             $('#MedidasPro').fadeIn('slow');
-            $('#aplicaMedida').prop("checked", false);
+            $('input[name="aplicaMedida"]').prop("checked", false).prop("disabled", false);
         } else {
-             $('#MedidasPro').fadeOut('slow');
-            $('#aplicaMedida').prop("checked", false);
+            $('#MedidasPro').fadeOut('slow');
+            $('input[name="aplicaMedida"]').prop("checked", false).prop("disabled", false);
         }
     });
-    
+
     $('#mujProtect').change(function (e) {
         if ($(this).val() === '1') {
             $('#MujPro').fadeIn('slow');
-            $('#aplicaMedidaMuj').prop("checked", false);
+            $('input[name="aplicaMedidaMuj"]').prop("checked", false).prop("disabled", false);
         } else {
-             $('#MujPro').fadeOut('slow');
-            $('#aplicaMedidaMuj').prop("checked", false);
+            $('#MujPro').fadeOut('slow');
+            $('input[name="aplicaMedidaMuj"]').prop("checked", false).prop("disabled", false);
+        }
+    });
+
+    $('.RelaProceChk').change(function () {
+        var numProcesa = $('#numeroProcesados').val();
+        for (i = 0; i < numProcesa; i++) {
+            if ($('#chkRelaProce' + i + '99').is(":checked")) {
+                for (var j = 1; j < 11; j++) {
+                    $('#chkRelaProce' + i + j).prop("checked", false).prop("disabled", true);
+                }
+            }
+            if ($('#chkRelaProce' + i + '10').is(":checked")) {
+                for (var j = 1; j < 10; j++) {
+                    $('#chkRelaProce' + i + j).prop("checked", false).prop("disabled", true);
+                }
+                $('#chkRelaProce99').prop("checked", false).prop("disabled", true);
+
+            } else {
+                for (var j = 1; j < 12; j++) {
+                    $('#chkRelaProce' + i + j).prop("disabled", false);
+                }
+            }
+        }
+    });
+
+    $('#chkIngresos9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 9; i++) {
+                $('#chkIngresos' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 9; i++) {
+                $('#chkIngresos' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#aplicaMedida99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 12; i++) {
+                $('#aplicaMedida' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 12; i++) {
+                $('#aplicaMedida' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#aplicaMedidaMuj99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 18; i++) {
+                $('#aplicaMedidaMuj' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 18; i++) {
+                $('#aplicaMedidaMuj' + i).prop("checked", false).prop("disabled", false);
+            }
         }
     });
 
     /*---------------------------- FIN VICTIMAS ----------------------------*/
-    
+
     /*---------------------------------PROCESADOS-------------------------------*/
-    $('#presentAdo').change(function() {
+    $('#presentAdo').change(function () {
         switch ($(this).val()) {
             case '1':
                 $('#dTipoDetencion').fadeIn('slow');
@@ -268,8 +348,8 @@ $(document).ready(function () {
             $('#delictivo').prop("disabled", false);
         }
     });
-    
-     $('#ingresosPro').change(function (e) {
+
+    $('#ingresosPro').change(function (e) {
         if ($(this).val() === '1') {
             $('#rangoIngePro, #fuenteIngrePro').fadeIn('slow');
             $('#rangoIngresosPro').val('').prop('required', true);
@@ -277,11 +357,11 @@ $(document).ready(function () {
         } else {
             $('#rangoIngePro, #fuenteIngrePro').fadeOut('slow');
             $('#rangoIngresosPro').val('-2').prop('required', false);
-             $('#chkIngresosPro').prop("checked", false);
+            $('#chkIngresosPro').prop("checked", false);
         }
-    }); 
+    });
     /*--------------------------FIN PROCESADOS------------------------------------*/
-    
+
     /*--------------------------FUNCIONES PARA INICIAL-------------------------*/
     $('#audiInicial').change(function (e) {
         if ($(this).val() === '1') {
@@ -294,9 +374,9 @@ $(document).ready(function () {
             $('#chkFechaAutoLiber,#chkFechaAutoLib,#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
 
         } else {
-            $('#dCtrlDetencion,#dFormuImputa,#dLegalDeten,#dFechaAutoLiber,#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo').fadeOut('slow');
+            $('#dCtrlDetencion,#dFormuImputa,#dLegalDeten,#dFechaAutoLiber,#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo,#especifiqueMC').fadeOut('slow');
             $('#ctrlDetencion,#formuImputa,#legalDeten,#declaro,#huboPlazo,#plazo,#autoVin,#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
-                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
+                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion,#formulaAcusacion').val('-2').prop('required', false);
             $('#dFechaAutoLiber,#fechaFormuImpu,#fechDeclara,#fechAutoLib,#fechAuto,#fechSoliPlazo,#fechCierreI,#fechaReapertura').val("1899-09-09").prop('required', false);
             $('#chkFechaAutoLiber,#chkFechaAutoLib,#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
         }
@@ -315,9 +395,9 @@ $(document).ready(function () {
         } else {
             $('#dFormuImputa').fadeIn('slow');
             $('#formuImputa').val('').prop('required', true);
-            $('#dLegalDeten,#dFechaAutoLiber,#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo').fadeOut('slow');
+            $('#dLegalDeten,#dFechaAutoLiber,#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo,#especifiqueMC').fadeOut('slow');
             $('#legalDeten,#declaro,#huboPlazo,#plazo,#autoVin,#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
-                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
+                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion,#MCespecificar').val('-2').prop('required', false);
             $('#dFechaAutoLiber,#fechaFormuImpu,#fechDeclara,#fechAutoLib,#fechAuto,#fechSoliPlazo,#fechCierreI,#fechaReapertura').val("1899-09-09").prop('required', false);
             $('#chkFechaAutoLiber,#chkFechaAutoLib,#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
         }
@@ -337,9 +417,9 @@ $(document).ready(function () {
         } else {
             $('#dFormuImputa').fadeIn('slow');
             $('#formuImputa').val('').prop('required', true);
-            $('#dFechaAutoLiber,#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo').fadeOut('slow');
+            $('#dFechaAutoLiber,#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo,#especifiqueMC').fadeOut('slow');
             $('#declaro,#huboPlazo,#plazo,#autoVin,#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
-                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
+                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion,#MCespecificar').val('-2').prop('required', false);
             $('#dFechaAutoLiber,#fechaFormuImpu,#fechDeclara,#fechAutoLib,#fechAuto,#fechSoliPlazo,#fechCierreI,#fechaReapertura').val("1899-09-09").prop('required', false);
             $('#chkFechaAutoLiber,#chkFechaAutoLib,#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
         }
@@ -356,9 +436,9 @@ $(document).ready(function () {
             $('#fechAutoLib').val("1899-09-09").prop('required', false);
             $('#chkFechaFormuImpu,#chkFechDeclara,#chkFechaAuto,#chkFechaAutoLib').prop("checked", false);
         } else {
-            $('#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo').fadeOut('slow');
+            $('#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo,#especifiqueMC').fadeOut('slow');
             $('#declaro,#huboPlazo,#plazo,#autoVin,#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
-           #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
+           #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion,#MCespecificar').val('-2').prop('required', false);
             $('#fechaFormuImpu,#fechDeclara,#fechAutoLib,#fechAutoLib,#fechAuto,#fechSoliPlazo,#fechCierreI,#fechaReapertura').val("1899-09-09").prop('required', false);
             $('#chkFechaAutoLib,#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
         }
@@ -374,9 +454,9 @@ $(document).ready(function () {
             $('#fechAutoLib').val("1899-09-09").prop('required', false);
             $('#chkFechaAutoLib').prop("checked", false);
         } else {
-            $('#dfechAuto,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo').fadeOut('slow');
+            $('#dfechAuto,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#fPlazo,#especifiqueMC').fadeOut('slow');
             $('#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
-                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
+                   #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion,#MCespecificar').val('-2').prop('required', false);
             $('#fechAuto,#fechSoliPlazo,#fechCierreI,#fechaReapertura').val("1899-09-09").prop('required', false);
             $('#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
             $('#dfechAutoLib').fadeIn('slow');
@@ -388,8 +468,30 @@ $(document).ready(function () {
     $('#drecretaMC').change(function () {
         if ($(this).val() === '1') {
             $('#tableMcau').fadeIn('slow');
+            $('input[name="apliMedidaCau"]').prop("checked", false).prop("disabled", false);
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
         } else {
             $('#tableMcau').fadeOut('slow');
+            $('input[name="apliMedidaCau"]').prop("checked", false).prop("disabled", false);
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
+        }
+    });
+    
+     $('#apliMedidaCau99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 14; i++) {
+                $('#apliMedidaCau' + i).prop("checked", false).prop("disabled", true);
+            }
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
+        } else {
+            for (var i = 1; i < 14; i++) {
+                $('#apliMedidaCau' + i).prop("checked", false).prop("disabled", false);
+            }
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
         }
     });
 
@@ -464,14 +566,17 @@ $(document).ready(function () {
             $('#divfechaAudiinter,#dseparaAcusa,#fmediosPrueba, #dmediosPrueba,#dacuerdosProba,#daperturaJO').fadeIn('slow');
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("").prop("disabled", false).prop("required", true);
-            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO,#tipoPruebaMP,#resolPruebaMP,#tipoPruebaJuri,\n\
-                #resolJuridico,#tipoPruebaDefen,#resolDefensa').val('').prop("required", true);
+            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO').val('').prop("required", true);
+            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#tblpruebaMP,#tblmediospruebaAJ,#tblmediospruebaDefen').fadeOut('slow');
+            $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('-2').prop('required', false);
+            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+
         } else {
             $('#divfechaAudiinter,#dseparaAcusa,#fmediosPrueba, #dmediosPrueba,#dacuerdosProba,#daperturaJO').fadeOut('slow');
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("1899-09-09").prop("disabled", false).prop("required", false);
-            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO,#tipoPruebaMP,#resolPruebaMP,#tipoPruebaJuri,\n\
-                #resolJuridico,#tipoPruebaDefen,#resolDefensa').val('-2').prop("required", true);
+            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO').val('-2').prop("required", true);
+            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
         }
     });
 
@@ -480,52 +585,84 @@ $(document).ready(function () {
             $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa').fadeIn('slow');
             $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('').prop('required', true);
         } else {
-            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#dtipoPruebaMP, #dresolPruebaMP, #dtipoPruebaJuri,#dresolJuridico, #dtipoPruebaDefen, #dresolDefensa').fadeOut('slow');
-            $('#pruebaMP, #pruebaAJ, #pruebaDefensa, #tipoPruebaMP, #resolPruebaMP,#tipoPruebaJuri,#resolJuridico,#tipoPruebaDefen, #resolDefensa').val('-2').prop('required', false);
+            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#tblpruebaMP, #tblmediospruebaAJ, #tblmediospruebaDefen').fadeOut('slow');
+            $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('-2').prop('required', false);
         }
     });
-    
+
     $('#pruebaMP').change(function () {
         if ($(this).val() === '1') {
-            $('#dtipoPruebaMP, #dresolPruebaMP').fadeIn('slow');
-            $('#tipoPruebaMP, #resolPruebaMP').val('').prop('required', true);
+            $('#tblpruebaMP').fadeIn('slow');
+            $('input[name="chkpruebaMP"]').prop("checked", false).prop("disabled", false);
         } else {
-            $('#dtipoPruebaMP, #dresolPruebaMP').fadeOut('slow');
-            $('#tipoPruebaMP, #resolPruebaMP').val('-2').prop('required', false);
+            $('#tblpruebaMP').fadeOut('slow');
+            $('input[name="chkpruebaMP"]').prop("checked", false).prop("disabled", false);
         }
     });
-    
+
     $('#pruebaAJ').change(function () {
         if ($(this).val() === '1') {
-            $('#dtipoPruebaJuri,#dresolJuridico').fadeIn('slow');
-            $('#tipoPruebaJuri,#resolJuridico').val('').prop('required', true);
+            $('#tblmediospruebaAJ').fadeIn('slow');
+            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("disabled", false);
         } else {
-            $('#dtipoPruebaJuri,#dresolJuridico').fadeOut('slow');
-            $('#tipoPruebaJuri,#resolJuridico').val('-2').prop('required', false);
+            $('#tblmediospruebaAJ').fadeOut('slow');
+            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("disabled", false);
+            ;
         }
     });
-    
+
     $('#pruebaDefensa').change(function () {
         if ($(this).val() === '1') {
-            $('#dtipoPruebaDefen, #dresolDefensa').fadeIn('slow');
-            $('#tipoPruebaDefen, #resolDefensa').val('').prop('required', true);
+            $('#tblmediospruebaDefen').fadeIn('slow');
+            $('input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
         } else {
-            $('#dtipoPruebaDefen, #dresolDefensa').fadeOut('slow');
-            $('#tipoPruebaDefen, #resolDefensa').val('-2').prop('required', false);
+            $('#tblmediospruebaDefen').fadeOut('slow');
+            $('input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+            ;
+        }
+    });
+
+    $('#chkpruebaAJ9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#chkpruebaMP9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#chkpruebaDefen9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaDefen' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaDefen' + i).prop("checked", false).prop("disabled", false);
+            }
         }
     });
     /*--------------------------FIN INTERMEDIA------------------------------------*/
-    
+
     /*----------------------- FUNCIONES PARA INSERTS AJAX --------------------------*/
 
 //Guarda Expedientes
     $('#formExpedientes').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-//        if($('#tAudiencias tbody tr').length === 0){
-//            alert('Necesita capturar al menos una audiencia');
-//            return false;
-//        }
         $.ajax({
             type: 'post',
             url: 'insrtExpediente',
@@ -583,7 +720,7 @@ $(document).ready(function () {
     $('#formProcesados').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if($('#ingresosPro').val() === '1'){
+        if ($('#ingresosPro').val() === '1') {
             if ($('#chkIngresosPro:checked').length === 0) {
                 alert('Serlecciona al menos una fuente de ingreso del procesado');
                 $('#chkIngresosPro').focus();
@@ -798,76 +935,19 @@ $(document).ready(function () {
             $('#expClave').focus();
         }
     });
-    
-    $('#totalAudiencias').on('focusin', function(){
-        $('#tiAudi').keypress(function(){
-           if($(this).val().length === 2){
-               $(this).val($(this).val() + ':');
-           }
+
+    $('#totalAudiencias').on('focusin', function () {
+        $('#tiAudi').keypress(function () {
+            if ($(this).val().length === 2) {
+                $(this).val($(this).val() + ':');
+            }
         });
-        
-        $('#tiAudi').on('input', function () { 
-            this.value = this.value.replace(/[^0-9]/g,':');
-            this.value = this.value.slice(0,5);
+
+        $('#tiAudi').on('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, ':');
+            this.value = this.value.slice(0, 5);
         });
     });
-    
-//    $('#addAudi').click(function(e){
-//        e.stopImmediatePropagation();
-//        var ultimoReg = $('#tAudiencias tbody tr').length;
-//        var tag = '<tr>\n\
-//                        <td>' + (ultimoReg + 1) + '</td>\n\
-//                        <td>\n\
-//                            <select name="tipoAudi" id="tipoAudi" class="txtLong" required>\n\
-//                                <option value="">--Seleccione--</option>\n\
-//                            </select></td>\n\
-//                        <td>\n\
-//                            <select name="juezAudi" id="juezAudi" class="txtLong" required>\n\
-//                                <option value="">--Seleccione--</option>\n\
-//                            </select></td>\n\
-//                        <td>\n\
-//                            <input type="date" name="fAudi" id="fAudi" class="txtMedia" required>\n\
-//                            <div class="noIdentificada" style="margin:0">\n\
-//                                <input type="checkbox" id="chkFechaCelebra" onclick="fechaNoIdent(\'#chkFechaCelebra\', \'#fAudi\')">\n\
-//                                <label>No identificada</label>\n\
-//                            </div>\n\
-//                        </td>\n\
-//                        <td>\n\
-//                            <input type="text" name="tiAudi" id="tiAudi" class="txtSmall" placeholder="hh/mm" required>\n\
-//                            <div class="noIdentificada" style="margin:0">\n\
-//                                <input type="checkbox" id="chkDuracion" onclick="DuraNoIdent(\'#chkDuracion\', \'#tiAudi\')">\n\
-//                                <label>No identificada</label>\n\
-//                            </div>\n\
-//                        </td>\n\
-//                    </tr>';
-//        $('#tAudiencias tbody').append(tag);
-//        var juzClave = $('#jClave').val();
-//        $.ajax({
-//            url : 'obtenCatalogo.jsp',
-//            dataType: 'html',
-//            type: 'post',
-//            data: {cat: 'tipoAudi'},
-//            succes: function(data){
-//                console.log('tipo Audiencias: ' + data);
-//            }
-//        }).done(function(d){
-//            $('#tipoAudi').html(d);
-//        });
-//        $.ajax({
-//            url : 'obtenCatalogo.jsp',
-//            dataType: 'html',
-//            type: 'post',
-//            data: {
-//                cat: 'jueces',
-//                juzClave: juzClave
-//                },
-//            succes: function(data){
-//                console.log('jueces: ' + data);
-//            }
-//        }).done(function(d){
-//            $('#juezAudi').html(d);
-//        });
-//    });
     /*----------------------- FIN FUNCIONES PARA EXPEDIENTES --------------------------*/
 
     /*-----------------------FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/
@@ -955,7 +1035,23 @@ function respuestaSimpleFecha(idSelect, idDiv, idDate, idChk) {
     }
 }
 /*****************************FIN PARA CAPTURA EXPEDIENTES *********************/
-
+//  var i = 0;
+//   fuction relacion(j,i){
+//        alert("entra");
+//    var numProcesa = $('#numeroProcesados').val();
+//    for (i = 0; i < numProcesa; i++) {
+//        if ($('#chkRelaProce' + i + '99').is(":checked")) {
+//            for (var j = -2; j < 11; j++) {
+//                $('#chkRelaProce' + i + j).prop("checked", false).prop("disabled", true);
+//            }
+//        } else {
+//            for (var j = -2; j < 11; j++) {
+//                $('#chkRelaProce' + i + j).prop("disabled", false);
+//            }
+//        }
+//        i++;
+//    }
+//});
 /******************************FUNCIONES ETAPA INTERMEDIA***************************/
 //Respuestas simples y fechas con NI
 /***

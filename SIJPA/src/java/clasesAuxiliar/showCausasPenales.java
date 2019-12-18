@@ -47,7 +47,7 @@ public class showCausasPenales {
             causas = new ArrayList();
             
             sql = "SELECT E.*, C.* "
-                + " FROM DATOS_EXPEDIENTES_ADOJC E, CATALOGOS_RESPUESTA_SIMPLE C"
+                + " FROM DATOS_CAUSAS_PENALES_ADOJC E, CATALOGOS_RESPUESTA_SIMPLE C"
                 + " WHERE C.RESPUESTA_ID=E.COMPETENCIA"
                 + " AND JUZGADO_CLAVE='"+juzgado+"' ORDER BY 1;";
             
@@ -69,7 +69,7 @@ public class showCausasPenales {
         int total=0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC";
             
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -85,7 +85,7 @@ public class showCausasPenales {
         int total=0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where JUZGADO_CLAVE='"+juzgado+"'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE='"+juzgado+"'";
             
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -101,7 +101,7 @@ public class showCausasPenales {
         int total=0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where EXPEDIENTE_CLAVE='"+exp+"'";
+            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='"+exp+"'";
             
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -117,7 +117,7 @@ public class showCausasPenales {
         int total=0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where EXPEDIENTE_CLAVE='"+exp+"'";
+            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='"+exp+"'";
             
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -133,7 +133,7 @@ public class showCausasPenales {
         int total=0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_VICTIMAS AS TOTAL FROM DATOS_EXPEDIENTES_ADOJC where EXPEDIENTE_CLAVE='"+exp+"'";
+            sql = "SELECT TOTAL_VICTIMAS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC  WHERE CAUSA_CLAVE='"+exp+"'";
             
             rs = conn.consultar(sql);
             while (rs.next()) {

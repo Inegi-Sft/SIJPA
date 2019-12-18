@@ -113,7 +113,7 @@ public class catalogos {
     public ArrayList findCodNorma() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CODIGO_NORMA WHERE  ID NOT IN (129,151,189,255,351,380,516,-2) ORDER BY 1";    
+        sql = "SELECT * FROM CATALOGOS_CODIGO_NORMA WHERE  ID_CODIGO NOT IN (129,151,189,255,351,380,516,-2) ORDER BY 1";    
 
         resul = conn.consultar(sql);
         try {
@@ -194,7 +194,7 @@ public class catalogos {
     public ArrayList findDelNorma(int id) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_DELITOS_NORMA  WHERE ID="+id+" ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_DELITOS_NORMA  WHERE ID_DELITO="+id+" ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -483,7 +483,7 @@ public class catalogos {
     public ArrayList findMedMujer() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_MUJER WHERE MUJERES_ID <> -2 ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_MUJER WHERE MUJER_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -499,7 +499,7 @@ public class catalogos {
     public ArrayList findMedProteccion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION WHERE MEDIDAS_ID <> -2 ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION WHERE PROTECCION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -515,7 +515,7 @@ public class catalogos {
     public ArrayList findMediosPrueba() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA WHERE PRUEBA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -819,7 +819,7 @@ public class catalogos {
     public ArrayList findRelImputado() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_RELACION_IMPUTADO ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_RELACION_IMPUTADO WHERE RELACION_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

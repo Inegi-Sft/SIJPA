@@ -58,7 +58,7 @@ public class insrtDelitos extends HttpServlet {
         String distrito = (String) sesion.getAttribute("distrito");
         String numero = (String) sesion.getAttribute("numero");
         String jConcatenado = entidad + municipio + distrito + numero;
-        String expediente =(String) sesion.getAttribute("expediente");
+        String claveCausa =(String) sesion.getAttribute("claveCausa");
         String delitoClave =request.getParameter("delitoClave");
         String delitoCP = request.getParameter("delitoCP");
         String articuloCP = request.getParameter("articuloCP");
@@ -93,7 +93,7 @@ public class insrtDelitos extends HttpServlet {
                     + municipio + ","
                     + distrito + ","
                     + numero + ",'" 
-                    + expediente + jConcatenado + "','" 
+                    + claveCausa + jConcatenado + "','" 
                     + delitoClave + jConcatenado + "',"
                     + delitoCP + ",'"
                     + articuloCP + "',"
@@ -127,10 +127,10 @@ public class insrtDelitos extends HttpServlet {
                                 + municipio + ","
                                 + distrito + ","
                                 + numero + ",'" 
-                                + expediente +jConcatenado + "','" 
+                                + claveCausa +jConcatenado + "','" 
                                 + delitoClave + jConcatenado + "',"
                                 + chkCR[i] 
-                                + " (select YEAR(NOW())) );";
+                                + " ,(select YEAR(NOW())) );";
                         System.out.println(sql);
                         conn.escribir(sql);
                     }
@@ -142,10 +142,10 @@ public class insrtDelitos extends HttpServlet {
                                   + municipio + ","
                                   + distrito + ","
                                   + numero + ",'" 
-                                  + expediente +jConcatenado + "','" 
+                                  + claveCausa +jConcatenado + "','" 
                                   + delitoClave + jConcatenado + "',"
                                   + chkCS[j] 
-                                  + " (select YEAR(NOW())) );";      
+                                  + " ,(select YEAR(NOW())) );";      
                                 System.out.println(sql);
                                 conn.escribir(sql);
                             }
@@ -160,7 +160,7 @@ public class insrtDelitos extends HttpServlet {
                 resp.add(lis.get(0)[1]);
                 resp.add(lis.get(0)[2]);
                 resp.add(lis.get(0)[3]);
-                resp.add(deli.countDelitosInsertados(expediente + jConcatenado));
+                resp.add(deli.countDelitosInsertados(claveCausa + jConcatenado));
                 out.write(resp.toJSONString());
                 conn.close();
             } else {

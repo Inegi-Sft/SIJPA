@@ -33,12 +33,13 @@
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>Órganos Jurisdiccionales</h1>
-            <a href="capturaJuzgado.jsp" class="addJuz">Agregar Juzgado <img src="img/add.png" title="Agregar Juzgado"></a>
+            <a href="capturaJuzgado.jsp" class="addJuz">Agregar Órgano <img src="img/add.png" title="Agregar Órgano"></a>
             <table class="tablasRegis">
                 <tr>
                     <th>Juzgado Clave</th>
                     <th>Nombre</th>
-                    <th>Nombre Juez</th>
+                    <th>Número</th>
+                    <th>Jurisdicción</th>
                     <th>Entidad</th>
                     <th>Municipio</th>
                     <th>Editar</th>
@@ -46,7 +47,7 @@
                 </tr>
                 <% 
                     showJuzgados sj = new showJuzgados();
-                    lista = sj.findjuzgadoTabla();
+                    lista = sj.findJuzgadoTabla();
                     for (String[] lsj : lista) {
                         out.println("<tr>");
                         out.println("<td>" + lsj[0] + "</td>");
@@ -54,6 +55,7 @@
                         out.println("<td>" + lsj[2] + "</td>");
                         out.println("<td>" + lsj[3] + "</td>");
                         out.println("<td>" + lsj[4] + "</td>");
+                        out.println("<td>" + lsj[5] + "</td>");
                         out.println("<td><a href='#' class='popJ'><img src='img/editar.png' title='Editar'/></a></td>");
                         out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
                         out.println("</tr>");

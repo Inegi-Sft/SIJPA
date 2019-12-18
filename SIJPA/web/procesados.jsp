@@ -32,10 +32,9 @@
             ArrayList<String[]> lista;
             String entidad = (String) session.getAttribute("entidad");
             String municipio = (String) session.getAttribute("municipio");
-            String distrito = (String) session.getAttribute("distrito");
             String numero = (String) session.getAttribute("numero");
-            String jConcatenado = entidad + municipio + distrito + numero;
-            String expediente = (String) session.getAttribute("expediente");
+            String jConcatenado = entidad + municipio + numero;
+            String causaClave = (String) session.getAttribute("causaClave");
         %>
     </head>
     <body style="zoom: .85;">
@@ -158,7 +157,7 @@
                                         <select class="txtMedia" name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#rEntidad', '#rMunicipio');" required >
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResidencia();
+                                                lista = cat.findPais();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -569,8 +568,8 @@
                             <th>No. Victimas</th>
                         </tr>
                         <%
-                            int totVic = objExp.countTotalVictimas(expediente + jConcatenado);
-                            lista = sd.findDelitos(expediente + jConcatenado);
+                            int totVic = objExp.countTotalVictimas(causaClave + jConcatenado);
+                            lista = sd.findDelitos(causaClave + jConcatenado);
                             for (String[] ls : lista) {
                         %>
                         <tr>

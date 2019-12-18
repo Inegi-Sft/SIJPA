@@ -16,6 +16,6 @@
 
     lista = cat.findDelNorma(norma);
     for (String[] ls : lista) {
-        out.println("<option value='" + ls[0] + "'>" +ls[0] + ".- " + ls[1] + "</option>");
+        out.println("<option value='" + ls[0] + "'>" +ls[0] + ".- " + ls[2] + "</option>");
     }
 %>

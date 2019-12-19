@@ -391,6 +391,11 @@ fieldset legend{
     float: right;
     text-decoration: none;
     vertical-align: middle;
+    text-shadow: grey 3px 3px 5px;
+}
+.agregar:hover{
+    background-color: #ddd;
+    transform:scale(1.15);
 }
 
 .agregar img{
@@ -398,7 +403,7 @@ fieldset legend{
 }
 
 .dContenido{
-    width: 85%;
+    width: 100%;
     margin: auto;
     margin-bottom: -15px;
 }
@@ -458,4 +463,24 @@ a.addJuz:hover{
 input[type=text]:read-only, input[type=date]:read-only{
     background: rgb(235, 235, 228);
     cursor: default;
+}
+.lista{
+    display: inline-table;
+    vertical-align: text-top;
+}
+.lista li{
+    list-style:  none;
+    color:darkred;
+    font-size: 15px;
+}
+.lista label{
+    color:darkred;
+    font-size: 15px;
+    width: 200px; 
+    text-align: justify; 
+    margin-left: 10px;
+}
+.listaTable{
+    display: inline-table; 
+    width: 80%;
 }

@@ -47,16 +47,14 @@ public class insrtTramite extends HttpServlet {
         String distrito =(String) sesion.getAttribute("distrito");
         String numero =(String) sesion.getAttribute("numero");
         String jConcatenado =entidad+municipio+distrito+numero;
-        String expediente =(String) sesion.getAttribute("expediente");
+        String claveCausa =(String) sesion.getAttribute("claveCausa");
         
         String idProcesado = request.getParameter("idProcesado");
         String etapaProcesal = request.getParameter("eProcesal");
-        String motivo = request.getParameter("eMotivo");
-        String fechaActua=request.getParameter("uActua");
-
-        if (fechaActua == null) {
-            fechaActua = "1899-09-09";
-        }
+        String estInvesti = request.getParameter("estInvesti");
+        String estIntermedia = request.getParameter("estIntermedia");
+        String especifique = request.getParameter("especifique");
+        String fechaActo=request.getParameter("uActo");
 
         try {
             response.setContentType("text/json;charset=UTF-8");
@@ -64,7 +62,8 @@ public class insrtTramite extends HttpServlet {
             
             conn.Conectar();
             sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES("+entidad+","+municipio+","+distrito+","+numero+","
-                    + "'"+expediente+jConcatenado+"','"+idProcesado+"'," + etapaProcesal + ",'" + motivo + "','" + fechaActua + "', (select YEAR(NOW())) )";
+                    + "'"+claveCausa+jConcatenado+"','"+idProcesado+"',"+ etapaProcesal +","+estInvesti+","+estIntermedia+"'" 
+                    + especifique +"','" + fechaActo +"', (select YEAR(NOW())) )";
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 showTramite pro = new showTramite();
@@ -77,7 +76,7 @@ public class insrtTramite extends HttpServlet {
                 resp.add(lis.get(0)[2]);
                 resp.add(lis.get(0)[3]);
                 resp.add(lis.get(0)[4]);
-                resp.add(pro.countTramiteExp(expediente + jConcatenado));
+                resp.add(pro.countTramiteExp(claveCausa + jConcatenado));
                 out.write(resp.toJSONString());
                 conn.close();
             } else {
@@ -86,21 +85,6 @@ public class insrtTramite extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(insrtTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
-//                response.setContentType("text/html;charset=UTF-8");
-//                PrintWriter out = response.getWriter();
-//                try {
-//                    /* TODO output your page here. You may use following sample code. */
-//                    out.println("<tr>");
-//                    out.println("<td>002/2018-P14</td>");
-//                    out.println("<td>" + etapaProcesal + "</td>");
-//                    out.println("<td>" + motivo + "</td>");
-//                    out.println("<td>" + fechaActua + "</td>");
-//                    out.println("<td><a class='pop' href='tramite.jsp'><img src='img/editar.png' title='Modificar'/></a></td>");
-//                    out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
-//                    out.println("</tr>");
-//                } finally {
-//                    out.close();
-//                }
             
     }
 

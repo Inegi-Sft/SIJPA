@@ -37,7 +37,8 @@ public class insrtConclusiones extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
+    String sqlConclu,sqlDconclu;
+    boolean insrtDConclu=false;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,15 +51,19 @@ public class insrtConclusiones extends HttpServlet {
         String distrito =(String) sesion.getAttribute("distrito");
         String numero =(String) sesion.getAttribute("numero");
         String jConcatenado =entidad+municipio+distrito+numero;
-        String expediente =(String) sesion.getAttribute("expediente");
+        String claveCausa =(String) sesion.getAttribute("claveCausa");
         
         String idProcesado = request.getParameter("idProcesado");
         String fechaResolu=request.getParameter("fechaReso");
-        String tipoResolu = request.getParameter("tipoConclusion");
+        String tipoResolu = request.getParameter("resolucion");
         String tipoSobre = request.getParameter("tipoSobreseimto");
         String proceSobre = request.getParameter("proceSobreseimto");
-        String procedimiento = request.getParameter("huboProsedimto");
-        String tipoProcedimiento = request.getParameter("tipoMedidaPA");
+        String excluAccion = request.getParameter("excluAccion");
+        String tipoCondiSCP = request.getParameter("tipoCondiSCP");
+        String fechaExtSCP = request.getParameter("fechaExtSCP");
+        String tipoMecanismoAR = request.getParameter("tipoMecanismoAR");
+        String fechaExtinAR = request.getParameter("fechaExtinAR");
+        String tipoResolucionPA = request.getParameter("tipoResolucionPA");
         String privativa = request.getParameter("tipoMedidaPL");
         String noprivativa = request.getParameter("tipoMedidaNPL");
         String internamiento = request.getParameter("internamiento");
@@ -70,57 +75,52 @@ public class insrtConclusiones extends HttpServlet {
         String fechaImpugna=request.getParameter("fechaImpugnacion");
         String personaImpugna = request.getParameter("personaImpugna");
         String comentario = request.getParameter("comentarios");
-        if (fechaResolu == null) {
-            fechaResolu = "1899-09-09";
-        }
-        if (fechaImpugna == null) {
-            fechaImpugna = "1899-09-09";
-        }
+        
+        // variables DCONCLUSIONES
+        String[] delitoClave = request.getParameterValues("delitoConclu");
+        
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             
             conn.Conectar();
-            sql = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES ("+entidad+","+municipio+","+distrito+","+numero
-                    + ",'"+expediente+jConcatenado+"','"+idProcesado+"', '" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre
-                    + "," + procedimiento + "," + tipoProcedimiento + "," + privativa + "," + noprivativa + "," + internamiento + "," + reparacion + "," + tipoRepara
-                    + "," + multa + "," + impugnacion + "," + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "', (select YEAR(NOW())) )";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
-                showConclusiones pro = new showConclusiones();
-                ArrayList<String[]> lis = new ArrayList<String[]>();
-                lis = pro.findConcluProce(idProcesado);
-                JSONArray resp = new JSONArray();
-//                resp.add(posicion);
-                resp.add(lis.get(0)[0].replace(jConcatenado, ""));
-                resp.add(lis.get(0)[1]);
-                resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
-                resp.add(pro.countConclusionesExp(expediente + jConcatenado));
-                out.write(resp.toJSONString());
+            sqlConclu = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES ("+entidad+","+municipio+","+distrito+","+numero
+                    + ",'"+claveCausa+jConcatenado+"','"+idProcesado+"', '" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre +","+excluAccion
+                    + ","+ tipoCondiSCP +",'"+ fechaExtSCP +"',"+ tipoMecanismoAR +",'"+ fechaExtinAR +"',"+ tipoResolucionPA+","+ privativa +","+ noprivativa +"," + internamiento 
+                    + ","+ reparacion + "," + tipoRepara + "," + multa + "," + impugnacion + "," + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "', (select YEAR(NOW())) )";
+           
+            System.out.println(sqlConclu);
+//            if (conn.escribir(sqlConclu)) {
+                for (int i = 0; i < delitoClave.length; i++){
+                    String resolDelito = request.getParameter("resolDelito"+i);
+                    sqlDconclu = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES ("+entidad+","+municipio+","+distrito+","+numero
+                    + ",'"+claveCausa+jConcatenado+"','"+idProcesado+"','"+ delitoClave[i] +"',"+tipoResolu+","+ resolDelito +", (select YEAR(NOW())) )";
+
+                    System.out.println(sqlDconclu);
+                }
+//                insrtDConclu=conn.escribir(sqlDconclu);
+                
                 conn.close();
-            } else {
-                //regresa a insrttramite y maca error
-                conn.close();
-            }
+//            }
+//            if (insrtDConclu) {
+//                showConclusiones pro = new showConclusiones();
+//                ArrayList<String[]> lis = new ArrayList<String[]>();
+//                lis = pro.findConcluProce(idProcesado);
+//                JSONArray resp = new JSONArray();
+////                resp.add(posicion);
+//                resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+//                resp.add(lis.get(0)[1]);
+//                resp.add(lis.get(0)[2]);
+//                resp.add(lis.get(0)[3]);
+//                resp.add(pro.countConclusionesExp(claveCausa + jConcatenado));
+//                out.write(resp.toJSONString());
+//                conn.close();
+//            } else {
+//                conn.close();
+//            }
         } catch (SQLException ex) {
             Logger.getLogger(insrtConclusiones.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet insrtconclusiones</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

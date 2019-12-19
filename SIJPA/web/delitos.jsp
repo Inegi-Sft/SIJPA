@@ -32,7 +32,7 @@
             String distrito = (String) session.getAttribute("distrito");
             String numero = (String) session.getAttribute("numero");
             String jConcatenado = entidad + municipio + distrito + numero;
-            String expediente = (String) session.getAttribute("expediente");
+            String causaClave = (String) session.getAttribute("causaClave");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
@@ -76,7 +76,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <label class="lblExBig" for="articuloCP">Artículo y/o fracción de acuerdo con el código penal</label>
+                                <label class="lblExBig" for="articuloCP">Señalamiento normativo (Artículo, fracción, párrafo, inciso del código penal)</label>
                                 <input class="txtExBig" type="text"  name="articuloCP" id="articuloCP" required/>
                             </td>
                             <td rowspan="2">
@@ -104,7 +104,7 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="delitoNT">Delito de acuerdo con la Norma Técnica</label>
-                                <select class="lblExBig" name="delitoNT" id="delitoNT" required>
+                                <select class="txtExBig" name="delitoNT" id="delitoNT" required>
                                     <option value="">--Seleccione--</option>
                                 </select> 
                             </td>
@@ -161,11 +161,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="concurso">Concurso</label>
-                                <select class="txtMedia"  name="concurso" id="concurso" required>
+                                <label for="clasificacion">Clasificación en orden al resultado</label>
+                                <select class="txtMedia"  name="clasificacion" id="clasificacion" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findConcurso();
+                                        lista = cat.findClasificacion();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -173,11 +173,11 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="clasificacion">Clasificación en orden al resultado</label>
-                                <select class="txtMedia"  name="clasificacion" id="clasificacion" required>
+                                <label for="concurso">Concurso</label>
+                                <select class="txtMedia"  name="concurso" id="concurso" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findClasificacion();
+                                        lista = cat.findConcurso();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -250,7 +250,7 @@
                                         </select>
                                     </div>
                                     <div class="cols lblExBig">
-                                        <label class="lblExBig">Municipio/Demarcación territorial</label>
+                                        <label class="lblExBig">Municipio o Demarcación territorial de la Ciudad de México</label>
                                         <select class="txtMedia" name="municipioD" id="municipioD" required>
                                             <option value="">--Seleccione--</option>
                                         </select>
@@ -276,7 +276,7 @@
                                         out.println("<td>" + ls[0] + "</td>");
                                         out.println("<td>" + ls[1] + "</td>");
                                         out.println("<td>");
-                                        out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada' value='" + ls[0] + "' />");
+                                        out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' />");
                                         out.println("</td>");
                                         out.println("</tr>");
                                     }
@@ -297,7 +297,7 @@
                                         out.println("<td>" + ls[0] + "</td>");
                                         out.println("<td>" + ls[1] + "</td>");
                                         out.println("<td>");
-                                        out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua' value='" + ls[0] + "' />");
+                                        out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' />");
                                         out.println("</td>");
                                         out.println("</tr>");
                                     }

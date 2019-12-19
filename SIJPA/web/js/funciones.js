@@ -73,22 +73,46 @@ $(document).ready(function () {
                 $("#dRegJudicial,#dDistJudicial").hide();
                 $("#regJudicial,#distJudicial").val("-2").prop("required", false);
                 break;
-        }
-        if ($("#fOrganiza").val() > 3 || $("#fOrganiza").val() === "") {
-            $("#dRegJudicial,#dDistJudicial,#dPartJudicial").fadeOut("slow");
-            $("#regJudicial,#distJudicial,#partJudicial").val("-2").prop("required", false);
+            default:
+                $("#dRegJudicial,#dDistJudicial,#dPartJudicial").fadeOut("slow");
+                $("#regJudicial,#distJudicial,#partJudicial").val("-2").prop("required", false);
+                break;
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
+    /*----------------------------DELITOS --------------------------------------------*/
+    $('#contextoSitua99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 12; i++) {
+                $('#contextoSitua' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 12; i++) {
+                $('#contextoSitua' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#cosaRobada99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 12; i++) {
+                $('#cosaRobada' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 12; i++) {
+                $('#cosaRobada' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    /*----------------------------FIN DELITOS ----------------------------------------*/
 
     /*---------------------------- VICTIMAS ----------------------------*/
     $('#tipo_victima').change(function () {
         switch ($(this).val()) {
             case '1':
-                $('#victiFisicas, #mediProtec, #mediProtecMuj').fadeIn('slow');
+                $('#victiFisicas, #mediProtec').fadeIn('slow');
                 $('#sexo, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #ocupa, #mProtect, #mujProtect').val('').prop('required', true);
-                $('#tipoMoral').fadeOut('slow');
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('').prop('required', true);
+                $('#tipoMoral,#MedidasPro,#MujPro').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
                 break;
             case '2':
@@ -97,15 +121,28 @@ $(document).ready(function () {
 
                 $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
                 $('#sexo, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #ocupa, #mProtect, #mujProtect').val('-2').prop('required', false);
+                    #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('-2').prop('required', false);
                 $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
             default:
                 $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
                 $('#tvic_moral, #sexo, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #mProtect, #mujProtect').val('-2').prop('required', false);
+                    #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #extrangera, #mProtect, #mujProtect').val('-2').prop('required', false);
                 $('#fnacimiento').val("1899-09-09").prop('required', false);
                 break;
+        }
+    });
+
+    $('#sexo').change(function () {
+        if ($(this).val() === '2') {
+            $('#mujProtect').val('').prop('required', true);
+            $('#mediProtecMuj').fadeIn('slow');
+            $('#MujPro').fadeOut('slow');
+            $('#aplicaMedidaMuj').prop("checked", false);
+        } else {
+            $('#mujProtect').val('-2').prop('required', false);
+            $('#mediProtecMuj').fadeOut('slow');
+            $('#aplicaMedidaMuj').prop("checked", false);
         }
     });
 
@@ -181,25 +218,108 @@ $(document).ready(function () {
 
     $('#ingresos').change(function (e) {
         if ($(this).val() === '1') {
-            $('#rangoInge, #fuenteInge').fadeIn('slow');
-            $('#rangoIngresos, #fuenteIngresos').val('').prop('required', true);
+            $('#rangoInge, #fuenteIngre').fadeIn('slow');
+            $('#rangoIngresos').val('').prop('required', true);
+            $('#chkIngresos').prop("checked", false);
         } else {
-            $('#rangoInge, #fuenteInge').fadeOut('slow');
-            $('#rangoIngresos, #fuenteIngresos').val('-2').prop('required', false);
+            $('#rangoInge, #fuenteIngre').fadeOut('slow');
+            $('#rangoIngresos').val('-2').prop('required', false);
+            $('#chkIngresos').prop("checked", false);
+        }
+    });
+
+    $('#mProtect').change(function (e) {
+        if ($(this).val() === '1') {
+            $('#MedidasPro').fadeIn('slow');
+            $('input[name="aplicaMedida"]').prop("checked", false).prop("disabled", false);
+        } else {
+            $('#MedidasPro').fadeOut('slow');
+            $('input[name="aplicaMedida"]').prop("checked", false).prop("disabled", false);
+        }
+    });
+
+    $('#mujProtect').change(function (e) {
+        if ($(this).val() === '1') {
+            $('#MujPro').fadeIn('slow');
+            $('input[name="aplicaMedidaMuj"]').prop("checked", false).prop("disabled", false);
+        } else {
+            $('#MujPro').fadeOut('slow');
+            $('input[name="aplicaMedidaMuj"]').prop("checked", false).prop("disabled", false);
+        }
+    });
+
+    $('.RelaProceChk').change(function () {
+        var numProcesa = $('#numeroProcesados').val();
+        for (i = 0; i < numProcesa; i++) {
+            if ($('#chkRelaProce' + i + '99').is(":checked")) {
+                for (var j = 1; j < 11; j++) {
+                    $('#chkRelaProce' + i + j).prop("checked", false).prop("disabled", true);
+                }
+            }
+            if ($('#chkRelaProce' + i + '10').is(":checked")) {
+                for (var j = 1; j < 10; j++) {
+                    $('#chkRelaProce' + i + j).prop("checked", false).prop("disabled", true);
+                }
+                $('#chkRelaProce99').prop("checked", false).prop("disabled", true);
+
+            } else {
+                for (var j = 1; j < 12; j++) {
+                    $('#chkRelaProce' + i + j).prop("disabled", false);
+                }
+            }
+        }
+    });
+
+    $('#chkIngresos9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 9; i++) {
+                $('#chkIngresos' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 9; i++) {
+                $('#chkIngresos' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#aplicaMedida99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 12; i++) {
+                $('#aplicaMedida' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 12; i++) {
+                $('#aplicaMedida' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#aplicaMedidaMuj99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 18; i++) {
+                $('#aplicaMedidaMuj' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 18; i++) {
+                $('#aplicaMedidaMuj' + i).prop("checked", false).prop("disabled", false);
+            }
         }
     });
 
     /*---------------------------- FIN VICTIMAS ----------------------------*/
+
     /*---------------------------------PROCESADOS-------------------------------*/
-    $('#presentAdo').change(function (e) {
+    $('#presentAdo').change(function () {
         switch ($(this).val()) {
             case '1':
                 $('#dTipoDetencion').fadeIn('slow');
                 $('#tipoDetencion').val('').prop('required', true);
+                $('#formCondu').fadeOut('slow');
+                $('#formaConduc').val('-2').prop('required', false);
                 break;
             case '2':
                 $('#formCondu').fadeIn('slow');
                 $('#formaConduc').val('').prop('required', true);
+                $('#dTipoDetencion').fadeOut('slow');
+                $('#tipoDetencion').val('-2').prop('required', false);
                 break;
             default:
                 $('#dTipoDetencion, #formCondu').fadeOut('slow');
@@ -228,16 +348,20 @@ $(document).ready(function () {
             $('#delictivo').prop("disabled", false);
         }
     });
+
     $('#ingresosPro').change(function (e) {
         if ($(this).val() === '1') {
-            $('#rangoIngePro, #fuenteIngePro').fadeIn('slow');
-            $('#rangoIngresosPro, #fuenteIngresosPro').val('').prop('required', true);
+            $('#rangoIngePro, #fuenteIngrePro').fadeIn('slow');
+            $('#rangoIngresosPro').val('').prop('required', true);
+            $('#chkIngresosPro').prop("checked", false);
         } else {
-            $('#rangoIngePro, #fuenteIngePro').fadeOut('slow');
-            $('#rangoIngresosPro, #fuenteIngresosPro').val('-2').prop('required', false);
+            $('#rangoIngePro, #fuenteIngrePro').fadeOut('slow');
+            $('#rangoIngresosPro').val('-2').prop('required', false);
+            $('#chkIngresosPro').prop("checked", false);
         }
     });
     /*--------------------------FIN PROCESADOS------------------------------------*/
+
     /*--------------------------FUNCIONES PARA INICIAL-------------------------*/
     $('#audiInicial').change(function (e) {
         if ($(this).val() === '1') {
@@ -338,11 +462,30 @@ $(document).ready(function () {
     $('#drecretaMC').change(function () {
         if ($(this).val() === '1') {
             $('#tableMcau').fadeIn('slow');
-            $('#tableMcau input').prop("checked", false);
-            
+            $('input[name="apliMedidaCau"]').prop("checked", false).prop("disabled", false);
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
         } else {
             $('#tableMcau').fadeOut('slow');
+            $('input[name="apliMedidaCau"]').prop("checked", false).prop("disabled", false);
             $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
+        }
+    });
+    
+     $('#apliMedidaCau99').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 14; i++) {
+                $('#apliMedidaCau' + i).prop("checked", false).prop("disabled", true);
+            }
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
+        } else {
+            for (var i = 1; i < 14; i++) {
+                $('#apliMedidaCau' + i).prop("checked", false).prop("disabled", false);
+            }
+            $('#especifiqueMC').fadeOut('slow');
+            $('#MCespecificar').val('-2').prop('required', false);
         }
     });
 
@@ -402,7 +545,7 @@ $(document).ready(function () {
 
     $('#dictoSobresei').change(function () {
         if ($(this).val() !== '1') {
-            $('#fSuspencion').fadeIn('slow');
+            $('#fSuspencion,#dReapertura,#dAcusacion').fadeIn('slow');
             $('#suspenProceso,#causasSuspension,#huboReapertura,#fechaReapertura,#quienSoliApertura,#formulaAcusacion').val('').prop('required', true);
             $('#dcausasSuspension,#dfechaReapertura,#dquienSoliApertura').hide();
             $('#chkFechaReapertura').prop("checked", false);
@@ -431,14 +574,17 @@ $(document).ready(function () {
             $('#divfechaAudiinter,#dseparaAcusa,#fmediosPrueba, #dmediosPrueba,#dacuerdosProba,#daperturaJO').fadeIn('slow');
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("").prop("disabled", false).prop("required", true);
-            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO,#tipoPruebaMP,#resolPruebaMP,#tipoPruebaJuri,\n\
-#resolJuridico,#tipoPruebaDefen,#resolDefensa').val('').prop("required", true);
+            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO').val('').prop("required", true);
+            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#tblpruebaMP,#tblmediospruebaAJ,#tblmediospruebaDefen').fadeOut('slow');
+            $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('-2').prop('required', false);
+            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+
         } else {
             $('#divfechaAudiinter,#dseparaAcusa,#fmediosPrueba, #dmediosPrueba,#dacuerdosProba,#daperturaJO').fadeOut('slow');
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("1899-09-09").prop("disabled", false).prop("required", false);
-            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO,#tipoPruebaMP,#resolPruebaMP,#tipoPruebaJuri,\n\
-#resolJuridico,#tipoPruebaDefen,#resolDefensa').val('-2').prop("required", true);
+            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO').val('-2').prop("required", true);
+            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
         }
     });
 
@@ -447,48 +593,84 @@ $(document).ready(function () {
             $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa').fadeIn('slow');
             $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('').prop('required', true);
         } else {
-            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#dtipoPruebaMP, #dresolPruebaMP, #dtipoPruebaJuri,#dresolJuridico, #dtipoPruebaDefen, #dresolDefensa').fadeOut('slow');
-            $('#pruebaMP, #pruebaAJ, #pruebaDefensa, #tipoPruebaMP, #resolPruebaMP,#tipoPruebaJuri,#resolJuridico,#tipoPruebaDefen, #resolDefensa').val('-2').prop('required', false);
+            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#tblpruebaMP, #tblmediospruebaAJ, #tblmediospruebaDefen').fadeOut('slow');
+            $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('-2').prop('required', false);
         }
     });
+
     $('#pruebaMP').change(function () {
         if ($(this).val() === '1') {
-            $('#dtipoPruebaMP, #dresolPruebaMP').fadeIn('slow');
-            $('#tipoPruebaMP, #resolPruebaMP').val('').prop('required', true);
+            $('#tblpruebaMP').fadeIn('slow');
+            $('input[name="chkpruebaMP"]').prop("checked", false).prop("disabled", false);
         } else {
-            $('#dtipoPruebaMP, #dresolPruebaMP').fadeOut('slow');
-            $('#tipoPruebaMP, #resolPruebaMP').val('-2').prop('required', false);
+            $('#tblpruebaMP').fadeOut('slow');
+            $('input[name="chkpruebaMP"]').prop("checked", false).prop("disabled", false);
         }
     });
+
     $('#pruebaAJ').change(function () {
         if ($(this).val() === '1') {
-            $('#dtipoPruebaJuri,#dresolJuridico').fadeIn('slow');
-            $('#tipoPruebaJuri,#resolJuridico').val('').prop('required', true);
+            $('#tblmediospruebaAJ').fadeIn('slow');
+            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("disabled", false);
         } else {
-            $('#dtipoPruebaJuri,#dresolJuridico').fadeOut('slow');
-            $('#tipoPruebaJuri,#resolJuridico').val('-2').prop('required', false);
+            $('#tblmediospruebaAJ').fadeOut('slow');
+            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("disabled", false);
+            ;
         }
     });
+
     $('#pruebaDefensa').change(function () {
         if ($(this).val() === '1') {
-            $('#dtipoPruebaDefen, #dresolDefensa').fadeIn('slow');
-            $('#tipoPruebaDefen, #resolDefensa').val('').prop('required', true);
+            $('#tblmediospruebaDefen').fadeIn('slow');
+            $('input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
         } else {
-            $('#dtipoPruebaDefen, #dresolDefensa').fadeOut('slow');
-            $('#tipoPruebaDefen, #resolDefensa').val('-2').prop('required', false);
+            $('#tblmediospruebaDefen').fadeOut('slow');
+            $('input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+            ;
+        }
+    });
+
+    $('#chkpruebaAJ9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#chkpruebaMP9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    $('#chkpruebaDefen9').change(function () {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaDefen' + i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i < 6; i++) {
+                $('#chkpruebaDefen' + i).prop("checked", false).prop("disabled", false);
+            }
         }
     });
     /*--------------------------FIN INTERMEDIA------------------------------------*/
+
     /*----------------------- FUNCIONES PARA INSERTS AJAX --------------------------*/
 
 //Guarda Expedientes
     $('#formExpedientes').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if($('#tAudiencias tbody tr').length === 0){
-            alert('Necesita capturar al menos una audiencia');
-            return false;
-        }
         $.ajax({
             type: 'post',
             url: 'insrtExpediente',
@@ -546,6 +728,13 @@ $(document).ready(function () {
     $('#formProcesados').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        if ($('#ingresosPro').val() === '1') {
+            if ($('#chkIngresosPro:checked').length === 0) {
+                alert('Serlecciona al menos una fuente de ingreso del procesado');
+                $('#chkIngresosPro').focus();
+                return false;
+            }
+        }
         $.ajax({
             type: 'post',
             url: 'insrtProcesados',
@@ -911,7 +1100,23 @@ function respuestaSimpleFecha(idSelect, idDiv, idDate, idChk) {
     }
 }
 /*****************************FIN PARA CAPTURA EXPEDIENTES *********************/
-
+//  var i = 0;
+//   fuction relacion(j,i){
+//        alert("entra");
+//    var numProcesa = $('#numeroProcesados').val();
+//    for (i = 0; i < numProcesa; i++) {
+//        if ($('#chkRelaProce' + i + '99').is(":checked")) {
+//            for (var j = -2; j < 11; j++) {
+//                $('#chkRelaProce' + i + j).prop("checked", false).prop("disabled", true);
+//            }
+//        } else {
+//            for (var j = -2; j < 11; j++) {
+//                $('#chkRelaProce' + i + j).prop("disabled", false);
+//            }
+//        }
+//        i++;
+//    }
+//});
 /******************************FUNCIONES ETAPA INTERMEDIA***************************/
 //Respuestas simples y fechas con NI
 /***
@@ -1011,7 +1216,6 @@ function DuraNoIdent(idChk, idTxtDura) {
 /**************************FUNCION ETAPA INICIAL *******************************/
 /***
  * @param {type} idChk
- * @param {type} idTable
  * @returns {undefined}
  */
 
@@ -1067,11 +1271,6 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
     }
 }
 ;
-
-
-
-
-
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 
@@ -1434,6 +1633,12 @@ function numeroVictimas() {
 }
 
 /************************ FUNCIONES PARA DELETE AJAX ******************************/
+/***
+ * 
+ * @param {type} fila
+ * @param {type} idProce
+ * @returns {undefined}
+ */
 function deleteConclusion(fila, idProce) {
     var resp = confirm("Realmente deseas eliminar este resgistro?");
     if (resp) {

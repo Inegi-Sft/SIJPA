@@ -176,9 +176,9 @@ body{
     margin: 20px auto 10px auto;
 }
 
-.contenedor .txtSmall{ width: 70px;}
-.contenedor .txtMedia{ width: 160px;}
-.contenedor .txtLong{ width: 300px;}
+.contenedor .txtSmall{width: 70px;}
+.contenedor .txtMedia{width: 160px;}
+.contenedor .txtLong{width: 300px;}
 .contenedor .txtExBig{width: 800px;}
 .contenedor .lblExBig{width: auto;}
 
@@ -186,7 +186,7 @@ fieldset{
     background-color: rgba(255,255,255,0.4);
     border-color:  #0077CB;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 fieldset legend{
@@ -464,6 +464,7 @@ input[type=text]:read-only, input[type=date]:read-only{
     background: rgb(235, 235, 228);
     cursor: default;
 }
+
 .lista{
     display: inline-table;
     vertical-align: text-top;
@@ -483,4 +484,10 @@ input[type=text]:read-only, input[type=date]:read-only{
 .listaTable{
     display: inline-table; 
     width: 80%;
+}
+
+.fuente {
+    width: 15%;
+    margin: 5px;
+    font-size:smaller;
 }

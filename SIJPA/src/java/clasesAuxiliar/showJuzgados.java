@@ -19,6 +19,7 @@ public class showJuzgados {
     ArrayList<String> lista;
     ArrayList<String[]> listaTabla;
     String sql;
+    int tot;
     ResultSet rs;
     
     public ArrayList findJuzgados(){
@@ -37,12 +38,15 @@ public class showJuzgados {
         return lista;
     }
     
-    public ArrayList findjuzgadoTabla(){
+    public ArrayList findJuzgadoTabla(){
         try {
             conn.Conectar();
             listaTabla = new ArrayList<String[]>();
-            sql = "SELECT JUZGADO_CLAVE,JUZGADO_NOMBRE,JUZGADO_NUMERO,ENTIDAD,MUNICIPIO "
-                    + "FROM DATOS_JUZGADOS_ADOJC ORDER BY 1";
+            sql = "SELECT JUZGADO_CLAVE,JUZGADO_NOMBRE,JUZGADO_NUMERO,JUZGADO_JURISDICCION,ENTIDAD,MUNICIPIO "
+                    + "FROM DATOS_JUZGADOS_ADOJC DJ "
+                    + "JOIN CATALOGOS_JURISDICCION CJ "
+                    + "ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "
+                    + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 listaTabla.add(new String[]{
@@ -54,5 +58,22 @@ public class showJuzgados {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaTabla;
+    }
+    
+    public int findTotJuzgado(){
+        try {
+            conn.Conectar();
+            tot = 0;
+            sql = "SELECT COUNT(*) "
+                    + "FROM DATOS_JUZGADOS_ADOJC ORDER BY 1";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                tot = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tot;
     }
 }

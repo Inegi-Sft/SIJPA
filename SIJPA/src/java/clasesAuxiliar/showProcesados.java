@@ -78,7 +78,7 @@ public class showProcesados {
         try{
             conn.Conectar();
             conteoPro = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoPro = resul.getInt("TOTAL");
@@ -93,9 +93,9 @@ public class showProcesados {
     public ArrayList findProcesadoExp(String exp) {
         conn.Conectar();
         proce = new ArrayList();
-        sql = "SELECT * FROM DATOS_PROCESADOS_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"' "
-                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"')"
-                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_TRAMITES_ADOJC WHERE EXPEDIENTE_CLAVE='"+exp+"')";
+        sql = "SELECT * FROM DATOS_PROCESADOS_ADOJC WHERE CAUSA_CLAVE='"+exp+"' "
+                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC WHERE CAUSA_CLAVE='"+exp+"')"
+                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_TRAMITES_ADOJC WHERE CAUSA_CLAVE='"+exp+"')";
         
         resul = conn.consultar(sql);
         try {

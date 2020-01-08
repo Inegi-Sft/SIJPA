@@ -54,7 +54,7 @@
                                 <select  class="demo-default txtExBig" name="delitoCP" id="delitoCP" placeholder="--Seleccione--" required>
                                     <option value="" ></option>
                                     <%
-                                        lista = cat.findCodNorma();
+                                        lista = cat.findCodigoNorma();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "' data-data='{\"norma\":\"" + ls[2] + "\"}'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -85,7 +85,7 @@
                                     <select class="txtMedia"  name="reclasificaDel" id="reclasificaDel" onchange="respuestaSimpleFecha('#reclasificaDel', '#dFechaReclaDel', '#fechaReclaDel', '#chkFechaReclaDel');" required>
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = cat.findResSimple();
+                                            lista = cat.findRespuestaSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -151,7 +151,7 @@
                                 <select class="txtMedia"  name="calificacion" id="calificacion" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findCalifDelito();
+                                        lista = cat.findCalificacionDelito();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -189,7 +189,7 @@
                                 <select class="txtMedia"  name="comision" id="comision" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findFormComision();
+                                        lista = cat.findFormaComision();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -201,7 +201,7 @@
                                 <select class="txtMedia"  name="accion" id="accion" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findFormAccion();
+                                        lista = cat.findFormaAccion();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -227,7 +227,7 @@
                                 <select class="txtMedia"  name="instrumentos" id="instrumentos" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findInstrComision();
+                                        lista = cat.findInstrumentoComision();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }

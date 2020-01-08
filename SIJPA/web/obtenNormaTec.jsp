@@ -9,13 +9,13 @@
     catalogos cat = new catalogos();
     ArrayList<String[]> lista;
     int norma = 0;
-
+    
     if (request.getParameter("norma") != null) {
         norma = Integer.parseInt(request.getParameter("norma"));
     }
 
-    lista = cat.findDelNorma(norma);
+    lista = cat.findDelitosNorma(norma);
     for (String[] ls : lista) {
-        out.println("<option value='" + ls[0] + "'>" +ls[0] + ".- " + ls[2] + "</option>");
+        out.println("<option value='" + ls[0] + "'>" +ls[0] + ".- " + ls[1] + "</option>");
     }
 %>

@@ -53,13 +53,20 @@ public class insrtDelitos extends HttpServlet {
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
-        String entidad = (String) sesion.getAttribute("entidad");
-        String municipio = (String) sesion.getAttribute("municipio");
-        String distrito = (String) sesion.getAttribute("distrito");
-        String numero = (String) sesion.getAttribute("numero");
-        String jConcatenado = entidad + municipio + distrito + numero;
-        String claveCausa =(String) sesion.getAttribute("claveCausa");
-        String delitoClave =request.getParameter("delitoClave");
+//        String entidad = (String) sesion.getAttribute("entidad" );
+//        String municipio = (String) sesion.getAttribute("municipio");
+//        String numero = (String) sesion.getAttribute("numero");
+//        String jConcatenado = entidad + municipio + numero;
+//        String causaClave =(String) sesion.getAttribute("causaClave");
+
+ String entidad = "12";
+String municipio = "12001";
+String numero = "1";
+        String causaClave = "001/2019";
+        String delitoClave = "001/2019-D1";
+        String jConcatenado = entidad + municipio + numero;
+        
+//        String delitoClave = request.getParameter("delitoClave");
         String delitoCP = request.getParameter("delitoCP");
         String articuloCP = request.getParameter("articuloCP");
         int delitoNT = Integer.parseInt(request.getParameter("delitoNT"));
@@ -91,9 +98,8 @@ public class insrtDelitos extends HttpServlet {
             sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" 
                     + entidad + ","
                     + municipio + ","
-                    + distrito + ","
                     + numero + ",'" 
-                    + claveCausa + jConcatenado + "','" 
+                    + causaClave + jConcatenado + "','" 
                     + delitoClave + jConcatenado + "',"
                     + delitoCP + ",'"
                     + articuloCP + "',"
@@ -122,12 +128,11 @@ public class insrtDelitos extends HttpServlet {
             if (conn.escribir(sql)) {
                 if (delitoNT == 31) {
                     for (int i = 0; i < chkCR.length; i++) {
-                        sql = "INSERT INTO DATOS_DCOSA_ROBADA_ADOJC VALUES ("
+                        sql = "INSERT INTO DATOS_DROBO_ADOJC VALUES ("
                                 + entidad + ","
                                 + municipio + ","
-                                + distrito + ","
                                 + numero + ",'" 
-                                + claveCausa +jConcatenado + "','" 
+                                + causaClave +jConcatenado + "','" 
                                 + delitoClave + jConcatenado + "',"
                                 + chkCR[i] 
                                 + " ,(select YEAR(NOW())) );";
@@ -140,9 +145,8 @@ public class insrtDelitos extends HttpServlet {
                                 sql = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES ("
                                   + entidad + "," 
                                   + municipio + ","
-                                  + distrito + ","
                                   + numero + ",'" 
-                                  + claveCausa +jConcatenado + "','" 
+                                  + causaClave +jConcatenado + "','" 
                                   + delitoClave + jConcatenado + "',"
                                   + chkCS[j] 
                                   + " ,(select YEAR(NOW())) );";      
@@ -160,7 +164,7 @@ public class insrtDelitos extends HttpServlet {
                 resp.add(lis.get(0)[1]);
                 resp.add(lis.get(0)[2]);
                 resp.add(lis.get(0)[3]);
-                resp.add(deli.countDelitosInsertados(claveCausa + jConcatenado));
+                resp.add(deli.countDelitosInsertados(causaClave + jConcatenado));
                 out.write(resp.toJSONString());
                 conn.close();
             } else {
@@ -220,7 +224,7 @@ public class insrtDelitos extends HttpServlet {
                 + " LENGTH( REPLACE(DELITO_CLAVE,'" + jConcatenado + "',''))"
                 + " )"
                 + " ) AS NUMERO"
-                + " FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE='" + exp + jConcatenado + "';";
+                + " FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE='" + exp + jConcatenado + "';";
 //        String sql = "SELECT MAX("
 //                                + "SUBSTR( DELITO_CLAVE, INSTR(DELITO_CLAVE,'D')+1, length(DELITO_CLAVE) )"
 //                            + " ) AS NUMERO"

@@ -69,7 +69,7 @@
                                     <select name="tvic_moral" id="tvic_moral" class="txtMedia dependiente">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = cat.findVicMoral();
+                                            lista = cat.findVictimaMoral();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -89,7 +89,8 @@
                             <th>Delito cometido</th>
                         </tr>
                         <%
-                            vic = victi.findDelitos(causaClave + jConcatenado);
+                       //     vic = victi.findDelitos(causaClave + jConcatenado);
+                            vic = victi.findDelitos("001/201912120011");
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
@@ -115,7 +116,7 @@
                         <select name="con_asesor" id="con_asesor" class="txtMedia" required>
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findResSimple();
+                                lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -143,7 +144,8 @@
                             <th width="750">Relación</th>
                         </tr>
                         <%
-                            vic = victi.findVprocesados(causaClave + jConcatenado);
+                       //     vic = victi.findVprocesados(causaClave + jConcatenado);
+                            vic = victi.findVprocesados("001/201912120011");
                             int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");
@@ -152,7 +154,7 @@
                                 out.println(ls[0] + "<input type='hidden' name='proRela' value='" + ls[0] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");
-                                lista = cat.findRelImputado();
+                                lista = cat.findRelacionImputado();
                                 for (String[] los : lista) {
                                     out.println("<div class='chkCat'>");
                                     out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + ">");
@@ -297,7 +299,7 @@
                                 <select name="conyugal" id="conyugal" class="txtMedia">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findEdoCivil();
+                                        lista = cat.findEstadoCivil();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -323,7 +325,7 @@
                                 <select name="estudios" id="estudios" class="txtMedia">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findGEstudios();
+                                        lista = cat.findGradoEstudios();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -347,7 +349,7 @@
                                 <select name="hablaesp" id="hablaesp" class="txtMedia">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findDomEspanol();
+                                        lista = cat.findDominioEspanol();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -363,7 +365,7 @@
                                         <select name="indigena" id="indigena" class="txtMedia">
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResSimple();
+                                                lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -375,7 +377,7 @@
                                         <select name="familia" id="familia" class="txtMedia">
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findPIndigena();
+                                                lista = cat.findLinguisticas();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -389,7 +391,7 @@
                                 <select name="extrangera" id="extrangera" class="txtMedia dependiente">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findResSimple();
+                                        lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -401,7 +403,7 @@
                                 <select name="interprete" id="interprete" class="txtMedia dependiente">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findResSimple();
+                                        lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -417,7 +419,7 @@
                                         <select name="ingresos" id="ingresos" class="txtMedia dependiente">
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResSimple();
+                                                lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -430,7 +432,7 @@
                                         <select name="rangoIngresos" id="rangoIngresos" class="txtMedia dependiente">
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findRangoIngre();
+                                                lista = cat.findRangoIngresos();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -444,7 +446,7 @@
                                             <th>Aplica</th>
                                         </tr>
                                         <%
-                                            lista = cat.findFuenteIngre();
+                                            lista = cat.findFuenteIngresos();
                                             for (String[] ls : lista) {
                                                 out.println("<tr>");
                                                 out.println("<td>" + ls[0] + "</td>");
@@ -467,7 +469,7 @@
                     <select name="mProtect" id="mProtect" class="txtMedia">
                         <option value="">--Seleccione--</option>
                         <%
-                            lista = cat.findResSimple();
+                            lista = cat.findRespuestaSimple();
                             for (String[] ls : lista) {
                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                             }
@@ -480,7 +482,7 @@
                             <th>¿Aplicó la medida de protección?</th>
                         </tr>
                         <%
-                            lista = cat.findMedProteccion();
+                            lista = cat.findMedidasProteccion();
                             for (String[] ls : lista) {
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
@@ -499,7 +501,7 @@
                     <select name="mujProtect" id="mujProtect" class="txtMedia">
                         <option value="">--Seleccione--</option>
                         <%
-                            lista = cat.findResSimple();
+                            lista = cat.findRespuestaSimple();
                             for (String[] ls : lista) {
                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                             }
@@ -512,7 +514,7 @@
                             <th>¿Aplicó la medida de protección?</th>
                         </tr>
                         <%
-                            lista = cat.findMedMujer();
+                            lista = cat.findMedidasMujer();
                             for (String[] ls : lista) {
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");

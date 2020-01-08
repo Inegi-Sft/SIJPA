@@ -116,7 +116,7 @@
                                 <select class="txtMedia" name="fDivision" id="fDivision" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findForOrganiza();
+                                        lista = cat.findFormaDivision();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -161,7 +161,7 @@
                                 <select class="txtMedia" name="asentamiento" id="asentamiento" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findAsentHumano();
+                                        lista = cat.findAsentamientoHumano();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }

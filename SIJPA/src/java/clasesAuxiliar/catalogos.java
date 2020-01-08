@@ -23,10 +23,6 @@ public class catalogos {
     String sql;
     ResultSet resul;
 
-    /**
-     *
-     * @return
-     */
     public ArrayList findAcuerdoRepara() {
         conn.Conectar();
         lista = new ArrayList();

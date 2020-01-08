@@ -22,17 +22,15 @@ public class catalogos {
     ArrayList<String[]> lista;
     String sql;
     ResultSet resul;
-    String datoEsp;
 
     /**
      *
      * @return
      */
-    
-    public ArrayList findAlfabetismo() {
+    public ArrayList findAcuerdoRepara() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ALFABETISMO ORDER BY 1";
+        sql=" SELECT * FROM catalogos_acuerdo_reparatorio ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -44,494 +42,14 @@ public class catalogos {
         }
         return lista;
 
-    }
-
-    public ArrayList findAsentHumano() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ASENTAMIENTO_HUMANO ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findAutoVinculacion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_AUTO_VINCULACION ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findCalifDelito() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CALIFICACION_DELITO  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findClasificacion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CLASIFICACION  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findCodNorma() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CODIGO_NORMA WHERE  ID_CODIGO NOT IN (129,151,189,255,351,380,516,-2) ORDER BY 1";    
-
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2), resul.getString(3)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findConcurso() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CONCURSO  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findCondActividad() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CONDICION_ACTIVIDAD ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findCondEstudiante() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CONDICION_ESTUDIANTE ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findConsumacion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CONSUMACION ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findDelNorma(int id) {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_DELITOS_NORMA  WHERE ID_DELITO="+id+" ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3)
-                });
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findDomEspanol() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_DOMINIO_ESPANOL ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findEntidades() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ENTIDADES ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findEdoCivil() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ESTADO_CIVIL ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findEdoPsicoFisico() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ESTADO_PSICOFISICO ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findEtapaProcesal() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_ETAPA_PROCESAL  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findFormAccion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_FORMA_ACCION  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findFormComision() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_FORMA_COMISION  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    public ArrayList findForOrganiza() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_FORMA_ORGANIZA  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findFuero() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_FUERO  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findGEstudios() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_GRADO_ESTUDIOS  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findGParticipacion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_GRADO_PARTICIPACION  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findImpugResolucion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_IMPUGNA_RESOLUCION ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findImputabilidad() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_IMPUTABILIDAD  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findIncompetencia() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_INCOMPETENCIA ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findInstrComision() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_INSTRUMENTO_COMISION  ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findLinguisticas() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_LINGUISTICAS ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findMedCautelares() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES WHERE CAUTELARES_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findMedMujer() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_MUJER WHERE MUJER_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findMedProteccion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIDAS_PROTECCION WHERE PROTECCION_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-
-    public ArrayList findMediosPrueba() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA WHERE PRUEBA_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
     }
     
-    public ArrayList findResoluMprueba() {
+    
+    
+     public ArrayList findAlfabetismo() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_RESOLUCION_MPRUEBA ORDER BY 1";
+       sql=" SELECT * FROM catalogos_alfabetismo ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -542,12 +60,13 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    }
 
-    public ArrayList findModalidad() {
+    }
+    
+     public ArrayList findAsentamientoHumano() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MODALIDAD  ORDER BY 1";
+     sql=" SELECT * FROM catalogos_asentamiento_humano ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -558,13 +77,14 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    }
 
-    public ArrayList findMulta() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MULTA ORDER BY 1";
-        resul = conn.consultar(sql);
+    }
+     
+public ArrayList findAutoVinculacion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_auto_vinculacion ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -572,15 +92,713 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findMunicipios(int enti) {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_MUNICIPIOS WHERE ENTIDAD_ID = " + enti + " ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findCalificacionDelito() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_calificacion_delito ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findCausaSuspencion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_causa_suspencion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findClasificacion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_clasificacion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findCodigoNorma() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_codigo_norma ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findConcurso() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_concurso ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findCondicionActividad() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_condicion_actividad ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findCondicionEstudiante() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_condicion_estudiante ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findConsumacion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_consumacion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findContextoSituacional() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_contexto_situacional ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findCosaRobada() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_cosa_robada ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findDelitosNorma() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_delitos_norma ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findDominioEspanol() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_dominio_espanol ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findEntidades() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_entidades ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findEstadoCivil() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_estado_civil ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findEstadoPsicofisico() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_estado_psicofisico ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findEstudioProfesional() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_estudio_profesional ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findEtapaInicial() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_etapa_inicial ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findEtapaIntermedia() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_etapa_intermedia ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findEtapaProcesal() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_etapa_procesal ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findExclusionAccionp() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_exclusion_accionp ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFiguraMprueba() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_figura_mprueba ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFiguraProceso() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_figura_proceso ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFormaAccion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_forma_accion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFormaComision() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_forma_comision ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFormaConduccion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_forma_conduccion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFormaDivision() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_forma_division ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFuenteIngresos() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_fuente_ingresos ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFuero() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_fuero ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findFuncionJuzgado() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_funcion_juzgado ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findGradoEstudios() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_grado_estudios ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findGradoParticipacion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_grado_participacion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findIncompetencia() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_incompetencia ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findInstrumentoComision() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_instrumento_comision ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findJurisdiccion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_jurisdiccion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findLinguisticas() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_linguisticas ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findMedidasCautelares() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_medidas_cautelares ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findMedidasMujer() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_medidas_mujer ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findMedidasProteccion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_medidas_proteccion ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findMediosPrueba() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_medios_prueba ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findModalidad() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_modalidad ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findMulta() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_multa ORDER BY 1";
+       resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return lista;
+
+    }
+
+public ArrayList findMunicipios(int entidad) {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_municipios where entidad_id="+entidad+" ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(2), resul.getString(3)});
@@ -588,15 +806,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findNacionalidad() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_NACIONALIDAD ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findNacionalidad() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_nacionalidad ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -604,15 +823,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findNoPrivacion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_NOPRIVACION_LIBERTAD  ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findNoprivativas() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_noprivativas ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -620,15 +840,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findNumero() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_NUMERO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findNumero() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_numero ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -636,15 +857,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findOcupacion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_OCUPACION ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findOcupacion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_ocupacion ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -652,15 +874,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findPais() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PAIS ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findPais() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_pais ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -668,15 +891,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findPlazoCierre() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PLAZO_CIERRE ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findlazoCierre() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_plazo_cierre ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -684,47 +908,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
-    }
-    
-    public ArrayList findCausaSuspencion() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_CAUSA_SUSPENCION ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    
-    public ArrayList findReapertura() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_REAPERTURA ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
+
     }
 
-    public ArrayList findPConstitucional() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PLAZO_CONSTITUCIONAL ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findPlazoConstitucional() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_plazo_constitucional ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -732,15 +925,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findPrivLibertad() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PRIVACION_LIBERTAD ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findPrivativas() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_privativas ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -748,15 +942,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findProcedimiento() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PROCEDIMIENTO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findProcAbreviado() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_proc_abreviado ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -764,15 +959,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findProcAbreviado() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PROC_ABREVIADO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findPuebloIndigena() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_pueblo_indigena ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -780,15 +976,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findPIndigena() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_PUEBLO_INDIGENA ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findRangoIngresos() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_rango_ingresos ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -796,15 +993,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findReincidencia() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_REINCIDENCIA ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findReincidencia() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_reincidencia ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -812,15 +1010,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findRelImputado() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_RELACION_IMPUTADO WHERE RELACION_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findRelacionImputado() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_relacion_imputado ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -828,15 +1027,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findRePDano() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_REPARACION_DANO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findReparacionDano() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_reparacion_dano ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -844,15 +1044,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findRepLegal() {
-        conn.Conectar();
-        lista = new ArrayList();
-        sql = "SELECT * FROM CATALOGOS_REPRESENTANTE_LEGAL ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findRepresentanteLegal() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_representante_legal ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -860,15 +1061,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findResidencia() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_RESIDENCIA ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findResolucionMprueba() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_resolucion_mprueba ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -876,14 +1078,15 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findResSimple() {
+    public ArrayList findRespuestaSimple() {
         conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_RESPUESTA_SIMPLE ORDER BY 1";
+         lista = new ArrayList();
+        sql=" SELECT * FROM catalogos_respuesta_simple ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -892,15 +1095,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findSexo() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_SEXO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findSexo() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_sexo ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -908,30 +1112,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
-    }
-     public ArrayList findsitioOcurrencia() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_SITIO_OCURRENCIA ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
+
     }
 
-    public ArrayList findSobreseimiento() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_SOBRESEIMIENTO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findSitioOcurrencia() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_sitio_ocurrencia ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -939,47 +1129,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
-    }
-    
-    public ArrayList findRangoIngre() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_RANGO_INGRESOS ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    
-    public ArrayList findFuenteIngre() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_FUENTE_INGRESOS ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
+
     }
 
-    public ArrayList findTiempoInterna() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIEMPO_INTERNAMIENTO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findSobreseimiento() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_sobreseimiento ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -987,15 +1146,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoAudiencias() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_AUDIENCIAS WHERE AUDIENCIA_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findSuspensionCondicional() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_suspension_condicional ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1003,15 +1163,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoConsigna() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_CONSIGNACION ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTiempoInternamiento() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tiempo_internamiento ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1019,15 +1180,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoDefensor() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_DEFENSOR ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoAudiencias() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_audiencias ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1035,15 +1197,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoDetencion() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_DETENCION ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoConsignacion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_consignacion ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1051,15 +1214,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoImpugna() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_IMPUGNACION ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoDefensor() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_defensor ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1067,15 +1231,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoResolucion() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_RESOLUCION ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoDetencion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_detencion ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1083,15 +1248,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoSobrese() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_SOBRESEIMIENTO ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoImpugnacion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_impugnacion ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1099,15 +1265,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findTipoVictima() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_TIPO_VICTIMA ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoResolucion() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_resolucion ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1115,15 +1282,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findVialidad() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_VIALIDAD ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoSobreseimiento() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_sobreseimiento ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1131,15 +1299,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findVicMoral() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_VICTIMA_MORAL ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findTipoVictima() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_tipo_victima ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1147,15 +1316,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
+
     }
 
-    public ArrayList findVulnerabilidad() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_VULNERABILIDAD ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findVialidad() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_vialidad ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1163,30 +1333,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
-    }
-    public ArrayList findSitioOcurrencia() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_SITIO_OCURRENCIA ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
+
     }
 
-    public ArrayList findCosaRobada() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_COSA_ROBADA WHERE COSA_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findVictimaMoral() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_victima_moral ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1194,31 +1350,16 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
-    }
-    
-    public ArrayList findJurisdiccion() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_JURISDICCION ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
+
     }
 
-    public ArrayList findContextoSituacional() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_CONTEXTO_SITUACIONAL WHERE CONTEXTO_ID <> -2 ORDER BY 1";
-        resul = conn.consultar(sql);
+public ArrayList findVulnerabilidad() {
+conn.Conectar();
+ lista = new ArrayList();
+sql=" SELECT * FROM catalogos_vulnerabilidad ORDER BY 1";
+       resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{resul.getString(1), resul.getString(2)});
@@ -1226,102 +1367,9 @@ public class catalogos {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      }
         return lista;
-    }
-    
-    public ArrayList findFuncionJuzgado() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_FUNCION_JUZGADO ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    
-    public ArrayList findEstudioProfe() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_ESTUDIO_PROFESIONAL ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-  
-    public ArrayList findEtapaInvestigacion() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_ETAPA_INVESTIGACION ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    public ArrayList findEtapaIntermedia() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_ETAPA_INTERMEDIA ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    public ArrayList findExclusionAccionP() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_EXCLUSION_ACCIONP ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    
-    public ArrayList findFormConduccion() {
-        conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM CATALOGOS_FORMA_CONDUCCION ORDER BY 1";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
 
+    }
+ 
 }

@@ -175,82 +175,67 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="oculto" id="dtipoPruebaMP">
-                                                    <label for="tipoPruebaMP">Tipos de medios de prueba presentados por el ministerio público</label>
-                                                    <select class="txtMedia" name="tipoPruebaMP" id="tipoPruebaMP">
-                                                        <option value="">--Seleccione--</option>
-                                                        <%
-                                                            lista = cat.findMediosPrueba();
-                                                            for (String[] ls : lista) {
-                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                            }
-                                                        %> 
-                                                    </select>
-                                                </div>
-                                                <div class="oculto" id="dresolPruebaMP">
-                                                    <label for="resolPruebaMP">Resolución de los medios de prueba presentados por el ministerio público</label>
-                                                    <select class="txtMedia" name="resolPruebaMP" id="resolPruebaMP">
-                                                        <option value="">--Seleccione--</option>
-                                                        <%
-                                                            lista = cat.findResoluMprueba();
-                                                            for (String[] ls : lista) {
-                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                            }
-                                                        %> 
-                                                    </select>
-                                                </div>
+                                                <table id="tblpruebaMP" border="1" class="tablasRegis oculto">
+                                                    <tr>
+                                    <th width="20">Id</th>
+                                    <th width="450">Tipos</th>
+                                    <th width="70">Resolución</th>
+                                </tr>
+                                <%
+                                     lista=cat.findMediosPrueba();
+                                for (String[] ls : lista) {
+                                        out.println("<tr>");
+                                        out.println("<td>" + ls[0] + "</td>");
+                                        out.println("<td>" + ls[1] + "</td>");
+                                        out.println("<td>");
+                                        out.println("<input type='checkbox' name='chkpruebaMP' id='chkpruebaMP" + ls[0] + "' value='" + ls[0] + "' />");
+                                        out.println("</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>
+                                                </table>
                                             </td>
                                             <td>
-                                                <div class="oculto" id="dtipoPruebaJuri">
-                                                    <label for="tipoPruebaJuri">Tipos de medios de prueba presentados por asesor jurídico</label>
-                                                    <select class="txtMedia" name="tipoPruebaJuri" id="tipoPruebaJuri">
-                                                        <option value="">--Seleccione--</option>
-                                                        <%
-                                                            lista = cat.findMediosPrueba();
-                                                            for (String[] ls : lista) {
-                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                            }
-                                                        %> 
-                                                    </select>
-                                                </div>
-                                                <div class="oculto" id="dresolJuridico">
-                                                    <label for="resolJuridico">Resolución de los medios de prueba presentados por asesor jurídico</label>
-                                                    <select class="txtMedia" name="resolJuridico" id="resolJuridico">
-                                                        <option value="">--Seleccione--</option>
-                                                        <%
-                                                            lista = cat.findResoluMprueba();
-                                                            for (String[] ls : lista) {
-                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                            }
-                                                        %> 
-                                                    </select>
-                                                </div>
+                                                <table id="tblmediospruebaAJ" border="1" class="tablasRegis oculto">
+                                                    <tr>
+                                    <th width="20">Id</th>
+                                    <th width="450">Tipos</th>
+                                    <th width="70">Resolución</th>
+                                </tr>
+                                <%
+                                     lista=cat.findMediosPrueba();
+                                for (String[] ls : lista) {
+                                        out.println("<tr>");
+                                        out.println("<td>" + ls[0] + "</td>");
+                                        out.println("<td>" + ls[1] + "</td>");
+                                        out.println("<td>");
+                                        out.println("<input type='checkbox' name='chkpruebaAJ' id='chkpruebaAJ" + ls[0] + "' value='" + ls[0] + "' />");
+                                        out.println("</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>
+                                                </table>
                                             </td>
                                             <td>
-                                                <div class="oculto" id="dtipoPruebaDefen">
-                                                    <label for="tipoPruebaDefen">Tipos de medios de prueba presentados por la defensa</label>
-                                                    <select class="txtMedia" name="tipoPruebaDefen" id="tipoPruebaDefen">
-                                                        <option value="">--Seleccione--</option>
-                                                        <%
-                                                            lista = cat.findMediosPrueba();
-                                                            for (String[] ls : lista) {
-                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                            }
-                                                        %> 
-                                                    </select>
-                                                </div>
-                                                <div class="oculto" id="dresolDefensa">
-                                                    <label for="resolDefensa">Resolución de los medios de prueba presentados por la defensa</label>
-                                                    <select class="txtMedia" name="resolDefensa" id="resolDefensa">
-                                                        <option value="">--Seleccione--</option>
-                                                        <%
-                                                            lista = cat.findResoluMprueba();
-                                                            for (String[] ls : lista) {
-                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                            }
-                                                        %> 
-                                                    </select>
-                                                </div>
+                                                 <table id="tblmediospruebaDefen" border="1" class="tablasRegis oculto">
+                                                    <tr>
+                                    <th width="20">Id</th>
+                                    <th width="450">Tipos</th>
+                                    <th width="70">Resolución</th>
+                                </tr>
+                                <%
+                                     lista=cat.findMediosPrueba();
+                                for (String[] ls : lista) {
+                                        out.println("<tr>");
+                                        out.println("<td>" + ls[0] + "</td>");
+                                        out.println("<td>" + ls[1] + "</td>");
+                                        out.println("<td>");
+                                        out.println("<input type='checkbox' name='chkpruebaDefen' id='chkpruebaDefen" + ls[0] + "' value='" + ls[0] + "' />");
+                                        out.println("</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>
+                                                </table>
                                             </td>
                                         </tr>
                                     </table>
@@ -274,7 +259,7 @@
                             </td>
                             <td>
                                 <div id="daperturaJO" class="oculto">
-                                <label for="aperturaJO">¿Se dictó auto de apertura a juico oral?</label>
+                                <label for="aperturaJO">¿Se dictó auto de apertura a juicio oral?</label>
                                 <select class="txtMedia" name="aperturaJO" id="aperturaJO" required>
                                     <option value="">--Seleccione--</option>
                                     <%

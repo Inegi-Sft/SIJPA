@@ -36,7 +36,7 @@
                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
                 <fieldset>
                     <legend>Características de la etapa inical</legend>
-                    <div class="cols">
+                    <div class="colsA">
                         <label for="audiInicial">¿Hubo audiencia inicial?</label>
                         <select class="txtMedia" name="audiInicial" id="audiInicial" required>
                             <option value="">--Seleccione--</option>
@@ -48,7 +48,7 @@
                             %> 
                         </select>
                     </div>
-                    <div class="cols oculto" id="dCtrlDetencion">
+                    <div class="colsA oculto" id="dCtrlDetencion">
                         <label for="ctrlDetencion">¿Hubo control de detención?</label>
                         <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion" required>
                             <option value="">--Seleccione--</option>
@@ -59,7 +59,7 @@
                             %> 
                         </select>
                     </div>
-                    <div class="cols oculto" id="dLegalDeten">
+                    <div class="colsA oculto" id="dLegalDeten">
                         <label for="legalDeten">¿Se calificó como legal la detención?</label>
                         <select class="txtMedia" name="legalDeten" id="legalDeten" required>
                             <option value="">--Seleccione--</option>
@@ -71,14 +71,14 @@
                             %> 
                         </select>
                     </div>
-                    <div class="cols oculto" id="dFechaAutoLiber" >
+                    <div class="colsA oculto" id="dFechaAutoLiber" >
                         <label for="fechaAutoLiber" id="lblFechaAutoLiber">Fecha en que se dictó el auto de libertad por no ratificar como legal la detención</label>
                         <input type="date" name="fechaAutoLiber" id="fechaAutoLiber"/>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaAutoLiber" onclick="fechaNoIdent('#chkFechaAutoLiber', '#fechaAutoLiber')"><label>No identificada</label>
                         </div> 
                     </div>
-                    <div class="cols oculto" id="dFormuImputa">
+                    <div class="colsA oculto" id="dFormuImputa">
                         <label for="formuImputa">¿Hubo formulación de la imputación?</label>
                         <select class="txtMedia" name="formuImputa" id="formuImputa" required>
                             <option value="">--Seleccione--</option>
@@ -279,104 +279,104 @@
                         <label for="fechCierreI" >Fecha del cierre de la investigación</label>
                         <input type="date" name="fechCierreI" id="fechCierreI" required/>
                         <div class="noIdentificada">
-                            <input type="checkbox" id="chkFechCierreI" onclick="fechaEnProceso('#chkFechCierreI', '#chkEnProceso', '#fechCierreI')" required ><label>No identificada</label><br/>
+                            <input type="checkbox" id="chkFechCierreI" onclick="fechaEnProceso('#chkFechCierreI', '#chkEnProceso', '#fechCierreI')"><label>No identificada</label><br/>
                             <input type="checkbox"  id="chkEnProceso" onclick="fechaEnProceso('#chkFechCierreI', '#chkEnProceso', '#fechCierreI')" ><label>En proceso de investigación</label>
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="oculto" id="fPlazo">
+                <fieldset class="oculto" id="consePlazo">
                     <legend>Consecuencias de la conclusión del plazo de la investigación complementaria</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                    <div class="colsA">
-                        <label for="dictoSobresei">¿Se dictó el sobreseimiento de la causa penal?</label>
-                        <select class="txtMedia" name="dictoSobresei" id="dictoSobresei" required>
-                            <option value="">--Seleccione--</option>
-                            <%
-                                lista = cat.findResSimple();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
+                                <div class="colsA">
+                                    <label for="dictoSobresei">¿Se dictó el sobreseimiento de la causa penal?</label>
+                                    <select class="txtMedia" name="dictoSobresei" id="dictoSobresei" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
                             </td>
                             <td>
-                    <fieldset class=" colsA subField oculto" id="fSuspencion">
-                        <div class="colsA">
-                            <label for="suspenProceso">¿Se dictó suspensión del proceso?</label>
-                            <select class="txtMedia" name="suspenProceso" id="suspenProceso" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findResSimple();
-                                    for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                        <div class="colsA oculto" id="dcausasSuspension">
-                            <label for="causasSuspension">Causas de la suspensión del proceso</label>
-                            <select class="txtMedia" name="causasSuspension" id="causasSuspension" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findCausaSuspencion();
-                                    for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                    </fieldset>
+                                <fieldset class="colsA subField oculto" id="fSuspencion">
+                                    <div class="colsA">
+                                        <label for="suspenProceso">¿Se dictó suspensión del proceso?</label>
+                                        <select class="txtMedia" name="suspenProceso" id="suspenProceso" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findResSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %> 
+                                        </select>
+                                    </div>
+                                    <div class="colsA oculto" id="dcausasSuspension">
+                                        <label for="causasSuspension">Causas de la suspensión del proceso</label>
+                                        <select class="txtMedia" name="causasSuspension" id="causasSuspension" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findCausaSuspencion();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %> 
+                                        </select>
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
-                    <fieldset class="colsA subField oculto" ID="dReapertura">
-                        <div class="colsA">
-                            <label for="huboReapertura">¿Hubo reapertura del proceso?</label>
-                            <select class="txtMedia" name="huboReapertura" id="huboReapertura" required>
-                                <option value="">--Seleccione--</option>
-                                <%  lista = cat.findResSimple();
-                                    for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                        <div class="colsA oculto" id="dfechaReapertura" >
-                            <label for="fechaReapertura" id="lbfechSoliPlazo">Fecha de la reapertura del proceso</label>
-                            <input type="date" name="fechaReapertura" id="fechaReapertura"/>
-                            <div class="noIdentificada">
-                                <input type="checkbox" id="chkFechaReapertura" onclick="fechaNoIdent('#chkFechaReapertura', '#fechaReapertura')"><label>No identificada</label>
-                            </div>
-                        </div>
-                        <div class="colsA oculto" id="dquienSoliApertura">
-                            <label for="quienSoliApertura">¿Quién solicitó la reapertura?</label>
-                            <select class="txtMedia" name="quienSoliApertura" id="quienSoliApertura" required>
-                                <option value="">--Seleccione--</option>
-                                <%  
-                                    lista = cat.findReapertura();
-                                    for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
+                                <fieldset class="colsA subField oculto" ID="dReapertura">
+                                    <div class="colsA">
+                                        <label for="huboReapertura">¿Hubo reapertura del proceso?</label>
+                                        <select class="txtMedia" name="huboReapertura" id="huboReapertura" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%  lista = cat.findResSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %> 
+                                        </select>
+                                    </div>
+                                    <div class="colsA oculto" id="dfechaReapertura" >
+                                        <label for="fechaReapertura" id="lbfechSoliPlazo">Fecha de la reapertura del proceso</label>
+                                        <input type="date" name="fechaReapertura" id="fechaReapertura"/>
+                                        <div class="noIdentificada">
+                                            <input type="checkbox" id="chkFechaReapertura" onclick="fechaNoIdent('#chkFechaReapertura', '#fechaReapertura')"><label>No identificada</label>
+                                        </div>
+                                    </div>
+                                    <div class="colsA oculto" id="dquienSoliApertura">
+                                        <label for="quienSoliApertura">¿Quién solicitó la reapertura?</label>
+                                        <select class="txtMedia" name="quienSoliApertura" id="quienSoliApertura" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%  
+                                                lista = cat.findReapertura();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
 
-                                %> 
-                            </select>
-                        </div>
-                    </fieldset>
+                                            %> 
+                                        </select>
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
-                    <div class="colsA oculto" id="dAcusacion">
-                        <label for="formulaAcusacion">¿Se formuló acusación?</label>
-                        <select class="txtMedia" name="formulaAcusacion" id="formulaAcusacion" required>
-                            <option value="">--Seleccione--</option>
-                            <%                                    lista = cat.findResSimple();
-                                for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                }
-                            %> 
-                        </select>
-                    </div>
+                                <div class="colsA oculto" id="dAcusacion">
+                                    <label for="formulaAcusacion">¿Se formuló acusación?</label>
+                                    <select class="txtMedia" name="formulaAcusacion" id="formulaAcusacion" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%                                    lista = cat.findResSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
+                                </div>
                             </td>
                         </tr>
                     </table>

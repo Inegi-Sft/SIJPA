@@ -32,7 +32,7 @@
             String distrito = (String) session.getAttribute("distrito");
             String numero = (String) session.getAttribute("numero");
             String jConcatenado = entidad + municipio + distrito + numero;
-            String expediente = (String) session.getAttribute("expediente");
+            String causaClave = (String) session.getAttribute("causaClave");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
@@ -76,7 +76,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <label class="lblExBig" for="articuloCP">Artículo y/o fracción de acuerdo con el código penal</label>
+                                <label class="lblExBig" for="articuloCP">Señalamiento normativo (Artículo, fracción, párrafo, inciso del código penal)</label>
                                 <input class="txtExBig" type="text"  name="articuloCP" id="articuloCP" required/>
                             </td>
                             <td rowspan="2">
@@ -250,7 +250,7 @@
                                         </select>
                                     </div>
                                     <div class="cols lblExBig">
-                                        <label class="lblExBig">Municipio/Demarcación territorial</label>
+                                        <label class="lblExBig">Municipio o Demarcación territorial de la Ciudad de México</label>
                                         <select class="txtMedia" name="municipioD" id="municipioD" required>
                                             <option value="">--Seleccione--</option>
                                         </select>
@@ -276,7 +276,7 @@
                                         out.println("<td>" + ls[0] + "</td>");
                                         out.println("<td>" + ls[1] + "</td>");
                                         out.println("<td>");
-                                        out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada' value='" + ls[0] + "' />");
+                                        out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' />");
                                         out.println("</td>");
                                         out.println("</tr>");
                                     }
@@ -297,7 +297,7 @@
                                         out.println("<td>" + ls[0] + "</td>");
                                         out.println("<td>" + ls[1] + "</td>");
                                         out.println("<td>");
-                                        out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua' value='" + ls[0] + "' />");
+                                        out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' />");
                                         out.println("</td>");
                                         out.println("</tr>");
                                     }

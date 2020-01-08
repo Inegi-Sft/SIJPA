@@ -52,8 +52,8 @@ public class showDelitos {
         deli = new ArrayList();
         sql = "SELECT D.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, CC.DESCRIPCION, CFC.DESCRIPCION, D.NUMERO_PROCESADOS, D.NUMERO_VICTIMAS "
                 + "FROM DATOS_DELITOS_ADOJC D,CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
-                + "WHERE D.DELITO_CODIGO_PENAL=CCN.ID "
-                + "AND D.DELITO_NORMA_TECNICA=CDN.ID "
+                + "WHERE D.DELITO_CODIGO_PENAL=CCN.ID_CODIGO "
+                + "AND D.DELITO_NORMA_TECNICA=CDN.ID_DELITO "
                 + "AND D.GRADO_CONSUMACION=CC.CONSUMACION_ID "
                 + "AND D.FORMA_COMISION=CFC.COMISION_ID "
                 + "AND D.DELITO_CLAVE = '" + del + "';";
@@ -77,7 +77,7 @@ public class showDelitos {
         try {
             conn.Conectar();
             conteoDel = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE = '"+exp+"';";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '"+exp+"';";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoDel=resul.getInt("TOTAL");
@@ -96,8 +96,8 @@ public class showDelitos {
             
             sql = "SELECT D.DELITO_CLAVE, CN.CODIGO"
                 + " FROM DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
-                + " WHERE D.DELITO_CODIGO_PENAL=CN.ID"
-                + " AND EXPEDIENTE_CLAVE = '"+exp+"';";
+                + " WHERE D.DELITO_CODIGO_PENAL=CN.ID_CODIGO"
+                + " AND CAUSA_CLAVE = '"+exp+"';";
             
             resul = conn.consultar(sql);
             while (resul.next()) {

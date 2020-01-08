@@ -194,14 +194,14 @@ $(document).ready(function () {
             $('#deliCometido').focus();
         }
 
-        if ($('#chkRelaProce:checked').length === 0) {
+        if ($('.RelaProceChk:checked').length === 0) {
             e.preventDefault();
             alert('Selecciona al menos una opcion de Relacion de la Victima con el Procesado');
             $('#chkRelaProce').focus();
         }
-
+        
         if ($('#mProtect').val() === '1') {
-            if ($('#aplicaMedida:checked').length === 0) {
+            if ($('input[name=#aplicaMedida"]:checked').length === 0) {
                 e.preventDefault();
                 alert('Selecciona al menos una opcion de Medidas de Proteción');
                 $('#mProtect').focus();

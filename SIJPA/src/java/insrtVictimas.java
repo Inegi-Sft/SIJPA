@@ -177,8 +177,10 @@ String numero = "1";
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
+                    resp.add(lis.get(0)[4]);
                     resp.add(vic.countVictimas(causaClave + jConcatenado));
                     out.write(resp.toJSONString());
+                    conn.close();
                 }
                 conn.close();
             } else {

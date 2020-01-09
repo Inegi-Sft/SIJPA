@@ -742,9 +742,9 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopImmediatePropagation();
         if ($('#ingresosPro').val() === '1') {
-            if ($('#chkIngresosPro:checked').length === 0) {
-                alert('Serlecciona al menos una fuente de ingreso del procesado');
-                $('#chkIngresosPro').focus();
+            if ($('input[name="chkIngresosPro"]:checked').length === 0) {
+                alert('Selecciona al menos una fuente de ingreso del procesado');
+                $('input[name="chkIngresosPro"]').focus();
                 return false;
             }
         }

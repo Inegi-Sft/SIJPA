@@ -55,9 +55,9 @@ public class showProcesados {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO),TP.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
-                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_IMPUTABILIDAD TP, CATALOGOS_SEXO S"
-                + " WHERE TP.IMPUTABILIDAD_ID=P.PRESENTACION_ADO"
+            sql = "SELECT CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), TC.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
+                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TC, CATALOGOS_SEXO S"
+                + " WHERE P.INICIO_IMPUTADO=TC.CONSIGNACION_ID"
                 + " AND S.SEXO_ID=P.SEXO"
                 + " AND P.PROCESADO_CLAVE = '" + pro + "';";
             

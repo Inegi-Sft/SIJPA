@@ -54,7 +54,7 @@ public class showCausasPenales {
             rs = conn.consultar(sql);
             while (rs.next()) {
                 causas.add(new String[]{
-                    rs.getString("expediente_clave"),rs.getString("TOTAL_PROCESADOS"),rs.getString("TOTAL_VICTIMAS"),
+                    rs.getString("causa_clave"),rs.getString("TOTAL_PROCESADOS"),rs.getString("TOTAL_VICTIMAS"),
                     rs.getString("TOTAL_DELITOS"),rs.getString("C.DESCRIPCION"),rs.getString("FECHA_INGRESO")
                 });
             }

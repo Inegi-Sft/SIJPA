@@ -153,7 +153,7 @@ public class catalogos {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3)});
+                lista.add(new String[]{resul.getString(1), resul.getString(2), resul.getString(3)});
             }
             conn.close();
         } catch (SQLException ex) {
@@ -268,7 +268,7 @@ public class catalogos {
     public ArrayList findDelitosNorma(int norma) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_delitos_norma where id_delito="+norma+" ORDER BY 1";
+        sql = " SELECT * FROM catalogos_delitos_norma where id_delito=" + norma + " ORDER BY 1";
         System.out.println(sql);
         resul = conn.consultar(sql);
         try {

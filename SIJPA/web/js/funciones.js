@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('select > option[value=-2]').hide();
+    $('#estudiosPro > option[value=7],#estudiosPro > option[value=8]').hide();//oculta el grado de estudios maestria y doctorado en procesados
     $(".load").fadeOut("slow");//proceso de carga para causas penales
 
     //despliega ventana modal
@@ -312,13 +313,13 @@ $(document).ready(function () {
             case '1':
                 $('#dTipoDetencion').fadeIn('slow');
                 $('#tipoDetencion').val('').prop('required', true);
-                $('#formCondu').fadeOut('slow');
+                $('#formCondu').hide();
                 $('#formaConduc').val('-2').prop('required', false);
                 break;
             case '2':
                 $('#formCondu').fadeIn('slow');
                 $('#formaConduc').val('').prop('required', true);
-                $('#dTipoDetencion').fadeOut('slow');
+                $('#dTipoDetencion').hide();
                 $('#tipoDetencion').val('-2').prop('required', false);
                 break;
             default:
@@ -351,15 +352,27 @@ $(document).ready(function () {
 
     $('#ingresosPro').change(function (e) {
         if ($(this).val() === '1') {
-            $('#rangoIngePro, #fuenteIngrePro').fadeIn('slow');
+            $('#rangoIngePro, #tblFuenteIngrePro').fadeIn('slow');
             $('#rangoIngresosPro').val('').prop('required', true);
-            $('#chkIngresosPro').prop("checked", false);
         } else {
-            $('#rangoIngePro, #fuenteIngrePro').fadeOut('slow');
+            $('#rangoIngePro, #tblFuenteIngrePro').fadeOut('slow');
             $('#rangoIngresosPro').val('-2').prop('required', false);
-            $('#chkIngresosPro').prop("checked", false);
+            $('#tblFuenteIngrePro input').prop("checked", false);
         }
     });
+    
+    $('#chkIngresosPro9').change(function (e) {
+        if ($(this).is(":checked")) {
+            for (var i = 1; i <=7; i++) {
+                $('#chkIngresosPro'+i).prop("checked", false).prop("disabled", true);
+            }
+        } else {
+            for (var i = 1; i <=7; i++) {
+                $('#chkIngresosPro'+i).prop("checked", false).prop("disabled", false);
+            }
+        }
+    });
+    
     /*--------------------------FIN PROCESADOS------------------------------------*/
 
     /*--------------------------FUNCIONES PARA INICIAL-------------------------*/
@@ -1487,7 +1500,7 @@ function lugarNacimiento(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
 }
 
 function lugarResidencia(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
-    if ($(idSelect).val() === '1' || $(idSelect).val() === '2') {
+    if ($(idSelect).val() === '1') {
         $(idDivE).fadeIn("slow");
         $(idDivM).fadeIn("slow");
         $(idSelEnti).prop("required", true);

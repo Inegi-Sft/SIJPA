@@ -70,7 +70,7 @@
                                 <select name="Pparticular" id="Pparticular" class="txtMedia" required >
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findResSimple();
+                                        lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -86,7 +86,7 @@
                                         <select name="ExpAcomu" id="ExpAcomu" class="txtMedia" onchange="expacumula()" required>
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResSimple();
+                                                lista = cat.findRespuestaSimple();
                                                 for (int x = 0; x < 3; x++) {
                                                     out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
                                                 }
@@ -108,7 +108,7 @@
                                         <select name="compe" id="compe" class="txtMedia" onchange="competencia()" required>
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResSimple();
+                                                lista = cat.findRespuestaSimple();
                                                 for (int x = 0; x < 3; x++) {
                                                     out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
                                                 }

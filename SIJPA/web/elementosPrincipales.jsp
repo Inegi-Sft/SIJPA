@@ -45,12 +45,12 @@
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Expediente</button>
                 <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2" disabled>Delitos</button>
-                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3" disabled>Adolescentes</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3" >Adolescentes</button>
                 <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Victimas</button>
-                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5" >Inicial</button>
+                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5" disabled>Inicial</button>
                 <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6" disabled>Intermedia</button>
-                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" >Conclusion y/o Terminacion</button>
-                <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8" >Tramite</button>
+                <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" disabled>Conclusion y/o Terminacion</button>
+                <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8" disabled>Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
                 <%@include file="capturaExpediente.jsp"%>

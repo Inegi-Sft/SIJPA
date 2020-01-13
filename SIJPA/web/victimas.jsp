@@ -89,8 +89,7 @@
                             <th>Delito cometido</th>
                         </tr>
                         <%
-                       //     vic = victi.findDelitos(causaClave + jConcatenado);
-                            vic = victi.findDelitos("001/201912120011");
+                            vic = victi.findDelitos(causaClave + jConcatenado);
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
@@ -144,8 +143,7 @@
                             <th width="750">Relación</th>
                         </tr>
                         <%
-                       //     vic = victi.findVprocesados(causaClave + jConcatenado);
-                            vic = victi.findVprocesados("001/201912120011");
+                            vic = victi.findVprocesados(causaClave + jConcatenado);
                             int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");

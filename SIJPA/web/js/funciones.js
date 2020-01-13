@@ -201,7 +201,7 @@ $(document).ready(function () {
         }
         
         if ($('#mProtect').val() === '1') {
-            if ($('input[name=#aplicaMedida"]:checked').length === 0) {
+            if ($('input[name="aplicaMedida"]:checked').length === 0) {
                 e.preventDefault();
                 alert('Selecciona al menos una opcion de Medidas de ProteciÃ³n');
                 $('#mProtect').focus();
@@ -209,13 +209,15 @@ $(document).ready(function () {
         }
 
         if ($('#mujProtect').val() === '1') {
-            if ($('#aplicaMedidaMuj:checked').length === 0) {
+            if ($('input[name="aplicaMedidaMuj"]:checked').length === 0) {
                 e.preventDefault();
                 alert('Selecciona al menos una opcion de Medidas de ProteciÃ³n contra Mujeres');
                 $('#mujProtect').focus();
             }
         }
     });
+    
+    
 
     $('#ingresos').change(function (e) {
         if ($(this).val() === '1') {
@@ -676,22 +678,23 @@ $(document).ready(function () {
             }
         }
     });
+    
     /*--------------------------FIN INTERMEDIA------------------------------------*/
 
     /*----------------------- FUNCIONES PARA INSERTS AJAX --------------------------*/
 
-//Guarda Expedientes
-    $('#formExpedientes').submit(function (e) {
+//Guarda Causa Penal
+    $('#formCausaPenal').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         $.ajax({
             type: 'post',
-            url: 'insrtExpediente',
-            data: $('#formExpedientes').serialize(),
+            url: 'insrtCausaPenal',
+            data: $('#formCausaPenal').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor", response);
                 alert("Guardado con exito!!!");
-                $('#formExpedientes').find('input, textarea, button, select').attr('disabled', true);
+                $('#formCausaPenal').find('input, textarea, button, select').attr('disabled', true);
                 $("#guardarExp").prop("hidden", true);
                 if (response === 1) {
                     parent.openPestana('btn2', 'p2');
@@ -847,6 +850,32 @@ $(document).ready(function () {
     $('#formuMedia').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        if ($('#pruebaMP').val() === '1') {
+            if ($('input[name="chkpruebaMP"]:checked').length === 0) {
+                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio público');
+                $('#pruebaMP').focus();
+                return false;
+            }
+        }
+        if ($('#pruebaAJ').val() === '1') {
+            if ($('input[name="chkpruebaAJ"]:checked').length === 0) {
+                alert('Selecciona al menos una opcion de prueba presentadas por el asesor jurídico');
+                $('#pruebaAJ').focus();
+                return false;
+            }
+        }
+        if ($('#pruebaDefensa').val() === '1') {
+            if ($('input[name="chkpruebaDefen"]:checked').length === 0) {
+                alert('Selecciona al menos una opcion de prueba presentadas por la defensa');
+                $('#pruebaDefensa').focus();
+                return false;
+            }
+        }
+        if($('#mediosPrueba').val() === '1' && ($('#pruebaAJ').val() !== '1' && $('#pruebaAJ').val() !== '1' && $('#pruebaDefensa').val() !== '1')) {
+            alert('Revisar los medios de prueba');
+            $('#mediosPrueba').focus();
+                return false;
+        }
         $.ajax({
             type: 'post',
             url: 'insrtIntermedia',

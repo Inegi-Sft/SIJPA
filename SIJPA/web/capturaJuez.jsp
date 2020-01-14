@@ -95,7 +95,7 @@
                                 <select class="txtMedia" name="estudioJuez" id="estudioJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findEstudioProfe();
+                                        lista = cat.findEstudioProfesional();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }

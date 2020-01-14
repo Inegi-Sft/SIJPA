@@ -42,7 +42,7 @@ public class insrtDelitos extends HttpServlet {
     showDelitos sd = new showDelitos();
     Conexion_Mysql conn = new Conexion_Mysql();
 
-    String sql, sqldcosa, sqlhomicidio;
+    String sqlDelitos, sqldcosa, sqlhomicidio;
     ResultSet rs;
     int deliExp;
     int deliInsertados;
@@ -53,20 +53,12 @@ public class insrtDelitos extends HttpServlet {
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
-//        String entidad = (String) sesion.getAttribute("entidad" );
-//        String municipio = (String) sesion.getAttribute("municipio");
-//        String numero = (String) sesion.getAttribute("numero");
-//        String jConcatenado = entidad + municipio + numero;
-//        String causaClave =(String) sesion.getAttribute("causaClave");
-
- String entidad = "12";
-String municipio = "12001";
-String numero = "1";
-        String causaClave = "001/2019";
-        String delitoClave = "001/2019-D1";
+        String entidad = (String) sesion.getAttribute("entidad" );
+        String municipio = (String) sesion.getAttribute("municipio");
+        String numero = (String) sesion.getAttribute("numero");
         String jConcatenado = entidad + municipio + numero;
-        
-//        String delitoClave = request.getParameter("delitoClave");
+        String causaClave =(String) sesion.getAttribute("causaClave");
+        String delitoClave = request.getParameter("delitoClave");
         String delitoCP = request.getParameter("delitoCP");
         String articuloCP = request.getParameter("articuloCP");
         int delitoNT = Integer.parseInt(request.getParameter("delitoNT"));
@@ -95,7 +87,7 @@ String numero = "1";
 
             //String delitoClave = generaDelitoClave(expediente,jConcatenado);
             conn.Conectar();
-            sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" 
+            sqlDelitos = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" 
                     + entidad + ","
                     + municipio + ","
                     + numero + ",'" 
@@ -123,12 +115,12 @@ String numero = "1";
                     + "0,'"
                     + comentarios + "',"
                     + " (select YEAR(NOW())) );";
-            System.out.println(sql);
+            System.out.println(sqlDelitos);
            
-            if (conn.escribir(sql)) {
+            if (conn.escribir(sqlDelitos)) {
                 if (delitoNT == 31) {
                     for (int i = 0; i < chkCR.length; i++) {
-                        sql = "INSERT INTO DATOS_DROBO_ADOJC VALUES ("
+                        sqldcosa = "INSERT INTO DATOS_DROBO_ADOJC VALUES ("
                                 + entidad + ","
                                 + municipio + ","
                                 + numero + ",'" 
@@ -136,13 +128,13 @@ String numero = "1";
                                 + delitoClave + jConcatenado + "',"
                                 + chkCR[i] 
                                 + " ,(select YEAR(NOW())) );";
-                        System.out.println(sql);
-                        conn.escribir(sql);
+                        System.out.println(sqldcosa);
+                        conn.escribir(sqldcosa);
                     }
                 }
                         if (delitoNT == 1 || delitoNT == 4) {
                             for (int j = 0; j < chkCS.length; j++) {
-                                sql = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES ("
+                                sqlhomicidio = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES ("
                                   + entidad + "," 
                                   + municipio + ","
                                   + numero + ",'" 
@@ -150,8 +142,8 @@ String numero = "1";
                                   + delitoClave + jConcatenado + "',"
                                   + chkCS[j] 
                                   + " ,(select YEAR(NOW())) );";      
-                                System.out.println(sql);
-                                conn.escribir(sql);
+                                System.out.println(sqlhomicidio);
+                                conn.escribir(sqlhomicidio);
                             }
                     }
                 

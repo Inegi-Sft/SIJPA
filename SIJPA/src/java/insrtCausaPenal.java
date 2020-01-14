@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author CESAR.OSORIO
  */
-@WebServlet(urlPatterns = {"/insrtExpediente"})
-public class insrtExpediente extends HttpServlet {
+@WebServlet(urlPatterns = {"/insrtCausaPenal"})
+public class insrtCausaPenal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,27 +39,22 @@ public class insrtExpediente extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        
         HttpSession sesion= request.getSession();
 
         String juzgado_clave = (String) sesion.getAttribute("juzgadoClave");
         String jDividido[] = juzgado_clave.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
-        String jDistrito = jDividido[2];
-        String jNumero = jDividido[3];
-        String jConcatenado=jEntidad+jMunicipio+jDistrito+jNumero;
+        String jNumero = jDividido[2];
+        String jConcatenado = jEntidad + jMunicipio + jNumero;
         
         sesion.setAttribute("entidad", jEntidad);
         sesion.setAttribute("municipio", jMunicipio);
-        sesion.setAttribute("distrito", jDistrito);
         sesion.setAttribute("numero", jNumero);
         
         String carpInvestiga = request.getParameter("CarpInves");
-        String expediente_clave = request.getParameter("expClave");
-        sesion.setAttribute("expediente", expediente_clave);
+        String causaClave = request.getParameter("expClave");
+        sesion.setAttribute("causaClave",causaClave);
         String fecha_ingreso;
         if (request.getParameter("fIngreso") != null) {
             fecha_ingreso = request.getParameter("fIngreso");
@@ -76,42 +71,24 @@ public class insrtExpediente extends HttpServlet {
         String totalAdo = request.getParameter("Tadolescentes");
         String totalVic = request.getParameter("Tvictimas");
         String comentario = request.getParameter("ComentaExpe");
-        //Datos para Taudiencias
-        String[] tipoAudi = request.getParameterValues("tipoAudi");
-        String[] juezAudi = request.getParameterValues("juezAudi");
-        String[] fAudi = request.getParameterValues("fAudi");
-        String[] tiAudi = request.getParameterValues("tiAudi");
       
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
-            sql = "INSERT INTO DATOS_EXPEDIENTES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero
-                    +",'" + expediente_clave+jConcatenado+ "','" + juzgado_clave + "','" + carpInvestiga + "','" + fecha_ingreso + "'," 
-                    + nomJuez + "," + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
+            sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +"," + jNumero
+                    + ",'" + juzgado_clave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fecha_ingreso + "','" 
+                    + nomJuez + "'," + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
                     + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
             System.out.println(sql);
             if (conn.escribir(sql)) {
                 out.write(request.getParameter("compe"));
-//                if(competencia == 1 ){
-//                    for (int i = 0; i < tipoAudi.length; i++) {
-//                        sql = "INSERT INTO DATOS_TAUDIENCIAS_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +","+jDistrito + ","+jNumero+","
-//                                + "'" + expediente_clave+jConcatenado + "',"+ tipoAudi[i] + "," + juezAudi[i] + ",'" + juzgado_clave + "','"
-//                                + fAudi[i] + "','" + tiAudi[i] + "', (select YEAR(NOW())))";
-//                        System.out.println(sql);
-//                        insrtExpe=conn.escribir(sql);
-//                    }
-//                    if (insrtExpe) {
-//                        conn.close();
-//                        out.write(request.getParameter("compe"));
-//                    }
-//                }
                 conn.close();
             } else {
                 conn.close();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(insrtExpediente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(insrtCausaPenal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -130,7 +107,7 @@ public class insrtExpediente extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(insrtExpediente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(insrtCausaPenal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -148,7 +125,7 @@ public class insrtExpediente extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(insrtExpediente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(insrtCausaPenal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

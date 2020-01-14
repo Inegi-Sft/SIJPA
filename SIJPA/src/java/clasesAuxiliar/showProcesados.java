@@ -55,9 +55,9 @@ public class showProcesados {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO),TP.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
-                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_IMPUTABILIDAD TP, CATALOGOS_SEXO S"
-                + " WHERE TP.IMPUTABILIDAD_ID=P.PRESENTACION_ADO"
+            sql = "SELECT CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), TC.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
+                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TC, CATALOGOS_SEXO S"
+                + " WHERE P.INICIO_IMPUTADO=TC.CONSIGNACION_ID"
                 + " AND S.SEXO_ID=P.SEXO"
                 + " AND P.PROCESADO_CLAVE = '" + pro + "';";
             
@@ -102,6 +102,29 @@ public class showProcesados {
             while(resul.next()){
                 proce.add(new String[]{
                     resul.getString("PROCESADO_CLAVE"), resul.getString("NOMBRE")+" "+resul.getString("A_PATERNO")+" "+resul.getString("A_MATERNO")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+
+    }
+    public ArrayList findProcesadoDelitos(String causa, String pro) {
+        conn.Conectar();
+        proce = new ArrayList();
+        sql = "SELECT PD.DELITO_CLAVE, CN.CODIGO FROM DATOS_PDELITOS_ADOJC PD, DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
+                + " WHERE PD.CAUSA_CLAVE=D.CAUSA_CLAVE AND PD.DELITO_CLAVE=D.DELITO_CLAVE"
+                + " AND D.DELITO_CODIGO_PENAL=CN.ID_CODIGO"
+                + " AND PD.CAUSA_CLAVE='"+causa+"' AND PD.PROCESADO_CLAVE='"+pro+"';";
+        
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString(1), resul.getString(2)
                 });
             }
             conn.close();

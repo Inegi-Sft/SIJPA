@@ -48,10 +48,9 @@ public class insrtConclusiones extends HttpServlet {
 //        String posicion = request.getParameter("posicion");
         String entidad =(String) sesion.getAttribute("entidad");
         String municipio =(String) sesion.getAttribute("municipio");
-        String distrito =(String) sesion.getAttribute("distrito");
         String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+distrito+numero;
-        String claveCausa =(String) sesion.getAttribute("claveCausa");
+        String jConcatenado =entidad+municipio+numero;
+        String causaClave =(String) sesion.getAttribute("causaClave");
         
         String idProcesado = request.getParameter("idProcesado");
         String fechaResolu=request.getParameter("fechaReso");
@@ -84,40 +83,40 @@ public class insrtConclusiones extends HttpServlet {
             PrintWriter out = response.getWriter();
             
             conn.Conectar();
-            sqlConclu = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES ("+entidad+","+municipio+","+distrito+","+numero
-                    + ",'"+claveCausa+jConcatenado+"','"+idProcesado+"', '" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre +","+excluAccion
+            sqlConclu = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES ("+entidad+","+municipio+","+numero
+                    + ",'"+causaClave+jConcatenado+"','"+idProcesado+"', '" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre +","+excluAccion
                     + ","+ tipoCondiSCP +",'"+ fechaExtSCP +"',"+ tipoMecanismoAR +",'"+ fechaExtinAR +"',"+ tipoResolucionPA+","+ privativa +","+ noprivativa +"," + internamiento 
                     + ","+ reparacion + "," + tipoRepara + "," + multa + "," + impugnacion + "," + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "', (select YEAR(NOW())) )";
            
             System.out.println(sqlConclu);
-//            if (conn.escribir(sqlConclu)) {
+            if (conn.escribir(sqlConclu)) {
                 for (int i = 0; i < delitoClave.length; i++){
                     String resolDelito = request.getParameter("resolDelito"+i);
-                    sqlDconclu = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES ("+entidad+","+municipio+","+distrito+","+numero
-                    + ",'"+claveCausa+jConcatenado+"','"+idProcesado+"','"+ delitoClave[i] +"',"+tipoResolu+","+ resolDelito +", (select YEAR(NOW())) )";
+                    sqlDconclu = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES ("+entidad+","+municipio+","+numero
+                    + ",'"+causaClave+jConcatenado+"','"+idProcesado+"','"+ delitoClave[i] +"',"+tipoResolu+","+ resolDelito +", (select YEAR(NOW())) )";
 
                     System.out.println(sqlDconclu);
                 }
-//                insrtDConclu=conn.escribir(sqlDconclu);
+                insrtDConclu=conn.escribir(sqlDconclu);
                 
                 conn.close();
-//            }
-//            if (insrtDConclu) {
-//                showConclusiones pro = new showConclusiones();
-//                ArrayList<String[]> lis = new ArrayList<String[]>();
-//                lis = pro.findConcluProce(idProcesado);
-//                JSONArray resp = new JSONArray();
-////                resp.add(posicion);
-//                resp.add(lis.get(0)[0].replace(jConcatenado, ""));
-//                resp.add(lis.get(0)[1]);
-//                resp.add(lis.get(0)[2]);
-//                resp.add(lis.get(0)[3]);
-//                resp.add(pro.countConclusionesExp(claveCausa + jConcatenado));
-//                out.write(resp.toJSONString());
-//                conn.close();
-//            } else {
-//                conn.close();
-//            }
+            }
+            if (insrtDConclu) {
+                showConclusiones pro = new showConclusiones();
+                ArrayList<String[]> lis = new ArrayList<String[]>();
+                lis = pro.findConcluProce(idProcesado);
+                JSONArray resp = new JSONArray();
+//                resp.add(posicion);
+                resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                resp.add(lis.get(0)[1]);
+                resp.add(lis.get(0)[2]);
+                resp.add(lis.get(0)[3]);
+                resp.add(pro.countConclusionesExp(causaClave + jConcatenado));
+                out.write(resp.toJSONString());
+                conn.close();
+            } else {
+                conn.close();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(insrtConclusiones.class.getName()).log(Level.SEVERE, null, ex);
         }

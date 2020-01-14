@@ -24,10 +24,9 @@
             
             String entidad =(String) sesion.getAttribute("entidad");
             String municipio =(String) sesion.getAttribute("municipio");
-            String distrito =(String) sesion.getAttribute("distrito");
             String numero =(String) sesion.getAttribute("numero");
-            String jConcatenado =entidad+municipio+distrito+numero;
-            String claveCausa =(String) sesion.getAttribute("claveCausa");
+            String jConcatenado =entidad+municipio+numero;
+            String causaClave =(String) sesion.getAttribute("causaClave");
         %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
@@ -39,7 +38,7 @@
                     <label for="idProcesado">Id Adolescente</label>
                     <select name="idProcesado" id="idProcesado" class="lblExBig" required>
                         <option value="">--Seleccione--</option>
-                        <%  lista = proce.findProcesadoExp(claveCausa+jConcatenado);
+                        <%  lista = proce.findProcesadoExp(causaClave+jConcatenado);
                             for (String[] ls : lista) {
                                 out.println("<option value='" + ls[0] + "'>" + ls[0].replace(jConcatenado, "") + ".- " + ls[1] + "</option>");
                             }
@@ -64,7 +63,7 @@
                             <select name="estInvesti" id="estInvesti" class="txtMedia" onchange="ocultaEspecifique();">
                                 <option value="">--Seleccione--</option>
                                  <%
-                                    lista = cat.findEtapaInvestigacion();
+                                    lista = cat.findEtapaInicial();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }

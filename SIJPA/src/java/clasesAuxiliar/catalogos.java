@@ -895,7 +895,7 @@ public class catalogos {
 
     }
 
-    public ArrayList findlazoCierre() {
+    public ArrayList findPlazoCierre() {
         conn.Conectar();
         lista = new ArrayList();
         sql = " SELECT * FROM catalogos_plazo_cierre ORDER BY 1";

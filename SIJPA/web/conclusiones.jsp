@@ -13,58 +13,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Resoluciones</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/jquery-ui.js"></script>
-<!--        <style type="text/css">
-            .contenido{
-               display: inline-block;
-               vertical-align: top; 
-            }
-            .encabezado{
-                width: 20em;
-                padding: 10px 18px;
-                background-color: #003057;
-                color: white;
-                margin: 0 1em 0 1em;
-                border-top-left-radius:10px; 
-                border-top-right-radius: 10px;
-            }
-            .dragDrop {
-                border: 3px dashed transparent;
-                /*background: #ccc;*/
-                background: rgb(140, 139, 139, 0.4);
-                margin: 0 1em 1em 1em;
-                min-height: 8em;
-                padding: 1em;
-                width: 20em;
-            }
-
-            .dragDrop.hovering {
-                background: #b6d6fb;
-                border-color: #276cbc;
-            }
-            .item {
-                font-size: 16px;
-                background: white;
-                cursor: pointer;
-                display: block;
-                padding: 8px;
-                margin: 8px;
-                border-radius: 10px;
-                border: 1px solid #a7a4a4;
-            } 
-          
-         </style>
-        <script>
-        $( function(){
-            $( "ul.dragDrop" ).sortable({
-                connectWith: "ul"
-            }).disableSelection();
-            $( '.dragDrop' ).droppable({
-                accept: '.item',
-                hoverClass: 'hovering'
-            });
-        });
-        </script>-->
     </head>
     <body style="zoom: .9;">
         <%
@@ -76,21 +24,26 @@
             
             String entidad =(String) sesion.getAttribute("entidad");
             String municipio =(String) sesion.getAttribute("municipio");
-            String distrito =(String) sesion.getAttribute("distrito");
             String numero =(String) sesion.getAttribute("numero");
-            String jConcatenado =entidad+municipio+distrito+numero;
-            String claveCausa =(String) sesion.getAttribute("claveCausa");
+            String jConcatenado =entidad+municipio+numero;
+            String causaClave =(String) sesion.getAttribute("causaClave");
+            
+            String procesado = request.getParameter("idProcesado");
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el juez de control</h1>
-            <form action="" method="post" name="formConclusiones" id="formConclusiones">
-                <label for="idProcesado">Id Adolescente</label>
-                <select class="lblExBig" name="idProcesado" id="idProcesado">
+            <form action="conclusiones.jsp" method="post" name="formConclusiones" id="formConclusiones">
+                <label for="procesado">Id Adolescente</label>
+                <select class="lblExBig" name="idProcesado" id="idProcesado" onchange="formConclusiones.submit();" required>
                     <option value="">--Seleccione--</option>
-                    <%  lista = proce.findProcesadoExp(claveCausa+jConcatenado);
+                    <%  lista = proce.findProcesadoExp(causaClave+jConcatenado);
                         for (String[] ls : lista) {
-                            out.println("<option value='" + ls[0] + "'>" + ls[0].replace(jConcatenado, "") + ".- " + ls[1] + "</option>");
+                            out.println("<option value='" + ls[0] + "'");
+                            if(ls[0].equals(procesado)){
+                                out.println(" selected ");
+                            }
+                            out.println( ">" + ls[0].replace(jConcatenado, "") + ".- " + ls[1] + "</option>");
                         }
                     %> 
                 </select>
@@ -122,7 +75,7 @@
                             <select class="txtMedia" name="tipoSobreseimto" id="tipoSobreseimto">
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findTipoSobrese();
+                                    lista = cat.findTipoSobreseimiento();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -146,7 +99,7 @@
                             <select class="txtLong" name="excluAccion" id="excluAccion">
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findExclusionAccionP();
+                                    lista = cat.findExclusionAccionp();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -161,7 +114,7 @@
                             <select class="txtMedia" name="tipoCondiSCP" id="tipoCondiSCP" required>
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findResSimple();
+                                    lista = cat.findSuspensionCondicional();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -183,7 +136,7 @@
                             <select class="txtMedia" name="tipoMecanismoAR" id="tipoMecanismoAR" required>
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findResSimple();
+                                    lista = cat.findAcuerdoRepara();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -217,7 +170,7 @@
                             <select class="txtMedia" name="tipoMedidaPL" id="tipoMedidaPL"  onchange="rInternamiento()" >
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findPrivLibertad();
+                                    lista = cat.findPrivativas();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -229,7 +182,7 @@
                             <select class="txtMedia" name="tipoMedidaNPL" id="tipoMedidaNPL" >
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findNoPrivacion();
+                                    lista = cat.findNoprivativas();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -241,7 +194,7 @@
                             <select class="txtMedia" name="internamiento" id="internamiento">
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findTiempoInterna();
+                                    lista = cat.findTiempoInternamiento();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -256,56 +209,22 @@
                                 <th width="130">No privativo</th>
                                 <th width="130">No identificado</th>
                             </tr>
-                            <tr>
-                                <td>Delitos en contra de la salud en su modalidad de narcomenudeo
-                                    <input type="hidden" name="delitoConclu" value="d1">
-                                </td>
-                                <td><input type="radio" name="resolDelito0" value="1"></td>
-                                <td><input type="radio" name="resolDelito0" value="2"></td>
-                                <td><input type="radio" class="radValCambia" name="resolDelito0" value="9"></td>
-                            </tr>
-                            <tr>
-                                <td>Homicidio
-                                    <input type="hidden" name="delitoConclu" value="d2">
-                                </td>
-                                <td><input type="radio" name="resolDelito1" value="1"></td>
-                                <td><input type="radio" name="resolDelito1" value="2"></td>
-                                <td><input type="radio" class="radValCambia" name="resolDelito1" value="9"></td>
-                            </tr>
-                            <tr>
-                                <td>lesiones graves
-                                <input type="hidden"  name="delitoConclu" value="d3">
-                                </td>
-                                <td><input type="radio" name="resolDelito2" value="1"></td>
-                                <td><input type="radio" name="resolDelito2" value="2"></td>
-                                <td><input type="radio" class="radValCambia" name="resolDelito2" value="9"></td>
-                            </tr>
-                            <tr>
-                                <td>contra el medio ambiente
-                                <input type="hidden" name="delitoConclu" value="d4">
-                                </td>
-                                <td><input type="radio" name="resolDelito3" value="1"></td>
-                                <td><input type="radio" name="resolDelito3" value="2"></td>
-                                <td><input type="radio" class="radValCambia" name="resolDelito3" value="9"></td>
-                            </tr>
+                            <%
+                                lista = proce.findProcesadoDelitos(causaClave+jConcatenado, procesado);
+                                for(int i=0;i<lista.size();i++){
+                            %>
+                                <tr>
+                                    <td><%=lista.get(i)[1]%>
+                                        <input type="hidden" name="delitoConclu" value="<%=lista.get(i)[0]%>">
+                                    </td>
+                                    <td><input type="radio" name="resolDelito<%=i%>" value="1"></td>
+                                    <td><input type="radio" name="resolDelito<%=i%>" value="2"></td>
+                                    <td><input type="radio" class="radValCambia" name="resolDelito<%=i%>" value="9"></td>
+                                </tr>
+                            <%
+                                }
+                            %> 
                         </table>
-<!--                        <span id="notaDC" class="oculto" style="display:block; font-size: 18px;color: maroon;"><b>Arrastra los delitos al apartado segun corresponda</b></span>
-                        <br/>
-                        <div class="contenido">
-                            <div class="encabezado" id="encabezado"> - - - </div>
-                            <ul class="dragDrop" id="privativaL">
-                                <li class="item">Delitos en contra de la salud en su modalidad de narcomenudeo</li>
-                                <li class="item">Homicidio</li>
-                                <li class="item">lesiones</li>
-                                <li class="item">Aborto no punible</li>
-                            </ul>
-                        </div>
-                        <div class="contenido oculto" id="cont2">
-                            <div class="encabezado">No privativa de la libertad</div>
-                            <ul class="dragDrop" id="noPrivativaL">
-                            </ul>
-                        </div>-->
-                        
                     </fieldset>
                 </fieldset>
                 <fieldset id="flsReparaDanio">
@@ -315,7 +234,7 @@
                         <select class="txtMedia" name="reparaDanio" id="reparaDanio" onchange="respuestaRepara()" required>
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findResSimple();
+                                lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -327,7 +246,7 @@
                         <select class="txtMedia dependiente" name="tipoReparaD" id="tipoReparaD" onchange="pagoCosa()" >
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findRePDano();
+                                lista = cat.findReparacionDano();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -354,7 +273,7 @@
                         <select class="txtMedia" name="impugnacion" id="impugnacion" onchange="impugna()" required>
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findResSimple();
+                                lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -366,7 +285,7 @@
                         <select class="txtMedia dependiente" name="tipoImpugnacion" id="tipoImpugnacion">
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findTipoImpugna();
+                                lista = cat.findTipoImpugnacion();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -385,7 +304,7 @@
                         <select class="txtMedia dependiente" name="personaImpugna" id="personaImpugna">
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findImpugResolucion();
+                                lista = cat.findFiguraProceso();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }

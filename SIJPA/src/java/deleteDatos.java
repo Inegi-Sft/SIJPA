@@ -42,9 +42,8 @@ public class deleteDatos extends HttpServlet {
         
         String entidad =(String) sesion.getAttribute("entidad");
         String municipio =(String) sesion.getAttribute("municipio");
-        String distrito =(String) sesion.getAttribute("distrito");
         String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+distrito+numero;
+        String jConcatenado =entidad+municipio+numero;
         
         String idProConclusion = request.getParameter("proceConclusion");
         String idProTramite = request.getParameter("proceTramite");

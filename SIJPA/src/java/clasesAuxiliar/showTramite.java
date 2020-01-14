@@ -55,7 +55,7 @@ public class showTramite {
             while(resul.next()){
                 trami.add(new String[]{
                     resul.getString("T.PROCESADO_CLAVE"), resul.getString("P.NOMBRE")+" "+resul.getString("P.A_PATERNO")+" "+resul.getString("P.A_MATERNO"),
-                    resul.getString("EP.DESCRIPCION"),resul.getString("T.MOTIVO_TRAMITE"),resul.getString("T.FECHA_ULTIMA_ACTUALIZACION")
+                    resul.getString("EP.DESCRIPCION"),resul.getString("T.FECHA_ACTO_PROCESAL")
                 });
             }
             conn.close();
@@ -70,7 +70,7 @@ public class showTramite {
         try{
             conn.Conectar();
             conteo = 0;
-            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteo= resul.getInt(1);

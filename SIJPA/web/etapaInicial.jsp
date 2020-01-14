@@ -41,7 +41,7 @@
                         <select class="txtMedia" name="audiInicial" id="audiInicial" required>
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findResSimple();
+                                lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -52,7 +52,7 @@
                         <label for="ctrlDetencion">¿Hubo control de detención?</label>
                         <select class="txtMedia" name="ctrlDetencion" id="ctrlDetencion" required>
                             <option value="">--Seleccione--</option>
-                            <% lista = cat.findResSimple();
+                            <% lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -64,7 +64,7 @@
                         <select class="txtMedia" name="legalDeten" id="legalDeten" required>
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findResSimple();
+                                lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -83,7 +83,7 @@
                         <select class="txtMedia" name="formuImputa" id="formuImputa" required>
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findResSimple();
+                                lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -108,7 +108,7 @@
                                         <select class="txtMedia" name="declaro" id="declaro" onchange="respuestaSimpleFecha('#declaro', '#lbfechDeclara1', '#fechDeclara', '#chkFechDeclara')" required>
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResSimple();
+                                                lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -131,7 +131,7 @@
                                         <select class="txtMedia" name="huboPlazo" id="huboPlazo" onchange="respuestaSelect('#huboPlazo', '#lbPlazo1', '#plazo')" required>
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResSimple();
+                                                lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -143,7 +143,7 @@
                                         <select class="txtMedia dependiente" name="plazo" id="plazo">
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findPConstitucional();
+                                                lista = cat.findPlazoConstitucional();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -167,17 +167,10 @@
                                         </select>
                                     </div>
                                     <div class="colsA oculto" ID="dfechAuto">
-                                        <label for="fechAuto">Fecha en que se dictó el auto de vinculación a proceso</label>
+                                        <label for="fechAuto" id="lblFechaAuto">Fecha en que se dictó el auto de vinculación a proceso</label>
                                         <input type="date" name="fechAuto" id="fechAuto" class="depenFecha"/>
                                         <div class="noIdentificada">
                                             <input type="checkbox" id="chkFechaAuto" onclick="fechaNoIdent('#chkFechaAuto', '#fechAuto')"/><label>No identificada</label>
-                                        </div>
-                                    </div>
-                                    <div class="colsA oculto" id="dfechAutoLib" >
-                                        <label for="fechAutoLib">Fecha en que se dictó el auto de libertad por no vinculación a proceso</label>
-                                        <input type="date" name="fechAutoLib" id="fechAutoLib" class="depenFecha"/>
-                                        <div class="noIdentificada" >
-                                            <input type="checkbox" id="chkFechaAutoLib" onclick="fechaNoIdent('#chkFechaAutoLib', '#fechAutoLib')"/><label>No identificada</label>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -190,7 +183,7 @@
                         <select class="txtMedia" name="drecretaMC" id="drecretaMC"  required>
                             <option value="">--Seleccione--</option>
                             <%
-                                lista = cat.findResSimple();
+                                lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
@@ -204,7 +197,7 @@
                                     <th width="70">Decretada</th>
                                 </tr>
                                 <%
-                                    lista = cat.findMedCautelares();
+                                    lista = cat.findMedidasCautelares();
                                     for (String[] ls : lista) {
                                         out.println("<tr>");
                                         out.println("<td>" + ls[0] + "</td>");
@@ -236,7 +229,7 @@
                             <select class="txtMedia" name="soliPlazo" id="soliPlazo" required>
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findResSimple();
+                                    lista = cat.findRespuestaSimple();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -252,10 +245,10 @@
                         </div>
                         <div class="colsA oculto" id="dsoliProrroga">
                             <label for="soliProrroga">¿Se autorizo prórroga del plazo para el cierre de la investigación?</label>
-                            <select class="txtMedia" name="soliProrroga" id="soliProrroga" onchange="respuestaSimpleFecha('#soliPlazo', '#lbfechSoliPlazo1', '#fechSoliPlazo', '#chkFechSoliPlazo')" required>
+                            <select class="txtMedia" name="soliProrroga" id="soliProrroga"  required>
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findResSimple();
+                                    lista = cat.findRespuestaSimple();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
@@ -294,7 +287,7 @@
                                     <select class="txtMedia" name="dictoSobresei" id="dictoSobresei" required>
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = cat.findResSimple();
+                                            lista = cat.findRespuestaSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -309,7 +302,7 @@
                                         <select class="txtMedia" name="suspenProceso" id="suspenProceso" required>
                                             <option value="">--Seleccione--</option>
                                             <%
-                                                lista = cat.findResSimple();
+                                                lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -336,7 +329,7 @@
                                         <label for="huboReapertura">¿Hubo reapertura del proceso?</label>
                                         <select class="txtMedia" name="huboReapertura" id="huboReapertura" required>
                                             <option value="">--Seleccione--</option>
-                                            <%  lista = cat.findResSimple();
+                                            <%  lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -355,7 +348,7 @@
                                         <select class="txtMedia" name="quienSoliApertura" id="quienSoliApertura" required>
                                             <option value="">--Seleccione--</option>
                                             <%  
-                                                lista = cat.findReapertura();
+                                                lista = cat.findFiguraProceso();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
@@ -370,7 +363,7 @@
                                     <label for="formulaAcusacion">¿Se formuló acusación?</label>
                                     <select class="txtMedia" name="formulaAcusacion" id="formulaAcusacion" required>
                                         <option value="">--Seleccione--</option>
-                                        <%                                    lista = cat.findResSimple();
+                                        <%                                    lista = cat.findRespuestaSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }

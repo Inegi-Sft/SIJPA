@@ -46,6 +46,10 @@ public class insrtJuez extends HttpServlet {
         HttpSession sesion= request.getSession();
         
         String juzClaveJuez = (String) sesion.getAttribute("juzgadoClave");
+         String jDividido[] = juzClaveJuez.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String jEntidad = jDividido[0];
+        String jMunicipio = jDividido[1];
+        String jNumero = jDividido[2];
         int juezID = Integer.parseInt(request.getParameter("juezID"));
         String nombre = request.getParameter("nombre");
         String apaterno = request.getParameter("apaterno");
@@ -63,8 +67,9 @@ public class insrtJuez extends HttpServlet {
         
         try {
             conn.Conectar();
-            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES('" + juzClaveJuez + "'," + juezID + ",'" + nombre + "','" + apaterno + "','"
-                    + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + "," + estudioJuez + "," + funcionJuez + ")";
+            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzClaveJuez + "'," + juezID + ",'" 
+                    + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + "," + estudioJuez + "," 
+                    + funcionJuez + ",(select YEAR(NOW())))";
             System.out.println(sql);
             if(conn.escribir(sql)){
                 response.sendRedirect("jueces.jsp");

@@ -62,7 +62,7 @@
                                     <select class="txtMedia" name="decubreProba" id="decubreProba" required>
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = cat.findResSimple();
+                                            lista = cat.findRespuestaSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -78,7 +78,7 @@
                                     <select class="txtMedia" name="audiInterme" id="audiInterme" required>
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = cat.findResSimple();
+                                            lista = cat.findRespuestaSimple();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
@@ -99,7 +99,7 @@
                                 <select class="txtMedia" name="separaAcusa" id="separaAcusa"  required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findResSimple();
+                                        lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -120,7 +120,7 @@
                                                 <select class="txtMedia" name="mediosPrueba" id="mediosPrueba" required>
                                                     <option value="">--Seleccione--</option>
                                                     <%
-                                                        lista = cat.findResSimple();
+                                                        lista = cat.findRespuestaSimple();
                                                         for (String[] ls : lista) {
                                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                         }
@@ -136,7 +136,7 @@
                                                     <select class="txtMedia" name="pruebaMP" id="pruebaMP">
                                                         <option value="">--Seleccione--</option>
                                                         <%
-                                                            lista = cat.findResSimple();
+                                                            lista = cat.findRespuestaSimple();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
@@ -150,7 +150,7 @@
                                                     <select class="txtMedia" name="pruebaAJ" id="pruebaAJ">
                                                         <option value="">--Seleccione--</option>
                                                         <%
-                                                            lista = cat.findResSimple();
+                                                            lista = cat.findRespuestaSimple();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
@@ -164,7 +164,7 @@
                                                     <select class="txtMedia" name="pruebaDefensa" id="pruebaDefensa">
                                                         <option value="">--Seleccione--</option>
                                                         <%
-                                                            lista = cat.findResSimple();
+                                                            lista = cat.findRespuestaSimple();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
@@ -249,7 +249,7 @@
                                 <select class="txtMedia" name="acuerdosProba" id="acuerdosProba" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findResSimple();
+                                        lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
@@ -263,7 +263,7 @@
                                 <select class="txtMedia" name="aperturaJO" id="aperturaJO" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findResSimple();
+                                        lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }

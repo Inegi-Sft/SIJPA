@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SIJPA::Elementos del Expediente</title>
+        <title>SIJPA::Elementos de la CausaPenal</title>
         <%@include file="librerias.jsp" %>
         <%
             showDelitos delito = new showDelitos();
@@ -34,7 +34,7 @@
             ArrayList<String[]> trami = new ArrayList();
             
             HttpSession sesion= request.getSession();
-            String expediente =(String) sesion.getAttribute("expediente");
+            String CausaPenal =(String) sesion.getAttribute("CausaPenal");
         %>
     </head>
     <body>
@@ -43,7 +43,7 @@
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
-                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Expediente</button>
+                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Causa Penal</button>
                 <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2" disabled>Delitos</button>
                 <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3" disabled>Adolescentes</button>
                 <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Victimas</button>
@@ -53,7 +53,7 @@
                 <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8" disabled>Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
-                <%@include file="capturaExpediente.jsp"%>
+                <%@include file="capturaCausaPenal.jsp"%>
                 
             </div>
             <div id="p2" class="pestanaContent">

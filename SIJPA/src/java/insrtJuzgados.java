@@ -83,7 +83,7 @@ public class insrtJuzgados extends HttpServlet {
         String causasTram = verificaVariable(request.getParameter("causasTram"));
         String causasBaja = verificaVariable(request.getParameter("causasBaja"));
         
-        juzgadoClave = entidadJ + "-" + municipioJ + "-" + jurisdiccion + "-" + numOrgano;
+        juzgadoClave = entidadJ + "-" + municipioJ + "-" + numOrgano;
         
         try {
             conn.Conectar();
@@ -95,9 +95,9 @@ public class insrtJuzgados extends HttpServlet {
                     + ")";
             System.out.println(sql);
             if(conn.escribir(sql)){
-                sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES('" + juzgadoClave + "'," + causasIngresa + "," + mediProteccion + "," + providenPrecauto + ","
-                        + pruebaAnti + "," + ordenesJudi + "," + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","
-                        + causasBaja +")";
+                sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                        + causasIngresa + "," + mediProteccion + "," + providenPrecauto + "," + pruebaAnti + "," + ordenesJudi + ","
+                        + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW())))"; 
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                         conn.close();

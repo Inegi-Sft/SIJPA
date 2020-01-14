@@ -25,21 +25,21 @@ public class showInicial {
     int conteoIni;
     int totalProcesa;
 
-    public ArrayList findInicialTabla(String inicia) {
+    public ArrayList findInicialTabla(String procesado) {
         conn.Conectar();
         ini = new ArrayList();
-        sql = "SELECT EP.PROCESADO_CLAVE, RSD.DESCRIPCION, RSL.DESCRIPCION, RSDE.DESCRIPCION, ep.FECHA_CIERRE_INVESTIGACION "
-                + "FROM DATOS_ETAPAPROC_ADOJC EP, CATALOGOS_RESPUESTA_SIMPLE RSD, CATALOGOS_RESPUESTA_SIMPLE RSL, CATALOGOS_RESPUESTA_SIMPLE RSDE "
-                + "WHERE EP.CTRL_DETENCION = RSD.RESPUESTA_ID "
-                + "AND EP.DETENCION_LEGAL = RSL.RESPUESTA_ID "
-                + "AND EP.ADOLESCENTE_DECLARO = RSDE.RESPUESTA_ID "
-                + "AND EP.PROCESADO_CLAVE = '" + inicia + "';";
+        sql = "SELECT EI.PROCESADO_CLAVE,RSD.DESCRIPCION, AV.DESCRIPCION, RSS.DESCRIPCION "
+                + "FROM DATOS_ETAPA_INICIAL_ADOJC EI, CATALOGOS_RESPUESTA_SIMPLE RSD, CATALOGOS_AUTO_VINCULACION AV, CATALOGOS_RESPUESTA_SIMPLE RSS "
+                + "WHERE EI.CTRL_DETENCION = RSD.RESPUESTA_ID "
+                + "AND EI.AUTO_VINCULACION = AV.AUTO_ID "
+                + "AND EI.SOBRESEIMIENTO_CAUSAP = RSS.RESPUESTA_ID "
+                + "AND EI.PROCESADO_CLAVE = '" + procesado + "';";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 ini.add(new String[]{
                     resul.getString(2), resul.getString(3),
-                    resul.getString(4), resul.getString(5)
+                    resul.getString(4)
                 });
             }
             conn.close();
@@ -54,7 +54,7 @@ public class showInicial {
         try {
             conn.Conectar();
             conteoIni = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPAPROC_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoIni = resul.getInt("TOTAL");
@@ -70,7 +70,7 @@ public class showInicial {
         conn.Conectar();
         vdeli = new ArrayList();
         sql = "SELECT DISTINCT(DELITO_CLAVE), COUNT(DISTINCT(PROCESADO_CLAVE)), COUNT(DISTINCT(VICTIMA_CLAVE)) FROM DATOS_VDELITOS_ADOJC "
-                + "WHERE EXPEDIENTE_CLAVE = '" + exp + "' GROUP BY DELITO_CLAVE;";
+                + "WHERE CAUSA_CLAVE = '" + exp + "' GROUP BY DELITO_CLAVE;";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -89,7 +89,7 @@ public class showInicial {
         try {
             conn.Conectar();
             totalProcesa = 0;
-            sql = "SELECT NUMERO_PROCESADOS AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT NUMERO_PROCESADOS AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 totalProcesa = resul.getInt("TOTAL");

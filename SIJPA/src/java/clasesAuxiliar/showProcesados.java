@@ -112,4 +112,27 @@ public class showProcesados {
         return proce;
 
     }
+    public ArrayList findProcesadoDelitos(String causa, String pro) {
+        conn.Conectar();
+        proce = new ArrayList();
+        sql = "SELECT PD.DELITO_CLAVE, CN.CODIGO FROM DATOS_PDELITOS_ADOJC PD, DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
+                + " WHERE PD.CAUSA_CLAVE=D.CAUSA_CLAVE AND PD.DELITO_CLAVE=D.DELITO_CLAVE"
+                + " AND D.DELITO_CODIGO_PENAL=CN.ID_CODIGO"
+                + " AND PD.CAUSA_CLAVE='"+causa+"' AND PD.PROCESADO_CLAVE='"+pro+"';";
+        
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+
+    }
 }

@@ -35,7 +35,9 @@ public class showConclusiones {
                     resul.getString(4),resul.getString(5),resul.getString(6),resul.getString(7),resul.getString(8),
                     resul.getString(9),resul.getString(10),resul.getString(11),resul.getString(12),resul.getString(13),
                     resul.getString(14),resul.getString(15),resul.getString(16),resul.getString(17),resul.getString(18),
-                    resul.getString(19),resul.getString(20),resul.getString(21),resul.getString(22),resul.getString(23),resul.getString(24)});
+                    resul.getString(19),resul.getString(20),resul.getString(21),resul.getString(22),resul.getString(23),
+                    resul.getString(24)
+                });
             }
             conn.close();
         }

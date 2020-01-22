@@ -1,47 +1,45 @@
 <%-- 
-    Document   : juzgados
-    Created on : 20/09/2019, 10:55:04 AM
-    Author     : FERMIN.GOMEZ
+    Document   : usuario
+    Created on : 17/01/2020, 03:12:05 PM
+    Author     : CARLOS.SANCHEZG
 --%>
 
-<%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page import="clasesAuxiliar.usuario"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
-        <title>SIJPA::Juzgados</title>
-        <%@include file="librerias.jsp" %>
-        <% 
-            showJuzgados sj = new showJuzgados();
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>SIJPA::Usuarios</title>
+        <%@include file="librerias.jsp"%>
+        <%
+            usuario usuario = new usuario();
             ArrayList<String[]> lista;
         %>
     </head>
-
-    <body >
+    <body>
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
-            <h1>Órganos Jurisdiccionales</h1>
-            <a href="capturaJuzgado.jsp" class="addJuz">Agregar Órgano <img src="img/add.png" title="Agregar Órgano"></a>
+            <h1>Usuarios</h1>
+            <a href="capturaUsuario.jsp" class="addJuz">Agregar Usuario <img src="img/add.png" title="Agregar Usuario"></a>
             <table class="tablasRegis">
                 <tr>
-                    <th>Juzgado Clave</th>
+                    <th>ID</th>
                     <th>Nombre</th>
-                    <th>Número</th>
-                    <th>Jurisdicción</th>
+                    <th>Edad</th>
+                    <th>Correo/Usuario</th>
                     <th>Entidad</th>
-                    <th>Municipio</th>
+                    <th>Nivel Usuario</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
                 <% 
-                    lista = sj.findJuzgadoTabla();
+                    lista = usuario.findUsuarioTabla();
                     for (String[] lsj : lista) {
                         out.println("<tr>");
                         out.println("<td>" + lsj[0] + "</td>");

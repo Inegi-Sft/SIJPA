@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 @import "pestanas.css";
 @import "menu.css";
-@import "Tablas.css";
+@import "tablas.css";
 
 *{
     -webkit-box-sizing: border-box;
@@ -19,7 +19,6 @@ and open the template in the editor.
 }
 
 body{
-    /*background: #706F6F;*/
     background-image: url("../img/fondo_final.png");
     background-attachment: fixed;
     background-size: cover;
@@ -29,47 +28,153 @@ body{
 }
 
 #splash{
-    background-color: rgba(0,0,0,1);
+    background-color: rgba(0,0,0,0.6);
     color: #fff;
-    top: 0;
+    margin:4% 25%;
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 50%;
     text-align: center;
+    border-radius: 20px;
 }
 
 #splash img{
     position: relative;
-    margin-top: 10vh;
 }
 
-.cabecera{
-    background-color: #27251F;
-    width: 100%;
-    z-index: 1000;
-}
-
-.cabecera #logo{
-    height: 50px;
-    margin: 5px 20px;
-}
-
-.cabecera #titulo{
-    float: right;
-    height: 50px;
-    margin: 5px 20px;;
-}
-
-.cabecera #usu{
-    float: right;
+#login{
+    background-color: rgba(0,0,0,0.6);
     color: #FFF;
-    margin: 40px 10px 0 10px;
+    margin: 8% auto;
+    position: absolute;
+    padding: 10px 20px;
+    width: 20%;
+    height: 370px;
+    text-align: center;
+    border-radius: 20px;
+    left: -600px;
 }
 
-.cabecera #doscolores{
-    height: 7px;
-    background-color: #706F6F;
-    border-right: 50em solid #0077CB;
+#login img{
+    width: 100px;
+    display: block;
+    margin: 10px auto;
+}
+
+#login label{
+    display: inline-block;
+    margin-top: 15px;
+    float: left;
+}
+
+#login input{
+    width: 100%;
+    height: 30px;
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bolder;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#login input:focus{
+    box-shadow: 0 0 5px 5px rgba(122, 201, 255, 0.3);
+}
+
+#login #enviaUsu{
+    background-color: #0077CB;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    width: 50%;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#login #enviaUsu:hover{
+    background-color: #00CBCB;
+    width: 60%;
+    height: 45px;
+}
+
+#mensajeAdmin{
+    background-color: rgba(0,0,0,0.8);
+    color: #FFF;
+    margin: 2% 5%;
+    height: 90%;
+    width: 90%;
+    position: absolute;
+    padding: 30px;
+    top: 0px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+#mensajeAdmin p{
+    text-align: justify;
+    margin: 10%;
+    font-size: 20px;
+}
+
+#mensajeAdmin button{
+    background-color: #0077CB;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#mensajeAdmin button:hover{
+    background-color: #00CBCB;
+    width: 30%;
+}
+
+#mesajePass{
+    font-size: 17px;
+}
+
+#btnJc, #btnJo{
+    background-color: #0077CB;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    width: 25%;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 50px 30% 0 30%;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#btnJc:hover, #btnJo:hover{
+    background-color: #00CBCB;
+    width: 30%;
+    font-size: 18px;
+    box-shadow: 5px 5px 5px rgba(0, 119, 203, 0.3);
 }
 
 .contenedor{
@@ -128,6 +233,10 @@ body{
     background-color: #00CBCB;
     color: #FFFFFF;
     width: 15%;
+}
+
+.contenedor input[type=text]{
+    text-transform: uppercase;
 }
 
 .contenedor input, .contenedor input[type=text], .contenedor input[type=date], .contenedor input[type=number], 

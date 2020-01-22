@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 
-import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author CARLOS.SANCHEZG
  */
-@WebServlet(urlPatterns = {"/insrtJuez"})
-public class insrtJuez extends HttpServlet {
+@WebServlet(urlPatterns = {"/accesoSistema"})
+public class accesoSistema extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,55 +36,36 @@ public class insrtJuez extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
-    ResultSet rs;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        HttpSession sesion= request.getSession();
+        response.setContentType("text/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession sesion = request.getSession();
         
-        String primerJuez = request.getParameter("primerJuez");
-        String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
-        String[] juzSeparado = juzgadoClave.split("-");
-        String entidad = juzSeparado[0];
-        String mun = juzSeparado[1];
-        String num = juzSeparado[2];
-        int juezID = Integer.parseInt(request.getParameter("juezID"));
-        String nombre = request.getParameter("nombre").toUpperCase();
-        String apaterno = request.getParameter("apaterno").toUpperCase();
-        String amaterno = request.getParameter("amaterno").toUpperCase();
-        String fGestion;
-        if (request.getParameter("fGestion") != null) {
-            fGestion = request.getParameter("fGestion");
-        }else{
-            fGestion = "1899-09-09";
-        }
-        String sexoJuez = request.getParameter("sexoJuez");
-        String edadJuez = request.getParameter("edadJuez");
-        String estudioJuez = request.getParameter("estudioJuez");
-        String funcionJuez = request.getParameter("funcionJuez");
+        String nomUsu = request.getParameter("nomUsu").toUpperCase();
+        String passUsu = request.getParameter("passUsu").toUpperCase();
         
+        MessageDigest md = null;
         try {
-            conn.Conectar();
-            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + entidad + "," + mun + "," + num + ",'" + juzgadoClave + "'," + juezID + ",'"
-                    + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + ","
-                    + estudioJuez + "," + funcionJuez + ",(select YEAR(NOW()))"
-                    + ")";
-            System.out.println(sql);
-            if(conn.escribir(sql)){
-                conn.close();
-                response.sendRedirect("causasPenales.jsp");
+            md = MessageDigest.getInstance("SHA-1");
+            md.reset();
+            md.update(passUsu.getBytes("utf8"));
+            String hash = String.format("%040x", new BigInteger(1, md.digest()));
+            System.out.println("PASS: " + hash);
+            
+            usuario usuario = new usuario();
+            if(usuario.findUsuario(nomUsu,hash)){
+                int tipo = usuario.findTipoUsuario(nomUsu,hash);
+                sesion.setAttribute("tipoUsuario", tipo);
+                sesion.setAttribute("usuActivo", nomUsu);
+                sesion.setMaxInactiveInterval(-1);
+                out.write("1");
             }else{
-                conn.close();
-                response.sendRedirect("capturaJuez.jsp?error=100");
+                out.write("0");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(accesoSistema.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

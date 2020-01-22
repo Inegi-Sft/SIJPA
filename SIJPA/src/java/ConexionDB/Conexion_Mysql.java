@@ -27,15 +27,10 @@ public class Conexion_Mysql {
     public boolean Conectar() { 
         try { 
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://10.15.130.27:3306/sijpa_db";
+            String url = "jdbc:mysql://10.15.130.27:3306/sijpa_dbp";
             conexion = (Connection) DriverManager.getConnection(url,"carlos","carlos2019");
-            if (conexion != null) { 
-                System.out.println("Conexion oracle exitosa!");
-                return true;
-            } else { 
-                System.out.println("Conexion oracle fallida!");
-                return false;
-            } 
+            return conexion != null; //System.out.println("Conexion oracle exitosa!");
+            //System.out.println("Conexion oracle fallida!");
         } catch (ClassNotFoundException e) { 
             System.err.println("Error: " + e);
         } catch (SQLException ex) {        
@@ -71,7 +66,7 @@ public class Conexion_Mysql {
     }
     
     public void close() throws SQLException{
-        System.out.println("Conexion oracle Cerrada");
+        //System.out.println("Conexion oracle Cerrada");
         conexion.close();
     }
 }

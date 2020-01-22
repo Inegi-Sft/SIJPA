@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17/01/2020, 10:02:52 AM
+    Author     : CARLOS.SANCHEZG
+*/
+
+.cabecera{
+    background-color: #27251F;
+    width: 100%;
+    z-index: 1000;
+}
+
+.cabecera #logo{
+    height: 50px;
+    margin: 5px 20px;
+}
+
+.cabecera #titulo{
+    float: right;
+    height: 50px;
+    margin: 5px 20px;;
+}
+
+.cabecera #usu{
+    float: right;
+    color: #FFF;
+    margin: 40px 10px 0 10px;
+    width: 500px;
+    text-align: center;
+}
+
+.cabecera #usu *{
+    float: right;
+    position: relative;
+}
+
+.cabecera #usu img{
+    width: 30px;
+    margin: -5px 10px;
+    cursor: pointer;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.cabecera #usu #enlace a{
+    width: 120px;
+    color: #FFF;
+    text-decoration: none;
+    font-size: 14px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.cabecera #usu #enlace a:hover{
+    color: #00ffff;
+}
+
+.cabecera #doscolores{
+    height: 7px;
+    background-color: #706F6F;
+    border-right: 50em solid #0077CB;
+}
+

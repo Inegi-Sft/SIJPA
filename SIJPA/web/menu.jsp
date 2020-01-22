@@ -10,5 +10,8 @@
         <li><a href="juzgados.jsp">Juzgados</a></li>
         <li><a href="jueces.jsp">Jueces</a></li>
         <li><a href="audiencias.jsp">Audiencias</a></li>
+        <% if((Integer)session.getAttribute("tipoUsuario") == 1){ %>
+            <li><a href="usuario.jsp">Usuarios</a></li>
+        <% } %>
     </ul>
 </nav>

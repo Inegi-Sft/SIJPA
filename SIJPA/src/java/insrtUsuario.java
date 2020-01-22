@@ -38,33 +38,51 @@ public class insrtUsuario extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = System.getProperty("user.name");
+        response.setContentType("text/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         
-        if(request.getParameter("aceptar") != null){
+        if(request.getParameter("tipoUsuario") != null){
+            int tipoUsuario = Integer.parseInt(request.getParameter("tipoUsuario"));
+            String nom = request.getParameter("nom").toUpperCase();
+            String paterno = request.getParameter("paterno").toUpperCase();
+            String materno = request.getParameter("materno").toUpperCase();
+            String edad = request.getParameter("edad");
+            String correo = request.getParameter("correo").toUpperCase();
+            String entidad = request.getParameter("entidad");
+            String pass = request.getParameter("pass");
+            
+            //Validacion para que se inserte el Administrador por primera vez
             conn.Conectar();
-            sql = "INSERT INTO USUARIOS(USUARIO,ESTATUS) VALUES('" + userName + "', 1)";
+            sql = "INSERT INTO USUARIOS VALUES(null,'" + nom + "','" + paterno + "','" + materno + "'," + edad + ",'"
+                    + correo + "'," + entidad + ",SHA1('" + pass + "')," + tipoUsuario + ",0,1"
+                    + ")";
+            System.out.println(sql);
             if(conn.escribir(sql)){
-                response.sendRedirect("juzgados.jsp");
+                if(tipoUsuario == 1){
+                    response.sendRedirect("index.jsp");
+                }else{
+                    response.sendRedirect("usuario.jsp");
+                }
             }else{
                 response.sendRedirect("index.jsp?errorbd=si");
             }
         }
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet insrtUsuario</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet insrtUsuario at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+        //Validacion si aceptan el acuerdo en la pagina de bienvenida se actualiza para que no se vuelva a mostrar
+        if(request.getParameter("aceptarAcuerdo") != null){
+            HttpSession sesion = request.getSession();
+            String usuario = (String) sesion.getAttribute("usuActivo");
+            conn.Conectar();
+            sql = "UPDATE USUARIOS SET VISITA = 1 WHERE CORREO = '" + usuario + "';";
+            System.out.println(sql);
+            if(conn.escribir(sql)){
+                int visita = 1;
+                sesion.setAttribute("visitaUsuario", visita);
+                sesion.setMaxInactiveInterval(-1);
+                response.sendRedirect("causasPenales.jsp");
+            }else{
+                response.sendRedirect("index.jsp?errorbd=si");
+            }
         }
     }
     

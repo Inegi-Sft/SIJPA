@@ -4,6 +4,7 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="clasesAuxiliar.NumerosRomanos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
@@ -15,17 +16,34 @@
         <title>SIJPA::Captura Juzgados</title>
         <%@include file="librerias.jsp"%>
         <% 
+            if(request.getParameter("errorJuzgado") != null){
+                int error = Integer.parseInt(request.getParameter("errorJuzgado"));
+                switch(error){
+                    case 100:
+                        out.println("<script>alert('Lo datos del Informe no se puede insertar verificar la base')</script>");
+                        break;
+                    case 200:
+                        out.println("<script>alert('El Juzgado no se pudo insertar, tal vez este duplicado')</script>");
+                        break;
+                }
+            }
+            
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
+            
+            showJuzgados sjuzgado = new showJuzgados();
+            int totJuzgado = sjuzgado.findTotJuzgado();
         %>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
+            <% if(totJuzgado > 0){ %>
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
+            <% } %>
             <h1>Captura Órgano Jurisdiccional</h1>
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1">Datos Principales</button>
@@ -63,8 +81,8 @@
                         <tr>
                             <td>
                                 <label for="ladaTel">Lada &nbsp; / &nbsp; Teléfono</label>
-                                <input type="number" class="txtSmall" name="ladaJuz" id="ladaJuz"/>
-                                <input type="number" class="txtMedia" name="telJuz" id="tel"/>
+                                <input type="number" class="txtSmall" name="ladaJuz" id="ladaJuz" value="55"/>
+                                <input type="text" class="txtMedia" name="telJuz" id="telJuz" maxlength="8"/>
                             </td>
                             <td>
                                 <label for="correo">Correo Órgano Jurisdiccional</label>
@@ -85,13 +103,12 @@
                         </tr>
                     </table>
                 </div>
-
                 <div id="p2" class="pestanaContent">
                     <h2>División territorial jurisdiccional - Poder Judicial Estatal</h2>
                     <table  class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="entidad">Entidad Federativa</label>
+                                <label for="entidadJ">Entidad Federativa</label>
                                 <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -101,10 +118,9 @@
                                         }
                                     %>
                                 </select>
-                                <input type="hidden" name="bandera" value="1"/>
                             </td>
                             <td>
-                                <label for="municipio">Municipio o Demarcación Territorial de la CDMX</label>
+                                <label for="municipioJ">Municipio o Demarcación Territorial de la CDMX</label>
                                 <select class="txtMedia" name="municipioJ" id="municipioJ" required>
                                     <option value="">--Seleccione--</option>
                                 </select>
@@ -234,56 +250,56 @@
                             </td>
                             <td>
                                 <label for="causasIngresa">Causas Penales Ingresadas</label>
-                                <input type="text" name="causasIngresa" id="causasIngresa" class="txtMedia">
+                                <input type="number" name="causasIngresa" id="causasIngresa" class="txtMedia" min="0">
                             </td>
                             <td>
                                 <label for="mediProteccion">Medidas de Protección</label>
-                                <input type="text" name="mediProteccion" id="mediProteccion" class="txtMedia">
+                                <input type="number" name="mediProteccion" id="mediProteccion" class="txtMedia" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="providenPrecauto">Providencias Precautorias</label>
-                                <input type="text" name="providenPrecauto" id="providenPrecauto" class="txtMedia">
+                                <input type="number" name="providenPrecauto" id="providenPrecauto" class="txtMedia" min="0">
                             </td>
                             <td>
                                 <label for="actosInvestiga">Pruebas Anticipadas</label>
-                                <input type="text" name="pruebaAnti" id="pruebaAnti" class="txtMedia">
+                                <input type="number" name="pruebaAnti" id="pruebaAnti" class="txtMedia" min="0">
                             </td>
                             <td>
                                 <label for="ordenesJudi">Órdenes Judiciales</label>
-                                <input type="text" name="ordenesJudi" id="ordenesJudi" class="txtMedia">
+                                <input type="number" name="ordenesJudi" id="ordenesJudi" class="txtMedia" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="actosInvestiga">Actos investigación con Control Judicial</label>
-                                <input type="text" name="actosInvestiga" id="actosInvestiga" class="txtMedia">
+                                <input type="number" name="actosInvestiga" id="actosInvestiga" class="txtMedia" min="0">
                             </td>
                             <td>
                                 <label for="impugnaMp">Impugnaciones al Ministerio Publico</label>
-                                <input type="text" name="impugnaMp" id="impugnaMp" class="txtMedia">
+                                <input type="number" name="impugnaMp" id="impugnaMp" class="txtMedia" min="0">
                             </td>
                             <td>
                                 <label for="otros">Otros Asuntos</label>
-                                <input type="text" name="otros" id="otros" class="txtMedia">
+                                <input type="number" name="otros" id="otros" class="txtMedia" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="causasTram">Causas Penales en Trámite</label>
-                                <input type="text" name="causasTram" id="causasTram" class="txtMedia">
+                                <input type="number" name="causasTram" id="causasTram" class="txtMedia" min="0">
                             </td>
                             <td>
                                 <label for="causasBaja">Causas Penales dadas de baja</label>
-                                <input type="text" name="causasBaja" id="causasBaja" class="txtMedia">
+                                <input type="number" name="causasBaja" id="causasBaja" class="txtMedia" min="0">
                             </td>
                             <td></td>
                         </tr>
                     </table>
                 </div>
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Guardar">
+                <input type="submit" name="guardar" id="guardar" value="Guardar"/>
             </form>
         </section>
     </body>

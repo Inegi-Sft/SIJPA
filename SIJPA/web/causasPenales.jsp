@@ -4,6 +4,8 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="clasesAuxiliar.showJueces"%>
+<%@page import="clasesAuxiliar.usuario"%>
 <%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="java.util.ArrayList"%>
@@ -16,6 +18,16 @@
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
         <%
+            showJuzgados juz = new showJuzgados();
+            showJueces juez = new showJueces();
+            if(juz.findTotJuzgado() == 0){
+                response.sendRedirect("capturaJuzgado.jsp");
+            }else if(session.getAttribute("juzgadoClave") != null){
+                if(juez.findTotJuez((String)session.getAttribute("juzgadoClave")) == 0){
+                    response.sendRedirect("capturaJuez.jsp");
+                }
+            }
+            
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
                 juzgado=request.getParameter("juzgado");
@@ -24,7 +36,7 @@
                 juzgado = (String) session.getAttribute("juzgadoClave");
             }
             
-            showJuzgados juz = new showJuzgados();
+            
             showCausasPenales cp = new showCausasPenales();
             
             ArrayList<String[]> lsCausas;
@@ -35,7 +47,7 @@
     </head>
     <body>
         <div class="load"></div>
-        <%@include file="cabecera.jsp" %>
+        <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
             <div class="toggle-nav">

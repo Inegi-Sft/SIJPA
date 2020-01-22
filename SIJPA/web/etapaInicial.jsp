@@ -383,5 +383,6 @@
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante" onclick="return medidasCaute('#drecretaMC')"/>
             </form>
         </section>
+        <script> $("#formulaAcusacion > option[value=9]").hide(); </script>
     </body>
 </html>

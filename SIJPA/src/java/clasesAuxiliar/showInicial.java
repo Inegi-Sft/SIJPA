@@ -28,9 +28,10 @@ public class showInicial {
     public ArrayList findInicialTabla(String procesado) {
         conn.Conectar();
         ini = new ArrayList();
-        sql = "SELECT EI.PROCESADO_CLAVE,RSD.DESCRIPCION, AV.DESCRIPCION, RSS.DESCRIPCION "
-                + "FROM DATOS_ETAPA_INICIAL_ADOJC EI, CATALOGOS_RESPUESTA_SIMPLE RSD, CATALOGOS_AUTO_VINCULACION AV, CATALOGOS_RESPUESTA_SIMPLE RSS "
-                + "WHERE EI.CTRL_DETENCION = RSD.RESPUESTA_ID "
+        sql = "SELECT EI.PROCESADO_CLAVE,CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSD.DESCRIPCION, AV.DESCRIPCION, RSS.DESCRIPCION "
+                + "FROM DATOS_ETAPA_INICIAL_ADOJC EI, DATOS_PROCESADOS_ADOJC P, CATALOGOS_RESPUESTA_SIMPLE RSD, CATALOGOS_AUTO_VINCULACION AV, CATALOGOS_RESPUESTA_SIMPLE RSS "
+                + "WHERE P.PROCESADO_CLAVE=EI.PROCESADO_CLAVE "
+                + "AND EI.CTRL_DETENCION = RSD.RESPUESTA_ID "
                 + "AND EI.AUTO_VINCULACION = AV.AUTO_ID "
                 + "AND EI.SOBRESEIMIENTO_CAUSAP = RSS.RESPUESTA_ID "
                 + "AND EI.PROCESADO_CLAVE = '" + procesado + "';";
@@ -38,8 +39,8 @@ public class showInicial {
         try {
             while (resul.next()) {
                 ini.add(new String[]{
-                    resul.getString(2), resul.getString(3),
-                    resul.getString(4)
+                    resul.getString(1),resul.getString(2), resul.getString(3),
+                    resul.getString(4),resul.getString(5)
                 });
             }
             conn.close();
@@ -99,5 +100,33 @@ public class showInicial {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return totalProcesa;
+    }
+    public String verificaSobreseimientoAperturaJO(String exp, String pro) {
+        String valor="",sobre="",apertura="";
+        try {
+            conn.Conectar();
+            sql = "SELECT SOBRESEIMIENTO_CAUSAP FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE='"+exp+"' AND PROCESADO_CLAVE='"+pro+"'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                sobre = resul.getString("SOBRESEIMIENTO_CAUSAP");
+            }
+            if(sobre.equals("1")){//condicion para saber si en datos_etapa_inicial seleccionaron sobreseimiento
+                valor="1";//valor del sobreseimiento en el catalogo tipo_resolucion
+            }else{
+                sql = "SELECT APERTURA_JUICIO_ORAL FROM DATOS_ETAPA_INTERMEDIA_ADOJC WHERE CAUSA_CLAVE='"+exp+"' AND PROCESADO_CLAVE='"+pro+"'";
+                resul = conn.consultar(sql);
+                while (resul.next()) {
+                    apertura = resul.getString("APERTURA_JUICIO_ORAL");
+                }
+                if(apertura.equals("1")){//condicion para saber si en datos_etapa_intermedia seleccionaron apertura a JO
+                    valor="5";//valor de apertura a JO en el catalogo tipo_resolucion
+                }
+            }
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
     }
 }

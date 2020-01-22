@@ -31,7 +31,6 @@
             showVictimas sd = new showVictimas();
             showCausasPenales objExp = new showCausasPenales();
             ArrayList<String[]> lista;
-                     
             String entidad = (String) session.getAttribute("entidad");
             String municipio = (String) session.getAttribute("municipio");
             String numero = (String) session.getAttribute("numero");

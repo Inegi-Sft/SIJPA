@@ -6,6 +6,7 @@
 
 import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.showInicial;
+import clasesAuxiliar.showIntermedia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -42,6 +43,7 @@ public class insrtInicial extends HttpServlet {
     boolean updateVdeli;
     int totalProcesa;
     showInicial cat = new showInicial();
+    showIntermedia itm = new showIntermedia();
     ArrayList<String[]> vdeli;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -132,10 +134,14 @@ public class insrtInicial extends HttpServlet {
                     lis = cat.findInicialTabla(procesado_clave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
-                    resp.add(lis.get(0)[0]);
+                    resp.add(lis.get(0)[0].replace(jConcatenado,""));
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(lis.get(0)[4]);
                     resp.add(cat.countInicial(causaClave + jConcatenado));
+                    resp.add(formulaAcusacion);//dato para saber si ese rocesado pasa a intermedia
+                    resp.add(itm.countTotPasanInicial_Intermedia(causaClave + jConcatenado));//total de procesados que pasan a intermedia
                     out.write(resp.toJSONString());
                     
                     conn.close();

@@ -74,17 +74,19 @@
                         <tr>
                             <td colspan="2">
                                 <fieldset>
-                                    <label for="audiInterme">¿Hubo celebración de la audiencia intermedia?</label>
-                                    <select class="txtMedia" name="audiInterme" id="audiInterme" required>
-                                        <option value="">--Seleccione--</option>
-                                        <%
-                                            lista = cat.findRespuestaSimple();
-                                            for (String[] ls : lista) {
-                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                            }
-                                        %> 
-                                    </select>
-                                    <div class="oculto" id="divfechaAudiinter">
+                                    <div class="cols">
+                                        <label for="audiInterme">¿Hubo celebración de la audiencia intermedia?</label>
+                                        <select class="txtMedia" name="audiInterme" id="audiInterme" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findRespuestaSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %> 
+                                        </select>
+                                    </div>
+                                    <div class="oculto cols" id="divfechaAudiinter">
                                         <label for="fechaCtrlDeten" id="lblfechaAudiinter">Fecha de la audiencia intermedia</label>
                                         <input type="date" name="fechaAudiinter" id="fechaAudiinter"/>
                                         <div class="noIdentificada" id="nifechaAudiinter">
@@ -284,5 +286,6 @@
                 <input type="submit" name="guardainter" value="Guardar" id="guardaInter" class="btnFlotante"/>
             </form>
         </section>
+        <script> $("#aperturaJO > option[value=9]").hide(); </script>
     </body>
 </html>

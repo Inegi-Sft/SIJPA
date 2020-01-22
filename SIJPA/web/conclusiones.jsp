@@ -3,6 +3,7 @@
     Created on : 3/10/2019, 02:16:37 PM
     Author     : FERMIN.GOMEZ
 --%>
+<%@page import="clasesAuxiliar.showInicial"%>
 <%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
@@ -20,6 +21,7 @@
             
             catalogos cat = new catalogos();
             showProcesados proce=new showProcesados();
+            showInicial proCon=new showInicial();
             ArrayList<String[]> lista = new ArrayList();
             
             String entidad =(String) sesion.getAttribute("entidad");
@@ -29,6 +31,7 @@
             String causaClave =(String) sesion.getAttribute("causaClave");
             
             String procesado = request.getParameter("idProcesado");
+            String tResolucion = proCon.verificaSobreseimientoAperturaJO(causaClave+jConcatenado, procesado);
         %>
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
@@ -37,7 +40,7 @@
                 <label for="procesado">Id Adolescente</label>
                 <select class="lblExBig" name="idProcesado" id="idProcesado" onchange="formConclusiones.submit();" required>
                     <option value="">--Seleccione--</option>
-                    <%  lista = proce.findProcesadoExp(causaClave+jConcatenado);
+                    <%  lista = proce.listProcesadoInsertConclusion(causaClave+jConcatenado);
                         for (String[] ls : lista) {
                             out.println("<option value='" + ls[0] + "'");
                             if(ls[0].equals(procesado)){
@@ -61,9 +64,14 @@
                         <label for="resolucion">Tipo de resolución (Conclusión o terminación)</label>
                         <select class="txtLong" name="resolucion" id="resolucion" onchange="tipoResolucion();" required>
                             <option value="">--Seleccione--</option>
-                            <%  lista = cat.findTipoResolucion();
+                            <%  
+                                lista = cat.findTipoResolucion();
                                 for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                    out.println("<option value='" + ls[0] + "'");
+                                    if(ls[0].equals(tResolucion)){
+                                        out.println(" selected ");
+                                    }
+                                    out.println( ">" + ls[0]+ ".- " + ls[1] + "</option>");
                                 }
                             %> 
                         </select>
@@ -320,5 +328,13 @@
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>
+        <% if(procesado!=null && tResolucion!=""){ %>
+            <script type="text/javascript"> 
+                $(document).ready(function(){ 
+                    tipoResolucion(); 
+                    $("#resolucion option:not(:selected)").attr("disabled", "disabled");
+                });
+            </script>
+        <%  } %>
     </body>
 </html>

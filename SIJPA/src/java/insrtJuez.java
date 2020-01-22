@@ -33,20 +33,19 @@ public class insrtJuez extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
     ResultSet rs;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        
-        HttpSession sesion= request.getSession();
-        
+
+        HttpSession sesion = request.getSession();
+
         String juzClaveJuez = (String) sesion.getAttribute("juzgadoClave");
-         String jDividido[] = juzClaveJuez.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String jDividido[] = juzClaveJuez.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
@@ -57,30 +56,30 @@ public class insrtJuez extends HttpServlet {
         String fGestion;
         if (request.getParameter("fGestion") != null) {
             fGestion = request.getParameter("fGestion");
-        }else{
+        } else {
             fGestion = "1899-09-09";
         }
         String sexoJuez = request.getParameter("sexoJuez");
         String edadJuez = request.getParameter("edadJuez");
         String estudioJuez = request.getParameter("estudioJuez");
         String funcionJuez = request.getParameter("funcionJuez");
-        
+
         try {
             conn.Conectar();
-            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzClaveJuez + "'," + juezID + ",'" 
-                    + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + "," + estudioJuez + "," 
+            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzClaveJuez + "'," + juezID + ",'"
+                    + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + "," + estudioJuez + ","
                     + funcionJuez + ",(select YEAR(NOW())))";
             System.out.println(sql);
-            if(conn.escribir(sql)){
+            if (conn.escribir(sql)) {
                 response.sendRedirect("jueces.jsp");
-            }else{
+            } else {
                 conn.close();
                 response.sendRedirect("jueces.jsp?errorJuez=si");
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

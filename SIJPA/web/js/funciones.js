@@ -81,6 +81,46 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
+    /*************************FUNCIONES PARA CAPTURA CAUSA PENAL DE JO*****************/
+    $('#difeOrgano').change(function () {
+        if ($(this).val() === '2') {
+            $('#juezatender').fadeIn("slow");
+            $('#jueznumero').val("").prop("required", true);
+            $('#nomJuez1,#nomJuez2,#nomJuez3,#nomJuezespec').fadeOut("slow");
+            $('#juez1,#juez2,#juez3').val("-2").prop("required", true);
+            $('#juezEspecificar').val("-2").prop("required", false);
+        } else {
+            $('#juezatender').fadeOut("slow");
+            $('#jueznumero').val("-2").prop("required", false);
+            $('#nomJuez1,#nomJuez2,#nomJuez3,#nomJuezespec').fadeOut("slow");
+            $('#juez1,#juez2,#juez3').val("-2").prop("required", true);
+            $('#juezEspecificar').val("-2").prop("required", false);
+        }
+    });
+
+    $('#jueznumero').change(function () {
+        switch ($(this).val()) {
+            case '1':
+                $('#nomJuez1').fadeIn("slow");
+                $('#juez1').val("").prop("required", true);
+                $('#nomJuez2,#nomJuez3,#nomJuezespec').fadeOut("slow");
+                $('#juez2,#juez3,#juezEspecificar').val("-2").prop("required", false);
+                break;
+            case '2':
+                $('#nomJuez1,#nomJuez2').fadeIn("slow");
+                $('#juez1,#juez2').val("").prop("required", true);
+                $('#nomJuez3,#nomJuezespec').fadeOut("slow");
+                $('#juez3,#juezEspecificar').val("-2").prop("required", false);
+                break;
+            case '3':
+                $('#nomJuez1,#nomJuez2,#nomJuez3,#nomJuezespec').fadeIn("slow");
+                $('#juez1,#juez2,#juez3').val("").prop("required", true);
+                $('#juezEspecificar').val("").prop("required", false);
+                break;
+        }
+    });
+
+    /**********************FIN DE FUNCIONES PARA CAPTURA CAUSA PENAL DE JO*************/
     /*----------------------------DELITOS --------------------------------------------*/
     $('#contextoSitua99').change(function () {
         if ($(this).is(":checked")) {
@@ -199,11 +239,11 @@ $(document).ready(function () {
             alert('Selecciona al menos una opcion de Relacion de la Victima con el Procesado');
             $('#chkRelaProce').focus();
         }
-        
+
         if ($('#mProtect').val() === '1') {
             if ($('input[name="aplicaMedida"]:checked').length === 0) {
                 e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Proteción');
+                alert('Selecciona al menos una opcion de Medidas de ProteciÃ³n');
                 $('#mProtect').focus();
             }
         }
@@ -211,13 +251,13 @@ $(document).ready(function () {
         if ($('#mujProtect').val() === '1') {
             if ($('input[name="aplicaMedidaMuj"]:checked').length === 0) {
                 e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Proteción contra Mujeres');
+                alert('Selecciona al menos una opcion de Medidas de ProteciÃ³n contra Mujeres');
                 $('#mujProtect').focus();
             }
         }
     });
-    
-    
+
+
 
     $('#ingresos').change(function (e) {
         if ($(this).val() === '1') {
@@ -362,19 +402,19 @@ $(document).ready(function () {
             $('#tblFuenteIngrePro input').prop("checked", false);
         }
     });
-    
+
     $('#chkIngresosPro9').change(function (e) {
         if ($(this).is(":checked")) {
-            for (var i = 1; i <=7; i++) {
-                $('#chkIngresosPro'+i).prop("checked", false).prop("disabled", true);
+            for (var i = 1; i <= 7; i++) {
+                $('#chkIngresosPro' + i).prop("checked", false).prop("disabled", true);
             }
         } else {
-            for (var i = 1; i <=7; i++) {
-                $('#chkIngresosPro'+i).prop("checked", false).prop("disabled", false);
+            for (var i = 1; i <= 7; i++) {
+                $('#chkIngresosPro' + i).prop("checked", false).prop("disabled", false);
             }
         }
     });
-    
+
     /*--------------------------FIN PROCESADOS------------------------------------*/
 
     /*--------------------------FUNCIONES PARA INICIAL-------------------------*/
@@ -419,10 +459,10 @@ $(document).ready(function () {
             $('#declaro,#huboPlazo,#plazo,#autoVin,#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
                    #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
             $('#fechaAutoLiber,#fechaFormuImpu,#fechDeclara,#fechAuto,#fechSoliPlazo,#fechCierreI,#fechaReapertura').val("1799-09-09").prop('required', false);
-            $('#chkFechaAutoLiber,#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura,#tableMcau input').prop("checked", false);           
+            $('#chkFechaAutoLiber,#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura,#tableMcau input').prop("checked", false);
         } else {
             $('#dFechaAutoLiber').fadeIn('slow');
-            $('#fechaAutoLiber,#formuImputa').val('').prop({'required':true,'readonly':false});
+            $('#fechaAutoLiber,#formuImputa').val('').prop({'required': true, 'readonly': false});
             $('#dFormuImputa,#tblimputacion,#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#consePlazo').hide();
             $('#formuImputa,#declaro,#huboPlazo,#plazo,#autoVin,#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
                    #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
@@ -436,7 +476,7 @@ $(document).ready(function () {
             $('#tblimputacion').fadeIn('slow');
             $('#fechaFormuImpu,#declaro,#fechDeclara,#huboPlazo,#plazo,#autoVin,#fechAuto,#drecretaMC,#soliPlazo,\n\
            #fechSoliPlazo,#soliProrroga,#plazoFijadoC,#fechCierreI,#dictoSobresei,#suspenProceso,\n\
-           #causasSuspension,#huboReapertura,#fechaReapertura,#quienSoliApertura,#formulaAcusacion').val('').prop({'required': true,'readonly':false});
+           #causasSuspension,#huboReapertura,#fechaReapertura,#quienSoliApertura,#formulaAcusacion').val('').prop({'required': true, 'readonly': false});
             $('#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
             $('#lbfechDeclara1,#lbPlazo1,#dfechAuto,#dfechSoliPlazo1,#dsoliProrroga,#dplazoFijadoC,#fSuspencion,#dReapertura,#dAcusacion').fadeOut('slow');
             $('#chkFechaFormuImpu,#chkFechDeclara,#chkFechaAuto,#tableMcau input').prop("checked", false);
@@ -454,14 +494,15 @@ $(document).ready(function () {
         if ($(this).val() === '1') {
             $('#dfechAuto,#fMedidaCaute,#fPlazo,#dCierre,#consePlazo').fadeIn('slow');
             $('#fechAuto,#drecretaMC,#soliPlazo,#fechSoliPlazo,#soliProrroga,#plazoFijadoC,#fechCierreI,#dictoSobresei,#suspenProceso,\n\
-                   #causasSuspension,#huboReapertura,#fechaReapertura,#quienSoliApertura,#formulaAcusacion').val('').prop({'required': true, 'readonly':false});
+                   #causasSuspension,#huboReapertura,#fechaReapertura,#quienSoliApertura,#formulaAcusacion').val('').prop({'required': true, 'readonly': false});
             $('#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop({"checked": false, "disabled": false});
             $('#dfechSoliPlazo1,#dsoliProrroga,#dplazoFijadoC,#fSuspencion,#dReapertura,#dAcusacion').hide();
             $('#lblFechaAuto').text("Fecha en que se dicto el auto de vinculacion a proceso");
             $('#tableMcau input').prop("checked", false);
-        } else if ($(this).val() === '2'){
+        } else if ($(this).val() === '2') {
             $('#dfechAuto').fadeIn('slow');
-            $('#fechAuto').val('').prop({'required': true, 'readonly':false});;
+            $('#fechAuto').val('').prop({'required': true, 'readonly': false});
+            ;
             $('#fMedidaCaute,#tableMcau,#fPlazo,#dCierre,#consePlazo').hide();
             $('#drecretaMC,#MCespecificar,#soliPlazo,#soliProrroga,#plazoFijadoC,#dictoSobresei,#suspenProceso,\n\
                    #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
@@ -476,7 +517,7 @@ $(document).ready(function () {
                    #causasSuspension,#huboReapertura,#quienSoliApertura,#formulaAcusacion').val('-2').prop('required', false);
             $('#fechAuto,#fechSoliPlazo,#fechCierreI,#fechaReapertura').val("1799-09-09").prop('required', false);
             $('#chkFechaAuto,#chkFechSoliPlazo,#chkFechCierreI,#chkEnProceso,#chkFechaReapertura').prop("checked", false);
-            $('#lblFechaAuto').text("Fecha en que se dict� el auto de libertad por no vinculaci�n a proceso");
+            $('#lblFechaAuto').text("Fecha en que se dictó el auto de libertad por no vinculación a proceso");
             $('#tableMcau input').prop("checked", false);
             alert("Esta Causa Penal debe ser registrada en Resoluciones o Tramite segun corresponda");
         }
@@ -495,8 +536,8 @@ $(document).ready(function () {
             $('#MCespecificar').val('-2').prop('required', false);
         }
     });
-    
-     $('#apliMedidaCau99').change(function () {
+
+    $('#apliMedidaCau99').change(function () {
         if ($(this).is(":checked")) {
             for (var i = 1; i < 14; i++) {
                 $('#apliMedidaCau' + i).prop("checked", false).prop("disabled", true);
@@ -515,7 +556,7 @@ $(document).ready(function () {
     $('#soliPlazo').change(function () {
         if ($(this).val() === '1') {
             $('#dfechSoliPlazo1,#dsoliProrroga,#dplazoFijadoC').fadeIn('slow');
-            $('#fechSoliPlazo,#soliProrroga,#plazoFijadoC').val('').prop({'required': true, 'readonly':false});
+            $('#fechSoliPlazo,#soliProrroga,#plazoFijadoC').val('').prop({'required': true, 'readonly': false});
             $('#chkFechSoliPlazo').prop("checked", false);
         } else {
             $('#dfechSoliPlazo1,#dsoliProrroga,#dplazoFijadoC').fadeOut('slow');
@@ -684,6 +725,7 @@ $(document).ready(function () {
             }
         }
     });
+
     $('#aperturaJO').change(function () {
         if ($(this).val() === '1') {
             alert("Causa Penal Concluida. Registre la informacion complementaria en el apartado de resoluciones");
@@ -876,14 +918,14 @@ $(document).ready(function () {
         e.stopImmediatePropagation();
         if ($('#pruebaMP').val() === '1') {
             if ($('input[name="chkpruebaMP"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio p�blico');
+                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio público');
                 $('#pruebaMP').focus();
                 return false;
             }
         }
         if ($('#pruebaAJ').val() === '1') {
             if ($('input[name="chkpruebaAJ"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por el asesor jur�dico');
+                alert('Selecciona al menos una opcion de prueba presentadas por el asesor jurídico');
                 $('#pruebaAJ').focus();
                 return false;
             }
@@ -895,10 +937,11 @@ $(document).ready(function () {
                 return false;
             }
         }
+
         if($('#mediosPrueba').val() === '1' && ($('#pruebaMP').val() !== '1' && $('#pruebaAJ').val() !== '1' && $('#pruebaDefensa').val() !== '1')) {
             alert('Revisar los medios de prueba');
             $('#mediosPrueba').focus();
-                return false;
+            return false;
         }
         $.ajax({
             type: 'post',
@@ -1010,44 +1053,44 @@ $(document).ready(function () {
             $('#expClave').focus();
         }
     });
-    
-    $('#totalAudiencias').on('focusin', function(){
-        $('#tiAudi').keypress(function(){
-           if($(this).val().length === 2){
-               $(this).val($(this).val() + ':');
-           }
+
+    $('#totalAudiencias').on('focusin', function () {
+        $('#tiAudi').keypress(function () {
+            if ($(this).val().length === 2) {
+                $(this).val($(this).val() + ':');
+            }
         });
-        
-        $('#tiAudi').on('input', function () { 
-            this.value = this.value.replace(/[^0-9]/g,':');
-            this.value = this.value.slice(0,5);
+
+        $('#tiAudi').on('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, ':');
+            this.value = this.value.slice(0, 5);
         });
     });
-    
-    $('#addAudi').click(function(e){
+
+    $('#addAudi').click(function (e) {
         e.stopImmediatePropagation();
         var ultimoReg = $('#tAudiencias tbody tr').length;
         var tag = '<tr>\n\
                         <td>' + (ultimoReg + 1) + '</td>\n\
                         <td>\n\
-                            <select name="tipoAudi" id="tipoAudi'+ultimoReg+'" class="txtLong" required>\n\
+                            <select name="tipoAudi" id="tipoAudi' + ultimoReg + '" class="txtLong" required>\n\
                                 <option value="">--Seleccione--</option>\n\
                             </select></td>\n\
                         <td>\n\
-                            <select name="juezAudi" id="juezAudi'+ultimoReg+'" class="txtLong" required>\n\
+                            <select name="juezAudi" id="juezAudi' + ultimoReg + '" class="txtLong" required>\n\
                                 <option value="">--Seleccione--</option>\n\
                             </select></td>\n\
                         <td>\n\
-                            <input type="date" name="fAudi" id="fAudi'+ultimoReg+'" class="txtMedia" required>\n\
+                            <input type="date" name="fAudi" id="fAudi' + ultimoReg + '" class="txtMedia" required>\n\
                             <div class="noIdentificada" style="margin:0">\n\
-                                <input type="checkbox" id="chkFechaCelebra'+ultimoReg+'" onclick="fechaNoIdent(\'#chkFechaCelebra'+ultimoReg+'\', \'#fAudi'+ultimoReg+'\')">\n\
+                                <input type="checkbox" id="chkFechaCelebra' + ultimoReg + '" onclick="fechaNoIdent(\'#chkFechaCelebra' + ultimoReg + '\', \'#fAudi' + ultimoReg + '\')">\n\
                                 <label>No identificada</label>\n\
                             </div>\n\
                         </td>\n\
                         <td>\n\
-                            <input type="text" name="tiAudi" id="tiAudi'+ultimoReg+'" class="txtSmall" placeholder="hh/mm" required>\n\
+                            <input type="text" name="tiAudi" id="tiAudi' + ultimoReg + '" class="txtSmall" placeholder="hh/mm" required>\n\
                             <div class="noIdentificada" style="margin:0">\n\
-                                <input type="checkbox" id="chkDuracion'+ultimoReg+'" onclick="DuraNoIdent(\'#chkDuracion'+ultimoReg+'\', \'#tiAudi'+ultimoReg+'\')">\n\
+                                <input type="checkbox" id="chkDuracion' + ultimoReg + '" onclick="DuraNoIdent(\'#chkDuracion' + ultimoReg + '\', \'#tiAudi' + ultimoReg + '\')">\n\
                                 <label>No identificada</label>\n\
                             </div>\n\
                         </td>\n\
@@ -1055,32 +1098,33 @@ $(document).ready(function () {
         $('#tAudiencias tbody').append(tag);
         var juzClave = $('#jClave').val();
         $.ajax({
-            url : 'obtenCatalogo.jsp',
+            url: 'obtenCatalogo.jsp',
             dataType: 'html',
             type: 'post',
             data: {cat: 'tipoAudi'},
-            succes: function(data){
+            succes: function (data) {
                 console.log('tipo Audiencias: ' + data);
             }
-        }).done(function(d){
-            $('#tipoAudi'+ultimoReg).html(d);
+        }).done(function (d) {
+            $('#tipoAudi' + ultimoReg).html(d);
         });
         $.ajax({
-            url : 'obtenCatalogo.jsp',
+            url: 'obtenCatalogo.jsp',
             dataType: 'html',
             type: 'post',
             data: {
                 cat: 'jueces',
                 juzClave: juzClave
-                },
-            succes: function(data){
+            },
+            succes: function (data) {
                 console.log('jueces: ' + data);
             }
-        }).done(function(d){
-            $('#juezAudi'+ultimoReg).html(d);
+        }).done(function (d) {
+            $('#juezAudi' + ultimoReg).html(d);
         });
     });
     /*----------------------- FIN FUNCIONES PARA EXPEDIENTES --------------------------*/
+    
 
     /*-----------------------FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/
     $('#apliMedidaCau13').change(function () {
@@ -1224,7 +1268,7 @@ function tipoProcedimientoAbrev() {
             $('#tblDConclusiones tr > *:nth-child(2)').fadeIn('slow');
             $('#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
             $('#tblDConclusiones tr > *:nth-child(2) input').prop("checked", true);
-            
+
             break;
         case '2':
             $('#dTipoMedidaPL').hide();
@@ -1242,7 +1286,7 @@ function tipoProcedimientoAbrev() {
             $('#tipoMedidaPL,#tipoMedidaNPL,#internamiento').val('-2').prop("required", false);
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');
             $('#tblDConclusiones tr > *:nth-child(4)').hide();
-            $('#tblDConclusiones input').prop({"checked": false, "required":true});
+            $('#tblDConclusiones input').prop({"checked": false, "required": true});
             break;
         default:
             $('#dTipoMedidaPL,#dTipoMedidaNPL,#Dinternamiento').fadeOut("slow");
@@ -1250,7 +1294,7 @@ function tipoProcedimientoAbrev() {
             $('#tblDConclusiones tr > *:nth-child(4)').fadeIn("slow");
             $('#tblDConclusiones tr > *:nth-child(4) input').prop("checked", true);
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').hide();
-            
+
             break;
     }
 }
@@ -1323,7 +1367,7 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
         $(idTxtDate).val("1699-09-09");
         $(idTxtDate).prop("readonly", true);
         $(idChkNi).prop("disabled", true);
-        
+
         alert("Fin. Esta Causa Penal pasa a Tramite");
         $('#consePlazo').fadeOut('slow');
         $('#consePlazo select').val('-2').prop('required', false);
@@ -1367,10 +1411,90 @@ function llenaMun(idEnt, idMun) {
 }
 /***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************/
 
+/*************************FUNCIONES PARA CAUSA PENALES JO***************************/
+/**
+ * 
+ * @param {type} idJclave
+ * @param {type} idCpen
+ * @returns {undefined}
+ */
+function llenaCausaJO(idJclave, idCpen) {
+    var juzClave = $(idJclave).val();
+    if (juzClave !== '') {
+        $.ajax({
+            url: "obtenCausaJC.jsp",
+            dataType: 'html',
+            type: "post",
+            data: {juzClave: juzClave},
+            success: function (response) {
+                console.log("Respuesta del servidor: ", response);
+            }
+        }).done(function (data) {
+            $(idCpen).html(data);
+        });
+    } else {
+        $(idCpen).empty().append("<option value='0'>--Seleccione--</option>");
+    }
+};
+function llenaElementosCPJC(jClave, idCclave, idDeli, idProce, idVic) {
+    var jClave = $(jClave).val();
+    var causaClave = $(idCclave).val();
+    if (causaClave !== '') {
+        $.ajax({
+            url: "obtenCausaJC.jsp",
+            dataType: 'html',
+            type: "post",
+            data: {causaClave: causaClave, jClave: jClave,  bandera: "1"},
+            success: function (response) { 
+                console.log("Respuesta del servidor: ", response);
+            }
+        }).done(function (data) {
+            $(idDeli).html(data);
+        });
+    } else {
+        $(idDeli).empty().append("<option value='0'>--Seleccione--</option>");
+    }
+    
+    if (causaClave !== '') {
+        $.ajax({
+            url: "obtenCausaJC.jsp",
+            dataType: 'html',
+            type: "post",
+            data: {causaClave: causaClave, bandera: "2"},
+            success: function (response) {
+                console.log("Respuesta del servidor: ", response);
+            }
+        }).done(function (data) {
+            $(idProce).html(data);
+        });
+    } else {
+        $(idProce).empty().append("<option value='0'>--Seleccione--</option>");
+    }
+    
+    if (causaClave !== '') {
+        $.ajax({
+            url: "obtenCausaJC.jsp",
+            dataType: 'html',
+            type: "post",
+            data: {causaClave: causaClave, bandera: "3"},
+            success: function (response) {
+                console.log("Respuesta del servidor: ", response);
+            }
+        }).done(function (data) {
+            $(idVic).html(data);
+        });
+    } else {
+        $(idVic).empty().append("<option value='0'>--Seleccione--</option>");
+    }
+};
+
+
+    /************************FIN DE FUNCIONES PARA CAUSA PENALES JO*********************/
+
 /*******************FUNCIONES DE CONCLUSIONES***********************************/
 function tipoResolucion() {
-    $('#tblDConclusiones input').prop("required",false);
-    $('#tblDConclusiones input.radValCambia').val("-2").prop("checked",true);
+    $('#tblDConclusiones input').prop("required", false);
+    $('#tblDConclusiones input.radValCambia').val("-2").prop("checked", true);
     if ($('#resolucion').val() === '1') {
         $('#flsSobreseimto,#flsImpugnacion').fadeIn("slow");
         $('#flsSobreseimto select,#flsImpugnacion select').val('').prop("required", true);
@@ -1381,52 +1505,52 @@ function tipoResolucion() {
             #flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();
         $('#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
         $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);
-        
-    } else if ($('#resolucion').val() === '2'){
+
+    } else if ($('#resolucion').val() === '2') {
         $('#flsSuspCP,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
         $('#tipoCondiSCP,#flsReparaDanio select,#flsImpugnacion select').val('').prop("required", true);
         $('#fechaExtSCP,#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
         $('#chkFechaExtSCP,#chkFechaImpugnacion').prop("checked", false);
-        
+
         $('#flsSobreseimto,#flsAcuerdoR,#flsProceAbreviado,\n\
             #dTipoRepara,#dMontoRepara,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
         $('#flsSobreseimto select,#tipoMecanismoAR,#flsProceAbreviado select').val('-2').prop("required", false);
         $('#fechaExtinAR').val('1799-09-09').prop("required", false);
-        
-    }else if ($('#resolucion').val() === '3'){
+
+    } else if ($('#resolucion').val() === '3') {
         $('#flsAcuerdoR,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
         $('#tipoMecanismoAR,#flsReparaDanio select,#flsImpugnacion select').val('').prop("required", true);
         $('#fechaExtinAR,#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
         $('#chkFechaExtinAR,#chkFechaImpugnacion').prop("checked", false);
-        
+
         $('#flsSobreseimto,#flsSuspCP,#flsProceAbreviado,\n\
             #dTipoRepara,#dMontoRepara,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
         $('#flsSobreseimto select,#tipoCondiSCP,#flsProceAbreviado select').val('-2').prop("required", false);
         $('#fechaExtSCP').val('1799-09-09').prop("required", false);
-    
-    }else if ($('#resolucion').val() === '4'){
+
+    } else if ($('#resolucion').val() === '4') {
         $('#flsProceAbreviado,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
         $('#flsProceAbreviado select,#flsReparaDanio select,#flsImpugnacion select').val('').prop("required", true);
         $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
         $('#chkFechaImpugnacion').prop("checked", false);
         $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
-        
+
         $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,\n\
         #dTipoMedidaPL,#dTipoMedidaNPL,#Dinternamiento,#dTipoRepara,#dMontoRepara,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
         $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR').val('-2').prop("required", false);
         $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);
-    
-    }else if ($('#resolucion').val() === '5'){
+
+    } else if ($('#resolucion').val() === '5') {
         $('#flsImpugnacion').fadeIn("slow");
         $('#flsImpugnacion select').val('').prop("required", true);
         $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
         $('#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
-        
+
         $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').fadeOut("slow");
         $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
         $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);
-    
-    }else {
+
+    } else {
         $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio,#flsImpugnacion').fadeOut("slow");
         $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select,#flsImpugnacion select').val('-2').prop("required", false);
         $('#fechaExtSCP,#fechaExtinAR,#fechaImpugnacion').val('1799-09-09').prop("required", false);
@@ -1487,34 +1611,34 @@ function causasExclusion() {
 /*******************FIN FUNCIONES DE CONCLUSIONES**********************************/
 
 /******************* FUNCIONES TRAMITE **********************************/
-function etapaProcesal(){
-   if ($('#eProcesal').val() === '1') {
+function etapaProcesal() {
+    if ($('#eProcesal').val() === '1') {
         $('#dEstInvesti').fadeIn("slow");
         $('#estInvesti').val('').prop("required", true);
         $('#dEstIntermedia,#dEspecifique').hide();
         $('#estIntermedia,#especifique').val('-2').prop("required", false);
-    } else if ($('#eProcesal').val() === '2'){
+    } else if ($('#eProcesal').val() === '2') {
         $('#dEstIntermedia').fadeIn("slow");
         $('#estIntermedia').val('').prop("required", true);
         $('#dEstInvesti,#dEspecifique').hide();
         $('#estInvesti,#especifique').val('-2').prop("required", false);
-    }else{
+    } else {
         $('#dEstInvesti,#dEstIntermedia,#dEspecifique').fadeOut("slow");
         $('#estInvesti,#estIntermedia,#especifique').val('-2').prop("required", false);
     }
 }
-function ocultaEspecifique(){
+function ocultaEspecifique() {
     if ($('#estInvesti').val() === '6' || $('#estIntermedia').val() === '4') {
         $('#dEspecifique').fadeIn('slow');
         $('#especifique').val('').prop("required", true);
-    }else{
+    } else {
         $('#dEspecifique').fadeOut('slow');
         $('#especifique').val('-2').prop("required", false);
     }
 }
 /*------------------ FIN FUNCIONES TRAMITE ------------------------------/
-
-/****************************** FUNCIONES PROCESADOS ******************************/
+ 
+ /****************************** FUNCIONES PROCESADOS ******************************/
 //para respuesta simple, oculta el select contenido en un div
 /***
  * 
@@ -1597,7 +1721,7 @@ function respuestaSimpleFecha(idSelSimple, idDiv, idDateOculta, idChk) {
     if ($(idSelSimple).val() === '1') {
         $(idDiv).fadeIn("slow");
         $(idChk).prop("checked", false);
-        $(idDateOculta).val("").prop({"disabled": false,"required": true, "readonly":false});
+        $(idDateOculta).val("").prop({"disabled": false, "required": true, "readonly": false});
     } else {
         $(idDiv).fadeOut("slow");
         $(idDateOculta).prop("required", false);
@@ -1680,7 +1804,7 @@ function numeroProcesados() {
 //        <td></td><td><a class="pop" href="etapaIntermedia.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
 //        </a></td></tr>');
 //    }
-    //pone contador de los porcesados que deben concluir o estar pendientes en su pesta�a correspondiente
+    //pone contador de los porcesados que deben concluir o estar pendientes en su pestaña correspondiente
     $('#lblNumConclu').text("Resoluciones agregadas: " + $('#tablaConclu tbody tr').length);
     $('#lblNumTram').text("Tramites agregados: " + $('#tablaTramite tbody tr').length);
     $('.proPendientes').text("Faltan: " + $('#Tadolescentes').val() + " adolescentes por asignar estatus");

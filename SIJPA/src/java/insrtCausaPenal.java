@@ -39,7 +39,7 @@ public class insrtCausaPenal extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        HttpSession sesion= request.getSession();
+        HttpSession sesion = request.getSession();
 
         String juzgado_clave = (String) sesion.getAttribute("juzgadoClave");
         String jDividido[] = juzgado_clave.split("-"); //Esto separa en un array basandose en el separador que le pases
@@ -47,14 +47,14 @@ public class insrtCausaPenal extends HttpServlet {
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
-        
+
         sesion.setAttribute("entidad", jEntidad);
         sesion.setAttribute("municipio", jMunicipio);
         sesion.setAttribute("numero", jNumero);
-        
+
         String carpInvestiga = request.getParameter("CarpInves");
         String causaClave = request.getParameter("expClave");
-        sesion.setAttribute("causaClave",causaClave);
+        sesion.setAttribute("causaClave", causaClave);
         String fecha_ingreso;
         if (request.getParameter("fIngreso") != null) {
             fecha_ingreso = request.getParameter("fIngreso");
@@ -71,14 +71,14 @@ public class insrtCausaPenal extends HttpServlet {
         String totalAdo = request.getParameter("Tadolescentes");
         String totalVic = request.getParameter("Tvictimas");
         String comentario = request.getParameter("ComentaExpe");
-      
+
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
-            sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES ("+ jEntidad +","+ jMunicipio +"," + jNumero
-                    + ",'" + juzgado_clave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fecha_ingreso + "','" 
-                    + nomJuez + "'," + particular+ "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "'," 
+            sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero
+                    + ",'" + juzgado_clave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fecha_ingreso + "','"
+                    + nomJuez + "'," + particular + "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "',"
                     + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
             System.out.println(sql);
             if (conn.escribir(sql)) {

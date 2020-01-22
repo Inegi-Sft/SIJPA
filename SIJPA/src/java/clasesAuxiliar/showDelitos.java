@@ -16,38 +16,37 @@ import java.util.logging.Logger;
  *
  * @author CESAR.OSORIO
  */
-
 public class showDelitos {
+
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> deli;
     String sql;
     ResultSet resul;
     int conteoDel;
-    
-    public ArrayList findDelitos(){
+
+    public ArrayList findDelitos() {
         conn.Conectar();
         deli = new ArrayList();
         sql = "SELECT * FROM DATOS_DELITOS_ADOJC";
         resul = conn.consultar(sql);
         try {
-            while(resul.next()){
-                deli.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3),
-                    resul.getString(4),resul.getString(5),resul.getString(6),resul.getString(7),
-                    resul.getString(8),resul.getString(9),resul.getString(10),resul.getString(11),
-                    resul.getString(12),resul.getString(13),resul.getString(14),resul.getString(15),
-                    resul.getString(16),resul.getString(17),resul.getString(18),resul.getString(19),
-                    resul.getString(20),resul.getString(21),resul.getString(22),resul.getString(23),
-                    resul.getString(24),resul.getString(25),resul.getString(26),resul.getString(27)});
+            while (resul.next()) {
+                deli.add(new String[]{resul.getString(1), resul.getString(2), resul.getString(3),
+                    resul.getString(4), resul.getString(5), resul.getString(6), resul.getString(7),
+                    resul.getString(8), resul.getString(9), resul.getString(10), resul.getString(11),
+                    resul.getString(12), resul.getString(13), resul.getString(14), resul.getString(15),
+                    resul.getString(16), resul.getString(17), resul.getString(18), resul.getString(19),
+                    resul.getString(20), resul.getString(21), resul.getString(22), resul.getString(23),
+                    resul.getString(24), resul.getString(25), resul.getString(26), resul.getString(27)});
             }
             conn.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return deli;
-    } 
-    
-    public ArrayList findDeliTabla(String del){
+    }
+
+    public ArrayList findDeliTabla(String del) {
         conn.Conectar();
         deli = new ArrayList();
         sql = "SELECT D.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, CC.DESCRIPCION, CFC.DESCRIPCION, D.NUMERO_PROCESADOS, D.NUMERO_VICTIMAS "
@@ -59,56 +58,54 @@ public class showDelitos {
                 + "AND D.DELITO_CLAVE = '" + del + "';";
         resul = conn.consultar(sql);
         try {
-            while(resul.next()){
+            while (resul.next()) {
                 deli.add(new String[]{
-                    resul.getString(2),resul.getString(3),resul.getString(4),
-                    resul.getString(5),resul.getString(6),resul.getString(7)
+                    resul.getString(2), resul.getString(3), resul.getString(4),
+                    resul.getString(5), resul.getString(6), resul.getString(7)
                 });
             }
             conn.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return deli;
-    } 
-    
-    public int countDelitosInsertados(String exp){
+    }
+
+    public int countDelitosInsertados(String exp) {
         try {
             conn.Conectar();
             conteoDel = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '"+exp+"';";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '" + exp + "';";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                conteoDel=resul.getInt("TOTAL");
+                conteoDel = resul.getInt("TOTAL");
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conteoDel;
-    } 
-    
-    public ArrayList findDelitosExp(String exp){
+    }
+
+    public ArrayList findDelitosExp(String exp) {
         try {
             conn.Conectar();
             deli = new ArrayList();
-            
+
             sql = "SELECT D.DELITO_CLAVE, CN.CODIGO"
-                + " FROM DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
-                + " WHERE D.DELITO_CODIGO_PENAL=CN.ID_CODIGO"
-                + " AND CAUSA_CLAVE = '"+exp+"';";
-            
+                    + " FROM DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
+                    + " WHERE D.DELITO_CODIGO_PENAL=CN.ID_CODIGO"
+                    + " AND CAUSA_CLAVE = '" + exp + "';";
+
             resul = conn.consultar(sql);
             while (resul.next()) {
                 deli.add(new String[]{
-                    resul.getString("DELITO_CLAVE"), resul.getString("CODIGO"), 
-                });
+                    resul.getString("DELITO_CLAVE"), resul.getString("CODIGO"),});
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return deli;
-    } 
+    }
 }

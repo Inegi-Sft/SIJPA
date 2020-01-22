@@ -38,7 +38,7 @@ public class insrtIntermedia extends HttpServlet {
      */
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql, sqlIntermedia, sqlMP, sqlAJ, sqlDefensa;
-    boolean insertMP,insertAJ,insertDefensa;
+    boolean insertMP, insertAJ, insertDefensa;
     showIntermedia cat = new showIntermedia();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -51,7 +51,7 @@ public class insrtIntermedia extends HttpServlet {
         String municipio = (String) sesion.getAttribute("municipio");
         String numero = (String) sesion.getAttribute("numero");
         String jConcatenado = entidad + municipio + numero;
-         String causaClave =(String) sesion.getAttribute("causaClave");
+        String causaClave = (String) sesion.getAttribute("causaClave");
         String procesado_clave = request.getParameter("idProcesado");
         String fechaEscrito;
         if (request.getParameter("fechaEscrito") != null) {
@@ -90,37 +90,37 @@ public class insrtIntermedia extends HttpServlet {
             PrintWriter out = response.getWriter();
 
             conn.Conectar();
-            sqlIntermedia = "INSERT INTO DATOS_ETAPA_INTERMEDIA_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado +
-                    "','" + procesado_clave + jConcatenado + "','" + fechaEscrito + "','" + fechaContestacion + "'," + descubrimiento + "," + intermedia + ",'" + fechaIntermedia 
-                    + "'," + separacion + "," + mediosPrueba + "," + pruebaMP + "," + pruebaAJ + "," + pruebaDefensa + "," + acuerdosProba + "," + aperturaJO + 
-                    ",'" + comentaInter + "',(select YEAR(NOW())))";
+            sqlIntermedia = "INSERT INTO DATOS_ETAPA_INTERMEDIA_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                    + "','" + procesado_clave + jConcatenado + "','" + fechaEscrito + "','" + fechaContestacion + "'," + descubrimiento + "," + intermedia + ",'" + fechaIntermedia
+                    + "'," + separacion + "," + mediosPrueba + "," + pruebaMP + "," + pruebaAJ + "," + pruebaDefensa + "," + acuerdosProba + "," + aperturaJO
+                    + ",'" + comentaInter + "',(select YEAR(NOW())))";
             System.out.println(sqlIntermedia);
-            
+
             if (conn.escribir(sqlIntermedia)) {
                 if (mediosPrueba == 1) {
                     if (pruebaMP == 1) {
                         for (int i = 0; i < chkpruebaMP.length; i++) {
-                            sqlMP = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado +
-                            "','" + procesado_clave + jConcatenado + "',1," + chkpruebaMP[i] + ",(select YEAR(NOW())))";
+                            sqlMP = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                                    + "','" + procesado_clave + jConcatenado + "',1," + chkpruebaMP[i] + ",(select YEAR(NOW())))";
                             System.out.println(sqlMP);
-                            insertMP= conn.escribir(sqlMP);
+                            insertMP = conn.escribir(sqlMP);
 
                         }
                     }
                     if (pruebaAJ == 1) {
                         for (int j = 0; j < chkpruebaAJ.length; j++) {
-                            sqlAJ = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado +
-                            "','" + procesado_clave + jConcatenado + "',2," + chkpruebaAJ[j] + ",(select YEAR(NOW())))";
+                            sqlAJ = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                                    + "','" + procesado_clave + jConcatenado + "',2," + chkpruebaAJ[j] + ",(select YEAR(NOW())))";
                             System.out.println(sqlAJ);
-                            insertAJ=conn.escribir(sqlAJ);
+                            insertAJ = conn.escribir(sqlAJ);
                         }
                     }
                     if (pruebaDefensa == 1) {
                         for (int k = 0; k < chkpruebaDefen.length; k++) {
-                            sqlDefensa = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado +
-                            "','" + procesado_clave + jConcatenado + "',3," + chkpruebaDefen[k] + ",(select YEAR(NOW())))";
+                            sqlDefensa = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                                    + "','" + procesado_clave + jConcatenado + "',3," + chkpruebaDefen[k] + ",(select YEAR(NOW())))";
                             System.out.println(sqlDefensa);
-                            insertDefensa=conn.escribir(sqlDefensa);
+                            insertDefensa = conn.escribir(sqlDefensa);
                         }
                     }
                     if (insertMP || insertAJ || insertDefensa) {

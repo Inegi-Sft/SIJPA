@@ -137,7 +137,7 @@
                 </fieldset>
                 <fieldset>
                     <legend>Relación de la Victima con el Procesado</legend>
-                    <table class="tablasRegis" onblur="relacion(j,i)">
+                    <table class="tablasRegis" onblur="relacion(j, i)">
                         <tr>
                             <th>Procesado Clave</th>
                             <th width="750">Relación</th>
@@ -148,7 +148,7 @@
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
-                                out.println( "<input type='hidden' name='numeroProcesados' id='numeroProcesados' value='" + vic.size() + "'/>");
+                                out.println("<input type='hidden' name='numeroProcesados' id='numeroProcesados' value='" + vic.size() + "'/>");
                                 out.println(ls[0] + "<input type='hidden' name='proRela' value='" + ls[0] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");

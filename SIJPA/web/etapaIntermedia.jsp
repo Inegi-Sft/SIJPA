@@ -31,11 +31,11 @@
         <section class="contenedor">
             <h1>Etapa Intermedia</h1>
             <form action="" method="post" id="formuMedia" name="formuMedia">
-                  <label for="idProcesado">Id Adolescente</label>
-                                <input class="txtMedia" name="idProcesado" id="idProcesado" value="<%=proceClave%>" readonly />
-                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
+                <label for="idProcesado">Id Adolescente</label>
+                <input class="txtMedia" name="idProcesado" id="idProcesado" value="<%=proceClave%>" readonly />
+                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
                 <fieldset>
-                     <legend>Características de la etapa intermedia</legend>
+                    <legend>Características de la etapa intermedia</legend>
                     <table style="border-spacing: 0; " class="tablaFormu">
                         <tr>
                             <td>
@@ -95,16 +95,16 @@
                             </td>
                             <td>
                                 <div id="dseparaAcusa" class="oculto">
-                                <label for="separaAcusa">¿Hubo separación de la acusación?</label>
-                                <select class="txtMedia" name="separaAcusa" id="separaAcusa"  required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findRespuestaSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %> 
-                                </select>
+                                    <label for="separaAcusa">¿Hubo separación de la acusación?</label>
+                                    <select class="txtMedia" name="separaAcusa" id="separaAcusa"  required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findRespuestaSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
                                 </div>
                             </td>
                         </tr>
@@ -116,16 +116,16 @@
                                         <tr>
                                             <td colspan="3">
                                                 <div id="dmediosPrueba" class="oculto">
-                                                <label for="mediosPrueba">¿Hubo presentación de medios de prueba?</label>
-                                                <select class="txtMedia" name="mediosPrueba" id="mediosPrueba" required>
-                                                    <option value="">--Seleccione--</option>
-                                                    <%
-                                                        lista = cat.findRespuestaSimple();
-                                                        for (String[] ls : lista) {
-                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                                        }
-                                                    %> 
-                                                </select>
+                                                    <label for="mediosPrueba">¿Hubo presentación de medios de prueba?</label>
+                                                    <select class="txtMedia" name="mediosPrueba" id="mediosPrueba" required>
+                                                        <option value="">--Seleccione--</option>
+                                                        <%
+                                                            lista = cat.findRespuestaSimple();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                        %> 
+                                                    </select>
                                                 </div>
                                             </td>
                                         </tr>
@@ -177,64 +177,64 @@
                                             <td>
                                                 <table id="tblpruebaMP" border="1" class="tablasRegis oculto">
                                                     <tr>
-                                    <th width="20">Id</th>
-                                    <th width="450">Tipos</th>
-                                    <th width="70">Resolución</th>
-                                </tr>
-                                <%
-                                     lista=cat.findMediosPrueba();
-                                for (String[] ls : lista) {
-                                        out.println("<tr>");
-                                        out.println("<td>" + ls[0] + "</td>");
-                                        out.println("<td>" + ls[1] + "</td>");
-                                        out.println("<td>");
-                                        out.println("<input type='checkbox' name='chkpruebaMP' id='chkpruebaMP" + ls[0] + "' value='" + ls[0] + "' />");
-                                        out.println("</td>");
-                                        out.println("</tr>");
-                                    }
-                                %>
+                                                        <th width="20">Id</th>
+                                                        <th width="450">Tipos</th>
+                                                        <th width="70">Resolución</th>
+                                                    </tr>
+                                                    <%
+                                                        lista = cat.findMediosPrueba();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<tr>");
+                                                            out.println("<td>" + ls[0] + "</td>");
+                                                            out.println("<td>" + ls[1] + "</td>");
+                                                            out.println("<td>");
+                                                            out.println("<input type='checkbox' name='chkpruebaMP' id='chkpruebaMP" + ls[0] + "' value='" + ls[0] + "' />");
+                                                            out.println("</td>");
+                                                            out.println("</tr>");
+                                                        }
+                                                    %>
                                                 </table>
                                             </td>
                                             <td>
                                                 <table id="tblmediospruebaAJ" border="1" class="tablasRegis oculto">
                                                     <tr>
-                                    <th width="20">Id</th>
-                                    <th width="450">Tipos</th>
-                                    <th width="70">Resolución</th>
-                                </tr>
-                                <%
-                                     lista=cat.findMediosPrueba();
-                                for (String[] ls : lista) {
-                                        out.println("<tr>");
-                                        out.println("<td>" + ls[0] + "</td>");
-                                        out.println("<td>" + ls[1] + "</td>");
-                                        out.println("<td>");
-                                        out.println("<input type='checkbox' name='chkpruebaAJ' id='chkpruebaAJ" + ls[0] + "' value='" + ls[0] + "' />");
-                                        out.println("</td>");
-                                        out.println("</tr>");
-                                    }
-                                %>
+                                                        <th width="20">Id</th>
+                                                        <th width="450">Tipos</th>
+                                                        <th width="70">Resolución</th>
+                                                    </tr>
+                                                    <%
+                                                        lista = cat.findMediosPrueba();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<tr>");
+                                                            out.println("<td>" + ls[0] + "</td>");
+                                                            out.println("<td>" + ls[1] + "</td>");
+                                                            out.println("<td>");
+                                                            out.println("<input type='checkbox' name='chkpruebaAJ' id='chkpruebaAJ" + ls[0] + "' value='" + ls[0] + "' />");
+                                                            out.println("</td>");
+                                                            out.println("</tr>");
+                                                        }
+                                                    %>
                                                 </table>
                                             </td>
                                             <td>
-                                                 <table id="tblmediospruebaDefen" border="1" class="tablasRegis oculto">
+                                                <table id="tblmediospruebaDefen" border="1" class="tablasRegis oculto">
                                                     <tr>
-                                    <th width="20">Id</th>
-                                    <th width="450">Tipos</th>
-                                    <th width="70">Resolución</th>
-                                </tr>
-                                <%
-                                     lista=cat.findMediosPrueba();
-                                for (String[] ls : lista) {
-                                        out.println("<tr>");
-                                        out.println("<td>" + ls[0] + "</td>");
-                                        out.println("<td>" + ls[1] + "</td>");
-                                        out.println("<td>");
-                                        out.println("<input type='checkbox' name='chkpruebaDefen' id='chkpruebaDefen" + ls[0] + "' value='" + ls[0] + "' />");
-                                        out.println("</td>");
-                                        out.println("</tr>");
-                                    }
-                                %>
+                                                        <th width="20">Id</th>
+                                                        <th width="450">Tipos</th>
+                                                        <th width="70">Resolución</th>
+                                                    </tr>
+                                                    <%
+                                                        lista = cat.findMediosPrueba();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<tr>");
+                                                            out.println("<td>" + ls[0] + "</td>");
+                                                            out.println("<td>" + ls[1] + "</td>");
+                                                            out.println("<td>");
+                                                            out.println("<input type='checkbox' name='chkpruebaDefen' id='chkpruebaDefen" + ls[0] + "' value='" + ls[0] + "' />");
+                                                            out.println("</td>");
+                                                            out.println("</tr>");
+                                                        }
+                                                    %>
                                                 </table>
                                             </td>
                                         </tr>
@@ -245,30 +245,30 @@
                         <tr>
                             <td>
                                 <div id="dacuerdosProba" class="oculto">
-                                <label for="acuerdosProba">¿Contó con acuerdos probatorios?</label>
-                                <select class="txtMedia" name="acuerdosProba" id="acuerdosProba" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findRespuestaSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %> 
-                                </select>
+                                    <label for="acuerdosProba">¿Contó con acuerdos probatorios?</label>
+                                    <select class="txtMedia" name="acuerdosProba" id="acuerdosProba" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findRespuestaSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
                                 </div>
                             </td>
                             <td>
                                 <div id="daperturaJO" class="oculto">
-                                <label for="aperturaJO">¿Se dictó auto de apertura a juicio oral?</label>
-                                <select class="txtMedia" name="aperturaJO" id="aperturaJO" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findRespuestaSimple();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %> 
-                                </select>
+                                    <label for="aperturaJO">¿Se dictó auto de apertura a juicio oral?</label>
+                                    <select class="txtMedia" name="aperturaJO" id="aperturaJO" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findRespuestaSimple();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %> 
+                                    </select>
                                 </div>
                             </td>
                             <td>

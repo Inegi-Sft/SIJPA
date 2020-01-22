@@ -55,7 +55,7 @@ public class insrtVictimas extends HttpServlet {
         String municipio = (String) sesion.getAttribute("municipio");
         String numero = (String) sesion.getAttribute("numero");
         String jConcatenado = entidad + municipio + numero;
-         String causaClave =(String) sesion.getAttribute("causaClave");
+        String causaClave = (String) sesion.getAttribute("causaClave");
         String victiClave = request.getParameter("victiClave");
         String tipo_victima = request.getParameter("tipo_victima");
         String victima_moral = request.getParameter("tvic_moral");
@@ -103,9 +103,9 @@ public class insrtVictimas extends HttpServlet {
             PrintWriter out = response.getWriter();
             conn.Conectar();
             sqlVictimas = "INSERT INTO DATOS_VICTIMAS_ADOJC  VALUES(" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
-                    + "','" + victiClave + jConcatenado + "'," + tipo_victima + "," + victima_moral + "," + conto_asesor + "," + asesor + "," + sexo + ",'" + fecha_nacimiento 
+                    + "','" + victiClave + jConcatenado + "'," + tipo_victima + "," + victima_moral + "," + conto_asesor + "," + asesor + "," + sexo + ",'" + fecha_nacimiento
                     + "'," + edad + "," + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + "," + muniNacimiento + "," + nacionalidad + "," + paisResi + ","
-                    + entidadResi + "," + municipioResi + "," + conyugal + "," + alfabetismo + "," + estudios + "," + espanol + "," + indigena + "," + familia 
+                    + entidadResi + "," + municipioResi + "," + conyugal + "," + alfabetismo + "," + estudios + "," + espanol + "," + indigena + "," + familia
                     + "," + extrangera + "," + interprete + "," + ingresos + "," + rangoingresos + "," + ocupacion + "," + vmedidaMujer + "," + vmedidas + ",'"
                     + comentarios + "',(select YEAR(NOW())))";
             System.out.println(sqlVictimas);
@@ -157,7 +157,7 @@ public class insrtVictimas extends HttpServlet {
                             conn.close();
                         }
                     }
-                    
+
                     conn.close();
                 }
                 //insertavmedida
@@ -174,7 +174,7 @@ public class insrtVictimas extends HttpServlet {
                 resp.add(lis.get(0)[3]);
                 resp.add(vic.countVictimas(causaClave + jConcatenado));
                 out.write(resp.toJSONString());
-                    
+
                 conn.close();
             } else {
                 //regresa a insrttramite y maca error

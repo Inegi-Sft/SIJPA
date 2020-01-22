@@ -55,11 +55,11 @@
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = jue.findJuez((String) session.getAttribute("juzgadoClave"));
-                                        if(lista.size() != 0){
+                                        if (lista.size() != 0) {
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
                                             }
-                                        }else{
+                                        } else {
                                             response.sendRedirect("capturaJuez.jsp");
                                         }
                                     %>  
@@ -152,23 +152,23 @@
                         </tr>
                     </table>
                 </fieldset>
-<!--                <fieldset class="oculto" id="totalAudiencias">
-                    <legend>Audiencias</legend>
-                    <table class="tablasRegis" id="tAudiencias">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tipo de audiencias</th>
-                                <th>Juez</th>
-                                <th>Fecha de Celebración</th>
-                                <th>Duración</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                    <a id="addAudi" class="addJuz">Agregar Audiencia <img src="img/add.png" title="Agregar Audiencia"></a>
-                </fieldset>-->
+                <!--                <fieldset class="oculto" id="totalAudiencias">
+                                    <legend>Audiencias</legend>
+                                    <table class="tablasRegis" id="tAudiencias">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tipo de audiencias</th>
+                                                <th>Juez</th>
+                                                <th>Fecha de Celebración</th>
+                                                <th>Duración</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <a id="addAudi" class="addJuz">Agregar Audiencia <img src="img/add.png" title="Agregar Audiencia"></a>
+                                </fieldset>-->
                 <div class="comentarios">
                     <h2>Comentarios</h2>
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>

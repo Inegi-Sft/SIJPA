@@ -53,11 +53,11 @@ public class insrtDelitos extends HttpServlet {
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
-        String entidad = (String) sesion.getAttribute("entidad" );
+        String entidad = (String) sesion.getAttribute("entidad");
         String municipio = (String) sesion.getAttribute("municipio");
         String numero = (String) sesion.getAttribute("numero");
         String jConcatenado = entidad + municipio + numero;
-        String causaClave =(String) sesion.getAttribute("causaClave");
+        String causaClave = (String) sesion.getAttribute("causaClave");
         String delitoClave = request.getParameter("delitoClave");
         String delitoCP = request.getParameter("delitoCP");
         String articuloCP = request.getParameter("articuloCP");
@@ -87,11 +87,11 @@ public class insrtDelitos extends HttpServlet {
 
             //String delitoClave = generaDelitoClave(expediente,jConcatenado);
             conn.Conectar();
-            sqlDelitos = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" 
+            sqlDelitos = "INSERT INTO DATOS_DELITOS_ADOJC VALUES("
                     + entidad + ","
                     + municipio + ","
-                    + numero + ",'" 
-                    + causaClave + jConcatenado + "','" 
+                    + numero + ",'"
+                    + causaClave + jConcatenado + "','"
                     + delitoClave + jConcatenado + "',"
                     + delitoCP + ",'"
                     + articuloCP + "',"
@@ -116,37 +116,37 @@ public class insrtDelitos extends HttpServlet {
                     + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sqlDelitos);
-           
+
             if (conn.escribir(sqlDelitos)) {
                 if (delitoNT == 31) {
                     for (int i = 0; i < chkCR.length; i++) {
                         sqldcosa = "INSERT INTO DATOS_DROBO_ADOJC VALUES ("
                                 + entidad + ","
                                 + municipio + ","
-                                + numero + ",'" 
-                                + causaClave +jConcatenado + "','" 
+                                + numero + ",'"
+                                + causaClave + jConcatenado + "','"
                                 + delitoClave + jConcatenado + "',"
-                                + chkCR[i] 
+                                + chkCR[i]
                                 + " ,(select YEAR(NOW())) );";
                         System.out.println(sqldcosa);
                         conn.escribir(sqldcosa);
                     }
                 }
-                        if (delitoNT == 1 || delitoNT == 4) {
-                            for (int j = 0; j < chkCS.length; j++) {
-                                sqlhomicidio = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES ("
-                                  + entidad + "," 
-                                  + municipio + ","
-                                  + numero + ",'" 
-                                  + causaClave +jConcatenado + "','" 
-                                  + delitoClave + jConcatenado + "',"
-                                  + chkCS[j] 
-                                  + " ,(select YEAR(NOW())) );";      
-                                System.out.println(sqlhomicidio);
-                                conn.escribir(sqlhomicidio);
-                            }
+                if (delitoNT == 1 || delitoNT == 4) {
+                    for (int j = 0; j < chkCS.length; j++) {
+                        sqlhomicidio = "INSERT INTO DATOS_DHOMICIDIO_ADOJC VALUES ("
+                                + entidad + ","
+                                + municipio + ","
+                                + numero + ",'"
+                                + causaClave + jConcatenado + "','"
+                                + delitoClave + jConcatenado + "',"
+                                + chkCS[j]
+                                + " ,(select YEAR(NOW())) );";
+                        System.out.println(sqlhomicidio);
+                        conn.escribir(sqlhomicidio);
                     }
-                
+                }
+
                 showDelitos deli = new showDelitos();
                 ArrayList<String[]> lis = new ArrayList<String[]>();
                 lis = deli.findDeliTabla(delitoClave + jConcatenado);

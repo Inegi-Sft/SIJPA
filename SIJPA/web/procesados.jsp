@@ -17,6 +17,7 @@
         <title>SIJPA::Procesados</title>
         <%@include file="librerias.jsp" %>
         <%
+            
             String proceClave = "", posicion = "";
             if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
                 proceClave = request.getParameter("proceClave");

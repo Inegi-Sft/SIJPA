@@ -503,7 +503,7 @@ fieldset legend{
     text-shadow: grey 3px 3px 5px;
 }
 .agregar:hover{
-    background-color: #ddd;
+    /*background-color: #ddd;*/
     transform:scale(1.15);
 }
 
@@ -512,7 +512,7 @@ fieldset legend{
 }
 
 .dContenido{
-    width: 100%;
+    width: 85%;
     margin: auto;
     margin-bottom: -15px;
 }

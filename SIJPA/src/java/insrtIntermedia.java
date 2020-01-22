@@ -37,7 +37,8 @@ public class insrtIntermedia extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
+    String sql, sqlIntermedia, sqlMP, sqlAJ, sqlDefensa;
+    boolean insertMP, insertAJ, insertDefensa;
     showIntermedia cat = new showIntermedia();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,42 +49,40 @@ public class insrtIntermedia extends HttpServlet {
         String posicion = request.getParameter("posicion");
         String entidad = (String) sesion.getAttribute("entidad");
         String municipio = (String) sesion.getAttribute("municipio");
-        String distrito = (String) sesion.getAttribute("distrito");
         String numero = (String) sesion.getAttribute("numero");
-        String jConcatenado = entidad + municipio + distrito + numero;
-        String expediente = (String) sesion.getAttribute("expediente");
+        String jConcatenado = entidad + municipio + numero;
+        String causaClave = (String) sesion.getAttribute("causaClave");
         String procesado_clave = request.getParameter("idProcesado");
-        String audiInter = request.getParameter("audiInterme");
-        String fechaAudiInter;
-        if (request.getParameter("fechaAudiinter") != null) {
-            fechaAudiInter = request.getParameter("fechaAudiinter");
-        } else {
-            fechaAudiInter = "1899-09-09";
-        }
         String fechaEscrito;
         if (request.getParameter("fechaEscrito") != null) {
             fechaEscrito = request.getParameter("fechaEscrito");
         } else {
             fechaEscrito = "1899-09-09";
         }
-        String correEscrito = request.getParameter("correEscrito");
-        String fechaCorreccion;
-        if (request.getParameter("fechaCorreccion") != null) {
-            fechaCorreccion = request.getParameter("fechaCorreccion");
+        String fechaContestacion;
+        if (request.getParameter("contestaEscrito") != null) {
+            fechaContestacion = request.getParameter("contestaEscrito");
         } else {
-            fechaCorreccion = "1899-09-09";
+            fechaContestacion = "1899-09-09";
         }
-        String coadyuvante = request.getParameter("asesorCoady");
-        String fechaCoady;
-        if (request.getParameter("fechaCoady") != null) {
-            fechaCoady = request.getParameter("fechaCoady");
+        String descubrimiento = request.getParameter("decubreProba");
+        String intermedia = request.getParameter("audiInterme");
+        String fechaIntermedia;
+        if (request.getParameter("fechaAudiinter") != null) {
+            fechaIntermedia = request.getParameter("fechaAudiinter");
         } else {
-            fechaCoady = "1899-09-09";
+            fechaIntermedia = "1899-09-09";
         }
-        String medioPrueba = request.getParameter("mediosPrueba");
-        String tipoPrueba = request.getParameter("tipoPrueba");
-        String excuMedios = request.getParameter("excuMedios");
-        String probatorios = request.getParameter("acuerdosProba");
+        String separacion = request.getParameter("separaAcusa");
+        int mediosPrueba = Integer.parseInt(request.getParameter("mediosPrueba"));
+        int pruebaMP = Integer.parseInt(request.getParameter("pruebaMP"));
+        int pruebaAJ = Integer.parseInt(request.getParameter("pruebaAJ"));
+        int pruebaDefensa = Integer.parseInt(request.getParameter("pruebaDefensa"));
+        String[] chkpruebaMP = request.getParameterValues("chkpruebaMP");
+        String[] chkpruebaAJ = request.getParameterValues("chkpruebaAJ");
+        String[] chkpruebaDefen = request.getParameterValues("chkpruebaDefen");
+        String acuerdosProba = request.getParameter("acuerdosProba");
+        String aperturaJO = request.getParameter("aperturaJO");
         String comentaInter = request.getParameter("comentarios");
 
         try {
@@ -91,12 +90,43 @@ public class insrtIntermedia extends HttpServlet {
             PrintWriter out = response.getWriter();
 
             conn.Conectar();
-            sql = "UPDATE DATOS_ETAPAPROC_ADOJC SET AUDIENCIA_INTERMEDIA=" + audiInter + ", FECHA_AUDIENCIA_INTERMEDIA = '" + fechaAudiInter + "', FECHA_ESCRITO_ACUSACION = '"
-                    + fechaEscrito + "', CORRECCION_ESCRITO_ACUSACION = " + correEscrito + ", FECHA_CORRECCION_ESCRITO ='" + fechaCorreccion + "', ASESOR_COADYUVANTE = " + coadyuvante + ","
-                    + " FECHA_SOLICITUD_COADYUVANTE ='" + fechaCoady + "', PRESENTACION_PRUEBAS = " + medioPrueba + ", TIPO_PRUEBA = " + tipoPrueba + ", EXCLUSION_MEDIOS = " + excuMedios + ","
-                    + " ACUERDO_PROBATORIO = " + probatorios + ", COMENTARIOS_INTERMEDIA ='" + comentaInter + "' WHERE PROCESADO_CLAVE = '" + procesado_clave + jConcatenado + "'";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
+            sqlIntermedia = "INSERT INTO DATOS_ETAPA_INTERMEDIA_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                    + "','" + procesado_clave + jConcatenado + "','" + fechaEscrito + "','" + fechaContestacion + "'," + descubrimiento + "," + intermedia + ",'" + fechaIntermedia
+                    + "'," + separacion + "," + mediosPrueba + "," + pruebaMP + "," + pruebaAJ + "," + pruebaDefensa + "," + acuerdosProba + "," + aperturaJO
+                    + ",'" + comentaInter + "',(select YEAR(NOW())))";
+            System.out.println(sqlIntermedia);
+
+            if (conn.escribir(sqlIntermedia)) {
+                if (mediosPrueba == 1) {
+                    if (pruebaMP == 1) {
+                        for (int i = 0; i < chkpruebaMP.length; i++) {
+                            sqlMP = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                                    + "','" + procesado_clave + jConcatenado + "',1," + chkpruebaMP[i] + ",(select YEAR(NOW())))";
+                            System.out.println(sqlMP);
+                            insertMP = conn.escribir(sqlMP);
+
+                        }
+                    }
+                    if (pruebaAJ == 1) {
+                        for (int j = 0; j < chkpruebaAJ.length; j++) {
+                            sqlAJ = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                                    + "','" + procesado_clave + jConcatenado + "',2," + chkpruebaAJ[j] + ",(select YEAR(NOW())))";
+                            System.out.println(sqlAJ);
+                            insertAJ = conn.escribir(sqlAJ);
+                        }
+                    }
+                    if (pruebaDefensa == 1) {
+                        for (int k = 0; k < chkpruebaDefen.length; k++) {
+                            sqlDefensa = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
+                                    + "','" + procesado_clave + jConcatenado + "',3," + chkpruebaDefen[k] + ",(select YEAR(NOW())))";
+                            System.out.println(sqlDefensa);
+                            insertDefensa = conn.escribir(sqlDefensa);
+                        }
+                    }
+                    if (insertMP || insertAJ || insertDefensa) {
+                        conn.close();
+                    }
+                }
 
                 ArrayList<String[]> lis = new ArrayList<String[]>();
                 lis = cat.findIntermediaTabla(procesado_clave + jConcatenado);
@@ -105,8 +135,8 @@ public class insrtIntermedia extends HttpServlet {
                 resp.add(lis.get(0)[0]);
                 resp.add(lis.get(0)[1]);
                 resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
-                resp.add(cat.countIntermedia(expediente + jConcatenado));
+                resp.add(cat.countIntermedia(causaClave + jConcatenado));
+                resp.add(cat.countTotPasanInicial_Intermedia(causaClave + jConcatenado));
                 out.write(resp.toJSONString());
                 conn.close();
             } else {
@@ -115,7 +145,7 @@ public class insrtIntermedia extends HttpServlet {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(insrtVictimas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(insrtIntermedia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

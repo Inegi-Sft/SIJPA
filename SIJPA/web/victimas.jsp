@@ -89,8 +89,7 @@
                             <th>Delito cometido</th>
                         </tr>
                         <%
-                       //     vic = victi.findDelitos(causaClave + jConcatenado);
-                            vic = victi.findDelitos("001/201912120011");
+                            vic = victi.findDelitos(causaClave + jConcatenado);
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
@@ -138,19 +137,18 @@
                 </fieldset>
                 <fieldset>
                     <legend>Relación de la Victima con el Procesado</legend>
-                    <table class="tablasRegis" onblur="relacion(j,i)">
+                    <table class="tablasRegis" onblur="relacion(j, i)">
                         <tr>
                             <th>Procesado Clave</th>
                             <th width="750">Relación</th>
                         </tr>
                         <%
-                       //     vic = victi.findVprocesados(causaClave + jConcatenado);
-                            vic = victi.findVprocesados("001/201912120011");
+                            vic = victi.findVprocesados(causaClave + jConcatenado);
                             int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
-                                out.println( "<input type='hidden' name='numeroProcesados' id='numeroProcesados' value='" + vic.size() + "'/>");
+                                out.println("<input type='hidden' name='numeroProcesados' id='numeroProcesados' value='" + vic.size() + "'/>");
                                 out.println(ls[0] + "<input type='hidden' name='proRela' value='" + ls[0] + "'/>");
                                 out.println("</td>");
                                 out.println("<td>");

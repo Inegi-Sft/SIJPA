@@ -99,6 +99,7 @@ public class insrtJuzgados extends HttpServlet {
                         + causasIngresa + "," + mediProteccion + "," + providenPrecauto + "," + pruebaAnti + "," + ordenesJudi + ","
                         + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW()))"
                         + ")";
+
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                     conn.close();

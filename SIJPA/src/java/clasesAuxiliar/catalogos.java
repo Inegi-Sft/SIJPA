@@ -745,7 +745,7 @@ public class catalogos {
     public ArrayList findMediosPrueba() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_medios_prueba ORDER BY 1";
+        sql = " SELECT * FROM catalogos_medios_prueba WHERE PRUEBA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -895,7 +895,7 @@ public class catalogos {
 
     }
 
-    public ArrayList findlazoCierre() {
+    public ArrayList findPlazoCierre() {
         conn.Conectar();
         lista = new ArrayList();
         sql = " SELECT * FROM catalogos_plazo_cierre ORDER BY 1";

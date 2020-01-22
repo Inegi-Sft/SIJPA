@@ -55,9 +55,9 @@ public class showProcesados {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO),TP.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
-                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_IMPUTABILIDAD TP, CATALOGOS_SEXO S"
-                + " WHERE TP.IMPUTABILIDAD_ID=P.PRESENTACION_ADO"
+            sql = "SELECT CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), TC.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
+                + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TC, CATALOGOS_SEXO S"
+                + " WHERE P.INICIO_IMPUTADO=TC.CONSIGNACION_ID"
                 + " AND S.SEXO_ID=P.SEXO"
                 + " AND P.PROCESADO_CLAVE = '" + pro + "';";
             
@@ -90,18 +90,83 @@ public class showProcesados {
         return conteoPro;
     }
     
-    public ArrayList findProcesadoExp(String exp) {
+    public ArrayList listProcesadoInsertConclusion(String exp) {
         conn.Conectar();
         proce = new ArrayList();
-        sql = "SELECT * FROM DATOS_PROCESADOS_ADOJC WHERE CAUSA_CLAVE='"+exp+"' "
-                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC WHERE CAUSA_CLAVE='"+exp+"')"
-                + " AND PROCESADO_CLAVE NOT IN (SELECT PROCESADO_CLAVE FROM DATOS_TRAMITES_ADOJC WHERE CAUSA_CLAVE='"+exp+"')";
+        sql = "SELECT P.PROCESADO_CLAVE, P.NOMBRE,P.A_PATERNO,P.A_MATERNO "
+                + " FROM DATOS_PROCESADOS_ADOJC P,DATOS_ETAPA_INICIAL_ADOJC INI"
+                + " WHERE P.PROCESADO_CLAVE=INI.PROCESADO_CLAVE"
+                + " AND P.CAUSA_CLAVE='"+exp+"'"
+                + " AND NOT INI.FECHA_CIERRE_INVESTIGACION='1699-09-09'"//Fecha En Proceso
+                + " AND NOT INI.REAPERTURA_PROCESO IN (2,9)"// No, No identificado
+                + " AND NOT INI.AUDIENCIA_INICIAL IN (2,9)"// No, No identificado
+                + " AND P.PROCESADO_CLAVE NOT IN ( SELECT ITM.PROCESADO_CLAVE FROM DATOS_ETAPA_INTERMEDIA_ADOJC ITM "
+                                                + " WHERE ITM.AUDIENCIA_INTERMEDIA IN (2,9) AND CAUSA_CLAVE='"+exp+"')"//No,No identificado
+                + " AND P.PROCESADO_CLAVE NOT IN ( SELECT C.PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC C "
+                                                + " WHERE C.CAUSA_CLAVE='"+exp+"')"//Que no este agregado en Conclusiones
+                + " AND P.PROCESADO_CLAVE NOT IN ( SELECT T.PROCESADO_CLAVE FROM DATOS_TRAMITES_ADOJC T "
+                                                + " WHERE T.CAUSA_CLAVE='"+exp+"')"//Que no este agregado en Tramite
+                + " ORDER BY P.PROCESADO_CLAVE";
         
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
                 proce.add(new String[]{
                     resul.getString("PROCESADO_CLAVE"), resul.getString("NOMBRE")+" "+resul.getString("A_PATERNO")+" "+resul.getString("A_MATERNO")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+
+    }
+    public ArrayList listProcesadoInsertTramite(String exp) {
+        conn.Conectar();
+        proce = new ArrayList();
+        sql = "SELECT P.PROCESADO_CLAVE, P.NOMBRE,P.A_PATERNO,P.A_MATERNO"
+                + " FROM DATOS_PROCESADOS_ADOJC P, DATOS_ETAPA_INICIAL_ADOJC INI"
+                + " WHERE P.PROCESADO_CLAVE=INI.PROCESADO_CLAVE"
+                + " AND P.CAUSA_CLAVE='"+exp+"'"
+                + " AND NOT INI.SOBRESEIMIENTO_CAUSAP=1"//sobreseimiento: Si
+                + " AND P.PROCESADO_CLAVE NOT IN (SELECT ITM.PROCESADO_CLAVE FROM DATOS_ETAPA_INTERMEDIA_ADOJC ITM "
+                                                + " WHERE ITM.APERTURA_JUICIO_ORAL=1 AND CAUSA_CLAVE='"+exp+"')"//Apertura JO: Si
+                + " AND P.PROCESADO_CLAVE NOT IN ( SELECT C.PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC C "
+                                                + " WHERE C.CAUSA_CLAVE='"+exp+"')"//Que no este agregado en Conclusiones
+                + " AND P.PROCESADO_CLAVE NOT IN ( SELECT T.PROCESADO_CLAVE FROM DATOS_TRAMITES_ADOJC T "
+                                                + " WHERE T.CAUSA_CLAVE='"+exp+"')"//Que no este agregado en Tramite
+                + " ORDER BY P.PROCESADO_CLAVE";
+        
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString("PROCESADO_CLAVE"), resul.getString("NOMBRE")+" "+resul.getString("A_PATERNO")+" "+resul.getString("A_MATERNO")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+
+    }
+    public ArrayList findProcesadoDelitos(String causa, String pro) {
+        conn.Conectar();
+        proce = new ArrayList();
+        sql = "SELECT PD.DELITO_CLAVE, CN.CODIGO FROM DATOS_PDELITOS_ADOJC PD, DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN"
+                + " WHERE PD.CAUSA_CLAVE=D.CAUSA_CLAVE AND PD.DELITO_CLAVE=D.DELITO_CLAVE"
+                + " AND D.DELITO_CODIGO_PENAL=CN.ID_CODIGO"
+                + " AND PD.CAUSA_CLAVE='"+causa+"' AND PD.PROCESADO_CLAVE='"+pro+"';";
+        
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString(1), resul.getString(2)
                 });
             }
             conn.close();

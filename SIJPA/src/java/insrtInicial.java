@@ -6,6 +6,7 @@
 
 import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.showInicial;
+import clasesAuxiliar.showIntermedia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -42,6 +43,7 @@ public class insrtInicial extends HttpServlet {
     boolean updateVdeli;
     int totalProcesa;
     showInicial cat = new showInicial();
+    showIntermedia itm = new showIntermedia();
     ArrayList<String[]> vdeli;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -51,10 +53,9 @@ public class insrtInicial extends HttpServlet {
         String posicion = request.getParameter("posicion");
         String entidad = (String) sesion.getAttribute("entidad");
         String municipio = (String) sesion.getAttribute("municipio");
-        String distrito = (String) sesion.getAttribute("distrito");
         String numero = (String) sesion.getAttribute("numero");
-        String jConcatenado = entidad + municipio + distrito + numero;
-        String claveCausa = (String) sesion.getAttribute("claveCausa");
+        String jConcatenado = entidad + municipio + numero;
+        String causaClave = (String) sesion.getAttribute("causaClave");
         String procesado_clave = request.getParameter("idProcesado");
        
         String audiInicial = request.getParameter("audiInicial");
@@ -69,7 +70,6 @@ public class insrtInicial extends HttpServlet {
         String Plazo = request.getParameter("plazo");
         String autovincula = request.getParameter("autoVin");
         String fechavincula = request.getParameter("fechAuto");
-        String fechAutoLib = request.getParameter("fechAutoLib");
         
         int mcautelar = Integer.parseInt(request.getParameter("drecretaMC"));
         String[] chkMedidaC = request.getParameterValues("apliMedidaCau");
@@ -94,9 +94,9 @@ public class insrtInicial extends HttpServlet {
             PrintWriter out = response.getWriter();
 
             conn.Conectar();
-//            totalProcesa = cat.countVdelitos(claveCausa + jConcatenado);
+//            totalProcesa = cat.countVdelitos(causaClave + jConcatenado);
 //            if (totalProcesa == 0) {
-//                vdeli = cat.findVdelitos(claveCausa + jConcatenado);
+//                vdeli = cat.findVdelitos(causaClave + jConcatenado);
 //                for (String[] ls : vdeli) {
 //                    sqlVD = "UPDATE DATOS_DELITOS_ADOJC SET NUMERO_PROCESADOS = " + ls[1] + ", NUMERO_VICTIMAS = " + ls[2] + " WHERE DELITO_CLAVE ='" + ls[0] + "'";
 //                    System.out.println(sqlVD);
@@ -104,47 +104,53 @@ public class insrtInicial extends HttpServlet {
 //                }
 //            }
 //            if (updateVdeli) {
-                sqlInicial = "INSERT INTO DATOS_ETAPAPROC_ADOJC VALUES ("+ entidad +","+ municipio +","+ distrito +","+ numero +",'"+ claveCausa+jConcatenado +"','"
+                sqlInicial = "INSERT INTO DATOS_ETAPA_INICIAL_ADOJC VALUES ("+ entidad +","+ municipio +","+ numero +",'"+ causaClave+jConcatenado +"','"
                     + procesado_clave+jConcatenado +"',"+audiInicial+","+ detencion +","+legaldetencion+",'"+ fechaAutoLiber +"',"+formuImputa+",'"+ fechaFormuImpu+"',"
-                    + declaro +",'"+ fechDeclara +"',"+ huboPlazo +","+ Plazo +","+ autovincula +",'"+ fechavincula +"','"+ fechAutoLib +"'," + cierreinvestiga + ",'" 
+                    + declaro +",'"+ fechDeclara +"',"+ huboPlazo +","+ Plazo +","+ autovincula +",'"+ fechavincula +"',"+ mcautelar +"," + cierreinvestiga + ",'" 
                     + fechaplazo +"',"+soliProrroga+","+ plazofijado +",'"+ fechCierreI +"',"+ dictoSobresei +","+ suspenProceso +","+ causasSuspension +","+huboReapertura+",'"
                     + fechaReapertura +"',"+ quienSoliApertura +","+ formulaAcusacion +",'"+ comentarios +"',(select YEAR(NOW())))";
                 System.out.println(sqlInicial);
-//                if (conn.escribir(sqlInicial)) {
+                if (conn.escribir(sqlInicial)) {
                     if (mcautelar == 1) {
                         for (int i = 0; i < chkMedidaC.length; i++) {
                             if (chkMedidaC[i].equals("13")) {
-                                sqlPM = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + claveCausa + jConcatenado + "','"
+                                sqlPM = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado + "','"
                                         + procesado_clave + jConcatenado + "'," + chkMedidaC[i] + ",'" + especificar + "', (select YEAR(NOW())))";
                                 System.out.println(sqlPM);
-//                                insrtPmedida = conn.escribir(sqlPM);
+                                insrtPmedida = conn.escribir(sqlPM);
                             } else {
-                                sqlPM = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'" + claveCausa + jConcatenado + "','"
+                                sqlPM = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado + "','"
                                         + procesado_clave + jConcatenado + "'," + chkMedidaC[i] + ", -2, (select YEAR(NOW())))";
                                 System.out.println(sqlPM);
-//                                insrtPmedida = conn.escribir(sqlPM);
+                                insrtPmedida = conn.escribir(sqlPM);
                             }
                         }
                         if (insrtPmedida) {
                             conn.close();
                         }
-//                    }
+                    }
+                    //showInicial inicio = new showInicial();
+                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    lis = cat.findInicialTabla(procesado_clave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[0].replace(jConcatenado,""));
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(lis.get(0)[4]);
+                    resp.add(cat.countInicial(causaClave + jConcatenado));
+                    resp.add(formulaAcusacion);//dato para saber si ese rocesado pasa a intermedia
+                    resp.add(itm.countTotPasanInicial_Intermedia(causaClave + jConcatenado));//total de procesados que pasan a intermedia
+                    out.write(resp.toJSONString());
+                    
+                    conn.close();
+                }else {
+                    conn.close();
                 }
-                //showInicial inicio = new showInicial();
-                /*ArrayList<String[]> lis = new ArrayList<String[]>();
-                lis = cat.findInicialTabla(procesado_clave + jConcatenado);
-                JSONArray resp = new JSONArray();
-                resp.add(posicion);
-                resp.add(lis.get(0)[0]);
-                resp.add(lis.get(0)[1]);
-                resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
-                resp.add(cat.countInicial(claveCausa + jConcatenado));
-                out.write(resp.toJSONString());
-                conn.close();
-            } else {
-                conn.close();
-            }*/
+//            }else {
+//                conn.close();
+//            }
         } catch (SQLException ex) {
             Logger.getLogger(insrtInicial.class.getName()).log(Level.SEVERE, null, ex);
         }

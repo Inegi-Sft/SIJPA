@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SIJPA::Elementos del Expediente</title>
+        <title>SIJPA::Elementos de la CausaPenal</title>
         <%@include file="librerias.jsp" %>
         <%
             showDelitos delito = new showDelitos();
@@ -34,7 +34,7 @@
             ArrayList<String[]> trami = new ArrayList();
             
             HttpSession sesion= request.getSession();
-            String expediente =(String) sesion.getAttribute("expediente");
+            String CausaPenal =(String) sesion.getAttribute("CausaPenal");
         %>
     </head>
     <body>
@@ -43,9 +43,9 @@
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
-                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Expediente</button>
+                <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1" style="display: block">Causa Penal</button>
                 <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2" disabled>Delitos</button>
-                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3" >Adolescentes</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3" disabled>Adolescentes</button>
                 <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Victimas</button>
                 <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5" disabled>Inicial</button>
                 <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6" disabled>Intermedia</button>
@@ -53,7 +53,7 @@
                 <button class="pestanaLinks" onclick="openPestana('btn8', 'p8')" id="btn8" disabled>Tramite</button>
             </div>
             <div id="p1" class="pestanaContent" style="display: block">
-                <%@include file="capturaExpediente.jsp"%>
+                <%@include file="capturaCausaPenal.jsp"%>
                 
             </div>
             <div id="p2" class="pestanaContent">
@@ -154,10 +154,9 @@
                         <tr>
                             <th>Adolescente clave</th>
                             <th>Nombre</th>
-                            <th>Control detencion</th>
-                            <th>¿Se calificó como legal la detención?</th>
-                            <th>¿El adolescente declaró?</th>
-                            <th>Fecha del Cierre de Investigación </th>
+                            <th width="150">¿Hubo control de detención?</th>
+                            <th>Resolución auto de vinculación </th>
+                            <th width="150">¿Se dictó sobreseimiento?</th>
                             <th>Editar</th>
                         </tr>
                     </thead>
@@ -172,10 +171,10 @@
                     <thead>
                     <tr>
                         <th>Adolescente clave</th>
+                        <th>Nombre</th>
                         <th>Audiencia intermedia</th>
                         <th>Escrito acusación</th>
                         <th>Presentacion medios prueba</th>
-                        <th>Acuerdos probatorios</th>
                         <th>Editar</th>
                     </tr>
                     </thead>
@@ -186,55 +185,44 @@
             </div>
             <div id="p7" class="pestanaContent">
                 <h2>Resoluciones dictadas</h2>
-                <div class="listaTable">
-                    <table class="dContenido">
+                <table class="dContenido">
+                    <tr>
+                        <td>
+                            <span class="indicador" id="lblNumConclu"></span>
+                            <span class="indicador2 proPendientes"></span>
+                            <a href="conclusiones.jsp" class="agregar pop" id="addConclu"><img src="img/add.png"/> Agregar</a>
+                        </td>
+                    </tr>
+                </table>
+                <table class="tablasRegis " id="tablaConclu">
+                    <thead>
                         <tr>
-                            <td>
-                                <span class="indicador" id="lblNumConclu"></span>
-                                <span class="indicador2 proPendientes"></span>
-                                <a href="conclusiones.jsp" class="agregar pop" id="addConclu"><img src="img/add.png"/> Agregar</a>
-<!--                                    </td>
--->                                </tr>
-                    </table>
-                    <table class="tablasRegis " id="tablaConclu" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Adolescente clave</th>
-                                <th>Nombre</th>
-                                <th>Fecha conclusión</th>
-                                <th>Tipo conclusión/terminación</th>
-                                <th width="80">Editar</th>
-                                <th width="80">Borrar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%--  conc = conclusion.findConcluTabla();
-                                for (String[] tm : conc) {
-                                    out.println("<tr>");
-                                    out.println("<td>" + tm[0] + "</td>");
-                                    out.println("<td>" + tm[1] + "</td>");
-                                    out.println("<td>" + tm[2] + "</td>");
-                                    out.println("<td>" + tm[3] + "</td>");
-                                    out.println("<td><a class='pop' href='conclusiones.jsp?pc=" + tm[2] + "'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                    out.println("</tr>");
-                                }
-                            --%>
-                        </tbody>
-                    </table>
-                </div>
-                <!--codigo jsp aqui-->
-                <div class="lista" id="listPConclu">
-                    <label>Respecto a la Etapa Inicial, estos adolescentes deben registrarse en resoluciones</label>
-                    <ul>
-                        <li>00148/2019-P1</li>
-                        <li>00148/2019-P2</li>
-                        <li>00148/2019-P5</li>
-                    </ul>
-                </div>
+                            <th>Adolescente clave</th>
+                            <th>Nombre</th>
+                            <th>Fecha conclusión</th>
+                            <th>Tipo conclusión/terminación</th>
+                            <th width="80">Editar</th>
+                            <th width="80">Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%--  conc = conclusion.findConcluTabla();
+                            for (String[] tm : conc) {
+                                out.println("<tr>");
+                                out.println("<td>" + tm[0] + "</td>");
+                                out.println("<td>" + tm[1] + "</td>");
+                                out.println("<td>" + tm[2] + "</td>");
+                                out.println("<td>" + tm[3] + "</td>");
+                                out.println("<td><a class='pop' href='conclusiones.jsp?pc=" + tm[2] + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                out.println("</tr>");
+                            }
+                        --%>
+                    </tbody>
+                </table>
             </div>
             <div id="p8" class="pestanaContent">
                 <h2>Pendientes de resolución</h2>
-                <div class="listaTable">
+                <!--<div class="listaTable">-->
                     <table class="dContenido">
                         <tr>
                             <td>
@@ -244,14 +232,13 @@
                             </td>
                         </tr>
                     </table>
-                    <table class="tablasRegis" id="tablaTramite" style="width: 100%">
+                    <table class="tablasRegis" id="tablaTramite">
                         <thead>
                             <tr>
                                 <th>Procesado clave</th>
                                 <th>Nombre</th>
                                 <th>Etapa procesal</th>
-                                <th>Motivo</th>
-                                <th>Fecha última actuación</th>
+                                <th>Fecha del último acto procesal</th>
                                 <th width="80">Editar</th>
                                 <th width="80">Borrar</th>
                             </tr>
@@ -270,14 +257,13 @@
                         </tbody>
                     </table>
                 </div>
-                <!--codigo jsp aqui-->
-                <div class="lista" id="listPTramite">
+<!--                <div class="lista" id="listPTramite">
                     <label>Respecto a la Etapa Inicial, estos adolescentes deben registrarse en pendientes de resolución:</label>
                     <ul>
                         <li>00148/2019-P3</li>
                         <li>00148/2019-P4</li>
                     </ul>
-                </div>
+                </div>-->
             </div>
         </section>
     </body>

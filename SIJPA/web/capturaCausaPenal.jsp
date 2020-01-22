@@ -1,5 +1,5 @@
 <%-- 
-    Document   : captura_expediente
+    Document   : captura_Causa_Penal
     Created on : 24/09/2019, 09:42:00 AM
     Author     : CESAR.OSORIO
 --%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SIJPA::Captura Expediente</title>
+        <title>SIJPA::Captura Causa Penal</title>
         <%@include file="librerias.jsp" %>
         <%
             catalogos cat = new catalogos();
@@ -22,10 +22,10 @@
     <body>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor" style="zoom: .9;">
-            <h2>Expediente</h2>
-            <form  method="post" name="formExpedientes" id="formExpedientes">
+            <h2>Causa Penal</h2>
+            <form  method="post" name="formCausaPenal" id="formCausaPenal">
                 <fieldset>
-                    <legend>Características del expediente de la causa penal</legend>
+                    <legend>Características de la causa penal</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
@@ -55,11 +55,11 @@
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = jue.findJuez((String) session.getAttribute("juzgadoClave"));
-                                        if(lista.size() != 0){
+                                        if (lista.size() != 0) {
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
                                             }
-                                        }else{
+                                        } else {
                                             response.sendRedirect("capturaJuez.jsp");
                                         }
                                     %>  
@@ -133,7 +133,7 @@
                     </table>
                 </fieldset>
                 <fieldset class="oculto" id="totalElementos">
-                    <legend>Contenidos del expediente de la causa penal</legend>
+                    <legend>Contenidos de la causa penal</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
@@ -142,7 +142,7 @@
 
                             </td>
                             <td>
-                                <label for="Tadolescentes">Total de adolescentes</label>
+                                <label for="Tadolescentes">Total de imputados</label>
                                 <input type="number" name="Tadolescentes" id="Tadolescentes" class="dependiente" onblur="numeroProcesados()">
                             </td>
                             <td>
@@ -152,23 +152,23 @@
                         </tr>
                     </table>
                 </fieldset>
-<!--                <fieldset class="oculto" id="totalAudiencias">
-                    <legend>Audiencias</legend>
-                    <table class="tablasRegis" id="tAudiencias">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tipo de audiencias</th>
-                                <th>Juez</th>
-                                <th>Fecha de Celebración</th>
-                                <th>Duración</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                    <a id="addAudi" class="addJuz">Agregar Audiencia <img src="img/add.png" title="Agregar Audiencia"></a>
-                </fieldset>-->
+                <!--                <fieldset class="oculto" id="totalAudiencias">
+                                    <legend>Audiencias</legend>
+                                    <table class="tablasRegis" id="tAudiencias">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tipo de audiencias</th>
+                                                <th>Juez</th>
+                                                <th>Fecha de Celebración</th>
+                                                <th>Duración</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <a id="addAudi" class="addJuz">Agregar Audiencia <img src="img/add.png" title="Agregar Audiencia"></a>
+                                </fieldset>-->
                 <div class="comentarios">
                     <h2>Comentarios</h2>
                     <textarea name="ComentaExpe" id="ComentaExpe"></textarea>

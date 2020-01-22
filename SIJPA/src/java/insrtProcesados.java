@@ -40,7 +40,7 @@ public class insrtProcesados extends HttpServlet {
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
     ResultSet rs;
-    boolean insertP = true;
+    boolean insertPD;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -50,10 +50,9 @@ public class insrtProcesados extends HttpServlet {
         String posicion = request.getParameter("posicion");
         String entidad = (String) sesion.getAttribute("entidad");
         String municipio = (String) sesion.getAttribute("municipio");
-        String distrito = (String) sesion.getAttribute("distrito");
         String numero = (String) sesion.getAttribute("numero");
-        String jConcatenado = entidad + municipio + distrito + numero;
-        String expediente = (String) sesion.getAttribute("expediente");
+        String jConcatenado = entidad + municipio + numero;
+        String causaClave = (String) sesion.getAttribute("causaClave");
 
         // VARIABLES PROCESADOS
         String proceClave = request.getParameter("proceClave");
@@ -62,12 +61,9 @@ public class insrtProcesados extends HttpServlet {
         String amaterno = request.getParameter("amaterno");
         String alias = request.getParameter("alias");
         String curp = request.getParameter("curp");
+        String fNacimiento = request.getParameter("fNacimiento");
         String sexo = request.getParameter("sexo");
         String edad = request.getParameter("edad");
-        String fNacimiento = request.getParameter("fNacimiento");
-        if (fNacimiento == null) {
-            fNacimiento = "1899-09-09";
-        }
         String nPais = request.getParameter("nPais");
         String nEntidad = request.getParameter("nEntidad");
         String nMunicipio = verificaVariable(request.getParameter("nMunicipio"));
@@ -78,7 +74,7 @@ public class insrtProcesados extends HttpServlet {
         String edoCivil = request.getParameter("edoCivil");
         String discapacidad = request.getParameter("discapacidad");
         String alfabet = request.getParameter("alfabet");
-        String estudios = request.getParameter("estudios");
+        String estudios = request.getParameter("estudiosPro");
         String condiEstudiante = request.getParameter("condiEstudiante");
         String hablaEsp = request.getParameter("hablaEsp");
         String poblaIndigena = request.getParameter("poblaIndigena");
@@ -116,8 +112,8 @@ public class insrtProcesados extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
-            sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + entidad + "," + municipio + "," + distrito + "," + numero + ",'"
-                    + expediente + jConcatenado + "','" + proceClave + jConcatenado + "','"
+            sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + entidad + "," + municipio + "," + numero + ",'"
+                    + causaClave + jConcatenado + "','" + proceClave + jConcatenado + "','"
                     + nombre + "','"
                     + apaterno + "','"
                     + amaterno + "','"
@@ -156,49 +152,45 @@ public class insrtProcesados extends HttpServlet {
                     + reincidencia + ","
                     + psicofisico + ","
                     + grupoDelictivo + ",'"
-                     + delictivo + "',"
+                    + delictivo + "',"
                     + defensor + ","
                     + representante + ",'"
                     + comentarios + "',"
                     + " (select YEAR(NOW())) );";
             System.out.println(sql);
             if (conn.escribir(sql)) {
+                if (ingresosPro == 1) {
+                    for (int i = 0; i < chkIngresosPro.length; i++) {
+                        sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJC VALUES(" + entidad + "," + municipio + "," + numero + ",'"
+                                + causaClave + jConcatenado + "','" + proceClave + jConcatenado + "'," + chkIngresosPro[i] + ","
+                                + "(select YEAR(NOW())) )";
+                        System.out.println(sql);
+                        conn.escribir(sql);
+                    }
+                }
+            
                 for (int i = 0; i < arrayDelito.length; i++) {
                     if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
-                        sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + entidad + "," + municipio + "," + distrito + "," + numero + ",'"
-                                + expediente + jConcatenado + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
+                        sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'"
+                                + causaClave + jConcatenado + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
                                 + arrayNumVic[i] + ",(select YEAR(NOW())) )";
                         System.out.println(sql);
-                        insertP = conn.escribir(sql);
+                        insertPD = conn.escribir(sql);
                     }
                 }
-                if (insertP) {
-                    if (ingresosPro == 1) {
-                        for (int i = 0; i < chkIngresosPro.length; i++) {
-                            sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJC VALUES(" + entidad + "," + municipio + "," + distrito + "," + numero + ",'"
-                                    + expediente + jConcatenado + "','" + proceClave + jConcatenado + "'," + chkIngresosPro[i] + ","
-                                    + "(select YEAR(NOW())) )";
-                            System.out.println(sql);
-                            insertP = conn.escribir(sql);
-                        }
-                        if (insertP) {
-                            conn.close();
-                        }
-
-                    }
+                if(insertPD){
+                    showProcesados pro = new showProcesados();
+                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[0]);
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(pro.countProcesados(causaClave + jConcatenado));
+                    out.write(resp.toJSONString());
                 }
-
-                showProcesados pro = new showProcesados();
-                ArrayList<String[]> lis = new ArrayList<String[]>();
-                lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
-                JSONArray resp = new JSONArray();
-                resp.add(posicion);
-                resp.add(lis.get(0)[0]);
-                resp.add(lis.get(0)[1]);
-                resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
-                resp.add(pro.countProcesados(expediente + jConcatenado));
-                out.write(resp.toJSONString());
                 conn.close();
             }
         } catch (SQLException ex) {
@@ -209,9 +201,9 @@ public class insrtProcesados extends HttpServlet {
     public String verificaVariable(String variable) {
         String verificada = "";
         if (variable == null) {
-            verificada = "0";
+            verificada = "-2";
         } else if (variable.equals("")) {
-            verificada = "0";
+            verificada = "-2";
         } else {
             verificada = variable;
         }

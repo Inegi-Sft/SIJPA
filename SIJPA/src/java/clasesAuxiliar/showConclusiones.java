@@ -94,7 +94,7 @@ public class showConclusiones {
         try{
             conn.Conectar();
             conteoConclu = 0;
-            sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoConclu = resul.getInt(1);

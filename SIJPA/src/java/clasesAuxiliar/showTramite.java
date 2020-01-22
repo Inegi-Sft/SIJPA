@@ -55,7 +55,7 @@ public class showTramite {
             while(resul.next()){
                 trami.add(new String[]{
                     resul.getString("T.PROCESADO_CLAVE"), resul.getString("P.NOMBRE")+" "+resul.getString("P.A_PATERNO")+" "+resul.getString("P.A_MATERNO"),
-                    resul.getString("EP.DESCRIPCION"),resul.getString("T.MOTIVO_TRAMITE"),resul.getString("T.FECHA_ULTIMA_ACTUALIZACION")
+                    resul.getString("EP.DESCRIPCION"),resul.getString("T.FECHA_ACTO_PROCESAL")
                 });
             }
             conn.close();
@@ -70,7 +70,7 @@ public class showTramite {
         try{
             conn.Conectar();
             conteo = 0;
-            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteo= resul.getInt(1);
@@ -81,5 +81,27 @@ public class showTramite {
         }
         return conteo;
 
+    }
+    public String verificaEtapaTramite(String exp, String pro) {
+        String valor="", existe="";
+        try {
+            conn.Conectar();
+            if(pro!=null){
+                sql = "SELECT COUNT(*) AS EXISTE FROM DATOS_ETAPA_INTERMEDIA_ADOJC WHERE CAUSA_CLAVE='"+exp+"' AND PROCESADO_CLAVE='"+pro+"'";
+                resul = conn.consultar(sql);
+                while (resul.next()) {
+                    existe = resul.getString("EXISTE");
+                }
+                if(existe.equals("0")){//condicion para saber si el procesado entro a etapa intermedia
+                    valor="1";//valor de inicial en el catalogo etapa_procesal
+                }else{
+                    valor="2";//valor de intermedia en el catalogo etapa_procesal
+                }
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
     }
 }

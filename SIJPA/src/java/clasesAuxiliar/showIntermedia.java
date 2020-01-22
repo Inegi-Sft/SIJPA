@@ -27,12 +27,11 @@ public class showIntermedia {
     public ArrayList findIntermediaTabla(String inicia) {
         conn.Conectar();
         ini = new ArrayList();
-        sql = "SELECT EP.PROCESADO_CLAVE, RSI.DESCRIPCION, RSE.DESCRIPCION, RSM.DESCRIPCION, RSP.DESCRIPCION "
-                + "FROM DATOS_ETAPAPROC_ADOJC EP, CATALOGOS_RESPUESTA_SIMPLE RSI, CATALOGOS_RESPUESTA_SIMPLE RSE, CATALOGOS_RESPUESTA_SIMPLE RSM, CATALOGOS_RESPUESTA_SIMPLE RSP "
+        sql = "SELECT EP.PROCESADO_CLAVE, RSI.DESCRIPCION, EP.FECHA_ESCRITO_ACUSACION, RSM.DESCRIPCION, RSP.DESCRIPCION "
+                + "FROM DATOS_ETAPA_INTERMEDIA_ADOJC EP, CATALOGOS_RESPUESTA_SIMPLE RSI, CATALOGOS_RESPUESTA_SIMPLE RSE, CATALOGOS_RESPUESTA_SIMPLE RSM, CATALOGOS_RESPUESTA_SIMPLE RSP "
                 + "WHERE EP.AUDIENCIA_INTERMEDIA = RSI.RESPUESTA_ID "
-                + "AND EP.CORRECCION_ESCRITO_ACUSACION = RSE.RESPUESTA_ID "
-                + "AND EP.PRESENTACION_PRUEBAS = RSM.RESPUESTA_ID "
-                + "AND EP.ACUERDO_PROBATORIO = RSP.RESPUESTA_ID "
+                + "AND EP.PRESENTACION_MPRUEBA = RSM.RESPUESTA_ID "
+                + "AND EP.ACUERDOS_PROBATORIOS = RSP.RESPUESTA_ID "
                 + "AND EP.PROCESADO_CLAVE = '" + inicia + "';";
         resul = conn.consultar(sql);
         try {
@@ -53,7 +52,22 @@ public class showIntermedia {
         try {
             conn.Conectar();
             conteoInter = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPAPROC_ADOJC WHERE EXPEDIENTE_CLAVE = '" + exp + "' AND AUDIENCIA_INTERMEDIA <> -2";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPA_INTERMEDIA_ADOJC WHERE CAUSA_CLAVE = '" + exp + "' AND AUDIENCIA_INTERMEDIA <> -2";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoInter = resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoInter;
+    }
+    public int countTotPasanInicial_Intermedia(String exp) {
+        try {
+            conn.Conectar();
+            conteoInter = 0;
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + exp + "' AND FORMULO_ACUSACION=1";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoInter = resul.getInt("TOTAL");

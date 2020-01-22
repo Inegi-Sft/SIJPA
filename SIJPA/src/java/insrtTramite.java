@@ -44,10 +44,9 @@ public class insrtTramite extends HttpServlet {
         
         String entidad =(String) sesion.getAttribute("entidad");
         String municipio =(String) sesion.getAttribute("municipio");
-        String distrito =(String) sesion.getAttribute("distrito");
         String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+distrito+numero;
-        String claveCausa =(String) sesion.getAttribute("claveCausa");
+        String jConcatenado =entidad+municipio+numero;
+        String causaClave =(String) sesion.getAttribute("causaClave");
         
         String idProcesado = request.getParameter("idProcesado");
         String etapaProcesal = request.getParameter("eProcesal");
@@ -61,8 +60,8 @@ public class insrtTramite extends HttpServlet {
             PrintWriter out = response.getWriter();
             
             conn.Conectar();
-            sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES("+entidad+","+municipio+","+distrito+","+numero+","
-                    + "'"+claveCausa+jConcatenado+"','"+idProcesado+"',"+ etapaProcesal +","+estInvesti+","+estIntermedia+"'" 
+            sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES("+entidad+","+municipio+","+numero+","
+                    + "'"+causaClave+jConcatenado+"','"+idProcesado+"',"+ etapaProcesal +","+estInvesti+","+estIntermedia+",'" 
                     + especifique +"','" + fechaActo +"', (select YEAR(NOW())) )";
             System.out.println(sql);
             if (conn.escribir(sql)) {
@@ -75,8 +74,7 @@ public class insrtTramite extends HttpServlet {
                 resp.add(lis.get(0)[1]);
                 resp.add(lis.get(0)[2]);
                 resp.add(lis.get(0)[3]);
-                resp.add(lis.get(0)[4]);
-                resp.add(pro.countTramiteExp(claveCausa + jConcatenado));
+                resp.add(pro.countTramiteExp(causaClave + jConcatenado));
                 out.write(resp.toJSONString());
                 conn.close();
             } else {

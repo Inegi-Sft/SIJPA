@@ -44,7 +44,7 @@ public class showJueces {
         return lista;
     }
     
-    public ArrayList findjuezTabla(String juzClave){
+    public ArrayList findJuezTabla(String juzClave){
         try {
             conn.Conectar();
             listaTabla = new ArrayList<String[]>();
@@ -68,7 +68,7 @@ public class showJueces {
         return listaTabla;
     }
     
-    public int findMaxJuex(String juzClave){
+    public int findMaxJuez(String juzClave){
         int max = 0;
         try {
             conn.Conectar();
@@ -85,6 +85,25 @@ public class showJueces {
             Logger.getLogger(showJueces.class.getName()).log(Level.SEVERE, null, ex);
         }
         return max;
+    }
+    
+    public int findTotJuez(String juzClave){
+        int tot = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) "
+                    + "FROM DATOS_JUECES_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "ORDER BY JUEZ_CLAVE";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                tot = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJueces.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tot;
     }
     
 }

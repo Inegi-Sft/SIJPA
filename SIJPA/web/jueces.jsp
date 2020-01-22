@@ -23,10 +23,6 @@
                 juzgado = (String) session.getAttribute("juzgadoClave");
             }
             
-            if(request.getParameter("errorJuez") != null){
-                out.println("<script>alert('Clave duplicada: El juez, distrito, entidad, municipio ya existe  verificar')</script>");
-            }
-            
             showJuzgados juz = new showJuzgados();
             showJueces sj = new showJueces();
             ArrayList<String> juzClave;
@@ -74,7 +70,7 @@
                     <th>Eliminar</th>
                 </tr>
                 <% 
-                    lista = sj.findjuezTabla(juzgado);
+                    lista = sj.findJuezTabla(juzgado);
                     for (String[] lsj : lista) {
                         out.println("<tr>");
                         out.println("<td>" + lsj[0] + "</td>");

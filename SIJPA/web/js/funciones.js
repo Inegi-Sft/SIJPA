@@ -1,4 +1,100 @@
 $(document).ready(function () {
+    /*----------------Index------------------------*/
+    //Temporizador para que aparesca el logo en primera instancia
+    setTimeout(function () {
+        $('#splash').slideDown('slow');
+    }, 500);
+    
+    //Temporizador para que desaparesca logo y aparesca login
+    setTimeout(function () {
+        $('#splash').animate({
+            left: "100%",
+            //width: "toggle",
+            opacity: "toggle"
+        },{
+            duration: 2000, // duration
+            queue: false
+        });
+        
+        $('#login').animate({
+            left: "40%",
+            //width: "toggle",
+            opacity: "toggle"
+        },{
+            duration: 2000,
+            queue: false
+        });
+    }, 3000);
+    
+    //Acceso al sistema mediante ajax
+    $('#formLogin').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: 'accesoSistema',
+            data: $('#formLogin').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                if (response === 1) {
+                    window.location.href = "bienvenida.jsp";
+                }else{
+                    alert('Usuario no encontrado, favor de revisar usuario o contraseña');
+                }
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+                alert('Usuario no encontrado, verificar datos');
+            }
+        });
+    });
+    /*----------------Fin Index------------------------*/
+    
+    /*----------------Sistemas Captura------------------------*/
+    $('#btnJc').click(function(){
+        window.location.href = "causasPenales.jsp";
+    });
+    /*----------------Fin Sistemas Captura------------------------*/
+    
+    /*----------------Registro Usuarios------------------------*/
+    $('#buttonAdmin').click(function(){
+        $('#mensajeAdmin').animate({
+            top: "-600"
+        },
+        1500);
+    });
+    
+    $('#pass').focusout(function(){
+        if($('#pass').val() === ""){
+            $('#confPass').val('');
+        }
+    });
+    
+    $('#confPass').keyup(function(){
+        if($('#confPass').val() !== ''){
+            if ($('#confPass').val() === $('#pass').val()) {
+                $('#mesajePass').text('Las contraseñas son correctas');
+                $('#mesajePass').css({'color':'#66cc00'});
+                $('#guardar').fadeIn('slow');
+            }else{
+                $('#mesajePass').text('Las contraseñas no coinciden');
+                $('#mesajePass').css({'color':'#ff0000'});
+                $('#guardar').fadeOut('slow');
+            }
+        }
+    });
+    /*----------------Fin Registro Usuarios------------------------*/
+    
+    /*----------------Cabecera------------------------*/
+    $('#usu img').click(function(){
+        $('#usu #enlace').animate({
+            right: "0",
+            width: "toggle",
+            opacity: "toggle"
+        },800);
+    });
+    /*----------------Fin de Cabecera------------------------*/
+    
     $('select > option[value=-2]').hide();
     $('#estudiosPro > option[value=7],#estudiosPro > option[value=8]').hide();//oculta el grado de estudios maestria y doctorado en procesados
     $(".load").fadeOut("slow");//proceso de carga para causas penales
@@ -48,12 +144,15 @@ $(document).ready(function () {
     });
 
     //oculta los divs con clase oculto (se utiliza en lugar de nacimiento y residencia)
-
     $('.oculto').hide();
     $('.dependiente').val('-2');
 
     /***************************** FUNCIONES JUZGADOS *******************************/
     //select forma de organizacion
+    $('#telJuz').keyup(function(){
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    });
+    
     $("#fDivision").change(function () {
         switch ($("#fDivision").val()) {
             case '1':
@@ -1137,20 +1236,7 @@ $(document).ready(function () {
         }
     });
     /*----------------------FIN DE FUNCION PARA MEDIDAS CAUTELARES DE ETAPA INICIAL----------*/
-}
-);
-
-/********************splash del inicio del sistema***********************/
-function splashIn() {
-    //despliega splash screen al principio del sistema
-    $('body').css('overflow', 'hidden');
-    setTimeout(function () {
-        $('body').css('overflow', 'auto');
-    }, 4500);
-    $('#splash').delay(4000).slideUp('slow');
-    //termina splash screen
-}
-/******************** fin splash del inicio del sistema***********************/
+});
 
 /***************************** PARA CAPTURA EXPEDIENTES *********************/
 function competencia() {

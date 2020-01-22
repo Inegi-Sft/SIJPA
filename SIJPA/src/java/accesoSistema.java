@@ -4,10 +4,14 @@
  * and open the template in the editor.
  */
 
-import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author CARLOS.SANCHEZG
  */
-@WebServlet(urlPatterns = {"/insrtUsuario"})
-public class insrtUsuario extends HttpServlet {
+@WebServlet(urlPatterns = {"/accesoSistema"})
+public class accesoSistema extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,62 +34,39 @@ public class insrtUsuario extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * 
      */
-    Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
-    ResultSet rs;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession sesion = request.getSession();
         
-        if(request.getParameter("tipoUsuario") != null){
-            int tipoUsuario = Integer.parseInt(request.getParameter("tipoUsuario"));
-            String nom = request.getParameter("nom").toUpperCase();
-            String paterno = request.getParameter("paterno").toUpperCase();
-            String materno = request.getParameter("materno").toUpperCase();
-            String edad = request.getParameter("edad");
-            String correo = request.getParameter("correo").toUpperCase();
-            String entidad = request.getParameter("entidad");
-            String pass = request.getParameter("pass");
+        String nomUsu = request.getParameter("nomUsu").toUpperCase();
+        String passUsu = request.getParameter("passUsu").toUpperCase();
+        
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-1");
+            md.reset();
+            md.update(passUsu.getBytes("utf8"));
+            String hash = String.format("%040x", new BigInteger(1, md.digest()));
+            System.out.println("PASS: " + hash);
             
-            //Validacion para que se inserte el Administrador por primera vez
-            conn.Conectar();
-            sql = "INSERT INTO USUARIOS VALUES(null,'" + nom + "','" + paterno + "','" + materno + "'," + edad + ",'"
-                    + correo + "'," + entidad + ",SHA1('" + pass + "')," + tipoUsuario + ",0,1"
-                    + ")";
-            System.out.println(sql);
-            if(conn.escribir(sql)){
-                if(tipoUsuario == 1){
-                    response.sendRedirect("index.jsp");
-                }else{
-                    response.sendRedirect("usuario.jsp");
-                }
-            }else{
-                response.sendRedirect("index.jsp?errorbd=si");
-            }
-        }
-        
-        //Validacion si aceptan el acuerdo en la pagina de bienvenida se actualiza para que no se vuelva a mostrar
-        if(request.getParameter("aceptarAcuerdo") != null){
-            HttpSession sesion = request.getSession();
-            String usuario = (String) sesion.getAttribute("usuActivo");
-            conn.Conectar();
-            sql = "UPDATE USUARIOS SET VISITA = 1 WHERE CORREO = '" + usuario + "';";
-            System.out.println(sql);
-            if(conn.escribir(sql)){
-                int visita = 1;
-                sesion.setAttribute("visitaUsuario", visita);
+            usuario usuario = new usuario();
+            if(usuario.findUsuario(nomUsu,hash)){
+                int tipo = usuario.findTipoUsuario(nomUsu,hash);
+                sesion.setAttribute("tipoUsuario", tipo);
+                sesion.setAttribute("usuActivo", nomUsu);
                 sesion.setMaxInactiveInterval(-1);
-                response.sendRedirect("causasPenales.jsp");
+                out.write("1");
             }else{
-                response.sendRedirect("index.jsp?errorbd=si");
+                out.write("0");
             }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(accesoSistema.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

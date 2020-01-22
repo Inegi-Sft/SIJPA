@@ -41,18 +41,18 @@ public class insrtJuez extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-
-        HttpSession sesion = request.getSession();
-
-        String juzClaveJuez = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzClaveJuez.split("-"); //Esto separa en un array basandose en el separador que le pases
-        String jEntidad = jDividido[0];
-        String jMunicipio = jDividido[1];
-        String jNumero = jDividido[2];
+        HttpSession sesion= request.getSession();
+        
+        String primerJuez = request.getParameter("primerJuez");
+        String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
+        String[] juzSeparado = juzgadoClave.split("-");
+        String entidad = juzSeparado[0];
+        String mun = juzSeparado[1];
+        String num = juzSeparado[2];
         int juezID = Integer.parseInt(request.getParameter("juezID"));
-        String nombre = request.getParameter("nombre");
-        String apaterno = request.getParameter("apaterno");
-        String amaterno = request.getParameter("amaterno");
+        String nombre = request.getParameter("nombre").toUpperCase();
+        String apaterno = request.getParameter("apaterno").toUpperCase();
+        String amaterno = request.getParameter("amaterno").toUpperCase();
         String fGestion;
         if (request.getParameter("fGestion") != null) {
             fGestion = request.getParameter("fGestion");
@@ -66,15 +66,17 @@ public class insrtJuez extends HttpServlet {
 
         try {
             conn.Conectar();
-            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzClaveJuez + "'," + juezID + ",'"
-                    + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + "," + estudioJuez + ","
-                    + funcionJuez + ",(select YEAR(NOW())))";
+            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + entidad + "," + mun + "," + num + ",'" + juzgadoClave + "'," + juezID + ",'"
+                    + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + ","
+                    + estudioJuez + "," + funcionJuez + ",(select YEAR(NOW()))"
+                    + ")";
             System.out.println(sql);
-            if (conn.escribir(sql)) {
-                response.sendRedirect("jueces.jsp");
-            } else {
+            if(conn.escribir(sql)){
                 conn.close();
-                response.sendRedirect("jueces.jsp?errorJuez=si");
+                response.sendRedirect("causasPenales.jsp");
+            }else{
+                conn.close();
+                response.sendRedirect("capturaJuez.jsp?error=100");
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);

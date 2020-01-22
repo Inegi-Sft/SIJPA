@@ -40,36 +40,37 @@ public class insrtJuzgados extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/json;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        HttpSession sesion = request.getSession();
         
         //Datos Organo Jurisdiccional
-        String nomOrgano = request.getParameter("nomOrgano");
+        String nomOrgano = request.getParameter("nomOrgano").toUpperCase();
         String numOrgano = request.getParameter("numOrgano");
         String jurisdiccion = request.getParameter("jurisdiccion");
         String funcionJuz = verificaVariable(request.getParameter("funcionJuz"));
         String ladaTel = verificaVariable(request.getParameter("ladaJuz") + request.getParameter("telJuz"));
-        String correo = verificaVariable(request.getParameter("correo"));
+        String correo = verificaVariable(request.getParameter("correo").toUpperCase());
         //Ubicacion de Organizacion del organo
         String entidadJ = request.getParameter("entidadJ");
         String municipioJ = request.getParameter("municipioJ");
         String fDivision = request.getParameter("fDivision");
-        String regJudicial = request.getParameter("regJudicial");
-        String distJudicial = request.getParameter("distJudicial");
-        String partJudicial = request.getParameter("partJudicial");
+        String regJudicial = request.getParameter("regJudicial").toUpperCase();
+        String distJudicial = request.getParameter("distJudicial").toUpperCase();
+        String partJudicial = request.getParameter("partJudicial").toUpperCase();
         //Domicilio
         String vialidad = request.getParameter("vialidad");
-        String nomVialidad = request.getParameter("nomVialidad");
+        String nomVialidad = request.getParameter("nomVialidad").toUpperCase();
         String asentamiento = request.getParameter("asentamiento");
-        String nomAsentamiento = request.getParameter("nomAsentamiento");
+        String nomAsentamiento = request.getParameter("nomAsentamiento").toUpperCase();
         String noExterior = verificaVariable(request.getParameter("noExterior"));
         String noInterior = verificaVariable(request.getParameter("noInterior"));
         String cp = verificaVariable(request.getParameter("cp"));
         //Datos Captura
-        String nombreCap = request.getParameter("nombreCap");
-        String apaternoCap = request.getParameter("apaternoCap");
-        String amaternoCap = request.getParameter("amaternoCap");
-        String cargo = request.getParameter("cargo");
+        String nombreCap = request.getParameter("nombreCap").toUpperCase();
+        String apaternoCap = request.getParameter("apaternoCap").toUpperCase();
+        String amaternoCap = request.getParameter("amaternoCap").toUpperCase();
+        String cargo = request.getParameter("cargo").toUpperCase();
         //Datos Generales
         String ejercicio = request.getParameter("ejercicio");
         String causasIngresa = verificaVariable(request.getParameter("causasIngresa"));
@@ -91,26 +92,27 @@ public class insrtJuzgados extends HttpServlet {
                     + funcionJuz + "," + ladaTel + ",'" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
                     + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "',"
                     + noExterior + "," + noInterior + "," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
-                    + ejercicio
-                    + ")";
+                    + ejercicio + ")";
             System.out.println(sql);
             if(conn.escribir(sql)){
                 sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
                         + causasIngresa + "," + mediProteccion + "," + providenPrecauto + "," + pruebaAnti + "," + ordenesJudi + ","
-                        + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW())))"; 
+                        + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW()))"
+                        + ")";
+
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                        conn.close();
-                        HttpSession sesion = request.getSession();
-                        sesion.setAttribute("juzgadoClave", juzgadoClave);
-                        response.sendRedirect("jueces.jsp");
+                    conn.close();
+                    sesion.setAttribute("juzgadoClave", juzgadoClave);
+                    sesion.setMaxInactiveInterval(-1);
+                    response.sendRedirect("causasPenales.jsp");
                 }else{
                     conn.close();
-                    response.sendRedirect("juzgados.jsp?errorInforme=si");
+                    response.sendRedirect("capturaJuzgado.jsp?error=100");
                 }
             }else{
                 conn.close();
-                response.sendRedirect("juzgados.jsp?errorJuzgado=si");
+                response.sendRedirect("capturaJuzgado.jsp?error=200");
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);

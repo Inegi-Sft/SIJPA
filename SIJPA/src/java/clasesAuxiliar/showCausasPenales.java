@@ -22,17 +22,17 @@ public class showCausasPenales {
     ArrayList<String[]> causas, lista;
 
     String sql;
-    ResultSet rs, resul;
-
+    ResultSet rs;
+    
     public ArrayList findJuez(String juzclave) {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT JUEZ_CLAVE,CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE ='" + juzclave + "' ORDER BY 1";
-        resul = conn.consultar(sql);
+        sql = "SELECT JUEZ_CLAVE,CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE ='"+ juzclave + "' ORDER BY 1";
+        rs = conn.consultar(sql);
         try {
-            while (resul.next()) {
+            while (rs.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(2)
+                    rs.getString(1), rs.getString(2)
                 });
             }
             conn.close();
@@ -46,7 +46,6 @@ public class showCausasPenales {
         try {
             conn.Conectar();
             causas = new ArrayList();
-
             sql = "SELECT E.*, C.* "
                     + " FROM DATOS_CAUSAS_PENALES_ADOJC E, CATALOGOS_RESPUESTA_SIMPLE C"
                     + " WHERE C.RESPUESTA_ID=E.COMPETENCIA"

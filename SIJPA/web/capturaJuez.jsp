@@ -15,9 +15,19 @@
         <title>SIJPA::Captura Juzgados</title>
         <%@include file="librerias.jsp"%>
         <% 
+            if(request.getParameter("error") != null){
+                int error = Integer.parseInt(request.getParameter("error"));
+                if(error == 100){
+                    out.println("<script>alert('Clave duplicada: El juez, distrito, entidad, municipio ya existe  verificar')</script>");
+                }
+            }
+            
             showJueces ju = new showJueces();
+            int totJuez = ju.findTotJuez((String) session.getAttribute("juzgadoClave"));
+            
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;
+            
             int maxJu = 0;
         %>
     </head>
@@ -25,9 +35,11 @@
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
+            <% if(totJuez > 0){ %>
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
+            <% } %>
             <h1>Captura Juez del Órgano</h1>
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1">Datos del Juez</button>
@@ -45,7 +57,7 @@
                             </td>
                             <td>
                                 <% 
-                                    maxJu = ju.findMaxJuex((String) session.getAttribute("juzgadoClave")) + 1;
+                                    maxJu = ju.findMaxJuez((String) session.getAttribute("juzgadoClave")) + 1;
                                 %>
                                 <label for="juezID">Juez ID</label>
                                 <input type="text" name="juezID" id="juezID" value="<%=maxJu%>" readonly/>
@@ -88,7 +100,7 @@
                             </td>
                             <td>
                                 <label for="edadJuez">Edad</label>
-                                <input type="number" class="txtSmall" name="edadJuez" id="edadJuez" required/>
+                                <input type="number" class="txtSmall" name="edadJuez" id="edadJuez" min="18" required/>
                             </td>
                             <td>
                                 <label for="estudioJuez">Grado de Estudios</label>

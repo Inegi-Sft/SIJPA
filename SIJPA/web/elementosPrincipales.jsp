@@ -171,10 +171,10 @@
                     <thead>
                     <tr>
                         <th>Adolescente clave</th>
+                        <th>Nombre</th>
                         <th>Audiencia intermedia</th>
                         <th>Escrito acusación</th>
                         <th>Presentacion medios prueba</th>
-                        <th>Acuerdos probatorios</th>
                         <th>Editar</th>
                     </tr>
                     </thead>

@@ -584,10 +584,8 @@ $(document).ready(function () {
     $('#formulaAcusacion').change(function () {
         if ($(this).val() === '1') {
             alert("Continua el procedimiento a Etapa Intermedia");
-        }else if ($(this).val() === '2') {
+        }else{
             alert("Continua con la captura a partir de resoluciones");
-        }else if ($(this).val() === '9') {
-            alert("No se puede continuar con el registro hasta saber si se formulo acusacion o no!");
         }
     });
 
@@ -686,7 +684,13 @@ $(document).ready(function () {
             }
         }
     });
-    
+    $('#aperturaJO').change(function () {
+        if ($(this).val() === '1') {
+            alert("Causa Penal Concluida. Registre la informacion complementaria en el apartado de resoluciones");
+        }else{
+            alert("Esta Causa Penal debe ser registrada en Resoluciones o Tramite segun corresponda");
+        }
+    });
     /*--------------------------FIN INTERMEDIA------------------------------------*/
 
     /*----------------------- FUNCIONES PARA INSERTS AJAX --------------------------*/
@@ -772,7 +776,7 @@ $(document).ready(function () {
 //                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaProcesa tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
-                     parent.$('#tablaInicial tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[1]);//coloca el nombre del procesado en la tabla de etapa inicial
+                    parent.$('#tablaInicial tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[1]);//coloca el nombre del procesado en la tabla de etapa inicial
 //                    console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
                     if (response[5] === numProce) {
                         parent.openPestana('btn4', 'p4');
@@ -835,15 +839,26 @@ $(document).ready(function () {
                 alert("Guardado con exito!!!");
                 var numProce = parseInt(parent.$('#Tadolescentes').val());
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i <= 3; i++) {
-                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + (i+1) + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaInicial tbody').find('tr').eq(response[0]).children('td').eq(i+1).html(response[i]);
+                    for (var i = 2; i <= 5; i++) {
+                        //pone filas en la tabla de inicial
+                        parent.$('#tablaInicial tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                     }
-                    console.log('Captu: ' + response[4] + ' Existen: ' + numProce);
-                    if (response[4] === numProce) {
-                        parent.openPestana('btn6', 'p6');
+                    //pone las filas en la tabla de intermedia, dependiendo si pasa o no a esta etapa
+                    if(response[7]==='1'){//Condicion para que el procesado pase a intermedia, Formula_Acusacion=1 (Si)
+                        parent.$('#tablaIntermedia tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
+                        <td></td><td><a class="pop" href="etapaIntermedia.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaIntermedia tbody tr').length + '">\n\
+                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                    }
+                    console.log('Captu: ' + response[6] + ' Existen: ' + numProce );
+                    if (response[6] === numProce) {
+                        if(response[8]!==0){//condicion para saber si hay procesados que pasen a intermedia, si no hay, pasa directo a conclusiones y tramite
+                            parent.openPestana('btn6', 'p6');
+                        }else{
+                            parent.openPestana('btn8', 'p8');
+                            parent.openPestana('btn7', 'p7');
+                        }
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[4]) + ' procesados');
+                        alert('Falta por capturar ' + (numProce - response[6]) + ' procesados');
                     }
                 }
                 parent.$.fancybox.close();
@@ -880,7 +895,7 @@ $(document).ready(function () {
                 return false;
             }
         }
-        if($('#mediosPrueba').val() === '1' && ($('#pruebaAJ').val() !== '1' && $('#pruebaAJ').val() !== '1' && $('#pruebaDefensa').val() !== '1')) {
+        if($('#mediosPrueba').val() === '1' && ($('#pruebaMP').val() !== '1' && $('#pruebaAJ').val() !== '1' && $('#pruebaDefensa').val() !== '1')) {
             alert('Revisar los medios de prueba');
             $('#mediosPrueba').focus();
                 return false;
@@ -892,17 +907,18 @@ $(document).ready(function () {
             success: function (response) {
                 console.log("Respuesta del servidor: ", response);
                 alert("Guardado con exito!!!");
-                var numProce = parseInt(parent.$('#Tadolescentes').val());
+                var numProce = response[5];
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i < 5; i++) {
+                    for (var i = 1; i <=3; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaIntermedia tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+                        parent.$('#tablaIntermedia tbody').find('tr').eq(response[0]).children('td').eq(i+1).html(response[i]);
                     }
-                    console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
-                    if (response[5] === numProce) {
+                    console.log('Captu: ' + response[4] + ' Existen: ' + numProce);
+                    if (response[4] === numProce) {
+                        parent.openPestana('btn8', 'p8');
                         parent.openPestana('btn7', 'p7');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
+                        alert('Falta por capturar ' + (numProce - response[4]) + ' procesados');
                     }
                 }
                 parent.$.fancybox.close();
@@ -1360,7 +1376,7 @@ function tipoResolucion() {
         $('#flsSobreseimto select,#flsImpugnacion select').val('').prop("required", true);
         $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
         $('#chkFechaImpugnacion').prop("checked", false);
-        
+
         $('#dExcluAccion,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna,\n\
             #flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();
         $('#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
@@ -1657,14 +1673,14 @@ function numeroProcesados() {
         <td><a class="pop" href="etapaInicial.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
         </a></td></tr>');
     }
-    $('#tablaIntermedia tbody').empty();
-    for (var i = 1; i <= procesados; i++) {
-        var proceClave = expediente + '-P' + i;
-        $('#tablaIntermedia tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td>\n\
-        <td></td><td><a class="pop" href="etapaIntermedia.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
-        </a></td></tr>');
-    }
-    //pone contador de los porcesados que deben concluir o estar pendientes en su pestaÃ±a correspondiente
+//    $('#tablaIntermedia tbody').empty();
+//    for (var i = 1; i <= procesados; i++) {
+//        var proceClave = expediente + '-P' + i;
+//        $('#tablaIntermedia tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td>\n\
+//        <td></td><td><a class="pop" href="etapaIntermedia.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
+//        </a></td></tr>');
+//    }
+    //pone contador de los porcesados que deben concluir o estar pendientes en su pestaña correspondiente
     $('#lblNumConclu').text("Resoluciones agregadas: " + $('#tablaConclu tbody tr').length);
     $('#lblNumTram').text("Tramites agregados: " + $('#tablaTramite tbody tr').length);
     $('.proPendientes').text("Faltan: " + $('#Tadolescentes').val() + " adolescentes por asignar estatus");

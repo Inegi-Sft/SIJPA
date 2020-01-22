@@ -32,12 +32,6 @@
             showCausasPenales objExp = new showCausasPenales();
             ArrayList<String[]> lista;
             
-            HttpSession sesion= request.getSession();
-            sesion.setAttribute("entidad", "12");
-            sesion.setAttribute("municipio", "12001");
-            sesion.setAttribute("numero", "1");
-            sesion.setAttribute("causaClave", "001/2019");
-            
             String entidad = (String) session.getAttribute("entidad");
             String municipio = (String) session.getAttribute("municipio");
             String numero = (String) session.getAttribute("numero");

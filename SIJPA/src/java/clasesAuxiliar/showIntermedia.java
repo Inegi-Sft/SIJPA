@@ -63,5 +63,20 @@ public class showIntermedia {
         }
         return conteoInter;
     }
+    public int countTotPasanInicial_Intermedia(String exp) {
+        try {
+            conn.Conectar();
+            conteoInter = 0;
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + exp + "' AND FORMULO_ACUSACION=1";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoInter = resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoInter;
+    }
 
 }

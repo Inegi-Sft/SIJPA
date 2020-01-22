@@ -135,8 +135,8 @@ public class insrtIntermedia extends HttpServlet {
                 resp.add(lis.get(0)[0]);
                 resp.add(lis.get(0)[1]);
                 resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
                 resp.add(cat.countIntermedia(causaClave + jConcatenado));
+                resp.add(cat.countTotPasanInicial_Intermedia(causaClave + jConcatenado));
                 out.write(resp.toJSONString());
                 conn.close();
             } else {

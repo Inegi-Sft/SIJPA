@@ -3,6 +3,7 @@
     Created on : 3/10/2019, 09:32:06 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.showTramite"%>
 <%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
@@ -20,6 +21,7 @@
             
             catalogos cat = new catalogos();
             showProcesados proce=new showProcesados();
+            showTramite proTram=new showTramite();
             ArrayList<String[]> lista = new ArrayList();
             
             String entidad =(String) sesion.getAttribute("entidad");
@@ -27,20 +29,27 @@
             String numero =(String) sesion.getAttribute("numero");
             String jConcatenado =entidad+municipio+numero;
             String causaClave =(String) sesion.getAttribute("causaClave");
+            
+            String procesado = request.getParameter("idProcesado");
+            String etapaProcesal = proTram.verificaEtapaTramite(causaClave+jConcatenado, procesado);
         %>
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Pendientes de resolución </h1>
-            <form action="" method="post" id="formTramite" name="formTramite">
+            <form action="tramite.jsp" method="post" id="formTramite" name="formTramite">
                 <fieldset >
                     <legend style="text-align: left;">Estatus</legend>
 
                     <label for="idProcesado">Id Adolescente</label>
-                    <select name="idProcesado" id="idProcesado" class="lblExBig" required>
+                    <select name="idProcesado" id="idProcesado" onchange="formTramite.submit();" class="lblExBig" required>
                         <option value="">--Seleccione--</option>
-                        <%  lista = proce.findProcesadoExp(causaClave+jConcatenado);
+                        <%  lista = proce.listProcesadoInsertTramite(causaClave+jConcatenado);
                             for (String[] ls : lista) {
-                                out.println("<option value='" + ls[0] + "'>" + ls[0].replace(jConcatenado, "") + ".- " + ls[1] + "</option>");
+                                out.println("<option value='" + ls[0] + "'");
+                                if(ls[0].equals(procesado)){
+                                    out.println(" selected ");
+                                }
+                                out.println( ">" + ls[0].replace(jConcatenado, "") + ".- " + ls[1] + "</option>");
                             }
                         %>     
                     </select>
@@ -53,7 +62,11 @@
                                  <%
                                     lista = cat.findEtapaProcesal();
                                     for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                        out.println("<option value='" + ls[0] + "'");
+                                        if(ls[0].equals(etapaProcesal)){
+                                            out.println(" selected ");
+                                        }
+                                        out.println( ">" + ls[0]+ ".- " + ls[1] + "</option>");
                                     }
                                 %>    
                             </select>
@@ -99,5 +112,13 @@
                 <input type="submit" name="guardar" id="guardarTram" value="Guardar">
             </form>
         </section>
+        <% if(procesado!=null && etapaProcesal!=""){ %>
+            <script type="text/javascript"> 
+                $(document).ready(function(){ 
+                    etapaProcesal(); 
+                    $("#eProcesal option:not(:selected)").attr("disabled", "disabled");
+                });
+            </script>
+        <%  } %>
     </body>
 </html>

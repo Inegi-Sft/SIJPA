@@ -82,4 +82,26 @@ public class showTramite {
         return conteo;
 
     }
+    public String verificaEtapaTramite(String exp, String pro) {
+        String valor="", existe="";
+        try {
+            conn.Conectar();
+            if(pro!=null){
+                sql = "SELECT COUNT(*) AS EXISTE FROM DATOS_ETAPA_INTERMEDIA_ADOJC WHERE CAUSA_CLAVE='"+exp+"' AND PROCESADO_CLAVE='"+pro+"'";
+                resul = conn.consultar(sql);
+                while (resul.next()) {
+                    existe = resul.getString("EXISTE");
+                }
+                if(existe.equals("0")){//condicion para saber si el procesado entro a etapa intermedia
+                    valor="1";//valor de inicial en el catalogo etapa_procesal
+                }else{
+                    valor="2";//valor de intermedia en el catalogo etapa_procesal
+                }
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+    }
 }

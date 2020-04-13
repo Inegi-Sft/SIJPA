@@ -40,9 +40,9 @@
         <%@include file="menu.jsp"%>
         <section class="contenedor">
             <% if(totJuzgado > 0){ %>
-            <div class="toggle-nav">
-                <div class="toggle-nav-inner"></div>
-            </div>
+                <div class="toggle-nav">
+                    <div class="toggle-nav-inner"></div>
+                </div>
             <% } %>
             <h1>Captura Órgano Jurisdiccional</h1>
             <div class="pestana">
@@ -63,11 +63,11 @@
                             </td>
                             <td>
                                 <label for="numJuzgado">Número Órgano Jurisdiccional</label>
-                                <input type="number" class="txtMedia" name="numOrgano" id="numOrgano" required/>
+                                <input type="number" name="numOrgano" id="numOrgano" required/>
                             </td>
                             <td>
                                 <label for="jurisdiccion">Jurisdicción</label>
-                                <select name="jurisdiccion" class="txtMedia" id="jurisdiccion" required>
+                                <select name="jurisdiccion" id="jurisdiccion" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findJurisdiccion();
@@ -82,7 +82,7 @@
                             <td>
                                 <label for="ladaTel">Lada &nbsp; / &nbsp; Teléfono</label>
                                 <input type="number" class="txtSmall" name="ladaJuz" id="ladaJuz" value="55"/>
-                                <input type="text" class="txtMedia" name="telJuz" id="telJuz" maxlength="8"/>
+                                <input type="text" class="txtMedia soloNum" name="telJuz" id="telJuz" maxlength="8"/>
                             </td>
                             <td>
                                 <label for="correo">Correo Órgano Jurisdiccional</label>
@@ -90,7 +90,7 @@
                             </td>
                             <td>
                                 <label for="funcionJuz">Funcion del organo Jurisdiccional</label>
-                                <select name="funcionJuz" class="txtMedia" id="funcionJuz" required>
+                                <select name="funcionJuz" id="funcionJuz" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findFuncionJuzgado();
@@ -109,7 +109,7 @@
                         <tr>
                             <td>
                                 <label for="entidadJ">Entidad Federativa</label>
-                                <select class="txtMedia" name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
+                                <select name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEntidades();
@@ -121,7 +121,7 @@
                             </td>
                             <td>
                                 <label for="municipioJ">Municipio o Demarcación Territorial de la CDMX</label>
-                                <select class="txtMedia" name="municipioJ" id="municipioJ" required>
+                                <select name="municipioJ" id="municipioJ" required>
                                     <option value="">--Seleccione--</option>
                                 </select>
                             </td>
@@ -129,7 +129,7 @@
                         <tr>
                             <td>
                                 <label for="fDivicion">Forma de División</label>
-                                <select class="txtMedia" name="fDivision" id="fDivision" required>
+                                <select name="fDivision" id="fDivision" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findFormaDivision();
@@ -162,7 +162,7 @@
                         <tr>
                             <td>
                                 <label for="vialidad">Vialidad</label>
-                                <select class="txtMedia" name="vialidad" id="vialidad" required>
+                                <select name="vialidad" id="vialidad" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findVialidad();
@@ -174,7 +174,7 @@
                             </td>
                             <td>
                                 <label for="asentamiento">Asentamiento Humano</label>
-                                <select class="txtMedia" name="asentamiento" id="asentamiento" required>
+                                <select name="asentamiento" id="asentamiento" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findAsentamientoHumano();
@@ -186,7 +186,7 @@
                             </td>
                             <td>
                                 <label for="cp">Codigo Postal</label>
-                                <input type="number" class="txtMedia" name="cp" id="cp" />
+                                <input type="text" class="soloNum" name="cp" id="cp" maxlength="5"/>
                             </td>
                         </tr>
                         <tr>
@@ -240,7 +240,7 @@
                         <tr>
                             <td>
                                 <label for="ejercicio">Ejercicio:</label>
-                                <select name="ejercicio" id="ejercicio" class="txtMedia" required>
+                                <select name="ejercicio" id="ejercicio" required>
                                     <option value="">--Seleccionar--</option>
                                     <option value="2017">2017</option>
                                     <option value="2018">2018</option>
@@ -250,49 +250,49 @@
                             </td>
                             <td>
                                 <label for="causasIngresa">Causas Penales Ingresadas</label>
-                                <input type="number" name="causasIngresa" id="causasIngresa" class="txtMedia" min="0">
+                                <input type="number" name="causasIngresa" id="causasIngresa" min="0">
                             </td>
                             <td>
                                 <label for="mediProteccion">Medidas de Protección</label>
-                                <input type="number" name="mediProteccion" id="mediProteccion" class="txtMedia" min="0">
+                                <input type="number" name="mediProteccion" id="mediProteccion" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="providenPrecauto">Providencias Precautorias</label>
-                                <input type="number" name="providenPrecauto" id="providenPrecauto" class="txtMedia" min="0">
+                                <input type="number" name="providenPrecauto" id="providenPrecauto" min="0">
                             </td>
                             <td>
                                 <label for="actosInvestiga">Pruebas Anticipadas</label>
-                                <input type="number" name="pruebaAnti" id="pruebaAnti" class="txtMedia" min="0">
+                                <input type="number" name="pruebaAnti" id="pruebaAnti" min="0">
                             </td>
                             <td>
                                 <label for="ordenesJudi">Órdenes Judiciales</label>
-                                <input type="number" name="ordenesJudi" id="ordenesJudi" class="txtMedia" min="0">
+                                <input type="number" name="ordenesJudi" id="ordenesJudi" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="actosInvestiga">Actos investigación con Control Judicial</label>
-                                <input type="number" name="actosInvestiga" id="actosInvestiga" class="txtMedia" min="0">
+                                <input type="number" name="actosInvestiga" id="actosInvestiga" min="0">
                             </td>
                             <td>
                                 <label for="impugnaMp">Impugnaciones al Ministerio Publico</label>
-                                <input type="number" name="impugnaMp" id="impugnaMp" class="txtMedia" min="0">
+                                <input type="number" name="impugnaMp" id="impugnaMp" min="0">
                             </td>
                             <td>
                                 <label for="otros">Otros Asuntos</label>
-                                <input type="number" name="otros" id="otros" class="txtMedia" min="0">
+                                <input type="number" name="otros" id="otros" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="causasTram">Causas Penales en Trámite</label>
-                                <input type="number" name="causasTram" id="causasTram" class="txtMedia" min="0">
+                                <input type="number" name="causasTram" id="causasTram" min="0">
                             </td>
                             <td>
                                 <label for="causasBaja">Causas Penales dadas de baja</label>
-                                <input type="number" name="causasBaja" id="causasBaja" class="txtMedia" min="0">
+                                <input type="number" name="causasBaja" id="causasBaja" min="0">
                             </td>
                             <td></td>
                         </tr>

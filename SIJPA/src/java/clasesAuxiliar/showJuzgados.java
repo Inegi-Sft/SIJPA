@@ -53,6 +53,18 @@ public class showJuzgados {
         return lista;
     }
     
+    public boolean findJuzgadoExist(String juzgadoClave){
+        try{
+            conn.Conectar();
+            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC WHERE JUZGADO_CLAVE = '" + juzgadoClave + "';";
+            rs = conn.consultar(sql);
+            return rs.next();
+        }catch(SQLException ex){
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
     public ArrayList findJuzgadoTabla(){
         try {
             conn.Conectar();

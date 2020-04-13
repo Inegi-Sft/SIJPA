@@ -19,10 +19,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author FERMIN.GOMEZ
+ * @author CARLOS.SANCHEZG
  */
-@WebServlet(urlPatterns = {"/deleteDatos"})
-public class deleteDatos extends HttpServlet {
+@WebServlet(urlPatterns = {"/borraProce"})
+public class borraProce extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,68 +36,46 @@ public class deleteDatos extends HttpServlet {
     
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession sesion= request.getSession();
-        
-        String entidad =(String) sesion.getAttribute("entidad");
-        String municipio =(String) sesion.getAttribute("municipio");
-        String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+numero;
-        
-        String idProConclusion = request.getParameter("proceConclusion");
-        String idProTramite = request.getParameter("proceTramite");
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
-        //Condicion para eliminar conclusiones
-        if(idProConclusion!=null){
-            try{
-                conn.Conectar();
-                sql="DELETE FROM DATOS_CONCLUSIONES_ADOJC WHERE PROCESADO_CLAVE='"+idProConclusion+jConcatenado+"'";
+        try {
+            String proceClave = request.getParameter("proceClave");
+            String nomTabla = request.getParameter("nomTabla");
+            String juzgadoClave = (String)sesion.getAttribute("juzgadoClave");
+            if(nomTabla.equals("inter")){
+                sql = "DELETE FROM DATOS_ETAPA_INTERMEDIA_ADOJC "
+                        + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
                 System.out.println(sql);
-                if (conn.escribir(sql)) {
-                    out.write("conclusionDeleted");
-                } else {
-                conn.close();
+                if(conn.escribir(sql)){
+                    out.write("Procesado Borrado de Intermedia");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        //Condicion para eliminar tramites
-        if(idProTramite!=null){
-            try{
-                conn.Conectar();
-                sql="DELETE FROM DATOS_TRAMITES_ADOJC WHERE PROCESADO_CLAVE='"+idProTramite+jConcatenado+"'";
+                conn.close();
+            }else if(nomTabla.equals("conclu")){
+                sql = "DELETE FROM DATOS_CONCLUSIONES_ADOJC "
+                        + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
                 System.out.println(sql);
-                if (conn.escribir(sql)) {
-                    out.write("tramiteDeleted");
-                } else {
-                conn.close();
+                if(conn.escribir(sql)){
+                    out.write("Procesado Borrado de Conclusiones");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
+                conn.close();
+            }else if(nomTabla.equals("tramite")){
+                sql = "DELETE FROM DATOS_TRAMITE_ADOJC "
+                        + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
+                System.out.println(sql);
+                if(conn.escribir(sql)){
+                    out.write("Procesado Borrado de Tramite");
+                }
+                conn.close();
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(borraProce.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            out.close();
         }
-        
-        
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet deleteDatos</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet deleteDatos at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -132,7 +132,7 @@ public class catalogos {
     public ArrayList findClasificacion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_clasificacion ORDER BY 1";
+        sql = " SELECT * FROM CATALOGOS_CLASIFICACION ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -149,11 +149,13 @@ public class catalogos {
     public ArrayList findCodigoNorma() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_codigo_norma where id_codigo <>-2 ORDER BY 1";
+        sql = " SELECT * FROM CATALOGOS_CODIGO_NORMA WHERE ID_CODIGO <>-2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2), resul.getString(3)});
+                lista.add(new String[]{
+                    resul.getString(1), resul.getString(2), resul.getString(3)
+                });
             }
             conn.close();
         } catch (SQLException ex) {
@@ -268,12 +270,14 @@ public class catalogos {
     public ArrayList findDelitosNorma(int norma) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_delitos_norma where id_delito=" + norma + " ORDER BY 1";
+        sql = " SELECT * FROM CATALOGOS_DELITOS_NORMA WHERE ID_DELITO = " + norma + " ORDER BY 1";
         System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(3)});
+                lista.add(new String[]{
+                    resul.getString(1), resul.getString(3)
+                });
             }
             conn.close();
         } catch (SQLException ex) {
@@ -303,7 +307,7 @@ public class catalogos {
     public ArrayList findEntidades() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_entidades ORDER BY 1";
+        sql = " SELECT * FROM CATALOGOS_ENTIDADES ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -545,14 +549,15 @@ public class catalogos {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+                lista.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-
     }
 
     public ArrayList findFuero() {
@@ -694,7 +699,7 @@ public class catalogos {
     public ArrayList findMedidasCautelares() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_medidas_cautelares ORDER BY 1";
+        sql = " SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES WHERE CAUTELARES_ID <> -2  ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -705,13 +710,28 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-
+    }
+    
+    public ArrayList findMedidasDuracion() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = " SELECT * FROM CATALOGOS_MEDIDAS_DURACION ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 
     public ArrayList findMedidasMujer() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_medidas_mujer WHERE MUJER_ID <>-2 ORDER BY 1";
+        sql = " SELECT * FROM catalogos_medidas_mujer WHERE MUJER_ID <>-2 ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -739,7 +759,22 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-
+    }
+    
+    public ArrayList findMedidasSolicita() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = " SELECT * FROM CATALOGOS_MEDIDAS_SOLICITA WHERE MEDIDA_SOLICITA_ID NOT IN(-2) ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 
     public ArrayList findMediosPrueba() {
@@ -796,11 +831,13 @@ public class catalogos {
     public ArrayList findMunicipios(int enti) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_municipios WHERE ENTIDAD_ID = " + enti + " AND MUNICIPIO_ID <> -2 ORDER BY 1";
+        sql = " SELECT * FROM CATALOGOS_MUNICIPIOS WHERE ENTIDAD_ID = " + enti + " ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                lista.add(new String[]{resul.getString(2), resul.getString(3)});
+                lista.add(new String[]{
+                    resul.getString(2), resul.getString(3)
+                });
             }
             conn.close();
         } catch (SQLException ex) {

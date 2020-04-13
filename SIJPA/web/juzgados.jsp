@@ -28,7 +28,7 @@
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>Órganos Jurisdiccionales</h1>
-            <a href="capturaJuzgado.jsp" class="addJuz">Agregar Órgano <img src="img/add.png" title="Agregar Órgano"></a>
+            <a href="capturaJuzgado.jsp" class="addJuz"><img src="img/add.png" title="Agregar Órgano"> Agregar Órgano</a>
             <table class="tablasRegis">
                 <tr>
                     <th>Juzgado Clave</th>

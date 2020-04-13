@@ -25,7 +25,7 @@ and open the template in the editor.
 }
 
 .pestana button {
-    background-color: rgba(111,111,111,0.6);
+    background-color: rgba(0,119,203,0.6);
     font-size: 15px;
     font-weight: bold;
     color: #fff;
@@ -68,4 +68,3 @@ and open the template in the editor.
 form div.pestanaContent {
     margin: 0 0px;
 }
-

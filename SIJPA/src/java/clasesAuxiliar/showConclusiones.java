@@ -20,23 +20,29 @@ public class showConclusiones {
 
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> conc;
+    ArrayList<String> concPA;
     String sql;
     ResultSet resul;
     int conteoConclu;
 
-    public ArrayList findConclusion() {
+    public ArrayList findConclusion(String causaClave, String proceClave) {
         conn.Conectar();
         conc = new ArrayList();
-        sql = "SELECT * FROM DATOS_CONCLUSIONES_ADOJC";
+        sql = "SELECT * FROM DATOS_CONCLUSIONES_ADOJC "
+                + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
-                conc.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3),
-                    resul.getString(4),resul.getString(5),resul.getString(6),resul.getString(7),resul.getString(8),
-                    resul.getString(9),resul.getString(10),resul.getString(11),resul.getString(12),resul.getString(13),
-                    resul.getString(14),resul.getString(15),resul.getString(16),resul.getString(17),resul.getString(18),
-                    resul.getString(19),resul.getString(20),resul.getString(21),resul.getString(22),resul.getString(23),
-                    resul.getString(24)
+                conc.add(new String[]{
+                    resul.getString("FECHA_CONCLUSION"), resul.getString("TIPO_RESOLUCION"),resul.getString("TIPO_SOBRESEIMIENTO"),
+                    resul.getString("PROCEDENCIA_SOBRESEIMIENTO"),resul.getString("EXCLUSION_ACCIONP"),resul.getString("SUSPENCION_CONDICIONAL"),
+                    resul.getString("FECHA_SUSPENCION"), resul.getString("MECANISMO_ACUERDO"), resul.getString("FECHA_ACUERDO"),
+                    resul.getString("TIPO_CONCLUSION_PA"), resul.getString("MEDIDA_PRIVATIVA"), resul.getString("MEDIDA_NOPRIVATIVA"),
+                    resul.getString("TIEMPO_INTERNAMIENTO"), resul.getString("REPARACION_DANIO"), resul.getString("TIPO_REPARACION_DANIO"),
+                    resul.getString("MONTO_REPARA"), resul.getString("IMPUGNACION"), resul.getString("TIPO_IMPUGNACION"),
+                    resul.getString("FECHA_IMPUGNACION"), resul.getString("PERSONA_IMPUGNA"), resul.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -45,14 +51,16 @@ public class showConclusiones {
             Logger.getLogger(showConclusiones.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conc;
-
     }
     
-    public ArrayList findConcluTabla() {
+    public ArrayList findConcluCausa(String causa) {
         conn.Conectar();
         conc = new ArrayList();
-        sql = "SELECT C.CONCLUSION_CLAVE, C.FECHA_CONCLUSION, C.PROCESADO_CLAVE, CAT.DESCRIPCION FROM DATOS_CONCLUSIONES_ADOJC C, CATALOGOS_TIPO_RESOLUCION CAT"
-                + " WHERE C.TIPO_RESOLUCION=CAT.RESOLUCION_ID";
+        sql = "SELECT C.PROCESADO_CLAVE, C.FECHA_CONCLUSION, C.PROCESADO_CLAVE, CAT.DESCRIPCION "
+                + "FROM DATOS_CONCLUSIONES_ADOJC C, CATALOGOS_TIPO_RESOLUCION CAT "
+                + "WHERE C.TIPO_RESOLUCION=CAT.RESOLUCION_ID "
+                + "AND CAUSA_CLAVE = '" + causa + "' "
+                + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
@@ -66,20 +74,20 @@ public class showConclusiones {
         return conc;
 
     }
-    public ArrayList findConcluProce(String pro) {
+    
+    public ArrayList findConcluTabla(String proceClave) {
         conn.Conectar();
         conc = new ArrayList();
-        sql = "SELECT C.PROCESADO_CLAVE, P.NOMBRE, P.A_PATERNO, P.A_MATERNO, C.FECHA_CONCLUSION, TR.DESCRIPCION "
+        sql = "SELECT C.PROCESADO_CLAVE, CONCAT(P.NOMBRE, ' ', P.A_PATERNO, ' ', P.A_MATERNO), C.FECHA_CONCLUSION, TR.DESCRIPCION "
                 + " FROM DATOS_CONCLUSIONES_ADOJC C, DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_RESOLUCION TR"
                 + " WHERE C.PROCESADO_CLAVE=P.PROCESADO_CLAVE"
                 + " AND C.TIPO_RESOLUCION=TR.RESOLUCION_ID"
-                + " AND C.PROCESADO_CLAVE='"+pro+"'";
+                + " AND C.PROCESADO_CLAVE='" + proceClave + "'";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
                 conc.add(new String[]{
-                    resul.getString(1), resul.getString(2)+" "+resul.getString(3)+" "+resul.getString(4),
-                    resul.getString(5),resul.getString(6)
+                    resul.getString(1), resul.getString(2),resul.getString(3),resul.getString(4)
                 });
             }
             conn.close();
@@ -88,8 +96,31 @@ public class showConclusiones {
             Logger.getLogger(showConclusiones.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conc;
-
     }
+    
+    public ArrayList findConcluProce(String proceClave) {
+        conn.Conectar();
+        conc = new ArrayList();
+        sql = "SELECT C.PROCESADO_CLAVE, CONCAT(P.NOMBRE, ' ', P.A_PATERNO, ' ', P.A_MATERNO), C.FECHA_CONCLUSION, TR.DESCRIPCION "
+                + " FROM DATOS_CONCLUSIONES_ADOJC C, DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_RESOLUCION TR"
+                + " WHERE C.PROCESADO_CLAVE=P.PROCESADO_CLAVE"
+                + " AND C.TIPO_RESOLUCION=TR.RESOLUCION_ID"
+                + " AND C.PROCESADO_CLAVE='" + proceClave + "';";
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                conc.add(new String[]{
+                    resul.getString(1), resul.getString(2)+" "+resul.getString(3)+" "+resul.getString(4)
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showConclusiones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conc;
+    }
+    
     public int countConclusionesExp(String exp) {
         try{
             conn.Conectar();
@@ -104,7 +135,26 @@ public class showConclusiones {
             Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
         }
         return conteoConclu;
-
+    }
+    
+    public ArrayList findConcluPA(String causaClave, String proceClave, String deliClave){
+        concPA = new ArrayList();
+        try {
+            conn.Conectar();
+            sql = "SELECT TIPO_CONCLUSION_PA FROM DATOS_DCONCLUSIONES_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                    + "AND DELITO_CLAVE = '" + deliClave + "' "
+                    + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            if(resul.next()) {
+               concPA.add(resul.getString("TIPO_CONCLUSION_PA"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return concPA;
     }
     
 }

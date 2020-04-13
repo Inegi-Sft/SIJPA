@@ -5,6 +5,7 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,20 +42,14 @@ public class insrtCausaPenal extends HttpServlet {
             throws ServletException, IOException, SQLException {
         HttpSession sesion = request.getSession();
 
-        String juzgado_clave = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzgado_clave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
-
-        sesion.setAttribute("entidad", jEntidad);
-        sesion.setAttribute("municipio", jMunicipio);
-        sesion.setAttribute("numero", jNumero);
-
-        String carpInvestiga = request.getParameter("CarpInves");
-        String causaClave = request.getParameter("expClave");
-        sesion.setAttribute("causaClave", causaClave);
+        String carpInvestiga = request.getParameter("carpInves");
+        String causaClave = request.getParameter("expClave");//Generamos la causaClave
         String fecha_ingreso;
         if (request.getParameter("fIngreso") != null) {
             fecha_ingreso = request.getParameter("fIngreso");
@@ -64,32 +59,65 @@ public class insrtCausaPenal extends HttpServlet {
         String nomJuez = request.getParameter("nomJuez");
         String particular = request.getParameter("Pparticular");
         String acomulado = request.getParameter("ExpAcomu");
-        String referencia = request.getParameter("ExpRefe");
+        String referencia = verificaVariable(request.getParameter("ExpRefe"));
         int competencia = Integer.parseInt(request.getParameter("compe"));
-        String incompetencia = request.getParameter("Tincompe");
-        String totalDeli = request.getParameter("Tdelitos");
-        String totalAdo = request.getParameter("Tadolescentes");
-        String totalVic = request.getParameter("Tvictimas");
+        String incompetencia = verificaVariable(request.getParameter("Tincompe"));
+        String totalDeli = verificaVariable(request.getParameter("Tdelitos"));
+        String totalAdo = verificaVariable(request.getParameter("Tadolescentes"));
+        String totalVic = verificaVariable(request.getParameter("Tvictimas"));
         String comentario = request.getParameter("ComentaExpe");
 
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
-            sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero
-                    + ",'" + juzgado_clave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fecha_ingreso + "','"
-                    + nomJuez + "'," + particular + "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "',"
-                    + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
-                out.write(request.getParameter("compe"));
-                conn.close();
-            } else {
-                conn.close();
+            
+            if(sesion.getAttribute("causaClave") == "" || sesion.getAttribute("causaClave") == null){//Si no hay causa entonces se inserta
+                sesion.setAttribute("causaClave", causaClave + jConcatenado);
+                sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
+                        + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fecha_ingreso + "',"
+                        + nomJuez + "," + particular + "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "',"
+                        + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    usuario usuario = new usuario();
+                    usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal
+                    out.write(request.getParameter("compe"));
+                    conn.close();
+                } else {
+                    conn.close();
+                }
+            }else{//Si hay causa entonces es actulizacion
+                sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET CARPETA_INVESTIGA = '" + carpInvestiga + "',FECHA_INGRESO = '" + fecha_ingreso + "',"
+                        + "JUEZ_CLAVE = " + nomJuez + ",DERIVA_ACCION_PENAL = " + particular + ",COMPETENCIA = " + competencia + ","
+                        + "TIPO_INCOMPETENCIA = " + incompetencia + ",EXPEDIENTE_ACUMULADO = " + acomulado + ",EXPEDIENTE_REFERENCIA = '" + referencia + "',"
+                        + "TOTAL_DELITOS = " + totalDeli + ",TOTAL_PROCESADOS = " + totalAdo + ",TOTAL_VICTIMAS = " + totalVic + ","
+                        + "COMENTARIOS = '" + comentario + "' "
+                        + "WHERE JUZGADO_CLAVE = '" + juzgadClave + "' "
+                        + "AND CAUSA_CLAVE = '" + sesion.getAttribute("causaClave") + "';";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    out.write("0");
+                    conn.close();
+                } else {
+                    conn.close();
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtCausaPenal.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String verificaVariable(String variable) {
+        String verificada = "";
+        if (variable == null) {
+            verificada = "-2";
+        } else if (variable.equals("")) {
+            verificada = "-2";
+        } else {
+            verificada = variable;
+        }
+        return verificada;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

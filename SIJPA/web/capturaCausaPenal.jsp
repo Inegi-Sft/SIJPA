@@ -3,6 +3,7 @@
     Created on : 24/09/2019, 09:42:00 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.showJueces"%>
 <%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
@@ -12,16 +13,56 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Causa Penal</title>
-        <%@include file="librerias.jsp" %>
+        <script type="text/javascript" src="js/funcionesCP.js"></script>
         <%
             catalogos cat = new catalogos();
-            showCausasPenales jue = new showCausasPenales();
-            ArrayList<String[]> lista;
+            showJueces juez = new showJueces();
+            ArrayList<String[]> lista, causa;
+            
+            String juzgadoClave = (String)session.getAttribute("juzgadoClave");
+            String causaNum = "";
+            String carpInves = "";
+            String fechaIngre = "";
+            String nomJuez = "";
+            String accionPenal = "";
+            String expAcomula = "";
+            String expReferencia = "";
+            String competencia = "";
+            String tipoCompe = "";
+            String totDelitos = "";
+            String totProce = "";
+            String totVictimas = "";
+            String comen = "";
+            if(request.getParameter("causaClave") != null){//Si viene la causa penal, recuperamos datos
+                String causaClave = request.getParameter("causaClave");
+                showCausasPenales causas = new showCausasPenales();
+                causa = causas.findCausaPenal(juzgadoClave, causaClave + juzgadoClave.replace("-", ""));
+                if(causa.size() > 0){
+                    session.setAttribute("causaClave", causaClave + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave
+                    causaNum = causaClave;
+                    carpInves = causa.get(0)[0];
+                    fechaIngre = causa.get(0)[1];
+                    nomJuez = causa.get(0)[2];
+                    accionPenal = causa.get(0)[3];
+                    expAcomula = causa.get(0)[4];
+                    expReferencia = causa.get(0)[5];
+                    competencia = causa.get(0)[6];
+                    tipoCompe = causa.get(0)[7];
+                    totDelitos = causa.get(0)[8];
+                    totProce = causa.get(0)[9];
+                    totVictimas = causa.get(0)[10];
+                    comen = causa.get(0)[11];
+                }else{
+                    out.println("<script>alert('Causa Penal " + causaClave + " no encontrada dentro del Juzgado "  + juzgadoClave + "'); "
+                            + "window.location.href = 'causasPenales.jsp'</script>");
+                }
+            }
+            
         %>
     </head>
     <body>
         <%--<%@include file="cabecera.jsp"%>--%>
-        <section class="contenedor" style="zoom: .9;">
+        <section class="contenedor">
             <h2>Causa Penal</h2>
             <form  method="post" name="formCausaPenal" id="formCausaPenal">
                 <fieldset>
@@ -33,46 +74,52 @@
                                 <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" disabled>
                             </td>
                             <td>
-                                <label for="CarpInves">No. Carpeta Investigación</label>
-                                <input type="text" name="CarpInves" id="CarpInves" required>
+                                <label for="carpInves">No. Carpeta Investigación</label>
+                                <input type="text" name="carpInves" id="CarpInves" value="<%=carpInves%>" required>
                             </td>
                             <td>
                                 <label for="expClave">No. Asunto Asignado</label>
-                                <input type="text" name="expClave" id="expClave" required>
+                                <input type="text" name="expClave" id="expClave" value="<%=causaNum%>" required>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="fIngreso">Fecha de ingreso</label>
-                                <input type="date" name="fIngreso" id="fIngreso" class="txtMedia" required>
+                                <input type="date" name="fIngreso" id="fIngreso" value="<%=fechaIngre%>" required>
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkFechaIngre" onclick="fechaNoIdent('#chkFechaIngre', '#fIngreso')"><label>No identificada</label>
+                                    <input type="checkbox" id="chkFechaIngre" onclick="fechaNoIdent('#chkFechaIngre', '#fIngreso')">
+                                    <label>No identificada</label>
                                 </div>
                             </td>
                             <td>
                                 <label for="nomJuez">Juez encargado de atender la causa penal</label>
-                                <select name="nomJuez" id="nomJuez" class="txtLong" required>
+                                <select name="nomJuez" id="nomJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = jue.findJuez((String) session.getAttribute("juzgadoClave"));
-                                        if (lista.size() != 0) {
-                                            for (String[] ls : lista) {
-                                                out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
+                                        lista = juez.findJuez(juzgadoClave);
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(nomJuez)){
+                                                out.println(" selected ");
                                             }
-                                        } else {
-                                            response.sendRedirect("capturaJuez.jsp");
+                                            out.println(">" + ls[1] + "</option>");
                                         }
+                                        out.println("<option value='100'>--Captura Juez--</option>");
                                     %>  
                                 </select>
                             </td>
                             <td>
                                 <label for="Pparticular">¿La causa penal deriva de acción penal por particular?</label>
-                                <select name="Pparticular" id="Pparticular" class="txtMedia" required >
+                                <select name="Pparticular" id="Pparticular" required >
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(accionPenal)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>  
                                 </select>
@@ -83,19 +130,23 @@
                                 <fieldset>
                                     <div class="cols" id="expAcomulado">
                                         <label for="ExpAcomu" >Expediente acumulado</label>
-                                        <select name="ExpAcomu" id="ExpAcomu" class="txtMedia" onchange="expacumula()" required>
+                                        <select name="ExpAcomu" id="ExpAcomu" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findRespuestaSimple();
                                                 for (int x = 0; x < 3; x++) {
-                                                    out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                                    out.println("<option value='" + lista.get(x)[0] + "'");
+                                                    if(lista.get(x)[0].equals(expAcomula)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
                                                 }
                                             %>  
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="expReferen">
                                         <label for="ExpRefe">Expediente al que hace referencia</label>
-                                        <input type="text" name="ExpRefe" id="ExpRefe" class="dependiente" value="-2">
+                                        <input type="text" name="ExpRefe" id="ExpRefe" class="txtMedia" value="<%=expReferencia%>">
                                     </div>
                                 </fieldset>
                             </td>
@@ -105,24 +156,32 @@
                                 <fieldset>
                                     <div class="cols">
                                         <label for="compe">Organo Competente</label>
-                                        <select name="compe" id="compe" class="txtMedia" onchange="competencia()" required>
+                                        <select name="compe" id="compe" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findRespuestaSimple();
                                                 for (int x = 0; x < 3; x++) {
-                                                    out.println("<option value='" + lista.get(x)[0] + "'>" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
+                                                    out.println("<option value='" + lista.get(x)[0] + "'");
+                                                    if(lista.get(x)[0].equals(competencia)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + lista.get(x)[0] + ".- " + lista.get(x)[1] + "</option>");
                                                 }
                                             %>  
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="tipoIncopetencia">
                                         <label for="Tincompe">Tipo de incompetencia</label>
-                                        <select name="Tincompe" id="Tincompe" class="txtMedia dependiente" >
+                                        <select name="Tincompe" id="Tincompe" class="txtMedia" >
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findIncompetencia();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(tipoCompe)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>  
                                         </select>
@@ -138,40 +197,23 @@
                         <tr>
                             <td>
                                 <label for="Tdelitos">Total de delitos</label>
-                                <input type="number" name="Tdelitos" id="Tdelitos" class="dependiente" onblur="numeroDelitos()">
+                                <input type="number" name="Tdelitos" id="Tdelitos" value="<%=totDelitos%>" onblur="numeroDelitos()">
 
                             </td>
                             <td>
                                 <label for="Tadolescentes">Total de imputados</label>
-                                <input type="number" name="Tadolescentes" id="Tadolescentes" class="dependiente" onblur="numeroProcesados()">
+                                <input type="number" name="Tadolescentes" id="Tadolescentes" value="<%=totProce%>" onblur="numeroProcesados()">
                             </td>
                             <td>
                                 <label for="Tvictimas">Total de víctimas</label>
-                                <input type="number" name="Tvictimas" id="Tvictimas" class="dependiente" onblur="numeroVictimas()">
+                                <input type="number" name="Tvictimas" id="Tvictimas" value="<%=totVictimas%>" onblur="numeroVictimas()">
                             </td>
                         </tr>
                     </table>
                 </fieldset>
-                <!--                <fieldset class="oculto" id="totalAudiencias">
-                                    <legend>Audiencias</legend>
-                                    <table class="tablasRegis" id="tAudiencias">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Tipo de audiencias</th>
-                                                <th>Juez</th>
-                                                <th>Fecha de Celebración</th>
-                                                <th>Duración</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                    <a id="addAudi" class="addJuz">Agregar Audiencia <img src="img/add.png" title="Agregar Audiencia"></a>
-                                </fieldset>-->
                 <div class="comentarios">
                     <h2>Comentarios</h2>
-                    <textarea name="ComentaExpe" id="ComentaExpe"></textarea>
+                    <textarea name="ComentaExpe" id="ComentaExpe"><%=comen%></textarea>
                 </div>
                 <br>
                 <input type="submit" name="guardarExp" id="guardarExp" value="Guardar"> 

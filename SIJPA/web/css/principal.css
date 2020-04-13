@@ -177,6 +177,12 @@ body{
     box-shadow: 5px 5px 5px rgba(0, 119, 203, 0.3);
 }
 
+.contenedor .txtSmall{width: 70px !important;}
+.contenedor .txtMedia{width: 160px !important;}
+.contenedor .txtLong{width: 300px !important;}
+.contenedor .txtExBig{width: 800px !important;}
+.contenedor .lblExBig{width: auto !important;}
+
 .contenedor{
     text-align: center;
 }
@@ -211,6 +217,7 @@ body{
 
 .contenedor input{
     margin:0 20px 20px 20px;
+    font-weight: bold;
 }
 
 .contenedor input[type=submit]{
@@ -244,6 +251,7 @@ body{
     padding: 2px 5px;
     border-radius: 5px;
     height: 30px;
+    width: 230px;
     font-size: 14px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -264,13 +272,19 @@ body{
     border-radius: 5px;
     font-size: 14px;
     padding: 2px 5px;
+    width: 230px;
     height: 30px;
     margin:0 20px 20px 20px;
+    font-weight: bold;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}
+
+.contenedor select:disabled{
+    background: #706F6F;
 }
 
 .contenedor select:focus, .contenedor textarea:focus{
@@ -284,12 +298,6 @@ body{
     font-weight: bold;
     margin: 20px auto 10px auto;
 }
-
-.contenedor .txtSmall{width: 70px;}
-.contenedor .txtMedia{width: 160px;}
-.contenedor .txtLong{width: 300px;}
-.contenedor .txtExBig{width: 800px;}
-.contenedor .lblExBig{width: auto;}
 
 fieldset{
     background-color: rgba(255,255,255,0.4);
@@ -331,6 +339,7 @@ fieldset legend{
     border-radius: 5px;
     box-shadow: 0 1px #fff;
     font-size: 16px;
+    font-weight: bold;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -412,11 +421,13 @@ fieldset legend{
     margin: 0 4px 0 0;
     border: none;
 }
+
 .contenedor input[type="checkbox"]{
     width:19px;
     height:19px;
     margin: 0 4px 0 0;
     border: none;
+    vertical-align: text-bottom;
 }
 
 .contenedor input[type="checkbox"].chkAplica{
@@ -437,12 +448,22 @@ fieldset legend{
     text-align: left;
 }
 
+.contenedor .chkMedi{
+    width: auto;
+    display: block;
+    text-align: left;
+}
+
 .contenedor .chkCat label{
     display: inline;
 }
 .contenedor .selectize-control{
     text-align: left;
     margin: 0 auto;
+}
+
+.contenedor .duraMedi{
+    width: 50px !important;
 }
 
 #juzClave{
@@ -484,26 +505,28 @@ fieldset legend{
     transition: all 0.3s ease;
 }
 
-.indicador{
-    text-shadow: grey 3px 3px 5px;
-    float: left;
-    display: inline-block;
-}
-
 .indicador2{
     text-shadow: grey 3px 3px 5px;
-    color: #D60320 ;
+    color: #00BD25;
     display: inline-block;
+    /*color: #D60320;*/
 }
 
 .agregar{
     float: right;
     text-decoration: none;
     vertical-align: middle;
+    color: #706F6F;
+    font-weight: bold;
     text-shadow: grey 3px 3px 5px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
+
 .agregar:hover{
-    /*background-color: #ddd;*/
     transform:scale(1.15);
 }
 
@@ -512,14 +535,14 @@ fieldset legend{
 }
 
 .dContenido{
-    width: 85%;
+    width: 90%;
     margin: auto;
     margin-bottom: -15px;
 }
 
 a.addJuz{
     position: relative;
-    left: 36%;
+    left: 39%;
     text-decoration: none;
     color: #706F6F;
     font-weight: bold;
@@ -537,8 +560,12 @@ a.addJuz:hover{
     font-size: 20px;
 }
 
+a.addJuz img{
+    vertical-align: text-bottom;
+}
+
 #jjc{
-    width: 87%;
+    width: 92%;
     margin: 0 auto;
     text-align: left;
 }
@@ -567,6 +594,10 @@ a.addJuz:hover{
 #jjc a:hover{
     color: #007dc1;
     font-size: 20px;
+}
+
+#jjc a img{
+    vertical-align: text-bottom;
 }
 
 input[type=text]:read-only, input[type=date]:read-only{
@@ -599,4 +630,23 @@ input[type=text]:read-only, input[type=date]:read-only{
     width: 15%;
     margin: 5px;
     font-size:smaller;
+}
+
+.contenedor .descMedi{
+    text-align: left;
+}
+
+.contenedor .descMedi img{
+    width: 15px;
+}
+
+.divMC{
+    position: absolute;
+    display: none;
+    color: #FFFFFF;
+    width: 250px;
+    height: auto;
+    background-color: rgba(0,0,0,0.7);
+    padding: 10px;
+    border-radius: 10px;
 }

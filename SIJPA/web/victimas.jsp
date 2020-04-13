@@ -4,6 +4,7 @@
     Author     : CESAR.OSORIO
 --%>
 
+<%@page import="clasesAuxiliar.showDelitos"%>
 <%@page import="clasesAuxiliar.showVictimas"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
@@ -14,28 +15,99 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Víctimas</title>
         <%@include file="librerias.jsp" %>
-    </head>
-    <body style="zoom: .9;">
+        <script type="text/javascript" src="js/funcionesVic.js"></script>
         <%
-            String victiClave = "", posicion = "";
+            catalogos cat = new catalogos();
+            showDelitos sDelitos = new showDelitos();
+            showVictimas sVicti = new showVictimas();
+            ArrayList<String[]> lista, victima, vic;
+            ArrayList<String> viDel = new ArrayList();
+            ArrayList<String> viPro = new ArrayList();
+            ArrayList<String> viIngre = new ArrayList();
+            ArrayList<String> vimedida = new ArrayList();
+            
+            String victiClave = "", posicion = "", edicion = "";
             if (request.getParameter("victiClave") != null || request.getParameter("posicion") != null) {
                 victiClave = request.getParameter("victiClave");
-                posicion = request.getParameter("posicion");
+                posicion = request.getParameter("posicion");//Variable de control para saber la fila de la tabla que pertenece
             }
-            if (request.getParameter("insertado") != null) {
-                out.println("<script type='text/javascript'>alert('Error al insertar: Consulte al administrador del sistema');</script>");
-            }
-            catalogos cat = new catalogos();
-            ArrayList<String[]> lista = new ArrayList();
-            showVictimas victi = new showVictimas();
-            ArrayList<String[]> vic = new ArrayList();
-            String entidad = (String) session.getAttribute("entidad");
-            String municipio = (String) session.getAttribute("municipio");
-            String numero = (String) session.getAttribute("numero");
-            String jConcatenado = entidad + municipio + numero;
+            
+            String juzgadoClave = (String) session.getAttribute("juzgadoClave");
             String causaClave = (String) session.getAttribute("causaClave");
-
+            String operacion = "";//Variable de control para saber si se inserta o se actualiza
+            String tipoVicti = "";
+            String victiMoral = "";
+            String contoAsesor = "";
+            String asesor = "";
+            String sexoVic = "";
+            String fechaNaciV = "";
+            String edadV = "";
+            String vulnera = "";
+            String paisNaci = "";
+            String entiNaci = "";
+            String munNaci = "";
+            String nacionalidad = "";
+            String resiPaisV = "";
+            String resiEntiV = "";
+            String resiMuniV = "";
+            String edoCivilV = "";
+            String condAlfaV = "";
+            String gdoEstudioV = "";
+            String hablaEspa = "";
+            String hablaExtra = "";
+            String hablaIndigena = "";
+            String lenguaIndigena = "";
+            String interprete = "";
+            String ocupa = "";
+            String ingresos = "";
+            String rangoIngre = "";
+            String medidaProte = "";
+            String medidaMujer = "";
+            String comen = "";
+            if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
+                edicion = request.getParameter("edita");
+                if(edicion.equals("Si")){
+                    victima = sVicti.findVictimas(causaClave, victiClave + juzgadoClave.replace("-", ""));
+                    if(victima.size() > 0){
+                        operacion = "actualizar";
+                        tipoVicti = victima.get(0)[0];
+                        victiMoral = victima.get(0)[1];
+                        contoAsesor = victima.get(0)[2];
+                        asesor = victima.get(0)[3];
+                        sexoVic = victima.get(0)[4];
+                        fechaNaciV = victima.get(0)[5];
+                        edadV = victima.get(0)[6];
+                        vulnera = victima.get(0)[7];
+                        paisNaci = victima.get(0)[8];
+                        entiNaci = victima.get(0)[9];
+                        munNaci = victima.get(0)[10];
+                        nacionalidad = victima.get(0)[11];
+                        resiPaisV = victima.get(0)[12];
+                        resiEntiV = victima.get(0)[13];
+                        resiMuniV = victima.get(0)[14];
+                        edoCivilV = victima.get(0)[15];
+                        condAlfaV = victima.get(0)[16];
+                        gdoEstudioV = victima.get(0)[17];
+                        hablaEspa = victima.get(0)[18];
+                        hablaExtra = victima.get(0)[19];
+                        hablaIndigena = victima.get(0)[20];
+                        lenguaIndigena = victima.get(0)[21];
+                        interprete = victima.get(0)[22];
+                        ocupa = victima.get(0)[23];
+                        ingresos = victima.get(0)[24];
+                        rangoIngre = victima.get(0)[25];
+                        medidaProte = victima.get(0)[26];
+                        medidaMujer = victima.get(0)[27];
+                        comen = victima.get(0)[28];
+                    }else{
+                        out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClave + "'); "
+                                + "window.location.href = 'elementosPrincipales.jsp'</script>");
+                    }
+                }
+            }
         %>
+    </head>
+    <body style="zoom: .9;">
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h1>Víctimas</h1>
@@ -49,10 +121,13 @@
                                     <label for="victima_clave">Víctima Clave</label>
                                     <input type="text" name="victiClave" id="victiClave" value="<%=victiClave%>" readonly/>
                                     <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
+                                    <input type="hidden" name="opera" id="opera" value="<%=operacion%>"/>
                                 </div>
                                 <div class="cols">
-                                    <label for="tipo_victima">Tipo de Víctima</label>
-                                    <select name="tipo_victima" id="tipo_victima" class="txtMedia" required>
+                                    <!--Usamos un input invisible para recuperar el dato de tipo victima de BD y llenarlo con jquery-->
+                                    <input type="hidden" id="tipoVictiHi" name="tipoVictiHi" value="<%=tipoVicti%>">
+                                    <label for="tipoVictima">Tipo de Víctima</label>
+                                    <select name="tipoVictima" id="tipoVictima" required>
                                         <option value="">--Seleccione--</option>
                                         <option value="1">1.- Persona física</option>
                                         <option value="2">2.- Persona moral</option>
@@ -66,12 +141,16 @@
                                 </div>
                                 <div class="cols oculto" id="tipoMoral">
                                     <label for="tvic_moral">Tipo de Víctima Moral</label>
-                                    <select name="tvic_moral" id="tvic_moral" class="txtMedia dependiente">
+                                    <select name="tvic_moral" id="tvic_moral">
                                         <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findVictimaMoral();
                                             for (String[] ls : lista) {
-                                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                out.println("<option value='" + ls[0] + "'");
+                                                if(ls[0].equals(victiMoral)){
+                                                    out.println(" selected ");
+                                                }
+                                                out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
                                         %>    
                                     </select>
@@ -89,19 +168,18 @@
                             <th>Delito cometido</th>
                         </tr>
                         <%
-                            vic = victi.findDelitos(causaClave + jConcatenado);
+                            vic = sDelitos.findDelitosCausa(causaClave);
                             for (String[] ls : vic) {
                                 out.println("<tr>");
+                                out.println("<td>" + ls[0].replace(juzgadoClave.replace("-", ""), "") + "</td>");
+                                out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>");
-                                out.println(ls[0] + "<input type='hidden' name='inpDeli' value='" + ls[0] + "'/>");
-                                out.println("</td>");
-                                out.println("<td>");
-                                out.println(ls[1] + "<input type='hidden' name='inpNom' value='" + ls[1] + "'/>");
-                                out.println("</td>");
-                                out.println("<td>");
-                        %>
-                        <input class="chkAplica" type="checkbox" name="deliCometido" id="deliCometido"/>
-                        <%
+                                viDel = sVicti.findVDelito(causaClave, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                if(viDel.size() != 0){
+                                    out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "' checked>");
+                                }else{
+                                    out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "'/>");
+                                }
                                 out.println("</td>");
                                 out.println("</tr>");
                             }
@@ -112,24 +190,32 @@
                     <legend>Defensa</legend>
                     <div class="cols">
                         <label for="con_asesor">¿Contó con Asesor Jurídico?</label>
-                        <select name="con_asesor" id="con_asesor" class="txtMedia" required>
+                        <select name="con_asesor" id="con_asesor" required>
                             <option value="">--Seleccione--</option>
                             <%
                                 lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                    out.println("<option value='" + ls[0] + "'");
+                                    if(ls[0].equals(contoAsesor)){
+                                        out.println(" selected ");
+                                    }
+                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
                             %>      
                         </select>
                     </div>
                     <div class="cols oculto" id="asesorJuri">
                         <label for="asesor">Asesor Jurídico</label>
-                        <select name="asesor" id="asesor" class="txtMedia dependiente">
+                        <select name="asesor" id="asesor">
                             <option value="">--Seleccione--</option>
                             <%
                                 lista = cat.findTipoDefensor();
                                 for (String[] ls : lista) {
-                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                    out.println("<option value='" + ls[0] + "'");
+                                    if(ls[0].equals(asesor)){
+                                        out.println(" selected ");
+                                    }
+                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
                             %>        
                         </select>
@@ -137,25 +223,34 @@
                 </fieldset>
                 <fieldset>
                     <legend>Relación de la Victima con el Procesado</legend>
-                    <table class="tablasRegis" onblur="relacion(j, i)">
-                        <tr>
-                            <th>Procesado Clave</th>
-                            <th width="750">Relación</th>
-                        </tr>
+                    <table class="tablasRegis" id="tblVictiProce">
+                        <thead>
+                            <tr>
+                                <th>Procesado Clave</th>
+                                <th width="750">Relación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <%
-                            vic = victi.findVprocesados(causaClave + jConcatenado);
+                            vic = sVicti.findVprocesados(causaClave);
                             int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");
                                 out.println("<td>");
-                                out.println("<input type='hidden' name='numeroProcesados' id='numeroProcesados' value='" + vic.size() + "'/>");
-                                out.println(ls[0] + "<input type='hidden' name='proRela' value='" + ls[0] + "'/>");
+                                out.println(ls[0].replace(juzgadoClave.replace("-", ""), "") + "<input type='hidden' name='proRela' value='" + ls[0] + "'>");
                                 out.println("</td>");
                                 out.println("<td>");
                                 lista = cat.findRelacionImputado();
                                 for (String[] los : lista) {
                                     out.println("<div class='chkCat'>");
-                                    out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + ">");
+                                    viPro.clear();//limpiamos el array para poder llenar de manera correcta todos los check
+                                    //Recuperamos el dato de la bd, si existe lo checheamos si no se encuentra vacio
+                                    viPro = sVicti.findVProcesado(causaClave, victiClave + juzgadoClave.replace("-", ""), ls[0], los[0]);
+                                    if(viPro.size() != 0){
+                                        out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + " checked>");
+                                    }else{
+                                        out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + ">");
+                                    }
                                     out.println("<label>" + los[1] + "</label>");
                                     out.println("</div>");
                                 }
@@ -164,6 +259,7 @@
                                 i++;
                             }
                         %>
+                        </tbody>
                     </table>
                 </fieldset>
                 <fieldset class="oculto" id="victiFisicas">
@@ -171,37 +267,45 @@
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="sexo">Sexo</label>
-                                <select name="sexo" id="sexo" class="txtMedia">
+                                <label for="sexoV">Sexo</label>
+                                <select name="sexoV" id="sexoV">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findSexo();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(sexoVic)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
                             </td>
                             <td>
-                                <label for="fnacimiento">Fecha de Nacimiento</label>
-                                <input type="date" name="fnacimiento" id="fnacimiento" class="txtMedia depenFecha">
-                                <div class="noIdentificada" id="chkFechaCtrlDeten">
-                                    <input type="checkbox" id="chkVictFisica" onchange="fechaNoIdent('#chkVictFisica', '#fnacimiento')">
+                                <label for="fnacimientoV">Fecha de Nacimiento</label>
+                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>" required>
+                                <div class="noIdentificada" id="dFechaNaciV">
+                                    <input type="checkbox" id="chkFechaNaciV" onchange="fechaNoIdent('#chkFechaNaciV', '#fnacimientoV')">
                                     <label>No identificada</label>
                                 </div>
                             </td>
                             <td>
                                 <label for="edad">Edad</label>
-                                <input type="number" name="edad" id="edad" class="txtMedia">
+                                <input type="number" name="edad" id="edad" value="<%=edadV%>">
                             </td>
                             <td>
                                 <label for="tvic_moral">Condición de vulnerabilidad</label>
-                                <select name="vulnera" id="vulnera" class="txtMedia">
+                                <select name="vulnera" id="vulnera">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findVulnerabilidad();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(vulnera)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>   
                                 </select>
@@ -213,44 +317,70 @@
                                     <legend>Lugar de nacimiento</legend>
                                     <div class="cols" id="paisNaci">
                                         <label for="Pnacimiento">País</label>
-                                        <select name="Pnacimiento" id="Pnacimiento" class="txtMedia">
+                                        <select name="Pnacimiento" id="Pnacimiento" onchange="lugarNacimiento('#Pnacimiento', '#estaNaci', '#munNaci', '#Enacimiento', '#Mnacimiento');" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(paisNaci)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>  
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="estaNaci">       
                                         <label for="Enacimiento">Entidad</label>
-                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" class="txtMedia dependiente" onchange="llenaMun('#Enacimiento', '#Mnacimiento')">
+                                        <select name="Enacimiento" id="Enacimiento" name="Enacimiento" onchange="llenaMun('#Enacimiento', '#Mnacimiento')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(entiNaci)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>     
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="munNaci"> 
                                         <label for="Mnacimiento">Municipio</label>
-                                        <select name="Mnacimiento" id="Mnacimiento" name="Mnacimiento" class="txtMedia dependiente">
-                                            <option value="">--Seleccione--</option>      
+                                        <select name="Mnacimiento" id="Mnacimiento">
+                                            <%
+                                                if(!paisNaci.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                }else{//Si el pais es mexico entonces se llena el catalogo con municipios del estado
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                    lista = cat.findMunicipios(Integer.parseInt(entiNaci));
+                                                    for (String[] ls : lista) {
+                                                        out.println("<option value='" + ls[0] + "'");
+                                                        if(ls[0].equals(munNaci)){
+                                                            out.println(" selected ");
+                                                        }
+                                                        out.println(">" + ls[1] + "</option>");
+                                                    }
+                                                }
+                                            %>
                                         </select>
                                     </div>
                                 </fieldset>
                             </td>
                             <td>
                                 <label for="naciona">Nacionalidad</label>
-                                <select name="naciona" id="naciona" class="txtMedia">
+                                <select name="naciona" id="naciona">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findNacionalidad();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(nacionalidad)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>     
                                 </select>
@@ -262,44 +392,70 @@
                                     <legend>Lugar habitual de residencia</legend>
                                     <div class="cols" id="paisResi"> 
                                         <label for="Preside">País</label>
-                                        <select name="Preside" id="Preside" class="txtMedia">
+                                        <select name="Preside" id="Preside" onchange="lugarNacimiento('#Preside', '#estaResi', '#munResi', '#Ereside', '#Mreside');" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(resiPaisV)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>    
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="estaResi">   
                                         <label for="Ereside">Entidad</label>
-                                        <select name="Ereside" id="Ereside" name="Ereside" class="txtMedia dependiente" onchange="llenaMun('#Ereside', '#Mreside')">
+                                        <select name="Ereside" id="Ereside" name="Ereside" onchange="llenaMun('#Ereside', '#Mreside')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(resiEntiV)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>      
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="munResi"> 
                                         <label for="Mreside">Municipio</label>
-                                        <select name="Mreside" id="Mreside" name="Mreside" class="txtMedia dependiente">
-                                            <option value="">--Seleccione--</option>      
+                                        <select name="Mreside" id="Mreside" name="Mreside">
+                                            <%
+                                                if(!resiPaisV.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                }else{//Si el pais es mexico entonces se llena el catalogo con municipios del estado
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                    lista = cat.findMunicipios(Integer.parseInt(resiEntiV));
+                                                    for (String[] ls : lista) {
+                                                        out.println("<option value='" + ls[0] + "'");
+                                                        if(ls[0].equals(resiMuniV)){
+                                                            out.println(" selected ");
+                                                        }
+                                                        out.println(">" + ls[1] + "</option>");
+                                                    }
+                                                }
+                                            %>
                                         </select>
                                     </div>
                                 </fieldset>
                             </td>
                             <td>
                                 <label for="conyugal">Situación conyugal</label>
-                                <select name="conyugal" id="conyugal" class="txtMedia">
+                                <select name="conyugal" id="conyugal" >
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEstadoCivil();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(edoCivilV)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>     
                                 </select>
@@ -308,48 +464,64 @@
                         <tr>
                             <td>
                                 <label for="alfabetismo">Condición de alfabetismo</label>
-                                <select name="alfabetismo" id="alfabetismo" class="txtMedia">
+                                <select name="alfabetismo" id="alfabetismo">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findAlfabetismo();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(condAlfaV)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>  
                                 </select>
                             </td>
                             <td>
                                 <label for="estudios">Grado de estudios </label>
-                                <select name="estudios" id="estudios" class="txtMedia">
+                                <select name="estudios" id="estudios">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findGradoEstudios();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>   
-                                </select>
-                            </td>
-                            <td>
-                                <label for="ocupa">Ocupación</label>
-                                <select name="ocupa" id="ocupa" class="txtMedia">
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findOcupacion();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(gdoEstudioV)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>   
                                 </select>
                             </td>
                             <td>
                                 <label for="hablaesp">Dominio del español</label>
-                                <select name="hablaesp" id="hablaesp" class="txtMedia">
+                                <select name="hablaesp" id="hablaesp">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findDominioEspanol();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(hablaEspa)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
+                                    %> 
+                                </select>
+                            </td>
+                            <td>
+                                <label for="interprete">¿Habla alguna lengua extranjera?</label>
+                                <select name="extrangera" id="extrangera">
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findRespuestaSimple();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(hablaExtra)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %> 
                                 </select>
@@ -360,24 +532,32 @@
                                 <fieldset>
                                     <div class="cols">
                                         <label for="indigena">Habla lengua indígena o dialecto </label>
-                                        <select name="indigena" id="indigena" class="txtMedia">
+                                        <select name="indigena" id="indigena" onchange="respuestaSimpleSelect('#indigena', '#famLingui', '#familia');" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(hablaIndigena)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %> 
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="famLingui">
                                         <label for="familia"> Familia lingüísticas</label>
-                                        <select name="familia" id="familia" class="txtMedia">
+                                        <select name="familia" id="familia">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findLinguisticas();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(lenguaIndigena)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>   
                                         </select>
@@ -385,27 +565,35 @@
                                 </fieldset>
                             </td>
                             <td>
-                                <label for="interprete">¿Habla alguna lengua extranjera?</label>
-                                <select name="extrangera" id="extrangera" class="txtMedia dependiente">
+                                <label for="interprete">¿Requirió de intérprete?</label>
+                                <select name="interprete" id="interprete">
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(interprete)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %> 
                                 </select>
                             </td>
                             <td>
-                                <label for="interprete">¿Requirió de intérprete?</label>
-                                <select name="interprete" id="interprete" class="txtMedia dependiente">
+                                <label for="ocupa">Ocupación</label>
+                                <select name="ocupa" id="ocupa">
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = cat.findRespuestaSimple();
+                                        lista = cat.findOcupacion();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(ocupa)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
-                                    %> 
+                                    %>   
                                 </select>
                             </td>
                         </tr>
@@ -413,31 +601,38 @@
                             <td colspan=4>
                                 <fieldset>
                                     <div class="cols">
-                                        <label for="indigena">¿Percibe algún tipo de ingresos? </label>
-                                        <select name="ingresos" id="ingresos" class="txtMedia dependiente">
+                                        <label for="ingresos">¿Percibe algún tipo de ingresos? </label>
+                                        <select name="ingresos" id="ingresos">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(ingresos)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %> 
                                         </select>
                                     </div>
-
                                     <div class="cols oculto" id="rangoInge">
                                         <label for="indigena">Rango de ingresos </label>
-                                        <select name="rangoIngresos" id="rangoIngresos" class="txtMedia dependiente">
+                                        <select name="rangoIngresos" id="rangoIngresos">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findRangoIngresos();
                                                 for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(rangoIngre)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %> 
                                         </select>
                                     </div>
-                                    <table class="tablasRegis oculto" border="0" id="fuenteIngre">
+                                    <table class="tablasRegis oculto" id="fuenteIngre">
                                         <tr>
                                             <th>ID</th>
                                             <th>Fuente de ingresos</th>
@@ -450,7 +645,12 @@
                                                 out.println("<td>" + ls[0] + "</td>");
                                                 out.println("<td>" + ls[1] + "</td>");
                                                 out.println("<td>");
-                                                out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + "  >");
+                                                viIngre = sVicti.findVIngresos(causaClave, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                                if(viIngre.size() != 0){
+                                                    out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + " checked>");
+                                                }else{
+                                                    out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + "  >");
+                                                }
                                                 out.println("</td>");
                                                 out.println("</tr>");
                                             }
@@ -464,16 +664,20 @@
                 <fieldset class="oculto" id="mediProtec">
                     <legend>Medidas Protección</legend>
                     <label for="mProtect" class="lblExBig">¿Se le dictaron medidas de protección?</label>
-                    <select name="mProtect" id="mProtect" class="txtMedia">
+                    <select name="mProtect" id="mProtect">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findRespuestaSimple();
                             for (String[] ls : lista) {
-                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                out.println("<option value='" + ls[0] + "'");
+                                if(ls[0].equals(medidaProte)){
+                                    out.println(" selected ");
+                                }
+                                out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                             }
                         %>  
                     </select>
-                    <table id="MedidasPro" class="tablasRegis" hidden>
+                    <table id="MedidasPro" class="tablasRegis oculto">
                         <tr>
                             <th>ID</th>
                             <th>Tipo de medidas de protección</th>
@@ -485,9 +689,14 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>");%>
-                        <input type="checkbox" name="aplicaMedida" id="aplicaMedida<%=ls[0]%>" value="<%=ls[0]%>"/>
-                        <%      out.println("</td>");
+                                out.println("<td>");
+                                vimedida = sVicti.findVMedidas(causaClave, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                if(vimedida.size() != 0){
+                                    out.println("<input type='checkbox' name='aplicaMedida' id='aplicaMedida" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                }else{
+                                    out.println("<input type='checkbox' name='aplicaMedida' id='aplicaMedida" + ls[0] + "' value='" + ls[0] + "'>");
+                                }
+                                out.println("</td>");
                                 out.println("</tr>");
                             }
                         %>
@@ -496,16 +705,20 @@
                 <fieldset class="oculto" id="mediProtecMuj">
                     <legend>Medidas de Protección Violencia Mujeres</legend>
                     <label for="mujProtect" class="lblExBig">¿Se le dictaron medidas de protección por delitos que impliquen violencia contra las mujeres?</label>
-                    <select name="mujProtect" id="mujProtect" class="txtMedia">
+                    <select name="mujProtect" id="mujProtect">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = cat.findRespuestaSimple();
                             for (String[] ls : lista) {
-                                out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                out.println("<option value='" + ls[0] + "'");
+                                if(ls[0].equals(medidaMujer)){
+                                    out.println(" selected ");
+                                }
+                                out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                             }
                         %>  
                     </select>
-                    <table id="MujPro" class="tablasRegis" hidden>
+                    <table id="MujPro" class="tablasRegis oculto">
                         <tr>
                             <th>ID</th>
                             <th>Tipo de medidas de protección por delitos que impliquen violencia contra las mujeres</th>
@@ -517,9 +730,14 @@
                                 out.println("<tr>");
                                 out.println("<td>" + ls[0] + "</td>");
                                 out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>");%>
-                        <input type="checkbox" name="aplicaMedidaMuj" id="aplicaMedidaMuj<%=ls[0]%>" value="<%=ls[0]%>" />
-                        <%      out.println("</td>");
+                                out.println("<td>");
+                                vimedida = sVicti.findVMedidasMuj(causaClave, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                if(vimedida.size() != 0){
+                                    out.println("<input type='checkbox' name='aplicaMedidaMuj' id='aplicaMedidaMuj" + ls[0] + "' value='" + ls[0] + "' cehcked>");
+                                }else{
+                                    out.println("<input type='checkbox' name='aplicaMedidaMuj' id='aplicaMedidaMuj" + ls[0] + "' value='" + ls[0] + "'>");
+                                }
+                                out.println("</td>");
                                 out.println("</tr>");
                             }
                         %> 
@@ -527,10 +745,10 @@
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>
-                    <textarea name="Comentavic" id="Comentavic"></textarea>
+                    <textarea name="Comentavic" id="Comentavic"><%=comen%></textarea>
                 </div>
                 <br>
-                <input type="submit" name="guardarvic" id="guardarvic" value="Guardar Víctima">
+                <input type="submit" name="guardarvic" id="guardarvic" value="Guardar">
             </form>
         </section>
     </body>

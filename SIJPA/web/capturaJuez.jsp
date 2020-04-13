@@ -79,7 +79,7 @@
                             </td>
                             <td>
                                 <label for="fGestion">Fecha inicio gestion:</label>
-                                <input type="date" class="txtMedia" name="fGestion" id="fGestion" required/>
+                                <input type="date" name="fGestion" id="fGestion" required/>
                                 <div class="noIdentificada">
                                     <input type="checkbox" name="chkFechaInicioG" id="chkFechaInicioG" onclick="fechaNoIdent('#chkFechaInicioG', '#fGestion');"><label>No identificada</label>
                                 </div>
@@ -88,7 +88,7 @@
                         <tr>
                             <td>
                                 <label for="sexoJuez">Sexo</label>
-                                <select class="txtMedia" name="sexoJuez" id="sexoJuez" required>
+                                <select name="sexoJuez" id="sexoJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findSexo();
@@ -104,7 +104,7 @@
                             </td>
                             <td>
                                 <label for="estudioJuez">Grado de Estudios</label>
-                                <select class="txtMedia" name="estudioJuez" id="estudioJuez" required>
+                                <select name="estudioJuez" id="estudioJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findEstudioProfesional();
@@ -116,7 +116,7 @@
                             </td>
                             <td>
                                 <label for="funcionJuez">Función dentro del Órgano</label>
-                                <select class="txtMedia" name="funcionJuez" id="funcionJuez" required>
+                                <select name="funcionJuez" id="funcionJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         lista = cat.findFuncionJuzgado();

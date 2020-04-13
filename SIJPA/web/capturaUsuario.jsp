@@ -72,14 +72,14 @@
                                 <input type="number" class="txtSmall" min="18" name="edad" id="edad" required/>
                             </td>
                             <td>
-                                <label for="correo">Correo Electronico</label>
+                                <label for="correo">Correo Electronico</label><div class="ayuda"></div>
                                 <input type="text" name="correo" id="correo" placeholder="usuario@correo.com" required/>
                             </td>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
                                 <%
                                     if(tot == 0){
-                                        out.println("<select class='txtMedia' name='entidad' id='entidad' required>");
+                                        out.println("<select name='entidad' id='entidad' required>");
                                         out.println("<option value=''>--Seleccione--</option>");
                                         lista = cat.findEntidades();
                                         for (String[] ls : lista) {
@@ -87,7 +87,7 @@
                                         }
                                         out.println("</select>");
                                     }else{
-                                        out.println("<select class='txtMedia' name='entidad' id='entidad' required>");
+                                        out.println("<select name='entidad' id='entidad' required>");
                                         lista = usuario.findEntidad();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
@@ -115,7 +115,7 @@
                 <br/>
                 <input type="submit" name="guardar" id="guardar" value="Guardar" hidden/>
             </form>
-            <% if((Integer)session.getAttribute("visitaUsuario") == null){ %>
+            <% if(tot == 0){ %>
             <div id="mensajeAdmin">
                 <p>
                     Bienvenido a la captura del Usuario Administrador del sistema SIJPA. Siendo que es la primera vez que se utiiza el sistema, se necesita capturar

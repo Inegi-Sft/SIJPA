@@ -38,6 +38,18 @@ public class usuario {
         return totUsu;
     }
     
+    public boolean findUsuarioExist(String usuario){
+        try{
+            conn.Conectar();
+            sql = "SELECT CORREO FROM USUARIOS WHERE CORREO = '" + usuario + "';";
+            rs = conn.consultar(sql);
+            return rs.next();
+        } catch(SQLException ex){
+            Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
     public boolean findUsuario(String nomUsuario, String passUsuario){
         try {
             conn.Conectar();
@@ -127,5 +139,38 @@ public class usuario {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaTabla;
+    }
+    
+    public int findAvanceUsuario(String causaClave){
+        int avance = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT AVANCE FROM USUARIOS_CONTROL WHERE CAUSA_CLAVE = '" + causaClave + "';";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                avance = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return avance;
+    }
+    
+    public void insrtAvance(String causaClave, int avance){
+        try{
+            conn.Conectar();
+            if(avance == 1){
+                sql = "INSERT INTO USUARIOS_CONTROL VALUES('" + causaClave + "'," + avance + ");";
+            }else{
+                sql = "UPDATE USUARIOS_CONTROL SET AVANCE = " + avance + " WHERE CAUSA_CLAVE = '" + causaClave + "';";
+            }
+            System.out.println(sql);
+            conn.escribir(sql);
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

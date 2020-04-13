@@ -41,14 +41,18 @@ public class insrtTramite extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession sesion= request.getSession();
+        //posicion de la fila de la tabla.vista donde se inserta el dato
+        String posicion = request.getParameter("posicion");
+        String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
+        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String jEntidad = jDividido[0];
+        String jMunicipio = jDividido[1];
+        String jNumero = jDividido[2];
+        String jConcatenado = jEntidad + jMunicipio + jNumero;
+        String causaClave = (String) sesion.getAttribute("causaClave");
+        String proceClave = request.getParameter("proceClave");
         
-        String entidad =(String) sesion.getAttribute("entidad");
-        String municipio =(String) sesion.getAttribute("municipio");
-        String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+numero;
-        String causaClave =(String) sesion.getAttribute("causaClave");
-        
-        String idProcesado = request.getParameter("idProcesado");
         String etapaProcesal = request.getParameter("eProcesal");
         String estInvesti = request.getParameter("estInvesti");
         String estIntermedia = request.getParameter("estIntermedia");
@@ -60,25 +64,62 @@ public class insrtTramite extends HttpServlet {
             PrintWriter out = response.getWriter();
             
             conn.Conectar();
-            sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES("+entidad+","+municipio+","+numero+","
-                    + "'"+causaClave+jConcatenado+"','"+idProcesado+"',"+ etapaProcesal +","+estInvesti+","+estIntermedia+",'" 
-                    + especifique +"','" + fechaActo +"', (select YEAR(NOW())) )";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
-                showTramite pro = new showTramite();
-                ArrayList<String[]> lis = new ArrayList<String[]>();
-                lis = pro.findTramiteProce(idProcesado);
-                JSONArray resp = new JSONArray();
-                
-                resp.add(lis.get(0)[0].replace(jConcatenado, ""));
-                resp.add(lis.get(0)[1]);
-                resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
-                resp.add(pro.countTramiteExp(causaClave + jConcatenado));
-                out.write(resp.toJSONString());
-                conn.close();
-            } else {
-                conn.close();
+            if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+                sql = "INSERT INTO DATOS_TRAMITES_ADOJC  VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                        + causaClave + "','" + proceClave + jConcatenado + "',"+ etapaProcesal + "," + estInvesti+ ", " + estIntermedia + ",'" 
+                        + especifique + "','" + fechaActo + "', (select YEAR(NOW())) )";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    //Solo se actualizan los que estan volando (etapa 5)
+                    sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 3 "
+                            + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
+                            + "AND ETAPA = 5;";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        showTramite tram = new showTramite();
+                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        int totTramiteInsrt = tram.countTramiteExp(causaClave);
+                        lis = tram.findTramiteTabla(proceClave + jConcatenado);
+                        JSONArray resp = new JSONArray();
+                        resp.add(posicion);
+                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                        resp.add(lis.get(0)[1]);
+                        resp.add(lis.get(0)[2]);
+                        resp.add(lis.get(0)[3]);
+                        resp.add(totTramiteInsrt);
+                        out.write(resp.toJSONString());
+                        conn.close();
+                    }else{
+                        conn.close();
+                    }
+                } else {
+                    conn.close();
+                }
+            }else{//Se actualiza el dato que viene de recuperacion
+                sql = "UPDATE DATOS_TRAMITES_ADOJC SET ETAPA_PROCESAL = " + etapaProcesal + ",ESTATUS_INVESTIGACION = " + estInvesti+ ","
+                        + "ESTATUS_INTERMEDIA = " + estIntermedia + ",ESPECIFIQUE = '" + especifique + "',"
+                        + "FECHA_ACTO_PROCESAL = '" + fechaActo + "' "
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    showTramite tram = new showTramite();
+                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    int totTramiteInsrt = tram.countTramiteExp(causaClave);
+                    lis = tram.findTramiteTabla(proceClave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(totTramiteInsrt);
+                    out.write(resp.toJSONString());
+                    conn.close();
+                } else {
+                    conn.close();
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtTramite.class.getName()).log(Level.SEVERE, null, ex);

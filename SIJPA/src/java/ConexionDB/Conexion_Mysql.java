@@ -27,8 +27,9 @@ public class Conexion_Mysql {
     public boolean Conectar() { 
         try { 
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://10.15.130.27:3306/sijpa_dbp";
-            conexion = (Connection) DriverManager.getConnection(url,"carlos","carlos2019");
+            String url = "jdbc:mysql://localhost:3306/sijpa_db";
+            //conexion = (Connection) DriverManager.getConnection(url,"carlos","carlos2019");
+            conexion = (Connection) DriverManager.getConnection(url,"root","");
             return conexion != null; //System.out.println("Conexion oracle exitosa!");
             //System.out.println("Conexion oracle fallida!");
         } catch (ClassNotFoundException e) { 

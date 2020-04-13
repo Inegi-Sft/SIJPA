@@ -5,10 +5,11 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showVictimas;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public class insrtVictimas extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sqlVictimas, sqlVDelitos, sqlVProce, sqlVmedidas, sqlVmedidasMuj, sqlIngresos;
+    String sql;
     boolean insertaVDeli;
     boolean insertaVProce;
     boolean insertavmedida = true;
@@ -51,20 +52,23 @@ public class insrtVictimas extends HttpServlet {
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
-        String entidad = (String) sesion.getAttribute("entidad");
-        String municipio = (String) sesion.getAttribute("municipio");
-        String numero = (String) sesion.getAttribute("numero");
-        String jConcatenado = entidad + municipio + numero;
+        String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
+        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String jEntidad = jDividido[0];
+        String jMunicipio = jDividido[1];
+        String jNumero = jDividido[2];
+        String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClave = (String) sesion.getAttribute("causaClave");
         String victiClave = request.getParameter("victiClave");
-        String tipo_victima = request.getParameter("tipo_victima");
-        String victima_moral = request.getParameter("tvic_moral");
+        String tipoVictima = request.getParameter("tipoVictima");
+        String victima_moral = verificaVariable(request.getParameter("tvic_moral"));
         String conto_asesor = request.getParameter("con_asesor");
-        String asesor = request.getParameter("asesor");
-        String sexo = request.getParameter("sexo");
+        String asesor = verificaVariable(request.getParameter("asesor"));
+        String sexoV = request.getParameter("sexoV");
         String fecha_nacimiento;
-        if (request.getParameter("fnacimiento") != null) {
-            fecha_nacimiento = request.getParameter("fnacimiento");
+        if (request.getParameter("fnacimientoV") != null) {
+            fecha_nacimiento = request.getParameter("fnacimientoV");
         } else {
             fecha_nacimiento = "1899-09-09";
         }
@@ -89,8 +93,7 @@ public class insrtVictimas extends HttpServlet {
         int ingresos = Integer.parseInt(request.getParameter("ingresos"));
         String rangoingresos = request.getParameter("rangoIngresos");
         String comentarios = request.getParameter("Comentavic");
-        String[] deli = request.getParameterValues("inpDeli");
-        String[] chk = request.getParameterValues("deliCometido");
+        String[] chkDeliCom = request.getParameterValues("deliCometido");
         String[] procesadoRela = request.getParameterValues("proRela");
         int vmedidas = Integer.parseInt(request.getParameter("mProtect"));
         String[] chkvmedida = request.getParameterValues("aplicaMedida");
@@ -102,83 +105,193 @@ public class insrtVictimas extends HttpServlet {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
-            sqlVictimas = "INSERT INTO DATOS_VICTIMAS_ADOJC  VALUES(" + entidad + "," + municipio + "," + numero + ",'" + causaClave + jConcatenado
-                    + "','" + victiClave + jConcatenado + "'," + tipo_victima + "," + victima_moral + "," + conto_asesor + "," + asesor + "," + sexo + ",'" + fecha_nacimiento
-                    + "'," + edad + "," + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + "," + muniNacimiento + "," + nacionalidad + "," + paisResi + ","
-                    + entidadResi + "," + municipioResi + "," + conyugal + "," + alfabetismo + "," + estudios + "," + espanol + "," + indigena + "," + familia
-                    + "," + extrangera + "," + interprete + "," + ingresos + "," + rangoingresos + "," + ocupacion + "," + vmedidaMujer + "," + vmedidas + ",'"
-                    + comentarios + "',(select YEAR(NOW())))";
-            System.out.println(sqlVictimas);
-            if (conn.escribir(sqlVictimas)) {
-                for (int i = 0; i < chk.length; i++) {
-                    sqlVDelitos = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'"
-                            + causaClave + jConcatenado + "','" + victiClave + jConcatenado + "','"
-                            + deli[i] + "','Si'" + ",(select YEAR(NOW())))";
-                    insertaVDeli = conn.escribir(sqlVDelitos);
-                    System.out.println(sqlVDelitos);
-                }
-                if (insertaVDeli) {
-                    for (int j = 0; j < procesadoRela.length; j++) {
-                        String[] chkRela = request.getParameterValues("chkRelaProce" + j);
-                        for (int k = 0; k < chkRela.length; k++) {
-                            sqlVProce = "INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'"
-                                    + causaClave + jConcatenado + "','" + procesadoRela[j] + "','" + victiClave + jConcatenado
-                                    + "'," + chkRela[k] + ", (select YEAR(NOW())))";
-                            System.out.println(sqlVProce);
-                            insertaVProce = conn.escribir(sqlVProce);
-                        }
+            
+            if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+                sql = "INSERT INTO DATOS_VICTIMAS_ADOJC  VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave
+                        + "','" + victiClave + jConcatenado + "'," + tipoVictima + "," + victima_moral + "," + conto_asesor + "," + asesor + "," + sexoV + ",'" + fecha_nacimiento
+                        + "'," + edad + "," + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + "," + muniNacimiento + "," + nacionalidad + "," + paisResi + ","
+                        + entidadResi + "," + municipioResi + "," + conyugal + "," + alfabetismo + "," + estudios + "," + espanol + "," + indigena + "," + familia
+                        + "," + extrangera + "," + interprete + "," + ingresos + "," + rangoingresos + "," + ocupacion + "," + vmedidaMujer + "," + vmedidas + ",'"
+                        + comentarios + "',(select YEAR(NOW())))";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    for (String chkDeliCom1 : chkDeliCom) {
+                        sql = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                + causaClave + "','" + victiClave + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
+                        insertaVDeli = conn.escribir(sql);
+                        System.out.println(sql);
                     }
-                    if (insertaVProce) {
-                        if (vmedidas == 1) {
-                            for (int i = 0; i < chkvmedida.length; i++) {
-                                sqlVmedidas = "INSERT INTO DATOS_VMEDIDAS_ADOJC VALUES (" + entidad + "," + municipio + "," + numero
-                                        + ",'" + causaClave + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkvmedida[i] + ",(select YEAR(NOW())))";
-                                System.out.println(sqlVmedidas);
-                                insertavmedida = conn.escribir(sqlVmedidas);
+                    if (insertaVDeli) {
+                        for (int j = 0; j < procesadoRela.length; j++) {
+                            String[] chkRela = request.getParameterValues("chkRelaProce" + j);
+                            for (String chkRela1 : chkRela) {
+                                sql = "INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                        + causaClave + "','" + victiClave + jConcatenado + "','" + procesadoRela[j] + "'," + chkRela1 + ", "
+                                        + "(select YEAR(NOW())))";
+                                System.out.println(sql);
+                                insertaVProce = conn.escribir(sql);
                             }
                         }
-                        if (vmedidaMujer == 1) {
-                            for (int i = 0; i < chkvmedidaMujer.length; i++) {
-                                sqlVmedidasMuj = "INSERT INTO DATOS_VMEDIDAS_DMUJ_ADOJC VALUES (" + entidad + "," + municipio + ","
-                                        + numero + ",'" + causaClave + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkvmedidaMujer[i] + ",(select YEAR(NOW())))";
-                                System.out.println(sqlVmedidasMuj);
-                                insertavmedidaMuj = conn.escribir(sqlVmedidasMuj);
+                        if (insertaVProce) {
+                            if (vmedidas == 1) {
+                                for (String chkvmedida1 : chkvmedida) {
+                                    sql = "INSERT INTO DATOS_VMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero
+                                            + ",'" + causaClave + "','" + victiClave + jConcatenado + "'," + chkvmedida1
+                                            + ",(select YEAR(NOW())))";
+                                    System.out.println(sql);
+                                    insertavmedida = conn.escribir(sql);
+                                }
+                            }
+                            if (vmedidaMujer == 1) {
+                                for (String chkvmedidaMujer1 : chkvmedidaMujer) {
+                                    sql = "INSERT INTO DATOS_VMEDIDAS_DMUJ_ADOJC VALUES (" + jEntidad + "," + jMunicipio + ","
+                                            + jNumero + ",'" + causaClave + "','" + victiClave + jConcatenado + "'," + chkvmedidaMujer1
+                                            + ",(select YEAR(NOW())))";
+                                    System.out.println(sql);
+                                    insertavmedidaMuj = conn.escribir(sql);
+                                }
+                            }
+                            if (ingresos == 1) {
+                                for (String chkIngreso : chkIngresos) {
+                                    sql = "INSERT INTO DATOS_VFUENTE_INGRESOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + ","
+                                            + jNumero + ",'" + causaClave + "','" + victiClave + jConcatenado + "'," + chkIngreso
+                                            + ",(select YEAR(NOW())))";
+                                    System.out.println(sql);
+                                    insertavingresos = conn.escribir(sql);
+                                }
+                            }
+                            if (insertavmedida || insertavmedidaMuj || insertavingresos) {
+                                conn.close();
                             }
                         }
-                        if (ingresos == 1) {
-                            for (int i = 0; i < chkIngresos.length; i++) {
-                                sqlIngresos = "INSERT INTO DATOS_VFUENTE_INGRESOS_ADOJC VALUES (" + entidad + "," + municipio + ","
-                                        + numero + ",'" + causaClave + jConcatenado + "','" + victiClave + jConcatenado + "'," + chkIngresos[i] + ",(select YEAR(NOW())))";
-                                System.out.println(sqlIngresos);
-                                insertavingresos = conn.escribir(sqlIngresos);
-                            }
-                        }
-                        if (insertavmedida || insertavmedidaMuj || insertavingresos) {
-                            conn.close();
-                        }
+                        conn.close();
                     }
-
+                    showVictimas vic = new showVictimas();
+                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    showCausasPenales causa = new showCausasPenales();
+                    int totVictiInsrt = vic.countVictimas(causaClave);
+                    int totVicti = causa.countTotalVictimas(causaClave);
+                    if(totVicti == totVictiInsrt){
+                        usuario usuario = new usuario();
+                        usuario.insrtAvance(causaClave, 5);//Actualizamos el avance de la causa penal
+                    }
+                    lis = vic.findVictimasTabla(victiClave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(lis.get(0)[4]);
+                    resp.add(totVictiInsrt);
+                    out.write(resp.toJSONString());
+                    conn.close();
+                } else {
                     conn.close();
                 }
-                //insertavmedida
-                //insertavmedidaMuj
-                //insertavingresos
-                showVictimas vic = new showVictimas();
-                ArrayList<String[]> lis = new ArrayList<String[]>();
-                lis = vic.findVictimasTabla(victiClave + jConcatenado);
-                JSONArray resp = new JSONArray();
-                resp.add(posicion);
-                resp.add(lis.get(0)[0]);
-                resp.add(lis.get(0)[1]);
-                resp.add(lis.get(0)[2]);
-                resp.add(lis.get(0)[3]);
-                resp.add(vic.countVictimas(causaClave + jConcatenado));
-                out.write(resp.toJSONString());
-
-                conn.close();
-            } else {
-                //regresa a insrttramite y maca error
-                conn.close();
+            }else{//Se actualiza el dato que viene de recuperacion
+                sql = "UPDATE DATOS_VICTIMAS_ADOJC SET TIPO_VICTIMA = " + tipoVictima + ",TIPO_VICTIMA_MORAL = " + victima_moral + ","
+                        + "CONTO_ASESOR = " + conto_asesor + ",ASESOR = " + asesor + ",SEXO = " + sexoV + ",FECHA_NACIMIENTO = '" + fecha_nacimiento + "',"
+                        + "EDAD = " + edad + ",VULNERABILIDAD = " + vulnerabilidad + ",NACIMIENTO_PAIS = " + paisNacimiento + ","
+                        + "NACIMIENTO_ENTIDAD = " + entidadNacimiento + ",NACIMIENTO_MUNICIPIO = " + muniNacimiento + ",NACIONALIDAD = " + nacionalidad + ","
+                        + "RESIDENCIA_PAIS = " + paisResi + ",RESIDENCIA_ENTIDAD = " + entidadResi + ",RESIDENCIA_MUNICIPIO = " + municipioResi + ","
+                        + "ESTADO_CIVIL = " + conyugal + ",CONDICION_ALFABETISMO = " + alfabetismo + ",GRADO_ESTUDIOS = " + estudios + ","
+                        + "HABLA_ESPANOL = " + espanol + ",HABLA_INDIGENA = " + indigena + ",LENGUA_INDIGENA = " + familia + ","
+                        + "LENGUA_EXTRANJERA = " + extrangera + ",INTERPRETE = " + interprete + ",INGRESOS = " + ingresos + ","
+                        + "RANGO_INGRESOS = " + rangoingresos + ",OCUPACION = " + ocupacion + ",MEDIDAS_MUJER = " + vmedidaMujer + ","
+                        + "MEDIDAS_PROTECCION = " + vmedidas + ",COMENTARIOS = '" + comentarios + "' "
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    //Se borra todo de vdelitos de la victima por si sufre alguna actualizacion o bien se modifica
+                    sql = "DELETE FROM DATOS_VDELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
+                    conn.escribir(sql);
+                    for (String chkDeliCom1 : chkDeliCom) {
+                        sql = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                + causaClave + "','" + victiClave + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
+                        insertaVDeli = conn.escribir(sql);
+                        System.out.println(sql);
+                    }
+                    if (insertaVDeli) {
+                        //Se borra vprocesados por si algun dato cambia o bien el disparador cambia
+                        sql = "DELETE FROM DATOS_VPROCESADOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                                + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
+                        conn.escribir(sql);
+                        for (int j = 0; j < procesadoRela.length; j++) {
+                            String[] chkRela = request.getParameterValues("chkRelaProce" + j);
+                            for (String chkRela1 : chkRela) {
+                                sql = "INSERT INTO DATOS_VPROCESADOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                        + causaClave + "','" + victiClave + jConcatenado + "','" + procesadoRela[j] + "'," + chkRela1 + ", "
+                                        + "(select YEAR(NOW())))";
+                                System.out.println(sql);
+                                insertaVProce = conn.escribir(sql);
+                            }
+                        }
+                        if (insertaVProce) {
+                            //Se borra vmedidas por si algun dato cambia o bien el disparador cambia
+                            sql = "DELETE FROM DATOS_VMEDIDAS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                                    + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
+                            conn.escribir(sql);
+                            if (vmedidas == 1) {
+                                for (String chkvmedida1 : chkvmedida) {
+                                    sql = "INSERT INTO DATOS_VMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero
+                                            + ",'" + causaClave + "','" + victiClave + jConcatenado + "'," + chkvmedida1
+                                            + ",(select YEAR(NOW())))";
+                                    System.out.println(sql);
+                                    insertavmedida = conn.escribir(sql);
+                                }
+                            }
+                            
+                            //Se borra vmedidas de mujeres por si algun dato cambia o bien el disparador cambia
+                            sql = "DELETE FROM DATOS_VMEDIDAS_DMUJ_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                                    + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
+                            conn.escribir(sql);
+                            if (vmedidaMujer == 1) {
+                                for (String chkvmedidaMujer1 : chkvmedidaMujer) {
+                                    sql = "INSERT INTO DATOS_VMEDIDAS_DMUJ_ADOJC VALUES (" + jEntidad + "," + jMunicipio + ","
+                                            + jNumero + ",'" + causaClave + "','" + victiClave + jConcatenado + "'," + chkvmedidaMujer1
+                                            + ",(select YEAR(NOW())))";
+                                    System.out.println(sql);
+                                    insertavmedidaMuj = conn.escribir(sql);
+                                }
+                            }
+                            
+                            //Se borra fuentes ingresos de victimas por si algun dato cambia o bien el disparador cambia
+                            sql = "DELETE FROM DATOS_VFUENTE_INGRESOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                                    + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
+                            conn.escribir(sql);
+                            if (ingresos == 1) {
+                                for (String chkIngreso : chkIngresos) {
+                                    sql = "INSERT INTO DATOS_VFUENTE_INGRESOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + ","
+                                            + jNumero + ",'" + causaClave + "','" + victiClave + jConcatenado + "'," + chkIngreso
+                                            + ",(select YEAR(NOW())))";
+                                    System.out.println(sql);
+                                    insertavingresos = conn.escribir(sql);
+                                }
+                            }
+                            if (insertavmedida || insertavmedidaMuj || insertavingresos) {
+                                conn.close();
+                            }
+                        }
+                        conn.close();
+                    }
+                    showVictimas vic = new showVictimas();
+                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    int totVictiInsrt = vic.countVictimas(causaClave);
+                    lis = vic.findVictimasTabla(victiClave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(lis.get(0)[4]);
+                    resp.add(totVictiInsrt);
+                    out.write(resp.toJSONString());
+                    conn.close();
+                } else {
+                    conn.close();
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtVictimas.class.getName()).log(Level.SEVERE, null, ex);

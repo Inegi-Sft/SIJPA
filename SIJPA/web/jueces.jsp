@@ -55,7 +55,7 @@
                         %>
                     </select>
                     <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
-                    <a href="#" onclick="validaAddJuez();">Agregar Juez <img src="img/add.png" title="Agregar Juez"></a>
+                    <a href="#" onclick="validaAddJuez();"><img src="img/add.png" title="Agregar Juez"> Agregar Juez</a>
                 </div>
             </form>
             

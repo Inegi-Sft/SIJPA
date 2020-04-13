@@ -24,15 +24,20 @@ public class showTramite {
     ResultSet resul;
     int conteo;
     
-    public ArrayList findTramite(){
+    public ArrayList findTramite(String causaClave, String proceClave){
         conn.Conectar();
         trami = new ArrayList();
-        sql = "SELECT * FROM DATOS_TRAMITES_ADOJC";
+        sql = "SELECT * FROM DATOS_TRAMITES_ADOJC "
+                + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
-                trami.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3),
-                    resul.getString(4),resul.getString(5),resul.getString(6),resul.getString(7),resul.getString(8),resul.getString(9)});
+                trami.add(new String[]{
+                    resul.getString("ETAPA_PROCESAL"), resul.getString("ESTATUS_INVESTIGACION"), resul.getString("ESTATUS_INTERMEDIA"),
+                    resul.getString("ESPECIFIQUE"), resul.getString("FECHA_ACTO_PROCESAL")
+                });
             }
             conn.close();
         }
@@ -40,68 +45,70 @@ public class showTramite {
             Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return trami;
-    } 
+    }
     
-    public ArrayList findTramiteProce(String pro) {
+    public ArrayList findTramiteCausa(String causaClave) {
         conn.Conectar();
         trami = new ArrayList();
-        sql = "SELECT T.*, P.NOMBRE, P.A_PATERNO, P.A_MATERNO, EP.DESCRIPCION "
-                + " FROM DATOS_TRAMITES_ADOJC T, DATOS_PROCESADOS_ADOJC P, CATALOGOS_ETAPA_PROCESAL EP"
-                + " WHERE T.PROCESADO_CLAVE=P.PROCESADO_CLAVE"
-                + " AND T.ETAPA_PROCESAL=EP.PROCESAL_ID"
-                + " AND T.PROCESADO_CLAVE='"+pro+"'";
+        sql = "SELECT T.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ', P.A_PATERNO,' ', P.A_MATERNO), EP.DESCRIPCION, T.FECHA_ACTO_PROCESAL "
+                + "FROM DATOS_TRAMITES_ADOJC T, DATOS_PROCESADOS_ADOJC P, CATALOGOS_ETAPA_PROCESAL EP "
+                + "WHERE T.PROCESADO_CLAVE=P.PROCESADO_CLAVE "
+                + "AND T.ETAPA_PROCESAL=EP.PROCESAL_ID "
+                + "AND T.PROCESADO_CLAVE = '" + causaClave + "' "
+                + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
                 trami.add(new String[]{
-                    resul.getString("T.PROCESADO_CLAVE"), resul.getString("P.NOMBRE")+" "+resul.getString("P.A_PATERNO")+" "+resul.getString("P.A_MATERNO"),
-                    resul.getString("EP.DESCRIPCION"),resul.getString("T.FECHA_ACTO_PROCESAL")
+                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4)
                 });
             }
             conn.close();
         }
         catch (SQLException ex) {
-            Logger.getLogger(showConclusiones.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
         return trami;
 
     }
-    public int countTramiteExp(String exp) {
+    
+    public ArrayList findTramiteTabla(String proceClave) {
+        conn.Conectar();
+        trami = new ArrayList();
+        sql = "SELECT T.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ', P.A_PATERNO,' ', P.A_MATERNO), EP.DESCRIPCION, T.FECHA_ACTO_PROCESAL "
+                + " FROM DATOS_TRAMITES_ADOJC T, DATOS_PROCESADOS_ADOJC P, CATALOGOS_ETAPA_PROCESAL EP"
+                + " WHERE T.PROCESADO_CLAVE=P.PROCESADO_CLAVE"
+                + " AND T.ETAPA_PROCESAL=EP.PROCESAL_ID"
+                + " AND T.PROCESADO_CLAVE='" + proceClave + "'";
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                trami.add(new String[]{
+                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4)
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return trami;
+    }
+    
+    public int countTramiteExp(String causaClave) {
         try{
             conn.Conectar();
             conteo = 0;
-            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteo= resul.getInt(1);
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showTramite .class.getName()).log(Level.SEVERE, null, ex);
         }
         return conteo;
-
     }
-    public String verificaEtapaTramite(String exp, String pro) {
-        String valor="", existe="";
-        try {
-            conn.Conectar();
-            if(pro!=null){
-                sql = "SELECT COUNT(*) AS EXISTE FROM DATOS_ETAPA_INTERMEDIA_ADOJC WHERE CAUSA_CLAVE='"+exp+"' AND PROCESADO_CLAVE='"+pro+"'";
-                resul = conn.consultar(sql);
-                while (resul.next()) {
-                    existe = resul.getString("EXISTE");
-                }
-                if(existe.equals("0")){//condicion para saber si el procesado entro a etapa intermedia
-                    valor="1";//valor de inicial en el catalogo etapa_procesal
-                }else{
-                    valor="2";//valor de intermedia en el catalogo etapa_procesal
-                }
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return valor;
-    }
+    
 }

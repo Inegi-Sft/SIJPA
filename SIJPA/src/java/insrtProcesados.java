@@ -5,7 +5,9 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showProcesados;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -48,19 +50,22 @@ public class insrtProcesados extends HttpServlet {
         HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
-        String entidad = (String) sesion.getAttribute("entidad");
-        String municipio = (String) sesion.getAttribute("municipio");
-        String numero = (String) sesion.getAttribute("numero");
-        String jConcatenado = entidad + municipio + numero;
+        String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
+        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String jEntidad = jDividido[0];
+        String jMunicipio = jDividido[1];
+        String jNumero = jDividido[2];
+        String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClave = (String) sesion.getAttribute("causaClave");
 
         // VARIABLES PROCESADOS
         String proceClave = request.getParameter("proceClave");
-        String nombre = request.getParameter("nombre");
-        String apaterno = request.getParameter("apaterno");
-        String amaterno = request.getParameter("amaterno");
-        String alias = request.getParameter("alias");
-        String curp = request.getParameter("curp");
+        String nombre = request.getParameter("nombre").toUpperCase();
+        String apaterno = request.getParameter("apaterno").toUpperCase();
+        String amaterno = request.getParameter("amaterno").toUpperCase();
+        String alias = request.getParameter("alias").toUpperCase();
+        String curp = request.getParameter("curp").toUpperCase();
         String fNacimiento = request.getParameter("fNacimiento");
         String sexo = request.getParameter("sexo");
         String edad = request.getParameter("edad");
@@ -112,86 +117,121 @@ public class insrtProcesados extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
-            sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + entidad + "," + municipio + "," + numero + ",'"
-                    + causaClave + jConcatenado + "','" + proceClave + jConcatenado + "','"
-                    + nombre + "','"
-                    + apaterno + "','"
-                    + amaterno + "','"
-                    + alias + "','"
-                    + curp + "','"
-                    + fNacimiento + "',"
-                    + sexo + ","
-                    + edad + ","
-                    + nPais + ","
-                    + nEntidad + ","
-                    + nMunicipio + ","
-                    + nacionalidad + ","
-                    + residencia + ","
-                    + rEntidad + ","
-                    + rMunicipio + ","
-                    + edoCivil + ","
-                    + discapacidad + ","
-                    + alfabet + ","
-                    + estudios + ","
-                    + condiEstudiante + ","
-                    + hablaEsp + ","
-                    + poblaIndigena + ","
-                    + puebloIndigena + ","
-                    + hablaIndigena + ","
-                    + lenguaIndigena + ","
-                    + lenExtranjera + ","
-                    + traductorPro + ","
-                    + ingresosPro + ","
-                    + rangoIngresosPro + ","
-                    + ocupacion + ","
-                    + condicionActi + ","
-                    + presentAdo + ","
-                    + tipoDetencion + ","
-                    + formaConduc + ","
-                    + participacion + ","
-                    + reincidencia + ","
-                    + psicofisico + ","
-                    + grupoDelictivo + ",'"
-                    + delictivo + "',"
-                    + defensor + ","
-                    + representante + ",'"
-                    + comentarios + "',"
-                    + " (select YEAR(NOW())) );";
-            System.out.println(sql);
-            if (conn.escribir(sql)) {
-                if (ingresosPro == 1) {
-                    for (int i = 0; i < chkIngresosPro.length; i++) {
-                        sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJC VALUES(" + entidad + "," + municipio + "," + numero + ",'"
-                                + causaClave + jConcatenado + "','" + proceClave + jConcatenado + "'," + chkIngresosPro[i] + ","
-                                + "(select YEAR(NOW())) )";
-                        System.out.println(sql);
-                        conn.escribir(sql);
-                    }
-                }
             
-                for (int i = 0; i < arrayDelito.length; i++) {
-                    if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
-                        sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + entidad + "," + municipio + "," + numero + ",'"
-                                + causaClave + jConcatenado + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
-                                + arrayNumVic[i] + ",(select YEAR(NOW())) )";
-                        System.out.println(sql);
-                        insertPD = conn.escribir(sql);
+            if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+                sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
+                        + proceClave + jConcatenado + "','" + nombre + "','"+ apaterno + "','" + amaterno + "','" + alias + "','" + curp + "','"
+                        + fNacimiento + "'," + sexo + "," + edad + "," + nPais + "," + nEntidad + "," + nMunicipio + "," + nacionalidad + ","
+                        + residencia + "," + rEntidad + "," + rMunicipio + "," + edoCivil + "," + discapacidad + "," + alfabet + "," + estudios + ","
+                        + condiEstudiante + "," + hablaEsp + "," + poblaIndigena + "," + puebloIndigena + "," + hablaIndigena + "," + lenguaIndigena + ","
+                        + lenExtranjera + "," + traductorPro + "," + ingresosPro + "," + rangoIngresosPro + "," + ocupacion + "," + condicionActi + ","
+                        + presentAdo + "," + tipoDetencion + "," + formaConduc + "," + participacion + "," + reincidencia + "," + psicofisico + ","
+                        + grupoDelictivo + ",'" + delictivo + "'," + defensor + "," + representante + ",'" + comentarios + "',"
+                        + " (select YEAR(NOW())) );";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    if (ingresosPro == 1) {
+                        for (String chkIngresosPro1 : chkIngresosPro) {
+                            sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                    + causaClave + "','" + proceClave + jConcatenado + "'," + chkIngresosPro1 + ","
+                                    + "(select YEAR(NOW())) )";
+                            System.out.println(sql);
+                            conn.escribir(sql);
+                        }
                     }
+
+                    for (int i = 0; i < arrayDelito.length; i++) {
+                        if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
+                            sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                    + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
+                                    + arrayNumVic[i] + ",(select YEAR(NOW())) )";
+                            System.out.println(sql);
+                            insertPD = conn.escribir(sql);
+                        }
+                    }
+                    if(insertPD){
+                        showProcesados pro = new showProcesados();
+                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        showCausasPenales causa = new showCausasPenales();
+                        int totProceInsrt = pro.countProcesados(causaClave);
+                        int totProce = causa.countTotalProcesados(causaClave);
+                        if(totProce == totProceInsrt){
+                            usuario usuario = new usuario();
+                            usuario.insrtAvance(causaClave, 4);//Actualizamos el avance de la causa penal
+                        }
+                        lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
+                        JSONArray resp = new JSONArray();
+                        resp.add(posicion);
+                        resp.add(lis.get(0)[1]);
+                        resp.add(lis.get(0)[2]);
+                        resp.add(lis.get(0)[3]);
+                        resp.add(lis.get(0)[4]);
+                        resp.add(totProceInsrt);
+                        out.write(resp.toJSONString());
+                    }
+                    conn.close();
                 }
-                if(insertPD){
-                    showProcesados pro = new showProcesados();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
-                    lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
-                    JSONArray resp = new JSONArray();
-                    resp.add(posicion);
-                    resp.add(lis.get(0)[0]);
-                    resp.add(lis.get(0)[1]);
-                    resp.add(lis.get(0)[2]);
-                    resp.add(lis.get(0)[3]);
-                    resp.add(pro.countProcesados(causaClave + jConcatenado));
-                    out.write(resp.toJSONString());
+            }else{//Se actualiza el dato que viene de recuperacion
+                sql = "UPDATE DATOS_PROCESADOS_ADOJC SET NOMBRE = '" + nombre + "',A_PATERNO = '"+ apaterno + "',A_MATERNO ='" + amaterno + "',"
+                        + "ALIAS = '" + alias + "',CURP = '" + curp + "',FECHA_NACIMIENTO = '" + fNacimiento + "',SEXO = " + sexo + ","
+                        + "EDAD = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
+                        + "NACIONALIDAD = " + nacionalidad + ",RESIDENCIA_PAIS = " + residencia + ",RESIDENCIA_ENTIDAD = " + rEntidad + ","
+                        + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
+                        + "CONDICION_ALFABETISMO = " + alfabet + ",ULTIMO_GRADO_ESTUDIOS = " + estudios + ",CONDICION_ESTUDIANTE = " + condiEstudiante + ","
+                        + "HABLA_ESPANOL = " + hablaEsp + ",POBLACION_INDIGENA = " + poblaIndigena + ",TIPO_PUEBLO_INDIGENA = " + puebloIndigena + ","
+                        + "HABLA_INDIGENA = " + hablaIndigena + ",FAMILIA_LINGUISTICA = " + lenguaIndigena + ",LENGUA_EXTRANJERA = " + lenExtranjera + ","
+                        + "INTERPRETE = " + traductorPro + ",INGRESOS = " + ingresosPro + ",RANGO_INGRESOS = " + rangoIngresosPro + ","
+                        + "OCUPACION = " + ocupacion + ",CONDICION_ACTIVIDAD = " + condicionActi + ",INICIO_IMPUTADO = " + presentAdo + ","
+                        + "TIPO_DETENCION = " + tipoDetencion + ",FORMA_CONDUCCION = " + formaConduc + ",GRADO_PARTICIPACION = " + participacion + ","
+                        + "REINCIDENCIA = " + reincidencia + ",ESTADO_PSICOFISICO = " + psicofisico + ",DELICTIVO = " + grupoDelictivo + ","
+                        + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
+                        + "COMENTARIOS = '" + comentarios + "' "
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    //Borramos los Pingresos por si sufren de acutliazcion o bien se cambie que no tuve ingresos
+                    sql = "DELETE FROM DATOS_PFUENTE_INGRESOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                    conn.escribir(sql);
+                    //Borramos pdelitos por si sufre actualizacion se inserten los nuevos o bien cambie de opcion
+                    sql = "DELETE FROM DATOS_PDELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                    conn.escribir(sql);
+                    if (ingresosPro == 1) {
+                        for (String chkIngresosPro1 : chkIngresosPro) {
+                            sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                    + causaClave + "','" + proceClave + jConcatenado + "'," + chkIngresosPro1 + ","
+                                    + "(select YEAR(NOW())) )";
+                            System.out.println(sql);
+                            conn.escribir(sql);
+                        }
+                    }
+                    for (int i = 0; i < arrayDelito.length; i++) {
+                        if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
+                            sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                                    + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
+                                    + arrayNumVic[i] + ",(select YEAR(NOW())) )";
+                            System.out.println(sql);
+                            insertPD = conn.escribir(sql);
+                        }
+                    }
+                    if(insertPD){
+                        showProcesados pro = new showProcesados();
+                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        int totProceInsrt = pro.countProcesados(causaClave);
+                        lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
+                        JSONArray resp = new JSONArray();
+                        resp.add(posicion);
+                        resp.add(lis.get(0)[1]);
+                        resp.add(lis.get(0)[2]);
+                        resp.add(lis.get(0)[3]);
+                        resp.add(lis.get(0)[4]);
+                        resp.add(totProceInsrt);
+                        out.write(resp.toJSONString());
+                    }
+                    conn.close();
                 }
-                conn.close();
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);

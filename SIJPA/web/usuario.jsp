@@ -26,7 +26,9 @@
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>Usuarios</h1>
-            <a href="capturaUsuario.jsp" class="addJuz">Agregar Usuario <img src="img/add.png" title="Agregar Usuario"></a>
+            <a href="capturaUsuario.jsp" class="addJuz">Agregar Usuario 
+                <img src="img/add.png" title="Agregar Usuario">
+            </a>
             <table class="tablasRegis">
                 <tr>
                     <th>ID</th>

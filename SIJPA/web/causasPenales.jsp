@@ -17,9 +17,23 @@
         <title>SIJPA::Causas Penales</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
-        <%
+        <%  
             showJuzgados juz = new showJuzgados();
             showJueces juez = new showJueces();
+            showCausasPenales cp = new showCausasPenales();
+            ArrayList<String[]> lsCausas;
+            ArrayList<String> lista;
+            
+            String juzgado = "";
+            if(request.getParameter("juzgado") != null){
+                if(request.getParameter("juzgado") != ""){
+                    juzgado=request.getParameter("juzgado");
+                    session.setAttribute("juzgadoClave", juzgado);
+                }
+            }else if(session.getAttribute("juzgadoClave") != null){
+                juzgado = (String) session.getAttribute("juzgadoClave");
+            }
+            
             if(juz.findTotJuzgado() == 0){
                 response.sendRedirect("capturaJuzgado.jsp");
             }else if(session.getAttribute("juzgadoClave") != null){
@@ -28,19 +42,9 @@
                 }
             }
             
-            String juzgado = "";
-            if(request.getParameter("juzgado") != null){
-                juzgado=request.getParameter("juzgado");
-                session.setAttribute("juzgadoClave", juzgado);
-            }else if(session.getAttribute("juzgadoClave") != null){
-                juzgado = (String) session.getAttribute("juzgadoClave");
+            if(session.getAttribute("causaClave") != null){
+                session.setAttribute("causaClave", "");
             }
-            
-            
-            showCausasPenales cp = new showCausasPenales();
-            
-            ArrayList<String[]> lsCausas;
-            ArrayList<String> lista;
             
             int tCausasJuz=cp.countTotalCausasPorJuzgado(juzgado);
         %>
@@ -53,7 +57,7 @@
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
-            <h1>Causas Penales</h1>
+            <h1>Causas Penales ${sessionScope.causaClave}</h1>
             <form action="causasPenales.jsp" name="formCP" method="post">
                 <div id="juzClave">
                     <label for="juzgado">Juzgado Clave:</label>
@@ -66,18 +70,20 @@
                                 if(ls.equals(juzgado)){
                                     out.println(" selected ");
                                 }
-                                out.println( ">" + ls + "</option>");
+                                out.println(">" + ls + "</option>");
                             }
                         %>
                     </select>
                 </div>
                 <span class="totExp">Total de Causas en este Juzgado: <%=tCausasJuz%></span>
                 <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
-                <a class="add" href="#" onclick="validaAddCausa();"><img src="img/add3.png" width="20" height="20"/> Agregar Expediente</a>
+                <a class="add" href="#" onclick="validaAddCausa();">
+                    <img src="img/add3.png" width="20" height="20"/> Agregar Expediente
+                </a>
                 <table id="causas" class="myTable">
                     <thead>
                         <tr>
-                            <th>Expediente</th>
+                            <th>Causa Penal</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
                             <th>Conductas Antisociales</th>
@@ -91,22 +97,22 @@
                     <tbody>
                     <%
                         lsCausas = cp.findCausasPorJuzgado(juzgado);
-                        String juzLimpio="";
-                        if(juzgado!=null){
-                            juzLimpio=juzgado.replace("-", "");
+                        String juzLimpio = "";
+                        if(juzgado != null){
+                            juzLimpio = juzgado.replace("-", "");
                         }
                         for (String[] ls : lsCausas) {
-                            String expSimple=ls[0].replace(juzLimpio, "");
+                            String ccSimple = ls[0].replace(juzLimpio, "");
                     %>
                         <tr>
-                            <td><%=expSimple%></td>
+                            <td><%=ccSimple%></td>
                             <td><%=ls[1]%></td>
                             <td><%=ls[2]%></td>
                             <td><%=ls[3]%></td>
                             <td><%=ls[4]%></td>
                             <td><%=ls[5]%></td>
                             <td>--</td>
-                            <td><a href="elementosPrincipales.jsp"><img src='img/editar.png' title="Editar"/></a></td>
+                            <td><a href="elementosPrincipales.jsp?causaClave=<%=ccSimple%>"><img src='img/editar.png' title="Editar"/></a></td>
                             <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
                         </tr>
                     <% 

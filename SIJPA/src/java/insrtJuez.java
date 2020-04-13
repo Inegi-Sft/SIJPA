@@ -43,7 +43,6 @@ public class insrtJuez extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession sesion= request.getSession();
         
-        String primerJuez = request.getParameter("primerJuez");
         String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
         String[] juzSeparado = juzgadoClave.split("-");
         String entidad = juzSeparado[0];

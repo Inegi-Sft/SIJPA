@@ -626,3 +626,26 @@ function deleteTramite(fila, idProce) {
     }
 }
 /*----------------------- FIN FUNCIONES PARA DELETE AJAX --------------------------*/
+ function fechaDias(){
+   var fecha =new Date(),ano,mes,dia;
+   ano=fecha.getFullYear();
+   mes=fecha.getMonth();
+   dia=fecha.getDate();
+   
+   if ((dia <10)&&(mes<10)){
+      fecha=ano+"-"+"0"+mes+"-"+"0"+dia;
+   }else if (mes<10) 
+   {
+      fecha=ano+"-"+"0"+mes+"-"+dia;
+   }else if (dia <10)
+   {
+       fecha=ano+"-"+mes+"-"+"0"+dia;
+   }else
+   {
+       fecha=ano+"-"+mes+"-"+dia;
+   }
+      return fecha;
+   //document.getElementById("fIngreso").setAttribute("max", fecha);
+  // alert ("la fecha"+ fecha);
+   // fecha=document.getElementById("myDate").max;    
+}

@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Causa Penal</title>
         <script type="text/javascript" src="js/funcionesCP.js"></script>
+        
         <%
             catalogos cat = new catalogos();
             showJueces juez = new showJueces();
@@ -85,7 +86,7 @@
                         <tr>
                             <td>
                                 <label for="fIngreso">Fecha de ingreso</label>
-                                <input type="date" name="fIngreso" id="fIngreso" value="<%=fechaIngre%>" required>
+                                <input type="date" name="fIngreso" id="fIngreso" value="<%=fechaIngre%>" required max="2020-04-16">
                                 <div class="noIdentificada">
                                     <input type="checkbox" id="chkFechaIngre" onclick="fechaNoIdent('#chkFechaIngre', '#fIngreso')">
                                     <label>No identificada</label>

@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8/04/2020, 12:27:19 PM
+    Author     : FERMIN.GOMEZ
+*/
+input[type=time]:read-only{
+    background: rgb(235, 235, 228);
+    cursor: default;
+}
+.contenedor input[type="checkbox"]{
+	margin: 0 4px 3px 0;
+	vertical-align: middle;
+	background: url("../img/checkbox-uncheck.png");
+	background-size: cover;
+	cursor: pointer;
+}
+.contenedor input[type="checkbox"]:checked{
+	background: url("../img/checkbox-check.png");
+	background-size: cover;
+}
+.contenedor input[type="time"].tiempo::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+.contenedor input[type="time"].tiempo{
+  width: 90px;
+}
+.contenedor input.audiFecha{
+  width: 150px;
+}
+.contenedor input.audiFecha, .contenedor input.tiempo{
+  margin: 1px 1px 1px 1px;
+  height: 27px;
+}
+#dJueces{
+    font-size: 12px;
+    text-align: left;
+    height: 110px;
+    overflow:  auto;
+}
+#fstJueces{
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    height: 150px;
+    margin-top:20px;
+    background-color: rgba(235,250,250,0.5);
+}
+#fstJueces legend{
+    font-size: 18px;
+    color: #003057
+}

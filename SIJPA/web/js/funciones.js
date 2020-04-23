@@ -46,7 +46,7 @@ $(document).ready(function () {
                 if (response === 1) {
                     window.location.href = "bienvenida.jsp";
                 }else{
-                    alert('Usuario no encontrado, favor de revisar usuario o contraseña');
+                    alert('Usuario no encontrado, favor de revisar usuario o contraseÃ±a');
                 }
             },
             error: function (response) {
@@ -98,11 +98,11 @@ $(document).ready(function () {
     $('#confPass').keyup(function(){
         if($('#confPass').val() !== ''){
             if ($('#confPass').val() === $('#pass').val()) {
-                $('#mesajePass').text('Las contraseñas son correctas');
+                $('#mesajePass').text('Las contraseÃ±as son correctas');
                 $('#mesajePass').css({'color':'#66cc00'});
                 $('#guardar').fadeIn('slow');
             }else{
-                $('#mesajePass').text('Las contraseñas no coinciden');
+                $('#mesajePass').text('Las contraseÃ±as no coinciden');
                 $('#mesajePass').css({'color':'#ff0000'});
                 $('#guardar').fadeOut('slow');
             }
@@ -584,7 +584,7 @@ function borraRegistro(clave, posi, tabla, idCampo){
         alert('Se recibe causa: ' + clave + ' ,posi: ' + posi + ' ,tabla: ' + tabla + ',idcampo: ' + idCampo);
         $('#' + tabla + ' tbody tr').eq(posi).remove();
         $(idCampo).val($(idCampo).val() - 1);
-        var numCampo = $(idCampo).val();//dependiendo del id que made sabremos el tamaño del campo
+        var numCampo = $(idCampo).val();//dependiendo del id que made sabremos el tamaÃ±o del campo
         if(clave !== 'sr'){
             $.ajax({
                 type: 'post',
@@ -618,3 +618,51 @@ function borraRegistro(clave, posi, tabla, idCampo){
     }
 }
 /*----------------------- FIN FUNCIONES PARA DELETE AJAX --------------------------*/
+function VFechaOcurrencia(Ocurr){
+    var fechaOcurren = $(Ocurr).val();
+    if (fechaOcurren !== '') {
+        $.ajax({
+            type: 'post',
+            url: 'obtenFechaOcurr',
+            data: {
+                fechaOcurren: fechaOcurren
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                if (response === '1') {
+                    alert('La Fecha De Ocurrencia No Debe Ser mayor A La Fecha de Ingreso');
+                    $(Ocurr).val("");
+                    $(Ocurr).focus();
+                }
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+            }
+        });
+    }   
+} 
+
+function ValidaCarpeInvest(InputCarpInves){
+    var CarpInves = $(InputCarpInves).val();
+    if (CarpInves !== '') {
+        $.ajax({
+            type: 'post',
+            url: 'obtenCarpeInves',
+            data: {
+                CarpInves: CarpInves
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                // alert("respuesta del servidor= "+response);
+                if (response === '1') {
+                    alert('La Causa Penal Ya Existe');
+                    $(InputCarpInves).val("");
+                    $(InputCarpInves).focus();               
+                }
+            }, 
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+            }
+        });
+    }
+}

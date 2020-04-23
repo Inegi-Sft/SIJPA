@@ -6,6 +6,7 @@
 <%@page import="clasesAuxiliar.showJueces"%>
 <%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +16,9 @@
         <title>SIJPA::Captura Causa Penal</title>
         <script type="text/javascript" src="js/funcionesCP.js"></script>
         
-        <%
+        <%            
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
             catalogos cat = new catalogos();
             showJueces juez = new showJueces();
             ArrayList<String[]> lista, causa;
@@ -76,17 +79,17 @@
                             </td>
                             <td>
                                 <label for="carpInves">No. Carpeta Investigación</label>
-                                <input type="text" name="carpInves" id="CarpInves" value="<%=carpInves%>" required>
+                                <input type="text" name="carpInves" id="CarpInves"  value="<%=carpInves%>"  required>
                             </td>
                             <td>
                                 <label for="expClave">No. Asunto Asignado</label>
-                                <input type="text" name="expClave" id="expClave" value="<%=causaNum%>" required>
+                                <input type="text" name="expClave" id="expClave" onblur="ValidaCarpeInvest('#expClave')"  value="<%=causaNum%>" required>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="fIngreso">Fecha de ingreso</label>
-                                <input type="date" name="fIngreso" id="fIngreso" value="<%=fechaIngre%>" required max="2020-04-16">
+                                <input type="date" name="fIngreso" id="fIngreso" value="<%=fechaIngre%>" required max="<%=fechas%>" onkeydown="return false">
                                 <div class="noIdentificada">
                                     <input type="checkbox" id="chkFechaIngre" onclick="fechaNoIdent('#chkFechaIngre', '#fIngreso')">
                                     <label>No identificada</label>

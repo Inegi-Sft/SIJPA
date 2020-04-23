@@ -18,7 +18,7 @@
         <section class="contenedor">
             <h1>SISTEMAS CAPTURA SIJPA</h1><br>
             <button id="btnJc" name="btnJc">Juzgado de Control</button>
-            <button id="btnJo" name="btnJo" disabled>Juicio Oral</button>
+            <button id="btnJo" name="btnJo">Juicio Oral</button>
         </section>
     </body>
 </html>

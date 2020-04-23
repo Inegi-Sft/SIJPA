@@ -57,7 +57,7 @@ public class showProcesados {
         return proce;
     }
     
-    public ArrayList findProcesasdosCausa(String causa){
+    public ArrayList findProcesasdosCausa(String causaClve){
         try {
             conn.Conectar();
             proce = new ArrayList();
@@ -65,7 +65,7 @@ public class showProcesados {
                     + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TC, CATALOGOS_SEXO S"
                     + " WHERE P.INICIO_IMPUTADO = TC.CONSIGNACION_ID"
                     + " AND S.SEXO_ID = P.SEXO"
-                    + " AND P.CAUSA_CLAVE = '" + causa + "'"
+                    + " AND P.CAUSA_CLAVE = '" + causaClve + "'"
                     + " ORDER BY 1;";
             
             resul = conn.consultar(sql);
@@ -109,7 +109,8 @@ public class showProcesados {
         try{
             conn.Conectar();
             conteoPro = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND NOMBRE <> -2";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoPro = resul.getInt("TOTAL");

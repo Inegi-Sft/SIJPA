@@ -129,8 +129,8 @@ public class showInicial {
     public ArrayList findVdelitos(String causaClave) {
         conn.Conectar();
         vdeli = new ArrayList();
-        sql = "SELECT DISTINCT(DELITO_CLAVE), COUNT(DISTINCT(PROCESADO_CLAVE)), COUNT(DISTINCT(VICTIMA_CLAVE)) FROM DATOS_VDELITOS_ADOJC "
-                + "WHERE CAUSA_CLAVE = '" + causaClave + "' GROUP BY DELITO_CLAVE;";
+        sql = "SELECT DISTINCT(DELITO_CLAVE), COUNT(DISTINCT(PROCESADO_CLAVE)), COUNT(DISTINCT(VICTIMA_CLAVE)) "
+                + "FROM DATOS_VDELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' GROUP BY DELITO_CLAVE;";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

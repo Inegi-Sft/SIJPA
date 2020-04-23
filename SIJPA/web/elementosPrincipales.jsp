@@ -80,36 +80,43 @@
                             <th>Grado</th>
                             <th>Comisión</th>
                             <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>  
                     <tbody>
                         <%
                             if(!cc.equals("")){
-                                for(y = 1; y <= totD; y++){//For para recorrer todos los delitos en la causa penal
-                                    deli = delito.findDeliTabla(cc + "-D" + y + jc.replace("-", ""));//Le enviamos el delito a la BD
-                                    if(deli.size() != 0){//Si el delito esta en BD lo ponemos
+                                y = 0;
+                                deli = delito.findDeliCausas(ccJuz);//Obtenemos delitos por causa
+                                for(String[] del : deli){//For para recorrer todos los delitos en la causa penal
+                                    if(!del[1].equals("No aplica")){//Si el delito esta en lleno BD lo ponemos
                                         out.println("<tr>");
-                                        out.println("<td>" + deli.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + deli.get(0)[1] + "</td>");
-                                        out.println("<td>" + deli.get(0)[2] + "</td>");
-                                        out.println("<td>" + deli.get(0)[3] + "</td>");
-                                        out.println("<td>" + deli.get(0)[4] + "</td>");
-                                        out.println("<td>" + deli.get(0)[5] + "</td>");
-                                        out.println("<td><a class='pop' href='delitos.jsp?delitoClave=" + deli.get(0)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + (y - 1) + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td>" + del[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + del[1] + "</td>");
+                                        out.println("<td>" + del[2] + "</td>");
+                                        out.println("<td>" + del[3] + "</td>");
+                                        out.println("<td>" + del[4] + "</td>");
+                                        out.println("<td>" + del[5] + "</td>");
+                                        out.println("<td><a class='pop' href='delitos.jsp?delitoClave=" + del[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                                + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"/></a></td>");
                                         out.println("</tr>");
                                     }else{//Si el delito no esta en la BD lo agregamos vacio
                                         out.println("<tr>");
-                                        out.println("<td>" + cc + "-D" + y + "</td>");
+                                        out.println("<td>" + del[0].replace(jc.replace("-", ""), "") + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='delitos.jsp?delitoClave=" + cc + "-D" + y
-                                                + "&posicion=" + (y - 1) + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a class='pop' href='delitos.jsp?delitoClave=" + del[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                                + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
                                         out.println("</tr>");
                                     }
+                                    y++;
                                 }
                             }
                         %>
@@ -127,34 +134,41 @@
                             <th>Sexo</th>
                             <th>Fecha nacimiento</th>
                             <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead> 
                     <tbody>
                         <%
                             if(!cc.equals("")){
-                                for(y = 1; y <= totP; y++){//For para recorrer los procesados en de la cuasa penal
-                                    proce = procesa.findProcesasdosTabla(cc + "-P" + y + jc.replace("-", ""));
-                                    if(proce.size() != 0){//Si el procesado esta en BD se pone
+                                y = 0;
+                                proce = procesa.findProcesasdosCausa(ccJuz);
+                                for(String[] proc : proce){//For para recorrer los procesados en de la cuasa penal
+                                    if(!proc[1].equals("-2 -2 -2")){//Si el procesado esta lleno en BD se pone
                                         out.println("<tr>");
-                                        out.println("<td>" + proce.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + proce.get(0)[1] + "</td>");
-                                        out.println("<td>" + proce.get(0)[2] + "</td>");
-                                        out.println("<td>" + proce.get(0)[3] + "</td>");
-                                        out.println("<td>" + proce.get(0)[4] + "</td>");
-                                        out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + proce.get(0)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + (y - 1) + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td>" + proc[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + proc[1] + "</td>");
+                                        out.println("<td>" + proc[2] + "</td>");
+                                        out.println("<td>" + proc[3] + "</td>");
+                                        out.println("<td>" + proc[4] + "</td>");
+                                        out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + proc[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                                + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
                                         out.println("</tr>");
                                     }else{//Si el procesado no esta en BD se agrega vacio
                                         out.println("<tr>");
-                                        out.println("<td>" + cc + "-P" + y + "</td>");
+                                        out.println("<td>" + proc[0].replace(jc.replace("-", ""), "") + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + cc + "-P" + y
-                                                + "&posicion=" + (y - 1) + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + proc[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                                + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
                                         out.println("</tr>");
                                     }
+                                    y++;
                                 }
                             }
                         %>
@@ -172,34 +186,41 @@
                             <th>Fecha nacimiento</th>
                             <th>Lugar nacimiento</th>
                             <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
                             if(!cc.equals("")){
-                                for(y = 1; y <= totV; y++){//For para recorrer todas las victimas registradas en BD
-                                    vic = victi.findVictimasTabla(cc + "-V" + y + jc.replace("-", ""));
-                                    if(vic.size() != 0){//Si tenemos victimas registradas en la BD las ponemos
+                                y = 0;
+                                vic = victi.findVictimasCausa(ccJuz);
+                                for(String[] vi : vic){//For para recorrer todas las victimas registradas en BD
+                                    if(!vi[1].equals("No aplica")){//Si tenemos victimas registradas en la BD las ponemos
                                         out.println("<tr>");
-                                        out.println("<td>" + vic.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + vic.get(0)[1] + "</td>");
-                                        out.println("<td>" + vic.get(0)[2] + "</td>");
-                                        out.println("<td>" + vic.get(0)[3] + "</td>");
-                                        out.println("<td>" + vic.get(0)[4] + "</td>");
-                                        out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + vic.get(0)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + (y - 1) + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td>" + vi[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + vi[1] + "</td>");
+                                        out.println("<td>" + vi[2] + "</td>");
+                                        out.println("<td>" + vi[3] + "</td>");
+                                        out.println("<td>" + vi[4] + "</td>");
+                                        out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + vi[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                                + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");
                                         out.println("</tr>");
                                     }else{//Si la victima no esta en BD se agrega vacia
                                         out.println("<tr>");
-                                        out.println("<td>" + cc + "-V" + y + "</td>");
+                                        out.println("<td>" + vi[0].replace(jc.replace("-", ""), "") + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + cc + "-V" + y
-                                                + "&posicion=" + (y - 1) + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + vi[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                                + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");
                                         out.println("</tr>");
                                     }
+                                    y++;
                                 }
                             }
                         %>
@@ -223,45 +244,33 @@
                     <tbody>
                         <%
                             if(!cc.equals("")){
-                                for(y = 1; y <= totP; y++){//For para recorrer todos los procesados registrados
-                                    ini = inicial.findInicialTabla(cc + "-P" + y + jc.replace("-", ""));//Veirifcamos si ya existe en inicial
-                                    proce = procesa.findProcesasdosTabla(cc + "-P" + y + jc.replace("-", ""));//Verificamos si existe en procesados
-                                    if(ini.size() != 0){//Si el procesado esta en inicial de la BD lo agregamos
+                                y = 0;
+                                ini = inicial.findInicialCausa(ccJuz);//Veirifcamos si ya existe en inicial
+                                for(String[] in : ini){//For para recorrer todos los procesados registrados
+                                    if(!in[2].equals("No aplica")){//Si el procesado esta en inicial de la BD lo agregamos
                                         out.println("<tr>");
-                                        out.println("<td>" + ini.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + ini.get(0)[1] + "</td>");
-                                        out.println("<td>" + ini.get(0)[2] + "</td>");
-                                        out.println("<td>" + ini.get(0)[3] + "</td>");
-                                        out.println("<td>" + ini.get(0)[4] + "</td>");
-                                        out.println("<td>" + ini.get(0)[5] + "</td>");
-                                        out.println("<td><a class='pop' href='etapaInicial.jsp?proceClave=" + ini.get(0)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + (y - 1) + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("</tr>");
-                                    }else if(proce.size() != 0){
-                                        //Si no existe en la BD de inicial lo buscamos en procesados
-                                        out.println("<tr>");
-                                        out.println("<td>" + proce.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + proce.get(0)[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
-                                        out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='etapaInicial.jsp?proceClave=" + proce.get(0)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + (y - 1) + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td>" + in[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + in[1] + "</td>");
+                                        out.println("<td>" + in[2] + "</td>");
+                                        out.println("<td>" + in[3] + "</td>");
+                                        out.println("<td>" + in[4] + "</td>");
+                                        out.println("<td>" + in[5] + "</td>");
+                                        out.println("<td><a class='pop' href='etapaInicial.jsp?proceClave=" + in[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }else{
-                                        //Si no existe en la BD en ninguna tabla entonces lo agregamos vacio
                                         out.println("<tr>");
-                                        out.println("<td>" + cc + "-P" + y + "</td>");
+                                        out.println("<td>" + in[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td></td>");//Traemos el nombre de procesados en la reccuperación de BD
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='etapaInicial.jsp?proceClave=" + cc + "-P" + y
-                                                + "&posicion=" + (y - 1) + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                        out.println("<td><a class='pop' href='etapaInicial.jsp?proceClave=" + in[0].replace(jc.replace("-", ""), "")
+                                                + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }
+                                    y++;
                                 }
                             }
                         %>

@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SIJPA::Causas Penales</title>
+        <title>SIJPA::Causas Penales JC</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
         <%  
@@ -57,7 +57,7 @@
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
-            <h1>Causas Penales ${sessionScope.causaClave}</h1>
+            <h1>Causas Penales JC</h1>
             <form action="causasPenales.jsp" name="formCP" method="post">
                 <div id="juzClave">
                     <label for="juzgado">Juzgado Clave:</label>
@@ -83,6 +83,7 @@
                 <table id="causas" class="myTable">
                     <thead>
                         <tr>
+                            <th>Posi</th>
                             <th>Causa Penal</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
@@ -101,10 +102,12 @@
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");
                         }
+                        int pos = 0;
                         for (String[] ls : lsCausas) {
                             String ccSimple = ls[0].replace(juzLimpio, "");
                     %>
                         <tr>
+                            <td><%=pos%></td>
                             <td><%=ccSimple%></td>
                             <td><%=ls[1]%></td>
                             <td><%=ls[2]%></td>
@@ -113,9 +116,10 @@
                             <td><%=ls[5]%></td>
                             <td>--</td>
                             <td><a href="elementosPrincipales.jsp?causaClave=<%=ccSimple%>"><img src='img/editar.png' title="Editar"/></a></td>
-                            <td><a href="#"><img src='img/delete.png' title="Eliminar"/></a></td>
+                            <td><a href="#"><img src='img/delete.png' title="Eliminar" onclick="borraRegistro(<%=ls[0]%>,<%=pos%>,'causas')"/></a></td>
                         </tr>
                     <% 
+                            pos++;
                         }
                     %>
                     </tbody>

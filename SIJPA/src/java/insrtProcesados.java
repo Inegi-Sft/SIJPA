@@ -119,15 +119,22 @@ public class insrtProcesados extends HttpServlet {
             conn.Conectar();
             
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                        + proceClave + jConcatenado + "','" + nombre + "','"+ apaterno + "','" + amaterno + "','" + alias + "','" + curp + "','"
-                        + fNacimiento + "'," + sexo + "," + edad + "," + nPais + "," + nEntidad + "," + nMunicipio + "," + nacionalidad + ","
-                        + residencia + "," + rEntidad + "," + rMunicipio + "," + edoCivil + "," + discapacidad + "," + alfabet + "," + estudios + ","
-                        + condiEstudiante + "," + hablaEsp + "," + poblaIndigena + "," + puebloIndigena + "," + hablaIndigena + "," + lenguaIndigena + ","
-                        + lenExtranjera + "," + traductorPro + "," + ingresosPro + "," + rangoIngresosPro + "," + ocupacion + "," + condicionActi + ","
-                        + presentAdo + "," + tipoDetencion + "," + formaConduc + "," + participacion + "," + reincidencia + "," + psicofisico + ","
-                        + grupoDelictivo + ",'" + delictivo + "'," + defensor + "," + representante + ",'" + comentarios + "',"
-                        + " (select YEAR(NOW())) );";
+                sql = "UPDATE DATOS_PROCESADOS_ADOJC SET NOMBRE = '" + nombre + "',A_PATERNO = '"+ apaterno + "',A_MATERNO ='" + amaterno + "',"
+                        + "ALIAS = '" + alias + "',CURP = '" + curp + "',FECHA_NACIMIENTO = '" + fNacimiento + "',SEXO = " + sexo + ","
+                        + "EDAD = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
+                        + "NACIONALIDAD = " + nacionalidad + ",RESIDENCIA_PAIS = " + residencia + ",RESIDENCIA_ENTIDAD = " + rEntidad + ","
+                        + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
+                        + "CONDICION_ALFABETISMO = " + alfabet + ",ULTIMO_GRADO_ESTUDIOS = " + estudios + ",CONDICION_ESTUDIANTE = " + condiEstudiante + ","
+                        + "HABLA_ESPANOL = " + hablaEsp + ",POBLACION_INDIGENA = " + poblaIndigena + ",TIPO_PUEBLO_INDIGENA = " + puebloIndigena + ","
+                        + "HABLA_INDIGENA = " + hablaIndigena + ",FAMILIA_LINGUISTICA = " + lenguaIndigena + ",LENGUA_EXTRANJERA = " + lenExtranjera + ","
+                        + "INTERPRETE = " + traductorPro + ",INGRESOS = " + ingresosPro + ",RANGO_INGRESOS = " + rangoIngresosPro + ","
+                        + "OCUPACION = " + ocupacion + ",CONDICION_ACTIVIDAD = " + condicionActi + ",INICIO_IMPUTADO = " + presentAdo + ","
+                        + "TIPO_DETENCION = " + tipoDetencion + ",FORMA_CONDUCCION = " + formaConduc + ",GRADO_PARTICIPACION = " + participacion + ","
+                        + "REINCIDENCIA = " + reincidencia + ",ESTADO_PSICOFISICO = " + psicofisico + ",DELICTIVO = " + grupoDelictivo + ","
+                        + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
+                        + "COMENTARIOS = '" + comentarios + "' "
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     if (ingresosPro == 1) {
@@ -151,7 +158,7 @@ public class insrtProcesados extends HttpServlet {
                     }
                     if(insertPD){
                         showProcesados pro = new showProcesados();
-                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        ArrayList<String[]> lis = new ArrayList<>();
                         showCausasPenales causa = new showCausasPenales();
                         int totProceInsrt = pro.countProcesados(causaClave);
                         int totProce = causa.countTotalProcesados(causaClave);
@@ -218,7 +225,7 @@ public class insrtProcesados extends HttpServlet {
                     }
                     if(insertPD){
                         showProcesados pro = new showProcesados();
-                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        ArrayList<String[]> lis = new ArrayList<>();
                         int totProceInsrt = pro.countProcesados(causaClave);
                         lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
                         JSONArray resp = new JSONArray();

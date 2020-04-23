@@ -132,7 +132,8 @@ public class showVictimas {
         try {
             conn.Conectar();
             conteoVic = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_VICTIMAS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_VICTIMAS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND TIPO_VICTIMA <> -2;";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoVic = resul.getInt("TOTAL");

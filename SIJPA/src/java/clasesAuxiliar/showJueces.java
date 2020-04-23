@@ -48,7 +48,8 @@ public class showJueces {
         try {
             conn.Conectar();
             listaTabla = new ArrayList<String[]>();
-            sql = "SELECT DJ.JUEZ_CLAVE,CONCAT(DJ.NOMBRE_JUEZ,' ',DJ.APELLIDOP_JUEZ,' ',DJ.APELLIDOM_JUEZ) AS NOMBRE_JUEZ,DJ.EDAD,DJ.FECHA_GESTION,"
+            sql = "SELECT DJ.JUEZ_CLAVE,CONCAT(DJ.NOMBRE_JUEZ,' ',DJ.APELLIDOP_JUEZ,' ',DJ.APELLIDOM_JUEZ) "
+                    + "AS NOMBRE_JUEZ,DJ.EDAD,DJ.FECHA_GESTION,"
                     + "CF.DESCRIPCION "
                     + "FROM DATOS_JUECES_ADOJC DJ "
                     + "JOIN CATALOGOS_FUNCION_JUZGADO CF "

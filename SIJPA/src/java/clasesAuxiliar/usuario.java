@@ -53,7 +53,9 @@ public class usuario {
     public boolean findUsuario(String nomUsuario, String passUsuario){
         try {
             conn.Conectar();
-            sql = "SELECT * FROM USUARIOS WHERE CORREO = '" + nomUsuario + "' AND CONTRASENIA = '" + passUsuario + "' AND ESTATUS = 1;";
+            sql = "SELECT * FROM USUARIOS WHERE CORREO = '" + nomUsuario + "' "
+                    + "AND CONTRASENIA = '" + passUsuario + "' "
+                    + "AND ESTATUS = 1;";
             System.out.println(sql);
             rs = conn.consultar(sql);
             return rs.next();
@@ -67,7 +69,8 @@ public class usuario {
         int tipo = 0;
         try {
             conn.Conectar();
-            sql = "SELECT TIPO_USUARIO FROM USUARIOS WHERE CORREO = '" + nomUsuario + "' AND CONTRASENIA = '" + passUsuario + "';";
+            sql = "SELECT TIPO_USUARIO FROM USUARIOS WHERE CORREO = '" + nomUsuario + "' "
+                    + "AND CONTRASENIA = '" + passUsuario + "';";
             System.out.println(sql);
             rs = conn.consultar(sql);
             while(rs.next()){
@@ -100,7 +103,7 @@ public class usuario {
     public ArrayList findEntidad(){
         try {
             conn.Conectar();
-            listaTabla = new ArrayList<String[]>();
+            listaTabla = new ArrayList<>();
             sql = "SELECT U.ENTIDAD, CE.DESCRIPCION FROM USUARIOS U JOIN CATALOGOS_ENTIDADES CE "
                     + "ON U.ENTIDAD = CE.ENTIDAD_ID "
                     + "WHERE U.TIPO_USUARIO = 1";
@@ -121,7 +124,7 @@ public class usuario {
     public ArrayList findUsuarioTabla(){
         try {
             conn.Conectar();
-            listaTabla = new ArrayList<String[]>();
+            listaTabla = new ArrayList<>();
             sql = "SELECT U.USUARIO_ID,CONCAT(U.NOMBRE,' ',U.APATERNO,' ',U.AMATERNO),U.EDAD,U.CORREO,CE.DESCRIPCION, TU.DESCRIPCION "
                     + "FROM USUARIOS U JOIN CATALOGOS_ENTIDADES CE "
                     + "ON U.ENTIDAD = CE.ENTIDAD_ID "
@@ -161,7 +164,7 @@ public class usuario {
     public void insrtAvance(String causaClave, int avance){
         try{
             conn.Conectar();
-            if(avance == 1){
+            if(avance == 2){
                 sql = "INSERT INTO USUARIOS_CONTROL VALUES('" + causaClave + "'," + avance + ");";
             }else{
                 sql = "UPDATE USUARIOS_CONTROL SET AVANCE = " + avance + " WHERE CAUSA_CLAVE = '" + causaClave + "';";
@@ -169,6 +172,51 @@ public class usuario {
             System.out.println(sql);
             conn.escribir(sql);
             conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insrtRegDPV(String causaClave, String juzgadoClave, int totDel, int totPro, int totVict){
+        try{
+            int x;
+            conn.Conectar();
+            String jDividido[] = juzgadoClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+            String jEntidad = jDividido[0];
+            String jMunicipio = jDividido[1];
+            String jNumero = jDividido[2];
+            String jConcatenado = jEntidad + jMunicipio + jNumero;
+            for(x = 1; x <= totDel; x++){
+                sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
+                        + causaClave + jConcatenado + "','" + causaClave + "-D" + x + jConcatenado + "'," 
+                        + "-2,-2,-2,-2,-2,'1899-09-09','1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,0,0,'',(select YEAR(NOW())) )";
+                System.out.println(sql);
+                conn.escribir(sql);
+            }
+            for(x = 1; x <= totPro; x++){
+                sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
+                        + causaClave + jConcatenado + "','" + causaClave + "-P" + x + jConcatenado + "'," 
+                        + "-2,-2,-2,-2,-2,'1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,"
+                        + "-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,'',(select YEAR(NOW())) )";
+                System.out.println(sql);
+                conn.escribir(sql);
+                sql = "INSERT INTO DATOS_ETAPA_INICIAL_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
+                        + causaClave + jConcatenado + "','" + causaClave + "-P" + x + jConcatenado + "'," 
+                        + "-2,-2,-2,'1899-09-09',-2,'1899-09-09',-2,'1899-09-09',-2,-2,-2,'1899-09-09',-2,-2,"
+                        + "'1899-09-09',-2,-2,'1899-09-09',-2,-2,-2,-2,'1899-09-09',-2,-2,'',(select YEAR(NOW())),0)";
+                System.out.println(sql);
+                conn.escribir(sql);
+            }
+            for(x = 1; x <= totVict; x++){
+                sql = "INSERT INTO DATOS_VICTIMAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
+                        + causaClave + jConcatenado + "','" + causaClave + "-V" + x + jConcatenado + "'," 
+                        + "-2,-2,-2,-2,-2,'1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,"
+                        + "-2,-2,-2,-2,-2,'',(select YEAR(NOW())) )";
+                System.out.println(sql);
+                conn.escribir(sql);
+            }
+            conn.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }

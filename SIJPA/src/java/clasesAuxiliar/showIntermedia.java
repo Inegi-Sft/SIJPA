@@ -120,7 +120,8 @@ public class showIntermedia {
         try {
             conn.Conectar();
             conteoInter = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + exp + "' AND FORMULO_ACUSACION=1";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPA_INICIAL_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + exp + "' AND FORMULO_ACUSACION = 1";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoInter = resul.getInt("TOTAL");
@@ -137,7 +138,8 @@ public class showIntermedia {
         int existe = 0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) AS EXISTE FROM DATOS_ETAPA_INTERMEDIA_ADOJC WHERE CAUSA_CLAVE='" + causaClave + "' AND PROCESADO_CLAVE='" + proceClave + "'";
+            sql = "SELECT COUNT(*) AS EXISTE FROM DATOS_ETAPA_INTERMEDIA_ADOJC "
+                    + "WHERE CAUSA_CLAVE='" + causaClave + "' AND PROCESADO_CLAVE='" + proceClave + "'";
             System.out.println(sql);
             resul = conn.consultar(sql);
             if (resul.next()) {

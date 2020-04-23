@@ -626,26 +626,51 @@ function deleteTramite(fila, idProce) {
     }
 }
 /*----------------------- FIN FUNCIONES PARA DELETE AJAX --------------------------*/
- function fechaDias(){
-   var fecha =new Date(),ano,mes,dia;
-   ano=fecha.getFullYear();
-   mes=fecha.getMonth();
-   dia=fecha.getDate();
-   
-   if ((dia <10)&&(mes<10)){
-      fecha=ano+"-"+"0"+mes+"-"+"0"+dia;
-   }else if (mes<10) 
-   {
-      fecha=ano+"-"+"0"+mes+"-"+dia;
-   }else if (dia <10)
-   {
-       fecha=ano+"-"+mes+"-"+"0"+dia;
-   }else
-   {
-       fecha=ano+"-"+mes+"-"+dia;
-   }
-      return fecha;
-   //document.getElementById("fIngreso").setAttribute("max", fecha);
-  // alert ("la fecha"+ fecha);
-   // fecha=document.getElementById("myDate").max;    
+function VFechaOcurrencia(Ocurr){
+    var fechaOcurren = $(Ocurr).val();
+    if (fechaOcurren !== '') {
+        $.ajax({
+            type: 'post',
+            url: 'obtenFechaOcurr',
+            data: {
+                fechaOcurren: fechaOcurren
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                if (response === '1') {
+                    alert('La Fecha De Ocurrencia No Debe Ser mayor A La Fecha de Ingreso');
+                    $(Ocurr).val("");
+                    $(Ocurr).focus();
+                }
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+            }
+        });
+    }   
+} 
+
+function ValidaCarpeInvest(InputCarpInves){
+    var CarpInves = $(InputCarpInves).val();
+    if (CarpInves !== '') {
+        $.ajax({
+            type: 'post',
+            url: 'obtenCarpeInves',
+            data: {
+                CarpInves: CarpInves
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor", response);
+                // alert("respuesta del servidor= "+response);
+                if (response === '1') {
+                    alert('La Causa Penal Ya Existe');
+                    $(InputCarpInves).val("");
+                    $(InputCarpInves).focus();               
+                }
+            }, 
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+            }
+        });
+    }
 }

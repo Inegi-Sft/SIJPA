@@ -8,6 +8,7 @@
 <%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -20,6 +21,10 @@
         <%
             catalogos cat = new catalogos();
             showDelitos delitos = new showDelitos();
+            showCausasPenales cpenales=new showCausasPenales();
+           FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
+            
             ArrayList<String[]> lista, delito;
             ArrayList<String> deliAdi = new ArrayList();
             
@@ -190,9 +195,9 @@
                         <tr>
                             <td>
                                 <label for="ocurrencia">Fecha de ocurrencia</label>
-                                <input type="date" name="ocurrencia" id="ocurrencia" value="<%=fechaOcurre%>" required>
+                                <input type="date" name="ocurrencia" id="ocurrencia" value="<%=fechaOcurre%>" required max="<%=fechas%>" onkeydown="return false" onblur="VFechaOcurrencia('#ocurrencia')">
                                 <div class="noIdentificada">
-                                    <input type="checkbox" id="chkOcurrencia" onclick="fechaNoIdent('#chkOcurrencia', '#ocurrencia');">
+                                    <input type="checkbox" id="chkOcurrencia" onclick="fechaNoIdent('#chkOcurrencia', '#ocurrencia')">
                                     <label>No identificada</label>
                                 </div>
                             </td>

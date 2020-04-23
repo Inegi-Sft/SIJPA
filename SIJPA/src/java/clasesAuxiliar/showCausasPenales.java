@@ -153,4 +153,42 @@ public class showCausasPenales {
         }
         return total;
     }
+    
+    public String FechaIng(String juzgadoClave, String causaClave) {
+        String FechaIngreso = "";
+        try {
+            conn.Conectar();
+            sql = "SELECT FECHA_INGRESO FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' AND "
+                    + "CAUSA_CLAVE = '" + causaClave + "'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            if (rs.next()) {
+                FechaIngreso = rs.getString("FECHA_INGRESO");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return FechaIngreso;
+    }
+    
+    public boolean CarpetaInves(String juzgadoClave, String numcarpeta) {
+        boolean Exis = false;
+        try {
+            conn.Conectar();
+            sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + numcarpeta + "' AND "
+                    + " JUZGADO_CLAVE = '" + juzgadoClave + "'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            if (rs.next()) {
+                Exis = true;
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Exis;
+    }
 }
+

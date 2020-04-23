@@ -90,12 +90,16 @@ public class insrtDelitos extends HttpServlet {
             PrintWriter out = response.getWriter();
             conn.Conectar();
             
-            if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                        + delitoClave + jConcatenado + "'," + delitoCP + ",'" + articuloCP + "'," + delitoNT + "," + fuero + "," + reclasificaDel + ",'"
-                        + fechaReclaDel + "','" + ocurrencia + "'," + sitioO + "," + consumacion + "," + calificacion + "," + clasificacion + ","
-                        + concurso + "," + comision + "," + accion + "," + modalidad + "," + instrumentos + "," + entidadD + ","
-                        + municipioD + ",0,0,'" + comentarios + "'," + " (select YEAR(NOW())) );";
+            if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo
+                sql = "UPDATE DATOS_DELITOS_ADOJC SET DELITO_CODIGO_PENAL = " + delitoCP + ",ART_CODIGO_PENAL = '" + articuloCP + "',"
+                        + "DELITO_NORMA_TECNICA = " + delitoNT + ",TIPO_FUERO = " + fuero + ",DELITO_RECLASIFICADO = " + reclasificaDel + ","
+                        + "FECHA_RECLASIFICACION = '" +fechaReclaDel + "',FECHA_OCURRENCIA = '" + ocurrencia + "',SITIO_OCURRENCIA = " + sitioO + ","
+                        + "GRADO_CONSUMACION = " + consumacion + ",CALIFICACION = " + calificacion + ",CLASIFICACION = " + clasificacion + ","
+                        + "CONCURSO = " +concurso + ",FORMA_COMISION = " + comision + ",FORMA_ACCION = " + accion + ",MODALIDAD = " + modalidad + ","
+                        + "INSTRUMENTO_COMISION = " + instrumentos + ",OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
+                        + "COMENTARIOS = '" + comentarios + "' "
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND DELITO_CLAVE = '" + delitoClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     if (delitoNT == 31) {
@@ -116,7 +120,7 @@ public class insrtDelitos extends HttpServlet {
                     }
 
                     showDelitos deli = new showDelitos();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     showCausasPenales causa = new showCausasPenales();
                     int totDelInsrt = deli.countDelitosInsertados(causaClave);
                     int totDel = causa.countTotalDelitos(causaClave);

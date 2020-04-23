@@ -24,6 +24,7 @@
             ArrayList<String[]> lista, causa;
             
             String juzgadoClave = (String)session.getAttribute("juzgadoClave");
+            String operacion = "";//Variable de control para saber si se inserta o se actualiza
             String causaNum = "";
             String carpInves = "";
             String fechaIngre = "";
@@ -43,6 +44,7 @@
                 causa = causas.findCausaPenal(juzgadoClave, causaClave + juzgadoClave.replace("-", ""));
                 if(causa.size() > 0){
                     session.setAttribute("causaClave", causaClave + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave
+                    operacion = "actualizar";
                     causaNum = causaClave;
                     carpInves = causa.get(0)[0];
                     fechaIngre = causa.get(0)[1];
@@ -76,10 +78,11 @@
                             <td>
                                 <label for="jClave">Juzgado Clave:</label>
                                 <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" disabled>
+                                <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                             </td>
                             <td>
                                 <label for="carpInves">No. Carpeta Investigación</label>
-                                <input type="text" name="carpInves" id="CarpInves"  value="<%=carpInves%>"  required>
+                                <input type="text" name="carpInves" id="carpInves" value="<%=carpInves%>" required>
                             </td>
                             <td>
                                 <label for="expClave">No. Asunto Asignado</label>
@@ -201,16 +204,16 @@
                         <tr>
                             <td>
                                 <label for="Tdelitos">Total de delitos</label>
-                                <input type="number" name="Tdelitos" id="Tdelitos" value="<%=totDelitos%>" onblur="numeroDelitos()">
+                                <input type="number" name="Tdelitos" id="Tdelitos" value="<%=totDelitos%>" min="0">
 
                             </td>
                             <td>
                                 <label for="Tadolescentes">Total de imputados</label>
-                                <input type="number" name="Tadolescentes" id="Tadolescentes" value="<%=totProce%>" onblur="numeroProcesados()">
+                                <input type="number" name="Tadolescentes" id="Tadolescentes" value="<%=totProce%>" min="0">
                             </td>
                             <td>
                                 <label for="Tvictimas">Total de víctimas</label>
-                                <input type="number" name="Tvictimas" id="Tvictimas" value="<%=totVictimas%>" onblur="numeroVictimas()">
+                                <input type="number" name="Tvictimas" id="Tvictimas" value="<%=totVictimas%>" min="0">
                             </td>
                         </tr>
                     </table>

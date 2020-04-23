@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -41,7 +42,8 @@ public class insrtCausaPenal extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         HttpSession sesion = request.getSession();
-
+        
+        String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
         String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
         String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
@@ -49,7 +51,7 @@ public class insrtCausaPenal extends HttpServlet {
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String carpInvestiga = request.getParameter("carpInves");
-        String causaClave = request.getParameter("expClave");//Generamos la causaClave
+        String causaClave = request.getParameter("expClave");
         String fecha_ingreso;
         if (request.getParameter("fIngreso") != null) {
             fecha_ingreso = request.getParameter("fIngreso");
@@ -72,7 +74,7 @@ public class insrtCausaPenal extends HttpServlet {
             PrintWriter out = response.getWriter();
             conn.Conectar();
             
-            if(sesion.getAttribute("causaClave") == "" || sesion.getAttribute("causaClave") == null){//Si no hay causa entonces se inserta
+            if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
                 sesion.setAttribute("causaClave", causaClave + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fecha_ingreso + "',"
@@ -82,7 +84,14 @@ public class insrtCausaPenal extends HttpServlet {
                 if (conn.escribir(sql)) {
                     usuario usuario = new usuario();
                     usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal
-                    out.write(request.getParameter("compe"));
+                    usuario.insrtRegDPV(causaClave, juzgadClave, Integer.parseInt(totalDeli), Integer.parseInt(totalAdo), Integer.parseInt(totalVic));
+                    JSONArray resp = new JSONArray();
+                    resp.add(competencia);//regresamos competencia
+                    resp.add(jConcatenado);//regresamos juzgado concatenado
+                    resp.add(totalDeli);//regresamos total de delitos
+                    resp.add(totalAdo);//regresamos total de adolescenetes
+                    resp.add(totalVic);//regresamos total de victimas
+                    out.write(resp.toJSONString());
                     conn.close();
                 } else {
                     conn.close();

@@ -27,6 +27,7 @@ public class Conexion_Mysql {
     public boolean Conectar() { 
         try { 
             Class.forName("com.mysql.jdbc.Driver");
+            //String url = "jdbc:mysql://node53293-sijpa.jl.serv.net.mx:3306/sijpa_db";
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
 //            String url = "jdbc:mysql://10.15.130.27:3306/sijpa_dbp";
             conexion = (Connection) DriverManager.getConnection(url,"root","");

@@ -72,7 +72,7 @@ public class insrtVictimas extends HttpServlet {
         } else {
             fecha_nacimiento = "1899-09-09";
         }
-        int edad = Integer.parseInt(request.getParameter("edad"));
+        int edad = Integer.parseInt(request.getParameter("edadVi"));
         String vulnerabilidad = request.getParameter("vulnera");
         String paisNacimiento = request.getParameter("Pnacimiento");
         String entidadNacimiento = request.getParameter("Enacimiento");
@@ -91,7 +91,7 @@ public class insrtVictimas extends HttpServlet {
         String extrangera = request.getParameter("extrangera");
         String interprete = request.getParameter("interprete");
         int ingresos = Integer.parseInt(request.getParameter("ingresos"));
-        String rangoingresos = request.getParameter("rangoIngresos");
+        String rangoingresos = verificaVariable(request.getParameter("rangoIngresos"));
         String comentarios = request.getParameter("Comentavic");
         String[] chkDeliCom = request.getParameterValues("deliCometido");
         String[] procesadoRela = request.getParameterValues("proRela");
@@ -107,12 +107,18 @@ public class insrtVictimas extends HttpServlet {
             conn.Conectar();
             
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                sql = "INSERT INTO DATOS_VICTIMAS_ADOJC  VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave
-                        + "','" + victiClave + jConcatenado + "'," + tipoVictima + "," + victima_moral + "," + conto_asesor + "," + asesor + "," + sexoV + ",'" + fecha_nacimiento
-                        + "'," + edad + "," + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + "," + muniNacimiento + "," + nacionalidad + "," + paisResi + ","
-                        + entidadResi + "," + municipioResi + "," + conyugal + "," + alfabetismo + "," + estudios + "," + espanol + "," + indigena + "," + familia
-                        + "," + extrangera + "," + interprete + "," + ingresos + "," + rangoingresos + "," + ocupacion + "," + vmedidaMujer + "," + vmedidas + ",'"
-                        + comentarios + "',(select YEAR(NOW())))";
+                sql = "UPDATE DATOS_VICTIMAS_ADOJC SET TIPO_VICTIMA = " + tipoVictima + ",TIPO_VICTIMA_MORAL = " + victima_moral + ","
+                        + "CONTO_ASESOR = " + conto_asesor + ",ASESOR = " + asesor + ",SEXO = " + sexoV + ",FECHA_NACIMIENTO = '" + fecha_nacimiento + "',"
+                        + "EDAD = " + edad + ",VULNERABILIDAD = " + vulnerabilidad + ",NACIMIENTO_PAIS = " + paisNacimiento + ","
+                        + "NACIMIENTO_ENTIDAD = " + entidadNacimiento + ",NACIMIENTO_MUNICIPIO = " + muniNacimiento + ",NACIONALIDAD = " + nacionalidad + ","
+                        + "RESIDENCIA_PAIS = " + paisResi + ",RESIDENCIA_ENTIDAD = " + entidadResi + ",RESIDENCIA_MUNICIPIO = " + municipioResi + ","
+                        + "ESTADO_CIVIL = " + conyugal + ",CONDICION_ALFABETISMO = " + alfabetismo + ",GRADO_ESTUDIOS = " + estudios + ","
+                        + "HABLA_ESPANOL = " + espanol + ",HABLA_INDIGENA = " + indigena + ",LENGUA_INDIGENA = " + familia + ","
+                        + "LENGUA_EXTRANJERA = " + extrangera + ",INTERPRETE = " + interprete + ",INGRESOS = " + ingresos + ","
+                        + "RANGO_INGRESOS = " + rangoingresos + ",OCUPACION = " + ocupacion + ",MEDIDAS_MUJER = " + vmedidaMujer + ","
+                        + "MEDIDAS_PROTECCION = " + vmedidas + ",COMENTARIOS = '" + comentarios + "' "
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     for (String chkDeliCom1 : chkDeliCom) {
@@ -167,7 +173,7 @@ public class insrtVictimas extends HttpServlet {
                         conn.close();
                     }
                     showVictimas vic = new showVictimas();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     showCausasPenales causa = new showCausasPenales();
                     int totVictiInsrt = vic.countVictimas(causaClave);
                     int totVicti = causa.countTotalVictimas(causaClave);
@@ -277,7 +283,7 @@ public class insrtVictimas extends HttpServlet {
                         conn.close();
                     }
                     showVictimas vic = new showVictimas();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     int totVictiInsrt = vic.countVictimas(causaClave);
                     lis = vic.findVictimasTabla(victiClave + jConcatenado);
                     JSONArray resp = new JSONArray();

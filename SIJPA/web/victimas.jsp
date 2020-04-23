@@ -284,15 +284,15 @@
                             </td>
                             <td>
                                 <label for="fnacimientoV">Fecha de Nacimiento</label>
-                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>" required>
+                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>">
                                 <div class="noIdentificada" id="dFechaNaciV">
                                     <input type="checkbox" id="chkFechaNaciV" onchange="fechaNoIdent('#chkFechaNaciV', '#fnacimientoV')">
                                     <label>No identificada</label>
                                 </div>
                             </td>
                             <td>
-                                <label for="edad">Edad</label>
-                                <input type="number" name="edad" id="edad" value="<%=edadV%>">
+                                <label for="edadVi">Edad</label>
+                                <input type="number" name="edadVi" id="edadVi" value="<%=edadV%>">
                             </td>
                             <td>
                                 <label for="tvic_moral">Condición de vulnerabilidad</label>

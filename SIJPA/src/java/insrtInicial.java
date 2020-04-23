@@ -112,13 +112,19 @@ public class insrtInicial extends HttpServlet {
 
             conn.Conectar();
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                sql = "INSERT INTO DATOS_ETAPA_INICIAL_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                        + proceClave + jConcatenado + "'," + audiInicial + "," + detencion + "," + legaldetencion + ",'" + fechaAutoLiber + "',"
-                        + formuImputa + ",'" + fechaFormuImpu + "'," + declaro + ",'" + fechDeclara + "'," + huboPlazo + "," + Plazo + ","
-                        + autovincula + ",'" + fechavincula + "'," + drecretaMC + "," + cierreinvestiga + ",'" + fechaplazo + "'," + soliProrroga + ","
-                        + plazofijado + ",'" + fechCierreI + "'," + dictoSobresei + "," + suspenProceso + "," + causasSuspension + "," + huboReapertura + ",'"
-                        + fechaReapertura + "'," + quienSoliApertura + "," + formulaAcusacion + ",'" + comentarios + "',(select YEAR(NOW())),"
-                        + banderaEtapa + ")";
+                sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET AUDIENCIA_INICIAL = " + audiInicial + ",CTRL_DETENCION = " + detencion + ","
+                        + "DETENCION_LEGAL = " + legaldetencion + ",FECHA_LIBERTAD = '" + fechaAutoLiber + "',FORMULACION_IMPUTACION = " + formuImputa + ","
+                        + "FECHA_IMPUTACION = '" + fechaFormuImpu + "',IMPUTADO_DECLARO = " + declaro + ",FECHA_DECLARACION = '" + fechDeclara + "',"
+                        + "PLAZO_CONSTITUCIONAL = " + huboPlazo + ",TIEMPO_PLAZO = " + Plazo + ",TIEMPO_PLAZO = " + autovincula + ","
+                        + "FECHA_VINCULACION = '" + fechavincula + "',IMPUSO_MCAUTELARES = " + drecretaMC + ",INVESTIGACION_COMPLEMENTARIA = " + cierreinvestiga + ","
+                        + "FECHA_PLAZO_INVESTIGACION = '" + fechaplazo + "',PRORROGA_PLAZO_CIERRE = " + soliProrroga + ","
+                        + "PLAZO_CIERRE_INVESTIGACION = " + plazofijado + ",FECHA_CIERRE_INVESTIGACION = '" + fechCierreI + "',"
+                        + "SOBRESEIMIENTO_CAUSAP = " + dictoSobresei + ",SUSPENSION_PROCESO = " + suspenProceso + ","
+                        + "CAUSA_SUSPENSION_PROCESO = " + causasSuspension + ",REAPERTURA_PROCESO = " + huboReapertura + ","
+                        + "FECHA_REAPERTURA_PROCESO = '" + fechaReapertura + "',SOLICITO_REAPERTURA = " + quienSoliApertura + ","
+                        + "FORMULO_ACUSACION = " + formulaAcusacion + ",COMENTARIOS = '" + comentarios + "',ETAPA = " + banderaEtapa + " "
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     if (drecretaMC == 1) {
@@ -147,7 +153,7 @@ public class insrtInicial extends HttpServlet {
                     }
                     
                     showInicial inicial = new showInicial();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     showCausasPenales causa = new showCausasPenales();
                     int totInicialInsrt = inicial.countInicial(causaClave);
                     int totInicial = causa.countTotalProcesados(causaClave);
@@ -218,7 +224,7 @@ public class insrtInicial extends HttpServlet {
                     }
 
                     showInicial inicial = new showInicial();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     int totInicialInsrt = inicial.countInicial(causaClave);
                     lis = inicial.findInicialTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();

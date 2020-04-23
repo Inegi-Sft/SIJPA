@@ -38,8 +38,8 @@ public class obtenMunicipios extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
+            
             if (request.getParameter("enti") != null) {
                 enti = Integer.parseInt(request.getParameter("enti"));
                 out.println("<option value=''>--Seleccione--</option>");
@@ -49,8 +49,6 @@ public class obtenMunicipios extends HttpServlet {
             for (String[] ls : lista) {
                 out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
             }
-        } finally {
-            out.close();
         }
     }
 

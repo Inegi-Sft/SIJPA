@@ -27,7 +27,7 @@ public class showCausasPenalesJO {
      public ArrayList findJuzgados() {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT JUZGADO_CLAVE FROM datos_juzgados_adojc ORDER BY 1";
+        sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -45,7 +45,8 @@ public class showCausasPenalesJO {
         conn.Conectar();
         lista = new ArrayList<String[]>();
         
-        sql = "SELECT REPLACE(CAUSA_CLAVE,REPLACE('" + juzgado_clave + "','-',''),'') FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado_clave + "' ORDER BY 1";
+        sql = "SELECT REPLACE(CAUSA_CLAVE,REPLACE('" + juzgado_clave + "','-',''),'') "
+                + "FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado_clave + "' ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -62,7 +63,8 @@ public class showCausasPenalesJO {
      public ArrayList findTotalDelitos(String juzgado_clave, String CausaClaveJC) {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT TOTAL_DELITOS FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + CausaClaveJC + "' || REPLACE('" + juzgado_clave + "','-','')";
+        sql = "SELECT TOTAL_DELITOS FROM DATOS_CAUSAS_PENALES_ADOJC "
+                + "WHERE CAUSA_CLAVE = '" + CausaClaveJC + "' || REPLACE('" + juzgado_clave + "','-','')";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

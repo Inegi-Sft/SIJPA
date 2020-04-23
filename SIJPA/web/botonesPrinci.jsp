@@ -17,7 +17,6 @@
         etapas = sIni.findEtapaCausa(request.getParameter("causaClave") + juzgadoClave.replace("-", ""));
         String [] pestanas = {"Causa Penal","Delitos","Adolescentes","Victimas","Inicial","Intermedia",
             "Conclusión y/o Terminación","Tramite"};
-        int [] pesProce = {1,2,3,6,7};//Control para pestañas intermedia, conslusion y tramite
         System.out.println("Avance: " + avance);
         
         out.println("<button class='pestanaLinks active' onclick=\"openPestana('btn1', 'p1')\" id='btn1'>" + pestanas[0] + "</button>");
@@ -30,7 +29,7 @@
             }
         }
         
-        //Buscaremos los inndices para intermedia, conclusion o tramite para saber cual aactivar
+        //Buscaremos los indices para intermedia, conclusion o tramite para saber cual aactivar
         if(etapas.size() != 0){
             //Si tenemos procesados en etapa inicial, entonces procedemos a validarlo
             if(etapas.indexOf("7") > -1){//Existe en Intermedia-Tramite
@@ -95,6 +94,11 @@
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn8', 'p8')\" id='btn8' disabled>" + pestanas[7] + "</button>");
             }else if(etapas.indexOf("1") > -1){//Existe en Intermedia
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn6', 'p6')\" id='btn6'>" + pestanas[5] + "</button>");
+                out.println("<button class='pestanaLinks' onclick=\"openPestana('btn7', 'p7')\" id='btn7' disabled>" + pestanas[6] + "</button>");
+                out.println("<button class='pestanaLinks' onclick=\"openPestana('btn8', 'p8')\" id='btn8' disabled>" + pestanas[7] + "</button>");
+            }else{
+                //los mostramos vacios si etapa es 0 ya que aun no se tiene nada registrado en etapa inicial
+                out.println("<button class='pestanaLinks' onclick=\"openPestana('btn6', 'p6')\" id='btn6' disabled>" + pestanas[5] + "</button>");
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn7', 'p7')\" id='btn7' disabled>" + pestanas[6] + "</button>");
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn8', 'p8')\" id='btn8' disabled>" + pestanas[7] + "</button>");
             }

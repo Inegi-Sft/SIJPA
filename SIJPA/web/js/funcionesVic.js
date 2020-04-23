@@ -85,7 +85,7 @@ $(document).ready(function() {
         switch ($(this).val()) {
             case '1':
                 $('#victiFisicas, #mediProtec').fadeIn('slow');
-                $('#sexoV, #fnacimiento, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                $('#sexoV, #fnacimientoV, #edadVi, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('').prop('required', true);
                 $('#tipoMoral,#MedidasPro,#MujPro').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
@@ -95,15 +95,15 @@ $(document).ready(function() {
                 $('#tvic_moral').val('').prop('required', true);
 
                 $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
-                $('#sexoV, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('-2').prop('required', false);
-                $('#fnacimiento').val("1899-09-09").prop('required', false);
+                $('#fnacimientoV').val("1899-09-09").prop('required', false);
                 break;
             default:
                 $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
-                $('#tvic_moral, #sexoV, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                $('#tvic_moral, #sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #extrangera, #mProtect, #mujProtect').val('-2').prop('required', false);
-                $('#fnacimiento').val("1899-09-09").prop('required', false);
+                $('#fnacimientoV').val("1899-09-09").prop('required', false);
                 break;
         }
     });

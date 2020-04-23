@@ -46,7 +46,7 @@ $(document).ready(function () {
                 if (response === 1) {
                     window.location.href = "bienvenida.jsp";
                 }else{
-                    alert('Usuario no encontrado, favor de revisar usuario o contraseña');
+                    alert('Usuario no encontrado, favor de revisar usuario o contraseÃ±a');
                 }
             },
             error: function (response) {
@@ -98,11 +98,11 @@ $(document).ready(function () {
     $('#confPass').keyup(function(){
         if($('#confPass').val() !== ''){
             if ($('#confPass').val() === $('#pass').val()) {
-                $('#mesajePass').text('Las contraseñas son correctas');
+                $('#mesajePass').text('Las contraseÃ±as son correctas');
                 $('#mesajePass').css({'color':'#66cc00'});
                 $('#guardar').fadeIn('slow');
             }else{
-                $('#mesajePass').text('Las contraseñas no coinciden');
+                $('#mesajePass').text('Las contraseÃ±as no coinciden');
                 $('#mesajePass').css({'color':'#ff0000'});
                 $('#guardar').fadeOut('slow');
             }
@@ -517,54 +517,6 @@ function validaAddJuez() {
     }
 }
 
-function numeroDelitos() {
-    $('#tablaDeli tbody').empty();
-    var expediente = $('#expClave').val();
-    var delitos = $('#Tdelitos').val();
-    for (var i = 1; i <= delitos; i++) {
-        var delitoClave = expediente + '-D' + i;
-        $('#tablaDeli tbody').append('<tr><td>' + delitoClave + '</td><td></td><td></td><td></td><td></td>\n\
-        <td></td><td><a class="pop" href="delitos.jsp?delitoClave=' + delitoClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
-        </a></td></tr>');
-    }
-}
-
-function numeroProcesados() {
-    $('#tablaProcesa tbody').empty();
-    var expediente = $('#expClave').val();
-    var procesados = $('#Tadolescentes').val();
-    for (var i = 1; i <= procesados; i++) {
-        var proceClave = expediente + '-P' + i;
-        $('#tablaProcesa tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td>\n\
-        <td></td><td><a class="pop" href="procesados.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
-        </a></td></tr>');
-    }
-    $('#tablaInicial tbody').empty();
-    for (var i = 1; i <= procesados; i++) {
-        var proceClave = expediente + '-P' + i;
-        $('#tablaInicial tbody').append('<tr><td>' + proceClave + '</td><td></td><td></td><td></td><td></td>\n\
-        <td><a class="pop" href="etapaInicial.jsp?proceClave=' + proceClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
-        </a></td></tr>');
-    }
-
-    //pone contador de los porcesados que deben concluir o estar pendientes en su pestaña correspondiente
-    $('#lblNumConclu').text("Resoluciones agregadas: " + $('#tablaConclu tbody tr').length);
-    $('#lblNumTram').text("Tramites agregados: " + $('#tablaTramite tbody tr').length);
-    $('.proPendientes').text("Faltan: " + $('#Tadolescentes').val() + " adolescentes por asignar estatus");
-}
-
-function numeroVictimas() {
-    $('#tablaVictimas tbody').empty();
-    var expediente = $('#expClave').val();
-    var victimas = $('#Tvictimas').val();
-    for (var i = 1; i <= victimas; i++) {
-        var victiClave = expediente + '-V' + i;
-        $('#tablaVictimas').append('<tr><td>' + victiClave + '</td><td></td><td></td><td></td>\n\
-        <td></td><td><a class="pop" href="victimas.jsp?victiClave=' + victiClave + '&posicion=' + (i - 1) + '"><img src="img/editar.png" title="Modificar"/>\n\
-        </a></td></tr>');
-    }
-}
-
 /************************ FUNCIONES PARA DELETE AJAX ******************************/
 /***
  * 
@@ -623,6 +575,46 @@ function deleteTramite(fila, idProce) {
                 alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
+    }
+}
+
+function borraRegistro(clave, posi, tabla, idCampo){
+    var resp = confirm("Realmente deseas eliminar este registro de JC?");
+    if (resp) {
+        alert('Se recibe causa: ' + clave + ' ,posi: ' + posi + ' ,tabla: ' + tabla + ',idcampo: ' + idCampo);
+        $('#' + tabla + ' tbody tr').eq(posi).remove();
+        $(idCampo).val($(idCampo).val() - 1);
+        var numCampo = $(idCampo).val();//dependiendo del id que made sabremos el tamaÃ±o del campo
+        if(clave !== 'sr'){
+            $.ajax({
+                type: 'post',
+                url: 'deleteDatos',
+                data: {
+                    clave: clave,
+                    tabla: tabla,
+                    num: numCampo
+                },
+                success: function (response) {
+                    console.log("Respuesta del servidor al borrar: ", response);
+                    if(response === 'causas'){
+                        alert('La causa penal ' + clave + ' borro con exito');
+                    } else if(response === 'tablaDeli'){
+                        alert('El Delito ' + clave + ' se borro con exito');
+                    } else if(response === 'tablaProcesa'){
+                        alert('El Procesado ' + clave + ' se borro con exito');
+                        //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
+                        $('#tablaInicial tbody tr').eq(posi).remove();
+                        buscaYremplaza(clave,0);
+                    } else if(response === 'tablaVictimas'){
+                        alert('La Victima ' + clave + ' se borro con exito');
+                    }
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor al borrar: ", response);
+                    alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
+                }
+            });
+        }
     }
 }
 /*----------------------- FIN FUNCIONES PARA DELETE AJAX --------------------------*/

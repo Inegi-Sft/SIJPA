@@ -38,66 +38,110 @@ public class deleteDatos extends HttpServlet {
     String sql;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession sesion= request.getSession();
-        
-        String entidad =(String) sesion.getAttribute("entidad");
-        String municipio =(String) sesion.getAttribute("municipio");
-        String numero =(String) sesion.getAttribute("numero");
-        String jConcatenado =entidad+municipio+numero;
-        
-        String idProConclusion = request.getParameter("proceConclusion");
-        String idProTramite = request.getParameter("proceTramite");
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        //Condicion para eliminar conclusiones
-        if(idProConclusion!=null){
+        HttpSession sesion = request.getSession();
+        
+        String tabla = request.getParameter("tabla");
+        String num = request.getParameter("num");
+        
+        //Condicion para eliminar causas penales
+        if(tabla.equals("causas")){
+            System.out.println("Borramos Causa Penal");
             try{
+                String causaClave = request.getParameter("clave");
                 conn.Conectar();
-                sql="DELETE FROM DATOS_CONCLUSIONES_ADOJC WHERE PROCESADO_CLAVE='"+idProConclusion+jConcatenado+"'";
+                sql="DELETE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
-                    out.write("conclusionDeleted");
+                    out.write("causas");
+                    conn.close();
                 } else {
-                conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        //Condicion para eliminar tramites
-        if(idProTramite!=null){
-            try{
-                conn.Conectar();
-                sql="DELETE FROM DATOS_TRAMITES_ADOJC WHERE PROCESADO_CLAVE='"+idProTramite+jConcatenado+"'";
-                System.out.println(sql);
-                if (conn.escribir(sql)) {
-                    out.write("tramiteDeleted");
-                } else {
-                conn.close();
+                    conn.close();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
+        //Condicion para eliminar delitos
+        if(tabla.equals("tablaDeli")){
+            System.out.println("Borramos Delitos");
+            try{
+                String clave = request.getParameter("clave");
+                conn.Conectar();
+                sql="DELETE FROM DATOS_DELITOS_ADOJC WHERE DELITO_CLAVE = '" + clave + "'";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET TOTAL_DELITOS = " + num
+                            + " WHERE CAUSA_CLAVE = '" + sesion.getAttribute("causaClave") + "';";
+                    System.out.println(sql);
+                    if (conn.escribir(sql)) {
+                        out.write("tablaDeli");
+                        conn.close();
+                    }else{
+                        conn.close();
+                    }
+                } else {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet deleteDatos</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet deleteDatos at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
+        //Condicion para eliminar procesados
+        if(tabla.equals("tablaProcesa")){
+            System.out.println("Borramos Procesados");
+            try{
+                String clave = request.getParameter("clave");
+                conn.Conectar();
+                sql="DELETE FROM DATOS_PROCESADOS_ADOJC WHERE PROCESADO_CLAVE = '" + clave + "'";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET TOTAL_PROCESADOS = " + num
+                            + " WHERE CAUSA_CLAVE = '" + sesion.getAttribute("causaClave") + "';";
+                    System.out.println(sql);
+                    if (conn.escribir(sql)) {
+                        out.write("tablaProcesa");
+                        conn.close();
+                    }else{
+                        conn.close();
+                    }
+                } else {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        //Condicion para eliminar victimas
+        if(tabla.equals("tablaVictimas")){
+            System.out.println("Borramos Victimas");
+            try{
+                String clave = request.getParameter("clave");
+                conn.Conectar();
+                sql="DELETE FROM DATOS_VICTIMAS_ADOJC WHERE VICTIMA_CLAVE = '" + clave + "'";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET TOTAL_VICTIMAS = " + num
+                            + " WHERE CAUSA_CLAVE = '" + sesion.getAttribute("causaClave") + "';";
+                    System.out.println(sql);
+                    if (conn.escribir(sql)) {
+                        out.write("tablaVictimas");
+                        conn.close();
+                    }else{
+                        conn.close();
+                    }
+                } else {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

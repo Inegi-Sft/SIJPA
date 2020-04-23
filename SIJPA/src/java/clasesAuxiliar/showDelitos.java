@@ -77,7 +77,7 @@ public class showDelitos {
         }
         return deli;
     }
-
+    
     public ArrayList findDeliTabla(String delitoClave) {
         conn.Conectar();
         deli = new ArrayList();
@@ -108,7 +108,8 @@ public class showDelitos {
         try {
             conn.Conectar();
             conteoDel = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "';";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND DELITO_CODIGO_PENAL <> -2;";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoDel = resul.getInt("TOTAL");

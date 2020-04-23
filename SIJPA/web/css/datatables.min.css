@@ -65,6 +65,7 @@ table.dataTable tbody th,table.dataTable tbody td{
 }
 
 #causas_filter label, #causas_length label{
+    width: auto;
     margin: 20px 10px 20px 0;
     text-align: left;
 }
@@ -109,7 +110,7 @@ table.dataTable tbody th,table.dataTable tbody td{
 .totExp{
     position: relative;
     float: left;
-    left: 5%;
+    left: 10%;
     top: 80px;
     height: 30px;
     padding: 5px;

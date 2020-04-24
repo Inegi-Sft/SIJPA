@@ -53,7 +53,7 @@ public class showJueces {
                     + "FROM DATOS_JUECES_ADOJC DJ "
                     + "JOIN CATALOGOS_FUNCION_JUZGADO CF "
                     + "ON DJ.FUNCION_DESEMPENA = CF.FUNCION_JUZ_ID "
-                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' AND JUEZ_CLAVE <> -2 "
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {

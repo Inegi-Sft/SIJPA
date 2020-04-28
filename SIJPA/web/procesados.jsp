@@ -173,7 +173,7 @@
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
-                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" onkeydown="return false" onblur="ValFechaNac('#fNacimiento','#edad')" required>
+                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" onblur="ValFechaNacPRO('#fNacimiento','#edad')" onkeydown="return false" required>
                                 <div class='noIdentificada'>
                                     <input type='checkbox' id='chkFechaNac' onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento')">
                                     <label>No identificada</label>

@@ -667,8 +667,7 @@ function ValidaCarpeInvest(InputCarpInves){
     }
 }
 
-function ValFechaNac(FechaNac,Edad){
-alert('ENTRO A FUNCION');
+function ValFechaNacPRO(FechaNac,Edad){
 var Fnac=$(FechaNac).val();
 if(Fnac !==''){
         $.ajax({
@@ -678,12 +677,10 @@ if(Fnac !==''){
                 Fnac: Fnac
             },
             success: function (response) { 
-             // alert(response);
                 var edadc = parseInt(response);
-                console.log("Respuesta del servidor", response);
+               // console.log("Respuesta del servidor", response);
                if(response!=='0'){
                 if ((edadc>11) && (edadc<18)){
-               // alert(response);
                     var resp = confirm("Desea agregar la edad. Edad=" + response);
                     if (resp) {
                         $(Edad).val(edadc);
@@ -692,7 +689,6 @@ if(Fnac !==''){
                     alert('Favor de Verificar la fecha de nacimiento. Edad=' + edadc);
                     $(FechaNac).val("");
                     $(Edad).val("");
-                    //$(FechaNac).focus();
                 }
             }
             },
@@ -702,14 +698,14 @@ if(Fnac !==''){
         });
     }
   } 
-  
- function ValFechaNacVic(dFechaNac,SEdad){
+
+  function ValFechaNacVic(dFechaNac,SEdad){
     alert('entro a funcion');
      var FechaNac = $(dFechaNac).val();
     if (FechaNac !== '') {
         $.ajax({
             type: 'post',
-            url: 'obtenFechaNacVict',
+            url: 'obtenFechaNacVic',
             data: {
                 FechaNac: FechaNac
             },
@@ -729,3 +725,4 @@ if(Fnac !==''){
         });
     }  
  } 
+

@@ -8,7 +8,6 @@ import clasesAuxiliar.showCausasPenales;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +17,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author ANTONIO.CORIA
  */
-@WebServlet(urlPatterns = {"/obtenFechaNacVict"})
-public class obtenFechaNacVict extends HttpServlet {
+public class obtenFechaNacVic extends HttpServlet {
 
+    String FechExpe=null;
+    int edad=0;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,29 +33,37 @@ public class obtenFechaNacVict extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+         PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession();
         String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
         String causaClave = (String) sesion.getAttribute("causaClave");
         showCausasPenales penales = new showCausasPenales();
         
-        try (PrintWriter out = response.getWriter()) {
-        if (request.getParameter("FechaNac") != null) {
-            String FechNac = request.getParameter("Fnac");
-            String AñoNac = FechNac.substring(0, 4);
-            String FechExpe = penales.FechaIng(juzgadoClave, causaClave);
-            String AnoIngreso = FechExpe.substring(0, 4);
-         if (FechExpe.equals("1899-09-09")){
-             out.write("0");
-         }else{
-           int  edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AñoNac);
-           System.out.println("la edad es mira"+edad);
-           out.println(edad);      
-         }
+         try {
+          if (request.getParameter("FechaNac") != null) {
+             String FechNac = request.getParameter("FechaNac");
+                String AnoNac = FechNac.substring(0, 4);
+                FechExpe = penales.FechaIng(juzgadoClave, causaClave);
+                String AnoIngreso = FechExpe.substring(0, 4);
+                System.out.println("año de ingreso="+FechExpe); 
+              if (FechExpe.equals("1899-09-09")){
+                  out.write("0");
+              }else{
+                  edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
+                  out.println(edad);
+              }
+              
+              
+          }   
              
-            
-            
+             
+             
+         }finally {
+            out.close();
         }
-        }
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

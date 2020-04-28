@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
 public class obtenFechaNacPro extends HttpServlet {
 
     String FechExpe=null;
-    
     int edad=0;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +45,7 @@ public class obtenFechaNacPro extends HttpServlet {
         try {
             if (request.getParameter("Fnac") != null) {
                 String FechNac = request.getParameter("Fnac");
-                String AñoNac = FechNac.substring(0, 4);
+                String AnoNac = FechNac.substring(0, 4);
                 FechExpe = penales.FechaIng(juzgadoClave, causaClave);
                 String AnoIngreso = FechExpe.substring(0, 4);
                 System.out.println("año de ingreso="+FechExpe);
@@ -69,7 +68,7 @@ public class obtenFechaNacPro extends HttpServlet {
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                          String part2 = parts[1];
-                        edad = Integer.parseInt(part2.substring(0,4)) - Integer.parseInt(AñoNac);
+                        edad = Integer.parseInt(part2.substring(0,4)) - Integer.parseInt(AnoNac);
                         System.out.println("la causa Clave="+causaClave+" "+part1+" "+part2);
                        out.println(edad);
                     }
@@ -79,11 +78,11 @@ public class obtenFechaNacPro extends HttpServlet {
                         String part1 = parts[0];
                         String part2 = parts[1];
                         String part3 = parts[2];
-                        edad = Integer.parseInt(part3.substring(0,4)) - Integer.parseInt(AñoNac);
+                        edad = Integer.parseInt(part3.substring(0,4)) - Integer.parseInt(AnoNac);
                         out.println(edad);
                     }
                 } else {
-                        edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AñoNac);
+                        edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
                         System.out.println("la edad es mira"+edad);
                         out.println(edad);      
                 }

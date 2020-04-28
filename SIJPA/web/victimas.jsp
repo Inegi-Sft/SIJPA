@@ -284,7 +284,7 @@
                             </td>
                             <td>
                                 <label for="fnacimientoV">Fecha de Nacimiento</label>
-                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>">
+                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>" onkeydown="return false" onblur="ValFechaNacVic('#fnacimientoV','#edadVi')" required>
                                 <div class="noIdentificada" id="dFechaNaciV">
                                     <input type="checkbox" id="chkFechaNaciV" onchange="fechaNoIdent('#chkFechaNaciV', '#fnacimientoV')">
                                     <label>No identificada</label>
@@ -292,7 +292,19 @@
                             </td>
                             <td>
                                 <label for="edadVi">Edad</label>
-                                <input type="number" name="edadVi" id="edadVi" value="<%=edadV%>">
+                                <select name="edadVi" id="edadVi" required>
+                                 <option value="">--Seleccione--</option>
+                                 <%
+                                        for (int m = 0; m <= 99; m++) {
+                                            out.println("<option value='" + m + "'");
+                                            if(Integer.toString(m).equals(edadV)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + m + "</option>");        
+                                        }
+                                    %>
+                                    <option value="-9">No identificado</option>
+                                </select>
                             </td>
                             <td>
                                 <label for="tvic_moral">Condición de vulnerabilidad</label>

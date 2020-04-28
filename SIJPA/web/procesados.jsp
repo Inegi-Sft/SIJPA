@@ -173,7 +173,7 @@
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
-                                <input type="date" name="fNacimiento" id="fNacimiento" value="<%=fechaNaci%>" required>
+                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" onkeydown="return false" onblur="ValFechaNac('#fNacimiento','#edad')" required>
                                 <div class='noIdentificada'>
                                     <input type='checkbox' id='chkFechaNac' onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento')">
                                     <label>No identificada</label>
@@ -200,7 +200,7 @@
                                 <select name="edad" id="edad" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        for (int i = 12; i <= 99; i++) {
+                                        for (int i = 12; i <= 17; i++) {
                                             out.println("<option value='" + i + "'");
                                             if(Integer.toString(i).equals(edad)){
                                                 out.println(" selected ");

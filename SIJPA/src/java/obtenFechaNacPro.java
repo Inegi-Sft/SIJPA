@@ -19,9 +19,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author ANTONIO.CORIA
  */
-@WebServlet(urlPatterns = {"/obtenFechaOcurr"})
-public class obtenFechaOcurr extends HttpServlet {
+@WebServlet(urlPatterns = {"/obtenFechaNacPro"})
+public class obtenFechaNacPro extends HttpServlet {
 
+    String FechExpe=null;
+    
+    int edad=0;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,39 +34,60 @@ public class obtenFechaOcurr extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    showCausasPenales penales = new showCausasPenales();
-    String FechaIngreso=null;
-    String FechaOcurrencia=null;
-    String juzgadoClave=null;
-    String causaClave=null;
-    Boolean ver;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession();
-        try {
-            System.out.println("Entrando al servlet");
+        String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
+        String causaClave = (String) sesion.getAttribute("causaClave");
+        showCausasPenales penales = new showCausasPenales();
 
-            if (request.getParameter("fechaOcurren") != null) {
-                juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
-                causaClave = (String) sesion.getAttribute("causaClave");
-                Date fechaOcurr = Date.valueOf(request.getParameter("fechaOcurren"));
-                Date fechaing = Date.valueOf(penales.FechaIng(juzgadoClave, causaClave));
-                FechaIngreso=fechaing.toString();
-                ver = fechaing.after(fechaOcurr);
-                if (FechaIngreso.equals("1899-09-09"))
-                {
-                 out.write("0");
-                }else{
-                if ((fechaing.after(fechaOcurr) == false) && (!fechaing.equals(fechaOcurr))) {
-                    out.write("1");
-                    System.out.println(ver + " FECHA OCURENCIA:" + fechaOcurr + " FECHA INGRESO:" + fechaing);
+        try {
+            if (request.getParameter("Fnac") != null) {
+                String FechNac = request.getParameter("Fnac");
+                String AñoNac = FechNac.substring(0, 4);
+                FechExpe = penales.FechaIng(juzgadoClave, causaClave);
+                String AnoIngreso = FechExpe.substring(0, 4);
+                System.out.println("año de ingreso="+FechExpe);
+                if (FechExpe.equals("1899-09-09")){
+                    System.out.print("entro con año de ingreso 1899 "+FechExpe);
+                    char numca[] = causaClave.toCharArray();
+                    int m = 0;
+                    for (int i = 0; i < causaClave.length(); i++) {
+                        if (numca[i] == '/') {
+                            m++;
+                        }
+                    }
+                    System.out.println("numero de / "+m);
+                    if (m == 0){
+                        System.out.println("esta en validacion 0");
+                        out.write("0");
+                    } 
+                   else if (m == 1) {
+                        System.out.println("esta en validacion 1 yea");
+                        String[] parts = causaClave.split("/");
+                        String part1 = parts[0];
+                         String part2 = parts[1];
+                        edad = Integer.parseInt(part2.substring(0,4)) - Integer.parseInt(AñoNac);
+                        System.out.println("la causa Clave="+causaClave+" "+part1+" "+part2);
+                       out.println(edad);
+                    }
+                   else if (m == 2) {
+                        System.out.println("esta en validacion 2");
+                        String[] parts = causaClave.split("/");
+                        String part1 = parts[0];
+                        String part2 = parts[1];
+                        String part3 = parts[2];
+                        edad = Integer.parseInt(part3.substring(0,4)) - Integer.parseInt(AñoNac);
+                        out.println(edad);
+                    }
                 } else {
-                    out.write("0");
+                        edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AñoNac);
+                        System.out.println("la edad es mira"+edad);
+                        out.println(edad);      
                 }
-            }  
+                
             }
         } finally {
             out.close();

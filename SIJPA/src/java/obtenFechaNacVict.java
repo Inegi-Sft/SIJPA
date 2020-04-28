@@ -7,7 +7,6 @@
 import clasesAuxiliar.showCausasPenales;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ANTONIO.CORIA
  */
-@WebServlet(urlPatterns = {"/obtenFechaOcurr"})
-public class obtenFechaOcurr extends HttpServlet {
+@WebServlet(urlPatterns = {"/obtenFechaNacVict"})
+public class obtenFechaNacVict extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,42 +30,31 @@ public class obtenFechaOcurr extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    showCausasPenales penales = new showCausasPenales();
-    String FechaIngreso=null;
-    String FechaOcurrencia=null;
-    String juzgadoClave=null;
-    String causaClave=null;
-    Boolean ver;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession();
-        try {
-            System.out.println("Entrando al servlet");
-
-            if (request.getParameter("fechaOcurren") != null) {
-                juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
-                causaClave = (String) sesion.getAttribute("causaClave");
-                Date fechaOcurr = Date.valueOf(request.getParameter("fechaOcurren"));
-                Date fechaing = Date.valueOf(penales.FechaIng(juzgadoClave, causaClave));
-                FechaIngreso=fechaing.toString();
-                ver = fechaing.after(fechaOcurr);
-                if (FechaIngreso.equals("1899-09-09"))
-                {
-                 out.write("0");
-                }else{
-                if ((fechaing.after(fechaOcurr) == false) && (!fechaing.equals(fechaOcurr))) {
-                    out.write("1");
-                    System.out.println(ver + " FECHA OCURENCIA:" + fechaOcurr + " FECHA INGRESO:" + fechaing);
-                } else {
-                    out.write("0");
-                }
-            }  
-            }
-        } finally {
-            out.close();
+        String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
+        String causaClave = (String) sesion.getAttribute("causaClave");
+        showCausasPenales penales = new showCausasPenales();
+        
+        try (PrintWriter out = response.getWriter()) {
+        if (request.getParameter("FechaNac") != null) {
+            String FechNac = request.getParameter("Fnac");
+            String AñoNac = FechNac.substring(0, 4);
+            String FechExpe = penales.FechaIng(juzgadoClave, causaClave);
+            String AnoIngreso = FechExpe.substring(0, 4);
+         if (FechExpe.equals("1899-09-09")){
+             out.write("0");
+         }else{
+           int  edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AñoNac);
+           System.out.println("la edad es mira"+edad);
+           out.println(edad);      
+         }
+             
+            
+            
+        }
         }
     }
 

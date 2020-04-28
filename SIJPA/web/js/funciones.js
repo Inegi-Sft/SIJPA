@@ -666,3 +666,66 @@ function ValidaCarpeInvest(InputCarpInves){
         });
     }
 }
+
+function ValFechaNac(FechaNac,Edad){
+alert('ENTRO A FUNCION');
+var Fnac=$(FechaNac).val();
+if(Fnac !==''){
+        $.ajax({
+            type: 'post',
+            url: 'obtenFechaNacPro',
+            data: {
+                Fnac: Fnac
+            },
+            success: function (response) { 
+             // alert(response);
+                var edadc = parseInt(response);
+                console.log("Respuesta del servidor", response);
+               if(response!=='0'){
+                if ((edadc>11) && (edadc<18)){
+               // alert(response);
+                    var resp = confirm("Desea agregar la edad. Edad=" + response);
+                    if (resp) {
+                        $(Edad).val(edadc);
+                    }
+                } else {
+                    alert('Favor de Verificar la fecha de nacimiento. Edad=' + edadc);
+                    $(FechaNac).val("");
+                    $(Edad).val("");
+                    //$(FechaNac).focus();
+                }
+            }
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+            }
+        });
+    }
+  } 
+  
+ function ValFechaNacVic(dFechaNac,SEdad){
+    alert('entro a funcion');
+     var FechaNac = $(dFechaNac).val();
+    if (FechaNac !== '') {
+        $.ajax({
+            type: 'post',
+            url: 'obtenFechaNacVict',
+            data: {
+                FechaNac: FechaNac
+            },
+            success: function (response) {
+                var edadVic = parseInt(response);
+                if (response !== '0') {
+                    var resp = confirm("Desea agregar la edad. Edad=" + response);
+                    if (resp) {
+                        $(SEdad).val(edadVic);
+                    }
+                }
+
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor", response);
+            }
+        });
+    }  
+ } 

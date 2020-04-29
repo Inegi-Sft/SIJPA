@@ -700,9 +700,8 @@ if(Fnac !==''){
   } 
 
   function ValFechaNacVic(dFechaNac,SEdad){
-    alert('entro a funcion');
      var FechaNac = $(dFechaNac).val();
-    if (FechaNac !== '') {
+     if (FechaNac !== '') {
         $.ajax({
             type: 'post',
             url: 'obtenFechaNacVic',

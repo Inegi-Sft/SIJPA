@@ -9,6 +9,7 @@
 <%@page import="clasesAuxiliar.showDelitos"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,8 @@
             showDelitos sd = new showDelitos();
             showCausasPenales causaPen = new showCausasPenales();
             showProcesados sProcesa = new showProcesados();
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
             ArrayList<String[]> lista, procesado;
             ArrayList<String> pIngre = new ArrayList();
             
@@ -173,7 +176,7 @@
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
-                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" onblur="ValFechaNacPRO('#fNacimiento','#edad')" onkeydown="return false" required>
+                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" max="<%=fechas%>" onblur="ValFechaNacPRO('#fNacimiento','#edad')" onkeydown="return false" required>
                                 <div class='noIdentificada'>
                                     <input type='checkbox' id='chkFechaNac' onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento')">
                                     <label>No identificada</label>

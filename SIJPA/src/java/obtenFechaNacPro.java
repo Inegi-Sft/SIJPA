@@ -48,9 +48,9 @@ public class obtenFechaNacPro extends HttpServlet {
                 String AnoNac = FechNac.substring(0, 4);
                 FechExpe = penales.FechaIng(juzgadoClave, causaClave);
                 String AnoIngreso = FechExpe.substring(0, 4);
-                System.out.println("año de ingreso="+FechExpe);
-                if (FechExpe.equals("1899-09-09")){
-                    System.out.print("entro con año de ingreso 1899 "+FechExpe);
+                System.out.println("año de ingreso=" + FechExpe);
+                if (FechExpe.equals("1899-09-09")) {
+                    System.out.print("entro con año de ingreso 1899 " + FechExpe);
                     char numca[] = causaClave.toCharArray();
                     int m = 0;
                     for (int i = 0; i < causaClave.length(); i++) {
@@ -58,35 +58,44 @@ public class obtenFechaNacPro extends HttpServlet {
                             m++;
                         }
                     }
-                    System.out.println("numero de / "+m);
-                    if (m == 0){
+                    System.out.println("numero de / " + m);
+                    if (m == 0) {
                         System.out.println("esta en validacion 0");
                         out.write("0");
-                    } 
-                   else if (m == 1) {
+                    } else if (m == 1) {
                         System.out.println("esta en validacion 1 yea");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
-                         String part2 = parts[1];
-                        edad = Integer.parseInt(part2.substring(0,4)) - Integer.parseInt(AnoNac);
-                        System.out.println("la causa Clave="+causaClave+" "+part1+" "+part2);
-                       out.println(edad);
-                    }
-                   else if (m == 2) {
+                        String part2 = parts[1];
+                        int ValAño = Integer.parseInt(part2.substring(0, 4));
+                        System.out.println("AÑO DE INGRESO= " + ValAño);
+                        if ((ValAño > 1915) && (ValAño < 2020)) {
+                            edad = Integer.parseInt(part2.substring(0, 4)) - Integer.parseInt(AnoNac);
+                            System.out.println("la causa Clave=" + causaClave + " " + part1 + " " + part2);
+                            out.println(edad);
+                        } else {
+                            out.write("0");
+                        }
+                    } else if (m == 2) {
                         System.out.println("esta en validacion 2");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];
                         String part3 = parts[2];
-                        edad = Integer.parseInt(part3.substring(0,4)) - Integer.parseInt(AnoNac);
-                        out.println(edad);
+                        int ValAño = Integer.parseInt(part2.substring(0, 4));
+                        if ((ValAño > 1915) && (ValAño < 2020)) {
+                            edad = Integer.parseInt(part3.substring(0, 4)) - Integer.parseInt(AnoNac);
+                            out.println(edad);
+                        } else {
+                            out.write("0");
+                        }
                     }
                 } else {
-                        edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
-                        System.out.println("la edad es mira"+edad);
-                        out.println(edad);      
+                    edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
+                    System.out.println("la edad es mira" + edad);
+                    out.println(edad);
                 }
-                
+
             }
         } finally {
             out.close();

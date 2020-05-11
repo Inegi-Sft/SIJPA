@@ -25,7 +25,7 @@
             <h1>Resoluciones dictadas por el tribunal de enjuiciamiento</h1>
             <form action="conclusionesJO.jsp" method="post" name="formConclusionesJO" id="formConclusionesJO">
                 <label for="procesado">Id Adolescente</label>
-                <select name="proceClave" id="proceClave">
+                <select name="proceClave" id="proceClave" required>
                     <option value="">--Seleccione--</option>
                 </select>
                 <fieldset>

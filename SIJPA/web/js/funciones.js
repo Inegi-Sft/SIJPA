@@ -11,28 +11,28 @@ $(document).ready(function () {
     setTimeout(function () {
         $('#splash').slideDown('slow');
     }, 500);
-    
+
     //Temporizador para que desaparesca logo y aparesca login
     setTimeout(function () {
         $('#splash').animate({
             left: "100%",
             //width: "toggle",
             opacity: "toggle"
-        },{
+        }, {
             duration: 2000, // duration
             queue: false
         });
-        
+
         $('#login').animate({
             left: "40%",
             //width: "toggle",
             opacity: "toggle"
-        },{
+        }, {
             duration: 2000,
             queue: false
         });
     }, 3000);
-    
+
     //Acceso al sistema mediante ajax
     $('#formLogin').submit(function (e) {
         e.preventDefault();
@@ -45,7 +45,7 @@ $(document).ready(function () {
                 console.log("Respuesta del servidor", response);
                 if (response === 1) {
                     window.location.href = "bienvenida.jsp";
-                }else{
+                } else {
                     alert('Usuario no encontrado, favor de revisar usuario o contraseña');
                 }
             },
@@ -56,28 +56,28 @@ $(document).ready(function () {
         });
     });
     /*----------------Fin Index------------------------*/
-    
+
     /*----------------Sistemas Captura------------------------*/
-    $('#btnJc').click(function(){
+    $('#btnJc').click(function () {
         window.location.href = "causasPenales.jsp";
     });
     /*----------------Fin Sistemas Captura------------------------*/
-    
+
     /*----------------Registro Usuarios------------------------*/
-    $('#buttonAdmin').click(function(){
+    $('#buttonAdmin').click(function () {
         $('#mensajeAdmin').animate({
             top: "-600"
         },
         1500);
     });
-    
-    $('#pass').focusout(function(){
-        if($('#pass').val() === ""){
+
+    $('#pass').focusout(function () {
+        if ($('#pass').val() === "") {
             $('#confPass').val('');
         }
     });
-    
-    $('#correo').focusout(function(){
+
+    $('#correo').focusout(function () {
         var usuario = $('#correo').val();
         $.ajax({
             url: 'obtenUsuario',
@@ -88,38 +88,38 @@ $(document).ready(function () {
             }
         }).done(function (d) {
             console.log(d);
-            if(d === 1){
+            if (d === 1) {
                 alert('Usuario ya registrado, verificar');
                 $('#correo').val('');
             }
         });
     });
-    
-    $('#confPass').keyup(function(){
-        if($('#confPass').val() !== ''){
+
+    $('#confPass').keyup(function () {
+        if ($('#confPass').val() !== '') {
             if ($('#confPass').val() === $('#pass').val()) {
                 $('#mesajePass').text('Las contraseñas son correctas');
-                $('#mesajePass').css({'color':'#66cc00'});
+                $('#mesajePass').css({'color': '#66cc00'});
                 $('#guardar').fadeIn('slow');
-            }else{
+            } else {
                 $('#mesajePass').text('Las contraseñas no coinciden');
-                $('#mesajePass').css({'color':'#ff0000'});
+                $('#mesajePass').css({'color': '#ff0000'});
                 $('#guardar').fadeOut('slow');
             }
         }
     });
     /*----------------Fin Registro Usuarios------------------------*/
-    
+
     /*----------------Cabecera------------------------*/
-    $('#usu img').click(function(){
+    $('#usu img').click(function () {
         $('#usu #enlace').animate({
             right: "0",
             width: "toggle",
             opacity: "toggle"
-        },800);
+        }, 800);
     });
     /*----------------Fin de Cabecera------------------------*/
-    
+
     $('select > option[value=-2]').hide();
     $('#estudiosPro > option[value=7],#estudiosPro > option[value=8]').hide();//oculta el grado de estudios maestria y doctorado en procesados
     $(".load").fadeOut("slow");//proceso de carga para causas penales
@@ -145,29 +145,30 @@ $(document).ready(function () {
     /***************************** FUNCIONES JUZGADOS *******************************/
     //permite solo numeros en los inputs
     /***
-    * 
-    * @param {type} ex
-    * @returns {undefined}
-    */
-    $('.soloNum').keypress(function(ex){
-        if(ex.charCode < 48 || ex.charCode > 57) return false;
+     * 
+     * @param {type} ex
+     * @returns {undefined}
+     */
+    $('.soloNum').keypress(function (ex) {
+        if (ex.charCode < 48 || ex.charCode > 57)
+            return false;
     });
-    
-    $('#municipioJ').change(function(){
+
+    $('#municipioJ').change(function () {
         var entidad = $('#entidadJ').val();
         var muni = $('#municipioJ').val();
         var num = $('#numOrgano').val();
         var juzgado = entidad + '-' + muni + '-' + num;
         $.ajax({
-            url : 'obtenJuzgado',
-            type : 'post',
+            url: 'obtenJuzgado',
+            type: 'post',
             data: {juzgado: juzgado},
             succes: function (data) {
                 console.log('Juzgado ' + data);
             }
         }).done(function (d) {
             console.log('Juzgado Resul ' + d);
-            if(d === 1){
+            if (d === 1) {
                 alert('Juzgado ya registrado, verificar');
                 $('#numOrgano').val('');
                 $('#entidadJ, #municipioJ').val('');
@@ -175,7 +176,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     $("#fDivision").change(function () {
         switch ($("#fDivision").val()) {
             case '1':
@@ -349,7 +350,8 @@ function llenaCausaJO(idJclave, idCpen) {
     } else {
         $(idCpen).empty().append("<option value='0'>--Seleccione--</option>");
     }
-};
+}
+;
 
 function llenaElementosCPJC(jClave, idCclave, idDeli, idProce, idVic) {
     var jClaver = $(jClave).val();
@@ -359,8 +361,8 @@ function llenaElementosCPJC(jClave, idCclave, idDeli, idProce, idVic) {
             url: "obtenCausaJC",
             dataType: 'html',
             type: "post",
-            data: {causaClave: causaClave, jClave: jClaver,  bandera: "1"},
-            success: function (response) { 
+            data: {causaClave: causaClave, jClave: jClaver, bandera: "1"},
+            success: function (response) {
                 console.log("Respuesta del servidor: ", response);
             }
         }).done(function (data) {
@@ -369,7 +371,7 @@ function llenaElementosCPJC(jClave, idCclave, idDeli, idProce, idVic) {
     } else {
         $(idDeli).empty().append("<option value='0'>--Seleccione--</option>");
     }
-    
+
     if (causaClave !== '') {
         $.ajax({
             url: "obtenCausaJC",
@@ -385,7 +387,7 @@ function llenaElementosCPJC(jClave, idCclave, idDeli, idProce, idVic) {
     } else {
         $(idProce).empty().append("<option value='0'>--Seleccione--</option>");
     }
-    
+
     if (causaClave !== '') {
         $.ajax({
             url: "obtenCausaJC",
@@ -401,10 +403,11 @@ function llenaElementosCPJC(jClave, idCclave, idDeli, idProce, idVic) {
     } else {
         $(idVic).empty().append("<option value='0'>--Seleccione--</option>");
     }
-};
+}
+;
 /************************FIN DE FUNCIONES PARA CAUSA PENALES JO*********************/
- 
- /****************************** FUNCIONES PROCESADOS ******************************/
+
+/****************************** FUNCIONES PROCESADOS ******************************/
 //para respuesta simple, oculta el select contenido en un div
 /***
  * 
@@ -578,14 +581,14 @@ function deleteTramite(fila, idProce) {
     }
 }
 
-function borraRegistro(clave, posi, tabla, idCampo){
+function borraRegistro(clave, posi, tabla, idCampo) {
     var resp = confirm("Realmente deseas eliminar este registro de JC?");
     if (resp) {
         alert('Se recibe causa: ' + clave + ' ,posi: ' + posi + ' ,tabla: ' + tabla + ',idcampo: ' + idCampo);
         $('#' + tabla + ' tbody tr').eq(posi).remove();
         $(idCampo).val($(idCampo).val() - 1);
         var numCampo = $(idCampo).val();//dependiendo del id que made sabremos el tamaño del campo
-        if(clave !== 'sr'){
+        if (clave !== 'sr') {
             $.ajax({
                 type: 'post',
                 url: 'deleteDatos',
@@ -596,16 +599,16 @@ function borraRegistro(clave, posi, tabla, idCampo){
                 },
                 success: function (response) {
                     console.log("Respuesta del servidor al borrar: ", response);
-                    if(response === 'causas'){
+                    if (response === 'causas') {
                         alert('La causa penal ' + clave + ' borro con exito');
-                    } else if(response === 'tablaDeli'){
+                    } else if (response === 'tablaDeli') {
                         alert('El Delito ' + clave + ' se borro con exito');
-                    } else if(response === 'tablaProcesa'){
+                    } else if (response === 'tablaProcesa') {
                         alert('El Procesado ' + clave + ' se borro con exito');
                         //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
                         $('#tablaInicial tbody tr').eq(posi).remove();
-                        buscaYremplaza(clave,0);
-                    } else if(response === 'tablaVictimas'){
+                        buscaYremplaza(clave, 0);
+                    } else if (response === 'tablaVictimas') {
                         alert('La Victima ' + clave + ' se borro con exito');
                     }
                 },
@@ -618,7 +621,7 @@ function borraRegistro(clave, posi, tabla, idCampo){
     }
 }
 /*----------------------- FIN FUNCIONES PARA DELETE AJAX --------------------------*/
-function VFechaOcurrencia(Ocurr){
+function VFechaOcurrencia(Ocurr) {
     var fechaOcurren = $(Ocurr).val();
     if (fechaOcurren !== '') {
         $.ajax({
@@ -639,10 +642,10 @@ function VFechaOcurrencia(Ocurr){
                 console.log("Respuesta del servidor", response);
             }
         });
-    }   
-} 
+    }
+}
 
-function ValidaCarpeInvest(InputCarpInves){
+function ValidaCarpeInvest(InputCarpInves) {
     var CarpInves = $(InputCarpInves).val();
     if (CarpInves !== '') {
         $.ajax({
@@ -657,9 +660,9 @@ function ValidaCarpeInvest(InputCarpInves){
                 if (response === '1') {
                     alert('La Causa Penal Ya Existe');
                     $(InputCarpInves).val("");
-                    $(InputCarpInves).focus();               
+                    $(InputCarpInves).focus();
                 }
-            }, 
+            },
             error: function (response) {
                 console.log("Respuesta del servidor", response);
             }
@@ -667,41 +670,48 @@ function ValidaCarpeInvest(InputCarpInves){
     }
 }
 
-function ValFechaNacPRO(FechaNac,Edad){
-var Fnac=$(FechaNac).val();
-if(Fnac !==''){
+function ValFechaNacPRO(FechaNac, Edad) {
+    var Fnac = $(FechaNac).val();
+    if (Fnac !== '') {
         $.ajax({
             type: 'post',
             url: 'obtenFechaNacPro',
             data: {
                 Fnac: Fnac
             },
-            success: function (response) { 
+            success: function (response) {
                 var edadc = parseInt(response);
-               // console.log("Respuesta del servidor", response);
-               if(response!=='0'){
-                if ((edadc>11) && (edadc<18)){
-                    var resp = confirm("Desea agregar la edad. Edad=" + response);
-                    if (resp) {
-                        $(Edad).val(edadc);
+                // console.log("Respuesta del servidor", response);
+                if (response !== '0') {
+                    if ((edadc > 11) && (edadc < 18)) {
+                        var resp = confirm("Desea agregar la edad. Edad=" + response);
+                        if (resp) {
+                            $(Edad).val(edadc);
+                        }
+                    } else {
+                        if (edadc>0){
+                         alert('Favor de Verificar la fecha de nacimiento. Edad=' + edadc);
+                        $(FechaNac).val("");
+                        $(Edad).val("");   
+                        }else{
+                         alert('LA FECHA DE NACIMIENTO NO DEBE SER MAYOR A LA FECHA DE INGRESO');
+                        $(FechaNac).val("");
+                        $(Edad).val("");  
+                        }
+                        
                     }
-                } else {
-                    alert('Favor de Verificar la fecha de nacimiento. Edad=' + edadc);
-                    $(FechaNac).val("");
-                    $(Edad).val("");
                 }
-            }
             },
             error: function (response) {
                 console.log("Respuesta del servidor", response);
             }
         });
     }
-  } 
+}
 
   function ValFechaNacVic(dFechaNac,SEdad){
-     var FechaNac = $(dFechaNac).val();
-     if (FechaNac !== '') {
+    var FechaNac = $(dFechaNac).val();
+    if (FechaNac !== '') {
         $.ajax({
             type: 'post',
             url: 'obtenFechaNacVic',
@@ -710,11 +720,20 @@ if(Fnac !==''){
             },
             success: function (response) {
                 var edadVic = parseInt(response);
-                if (response !== '0') {
+               //alert('Respuesta servidores se�ores'+response);
+                if (response !== '0'){
+                  if ((response !=='1')){
                     var resp = confirm("Desea agregar la edad. Edad=" + response);
                     if (resp) {
                         $(SEdad).val(edadVic);
                     }
+                }
+            }
+                if (response === '1')
+                {
+                    alert('LA FECHA DE NACIMIENTO NO DEBE SER MAYOR A LA FECHA DE INGRESO');
+                    $(SEdad).val("");
+                    $(dFechaNac).val("");
                 }
 
             },
@@ -722,6 +741,9 @@ if(Fnac !==''){
                 console.log("Respuesta del servidor", response);
             }
         });
-    }  
- } 
+    }
+}
 
+function prueba(){
+    window.location.href = "juicioPenal.jsp";
+}

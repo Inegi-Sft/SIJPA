@@ -40,30 +40,76 @@ public class obtenFechaNacVic extends HttpServlet {
         showCausasPenales penales = new showCausasPenales();
         
          try {
-          if (request.getParameter("FechaNac") != null) {
-             String FechNac = request.getParameter("FechaNac");
+            if (request.getParameter("FechaNac") != null) {
+                String FechNac = request.getParameter("FechaNac");
                 String AnoNac = FechNac.substring(0, 4);
                 FechExpe = penales.FechaIng(juzgadoClave, causaClave);
                 String AnoIngreso = FechExpe.substring(0, 4);
-                System.out.println("año de ingreso="+FechExpe); 
-              if (FechExpe.equals("1899-09-09")){
-                  out.write("0");
-              }else{
-                  edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
-                  out.println(edad);
-              }
-              
-              
-          }   
-             
-             
-             
-         }finally {
+                System.out.println("año de ingreso=" + FechExpe);
+                if (FechExpe.equals("1899-09-09")) {
+                    System.out.print("entro con año de ingreso 1899 " + FechExpe);
+                    char numca[] = causaClave.toCharArray();
+                    int m = 0;
+                    for (int i = 0; i < causaClave.length(); i++) {
+                        if (numca[i] == '/') {
+                            m++;
+                        }
+                    }
+                    System.out.println("numero de / " + m);
+                    if (m == 0) {
+                        System.out.println("esta en validacion 0");
+                        out.write("0");
+                    } else if (m == 1) {
+                        System.out.println("esta en validacion 1 yessssssssssss");
+                        String[] parts = causaClave.split("/");
+                        String part1 = parts[0];
+                        String part2 = parts[1];
+                        int ValAño = Integer.parseInt(part2.substring(0, 4));
+                        System.out.println("AÑO DE INGRESO= " + ValAño);
+                        if ((ValAño > 1915) && (ValAño < 2020)) {
+                            edad = Integer.parseInt(part2.substring(0, 4)) - Integer.parseInt(AnoNac);
+                            System.out.println("La edad es :" + edad);
+                            if (edad > 0) {
+                                out.println(edad);
+                            } else {
+                                System.out.println("ENTROOOOOOOO A1111");
+                                out.write("1");
+                            }
+                        } else {
+                            out.write("0");
+                        }
+                    } else if (m == 2) {
+                        System.out.println("esta en validacion 2");
+                        String[] parts = causaClave.split("/");
+                        String part1 = parts[0];
+                        String part2 = parts[1];
+                        String part3 = parts[2];
+                        int ValAño = Integer.parseInt(part2.substring(0, 4));
+                        if ((ValAño > 1915) && (ValAño < 2020)) {
+                            edad = Integer.parseInt(part3.substring(0, 4)) - Integer.parseInt(AnoNac);
+                            if (edad > 0) {
+                                out.println(edad);
+                            } else {
+                                out.write("1");
+                            }
+                            out.println(edad);
+                        } else {
+                            out.write("0");
+                        }
+                    }
+                } else {
+                    edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
+                    if (edad > 0) {
+                        out.println(edad);
+                    } else {
+                        out.write("1");
+                    }
+                }
+            }
+        } finally {
             out.close();
         }
-        
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

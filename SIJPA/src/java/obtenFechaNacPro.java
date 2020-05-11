@@ -63,7 +63,7 @@ public class obtenFechaNacPro extends HttpServlet {
                         System.out.println("esta en validacion 0");
                         out.write("0");
                     } else if (m == 1) {
-                        System.out.println("esta en validacion 1 yea");
+                        System.out.println("esta en validacion 1 yesssssss");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];

@@ -58,5 +58,13 @@ $(document).ready(function() {
             $('#delictivo').prop("disabled", false);
         }
     });
+    
+    $('#formProcesadosJO').submit(function (e) {
+        if ($('input[name="chkIngresos"]:checked').length === 0) {
+            e.preventDefault();
+            alert('Selecciona al menos una opcion de Fuente de Ingresos');
+            $('input[name="chkIngresos"]').focus();
+        }
+    });
 
 });

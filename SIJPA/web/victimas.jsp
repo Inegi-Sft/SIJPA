@@ -8,6 +8,7 @@
 <%@page import="clasesAuxiliar.showVictimas"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,6 +21,8 @@
             catalogos cat = new catalogos();
             showDelitos sDelitos = new showDelitos();
             showVictimas sVicti = new showVictimas();
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
             ArrayList<String[]> lista, victima, vic;
             ArrayList<String> viDel = new ArrayList();
             ArrayList<String> viPro = new ArrayList();
@@ -284,7 +287,7 @@
                             </td>
                             <td>
                                 <label for="fnacimientoV">Fecha de Nacimiento</label>
-                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>">
+                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>" max="<%=fechas%>" onblur="ValFechaNacVic('#fnacimientoV','#edadVi')" required>
                                 <div class="noIdentificada" id="dFechaNaciV">
                                     <input type="checkbox" id="chkFechaNaciV" onchange="fechaNoIdent('#chkFechaNaciV', '#fnacimientoV')">
                                     <label>No identificada</label>
@@ -292,7 +295,19 @@
                             </td>
                             <td>
                                 <label for="edadVi">Edad</label>
-                                <input type="number" name="edadVi" id="edadVi" value="<%=edadV%>">
+                                <select name="edadVi" id="edadVi" required>
+                                 <option value="">--Seleccione--</option>
+                                 <%
+                                        for (int m = 0; m <= 99; m++) {
+                                            out.println("<option value='" + m + "'");
+                                            if(Integer.toString(m).equals(edadV)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + m + "</option>");        
+                                        }
+                                    %>
+                                    <option value="-9">No identificado</option>
+                                </select>
                             </td>
                             <td>
                                 <label for="tvic_moral">Condición de vulnerabilidad</label>

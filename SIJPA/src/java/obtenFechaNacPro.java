@@ -19,9 +19,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author ANTONIO.CORIA
  */
-@WebServlet(urlPatterns = {"/obtenFechaOcurr"})
-public class obtenFechaOcurr extends HttpServlet {
+@WebServlet(urlPatterns = {"/obtenFechaNacPro"})
+public class obtenFechaNacPro extends HttpServlet {
 
+    String FechExpe=null;
+    int edad=0;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,34 +33,24 @@ public class obtenFechaOcurr extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    showCausasPenales penales = new showCausasPenales();
-    String FechaIngreso=null;
-    String FechaOcurrencia=null;
-    String juzgadoClave=null;
-    String causaClave=null;
-    String ExtrAño=null;
-    int AñoOcurr=0;
-    Boolean ver;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession();
-        try {
-            System.out.println("Entrando al servlet");
+        String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
+        String causaClave = (String) sesion.getAttribute("causaClave");
+        showCausasPenales penales = new showCausasPenales();
 
-            if (request.getParameter("fechaOcurren") != null) {
-                juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
-                causaClave = (String) sesion.getAttribute("causaClave");
-                Date fechaOcurr = Date.valueOf(request.getParameter("fechaOcurren"));
-                ExtrAño = String.valueOf(fechaOcurr).substring(0,4);
-                AñoOcurr=Integer.parseInt(ExtrAño);
-                Date fechaing = Date.valueOf(penales.FechaIng(juzgadoClave, causaClave));
-                FechaIngreso = fechaing.toString();
-                ver = fechaing.after(fechaOcurr);
-                if (FechaIngreso.equals("1899-09-09")) {
-                     System.out.print("entro con año de ingreso 1899 ");
+        try {
+            if (request.getParameter("Fnac") != null) {
+                String FechNac = request.getParameter("Fnac");
+                String AnoNac = FechNac.substring(0, 4);
+                FechExpe = penales.FechaIng(juzgadoClave, causaClave);
+                String AnoIngreso = FechExpe.substring(0, 4);
+                System.out.println("año de ingreso=" + FechExpe);
+                if (FechExpe.equals("1899-09-09")) {
+                    System.out.print("entro con año de ingreso 1899 " + FechExpe);
                     char numca[] = causaClave.toCharArray();
                     int m = 0;
                     for (int i = 0; i < causaClave.length(); i++) {
@@ -71,17 +63,16 @@ public class obtenFechaOcurr extends HttpServlet {
                         System.out.println("esta en validacion 0");
                         out.write("0");
                     } else if (m == 1) {
-                        System.out.println("esta en validacion 1 yea");
+                        System.out.println("esta en validacion 1 yesssssss");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];
                         int ValAño = Integer.parseInt(part2.substring(0, 4));
-                        System.out.println("AÑO DE INGRESOS= " + ValAño);
-                        System.out.println("AÑO DE OCURRENCIA= " + ExtrAño);
+                        System.out.println("AÑO DE INGRESO= " + ValAño);
                         if ((ValAño > 1915) && (ValAño < 2020)) {
-                            if (ValAño < AñoOcurr) {
-                                out.write("1");
-                            }
+                            edad = Integer.parseInt(part2.substring(0, 4)) - Integer.parseInt(AnoNac);
+                            System.out.println("la causa Clave=" + causaClave + " " + part1 + " " + part2);
+                            out.println(edad);
                         } else {
                             out.write("0");
                         }
@@ -93,21 +84,18 @@ public class obtenFechaOcurr extends HttpServlet {
                         String part3 = parts[2];
                         int ValAño = Integer.parseInt(part2.substring(0, 4));
                         if ((ValAño > 1915) && (ValAño < 2020)) {
-                            if (ValAño < AñoOcurr) {
-                                out.write("1");
-                            }
+                            edad = Integer.parseInt(part3.substring(0, 4)) - Integer.parseInt(AnoNac);
+                            out.println(edad);
                         } else {
                             out.write("0");
                         }
                     }
                 } else {
-                    if ((fechaing.after(fechaOcurr) == false) && (!fechaing.equals(fechaOcurr))) {
-                        out.write("1");
-                        System.out.println(ver + " FECHA OCURENCIA:" + fechaOcurr + " FECHA INGRESO:" + fechaing);
-                    } else {
-                        out.write("0");
-                    }
+                    edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
+                    System.out.println("la edad es mira" + edad);
+                    out.println(edad);
                 }
+
             }
         } finally {
             out.close();

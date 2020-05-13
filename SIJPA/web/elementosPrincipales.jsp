@@ -408,16 +408,16 @@
                                         out.println("<p class='indicador2' style='color:#D60320'>");
                                         out.println("<span>" + etapaProce.size() + "</span>");
                                         out.println("adolescente(s) por asignar estatus</p>");
-                                        out.println("<a href='tramite.jsp' class='agregar pop'><img src='img/add.png'/> Agregar</a>");
+                                        out.println("<a href='tramiteJO.jsp' class='agregar pop'><img src='img/add.png'/> Agregar</a>");
                                     }else{
                                         out.println("<p class='indicador2'><span>0</span>");
                                         out.println("adolescente(s) por asignar estatus</p>");
-                                        out.println("<a href='tramite.jsp' class='agregar pop oculto'><img src='img/add.png'/> Agregar</a>");
+                                        out.println("<a href='tramiteJO.jsp' class='agregar pop oculto'><img src='img/add.png'/> Agregar</a>");
                                     }
                                 }else{
                                     out.println("<p class='indicador2'><span>0</span>");
                                     out.println("adolescente(s) por asignar estatus</p>");
-                                    out.println("<a href='tramite.jsp' class='agregar pop oculto'><img src='img/add.png'/> Agregar</a>");
+                                    out.println("<a href='tramiteJO.jsp' class='agregar pop oculto'><img src='img/add.png'/> Agregar</a>");
                                 }
                             %>
                         </td>

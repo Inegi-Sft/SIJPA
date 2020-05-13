@@ -6,13 +6,15 @@
 
 <nav>
     <ul>
-        <li><a href="causasPenales.jsp">Causas Penales</a></li>
+        <li><a href="causasPenales.jsp">JC</a></li>
+        <li><a href="causasPenalesJO.jsp">JO</a></li>
         <li><a href="juzgados.jsp">Juzgados</a></li>
         <li><a href="jueces.jsp">Jueces</a></li>
         <li><a href="audiencias.jsp">Audiencias</a></li>
-        <li><a href="sistemasCap.jsp">Sistemas de Captura</a></li>
+        <!--<li><a href="sistemasCap.jsp">Sistemas de Captura</a></li>-->
         <% if((Integer)session.getAttribute("tipoUsuario") == 1){ %>
             <li><a href="usuario.jsp">Usuarios</a></li>
+            <li><a href="BDMySQL/sijpa_db13052020.sql" download="sijpa_db.sql">Base de Datos SIJPA</a></li>
         <% } %>
     </ul>
 </nav>

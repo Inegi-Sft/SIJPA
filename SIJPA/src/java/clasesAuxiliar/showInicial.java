@@ -55,17 +55,18 @@ public class showInicial {
         return ini;
     }
     
-    public ArrayList findInicialCausa(String causa) {
+    public ArrayList findInicialCausa(String causaClave) {
         conn.Conectar();
         ini = new ArrayList();
-        sql = "SELECT EI.PROCESADO_CLAVE,CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSA.DESCRIPCION, AV.DESCRIPCION, RS.DESCRIPCION, EI.ETAPA "
+        sql = "SELECT EI.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSA.DESCRIPCION, AV.DESCRIPCION, RS.DESCRIPCION, CE.DESCRIPCION "
                 + "FROM DATOS_ETAPA_INICIAL_ADOJC EI, DATOS_PROCESADOS_ADOJC P, CATALOGOS_RESPUESTA_SIMPLE RSA, CATALOGOS_AUTO_VINCULACION AV, "
-                + "CATALOGOS_RESPUESTA_SIMPLE RS "
+                + "CATALOGOS_RESPUESTA_SIMPLE RS, CATALOGOS_ETAPAS CE "
                 + "WHERE EI.PROCESADO_CLAVE = P.PROCESADO_CLAVE "
                 + "AND EI.AUDIENCIA_INICIAL = RSA.RESPUESTA_ID "
                 + "AND EI.AUTO_VINCULACION = AV.AUTO_ID "
                 + "AND EI.SOBRESEIMIENTO_CAUSAP = RS.RESPUESTA_ID "
-                + "AND EI.CAUSA_CLAVE = '" + causa + "' "
+                + "AND EI.ETAPA = CE.ETAPA_ID "
+                + "AND EI.CAUSA_CLAVE = '" + causaClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {

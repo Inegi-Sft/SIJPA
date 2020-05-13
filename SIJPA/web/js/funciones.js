@@ -61,6 +61,9 @@ $(document).ready(function () {
     $('#btnJc').click(function(){
         window.location.href = "causasPenales.jsp";
     });
+    $('#btnJo').click(function(){
+        window.location.href = "causasPenalesJO.jsp";
+    });
     /*----------------Fin Sistemas Captura------------------------*/
     
     /*----------------Registro Usuarios------------------------*/
@@ -127,7 +130,8 @@ $(document).ready(function () {
     $('.oculto').hide();
 
     //despliega ventana modal
-    $('#tablaVictimas, #tablaDeli, #tablaProcesa, #tablaInicial, #tablaIntermedia, #tablaConclu, #tablaTramite, .agregar').on('focusin', function () {
+    $('#tablaDeli, #tablaProcesa, #tablaVictimas, #tablaInicial, #tablaIntermedia, #tablaConclu, #tablaTramite, .agregar,\n\
+        #tablaDeliJO, #tablaProcesaJO, #tablaVictimasJO, #tablaJuicioJO, #tablaConcluJO, #conclusionesJO').on('focusin', function () {
         $('a.pop').fancybox({
             'type': 'iframe',
             'overlayShow': true,
@@ -517,67 +521,140 @@ function validaAddJuez() {
     }
 }
 
-/************************ FUNCIONES PARA DELETE AJAX ******************************/
-/***
+/********************* FUNCIONES BUSCA Y REMPLAZA PROCESADOS  *********************/
+/**
  * 
- * @param {type} fila
- * @param {type} idProce
+ * @param {type} proceClave
+ * @param {type} etapaProce
  * @returns {undefined}
  */
-function deleteConclusion(fila, idProce) {
-    var resp = confirm("Realmente deseas eliminar este resgistro?");
-    if (resp) {
-        $.ajax({
-            type: 'post',
-            url: 'deleteDatos',
-            data: {proceConclusion: idProce},
-            success: function (response) {
-                console.log("Respuesta del servidor: ", response);
-                if (response === "conclusionDeleted") {
-                    alert("Resolucion: " + idProce + " Registro eliminado!!!");
-                    $('#tablaConclu tbody #' + fila).remove();//elimina fila de tabla por su id
-                    var numProce = parseInt($('#Tadolescentes').val());
-                    $('#lblNumConclu').text("Conclusiones agregadas: " + $('#tablaConclu tbody tr').length);//tramites agregados
-                    var proPendientes = numProce - $('#tablaConclu tbody tr').length - $('#tablaTramite tbody tr').length;//procesados pendientes
-                    $('.agregar').fadeIn("slow");//muestra boton agregar
-                    $('.proPendientes').text("Faltan: " + proPendientes + " adolescentes por asignar estatus").css({'color': '#D60320', 'float': 'none'});
+function buscaYremplaza(proceClave, etapaProce){
+    var encontrado = false;
+    var eliminaBD = false;
+    var nomTabla = "";
+    var dato = "";
+    console.log('etapa: ' + etapaProce);
+    if(parent.$('#tablaIntermedia tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
+        parent.$('#tablaIntermedia tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
+            dato = $(this).html();
+            console.log('dato intermedia: ' + dato + ' proceClave: ' + proceClave);
+            if(proceClave === dato){
+                if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
+                    if($(this).parent().find('td:eq(2)').html() !== ''){
+                        //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                        console.log('Esta sin insertar en BD');
+                        eliminaBD = true;
+                        nomTabla = "inter";
+                    }
+                    encontrado = true;
+                    $(this).parent().remove();
+                    if(parent.$('#tablaIntermedia tbody tr').length === 0){
+                        parent.$('#btn6').prop('disabled', true);
+                    }
                 }
-            },
-            error: function (response) {
-                console.log("Respuesta del servidor", response);
-                alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
     }
-}
-
-function deleteTramite(fila, idProce) {
-    var resp = confirm("Realmente deseas eliminar este registro?");
-    if (resp) {
-        $.ajax({
-            type: 'post',
-            url: 'deleteDatos',
-            data: {proceTramite: idProce},
-            success: function (response) {
-                console.log("Respuesta del servidor: ", response);
-                if (response === "tramiteDeleted") {
-                    alert("Tramite: " + idProce + " Registro eliminado!!!");
-                    $('#tablaTramite tbody #' + fila).remove();//elimina fila de tabla por su id
-                    var numProce = parseInt($('#Tadolescentes').val());
-                    $('#lblNumTram').text("Tramites agregados: " + $('#tablaTramite tbody tr').length);//tramites agregados
-                    var proPendientes = numProce - $('#tablaConclu tbody tr').length - $('#tablaTramite tbody tr').length;//procesados pendientes
-                    $('.agregar').fadeIn("slow");//muestra boton agregar
-                    $('.proPendientes').text("Faltan: " + proPendientes + " adolescentes por asignar estatus").css({'color': '#D60320', 'float': 'none'});
+    if(!encontrado){
+        if(parent.$('#tablaConclu tbody tr').length > 0){
+            parent.$('#tablaConclu tbody tr').find('td:eq(0)').each(function(){
+                dato = $(this).html();
+                console.log('dato conclusion: ' + dato + ' proceClave: ' + proceClave);
+                if(proceClave === dato){
+                    if(etapaProce !== 2 || etapaProce !== 6){//Quiere decir que cambio de etapa en la actualizacion
+                        if($(this).parent().find('td:eq(2)').html() !== ''){
+                            //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                            console.log('Esta sin insertar en BD');
+                            eliminaBD = true;
+                            nomTabla = "conclu";
+                        }
+                        encontrado = true;
+                        $(this).parent().remove();
+                        if(parent.$('#tablaConclu tbody tr').length === 0){
+                            if(parent.$('#tablaVolando tbody tr').length === 0){
+                                parent.$('#btn7').prop('disabled', true);
+                            }
+                        }
+                    }
                 }
+            });
+        }
+    }
+    if(!encontrado){
+        if(parent.$('#tablaTramite tbody tr').length > 0){
+            parent.$('#tablaTramite tbody tr').find('td:eq(0)').each(function(){
+                dato = $(this).html();
+                console.log('dato tramite: ' + dato + ' proceClave: ' + proceClave);
+                if(proceClave === dato){
+                    if(etapaProce !== 3 || etapaProce !== 7){//Quiere decir que cambio de etapa en la actualizacion
+                        if($(this).parent().find('td:eq(2)').html() !== ''){
+                            //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                            console.log('Esta sin insertar en BD');
+                            eliminaBD = true;
+                            nomTabla = "tramite";
+                        }
+                        encontrado = true;
+                        $(this).parent().remove();
+                        if(parent.$('#tablaTramite tbody tr').length === 0){
+                            if(parent.$('#tablaVolando tbody tr').length === 0){
+                                parent.$('#btn8').prop('disabled', true);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+    if(!encontrado){
+        if(parent.$('#tablaVolando tbody tr').length > 0){
+            parent.$('#tablaVolando tbody tr').find('td:eq(0)').each(function(){
+                dato = $(this).html();
+                console.log('dato volando: ' + dato + ' proceClave: ' + proceClave);
+                if(proceClave === dato){
+                    if(etapaProce !== 5){//Quiere decir que cambio de etapa en la actualizacion
+                        $(this).parent().remove();
+                        var numReg = parent.$('#tablaVolando tbody tr').length;
+                        if (numReg === 0) {
+                            parent.$('.indicador2').css('color', '#00BD25');//Cambiamos el color a verde
+                            parent.$('.agregar').hide();//Escondemos el boton de agregar
+                            parent.$('.indicador2 span').text(numReg);//Lo mostramos con la cantidad actualizada
+                        } else {
+                            parent.$('.indicador2 span').text(numReg);//Lo mostramos con la cantidad actualizada
+                        }
+                    }
+                }
+            });
+        }
+    }
+    
+    if(eliminaBD){//Si encuentra algun caso donde se tenga qu eliminar de la BD entonces lo hacemos
+        $.ajax({
+            url: 'borraProce',
+            type: 'post',
+            data: {
+                proceClave: proceClave,
+                nomTabla: nomTabla
             },
-            error: function (response) {
-                console.log("Respuesta del servidor", response);
-                alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
+            succes: function (data) {
+                console.log('Usuario ' + data);
             }
+        }).done(function (d) {
+            console.log(d);
+            alert(d);
         });
     }
 }
+/********************* FIN BUSCA Y REMPLAZA PROCESADOS ****************************/
 
+/************************ FUNCIONES PARA DELETE AJAX ******************************/
+/**
+ * 
+ * @param {type} clave
+ * @param {type} posi
+ * @param {type} tabla
+ * @param {type} idCampo
+ * @returns {undefined}
+ */
 function borraRegistro(clave, posi, tabla, idCampo){
     var resp = confirm("Realmente deseas eliminar este registro de JC?");
     if (resp) {

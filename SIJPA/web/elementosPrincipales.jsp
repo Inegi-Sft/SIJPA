@@ -3,21 +3,20 @@
     Created on : 4/10/2019, 11:24:50 AM
     Author     : FERMIN.GOMEZ
 --%>
-<%@page import="clasesAuxiliar.showIntermedia"%>
-<%@page import="clasesAuxiliar.showInicial"%>
-<%@page import="clasesAuxiliar.showVictimas"%>
-<%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="clasesAuxiliar.showDelitos"%>
+<%@page import="clasesAuxiliar.showProcesados"%>
+<%@page import="clasesAuxiliar.showVictimas"%>
+<%@page import="clasesAuxiliar.showInicial"%>
+<%@page import="clasesAuxiliar.showIntermedia"%>
 <%@page import="clasesAuxiliar.showConclusiones"%>
 <%@page import="clasesAuxiliar.showTramite"%>
-<%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SIJPA::Elementos de la CausaPenal</title>
+        <title>SIJPA::Elementos JC</title>
         <%@include file="librerias.jsp" %>
         <%  
             showDelitos delito = new showDelitos();
@@ -43,17 +42,12 @@
             ArrayList<String[]> trami = new ArrayList();
             
             String jc = (String)session.getAttribute("juzgadoClave");
-            int totD = 0, totP = 0, totV = 0;
             int y = 0;
             String cc = "";
             String ccJuz = "";
             if(request.getParameter("causaClave") != null){//Si viene la causa penal, recuperamos datos
                 cc = request.getParameter("causaClave");
                 ccJuz = cc + jc.replace("-", "");
-                showCausasPenales causaPen = new showCausasPenales();
-                totD = causaPen.countTotalDelitos(ccJuz);
-                totP = causaPen.countTotalProcesados(ccJuz);
-                totV = causaPen.countTotalVictimas(ccJuz);
             }
         %>
     </head>

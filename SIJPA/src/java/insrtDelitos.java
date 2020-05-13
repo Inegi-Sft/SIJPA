@@ -177,7 +177,7 @@ public class insrtDelitos extends HttpServlet {
                         }
                     }
                     showDelitos deli = new showDelitos();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     int totDelInsrt = deli.countDelitosInsertados(causaClave);
                     lis = deli.findDeliTabla(delitoClave + jConcatenado);
                     JSONArray resp = new JSONArray();
@@ -194,9 +194,7 @@ public class insrtDelitos extends HttpServlet {
                     conn.close();
                 }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (IOException | SQLException ex) {
             Logger.getLogger(insrtProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

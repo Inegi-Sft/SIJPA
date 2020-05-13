@@ -46,20 +46,20 @@ public class showCausasPenales {
         return causas;
     }
 
-    public ArrayList findCausasPorJuzgado(String juzgado) {
+    public ArrayList findCausasPenales(String juzgado) {
         try {
             conn.Conectar();
             causas = new ArrayList();
             sql = "SELECT E.*, C.DESCRIPCION "
                     + " FROM DATOS_CAUSAS_PENALES_ADOJC E, CATALOGOS_RESPUESTA_SIMPLE C"
-                    + " WHERE C.RESPUESTA_ID=E.COMPETENCIA"
-                    + " AND JUZGADO_CLAVE='" + juzgado + "' ORDER BY 1;";
+                    + " WHERE C.RESPUESTA_ID = E.COMPETENCIA"
+                    + " AND JUZGADO_CLAVE = '" + juzgado + "' ORDER BY 1;";
 
             rs = conn.consultar(sql);
             while (rs.next()) {
                 causas.add(new String[]{
-                    rs.getString("CAUSA_CLAVE"), rs.getString("TOTAL_PROCESADOS"), rs.getString("TOTAL_VICTIMAS"),
-                    rs.getString("TOTAL_DELITOS"), rs.getString("C.DESCRIPCION"), rs.getString("FECHA_INGRESO")
+                    rs.getString("CAUSA_CLAVE"), rs.getString("FECHA_INGRESO"), rs.getString("TOTAL_DELITOS"), 
+                    rs.getString("TOTAL_PROCESADOS"), rs.getString("TOTAL_VICTIMAS"), rs.getString("C.DESCRIPCION")
                 });
             }
             conn.close();
@@ -69,24 +69,7 @@ public class showCausasPenales {
         return causas;
     }
 
-    public int countTotalCausas() {
-        total = 0;
-        try {
-            conn.Conectar();
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC";
-
-            rs = conn.consultar(sql);
-            while (rs.next()) {
-                total = rs.getInt("TOTAL");
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return total;
-    }
-
-    public int countTotalCausasPorJuzgado(String juzgado) {
+    public int countCausasPenales(String juzgado) {
         total = 0;
         try {
             conn.Conectar();

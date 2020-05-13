@@ -46,7 +46,7 @@
                 session.setAttribute("causaClave", "");
             }
             
-            int tCausasJuz=cp.countTotalCausasPorJuzgado(juzgado);
+            int tCausasJuz=cp.countCausasPenales(juzgado);
         %>
     </head>
     <body>
@@ -75,21 +75,21 @@
                         %>
                     </select>
                 </div>
-                <span class="totExp">Total de Causas en este Juzgado: <%=tCausasJuz%></span>
+                <span class="totExp">Total: <%=tCausasJuz%></span>
                 <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
                 <a class="add" href="#" onclick="validaAddCausa();">
-                    <img src="img/add3.png" width="20" height="20"/> Agregar Expediente
+                    <img src="img/add3.png" width="20" height="20"/> Agregar
                 </a>
                 <table id="causas" class="myTable">
                     <thead>
                         <tr>
                             <th>Posi</th>
-                            <th>Causa Penal</th>
+                            <th>No. Asunto</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Conductas Antisociales</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
-                            <th>Conductas Antisociales</th>
                             <th>Organo Competente</th>
-                            <th>Fecha Ingreso</th>
                             <th>Inconsistencias</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
@@ -97,7 +97,7 @@
                     </thead>
                     <tbody>
                     <%
-                        lsCausas = cp.findCausasPorJuzgado(juzgado);
+                        lsCausas = cp.findCausasPenales(juzgado);
                         String juzLimpio = "";
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");

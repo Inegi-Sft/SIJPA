@@ -5,7 +5,6 @@
  */
 
 import ConexionDB.Conexion_Mysql;
-import clasesAuxiliar.showTramite;
 import clasesAuxiliar.showTramiteJO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,16 +78,16 @@ public class insrtTramiteJO extends HttpServlet {
                     System.out.println(sql);
                     if(conn.escribir(sql)){
                         showTramiteJO tram = new showTramiteJO();
-                        ArrayList<String[]> lis = new ArrayList<String[]>();
-                        int totTramiteInsrt = tram.countTramiteExp(causaClave);
-                        lis = tram.findTramiteTabla(proceClave + jConcatenado);
+                        ArrayList<String[]> lis = new ArrayList<>();
+                        //int totTramiteInsrt = tram.countTramiteExp(causaClave);
+                        //lis = tram.findTramiteTabla(proceClave + jConcatenado);
                         JSONArray resp = new JSONArray();
                         resp.add(posicion);
                         resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                         resp.add(lis.get(0)[1]);
                         resp.add(lis.get(0)[2]);
                         resp.add(lis.get(0)[3]);
-                        resp.add(totTramiteInsrt);
+                        //resp.add(totTramiteInsrt);
                         out.write(resp.toJSONString());
                         conn.close();
                     }else{
@@ -106,16 +105,16 @@ public class insrtTramiteJO extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showTramiteJO tram = new showTramiteJO();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
-                    int totTramiteInsrt = tram.countTramiteExp(causaClave);
-                    lis = tram.findTramiteTabla(proceClave + jConcatenado);
+                    ArrayList<String[]> lis = new ArrayList<>();
+                    //int totTramiteInsrt = tram.countTramiteExp(causaClave);
+                    //lis = tram.findTramiteTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
                     resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
-                    resp.add(totTramiteInsrt);
+                    //resp.add(totTramiteInsrt);
                     out.write(resp.toJSONString());
                     conn.close();
                 } else {

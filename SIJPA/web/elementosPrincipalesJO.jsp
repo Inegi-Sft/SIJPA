@@ -88,7 +88,7 @@
                                         out.println("<td>" + deliJO.get(0)[3] + "</td>");
                                         out.println("<td>" + deliJO.get(0)[4] + "</td>");
                                         out.println("<td>" + deliJO.get(0)[5] + "</td>");
-                                        out.println("<td><a class='pop' href='delitos.jsp?delitoClave=" + deliJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + deliJO.get(0)[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"/></a></td>");
@@ -101,7 +101,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='delitos.jsp?delitoClaveJC=" + delJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + delJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
@@ -142,7 +142,7 @@
                                         out.println("<td>" + proceJO.get(0)[2] + "</td>");
                                         out.println("<td>" + proceJO.get(0)[3] + "</td>");
                                         out.println("<td>" + proceJO.get(0)[4] + "</td>");
-                                        out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + proceJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + proceJO.get(0)[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
@@ -154,7 +154,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + proJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + proJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
@@ -195,7 +195,7 @@
                                         out.println("<td>" + vicJO.get(0)[2] + "</td>");
                                         out.println("<td>" + vicJO.get(0)[3] + "</td>");
                                         out.println("<td>" + vicJO.get(0)[4] + "</td>");
-                                        out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + vicJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + vicJO.get(0)[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");
@@ -207,7 +207,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + viJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + viJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");

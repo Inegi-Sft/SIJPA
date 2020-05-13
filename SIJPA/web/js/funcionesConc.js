@@ -301,23 +301,6 @@ $(document).ready(function() {
                         var enlace = parent.$('#tablaConclu tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                         parent.$('#tablaConclu tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     }
-//                    //Si el procesado es enviado a JO entonces se hace volcado de datos¡¡
-//                    if(response[5] === '5'){
-//                        console.log('Entramos para volcado de datos: ', response[5]);
-//                        $.ajax({
-//                            type: 'post',
-//                            url: 'insrtVolcadoJO',
-//                            data: {
-//                                proceClave: response[1]
-//                            },
-//                            succes: function(){
-//                                console.log('Volcado del procesado ', response[1], ' con exito');
-//                            },
-//                            error: function(){
-//                                console.log('Error en el volcado de datos, checar');
-//                            }
-//                        });
-//                    }
                 }
                 parent.$.fancybox.close();
             },

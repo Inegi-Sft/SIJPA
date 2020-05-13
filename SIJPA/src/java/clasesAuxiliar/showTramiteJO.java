@@ -44,6 +44,7 @@ public class showTramiteJO {
         catch (SQLException ex) {
             Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return tramite;
     }
     
@@ -62,6 +63,7 @@ public class showTramiteJO {
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
+
                 tramite.add(new String[]{
                     resul.getString(1), resul.getString(2), resul.getString(3)
                 });

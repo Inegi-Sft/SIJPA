@@ -74,6 +74,8 @@
                             }
                         %>
                     </select>
+                    <label for="Prueba">Boton prueba:</label> 
+                    <input  type="button" name="botonpru" id="botonpru" width="15" height="15" onclick="prueba()" >
                 </div>
                 <span class="totExp">Total: <%=tCausasJuz%></span>
                 <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>

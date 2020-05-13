@@ -1410,7 +1410,7 @@ public class catalogos {
     public ArrayList findAudienciasInvestigacion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_audiencias_investigacion ORDER BY 1";
+        sql = " SELECT * FROM catalogos_audiencias_investigacion where audiencia_id <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1427,7 +1427,7 @@ public class catalogos {
     public ArrayList findAudienciasIntermedia() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_audiencias_intermedia ORDER BY 1";
+        sql = " SELECT * FROM catalogos_audiencias_intermedia where audiencia_id <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1444,6 +1444,25 @@ public class catalogos {
         conn.Conectar();
         lista = new ArrayList();
         sql = " SELECT * FROM catalogos_audiencias_juiciooral ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+    }
+    
+    //********************************* E X C L U S I V O S   J O  ***********************
+    
+    public ArrayList findTipoResolucionJO() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM catalogos_tipo_resolucionjo ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

@@ -1456,5 +1456,24 @@ public class catalogos {
         return lista;
 
     }
+    
+    //********************************* E X C L U S I V O S   J O  ***********************
+    
+    public ArrayList findTipoResolucionJO() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM catalogos_tipo_resolucionjo ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+    }
 
 }

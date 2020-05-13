@@ -21,7 +21,7 @@
     </head>
     <body style="zoom: .9;">
         <section class="contenedor">
-            <h1>Etapa Inicial</h1>
+            <h1>Etapa Juicio Oral</h1>
             <form action="" method="post" name="formJuicioO" id="fromJuicioO">
                 <label for="idProcesado">Id Adolescente</label>
                 <input type="text" name="proceClave" id="proceClave" readonly>

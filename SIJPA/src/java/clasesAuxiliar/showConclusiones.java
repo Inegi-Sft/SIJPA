@@ -53,18 +53,20 @@ public class showConclusiones {
         return conc;
     }
     
-    public ArrayList findConcluCausa(String causa) {
+    public ArrayList findConcluCausa(String causaClave) {
         conn.Conectar();
         conc = new ArrayList();
         sql = "SELECT C.PROCESADO_CLAVE, C.FECHA_CONCLUSION, C.PROCESADO_CLAVE, CAT.DESCRIPCION "
                 + "FROM DATOS_CONCLUSIONES_ADOJC C, CATALOGOS_TIPO_RESOLUCION CAT "
                 + "WHERE C.TIPO_RESOLUCION=CAT.RESOLUCION_ID "
-                + "AND CAUSA_CLAVE = '" + causa + "' "
+                + "AND CAUSA_CLAVE = '" + causaClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
-                conc.add(new String[]{resul.getString(1), resul.getString(2),resul.getString(3),resul.getString(4)});
+                conc.add(new String[]{
+                    resul.getString(1), resul.getString(2),resul.getString(3),resul.getString(4)
+                });
             }
             conn.close();
         }
@@ -121,11 +123,11 @@ public class showConclusiones {
         return conc;
     }
     
-    public int countConclusionesExp(String exp) {
+    public int countConclusionesExp(String causaClave) {
         try{
             conn.Conectar();
             conteoConclu = 0;
-            sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJC WHERE CAUSA_CLAVE = '" + exp + "'";
+            sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoConclu = resul.getInt(1);

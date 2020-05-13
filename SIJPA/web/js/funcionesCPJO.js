@@ -5,101 +5,106 @@
  */
 
 $(document).ready(function () {
-    /*---------------------------- FUNCIONES CAUSA PENAL JC----------------------------*/
     //Se usa para la recuperacion de datos de DB
-    if($('#carpInves').val() !== ''){
-        $('#carpInves,#expClave,#compe').prop('disabled',true);
+    if($('#fIngresoJO').val() === '1899-09-09'){
+        $('#fIngresoJO').prop('readonly', true);
+        $('#chkFechaIngreJO').prop('checked', true);
     }
     
-    //Se usa para la recuperacion de datos de DB
-    if($('#fIngreso').val() === '1899-09-09'){
-        $('#fIngreso').prop('readonly', true);
-        $('#chkFechaIngre').prop('checked', true);
+    //Se usa para la recuperacion de BD
+    if($('#difeOrgano').val() === '1'){
+        $('#divOrgDif').show();
+    }else if($('#difeOrgano').val() === '2'){
+        $('#regCantJuez').show();
+        //Si dice que NO en otro organo entonces le mostramos la cantidad de jueces y jueces
+        if($('#cantJuezHi').val() !== ''){
+            var cantiJuez = $('#cantJuezHi').val();
+            if(cantiJuez === '1'){
+                $('#divJuezJO1').show();
+            }else if(cantiJuez === '2'){
+                $('#divJuezJO1,#divJuezJO2').show();
+            }else{
+                $('#divJuezJO1,#divJuezJO2,#divJuezJO3').show();
+            }
+            $("#cantJuez option[value='" + cantiJuez + "']").prop('selected', true);
+        }
     }
     
-    //Se usa para la recuperacion de datos de DB
-    if($('#ExpAcomu').val() === '1'){
-        $('#expReferen').show();
-    }
-    
-    //Se usa para la recuperacion de datos de DB
-    if($('#compe').val() === '1'){
-        $('#totalElementos').show();
-    }else if($('#compe').val() === '2'){
-        $('#tipoIncopetencia').show(); 
-    }
-    
-    //Se usa para la recuperacion de datos de DB
-    if($('#opera').val() !== ''){
-        $('#Tdelitos').attr('min',$('#Tdelitos').val());
-        $('#Tadolescentes').attr('min',$('#Tadolescentes').val());
-        $('#Tvictimas').attr('min',$('#Tvictimas').val());
-    }
-    
-    $('#nomJuez').change(function(){
-        if($(this).val() === '100'){
-            //window.location.href = 'capturaJuez.jsp';
-            alert('Favor de capturar el Juez y regresar a capturar el expediente');
-            window.location.href = 'capturaJuez.jsp';
+    $('#difeOrgano').change(function(){
+        if($(this).val() === '2'){
+            $('#regCantJuez').fadeIn();
+            $('#cantJuez').val('').prop('required', true);
+            
+            $('#divOrgDif').fadeOut();
+            $('#orgDif').val('-2').prop('required', false);
+        }else{
+            $('#divOrgDif').fadeIn();
+            $('#orgDif').val('').prop('required', true);
+            
+            $('#regCantJuez').fadeOut();
+            $('#cantJuez').val('-2').prop('required', false);
+            $('#divJuezJO1,#divJuezJO2,#divJuezJO3').fadeOut();
+            $('#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
         }
     });
     
-    $('#ExpAcomu').change(function (){
-        if ($('#ExpAcomu').val() === '1') {
-            $('#expReferen').fadeIn("slow");
-            $('#ExpRefe').val('').prop("required", true);
-        } else {
-            $('#expReferen').fadeOut("slow");
-            $('#ExpRefe').val('-2').prop("required", false);
-        }
-    });
-    
-    $('#compe').change(function (){
-        switch ($('#compe').val()) {
+    $('#cantJuez').change(function(){
+        switch ($('#cantJuez').val()){
             case '1':
-                $('#totalElementos, #totalAudiencias').fadeIn("slow");
-                $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
-                $('#tipoIncopetencia').fadeOut("slow");
-                $('#Tincompe').val('-2').prop('required', false);
+                $('#divJuezJO1').fadeIn();
+                $('#juezJO1').val('').prop('required', true);
+                
+                $('#divJuezJO2,#divJuezJO3').fadeOut();
+                $('#juezJO2,#juezJO3').val('-2').prop('required', false);
                 break;
             case '2':
-                $('#tipoIncopetencia').fadeIn("slow");
-                $('#Tincompe').val('').prop("required", true);
-                $('#totalElementos, #totalAudiencias').fadeOut("slow");
-                $('#Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
+                $('#divJuezJO1,#divJuezJO2').fadeIn();
+                $('#juezJO1,#juezJO2').val('').prop('required', true);
+                
+                $('#divJuezJO3').fadeOut();
+                $('#juezJO3').val('-2').prop('required', false);
+                break;
+            case '3':
+                $('#divJuezJO1, #divJuezJO2, #divJuezJO3').fadeIn();
+                $('#juezJO1,#juezJO2,#juezJO3').val('').prop('required', true);
                 break;
             default:
-                $('#totalElementos, #totalAudiencias, #tipoIncopetencia').fadeOut("slow");
-                $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tincompe').val('-2').prop("required", false);
+                $('#divJuezJO1,#divJuezJO2,#divJuezJO3').fadeOut();
+                $('#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
                 break;
         }
     });
     
-    $('#Tdelitos, #Tadolescentes, #Tvictimas').focus(function (e) {
-        if ($('#expClave').val() === "") {
-            e.stopImmediatePropagation();
-            alert('Favor de capturar el expediente clave para poder agregar los datos siguientes');
-            $('#expClave').focus();
+    $('#orgDif').change(function(){
+        if($(this).val() === '100'){
+            alert('Favor de capturar el Juez y regresar a capturar el expediente');
+            window.location.href = 'capturaJuzgado.jsp';
+            //hacer la funcion en un futuro para capturar desde fancybox
+//            $.fancybox.open({
+//                src  : 'capturaJuzgado.jsp',
+//                type : 'iframe',
+//                opts : {
+//                    afterShow : function( instance, current ) {
+//                            console.info( 'done!' );
+//                    }
+//                }
+//            });
         }
-    });
-    
-    $('#Tdelitos, #Tadolescentes, #Tvictimas').keydown(function(e){
-        return false;
     });
     
     //Guarda Causa Penal
-    $('#formCausaPenal').submit(function (e) {
+    $('#formCausaPenalJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         $.ajax({
             type: 'post',
-            url: 'insrtCausaPenal',
-            data: $('#formCausaPenal').serialize(),
+            url: 'insrtCausaPenalJO',
+            data: $('#formCausaPenalJO').serialize(),
             success: function (response) {
-                console.log("Respuesta del servidor Causa Penal: ", response);
+                console.log("Respuesta del servidor Causa Penal JO: ", response);
                 alert("Guardado con exito!!!");
-                $('#formCausaPenal').find('input, textarea, button, select').attr('disabled', true);
-                $("#guardarExp").prop("hidden", true);
+                $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
+                $("#guardarExpJO").prop("hidden", true);
                 if (response !== null && $.isArray(response)) {
                     if(response[0] === 1){//organo competente
                         var expe = $('#expClave').val();
@@ -141,5 +146,4 @@ $(document).ready(function () {
             }
         });
     });
-    /*---------------------------- FIN FUNCIONES CAUSA PENAL JC----------------------------*/
 });

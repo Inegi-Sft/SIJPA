@@ -33,6 +33,7 @@ public class insrtJuzgados extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
     ResultSet rs;

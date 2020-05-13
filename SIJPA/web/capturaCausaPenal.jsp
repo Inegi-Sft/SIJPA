@@ -15,7 +15,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Causa Penal</title>
         <script type="text/javascript" src="js/funcionesCP.js"></script>
-        
         <%            
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();
@@ -25,7 +24,7 @@
             
             String juzgadoClave = (String)session.getAttribute("juzgadoClave");
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
-            String causaNum = "";
+            String causaClave = "";
             String carpInves = "";
             String fechaIngre = "";
             String nomJuez = "";
@@ -39,13 +38,12 @@
             String totVictimas = "";
             String comen = "";
             if(request.getParameter("causaClave") != null){//Si viene la causa penal, recuperamos datos
-                String causaClave = request.getParameter("causaClave");
+                causaClave = request.getParameter("causaClave");
                 showCausasPenales causas = new showCausasPenales();
                 causa = causas.findCausaPenal(juzgadoClave, causaClave + juzgadoClave.replace("-", ""));
                 if(causa.size() > 0){
                     session.setAttribute("causaClave", causaClave + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave
                     operacion = "actualizar";
-                    causaNum = causaClave;
                     carpInves = causa.get(0)[0];
                     fechaIngre = causa.get(0)[1];
                     nomJuez = causa.get(0)[2];
@@ -72,11 +70,11 @@
             <h2>Causa Penal</h2>
             <form  method="post" name="formCausaPenal" id="formCausaPenal">
                 <fieldset>
-                    <legend>Características de la causa penal</legend>
+                    <legend>Características de la Causa Penal</legend>
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="jClave">Juzgado Clave:</label>
+                                <label for="jClave">Juzgado Clave</label>
                                 <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" disabled>
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                             </td>
@@ -86,7 +84,7 @@
                             </td>
                             <td>
                                 <label for="expClave">No. Asunto Asignado</label>
-                                <input type="text" name="expClave" id="expClave" onblur="ValidaCarpeInvest('#expClave')"  value="<%=causaNum%>" required>
+                                <input type="text" name="expClave" id="expClave" onblur="ValidaCarpeInvest('#expClave')" value="<%=causaClave%>" required>
                             </td>
                         </tr>
                         <tr>

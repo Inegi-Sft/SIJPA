@@ -52,25 +52,25 @@ table.dataTable tbody th,table.dataTable tbody td{
     width: 15px;
 }
 
-#causas_filter, #causas_length{
+#causas_filter, #causas_length, #causasJO_filter, #causasJO_length{
     height: 60px;
 }
 
-#causas_filter input{
+#causas_filter input, #causasJO_filter input{
     width: 200px;
 }
 
-#causas_length select{
+#causas_length select, #causasJO_length select{
     width: 150px;
 }
 
-#causas_filter label, #causas_length label{
+#causas_filter label, #causas_length label, #causasJO_filter label, #causasJO_length label{
     width: auto;
     margin: 20px 10px 20px 0;
     text-align: left;
 }
 
-#causas_filter{
+#causas_filter, #causasJO_filter{
     position: relative;
     right: 15%;
 }

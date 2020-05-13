@@ -64,7 +64,7 @@ public class showProcesados {
             sql = "SELECT P.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), TC.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
                     + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TC, CATALOGOS_SEXO S"
                     + " WHERE P.INICIO_IMPUTADO = TC.CONSIGNACION_ID"
-                    + " AND S.SEXO_ID = P.SEXO"
+                    + " AND P.SEXO = S.SEXO_ID"
                     + " AND P.CAUSA_CLAVE = '" + causaClve + "'"
                     + " ORDER BY 1;";
             
@@ -88,10 +88,9 @@ public class showProcesados {
             sql = "SELECT P.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), TC.DESCRIPCION, S.DESCRIPCION,P.FECHA_NACIMIENTO"
                     + " FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_TIPO_CONSIGNACION TC, CATALOGOS_SEXO S"
                     + " WHERE P.INICIO_IMPUTADO = TC.CONSIGNACION_ID"
-                    + " AND S.SEXO_ID = P.SEXO"
+                    + " AND P.SEXO = S.SEXO_ID"
                     + " AND P.PROCESADO_CLAVE = '" + proceClave + "'"
                     + " ORDER BY 1;";
-            
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proce.add(new String[]{

@@ -41,8 +41,7 @@ public class borraProce extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             String proceClave = request.getParameter("proceClave");
             String nomTabla = request.getParameter("nomTabla");
             String juzgadoClave = (String)sesion.getAttribute("juzgadoClave");
@@ -73,8 +72,6 @@ public class borraProce extends HttpServlet {
             }
         } catch (SQLException ex) {
             Logger.getLogger(borraProce.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            out.close();
         }
     }
 

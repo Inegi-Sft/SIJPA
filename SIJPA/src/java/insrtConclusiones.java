@@ -120,6 +120,7 @@ public class insrtConclusiones extends HttpServlet {
                         resp.add(lis.get(0)[1]);
                         resp.add(lis.get(0)[2]);
                         resp.add(lis.get(0)[3]);
+                        //resp.add(tipoResolu);//Tipo de resolucion
                         resp.add(totConcluInsrt);
                         out.write(resp.toJSONString());
                         conn.close();
@@ -156,7 +157,7 @@ public class insrtConclusiones extends HttpServlet {
                         }
                     }
                     showConclusiones con = new showConclusiones();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     int totConcluInsrt = con.countConclusionesExp(causaClave);
                     lis = con.findConcluTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();

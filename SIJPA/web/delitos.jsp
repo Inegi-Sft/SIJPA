@@ -21,9 +21,8 @@
         <%
             catalogos cat = new catalogos();
             showDelitos delitos = new showDelitos();
-            showCausasPenales cpenales=new showCausasPenales();
-           FechaMax fecha =new FechaMax();
-            String fechas= fecha.FechaValida();
+            FechaMax fecha = new FechaMax();
+            String fechas = fecha.FechaValida();
             
             ArrayList<String[]> lista, delito;
             ArrayList<String> deliAdi = new ArrayList();

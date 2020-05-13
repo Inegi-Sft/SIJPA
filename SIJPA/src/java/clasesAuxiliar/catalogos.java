@@ -1475,5 +1475,56 @@ public class catalogos {
         return lista;
 
     }
+    
+    public ArrayList findMedidasDisciplinarias() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM catalogos_medidas_disciplinarias ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+    }
+    
+    public ArrayList findPromueveIncidente() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM catalogos_promueve_incidente ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+    }
+    
+    public ArrayList findSentidoFallo() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM catalogos_sentido_fallo ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+    }
 
 }

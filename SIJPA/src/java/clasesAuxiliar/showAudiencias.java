@@ -188,10 +188,52 @@ public class showAudiencias {
         return audiencias;
     }
     
+    //********************** J U I C I O  O R A L ********************
+    public ArrayList findAllCausaAudienciasJO(String juzgado) {
+        conn.Conectar();
+        lista = new ArrayList<String[]>();
+        sql = "SELECT CAUSA_CLAVEJO, "
+            + " CONCAT(J.APELLIDOP_JUEZ,' ', J.APELLIDOM_JUEZ,' ',J.NOMBRE_JUEZ) AS JUEZ1,"
+            + " CONCAT(J2.APELLIDOP_JUEZ,' ', J2.APELLIDOM_JUEZ,' ',J2.NOMBRE_JUEZ) AS JUEZ2,"
+            + " CONCAT(J3.APELLIDOP_JUEZ,' ', J3.APELLIDOM_JUEZ,' ',J3.NOMBRE_JUEZ) AS JUEZ3"
+            + " FROM DATOS_AUDIENCIAS_ADOJO A "
+            + " INNER JOIN DATOS_JUECES_ADOJC J ON A.JUZGADO_CLAVE=J.JUZGADO_CLAVE AND A.JUEZ_CLAVE1=J.JUEZ_CLAVE"
+            + " INNER JOIN DATOS_JUECES_ADOJC J2 ON A.JUZGADO_CLAVE=J2.JUZGADO_CLAVE AND A.JUEZ_CLAVE2=J2.JUEZ_CLAVE"
+            + " INNER JOIN DATOS_JUECES_ADOJC J3 ON A.JUZGADO_CLAVE=J3.JUZGADO_CLAVE AND A.JUEZ_CLAVE3=J3.JUEZ_CLAVE"
+            + " WHERE A.JUZGADO_CLAVE='"+juzgado+"' GROUP BY A.CAUSA_CLAVEJO ORDER BY CAUSA_CLAVEJO";
+        System.out.println(sql);
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                String juez2 = resul.getString("JUEZ2");
+                String juez3 = resul.getString("JUEZ3");
+                if(juez2.equals("-2 -2 -2")){
+                    juez2="- - -";
+                }
+                if(juez3.equals("-2 -2 -2")){
+                    juez3="- - -";
+                }
+                   
+                lista.add(new String[]{
+                    resul.getString("CAUSA_CLAVEJO"),
+                    resul.getString("JUEZ1"),
+                    juez2,
+                    juez3
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
     public ArrayList findCausasJO(String juzgado) {
         conn.Conectar();
         lista = new ArrayList<String[]>();
-        sql = "SELECT CAUSA_CLAVE FROM datos_causas_penales_adojo  where juzgado_clave='"+juzgado+"' ORDER BY 1";
+        sql = "SELECT CAUSA_CLAVEJO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE='"+juzgado+"' "
+            + " AND CAUSA_CLAVEJO NOT IN (SELECT DISTINCT CAUSA_CLAVEJO FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE='"+juzgado+"')"
+            + " ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -206,4 +248,41 @@ public class showAudiencias {
         return lista;
     }
     
+    public ArrayList recuperaJuezJO(String juzgado, String causa) {
+        conn.Conectar();
+        jueces = new ArrayList<String[]>();
+        sql = "SELECT DISTINCT JUEZ_CLAVE1, JUEZ_CLAVE2, JUEZ_CLAVE3 FROM datos_audiencias_adojo"
+            + " where juzgado_clave='"+juzgado+"' and causa_clavejo='"+causa+"'";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                jueces.add(new String[]{
+                    resul.getString("JUEZ_CLAVE1"), resul.getString("JUEZ_CLAVE2"), resul.getString("JUEZ_CLAVE3")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jueces;
+    }
+    
+    public ArrayList recuperaAudienciasJO(String juzgado, String causa, String audi) {
+        conn.Conectar();
+        audiencias = new ArrayList<String[]>();
+        sql = "SELECT AUDIENCIA_JUICIOORAL,FECHA_CELEBRACION,DURACION FROM DATOS_AUDIENCIAS_ADOJO"
+            + " WHERE juzgado_clave='"+juzgado+"' and causa_clavejo='"+causa+"' and AUDIENCIA_JUICIOORAL="+audi;
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                audiencias.add(new String[]{
+                    resul.getString("AUDIENCIA_JUICIOORAL"), resul.getString("FECHA_CELEBRACION"), resul.getString("DURACION")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return audiencias;
+    }
 }

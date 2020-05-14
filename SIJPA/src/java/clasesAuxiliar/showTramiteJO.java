@@ -75,4 +75,27 @@ public class showTramiteJO {
         }
         return tramite;
     }
+    
+    public ArrayList findTramiteJO(String causaClaveJO, String proceClave){
+        conn.Conectar();
+        tramite = new ArrayList();
+        sql = "SELECT * FROM DATOS_TRAMITES_ADOJC "
+                + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                tramite.add(new String[]{
+                    resul.getString("ETAPA_PROCESAL"), resul.getString("ESTATUS_INVESTIGACION"), resul.getString("ESTATUS_INTERMEDIA"),
+                    resul.getString("ESPECIFIQUE"), resul.getString("FECHA_ACTO_PROCESAL")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showTramite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tramite;
+    }
 }

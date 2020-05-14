@@ -131,7 +131,7 @@ $(document).ready(function () {
 
     //despliega ventana modal
     $('#tablaDeli, #tablaProcesa, #tablaVictimas, #tablaInicial, #tablaIntermedia, #tablaConclu, #tablaTramite, .agregar,\n\
-        #tablaDeliJO, #tablaProcesaJO, #tablaVictimasJO, #tablaJuicioJO, #tablaConcluJO, #conclusionesJO').on('focusin', function () {
+        #tablaDeliJO, #tablaProcesaJO, #tablaVictimasJO, #tablaJuicioJO, #tablaConcluJO, #tablaTramiteJO').on('focusin', function () {
         $('a.pop').fancybox({
             'type': 'iframe',
             'overlayShow': true,

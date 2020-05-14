@@ -89,7 +89,7 @@
                             <select name="estInvestiJO" id="estInvestiJO">
                                  <option value="">--Seleccione--</option>
                                  <%
-                                    lista = sTramite.findEstatus();
+                                    lista = cat.findEstatus();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'");
                                         if(ls[0].equals(estatusJO)){

@@ -263,14 +263,14 @@
                                             out.println("<option value='" + ls[0] + "'");
 //                                            if(ls[0].equals(gradoEstu)){
 //                                                out.println(" selected ");
-//                                            }
+//                                            }                                <label for="condiEstudiante">Condición de estudiante</label>
+
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
                                 </select>
                             </td>
                             <td>
-                                <label for="condiEstudiante">Condición de estudiante</label>
                                 <select name="condiEstudiante" id="condiEstudiante" required>
                                     <option value="">--Seleccione--</option>
                                     <%

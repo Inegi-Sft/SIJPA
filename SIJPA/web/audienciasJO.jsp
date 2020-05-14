@@ -1,6 +1,6 @@
 <%-- 
     Document   : audiencias
-    Created on : 3/04/2020, 09:34:31 AM
+    Created on : 14/05/2020, 09:34:31 AM
     Author     : FERMIN.GOMEZ
 --%>
 
@@ -11,9 +11,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SIJPA::Audiencias</title>
+        <title>SIJPA::AudienciasJO</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/fnAudiencias.js"></script>
+        <script type="text/javascript" src="js/fnAudienciasJO.js"></script>
         <%  
             showAudiencias sa = new showAudiencias();
             ArrayList<String[]> lista;
@@ -37,11 +37,11 @@
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
-            <h1>Audiencias JC</h1>
-            <form action="audiencias.jsp" name="formAudiencias" method="post">
+            <h1>Audiencias JO</h1>
+            <form action="audienciasJO.jsp" name="formAudienciasJO" method="post">
                 <div id="juzClave">
                     <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" class="txtLong" onchange="formAudiencias.submit();">
+                    <select name="juzgado" id="juzgado" class="txtLong" onchange="formAudienciasJO.submit();">
                         <option value="">--Seleccione--</option>
                         <%
                             lista = sa.findJuzgados();
@@ -56,7 +56,7 @@
                     </select>
                 </div>
                 <span class="msjAviso" hidden>Selecciona el Juzgado para agregar las audiencias</span>
-                <a class="add" href="#" onclick="validaAddAudiencias();">
+                <a class="add" href="#" onclick="validaAddAudienciasJO();">
                     <img src="img/add3.png" width="20" height="20"/> Agregar 
                 </a>
                 <table id="causas" class="myTable" >
@@ -66,15 +66,13 @@
                             <th>Juez 1</th>
                             <th>Juez 2</th>
                             <th>Juez 3</th>
-                            <th width="80">Investigacion</th>
-                            <th width="80">Intermedia</th>
                             <th width="40">Editar</th>
                             <th width="40">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                     <%
-                        lista = sa.findAllCausaAudiencias(juzgado);
+                        lista = sa.findAllCausaAudienciasJO(juzgado);
                         String juzLimpio = "";
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");
@@ -87,10 +85,8 @@
                             <td><%=ls[1]%></td>
                             <td><%=ls[2]%></td>
                             <td><%=ls[3]%></td>
-                            <td><%=ls[4]%></td>
-                            <td><%=ls[5]%></td>
-                            <td><a href="capturaAudiencias.jsp?causaClave=<%=ls[0]%>"><img src='img/editar.png' title="Editar"/></a></td>
-                            <td><a href="#"><img src='img/delete.png' title="Eliminar" onclick="deleteAudiencias('<%=ls[0]%>');"/></a></td>
+                            <td><a href="capturaAudienciasJO.jsp?causaClaveJO=<%=ls[0]%>"><img src='img/editar.png' title="Editar"/></a></td>
+                            <td><a href="#"><img src='img/delete.png' title="Eliminar" onclick="deleteAudienciasJO('<%=ls[0]%>');"/></a></td>
                         </tr>
                     <% 
                         }

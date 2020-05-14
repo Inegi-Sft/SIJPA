@@ -42,10 +42,12 @@
             String comen = "";
             if(request.getParameter("causaClaveJO") != null){
                 //Si viene la variable causa penales JO entonces recuperamos los datos
-                causaClaveJO = request.getParameter("causaClaveJO");
+                causaClaveJO = request.getParameter("causaClaveJO");//Creamos variable de sesion de JO
+                causaClaveJC = request.getParameter("causaClaveJC");//Actualizamos la viariable de sesion de JC
                 lisCausaJO = causaPenalJO.findCausaPenalJO(juzgadoClave, causaClaveJO + juzgadoClave.replace("-", ""));
                 if(lisCausaJO.size() > 0){
-                    session.setAttribute("causaClave", causaClaveJO + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave JC
+                    session.setAttribute("causaClaveJO", causaClaveJO + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave JO
+                    session.setAttribute("causaClave", causaClaveJC + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave JO
                     operacion = "actualizar";
                     //Recuperamos todo los datos de JO
                     causaClaveJC = lisCausaJO.get(0)[0].replace(juzgadoClave.replace("-", ""), "");
@@ -62,11 +64,11 @@
                     comen = lisCausaJO.get(0)[11];
                 }
             }else{
-                //Si no entonces trae JC solamente y recuperamos datos de JC
+                //Si no trae JO entonces trae JC solamente y recuperamos datos de JC
                 causaClaveJC = request.getParameter("causaClaveJC");
                 lisCausaJC = causaPenalJO.findCausaPenalJC(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
                 if(lisCausaJC.size() > 0){
-                    //session.setAttribute("causaClave", causaClaveJC + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave JC
+                    session.setAttribute("causaClave", causaClaveJC + juzgadoClave.replace("-", ""));//Actualizamos variable de sesion con causa clave JC
                     operacion = "";
                     //Solo recuperamos las necesarias que se comparten JC y JO
                     fechaIngreso = lisCausaJC.get(0)[0];

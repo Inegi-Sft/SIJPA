@@ -46,7 +46,7 @@ public class showDelitosJO {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return deli;
     }
@@ -74,8 +74,144 @@ public class showDelitosJO {
             }
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return deli;
+    }
+    
+    public ArrayList findDelitosJC(String causaClaveJC, String delitoClave){
+        conn.Conectar();
+        deli = new ArrayList();
+        sql = "SELECT D.*, CD.DELITO "
+                + "FROM DATOS_DELITOS_ADOJC D, CATALOGOS_DELITOS_NORMA CD "
+                + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
+                + "AND CAUSA_CLAVE = '" + causaClaveJC + "' "
+                + "AND DELITO_CLAVE = '" + delitoClave + "'"
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString("D.DELITO_CODIGO_PENAL"), resul.getString("D.TIPO_FUERO"), resul.getString("D.ART_CODIGO_PENAL"),
+                    resul.getString("D.DELITO_RECLASIFICADO"), resul.getString("D.FECHA_RECLASIFICACION"), resul.getString("D.DELITO_NORMA_TECNICA"),
+                    resul.getString("CD.DELITO"), resul.getString("D.FECHA_OCURRENCIA"), resul.getString("D.SITIO_OCURRENCIA"),
+                    resul.getString("D.GRADO_CONSUMACION"), resul.getString("D.CALIFICACION"), resul.getString("D.CLASIFICACION"),
+                    resul.getString("D.CONCURSO"), resul.getString("D.FORMA_COMISION"), resul.getString("D.FORMA_ACCION"), resul.getString("D.MODALIDAD"),
+                    resul.getString("D.INSTRUMENTO_COMISION"), resul.getString("D.OCURRIO_ENTIDAD"), resul.getString("D.OCURRIO_MUNICIPIO"),
+                    resul.getString("D.COMENTARIOS")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    }
+    
+    public ArrayList findDelitosJO(String causaClaveJO, String delitoClave){
+        conn.Conectar();
+        deli = new ArrayList();
+        sql = "SELECT D.*, CD.DELITO "
+                + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_DELITOS_NORMA CD "
+                + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
+                + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                + "AND DELITO_CLAVE = '" + delitoClave + "'"
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString("D.DELITO_CODIGO_PENAL"), resul.getString("D.TIPO_FUERO"), resul.getString("D.ART_CODIGO_PENAL"),
+                    resul.getString("D.DELITO_RECLASIFICADO"), resul.getString("D.FECHA_RECLASIFICACION"), resul.getString("D.DELITO_NORMA_TECNICA"),
+                    resul.getString("CD.DELITO"), resul.getString("D.FECHA_OCURRENCIA"), resul.getString("D.SITIO_OCURRENCIA"),
+                    resul.getString("D.GRADO_CONSUMACION"), resul.getString("D.CALIFICACION"), resul.getString("D.CLASIFICACION"),
+                    resul.getString("D.CONCURSO"), resul.getString("D.FORMA_COMISION"), resul.getString("D.FORMA_ACCION"), resul.getString("D.MODALIDAD"),
+                    resul.getString("D.INSTRUMENTO_COMISION"), resul.getString("D.OCURRIO_ENTIDAD"), resul.getString("D.OCURRIO_MUNICIPIO"),
+                    resul.getString("D.COMENTARIOS")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    }
+    
+    public ArrayList findDRoboJC(String causaClaveJC, String delitoCLave, String cosaRoba) {
+        try {
+            conn.Conectar();
+            deliAdi = new ArrayList();
+            sql = "SELECT TIPO_COSA_ROBADA FROM DATOS_DROBO_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "AND DELITO_CLAVE = '" + delitoCLave + "' "
+                    + "AND TIPO_COSA_ROBADA = " + cosaRoba + " "
+                    + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                deliAdi.add(resul.getString("TIPO_COSA_ROBADA"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deliAdi;
+    }
+    
+    public ArrayList findDRoboJO(String causaClaveJO, String delitoCLave, String cosaRoba) {
+        try {
+            conn.Conectar();
+            deliAdi = new ArrayList();
+            sql = "SELECT TIPO_COSA_ROBADA FROM DATOS_DROBO_ADOJO "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    + "AND DELITO_CLAVE = '" + delitoCLave + "' "
+                    + "AND TIPO_COSA_ROBADA = " + cosaRoba + ""
+                    + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                deliAdi.add(resul.getString("TIPO_COSA_ROBADA"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deliAdi;
+    }
+    
+    public ArrayList findDHomicidiosJC(String causaClaveJC, String delitoCLave, String situacion) {
+        try {
+            conn.Conectar();
+            deliAdi = new ArrayList();
+            sql = "SELECT CONTEXTO_SITUACIONAL FROM DATOS_DHOMICIDIO_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "AND DELITO_CLAVE = '" + delitoCLave + "' "
+                    + "AND CONTEXTO_SITUACIONAL = " + situacion + ";";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                deliAdi.add(resul.getString("CONTEXTO_SITUACIONAL"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deliAdi;
+    }
+    
+    public ArrayList findDHomicidiosJO(String causaClaveJO, String delitoCLave, String situacion) {
+        try {
+            conn.Conectar();
+            deliAdi = new ArrayList();
+            sql = "SELECT CONTEXTO_SITUACIONAL FROM DATOS_DHOMICIDIO_ADOJO "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    + "AND DELITO_CLAVE = '" + delitoCLave + "' "
+                    + "AND CONTEXTO_SITUACIONAL = " + situacion + ";";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                deliAdi.add(resul.getString("CONTEXTO_SITUACIONAL"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deliAdi;
     }
 }

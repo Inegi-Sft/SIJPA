@@ -28,7 +28,8 @@ public class showDelitos {
     public ArrayList findDelitos(String causaClave, String delitoClave) {
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT D.*, CD.DELITO FROM DATOS_DELITOS_ADOJC D, CATALOGOS_DELITOS_NORMA CD "
+        sql = "SELECT D.*, CD.DELITO "
+                + "FROM DATOS_DELITOS_ADOJC D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
                 + "AND CAUSA_CLAVE = '" + causaClave + "' "
                 + "AND DELITO_CLAVE = '" + delitoClave + "';";

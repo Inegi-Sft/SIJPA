@@ -1493,6 +1493,23 @@ public class catalogos {
 
     }
     
+    public ArrayList findEstatus() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = " SELECT * FROM catalogos_estatusjo ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+    }
+  
     public ArrayList findMedidasDisciplinarias() {
         conn.Conectar();
         lista = new ArrayList();
@@ -1507,7 +1524,6 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-
     }
     
     public ArrayList findPromueveIncidente() {
@@ -1541,7 +1557,6 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-
     }
 
 }

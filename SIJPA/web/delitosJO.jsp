@@ -4,9 +4,9 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="clasesAuxiliar.showDelitosJO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.FechaMax"%>
-<%@page import="clasesAuxiliar.showDelitos"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -18,12 +18,12 @@
         <script type="text/javascript" src="js/funcionesDelJO.js"></script>
         <%
             catalogos cat = new catalogos();
-            showDelitos delitos = new showDelitos();
+            showDelitosJO delitos = new showDelitosJO();
             FechaMax fecha = new FechaMax();
             String fechas = fecha.FechaValida();
             
-            ArrayList<String[]> lista, delito;
-            ArrayList<String> deliAdi = new ArrayList();
+            ArrayList<String[]> lista, delitoJC, delitoJO;
+            ArrayList<String> deliAdiJC, deliAdiJO;
             
             String delitoClave = "", posicion = "", edicion = "";
             if (request.getParameter("delitoClave") != null || request.getParameter("posicion") != null) {
@@ -32,7 +32,8 @@
             }
             
             String juzgadoClave = (String)session.getAttribute("juzgadoClave");
-            String causaClave = (String)session.getAttribute("causaClave");//Obtenemos la causa clave
+            String causaClaveJC = (String)session.getAttribute("causaClave");//Obtenemos la causa clave de JC
+            String causaClaveJO = (String)session.getAttribute("causaClaveJO");//Obtenemos la causa clave de JO
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
             String delitoCP = "";
             String fuero = "";
@@ -57,33 +58,60 @@
             if(request.getParameter("edita") != null){//Si es diferente de null entonces le mostramos los datos de JO
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
-                    delito = delitos.findDelitos(causaClave, delitoClave + juzgadoClave.replace("-", ""));
-                    if(delito.size() > 0){
+                    delitoJO = delitos.findDelitosJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""));
+                    if(delitoJO.size() > 0){
                         operacion = "actualizar";
-                        delitoCP = delito.get(0)[0];
-                        fuero = delito.get(0)[1];
-                        articuloCP = delito.get(0)[2];
-                        reclasifica = delito.get(0)[3];
-                        fechaReclasi = delito.get(0)[4];
-                        delitoNT = delito.get(0)[5];
-                        desDelitoNT = delito.get(0)[6];
-                        fechaOcurre = delito.get(0)[7];
-                        sitioOcurre = delito.get(0)[8];
-                        gradoConsuma = delito.get(0)[9];
-                        calificacion = delito.get(0)[10];
-                        clasificacion = delito.get(0)[11];
-                        concurso = delito.get(0)[12];
-                        formaComi = delito.get(0)[13];
-                        formaAccion = delito.get(0)[14];
-                        modalidad = delito.get(0)[15];
-                        instruComision = delito.get(0)[16];
-                        ocurreEnti = delito.get(0)[17];
-                        ocurreMuni = delito.get(0)[18];
-                        comen = delito.get(0)[19];
+                        delitoCP = delitoJO.get(0)[0];
+                        fuero = delitoJO.get(0)[1];
+                        articuloCP = delitoJO.get(0)[2];
+                        reclasifica = delitoJO.get(0)[3];
+                        fechaReclasi = delitoJO.get(0)[4];
+                        delitoNT = delitoJO.get(0)[5];
+                        desDelitoNT = delitoJO.get(0)[6];
+                        fechaOcurre = delitoJO.get(0)[7];
+                        sitioOcurre = delitoJO.get(0)[8];
+                        gradoConsuma = delitoJO.get(0)[9];
+                        calificacion = delitoJO.get(0)[10];
+                        clasificacion = delitoJO.get(0)[11];
+                        concurso = delitoJO.get(0)[12];
+                        formaComi = delitoJO.get(0)[13];
+                        formaAccion = delitoJO.get(0)[14];
+                        modalidad = delitoJO.get(0)[15];
+                        instruComision = delitoJO.get(0)[16];
+                        ocurreEnti = delitoJO.get(0)[17];
+                        ocurreMuni = delitoJO.get(0)[18];
+                        comen = delitoJO.get(0)[19];
                     }else{
-                        out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClave + "'); "
+                        out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
                     }
+                }
+            }else{//Si no trae variable edita, entonces le motramos los datos de JC
+                delitoJC = delitos.findDelitosJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""));
+                if(delitoJC.size() > 0){
+                    delitoCP = delitoJC.get(0)[0];
+                    fuero = delitoJC.get(0)[1];
+                    articuloCP = delitoJC.get(0)[2];
+                    reclasifica = delitoJC.get(0)[3];
+                    fechaReclasi = delitoJC.get(0)[4];
+                    delitoNT = delitoJC.get(0)[5];
+                    desDelitoNT = delitoJC.get(0)[6];
+                    fechaOcurre = delitoJC.get(0)[7];
+                    sitioOcurre = delitoJC.get(0)[8];
+                    gradoConsuma = delitoJC.get(0)[9];
+                    calificacion = delitoJC.get(0)[10];
+                    clasificacion = delitoJC.get(0)[11];
+                    concurso = delitoJC.get(0)[12];
+                    formaComi = delitoJC.get(0)[13];
+                    formaAccion = delitoJC.get(0)[14];
+                    modalidad = delitoJC.get(0)[15];
+                    instruComision = delitoJC.get(0)[16];
+                    ocurreEnti = delitoJC.get(0)[17];
+                    ocurreMuni = delitoJC.get(0)[18];
+                    comen = delitoJC.get(0)[19];
+                }else{
+                    out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
+                            + "window.location.href = 'elementosPrincipales.jsp'</script>");
                 }
             }
         %>
@@ -110,6 +138,7 @@
                                 <select  class="demo-default txtExBig" name="delitoCP" id="delitoCP" placeholder="--Seleccione--" required>
                                     <option value="" ></option>
                                     <%
+                                        
                                         lista = cat.findCodigoNorma();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "' data-data='{\"norma\":\"" + ls[2] + "\"}'");
@@ -400,17 +429,26 @@
                                 <th width="70">Aplica</th>
                             </tr>
                             <%
-                                lista=cat.findCosaRobada();
+                                lista = cat.findCosaRobada();
                                 for (String[] ls : lista) {
                                     out.println("<tr>");
                                     out.println("<td>" + ls[0] + "</td>");
                                     out.println("<td>" + ls[1] + "</td>");
                                     out.println("<td>");
-                                    deliAdi = delitos.findDRobo(causaClave, delitoClave + juzgadoClave.replace("-", ""),ls[0]);
-                                    if(deliAdi.size() != 0){
-                                        out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' checked>");
-                                    }else{
-                                        out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "'>"); 
+                                    if(!edicion.equals("")){//Diferente de vacio traemos JO
+                                        deliAdiJO = delitos.findDRoboJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""),ls[0]);
+                                        if(deliAdiJO.size() != 0){
+                                            out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                        }else{
+                                            out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "'>"); 
+                                        }
+                                    }else{//Traemos JC 
+                                        deliAdiJC = delitos.findDRoboJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""),ls[0]);
+                                        if(deliAdiJC.size() != 0){
+                                            out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                        }else{
+                                            out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "'>"); 
+                                        }
                                     }
                                     out.println("</td>");
                                     out.println("</tr>");
@@ -432,11 +470,20 @@
                                     out.println("<td>" + ls[0] + "</td>");
                                     out.println("<td>" + ls[1] + "</td>");
                                     out.println("<td>");
-                                    deliAdi = delitos.findDHomicidios(causaClave, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
-                                    if(deliAdi.size() != 0){
-                                        out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                    if(!edicion.equals("")){
+                                        deliAdiJO = delitos.findDHomicidiosJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        if(deliAdiJO.size() != 0){
+                                            out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                        }else{
+                                            out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "'>"); 
+                                        }
                                     }else{
-                                        out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "'>"); 
+                                        deliAdiJC = delitos.findDHomicidiosJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        if(deliAdiJC.size() != 0){
+                                            out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                        }else{
+                                            out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "'>"); 
+                                        }
                                     }
                                     out.println("</td>");
                                     out.println("</tr>");

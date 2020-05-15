@@ -5,7 +5,6 @@
  */
 
 $(document).ready(function() {
-    /*---------------------------- FUNCIONES VICTIMAS JC----------------------------*/
     //Se usa para la recuperacion de BD
     if($('#tipoVictiHi').val() !== ''){
         var tipoVi = $('#tipoVictiHi').val();
@@ -23,7 +22,7 @@ $(document).ready(function() {
     }
     
     //Se usa para la recuperacion de BD
-    var numProcesa = $('#tblVictiProce tbody tr').length;
+    var numProcesa = $('#tblVictiProceJO tbody tr').length;
     for (i = 0; i < numProcesa; i++) {
         if ($('#chkRelaProce' + i + '99').is(":checked")) {
             for (var j = 1; j < 11; j++) {
@@ -40,11 +39,6 @@ $(document).ready(function() {
             }
             $('#chkRelaProce' + i + '99').prop("disabled", false);
         }
-    }
-    
-    //Se usa para la recuperacion de BD
-    if($('#sexoV').val() === '2'){
-        $('#mediProtecMuj').show();
     }
     
     //Se usa para la recuperacion de BD
@@ -76,51 +70,35 @@ $(document).ready(function() {
         $('#fuenteIngre').show();
     }
     
-    //Se usa para la recuperacion de BD
-    if($('#mProtect').val() === '1'){
-        $('#MedidasPro').show();
-    }
-    
     $('#tipoVictima').change(function () {
         switch ($(this).val()) {
             case '1':
-                $('#victiFisicas, #mediProtec').fadeIn('slow');
-                $('#sexoV, #fnacimientoV, #edadVi, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('').prop('required', true);
-                $('#tipoMoral,#MedidasPro,#MujPro').fadeOut('slow');
+                $('#victiFisicas').fadeIn('slow');
+                $('#sexoV, #fnacimientoV, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #extrangera, #ocupa, #ingresos').val('').prop('required', true);
+                $('#tipoMoral').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
                 break;
             case '2':
                 $('#tipoMoral').fadeIn('slow');
                 $('#tvic_moral').val('').prop('required', true);
 
-                $('#victiFisicas, #mediProtec,  #mediProtecMuj').fadeOut('slow');
-                $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #mProtect, #mujProtect').val('-2').prop('required', false);
-                $('#fnacimientoV').val("1899-09-09").prop('required', false);
+                $('#victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
+                $('#sexoV, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
+                $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
+                $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
                 break;
             default:
-                $('#tipoMoral, #victiFisicas, #mediProtec, #mediProtecMuj').fadeOut('slow');
-                $('#tvic_moral, #sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-                    #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #extrangera, #mProtect, #mujProtect').val('-2').prop('required', false);
-                $('#fnacimientoV').val("1899-09-09").prop('required', false);
+                $('#tipoMoral, #victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
+                $('#tvic_moral, #sexoV, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                    #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #rangoIngresos, #extrangera').val('-2').prop('required', false);
+                $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
+                $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
                 break;
         }
     });
-
-    $('#sexoV').change(function () {
-        if ($(this).val() === '2') {
-            $('#mujProtect').val('').prop('required', true);
-            $('#mediProtecMuj').fadeIn('slow');
-            $('#MujPro').fadeOut('slow');
-            $('#aplicaMedidaMuj').prop("checked", false);
-        } else {
-            $('#mujProtect').val('-2').prop('required', false);
-            $('#mediProtecMuj').fadeOut('slow');
-            $('#aplicaMedidaMuj').prop("checked", false);
-        }
-    });
-
+    
     $('#con_asesor').change(function () {
         if ($(this).val() === '1') {
             $('#asesorJuri').fadeIn('slow');
@@ -131,37 +109,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#formVictimas').submit(function (e) {
-        if ($('#deliCometido:checked').length === 0) {
-            e.preventDefault();
-            alert('Selecciona al menos una opcion de Delitos cometidos a la Victima');
-            $('#deliCometido').focus();
-        }
-
-        if ($('.RelaProceChk:checked').length === 0) {
-            e.preventDefault();
-            alert('Selecciona al menos una opcion de Relacion de la Victima con el Procesado');
-            $('#chkRelaProce').focus();
-        }
-
-        if ($('#mProtect').val() === '1') {
-            if ($('input[name="aplicaMedida"]:checked').length === 0) {
-                e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Protección');
-                $('#mProtect').focus();
-            }
-        }
-
-        if ($('#mujProtect').val() === '1') {
-            if ($('input[name="aplicaMedidaMuj"]:checked').length === 0) {
-                e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Protección contra Mujeres');
-                $('#mujProtect').focus();
-            }
-        }
-    });
-
-    $('#ingresos').change(function (e) {
+    $('#ingresos').change(function () {
         if ($(this).val() === '1') {
             $('#rangoInge, #fuenteIngre').fadeIn('slow');
             $('#rangoIngresos').val('').prop('required', true);
@@ -173,28 +121,8 @@ $(document).ready(function() {
         }
     });
 
-    $('#mProtect').change(function (e) {
-        if ($(this).val() === '1') {
-            $('#MedidasPro').fadeIn('slow');
-            $('input[name="aplicaMedida"]').prop("checked", false).prop("disabled", false);
-        } else {
-            $('#MedidasPro').fadeOut('slow');
-            $('input[name="aplicaMedida"]').prop("checked", false).prop("disabled", false);
-        }
-    });
-
-    $('#mujProtect').change(function (e) {
-        if ($(this).val() === '1') {
-            $('#MujPro').fadeIn('slow');
-            $('input[name="aplicaMedidaMuj"]').prop("checked", false).prop("disabled", false);
-        } else {
-            $('#MujPro').fadeOut('slow');
-            $('input[name="aplicaMedidaMuj"]').prop("checked", false).prop("disabled", false);
-        }
-    });
-
     $('.RelaProceChk').change(function () {
-        var numProcesa = $('#tblVictiProce tbody tr').length;
+        var numProcesa = $('#tblVictiProceJO tbody tr').length;
         for (i = 0; i < numProcesa; i++) {
             if ($('#chkRelaProce' + i + '99').is(":checked")) {
                 for (var j = 1; j < 11; j++) {
@@ -214,7 +142,7 @@ $(document).ready(function() {
             }
         }
     });
-
+    
     $('#chkIngresos9').change(function () {
         if ($(this).is(":checked")) {
             for (var i = 1; i < 9; i++) {
@@ -227,32 +155,8 @@ $(document).ready(function() {
         }
     });
     
-    $('#aplicaMedida99').change(function () {
-        if ($(this).is(":checked")) {
-            for (var i = 1; i < 12; i++) {
-                $('#aplicaMedida' + i).prop("checked", false).prop("disabled", true);
-            }
-        } else {
-            for (var i = 1; i < 12; i++) {
-                $('#aplicaMedida' + i).prop("checked", false).prop("disabled", false);
-            }
-        }
-    });
-    
-    $('#aplicaMedidaMuj99').change(function () {
-        if ($(this).is(":checked")) {
-            for (var i = 1; i < 18; i++) {
-                $('#aplicaMedidaMuj' + i).prop("checked", false).prop("disabled", true);
-            }
-        } else {
-            for (var i = 1; i < 18; i++) {
-                $('#aplicaMedidaMuj' + i).prop("checked", false).prop("disabled", false);
-            }
-        }
-    });
-    
-    //Guarda Victimas
-    $('#formVictimas').submit(function (e) {
+    //Guarda Victimas JO
+    $('#formVictimasJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         if ($('#deliCometido:checked').length === 0) {
@@ -305,5 +209,4 @@ $(document).ready(function() {
             }
         });
     });
-    /*---------------------------- FIN VICTIMAS DELITOS JC----------------------------*/
 });

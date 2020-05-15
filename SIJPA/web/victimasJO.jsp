@@ -4,6 +4,9 @@
     Author     : CESAR.OSORIO
 --%>
 
+<%@page import="clasesAuxiliar.showDelitosJO"%>
+<%@page import="clasesAuxiliar.showVictimasJO"%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,11 +16,134 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::VíctimasJO</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/fnVictimasJO.js"></script>
+        <script type="text/javascript" src="js/funcionesVicJO.js"></script>
         <%
             catalogos cat = new catalogos();
-            ArrayList<String[]> lista;
-           
+            showDelitosJO sDelitos = new showDelitosJO();
+            showVictimasJO sVictima = new showVictimasJO();
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
+            ArrayList<String[]> lista, victiJC, victiJO, vic;
+            ArrayList<String> viDel, viIngre;
+            ArrayList<String> viPro = new ArrayList();
+            
+            String victiClave = "", posicion = "", edicion = "";
+            if (request.getParameter("victiClave") != null || request.getParameter("posicion") != null) {
+                victiClave = request.getParameter("victiClave");
+                posicion = request.getParameter("posicion");//Variable de control para saber la fila de la tabla que pertenece
+            }
+            
+            String juzgadoClave = (String) session.getAttribute("juzgadoClave");
+            String causaClaveJC = (String)session.getAttribute("causaClave");//Obtenemos la causa clave de JC
+            String causaClaveJO = (String)session.getAttribute("causaClaveJO");//Obtenemos la causa clave de JO
+            String operacion = "";//Variable de control para saber si se inserta o se actualiza
+            String tipoVicti = "";
+            String victiMoral = "";
+            String contoAsesor = "";
+            String asesor = "";
+            String sexoVic = "";
+            String fechaNaciV = "";
+            String edadV = "";
+            String vulnera = "";
+            String paisNaci = "";
+            String entiNaci = "";
+            String munNaci = "";
+            String nacionalidad = "";
+            String resiPaisV = "";
+            String resiEntiV = "";
+            String resiMuniV = "";
+            String edoCivilV = "";
+            String condAlfaV = "";
+            String gdoEstudioV = "";
+            String hablaEspa = "";
+            String hablaExtra = "";
+            String hablaIndigena = "";
+            String lenguaIndigena = "";
+            String interprete = "";
+            String ocupa = "";
+            String ingresos = "";
+            String rangoIngre = "";
+            String medidaProte = "";
+            String medidaMujer = "";
+            String comen = "";
+            if(request.getParameter("edita") != null){//Si es diferente de null entonces le mostramos los datos de JO
+                edicion = request.getParameter("edita");
+                if(edicion.equals("Si")){
+                    victiJO = sVictima.findVictimasJO(causaClaveJO, victiClave + juzgadoClave.replace("-", ""));
+                    if(victiJO.size() > 0){
+                        operacion = "actualizar";
+                        tipoVicti = victiJO.get(0)[0];
+                        victiMoral = victiJO.get(0)[1];
+                        contoAsesor = victiJO.get(0)[2];
+                        asesor = victiJO.get(0)[3];
+                        sexoVic = victiJO.get(0)[4];
+                        fechaNaciV = victiJO.get(0)[5];
+                        edadV = victiJO.get(0)[6];
+                        vulnera = victiJO.get(0)[7];
+                        paisNaci = victiJO.get(0)[8];
+                        entiNaci = victiJO.get(0)[9];
+                        munNaci = victiJO.get(0)[10];
+                        nacionalidad = victiJO.get(0)[11];
+                        resiPaisV = victiJO.get(0)[12];
+                        resiEntiV = victiJO.get(0)[13];
+                        resiMuniV = victiJO.get(0)[14];
+                        edoCivilV = victiJO.get(0)[15];
+                        condAlfaV = victiJO.get(0)[16];
+                        gdoEstudioV = victiJO.get(0)[17];
+                        hablaEspa = victiJO.get(0)[18];
+                        hablaExtra = victiJO.get(0)[19];
+                        hablaIndigena = victiJO.get(0)[20];
+                        lenguaIndigena = victiJO.get(0)[21];
+                        interprete = victiJO.get(0)[22];
+                        ocupa = victiJO.get(0)[23];
+                        ingresos = victiJO.get(0)[24];
+                        rangoIngre = victiJO.get(0)[25];
+                        medidaProte = victiJO.get(0)[26];
+                        medidaMujer = victiJO.get(0)[27];
+                        comen = victiJO.get(0)[28];
+                    }else{
+                        out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClaveJO + "'); "
+                                + "window.location.href = 'elementosPrincipales.jsp'</script>");
+                    }
+                }
+            }else{//Si no trae variable edita, entonces le motramos los datos de JC
+                victiJC = sVictima.findVictimasJC(causaClaveJC, victiClave + juzgadoClave.replace("-", ""));
+                if(victiJC.size() > 0){
+                    tipoVicti = victiJC.get(0)[0];
+                    victiMoral = victiJC.get(0)[1];
+                    contoAsesor = victiJC.get(0)[2];
+                    asesor = victiJC.get(0)[3];
+                    sexoVic = victiJC.get(0)[4];
+                    fechaNaciV = victiJC.get(0)[5];
+                    edadV = victiJC.get(0)[6];
+                    vulnera = victiJC.get(0)[7];
+                    paisNaci = victiJC.get(0)[8];
+                    entiNaci = victiJC.get(0)[9];
+                    munNaci = victiJC.get(0)[10];
+                    nacionalidad = victiJC.get(0)[11];
+                    resiPaisV = victiJC.get(0)[12];
+                    resiEntiV = victiJC.get(0)[13];
+                    resiMuniV = victiJC.get(0)[14];
+                    edoCivilV = victiJC.get(0)[15];
+                    condAlfaV = victiJC.get(0)[16];
+                    gdoEstudioV = victiJC.get(0)[17];
+                    hablaEspa = victiJC.get(0)[18];
+                    hablaExtra = victiJC.get(0)[19];
+                    hablaIndigena = victiJC.get(0)[20];
+                    lenguaIndigena = victiJC.get(0)[21];
+                    interprete = victiJC.get(0)[22];
+                    ocupa = victiJC.get(0)[23];
+                    ingresos = victiJC.get(0)[24];
+                    rangoIngre = victiJC.get(0)[25];
+                    medidaProte = victiJC.get(0)[26];
+                    medidaMujer = victiJC.get(0)[27];
+                    comen = victiJC.get(0)[28];
+                }else{
+                    out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClaveJC + "'); "
+                            + "window.location.href = 'elementosPrincipales.jsp'</script>");
+                }
+            }
+            
         %>
     </head>
     <body style="zoom: .9;">
@@ -32,9 +158,13 @@
                             <td>
                                 <div class="cols">
                                     <label for="victima_clave">Víctima Clave</label>
-                                    <input type="text" name="victiClave" id="victiClave" readonly/>
+                                    <input type="text" name="victiClave" id="victiClave" value="<%=victiClave%>" readonly/>
+                                    <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
+                                    <input type="hidden" name="opera" id="opera" value="<%=operacion%>"/>
                                 </div>
                                 <div class="cols">
+                                    <!--Usamos un input invisible para recuperar el dato de tipo victima de BD y llenarlo con jquery-->
+                                    <input type="hidden" id="tipoVictiHi" name="tipoVictiHi" value="<%=tipoVicti%>">
                                     <label for="tipoVictima">Tipo de Víctima</label>
                                     <select name="tipoVictima" id="tipoVictima" required>
                                         <option value="">--Seleccione--</option>
@@ -56,9 +186,9 @@
                                             lista = cat.findVictimaMoral();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
-//                                                if(ls[0].equals(victiMoral)){
-//                                                    out.println(" selected ");
-//                                                }
+                                                if(ls[0].equals(victiMoral)){
+                                                    out.println(" selected ");
+                                                }
                                                 out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
                                         %>    
@@ -71,11 +201,41 @@
                 <fieldset>
                     <legend >Delitos cometidos a la víctima</legend>
                     <table class="tablasRegis">
-                        <tr>
-                            <th>Delito Clave</th>
-                            <th>Delito</th>
-                            <th>Delito cometido</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Delito Clave</th>
+                                <th>Delito</th>
+                                <th>Delito cometido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <%
+                            vic = sDelitos.findDeliCausasJC(causaClaveJC);
+                            for (String[] ls : vic) {
+                                out.println("<tr>");
+                                out.println("<td>" + ls[0].replace(juzgadoClave.replace("-", ""), "") + "</td>");
+                                out.println("<td>" + ls[1] + "</td>");
+                                out.println("<td>");
+                                if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
+                                    viDel = sVictima.findVDelitoJO(causaClaveJO, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                    if(viDel.size() != 0){
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "' checked>");
+                                    }else{
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "'/>");
+                                    }
+                                }else{//SI edicion viene vacio entonces traemos JC
+                                    viDel = sVictima.findVDelitoJC(causaClaveJC, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                    if(viDel.size() != 0){
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "' checked>");
+                                    }else{
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "'/>");
+                                    }
+                                }
+                                out.println("</td>");
+                                out.println("</tr>");
+                            }
+                        %>
+                        </tbody>
                     </table>
                 </fieldset>
                 <fieldset>
@@ -88,9 +248,9 @@
                                 lista = cat.findRespuestaSimple();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'");
-//                                    if(ls[0].equals(contoAsesor)){
-//                                        out.println(" selected ");
-//                                    }
+                                    if(ls[0].equals(contoAsesor)){
+                                        out.println(" selected ");
+                                    }
                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
                             %>      
@@ -104,9 +264,9 @@
                                 lista = cat.findTipoDefensor();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'");
-//                                    if(ls[0].equals(asesor)){
-//                                        out.println(" selected ");
-//                                    }
+                                    if(ls[0].equals(asesor)){
+                                        out.println(" selected ");
+                                    }
                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                 }
                             %>        
@@ -115,7 +275,7 @@
                 </fieldset>
                 <fieldset>
                     <legend>Relación de la Victima con el Procesado</legend>
-                    <table class="tablasRegis" id="tblVictiProce">
+                    <table class="tablasRegis" id="tblVictiProceJO">
                         <thead>
                             <tr>
                                 <th>Procesado Clave</th>
@@ -123,7 +283,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                        
+                        <%
+                            vic = sVictima.findVprocesadosJC(causaClaveJC);
+                            int i = 0;
+                            for (String[] ls : vic) {
+                                out.println("<tr>");
+                                out.println("<td>");
+                                out.println(ls[0].replace(juzgadoClave.replace("-", ""), "") + "<input type='hidden' name='proRela' value='" + ls[0] + "'>");
+                                out.println("</td>");
+                                out.println("<td>");
+                                lista = cat.findRelacionImputado();
+                                for (String[] los : lista) {
+                                    out.println("<div class='chkCat'>");
+                                    viPro.clear();//limpiamos el array para poder llenar de manera correcta todos los check
+                                    //Recuperamos el dato de la bd, si existe lo checheamos si no se encuentra vacio
+                                    if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
+                                        viPro = sVictima.findViRelProcesadoJO(causaClaveJO, victiClave + juzgadoClave.replace("-", ""), ls[0], los[0]);
+                                        if(viPro.size() != 0){
+                                            out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + " checked>");
+                                        }else{
+                                            out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + ">");
+                                        }
+                                    }else{
+                                        viPro = sVictima.findViRelProcesadoJC(causaClaveJC, victiClave + juzgadoClave.replace("-", ""), ls[0], los[0]);
+                                        if(viPro.size() != 0){
+                                            out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + " checked>");
+                                        }else{
+                                            out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + ">");
+                                        }
+                                    }
+                                    out.println("<label>" + los[1] + "</label>");
+                                    out.println("</div>");
+                                }
+                                out.println("</td>");
+                                out.println("</tr>");
+                                i++;
+                            }
+                        %>
                         </tbody>
                     </table>
                 </fieldset>
@@ -139,9 +335,9 @@
                                         lista = cat.findSexo();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(sexoVic)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(sexoVic)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>
@@ -149,15 +345,27 @@
                             </td>
                             <td>
                                 <label for="fnacimientoV">Fecha de Nacimiento</label>
-                                <input type="date" name="fnacimientoV" id="fnacimientoV" required>
+                                <input type="date" name="fnacimientoV" id="fnacimientoV" value="<%=fechaNaciV%>" max="<%=fechas%>" onblur="ValFechaNacVic('#fnacimientoV','#edadVi')" required>
                                 <div class="noIdentificada" id="dFechaNaciV">
                                     <input type="checkbox" id="chkFechaNaciV" onchange="fechaNoIdent('#chkFechaNaciV', '#fnacimientoV')">
                                     <label>No identificada</label>
                                 </div>
                             </td>
                             <td>
-                                <label for="edad">Edad</label>
-                                <input type="number" name="edad" id="edad">
+                                <label for="edadVi">Edad</label>
+                                <select name="edadVi" id="edadVi" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        for (int m = 0; m <= 99; m++) {
+                                            out.println("<option value='" + m + "'");
+                                            if(Integer.toString(m).equals(edadV)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + m + "</option>");        
+                                        }
+                                    %>
+                                    <option value="-9">No identificado</option>
+                                </select>
                             </td>
                             <td>
                                 <label for="tvic_moral">Condición de vulnerabilidad</label>
@@ -167,9 +375,9 @@
                                         lista = cat.findVulnerabilidad();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(vulnera)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(vulnera)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>   
@@ -188,9 +396,9 @@
                                                 lista = cat.findPais();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(paisNaci)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(paisNaci)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>  
@@ -204,9 +412,9 @@
                                                 lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(entiNaci)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(entiNaci)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>     
@@ -215,7 +423,21 @@
                                     <div class="cols oculto" id="munNaci"> 
                                         <label for="Mnacimiento">Municipio</label>
                                         <select name="Mnacimiento" id="Mnacimiento">
-                                            
+                                            <%
+                                                if(!paisNaci.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                }else{//Si el pais es mexico entonces se llena el catalogo con municipios del estado
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                    lista = cat.findMunicipios(Integer.parseInt(entiNaci));
+                                                    for (String[] ls : lista) {
+                                                        out.println("<option value='" + ls[0] + "'");
+                                                        if(ls[0].equals(munNaci)){
+                                                            out.println(" selected ");
+                                                        }
+                                                        out.println(">" + ls[1] + "</option>");
+                                                    }
+                                                }
+                                            %>
                                         </select>
                                     </div>
                                 </fieldset>
@@ -228,9 +450,9 @@
                                         lista = cat.findNacionalidad();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(nacionalidad)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(nacionalidad)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>     
@@ -249,9 +471,9 @@
                                                 lista = cat.findPais();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(resiPaisV)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(resiPaisV)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>    
@@ -265,9 +487,9 @@
                                                 lista = cat.findEntidades();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(resiEntiV)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(resiEntiV)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>      
@@ -276,7 +498,21 @@
                                     <div class="cols oculto" id="munResi"> 
                                         <label for="Mreside">Municipio</label>
                                         <select name="Mreside" id="Mreside" name="Mreside">
-                                            
+                                            <%
+                                                if(!resiPaisV.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                }else{//Si el pais es mexico entonces se llena el catalogo con municipios del estado
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                    lista = cat.findMunicipios(Integer.parseInt(resiEntiV));
+                                                    for (String[] ls : lista) {
+                                                        out.println("<option value='" + ls[0] + "'");
+                                                        if(ls[0].equals(resiMuniV)){
+                                                            out.println(" selected ");
+                                                        }
+                                                        out.println(">" + ls[1] + "</option>");
+                                                    }
+                                                }
+                                            %>
                                         </select>
                                     </div>
                                 </fieldset>
@@ -289,9 +525,9 @@
                                         lista = cat.findEstadoCivil();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(edoCivilV)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(edoCivilV)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>     
@@ -307,9 +543,9 @@
                                         lista = cat.findAlfabetismo();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(condAlfaV)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(condAlfaV)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>  
@@ -323,9 +559,9 @@
                                         lista = cat.findGradoEstudios();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(gdoEstudioV)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(gdoEstudioV)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>   
@@ -339,9 +575,9 @@
                                         lista = cat.findDominioEspanol();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(hablaEspa)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(hablaEspa)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %> 
@@ -355,9 +591,9 @@
                                         lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(hablaExtra)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(hablaExtra)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %> 
@@ -375,9 +611,9 @@
                                                 lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(hablaIndigena)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(hablaIndigena)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %> 
@@ -391,9 +627,9 @@
                                                 lista = cat.findLinguisticas();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(lenguaIndigena)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(lenguaIndigena)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %>   
@@ -409,9 +645,9 @@
                                         lista = cat.findRespuestaSimple();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(interprete)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(interprete)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %> 
@@ -425,9 +661,9 @@
                                         lista = cat.findOcupacion();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-//                                            if(ls[0].equals(ocupa)){
-//                                                out.println(" selected ");
-//                                            }
+                                            if(ls[0].equals(ocupa)){
+                                                out.println(" selected ");
+                                            }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                     %>   
@@ -445,9 +681,9 @@
                                                 lista = cat.findRespuestaSimple();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(ingresos)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(ingresos)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %> 
@@ -461,9 +697,9 @@
                                                 lista = cat.findRangoIngresos();
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-//                                                    if(ls[0].equals(rangoIngre)){
-//                                                        out.println(" selected ");
-//                                                    }
+                                                    if(ls[0].equals(rangoIngre)){
+                                                        out.println(" selected ");
+                                                    }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                 }
                                             %> 
@@ -482,7 +718,21 @@
                                                 out.println("<td>" + ls[0] + "</td>");
                                                 out.println("<td>" + ls[1] + "</td>");
                                                 out.println("<td>");
-                                                out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + "  >");
+                                                if(!edicion.equals("")){//Si ediciion viene diferente de vacio entonces tremos datos de JO
+                                                    viIngre = sVictima.findVIngresosJO(causaClaveJO, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                                    if(viIngre.size() != 0){
+                                                        out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + " checked>");
+                                                    }else{
+                                                        out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + "  >");
+                                                    }
+                                                }else{//Si edicion viene vacio entonces recuperamos datos de JC
+                                                    viIngre = sVictima.findVIngresosJC(causaClaveJC, victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                                    if(viIngre.size() != 0){
+                                                        out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + " checked>");
+                                                    }else{
+                                                        out.println("<input type='checkbox' name='chkIngresos' id='chkIngresos" + ls[0] + "' value=" + ls[0] + "  >");
+                                                    }
+                                                }
                                                 out.println("</td>");
                                                 out.println("</tr>");
                                             }

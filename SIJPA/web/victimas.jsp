@@ -296,8 +296,8 @@
                             <td>
                                 <label for="edadVi">Edad</label>
                                 <select name="edadVi" id="edadVi" required>
-                                 <option value="">--Seleccione--</option>
-                                 <%
+                                    <option value="">--Seleccione--</option>
+                                    <%
                                         for (int m = 0; m <= 99; m++) {
                                             out.println("<option value='" + m + "'");
                                             if(Integer.toString(m).equals(edadV)){

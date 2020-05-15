@@ -12,9 +12,14 @@
         <li><a href="jueces.jsp">Jueces</a></li>
         <li><a href="audiencias.jsp">Audiencias</a></li>
         <!--<li><a href="sistemasCap.jsp">Sistemas de Captura</a></li>-->
-        <% if((Integer)session.getAttribute("tipoUsuario") == 1){ %>
-            <li><a href="usuario.jsp">Usuarios</a></li>
-            <li><a href="BDMySQL/sijpa_db13052020.sql" download="sijpa_db.sql">Base de Datos SIJPA</a></li>
-        <% } %>
+        <% 
+            if((Integer)session.getAttribute("tipoUsuario") == 1){ %>
+                <li><a href="usuario.jsp">Usuarios</a></li>
+                <li><a href="BDMySQL/sijpa_db14-05-20.sql" download="sijpa_db.sql">Base de Datos SIJPA</a></li>
+        <% 
+            }else{
+                response.sendRedirect("index.jsp");
+            }
+        %>
     </ul>
 </nav>

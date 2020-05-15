@@ -12,10 +12,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::ResolucionesJO</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/fnConclusionesJO.js"></script>
+        <script type="text/javascript" src="js/funcionesConcJO.js"></script>
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> lista = new ArrayList();
+            
+            String proceClave = "", posicion = "", edicion = "";
+            if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
+                proceClave = request.getParameter("proceClave");
+                posicion = request.getParameter("posicion");
+            }
+            
+            String operacion = "";//Variable de control para saber si se inserta o se actualiza
         %>
           
     </head>
@@ -23,11 +31,11 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el tribunal de enjuiciamiento</h1>
-            <form action="conclusionesJO.jsp" method="post" name="formConclusionesJO" id="formConclusionesJO">
+            <form method="post" name="formConclusionesJO" id="formConclusionesJO">
                 <label for="procesado">Id Adolescente</label>
-                <select name="proceClave" id="proceClave" required>
-                    <option value="">--Seleccione--</option>
-                </select>
+                <input type="text" name="delitoClave" id="delitoClave" value="<%=proceClave%>" readonly>
+                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
+                <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                 <fieldset>
                     <legend>Resolución</legend>
                     <div class="cols">

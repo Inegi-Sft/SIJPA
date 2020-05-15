@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 public class showVictimasJO {
     
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> vic;
+    ArrayList<String[]> vic, vicProce;
+    ArrayList<String> vicDelito, vicIngre;
     String sql;
     ResultSet resul;
     
@@ -81,5 +82,202 @@ public class showVictimasJO {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return vic;
+    }
+    
+    public ArrayList findVictimasJC(String causaClaveJC, String victimaClave) {
+        conn.Conectar();
+        vic = new ArrayList();
+        sql = "SELECT * FROM DATOS_VICTIMAS_ADOJC "
+                + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                + "AND VICTIMA_CLAVE = '" + victimaClave + "' "
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                vic.add(new String[]{
+                    resul.getString("TIPO_VICTIMA"), resul.getString("TIPO_VICTIMA_MORAL"), resul.getString("CONTO_ASESOR"),
+                    resul.getString("ASESOR"), resul.getString("SEXO"), resul.getString("FECHA_NACIMIENTO"), resul.getString("EDAD"),
+                    resul.getString("VULNERABILIDAD"), resul.getString("NACIMIENTO_PAIS"), resul.getString("NACIMIENTO_ENTIDAD"),
+                    resul.getString("NACIMIENTO_MUNICIPIO"), resul.getString("NACIONALIDAD"), resul.getString("RESIDENCIA_PAIS"),
+                    resul.getString("RESIDENCIA_ENTIDAD"), resul.getString("RESIDENCIA_MUNICIPIO"), resul.getString("ESTADO_CIVIL"),
+                    resul.getString("CONDICION_ALFABETISMO"), resul.getString("GRADO_ESTUDIOS"), resul.getString("HABLA_ESPANOL"),
+                    resul.getString("LENGUA_EXTRANJERA"), resul.getString("HABLA_INDIGENA"), resul.getString("LENGUA_INDIGENA"),
+                    resul.getString("INTERPRETE"), resul.getString("OCUPACION"), resul.getString("INGRESOS"), resul.getString("RANGO_INGRESOS"),
+                    resul.getString("MEDIDAS_PROTECCION"), resul.getString("MEDIDAS_MUJER"), resul.getString("COMENTARIOS")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vic;
+    }
+    
+    public ArrayList findVictimasJO(String causaClaveJO, String victimaClave) {
+        conn.Conectar();
+        vic = new ArrayList();
+        sql = "SELECT * FROM DATOS_VICTIMAS_ADOJO "
+                + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                + "AND VICTIMA_CLAVE = '" + victimaClave + "' "
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                vic.add(new String[]{
+                    resul.getString("TIPO_VICTIMA"), resul.getString("TIPO_VICTIMA_MORAL"), resul.getString("CONTO_ASESOR"),
+                    resul.getString("ASESOR"), resul.getString("SEXO"), resul.getString("FECHA_NACIMIENTO"), resul.getString("EDAD"),
+                    resul.getString("VULNERABILIDAD"), resul.getString("NACIMIENTO_PAIS"), resul.getString("NACIMIENTO_ENTIDAD"),
+                    resul.getString("NACIMIENTO_MUNICIPIO"), resul.getString("NACIONALIDAD"), resul.getString("RESIDENCIA_PAIS"),
+                    resul.getString("RESIDENCIA_ENTIDAD"), resul.getString("RESIDENCIA_MUNICIPIO"), resul.getString("ESTADO_CIVIL"),
+                    resul.getString("CONDICION_ALFABETISMO"), resul.getString("GRADO_ESTUDIOS"), resul.getString("HABLA_ESPANOL"),
+                    resul.getString("LENGUA_EXTRANJERA"), resul.getString("HABLA_INDIGENA"), resul.getString("LENGUA_INDIGENA"),
+                    resul.getString("INTERPRETE"), resul.getString("OCUPACION"), resul.getString("INGRESOS"), resul.getString("RANGO_INGRESOS"),
+                    resul.getString("MEDIDAS_PROTECCION"), resul.getString("MEDIDAS_MUJER"), resul.getString("COMENTARIOS")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vic;
+    }
+    
+    public ArrayList findVDelitoJC(String causaClaveJC, String victiClave, String deliClave){
+        vicDelito = new ArrayList();
+        try {
+            conn.Conectar();
+                sql = "SELECT DELITO_CLAVE FROM DATOS_VDELITOS_ADOJC "
+                        + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                        + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                        + "AND DELITO_CLAVE = '" + deliClave + "' "
+                        + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                vicDelito.add(resul.getString("DELITO_CLAVE"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicDelito;
+    }
+    
+    public ArrayList findVDelitoJO(String causaClaveJO, String victiClave, String deliClave){
+        vicDelito = new ArrayList();
+        try {
+            conn.Conectar();
+                sql = "SELECT DELITO_CLAVE FROM DATOS_VDELITOS_ADOJO "
+                        + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                        + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                        + "AND DELITO_CLAVE = '" + deliClave + "' "
+                        + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                vicDelito.add(resul.getString("DELITO_CLAVE"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicDelito;
+    }
+    
+    public ArrayList findVprocesadosJC(String causaClaveJC) {
+        conn.Conectar();
+        vicProce = new ArrayList();
+        sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
+                + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "'";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                vicProce.add(new String[]{
+                    resul.getString(1)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicProce;
+    }
+    
+    public ArrayList findViRelProcesadoJC(String causaClaveJC, String victiClave, String proceClave, String relacion){
+        vicProce = new ArrayList();
+        try {
+            conn.Conectar();
+                sql = "SELECT RELACION FROM DATOS_VPROCESADOS_ADOJC "
+                        + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                        + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                        + "AND RELACION = " + relacion + " "
+                        + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                vicDelito.add(resul.getString("RELACION"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicDelito;
+    }
+    
+    public ArrayList findViRelProcesadoJO(String causaClaveJO, String victiClave, String proceClave, String relacion){
+        vicProce = new ArrayList();
+        try {
+            conn.Conectar();
+                sql = "SELECT RELACION FROM DATOS_VPROCESADOS_ADOJO "
+                        + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                        + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                        + "AND RELACION = " + relacion + " "
+                        + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                vicDelito.add(resul.getString("RELACION"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicDelito;
+    }
+    
+    public ArrayList findVIngresosJC(String causaClaveJC, String victiClave, String ingreso) {
+        try {
+            conn.Conectar();
+            vicIngre = new ArrayList();
+            sql = "SELECT INGRESO FROM DATOS_VFUENTE_INGRESOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                    + "AND INGRESO = " + ingreso + ";";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                vicIngre.add(resul.getString("INGRESO"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicIngre;
+    }
+    
+    public ArrayList findVIngresosJO(String causaClaveJO, String victiClave, String ingreso) {
+        try {
+            conn.Conectar();
+            vicIngre = new ArrayList();
+            sql = "SELECT INGRESO FROM DATOS_VFUENTE_INGRESOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                    + "AND INGRESO = " + ingreso + ";";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                vicIngre.add(resul.getString("INGRESO"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicIngre;
     }
 }

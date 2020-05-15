@@ -53,37 +53,37 @@
                             </td> 
                             <td>
                                 <fieldset> 
-                                <label for="medidasJO">¿Se aplicaron medidas disciplinarias en la audiencia?</label>
-                                <select  name="medidasJO" id="medidasJO" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%                                        lista = cat.findFuero();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'");
-                                            if (ls[0].equals(0)) {
-                                                out.println(" selected ");
+                                    <label for="medidasJO">¿Se aplicaron medidas disciplinarias en la audiencia?</label>
+                                    <select  name="medidasJO" id="medidasJO" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%                                        lista = cat.findFuero();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'");
+                                                if (ls[0].equals(0)) {
+                                                    out.println(" selected ");
+                                                }
+                                                out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
-                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
-                                </select>
-                        <div class="oculto" id="incidenteJO">
-                            <label for="incidenteJO">¿Por quién fue promovido el incidente?</label>
-                            <select  name="incidenteJO" id="incidenteJO" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findFuero();
-                                    for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'");
-                                        if (ls[0].equals(0)) {
-                                            out.println(" selected ");
-                                        }
-                                        out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %>
-                            </select>      
-                        </div>
-                      </fieldset>
-                        </td>
+                                        %>
+                                    </select>
+                                    <div class="oculto" id="incidenteJO">
+                                        <label for="incidenteJO">¿Por quién fue promovido el incidente?</label>
+                                        <select  name="incidenteJO" id="incidenteJO" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findFuero();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if (ls[0].equals(0)) {
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>
+                                        </select>      
+                                    </div>
+                                </fieldset>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">

@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::ProcesadosJO</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/fnProcesadosJO.js"></script>
+        <script type="text/javascript" src="js/funcionesProJO.js"></script>
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> lista;

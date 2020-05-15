@@ -23,7 +23,7 @@
             String fechas = fecha.FechaValida();
             
             ArrayList<String[]> lista, delitoJC, delitoJO;
-            ArrayList<String> deliAdiJC, deliAdiJO;
+            ArrayList<String> deliAdi;
             
             String delitoClave = "", posicion = "", edicion = "";
             if (request.getParameter("delitoClave") != null || request.getParameter("posicion") != null) {
@@ -436,15 +436,15 @@
                                     out.println("<td>" + ls[1] + "</td>");
                                     out.println("<td>");
                                     if(!edicion.equals("")){//Diferente de vacio traemos JO
-                                        deliAdiJO = delitos.findDRoboJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""),ls[0]);
-                                        if(deliAdiJO.size() != 0){
+                                        deliAdi = delitos.findDRoboJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""),ls[0]);
+                                        if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{
                                             out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "'>"); 
                                         }
                                     }else{//Traemos JC 
-                                        deliAdiJC = delitos.findDRoboJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""),ls[0]);
-                                        if(deliAdiJC.size() != 0){
+                                        deliAdi = delitos.findDRoboJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""),ls[0]);
+                                        if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{
                                             out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "'>"); 
@@ -464,22 +464,22 @@
                                 <th width="70">Aplica</th>
                             </tr>
                             <%
-                                lista=cat.findContextoSituacional();
+                                lista = cat.findContextoSituacional();
                                 for (String[] ls : lista) {
                                     out.println("<tr>");
                                     out.println("<td>" + ls[0] + "</td>");
                                     out.println("<td>" + ls[1] + "</td>");
                                     out.println("<td>");
                                     if(!edicion.equals("")){
-                                        deliAdiJO = delitos.findDHomicidiosJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
-                                        if(deliAdiJO.size() != 0){
+                                        deliAdi = delitos.findDHomicidiosJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{
                                             out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "'>"); 
                                         }
                                     }else{
-                                        deliAdiJC = delitos.findDHomicidiosJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
-                                        if(deliAdiJC.size() != 0){
+                                        deliAdi = delitos.findDHomicidiosJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{
                                             out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "'>"); 

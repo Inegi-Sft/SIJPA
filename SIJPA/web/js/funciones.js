@@ -820,7 +820,3 @@ function ValFechaNacPRO(FechaNac, Edad) {
         });
     }
 }
-
-function prueba(){
-    window.location.href = "juicioPenal.jsp";
-}

@@ -15,7 +15,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales JC</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
         <%  
             showJuzgados juz = new showJuzgados();
@@ -74,8 +73,6 @@
                             }
                         %>
                     </select>
-                    <label for="Prueba">Boton prueba:</label> 
-                    <input  type="button" name="botonpru" id="botonpru" width="15" height="15" onclick="prueba()" >
                 </div>
                 <span class="totExp">Total: <%=tCausasJuz%></span>
                 <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>

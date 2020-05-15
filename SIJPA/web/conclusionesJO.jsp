@@ -33,7 +33,7 @@
             <h1>Resoluciones dictadas por el tribunal de enjuiciamiento</h1>
             <form method="post" name="formConclusionesJO" id="formConclusionesJO">
                 <label for="procesado">Id Adolescente</label>
-                <input type="text" name="delitoClave" id="delitoClave" value="<%=proceClave%>" readonly>
+                <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                 <fieldset>

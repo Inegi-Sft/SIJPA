@@ -147,3 +147,17 @@ nav ul li a.active{
 .toggle-nav.open .toggle-nav-inner:after {
     transform: translate3d(0,-20px,0) rotate(-90deg);
 }
+
+.img-circle{
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.fUsuario{
+    padding: 15px 0;
+}
+
+li:first-child{
+    color: #00CBCB;
+    background-color: #666666;
+}

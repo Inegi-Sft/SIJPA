@@ -36,7 +36,7 @@
             String jNumeroJO = jDividido[2];
             String jConcatenado = jEntidadJO + jMunicipioJO + jNumeroJO;
             String causaClave = (String) session.getAttribute("causaClave");
-            String operacionJO = "";//Variable de control para saber si se inserta o se actualiza
+            String operacion = "";//Variable de control para saber si se inserta o se actualiza
             String etapaProcesalJO = "";
             String estatusJO="";
             String especifiJO = "";
@@ -46,7 +46,7 @@
                 if(edicion.equals("Si")){
                     tramite = sTramite.findTramiteJO(causaClave, proceClave + jConcatenado);
                     if(tramite.size() > 0){
-                        operacionJO = "actualizar";
+                        operacion = "actualizar";
                         etapaProcesalJO ="Juicio Oral";
                         estatusJO=tramite.get(0)[0];
                         especifiJO = tramite.get(0)[1];
@@ -64,23 +64,13 @@
                 <fieldset>
                     <legend>Estatus</legend>
                     <label for="idProcesado">Id Adolescente</label>
-                    <% 
-                        //Si recibimos el procesado obligado en tramite lo imprimimos sin poder editar
-                        if(!proceClave.equals("")){
-                            out.println("<input type='text' name='proceClave' id='proceClave' value='" + proceClave + "' readonly>");
-                            out.println("<input type='hidden' name='posicion' id='posicion' value='" + posicion + "'>");
-                            out.println("<input type='hidden' name='opera' id='opera' value='" + operacionJO + "'>");
-                        }else{//Si el procesado no esta obligado en tramite entonces puede escoger de una lista
-                            out.println("<select name='proceClave' id='proceClave' onchange='formTramiteJO.submit();' required>");
-                            out.println("<option value=''>--Seleccione--</option>");
-                            out.println("</select>");
-                        }
-                    %>
-                    <br>
-                    <fieldset class="colsA subField">
+                    <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
+                    <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
+                    <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
+                    <fieldset class="subField">
                         <div class="cols">
                             <label for="eProcesal">Etapa procesal</label>
-                            <select name="eProcesal" id="eProcesalJO" disabled="false"  required>
+                            <select name="eProcesal" id="eProcesalJO" disabled required>
                                 <option value="">1.-Juicio Oral</option>
                             </select>
                         </div>
@@ -118,13 +108,5 @@
                 <input type="submit" name="guardar" id="guardarTram" value="Guardar">
             </form>
         </section>
-        <% if(!etapaProcesalJO.equals("")){ %>
-            <script type="text/javascript"> 
-                $(document).ready(function(){ 
-                    //etapaProcesal(); 
-                    $("#eProcesalJO option:not(:selected)").attr("disabled", "disabled");
-                });
-            </script>
-        <%  } %>
     </body>
 </html>

@@ -14,7 +14,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales JO</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
         <%@include file="librerias.jsp" %>
         <%  
             showJuzgados juz = new showJuzgados();

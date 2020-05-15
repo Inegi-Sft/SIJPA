@@ -17,14 +17,24 @@
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> lista = new ArrayList();
+            
+            String proceClave = "", posicion = "", edicion = "";
+            if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
+                proceClave = request.getParameter("proceClave");
+                posicion = request.getParameter("posicion");
+            }
+            
+            String operacion = "";//Variable de control para saber si se inserta o se actualiza
         %>
     </head>
     <body style="zoom: .9;">
         <section class="contenedor">
             <h1>Etapa Juicio Oral</h1>
-            <form action="" method="post" name="formJuicioO" id="fromJuicioO">
+            <form method="post" name="formJuicioO" id="fromJuicioO">
                 <label for="idProcesado">Id Adolescente</label>
-                <input type="text" name="proceClave" id="proceClave" readonly>
+                <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
+                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
+                <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                 <fieldset>
                     <legend>Características de la de juicio oral</legend>
                     <div class="cols" id="dApertura">

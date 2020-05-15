@@ -22,10 +22,10 @@
             if(request.getParameter("juzgado") != null){
                 if(request.getParameter("juzgado") != ""){
                     juzgado=request.getParameter("juzgado");
-                    session.setAttribute("juzgadoClaveAudi", juzgado);
+                    session.setAttribute("juzgadoClave", juzgado);
                 }
-            }else if(session.getAttribute("juzgadoClaveAudi") != null){
-                juzgado = (String) session.getAttribute("juzgadoClaveAudi");
+            }else if(session.getAttribute("juzgadoClave") != null){
+                juzgado = (String) session.getAttribute("juzgadoClave");
             }
         %>
     </head>

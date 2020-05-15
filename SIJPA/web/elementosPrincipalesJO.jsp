@@ -249,7 +249,7 @@
                                         out.println("<td>" + juiciJO.get(0)[3] + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[4] + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[5] + "</td>");
-                                        out.println("<td><a class='pop' href='juicioOral.jsp?proceClave=" + juiciJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='juicioPenal.jsp?proceClave=" + juiciJO.get(0)[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }else{
@@ -260,7 +260,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='juicioOral.jsp?proceClave=" + juiJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='juicioPenal.jsp?proceClave=" + juiJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }

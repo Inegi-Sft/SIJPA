@@ -103,7 +103,7 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Resoluciones dictadas por el juez de control</h1>
-            <form action="conclusiones.jsp" method="post" name="formConclusiones" id="formConclusiones">
+            <form method="post" name="formConclusiones" id="formConclusiones">
                 <label for="procesado">Id Adolescente</label>
                 <% 
                     //Si recibimos el procesado obligado en conclusion lo imprimimos sin poder editar

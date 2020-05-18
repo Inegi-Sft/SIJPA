@@ -73,7 +73,7 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE='" + juzgado + "'";
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "'";
 
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -86,11 +86,11 @@ public class showCausasPenales {
         return total;
     }
 
-    public int countTotalDelitos(String exp) {
+    public int countTotalDelitos(String causaClave) {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + exp + "'";
+            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
 
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -103,11 +103,11 @@ public class showCausasPenales {
         return total;
     }
 
-    public int countTotalProcesados(String exp) {
+    public int countTotalProcesados(String causaClave) {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + exp + "'";
+            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = " + causaClave + "'";
 
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -120,11 +120,11 @@ public class showCausasPenales {
         return total;
     }
 
-    public int countTotalVictimas(String exp) {
+    public int countTotalVictimas(String causaClave) {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_VICTIMAS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC  WHERE CAUSA_CLAVE='" + exp + "'";
+            sql = "SELECT TOTAL_VICTIMAS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
 
             rs = conn.consultar(sql);
             while (rs.next()) {

@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 public class showProcesadosJO {
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> proce;
+    ArrayList<String> pIngre;
     String sql;
     ResultSet resul;
     
@@ -71,5 +72,149 @@ public class showProcesadosJO {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proce;
+    }
+    
+    public ArrayList findProcesadosJC(String causaClaveJC, String proceClave){
+        try {
+            conn.Conectar();
+            proce = new ArrayList();
+            sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_MUNICIPIOS CM "
+                    + "WHERE P.CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "AND P.PROCESADO_CLAVE = '" + proceClave + "';";
+            resul = conn.consultar(sql);
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString("P.NOMBRE"), resul.getString("P.A_PATERNO"), resul.getString("P.A_MATERNO"), resul.getString("P.ALIAS"),
+                    resul.getString("P.CURP"), resul.getString("P.FECHA_NACIMIENTO"), resul.getString("P.SEXO"), resul.getString("P.EDAD"),
+                    resul.getString("P.NACIMIENTO_PAIS"), resul.getString("P.NACIMIENTO_ENTIDAD"), resul.getString("P.NACIMIENTO_MUNICIPIO"),
+                    resul.getString("P.NACIONALIDAD"), resul.getString("P.RESIDENCIA_PAIS"), resul.getString("P.RESIDENCIA_ENTIDAD"),
+                    resul.getString("P.RESIDENCIA_MUNICIPIO"), resul.getString("P.ESTADO_CIVIL"), resul.getString("P.DISCAPACIDAD"),
+                    resul.getString("P.CONDICION_ALFABETISMO"), resul.getString("P.ULTIMO_GRADO_ESTUDIOS"), resul.getString("P.CONDICION_ESTUDIANTE"),
+                    resul.getString("P.HABLA_ESPANOL"), resul.getString("P.POBLACION_INDIGENA"), resul.getString("P.TIPO_PUEBLO_INDIGENA"),
+                    resul.getString("P.HABLA_INDIGENA"), resul.getString("P.FAMILIA_LINGUISTICA"), resul.getString("P.LENGUA_EXTRANJERA"),
+                    resul.getString("P.INTERPRETE"), resul.getString("P.INGRESOS"), resul.getString("P.RANGO_INGRESOS"),
+                    resul.getString("P.OCUPACION"), resul.getString("P.CONDICION_ACTIVIDAD"), resul.getString("P.INICIO_IMPUTADO"),
+                    resul.getString("P.TIPO_DETENCION"), resul.getString("P.FORMA_CONDUCCION"), resul.getString("P.GRADO_PARTICIPACION"),
+                    resul.getString("P.REINCIDENCIA"), resul.getString("P.ESTADO_PSICOFISICO"), resul.getString("P.DELICTIVO"),
+                    resul.getString("P.GRUPO_DELICTIVO"), resul.getString("P.TIPO_DEFENSOR"), resul.getString("P.PERSONA_RESPONSABLE"),
+                    resul.getString("P.COMENTARIOS")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+    }
+    
+    public ArrayList findProcesadosJO(String causaClaveJO, String proceClave){
+        try {
+            conn.Conectar();
+            proce = new ArrayList();
+            sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_MUNICIPIOS CM "
+                    + "WHERE P.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND P.PROCESADO_CLAVE = '" + proceClave + "';";
+            resul = conn.consultar(sql);
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString("P.NOMBRE"), resul.getString("P.A_PATERNO"), resul.getString("P.A_MATERNO"), resul.getString("P.ALIAS"),
+                    resul.getString("P.CURP"), resul.getString("P.FECHA_NACIMIENTO"), resul.getString("P.SEXO"), resul.getString("P.EDAD"),
+                    resul.getString("P.NACIMIENTO_PAIS"), resul.getString("P.NACIMIENTO_ENTIDAD"), resul.getString("P.NACIMIENTO_MUNICIPIO"),
+                    resul.getString("P.NACIONALIDAD"), resul.getString("P.RESIDENCIA_PAIS"), resul.getString("P.RESIDENCIA_ENTIDAD"),
+                    resul.getString("P.RESIDENCIA_MUNICIPIO"), resul.getString("P.ESTADO_CIVIL"), resul.getString("P.DISCAPACIDAD"),
+                    resul.getString("P.CONDICION_ALFABETISMO"), resul.getString("P.ULTIMO_GRADO_ESTUDIOS"), resul.getString("P.CONDICION_ESTUDIANTE"),
+                    resul.getString("P.HABLA_ESPANOL"), resul.getString("P.POBLACION_INDIGENA"), resul.getString("P.TIPO_PUEBLO_INDIGENA"),
+                    resul.getString("P.HABLA_INDIGENA"), resul.getString("P.FAMILIA_LINGUISTICA"), resul.getString("P.LENGUA_EXTRANJERA"),
+                    resul.getString("P.INTERPRETE"), resul.getString("P.INGRESOS"), resul.getString("P.RANGO_INGRESOS"),
+                    resul.getString("P.OCUPACION"), resul.getString("P.CONDICION_ACTIVIDAD"), resul.getString("P.INICIO_IMPUTADO"),
+                    resul.getString("P.TIPO_DETENCION"), resul.getString("P.FORMA_CONDUCCION"), resul.getString("P.GRADO_PARTICIPACION"),
+                    resul.getString("P.REINCIDENCIA"), resul.getString("P.ESTADO_PSICOFISICO"), resul.getString("P.DELICTIVO"),
+                    resul.getString("P.GRUPO_DELICTIVO"), resul.getString("P.TIPO_DEFENSOR"), resul.getString("P.PERSONA_RESPONSABLE"),
+                    resul.getString("P.COMENTARIOS")
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+    }
+    
+    public ArrayList findPIngresosJC(String causaClaveJC, String proceCLave, String ingreso) {
+        try {
+            conn.Conectar();
+            pIngre = new ArrayList();
+            sql = "SELECT INGRESO FROM DATOS_PFUENTE_INGRESOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceCLave + "' "
+                    + "AND INGRESO = " + ingreso + ";";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                pIngre.add(resul.getString("INGRESO"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pIngre;
+    }
+    
+    public ArrayList findPIngresosJO(String causaClaveJO, String proceCLave, String ingreso) {
+        try {
+            conn.Conectar();
+            pIngre = new ArrayList();
+            sql = "SELECT INGRESO FROM DATOS_PFUENTE_INGRESOS_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceCLave + "' "
+                    + "AND INGRESO = " + ingreso + ";";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                pIngre.add(resul.getString("INGRESO"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pIngre;
+    }
+    
+    public int findPDelitosJC(String causaClaveJC, String proceCLave, String delitoClave) {
+        int numVictiPro = 0;
+        try {
+            conn.Conectar(); 
+            sql = "SELECT NUMERO_VICTIMAS FROM DATOS_PDELITOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceCLave + "' "
+                    + "AND DELITO_CLAVE = '" + delitoClave + "';";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                numVictiPro = resul.getInt("NUMERO_VICTIMAS");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numVictiPro;
+    }
+    
+    public int findPDelitosJO(String causaClaveJO, String proceCLave, String delitoClave) {
+        int numVictiPro = 0;
+        try {
+            conn.Conectar(); 
+            sql = "SELECT NUMERO_VICTIMAS FROM DATOS_PDELITOS_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceCLave + "' "
+                    + "AND DELITO_CLAVE = '" + delitoClave + "';";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                numVictiPro = resul.getInt("NUMERO_VICTIMAS");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numVictiPro;
     }
 }

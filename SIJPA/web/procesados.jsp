@@ -139,7 +139,7 @@
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
             <h1>Procesados</h1>
-            <form action="" method="post" name="formProcesados" id="formProcesados">
+            <form method="post" name="formProcesados" id="formProcesados">
                 <fieldset>
                     <legend>Características Sociodemográficas </legend>
                     <table class="tablaFormu">

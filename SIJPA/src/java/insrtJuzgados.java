@@ -86,7 +86,7 @@ public class insrtJuzgados extends HttpServlet {
         String causasBaja = verificaVariable(request.getParameter("causasBaja"));
         
         juzgadoClave = entidadJ + "-" + municipioJ + "-" + numOrgano;
-        
+          
         try {
             conn.Conectar();
             sql = "INSERT INTO DATOS_JUZGADOS_ADOJC VALUES('" + juzgadoClave + "','" + nomOrgano + "'," + numOrgano + "," + jurisdiccion + ","
@@ -103,6 +103,14 @@ public class insrtJuzgados extends HttpServlet {
 
                 System.out.println(sql);
                 if(conn.escribir(sql)){
+                    
+                    //inserta un juez no aplica de acuerdo a el juzgado 
+                    sql = "INSERT INTO datos_jueces_adojc  VALUES ("+entidadJ+","+ municipioJ +","+ numOrgano+",'"+ juzgadoClave +"', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        System.out.println("Juez No aplica insertado!");
+                    }
+                    
                     conn.close();
                     sesion.setAttribute("juzgadoClave", juzgadoClave);
                     sesion.setMaxInactiveInterval(-1);

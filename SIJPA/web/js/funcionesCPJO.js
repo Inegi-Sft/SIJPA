@@ -102,10 +102,15 @@ $(document).ready(function () {
             data: $('#formCausaPenalJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Causa Penal JO: ", response);
-                alert("Guardado con exito!!!");
-                $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
-                $("#guardarExpJO").prop("hidden", true);
-                if (response !== null && $.isArray(response)) {
+                if(response === "Realizado"){
+                    alert("Guardado con exito!!!");
+                    $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
+                    $("#guardarExpJO").prop("hidden", true);
+                    openPestana('btn2', 'p2');
+                }else{
+                    alert("Ocurrio un error, favor de verificarlo");
+                }
+                /*if (response !== null && $.isArray(response)) {
                     if(response[0] === 1){//organo competente
                         var expe = $('#expClave').val();
                         for(var x = 1; x <= response[2]; x++){
@@ -138,7 +143,7 @@ $(document).ready(function () {
                         }
                         openPestana('btn2', 'p2');
                     }
-                }
+                }*/
             },
             error: function (response) {
                 console.log("Respuesta del servidor Causa Penal: ", response);

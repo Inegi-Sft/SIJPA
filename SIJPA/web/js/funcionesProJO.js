@@ -5,6 +5,62 @@
  */
 
 $(document).ready(function() {
+     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#fNacimiento').val() === '1899-09-09'){
+        $('#fNacimiento').prop("readonly", true);
+        $('#chkFechaNac').prop("checked", true);
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#nPais').val() === '1'){
+        $('#dNEntidad').show();
+        $('#dNMunicipio').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#residencia').val() === '1'){
+        $('#dREntidad').show();
+        $('#dRMunicipio').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#poblaIndigena').val() === '1'){
+        $('#dPuebloIndigena').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#hablaIndigena').val() === '1'){
+        $('#dLenguaIndigena').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#ingresosPro').val() === '1'){
+        $('#rangoIngePro').show();
+        $('#tblFuenteIngrePro').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#ocupacion').val() === '10'){
+        $('#dCondicionActi').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#presentAdo').val() === '1'){
+        $('#dTipoDetencion').show();
+    }else if($('#presentAdo').val() === '2'){
+        $('#formCondu').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#grupoDelictivo').val() === '1'){
+        $('#gruDeli').show();
+    }
+    
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#delictivo').val() === '-9'){
+        $('#delictivo').prop("disabled", true);
+        $('#chkdelictivo').prop("checked", true);
+    }
     
     $('#curp').focusout(function(){
         if($(this).val() !== ''){

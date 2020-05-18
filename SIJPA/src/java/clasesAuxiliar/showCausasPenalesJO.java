@@ -152,4 +152,34 @@ public class showCausasPenalesJO {
         }
         return total;
     }
+    
+    public int countTotalVictimasJC(String causaClaveJC) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(DISTINCT VI.VICTIMA_CLAVE) AS TOTAL "
+                + "FROM DATOS_VICTIMAS_ADOJC VI, DATOS_VDELITOS_ADOJC VD, DATOS_PDELITOS_ADOJC PD, DATOS_CONCLUSIONES_ADOJC CO "
+                + "WHERE VI.CAUSA_CLAVE = VD.CAUSA_CLAVE "
+                + "AND VI.CAUSA_CLAVE = PD.CAUSA_CLAVE "
+                + "AND VI.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                + "AND VD.CAUSA_CLAVE = PD.CAUSA_CLAVE "
+                + "AND VD.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                + "AND PD.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                + "AND VI.VICTIMA_CLAVE = VD.VICTIMA_CLAVE "
+                + "AND VD.DELITO_CLAVE = PD.DELITO_CLAVE "
+                + "AND PD.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
+                + "AND CO.TIPO_RESOLUCION = 5 "
+                + "AND VI.CAUSA_CLAVE = '" + causaClaveJC + "' "
+                + "ORDER BY 1;";
+
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
 }

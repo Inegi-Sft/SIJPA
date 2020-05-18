@@ -29,9 +29,6 @@
             
             String juzgadoClave = (String)session.getAttribute("juzgadoClaveAudi");
             
-            //comprueba si existe un juez clave -2, si no hay inserta uno por juzgado para poderlo usar en insert Audiencias
-            sA.compruebaJuezNA(juzgadoClave);
-            
             //variables para recuperar datos
             ArrayList<String[]> jueces, audi;
             String causa = "";

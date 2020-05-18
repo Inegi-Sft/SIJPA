@@ -61,7 +61,7 @@ public class showCausasPenalesJO {
             conn.Conectar();
             causas = new ArrayList();
             sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' AND "
-                    + "CAUSA_CLAVE = '" + causaClaveJO + "';";
+                    + "CAUSA_CLAVEJO = '" + causaClaveJO + "';";
             System.out.println(sql);
             rs = conn.consultar(sql);
             while(rs.next()){

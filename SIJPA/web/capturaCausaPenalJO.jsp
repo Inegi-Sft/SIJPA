@@ -69,7 +69,7 @@
                 lisCausaJC = causaPenalJO.findCausaPenalJC(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
                 if(lisCausaJC.size() > 0){
                     session.setAttribute("causaClave", causaClaveJC + juzgadoClave.replace("-", ""));//Actualizamos variable de sesion con causa clave JC
-                    operacion = "";
+                    operacion = "insertar";
                     //Solo recuperamos las necesarias que se comparten JC y JO
                     fechaIngreso = lisCausaJC.get(0)[0];
                     totDelitos = lisCausaJC.get(0)[1];
@@ -89,16 +89,16 @@
                         <tr>
                             <td>
                                 <label for="jClave">Juzgado Clave</label>
-                                <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" disabled>
+                                <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" readonly>
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                             </td>
                             <td>
                                 <label for="expClaveJC">No. Asunto Asignado JC</label>
-                                <input type="text" name="expClaveJC" id="expClaveJC" value="<%=causaClaveJC%>" disabled>
+                                <input type="text" name="expClaveJC" id="expClaveJC" value="<%=causaClaveJC%>" readonly>
                             </td>
                             <td>
                                 <label for="expClaveJO">No. Asunto Asignado JO</label>
-                                <input type="text" name="expClaveJO" id="expClaveJO" onblur="ValidaCarpeInvest('#expClaveJO')" value="<%=causaClaveJO%>">
+                                <input type="text" name="expClaveJO" id="expClaveJO" onblur="ValidaCarpeInvest('#expClaveJO')" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>readonly<%}%>>
                             </td>
                         </tr>
                         <tr>
@@ -155,6 +155,7 @@
                                 <label for="cantJuez" class="lblExBig">Cantidad de jueces a quien corresponde conocer de la Causa Penal</label>
                                 <select name="cantJuez" id="cantJuez">
                                         <option value="">--Seleccione--</option>
+                                        <option value="-2">-2</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -218,6 +219,7 @@
                                     <label for="orgDif" class="lblExBig">Clave del Organo Jurisdiccional que atendio la Causa Penal</label>
                                     <select name="orgDif" id="orgDif">
                                         <option value="">--Seleccione--</option>
+                                        <option value="-2">-2</option>
                                         <%
                                             lis = juzgados.findJuzgados();
                                             for (String ls : lis) {

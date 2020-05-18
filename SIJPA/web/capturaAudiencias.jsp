@@ -27,10 +27,7 @@
             showAudiencias sA = new showAudiencias();
             ArrayList<String[]> lista;
             
-            String juzgadoClave = (String)session.getAttribute("juzgadoClaveAudi");
-            
-            //comprueba si existe un juez clave -2, si no hay inserta uno por juzgado para poderlo usar en insert Audiencias
-            sA.compruebaJuezNA(juzgadoClave);
+            String juzgadoClave = (String)session.getAttribute("juzgadoClave");
             
             //variables para recuperar datos
             ArrayList<String[]> jueces, audi;

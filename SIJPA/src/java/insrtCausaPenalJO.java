@@ -5,7 +5,6 @@
  */
 
 import ConexionDB.Conexion_Mysql;
-import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.simple.JSONArray;
 
 /**
  *
@@ -70,11 +68,11 @@ public class insrtCausaPenalJO extends HttpServlet {
             conn.Conectar();
             
             if(opera.equals("insertar")){//Si hay causa entonces se inserta
-                sesion.setAttribute("causaClave", causaClaveJO + jConcatenado);
+                sesion.setAttribute("causaClaveJO", causaClaveJO + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + causaClaveJC + jConcatenado +"','" + causaClaveJO + jConcatenado + "','" + fecha_ingreso + "',"
                         + totalDeli + "," + totalAdo + "," + totalVic + ","+ organoDiferente +",'"+ juzgadoDiferente +"',"+cantJuez+"," 
-                        + juezJO1 +","+ juezJO2 +","+ juezJO3 +",'"+ comentario + "', (select YEAR(NOW())))";
+                        + juezJO1 +","+ juezJO2 +","+ juezJO3 +",'"+ comentario + "', (select YEAR(NOW())));";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     out.write("Realizado");

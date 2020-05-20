@@ -100,7 +100,7 @@ $(document).ready(function () {
         }
     });
     
-    //Guarda Delitos
+    //Guarda Delitos JO
     $('#formDelitosJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();

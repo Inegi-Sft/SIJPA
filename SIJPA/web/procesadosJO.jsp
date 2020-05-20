@@ -380,7 +380,21 @@
                                     <div class="colsx oculto" id="dRMunicipio">
                                         <label for="rMunicipio">Municipio</label>
                                         <select name="rMunicipio" id="rMunicipio">
-                                            
+                                            <%
+                                                if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                }else{//Si el pais es mexico entonces se llena el catalogo con municipios del estado
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                    lista = cat.findMunicipios(Integer.parseInt(resiEnti));
+                                                    for (String[] ls : lista) {
+                                                        out.println("<option value='" + ls[0] + "'");
+                                                        if(ls[0].equals(resiMuni)){
+                                                            out.println(" selected ");
+                                                        }
+                                                        out.println(">" + ls[1] + "</option>");
+                                                    }
+                                                }
+                                            %>
                                         </select>
                                     </div>
                                 </fieldset>
@@ -858,7 +872,7 @@
                 </fieldset>
                 <div class="comentarios">
                     <h2>Comentarios</h2>
-                    <textarea name="comentarios" id="comentarios"></textarea>
+                    <textarea name="comentarios" id="comentarios"><%=comen%></textarea>
                 </div>
                 <br/>
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>

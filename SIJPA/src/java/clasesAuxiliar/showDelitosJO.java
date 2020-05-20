@@ -87,7 +87,7 @@ public class showDelitosJO {
                 + "FROM DATOS_DELITOS_ADOJC D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
                 + "AND CAUSA_CLAVE = '" + causaClaveJC + "' "
-                + "AND DELITO_CLAVE = '" + delitoClave + "'"
+                + "AND DELITO_CLAVE = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
@@ -116,7 +116,7 @@ public class showDelitosJO {
                 + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
                 + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                + "AND DELITO_CLAVE = '" + delitoClave + "'"
+                + "AND DELITO_CLAVE = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
@@ -165,7 +165,7 @@ public class showDelitosJO {
             sql = "SELECT TIPO_COSA_ROBADA FROM DATOS_DROBO_ADOJO "
                     + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
                     + "AND DELITO_CLAVE = '" + delitoCLave + "' "
-                    + "AND TIPO_COSA_ROBADA = " + cosaRoba + ""
+                    + "AND TIPO_COSA_ROBADA = " + cosaRoba + " "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {

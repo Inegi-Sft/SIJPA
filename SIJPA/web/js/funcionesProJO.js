@@ -115,12 +115,48 @@ $(document).ready(function() {
         }
     });
     
+    //Guarda Procesados
     $('#formProcesadosJO').submit(function (e) {
-        if ($('input[name="chkIngresos"]:checked').length === 0) {
-            e.preventDefault();
-            alert('Selecciona al menos una opcion de Fuente de Ingresos');
-            $('input[name="chkIngresos"]').focus();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if ($('#ingresosPro').val() === '1') {
+            if ($('input[name="chkIngresosPro"]:checked').length === 0) {
+                alert('Selecciona al menos una fuente de ingreso del procesado');
+                $('input[name="chkIngresosPro"]').focus();
+                return false;
+            }
         }
+        $.ajax({
+            type: 'post',
+            url: 'insrtProcesadosJO',
+            data: $('#formProcesadosJO').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor Procesados: ", response);
+                alert("Guardado con exito!!!");
+                var numProce = parseInt(parent.$('#TadolescentesJO').val());
+                if (response !== null && $.isArray(response)) {
+                    for (var i = 1; i < 5; i++) {
+//                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
+                        parent.$('#tablaProcesaJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+                    }
+                    //editamos enlance para que pueda ser actualizado ya estando lleno
+                    var enlace = parent.$('#tablaProcesaJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
+                    parent.$('#tablaProcesaJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
+                    //coloca el nombre del procesado en la tabla de etapa inicial
+                    parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[1]);
+                    if (response[5] === numProce) {
+                        parent.openPestana('btn4', 'p4');
+                    } else {
+                        alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
+                    }
+                }
+                parent.$.fancybox.close();
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor Procesados: ", response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
     });
 
 });

@@ -180,8 +180,8 @@ $(document).ready(function() {
         }
         $.ajax({
             type: 'post',
-            url: 'insrtVictimas',
-            data: $('#formVictimas').serialize(),
+            url: 'insrtVictimasJO',
+            data: $('#formVictimasJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Victimas: ", response);
                 alert("Guardado con exito!!!");

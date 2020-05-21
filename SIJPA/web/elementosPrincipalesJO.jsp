@@ -20,7 +20,7 @@
         <%@include file="librerias.jsp" %>
         <%  
             showDelitosJO delito = new showDelitosJO();
-            ArrayList<String[]> deliJC, deliJO;
+            ArrayList<String[]> deliJC, deliJO,delitosJO;
 
             showProcesadosJO procesa = new showProcesadosJO();
             ArrayList<String[]> proceJC, proceJO;
@@ -38,13 +38,25 @@
             ArrayList<String[]> tramJC, tramJO ;
             
             String jc = (String)session.getAttribute("juzgadoClave");
-            int y = 0;
+            int y = 0,ConDel=0;
             String ccJC = "";
+            String ccJO = "";
             String ccJuzJC = "";
+            String ccJuzJO = "";
             if(request.getParameter("causaClaveJC") != null){//Si viene la causa penal, recuperamos datos
                 ccJC = request.getParameter("causaClaveJC");
                 ccJuzJC = ccJC + jc.replace("-", "");
             }
+            if(request.getParameter("causaClaveJO") != null){//Si viene la causa penal, recuperamos datos
+                ccJO = request.getParameter("causaClaveJO");
+                ccJuzJO = ccJO + jc.replace("-", "");
+            }
+            if(request.getParameter("delitoClaveJO") != null){//Si viene la causa penal, recuperamos datos
+                
+               
+            }
+            
+            
         %>
     </head>
     <body>
@@ -73,27 +85,34 @@
                             <!--<th>Eliminar</th>-->
                         </tr>
                     </thead>  
-                    <tbody>
+                    <tbody> 
                         <%
                             if(!ccJC.equals("")){
                                 y = 0;
+                                int i=1,m=0;
                                 deliJC = delito.findDeliCausasJC(ccJuzJC);//Obtenemos delitos por causa
                                 for(String[] delJC : deliJC){//For para recorrer todos los delitos en la causa penal JC
-                                   deliJO = delito.findDeliCausasJO(ccJuzJC, delJC[0]);
-                                    if(deliJO.size() > 0){//Si el delito esta en BD de JO se muestra
+                                    ConDel=delito.countDelitosInsertados(ccJuzJO);
+                                    if(i <=ConDel){//Si el delito esta en BD de JO se muestra
+                                        deliJO = delito.findDeliCausasJO(ccJuzJO);
                                         out.println("<tr>");
-                                        out.println("<td>" + deliJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[1] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[2] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[3] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[4] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[5] + "</td>");
+                                        out.println("<td>" + deliJO.get(m)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + deliJO.get(m)[1] + "</td>");
+                                        out.println("<td>" + deliJO.get(m)[2] + "</td>");
+                                        out.println("<td>" + deliJO.get(m)[3] + "</td>");
+                                        out.println("<td>" + deliJO.get(m)[4] + "</td>");
+                                        out.println("<td>" + deliJO.get(m)[5] + "</td>");
                                         out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + deliJO.get(0)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Editar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"/></a></td>");
                                         out.println("</tr>");
-                                    }else{//Si el delito no esta en la BD de JO lo recuperamos de JC y se muestra
+                                        i=i+1;
+                                        m=m+1;
+                                        System.out.println("CONTADOR"+i);
+                                                
+                                    }
+                                    else{//Si el delito no esta en la BD de JO lo recuperamos de JC y se muestra
                                         out.println("<tr>");
                                         out.println("<td>" + delJC[0].replace(jc.replace("-", ""), "") + "</td>");
                                         out.println("<td></td>");

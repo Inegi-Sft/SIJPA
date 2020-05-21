@@ -4,9 +4,17 @@
         <servlet-name>obtenFechaNacVic</servlet-name>
         <servlet-class>obtenFechaNacVic</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>insrtDelitosJO</servlet-name>
+        <servlet-class>insrtDelitosJO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>obtenFechaNacVic</servlet-name>
         <url-pattern>/obtenFechaNacVic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insrtDelitosJO</servlet-name>
+        <url-pattern>/insrtDelitosJO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

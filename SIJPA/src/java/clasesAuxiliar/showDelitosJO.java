@@ -23,6 +23,7 @@ public class showDelitosJO {
     ArrayList<String> deliAdi;
     String sql;
     ResultSet resul;
+    int conteoDel;
     
     public ArrayList findDeliCausasJC(String causaClaveJC) {
         conn.Conectar();
@@ -53,7 +54,7 @@ public class showDelitosJO {
         return deli;
     }
     
-    public ArrayList findDeliCausasJO(String causaClaveJC, String delitoClave) {
+    public ArrayList findDeliCausasJO(String causaClaveJO) {
         conn.Conectar();
         deli = new ArrayList();
         sql = "SELECT DE.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, DE.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
@@ -63,8 +64,7 @@ public class showDelitosJO {
                 + "AND DE.DELITO_NORMA_TECNICA = CDN.ID_DELITO "
                 + "AND DE.GRADO_CONSUMACION = CC.CONSUMACION_ID "
                 + "AND DE.FORMA_COMISION = CFC.COMISION_ID "
-                + "AND CP.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
-                + "AND DE.DELITO_CLAVE = '" + delitoClave + "' "
+                + "AND CP.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "ORDER BY 1;";
         System.out.println(sql);
         resul = conn.consultar(sql);
@@ -121,6 +121,7 @@ public class showDelitosJO {
                 + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "AND DELITO_CLAVE = '" + delitoClave + "' "
                 + "ORDER BY 1;";
+        System.out.println("findelitosJO:"+sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -218,5 +219,49 @@ public class showDelitosJO {
             Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return deliAdi;
+    }
+    
+    public int countDelitosInsertados(String causaClave) {
+        try {
+            conn.Conectar();
+            conteoDel = 0;
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
+                    + "AND DELITO_CODIGO_PENAL <> -2;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoDel = resul.getInt("TOTAL");
+                System.out.println("cpnteo delitosjo: "+conteoDel);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoDel;
+    }
+    
+     public ArrayList findDeliTabla(String delitoClave) {
+        conn.Conectar();
+        deli = new ArrayList();
+        sql = "SELECT D.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, D.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
+                + "FROM DATOS_DELITOS_ADOJO D,CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
+                + "WHERE D.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
+                + "AND D.DELITO_NORMA_TECNICA = CDN.ID_DELITO "
+                + "AND D.GRADO_CONSUMACION = CC.CONSUMACION_ID "
+                + "AND D.FORMA_COMISION = CFC.COMISION_ID "
+                + "AND D.DELITO_CLAVE = '" + delitoClave + "' "
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString(1), resul.getString(2), resul.getString(3),
+                    resul.getString(4), resul.getString(5), resul.getString(6)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
     }
 }

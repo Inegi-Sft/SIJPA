@@ -6,7 +6,7 @@
 
 import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.showCausasPenales;
-import clasesAuxiliar.showDelitos;
+import clasesAuxiliar.showDelitosJO;
 import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,7 +40,7 @@ public class insrtDelitosJO extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
      showCausasPenales cp = new showCausasPenales();
-    showDelitos sd = new showDelitos();
+    showDelitosJO sd = new showDelitosJO();
     Conexion_Mysql conn = new Conexion_Mysql();
 
     String sql;
@@ -134,7 +134,7 @@ public class insrtDelitosJO extends HttpServlet {
                         }
                     }
 
-                    showDelitos deli = new showDelitos();
+                    showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     showCausasPenales causa = new showCausasPenales();
                     int totDelInsrt = deli.countDelitosInsertados(causaClaveJO);
@@ -146,7 +146,7 @@ public class insrtDelitosJO extends HttpServlet {
                     lis = deli.findDeliTabla(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
-                //    resp.add(lis.get(0)[0]);
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
@@ -154,6 +154,7 @@ public class insrtDelitosJO extends HttpServlet {
                     resp.add(lis.get(0)[5]);
                     resp.add(totDelInsrt);
                     out.write(resp.toJSONString());
+                    System.out.println("delito_clave: "+lis.get(0)[0]);
                     conn.close();
                 } else {
                     conn.close();
@@ -193,7 +194,7 @@ public class insrtDelitosJO extends HttpServlet {
                             conn.escribir(sql);
                         }
                     }
-                    showDelitos deli = new showDelitos();
+                    showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     int totDelInsrt = deli.countDelitosInsertados(causaClaveJO);
                     lis = deli.findDeliTabla(delitoClave + jConcatenado);

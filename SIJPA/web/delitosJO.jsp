@@ -54,7 +54,7 @@
             String instruComision = "";
             String ocurreEnti = "";
             String ocurreMuni = "";
-            String comen = "";
+            String comen = ""; 
             if(request.getParameter("edita") != null){//Si es diferente de null entonces le mostramos los datos de JO
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
@@ -80,8 +80,7 @@
                         instruComision = delitoJO.get(0)[16];
                         ocurreEnti = delitoJO.get(0)[17];
                         ocurreMuni = delitoJO.get(0)[18];
-                        comen = delitoJO.get(0)[19];
-                        delitoClave=delitoJO.get(0)[20].replace(juzgadoClave.replace("-", ""),"");
+                        comen = delitoJO.get(0)[19]; 
                     }else{
                         out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");

@@ -100,15 +100,15 @@ $(document).ready(function () {
         }
     });
     
-    //Guarda Delitos
+  //Guarda DelitosJO
     $('#formDelitosJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if ($('input[name="cosaRobada"]:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
-            $('input[name="cosaRobada"]').focus();
-            return false;
-        }
+     //   if ($('input[name="dCosaRobadaJO"]:checked').length === 0) {
+       //     alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
+         //   $('input[name="dCosaRobadaJO"]').focus();
+          //  return false;
+        //}
         $.ajax({
             type: 'post',
             url: 'insrtDelitosJO',
@@ -121,6 +121,7 @@ $(document).ready(function () {
                     for (var i = 1; i < 6; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaDeliJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+   
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
                     var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';

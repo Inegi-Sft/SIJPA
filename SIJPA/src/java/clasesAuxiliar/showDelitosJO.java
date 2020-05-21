@@ -35,8 +35,9 @@ public class showDelitosJO {
                 + "AND PD.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
                 + "AND DE.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
                 + "AND CO.TIPO_RESOLUCION = 5 "
-                + "AND DE.CAUSA_CLAVE = '" + causaClaveJC + "'"
+                + "AND DE.CAUSA_CLAVE = '" + causaClaveJC + "' "
                 + "ORDER BY 1;";
+        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -65,6 +66,7 @@ public class showDelitosJO {
                 + "AND CP.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
                 + "AND DE.DELITO_CLAVE = '" + delitoClave + "' "
                 + "ORDER BY 1;";
+        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -87,8 +89,9 @@ public class showDelitosJO {
                 + "FROM DATOS_DELITOS_ADOJC D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
                 + "AND CAUSA_CLAVE = '" + causaClaveJC + "' "
-                + "AND DELITO_CLAVE = '" + delitoClave + "'"
+                + "AND DELITO_CLAVE = '" + delitoClave + "' "
                 + "ORDER BY 1;";
+        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -116,7 +119,7 @@ public class showDelitosJO {
                 + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
                 + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                + "AND DELITO_CLAVE = '" + delitoClave + "'"
+                + "AND DELITO_CLAVE = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
@@ -128,7 +131,7 @@ public class showDelitosJO {
                     resul.getString("D.GRADO_CONSUMACION"), resul.getString("D.CALIFICACION"), resul.getString("D.CLASIFICACION"),
                     resul.getString("D.CONCURSO"), resul.getString("D.FORMA_COMISION"), resul.getString("D.FORMA_ACCION"), resul.getString("D.MODALIDAD"),
                     resul.getString("D.INSTRUMENTO_COMISION"), resul.getString("D.OCURRIO_ENTIDAD"), resul.getString("D.OCURRIO_MUNICIPIO"),
-                    resul.getString("D.COMENTARIOS")
+                    resul.getString("D.COMENTARIOS"),resul.getString("D.DELITO_CLAVE")
                 });
             }
             conn.close();
@@ -163,10 +166,11 @@ public class showDelitosJO {
             conn.Conectar();
             deliAdi = new ArrayList();
             sql = "SELECT TIPO_COSA_ROBADA FROM DATOS_DROBO_ADOJO "
-                    + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND DELITO_CLAVE = '" + delitoCLave + "' "
-                    + "AND TIPO_COSA_ROBADA = " + cosaRoba + ""
-                    + "ORDER BY 1;";
+                    + "AND TIPO_COSA_ROBADA = " + cosaRoba + " "
+                    + " ORDER BY 1;";
+            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 deliAdi.add(resul.getString("TIPO_COSA_ROBADA"));
@@ -202,9 +206,9 @@ public class showDelitosJO {
             conn.Conectar();
             deliAdi = new ArrayList();
             sql = "SELECT CONTEXTO_SITUACIONAL FROM DATOS_DHOMICIDIO_ADOJO "
-                    + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND DELITO_CLAVE = '" + delitoCLave + "' "
-                    + "AND CONTEXTO_SITUACIONAL = " + situacion + ";";
+                    + " AND CONTEXTO_SITUACIONAL = " + situacion + ";";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 deliAdi.add(resul.getString("CONTEXTO_SITUACIONAL"));

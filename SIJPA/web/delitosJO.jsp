@@ -81,6 +81,7 @@
                         ocurreEnti = delitoJO.get(0)[17];
                         ocurreMuni = delitoJO.get(0)[18];
                         comen = delitoJO.get(0)[19];
+                        delitoClave=delitoJO.get(0)[20].replace(juzgadoClave.replace("-", ""),"");
                     }else{
                         out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");

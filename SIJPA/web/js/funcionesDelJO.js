@@ -124,7 +124,7 @@ $(document).ready(function () {
    
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
-                    var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si' + '&title=Editar';
+                    var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                     parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     console.log('Captu: ' + response[7] + ' Existen: ' + numDeli);
                     if (response[7] === numDeli) {

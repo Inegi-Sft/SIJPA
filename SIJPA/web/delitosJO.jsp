@@ -88,6 +88,7 @@
                 }
             }else{//Si no trae variable edita, entonces le motramos los datos de JC
                 delitoJC = delitos.findDelitosJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""));
+                
                 if(delitoJC.size() > 0){
                     delitoCP = delitoJC.get(0)[0];
                     fuero = delitoJC.get(0)[1];

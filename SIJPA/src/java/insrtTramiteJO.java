@@ -54,7 +54,6 @@ public class insrtTramiteJO extends HttpServlet {
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClave = (String) sesion.getAttribute("causaClave");
         String proceClave = request.getParameter("proceClave");
-        
         String estInvesti = request.getParameter("estInvestiJO");
         String especifique = request.getParameter("especifiqueJO");
         String fechaActo=request.getParameter("uActoJO");
@@ -71,10 +70,10 @@ public class insrtTramiteJO extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {//preguntar
                     //Solo se actualizan los que estan volando (etapa 5)
-                    sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJO SET ETAPA = 3 "
-                            + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
-                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
-                            + "AND ETAPA = 5;";
+//                    sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJO SET ETAPA = 3 "
+//                            + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+//                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
+//                            + "AND ETAPA = 5;";
                     System.out.println(sql);
                     if(conn.escribir(sql)){
                         showTramiteJO tram = new showTramiteJO();

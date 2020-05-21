@@ -50,13 +50,7 @@
             if(request.getParameter("causaClaveJO") != null){//Si viene la causa penal, recuperamos datos
                 ccJO = request.getParameter("causaClaveJO");
                 ccJuzJO = ccJO + jc.replace("-", "");
-            }
-            if(request.getParameter("delitoClaveJO") != null){//Si viene la causa penal, recuperamos datos
-                
-               
-            }
-            
-            
+            } 
         %>
     </head>
     <body>
@@ -84,7 +78,7 @@
                             <th>Editar</th>
                             <!--<th>Eliminar</th>-->
                         </tr>
-                    </thead>  
+                    </thead>   
                     <tbody> 
                         <%
                             if(!ccJC.equals("")){
@@ -93,8 +87,8 @@
                                 deliJC = delito.findDeliCausasJC(ccJuzJC);//Obtenemos delitos por causa
                                 for(String[] delJC : deliJC){//For para recorrer todos los delitos en la causa penal JC
                                     ConDel=delito.countDelitosInsertados(ccJuzJO);
+                                    deliJO = delito.findDeliCausasJO(ccJuzJO);
                                     if(i <=ConDel){//Si el delito esta en BD de JO se muestra
-                                        deliJO = delito.findDeliCausasJO(ccJuzJO);
                                         out.println("<tr>");
                                         out.println("<td>" + deliJO.get(m)[0].replace(jc.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + deliJO.get(m)[1] + "</td>");

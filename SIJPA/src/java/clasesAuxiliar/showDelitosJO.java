@@ -170,7 +170,7 @@ public class showDelitosJO {
                     + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND DELITO_CLAVE = '" + delitoCLave + "' "
                     + "AND TIPO_COSA_ROBADA = " + cosaRoba + " "
-                    + " ORDER BY 1;";
+                    + "ORDER BY 1;";
             System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {

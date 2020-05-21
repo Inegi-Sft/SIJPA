@@ -74,6 +74,30 @@ public class showProcesadosJO {
         return proce;
     }
     
+    public ArrayList findProcesasdosTablaJO(String proceClave){
+        try {
+            conn.Conectar();
+            proce = new ArrayList();
+            sql = "SELECT PR.PROCESADO_CLAVE, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
+                    + "FROM DATOS_PROCESADOS_ADOJO PR, CATALOGOS_REINCIDENCIA RE, CATALOGOS_SEXO S "
+                    + "WHERE PR.REINCIDENCIA = RE.REINCIDENCIA_ID "
+                    + "AND PR.SEXO = S.SEXO_ID "
+                    + "AND PR.PROCESADO_CLAVE = '" + proceClave + "' "
+                    + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                proce.add(new String[]{
+                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4),
+                    resul.getString(5)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
+    }
+    
     public ArrayList findProcesadosJC(String causaClaveJC, String proceClave){
         try {
             conn.Conectar();
@@ -112,7 +136,7 @@ public class showProcesadosJO {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJC P, CATALOGOS_MUNICIPIOS CM "
+            sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJO P, CATALOGOS_MUNICIPIOS CM "
                     + "WHERE P.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND P.PROCESADO_CLAVE = '" + proceClave + "';";
             resul = conn.consultar(sql);
@@ -140,6 +164,24 @@ public class showProcesadosJO {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proce;
+    }
+    
+    public int countProcesadosJO(String causaClaveJO){
+        int conteoPro = 0; 
+        try{
+            conn.Conectar();
+            conteoPro = 0;
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_PROCESADOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND NOMBRE <> -2";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoPro = resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoPro;
     }
     
     public ArrayList findPIngresosJC(String causaClaveJC, String proceCLave, String ingreso) {

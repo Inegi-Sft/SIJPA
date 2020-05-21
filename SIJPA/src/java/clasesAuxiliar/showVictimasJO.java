@@ -23,6 +23,7 @@ public class showVictimasJO {
     ArrayList<String> vicDelito, vicIngre;
     String sql;
     ResultSet resul;
+    int conteoVic;
     
     public ArrayList findVictimasCausaJC(String causaClaveJC) {
         conn.Conectar();
@@ -279,5 +280,49 @@ public class showVictimasJO {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return vicIngre;
+    }
+    
+    public int countVictimasJO(String causaClave) {
+        try {
+            conn.Conectar();
+            conteoVic = 0;
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_VICTIMAS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
+                    + "AND TIPO_VICTIMA <> -2;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoVic = resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoVic;
+    }
+    
+    public ArrayList findVictimasTablaJO(String victiClave) {
+        conn.Conectar();
+        vic = new ArrayList();
+        sql = "SELECT V.VICTIMA_CLAVE, CTV.DESCRIPCION, CS.DESCRIPCION, V.FECHA_NACIMIENTO, CONCAT(CP.DESCRIPCION,',',CE.DESCRIPCION,',',CM.DESCRIPCION) "
+                + "FROM DATOS_VICTIMAS_ADOJO V, CATALOGOS_TIPO_VICTIMA CTV, CATALOGOS_SEXO CS, CATALOGOS_PAIS CP, CATALOGOS_MUNICIPIOS CM, CATALOGOS_ENTIDADES CE "
+                + "WHERE V.TIPO_VICTIMA = CTV.VICTIMA_ID "
+                + "AND V.SEXO = CS.SEXO_ID "
+                + "AND V.NACIMIENTO_MUNICIPIO = CM.MUNICIPIO_ID "
+                + "AND V.NACIMIENTO_ENTIDAD = CE.ENTIDAD_ID "
+                + "AND V.NACIMIENTO_PAIS = CP.PAIS_ID "
+                + "AND V.VICTIMA_CLAVE = '" + victiClave + "';";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                vic.add(new String[]{
+                    resul.getString(1), resul.getString(2), resul.getString(3),
+                    resul.getString(4), resul.getString(5)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vic;
+
     }
 }

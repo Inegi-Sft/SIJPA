@@ -83,7 +83,7 @@
                         comen = delitoJO.get(0)[19]; 
                     }else{
                         out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
-                                + "window.location.href = 'elementosPrincipales.jsp'</script>");
+                                + "window.location.href = 'elementosPrincipalesJO.jsp'</script>");
                     }
                 }
             }else{//Si no trae variable edita, entonces le motramos los datos de JC

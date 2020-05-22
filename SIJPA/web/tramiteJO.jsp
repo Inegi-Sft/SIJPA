@@ -35,7 +35,7 @@
             String jMunicipioJO = jDividido[1];
             String jNumeroJO = jDividido[2];
             String jConcatenado = jEntidadJO + jMunicipioJO + jNumeroJO;
-            String causaClave = (String) session.getAttribute("causaClave");
+            String causaClave = (String) session.getAttribute("causaClaveJO");
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
             String etapaProcesalJO = "";
             String estatusJO="";

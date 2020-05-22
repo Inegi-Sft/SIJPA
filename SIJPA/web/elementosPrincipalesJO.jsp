@@ -35,7 +35,7 @@
             ArrayList<String[]> concJC, concJO;
 
             showTramiteJO tramite = new showTramiteJO();
-            ArrayList<String[]> tramJC, tramJO ;
+            ArrayList<String[]> tramJC, tramJO;
             
             String jc = (String)session.getAttribute("juzgadoClave");
             int y = 0,ConDel=0;
@@ -396,18 +396,22 @@
                         <%
                             if(!ccJC.equals("")){
                                 y = 0;
-                                tramJC = tramite.findTramiteCausaJC(ccJuzJC);
-                                for(String[] traJC : tramJC){//For para recorrer todos los procesados que pasan a JO en JC
-                                    tramJO = tramite.findTramiteCausaJO(ccJuzJC, traJC[0]);
-                                    if(tramJO.size() > 0){//Si el procesado esta en inicial de la BD lo agregamos
+                                int i=1,m=0;
+                                   tramJC = tramite.findTramiteCausaJC(ccJuzJC);
+                                    for(String[] traJC : tramJC){//For para recorrer todos los procesados que pasan a JO en JC
+                                    int countTram=tramite.countTramitesInsertados(ccJuzJO);
+                                    tramJO = tramite.findTramiteCausaJO(ccJuzJO);
+                                    if(i <=countTram){//Si el procesado esta en inicial de la BD lo agregamos
                                         out.println("<tr>");
-                                        out.println("<td>" + tramJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + tramJO.get(0)[1] + "</td>");
+                                        out.println("<td>" + tramJO.get(m)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + tramJO.get(m)[1] + "</td>");
                                         out.println("<td>Juicio Oral</td>");
-                                        out.println("<td>" + tramJO.get(0)[2] + "</td>");
-                                        out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + tramJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td>" + tramJO.get(m)[2] + "</td>");
+                                        out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + tramJO.get(m)[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
+                                        i=i+1;
+                                        m=m+1;
                                     }else{
                                         out.println("<tr>");
                                         out.println("<td>" + traJC[0].replace(jc.replace("-", ""), "") + "</td>");

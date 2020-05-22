@@ -53,11 +53,15 @@ public class insrtTramiteJO extends HttpServlet {
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClave = (String) sesion.getAttribute("causaClave");
-        String proceClave = request.getParameter("proceClave");
+        String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
+        String proceC = request.getParameter("proceClave");
+        String Sep[]=proceC.split("-");
+        String Sep1=Sep[1]+jConcatenado; 
+        String proClave=causaClaveJO.replace(jConcatenado, "")+"-"+Sep1;
         String estInvesti = request.getParameter("estInvestiJO");
         String especifique = request.getParameter("especifiqueJO");
         String fechaActo=request.getParameter("uActoJO");
-
+        System.out.println(proClave);
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -65,24 +69,24 @@ public class insrtTramiteJO extends HttpServlet {
             conn.Conectar();
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_TRAMITES_ADOJO  VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                        + causaClave + "','" + proceClave + jConcatenado + "'," + estInvesti+ ",'" 
-                        + especifique + "','" + fechaActo + "', (select YEAR(NOW())) )";
-                System.out.println(sql);
-                if (conn.escribir(sql)) {//preguntar
+                        + causaClaveJO + "','" + proClave + "'," + estInvesti + ",'" 
+                        + especifique + "','" + fechaActo + "', (select YEAR(NOW())) );";
+                System.out.println("la query:" +sql);
+//                if (conn.escribir(sql)) {//preguntar
                     //Solo se actualizan los que estan volando (etapa 5)
 //                    sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJO SET ETAPA = 3 "
 //                            + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
 //                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
 //                            + "AND ETAPA = 5;";
-                    System.out.println(sql);
                     if(conn.escribir(sql)){
                         showTramiteJO tram = new showTramiteJO();
                         ArrayList<String[]> lis = new ArrayList<>();
                         //int totTramiteInsrt = tram.countTramiteExp(causaClave);
-                        //lis = tram.findTramiteTabla(proceClave + jConcatenado);
+                        lis = tram.findTramiteTablaJO(proClave); 
                         JSONArray resp = new JSONArray();
+                        
                         resp.add(posicion);
-                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));  
                         resp.add(lis.get(0)[1]);
                         resp.add(lis.get(0)[2]);
                         resp.add(lis.get(0)[3]);
@@ -92,27 +96,27 @@ public class insrtTramiteJO extends HttpServlet {
                     }else{
                         conn.close();
                     }
-                } else {
-                    conn.close();
-                }
+//                } else {
+//                    conn.close();
+//                }
             }else{//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_TRAMITES_ADOJO SET ESTATUS = " + estInvesti+ ","
                         + "ESPECIFIQUE = '" + especifique + "',"
                         + "FECHA_ACTO_PROCESAL = '" + fechaActo + "' "
-                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
-                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                        + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' " 
+                        + "AND PROCESADO_CLAVE = '" + proClave+ "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showTramiteJO tram = new showTramiteJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     //int totTramiteInsrt = tram.countTramiteExp(causaClave);
-                    //lis = tram.findTramiteTabla(proceClave + jConcatenado);
-                    JSONArray resp = new JSONArray();
-                    resp.add(posicion);
-                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
-                    resp.add(lis.get(0)[1]);
-                    resp.add(lis.get(0)[2]);
-                    resp.add(lis.get(0)[3]);
+                    lis = tram.findTramiteTablaJO(proClave); 
+                        JSONArray resp = new JSONArray();                   
+                        resp.add(posicion);
+                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));  
+                        resp.add(lis.get(0)[1]);
+                        resp.add(lis.get(0)[2]);
+                        resp.add(lis.get(0)[3]);
                     //resp.add(totTramiteInsrt);
                     out.write(resp.toJSONString());
                     conn.close();

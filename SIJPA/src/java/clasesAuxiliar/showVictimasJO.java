@@ -57,7 +57,7 @@ public class showVictimasJO {
         return vic;
     }
     
-    public ArrayList findVictimasCausaJO(String causaClaveJC, String victimaCLave) {
+    public ArrayList findVictimasCausaJO(String causaClaveJO, String victimaCLave) {
         conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT VI.VICTIMA_CLAVEJO, CTV.DESCRIPCION, CS.DESCRIPCION, VI.FECHA_NACIMIENTO, CONCAT(CPA.DESCRIPCION,',',CE.DESCRIPCION,',',CM.DESCRIPCION) "
@@ -133,7 +133,7 @@ public class showVictimasJO {
                     resul.getString("CONDICION_ALFABETISMO"), resul.getString("GRADO_ESTUDIOS"), resul.getString("HABLA_ESPANOL"),
                     resul.getString("LENGUA_EXTRANJERA"), resul.getString("HABLA_INDIGENA"), resul.getString("LENGUA_INDIGENA"),
                     resul.getString("INTERPRETE"), resul.getString("OCUPACION"), resul.getString("INGRESOS"), resul.getString("RANGO_INGRESOS"),
-                    resul.getString("MEDIDAS_PROTECCION"), resul.getString("MEDIDAS_MUJER"), resul.getString("COMENTARIOS")
+                    resul.getString("COMENTARIOS")
                 });
             }
             conn.close();

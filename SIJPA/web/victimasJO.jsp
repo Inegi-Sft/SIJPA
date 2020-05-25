@@ -101,7 +101,7 @@
                         ocupa = victiJO.get(0)[23];
                         ingresos = victiJO.get(0)[24];
                         rangoIngre = victiJO.get(0)[25];
-                        comen = victiJO.get(0)[28];
+                        comen = victiJO.get(0)[26];
                     }else{
                         out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
@@ -173,7 +173,7 @@
                                     <!--Usamos un input invisible para recuperar el dato de tipo victima de BD y llenarlo con jquery-->
                                     <input type="hidden" id="tipoVictiHi" name="tipoVictiHi" value="<%=tipoVicti%>">
                                     <label for="tipoVictima">Tipo de Víctima</label>
-                                    <select name="tipoVictima" id="tipoVictima" required>
+                                    <select name="tipoVictima" id="tipoVictima" onchange="tipo_Victima(this)" required>
                                         <option value="">--Seleccione--</option>
                                         <option value="1">1.- Persona física</option>
                                         <option value="2">2.- Persona moral</option>
@@ -218,26 +218,30 @@
                         <tbody>
                         <%
                             vic = sDelitos.findDeliCausasJC(causaClaveJC);
-                            String delitoClave="";
+                            String delitoClaveJO="";
                             for (String[] ls : vic) {
+                                delitoClaveJO= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-D"));//crea nueva clave de delito jo
                                 out.println("<tr>");
-                                out.println("<td>" + ls[0].replace(jConcatenado, "") + "</td>");
+                                if(!edicion.equals("")){//si es editar muestra la nueva clave de delito jo
+                                    out.println("<td>" + delitoClaveJO.replace(jConcatenado, "") + "</td>");
+                                }else{// si es insertar muestra la clave de delito jc pero inserta la clave jo
+                                    out.println("<td>" + ls[0].replace(jConcatenado, "") + "</td>");
+                                }
                                 out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>");
                                 if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
-                                    viDel = sVictima.findVDelitoJO(causaClaveJO, victiClave + jConcatenado, ls[0]);
+                                    viDel = sVictima.findVDelitoJO(causaClaveJO, victiClave + jConcatenado, delitoClaveJO);
                                     if(viDel.size() != 0){
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "' checked>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + viDel.get(0) + "' checked>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "'/>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + viDel.get(0) + "'/>");
                                     }
                                 }else{//SI edicion viene vacio entonces traemos JC
                                     viDel = sVictima.findVDelitoJC(causaClaveJC, victiClave + jConcatenado, ls[0]);
-                                    delitoClave= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-D"));//crea nueva clave de delito jo
                                     if(viDel.size() != 0){
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClave + "' checked>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "' checked>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClave + "'/>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "'/>");
                                     }
                                 }
                                 out.println("</td>");
@@ -295,11 +299,17 @@
                         <%
                             vic = sVictima.findVprocesadosJC(causaClaveJC);
                             int i = 0;
+                            String procesadoClave="";
                             for (String[] ls : vic) {
+                                procesadoClave= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-P"));//crea nueva clave de procesado jo
                                 out.println("<tr>");
                                 out.println("<td>");
-                                out.println(ls[0].replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + ls[0] + "'>");
-                                out.println("</td>");
+                                if(!edicion.equals("")){//si es editar muestra la nueva clave de procesado jo
+                                    out.println(procesadoClave.replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + procesadoClave + "'>");
+                                }else{//si es insertar muestra la clave de procesado jc pero inserta la clave jo
+                                    out.println(ls[0].replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + procesadoClave + "'>");
+                                }
+                                    out.println("</td>");
                                 out.println("<td>");
                                 lista = cat.findRelacionImputado();
                                 for (String[] los : lista) {
@@ -364,6 +374,7 @@
                                 <label for="edadVi">Edad</label>
                                 <select name="edadVi" id="edadVi" required>
                                     <option value="">--Seleccione--</option>
+                                    <option value="-2">-2</option>
                                     <%
                                         for (int m = 0; m <= 99; m++) {
                                             out.println("<option value='" + m + "'");

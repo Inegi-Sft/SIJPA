@@ -55,7 +55,7 @@ public class showConclusionesJO {
                 + "WHERE CO.CAUSA_CLAVEJO = PR.CAUSA_CLAVEJO "
                 + "AND CO.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
                 + "AND PR.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                + "AND CO.PROCESADO_CLAVE = PR.PROCESADO_CLAVE "
+                + "AND CO.PROCESADO_CLAVE = PR.PROCESADO_CLAVEJO "
                 + "AND CP.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
                 + "AND CO.PROCESADO_CLAVE = '" + proceClave + "' "
                 + "ORDER BY 1;";

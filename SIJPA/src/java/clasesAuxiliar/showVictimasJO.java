@@ -299,17 +299,17 @@ public class showVictimasJO {
         return conteoVic;
     }
     
-    public ArrayList findVictimasTablaJO(String victiClave) {
+    public ArrayList findVictimasTablaJO(String victiClaveJO) {
         conn.Conectar();
         vic = new ArrayList();
-        sql = "SELECT V.VICTIMA_CLAVE, CTV.DESCRIPCION, CS.DESCRIPCION, V.FECHA_NACIMIENTO, CONCAT(CP.DESCRIPCION,',',CE.DESCRIPCION,',',CM.DESCRIPCION) "
+        sql = "SELECT V.VICTIMA_CLAVEJO, CTV.DESCRIPCION, CS.DESCRIPCION, V.FECHA_NACIMIENTO, CONCAT(CP.DESCRIPCION,',',CE.DESCRIPCION,',',CM.DESCRIPCION) "
                 + "FROM DATOS_VICTIMAS_ADOJO V, CATALOGOS_TIPO_VICTIMA CTV, CATALOGOS_SEXO CS, CATALOGOS_PAIS CP, CATALOGOS_MUNICIPIOS CM, CATALOGOS_ENTIDADES CE "
                 + "WHERE V.TIPO_VICTIMA = CTV.VICTIMA_ID "
                 + "AND V.SEXO = CS.SEXO_ID "
                 + "AND V.NACIMIENTO_MUNICIPIO = CM.MUNICIPIO_ID "
                 + "AND V.NACIMIENTO_ENTIDAD = CE.ENTIDAD_ID "
                 + "AND V.NACIMIENTO_PAIS = CP.PAIS_ID "
-                + "AND V.VICTIMA_CLAVE = '" + victiClave + "';";
+                + "AND V.VICTIMA_CLAVEJO = '" + victiClaveJO + "';";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

@@ -51,7 +51,7 @@ public class insrtCausaPenal extends HttpServlet {
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String carpInvestiga = request.getParameter("carpInves");
-        String causaClave = request.getParameter("expClave");
+        String causaClave = request.getParameter("expClave").toUpperCase();
         String fecha_ingreso;
         if (request.getParameter("fIngreso") != null) {
             fecha_ingreso = request.getParameter("fIngreso");

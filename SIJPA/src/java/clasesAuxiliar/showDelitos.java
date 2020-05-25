@@ -130,7 +130,7 @@ public class showDelitos {
             sql = "SELECT D.DELITO_CLAVE, CN.CODIGO "
                     + "FROM DATOS_DELITOS_ADOJC D, CATALOGOS_CODIGO_NORMA CN "
                     + "WHERE D.DELITO_CODIGO_PENAL = CN.ID_CODIGO "
-                    + "AND CAUSA_CLAVE = '" + causaClave + "';";
+                    + "AND D.CAUSA_CLAVE = '" + causaClave + "';";
 
             resul = conn.consultar(sql);
             while (resul.next()) {

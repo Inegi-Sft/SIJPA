@@ -61,10 +61,13 @@ public class insrtDelitosJO extends HttpServlet {
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
+        String causaClaveJC = (String) sesion.getAttribute("causaClave");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
-        String delitoClave = request.getParameter("delitoClave");
-        String [] delitoSepara = delitoClave.split("-");
+        
+        String delitoClaveJC = request.getParameter("delitoClave");
+        String [] delitoSepara = delitoClaveJC.split("-");
         String delitoClaveJO = causaClaveJO.replace(jConcatenado, "") + "-" + delitoSepara[1];
+        
         String delitoCP = request.getParameter("delitoCP");
         String fuero = request.getParameter("fuero");
         String articuloCP = request.getParameter("articuloCP");
@@ -94,7 +97,8 @@ public class insrtDelitosJO extends HttpServlet {
             
             if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo               
                 sql="INSERT INTO DATOS_DELITOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + ",'" + jNumero + "','"
-                        + causaClaveJO + "','" + delitoClaveJO + jConcatenado + "'," + delitoCP + "," + articuloCP + ","
+                        + causaClaveJC + "','" + delitoClaveJC + jConcatenado + "','" + causaClaveJO + "','"
+                        + delitoClaveJO + jConcatenado + "'," + delitoCP + "," + articuloCP + ","
                         + delitoNT + "," + fuero + "," + reclasificaDel + ",'" + fechaReclaDel + "','" + ocurrencia + "',"
                         + sitioO + "," + consumacion + "," + calificacion + "," + clasificacion + "," + concurso + ","
                         + comision + "," + accion + "," + modalidad + "," + instrumentos + "," + entidadD + ","
@@ -152,7 +156,7 @@ public class insrtDelitosJO extends HttpServlet {
                         + "INSTRUMENTO_COMISION = " + instrumentos + ",OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
                         + "COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                        + "AND DELITO_CLAVE = '" + delitoClave + jConcatenado + "';";
+                        + "AND DELITO_CLAVEJO = '" + delitoClaveJO + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     //Borramos la tabla de robo y homicidios por si en la actualizacion cambio el delito o bien por si sufren actualizaciones dichas tablas

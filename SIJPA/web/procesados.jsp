@@ -238,7 +238,7 @@
                                     </div>
                                     <div class="colsx oculto" id="dNEntidad">
                                         <label for="nEntidad">Entidad</label>
-                                        <select name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')" required>
+                                        <select name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -254,7 +254,7 @@
                                     </div>
                                     <div class="colsx oculto" id="dNMunicipio">
                                         <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
-                                        <select name="nMunicipio" id="nMunicipio" required>
+                                        <select name="nMunicipio" id="nMunicipio">
                                             <%
                                                 if(!naciPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
                                                     out.println("<option value=''>--Seleccione--</option>");

@@ -142,6 +142,57 @@ public class showDelitosJO {
         return deli;
     }
     
+    public ArrayList findDelitosVictiJC(String causaClaveJC){
+        conn.Conectar();
+        deli = new ArrayList();
+        sql = "SELECT DISTINCT DE.DELITO_CLAVE, CN.CODIGO "
+                + "FROM DATOS_DELITOS_ADOJC DE, DATOS_PDELITOS_ADOJC PD, DATOS_CONCLUSIONES_ADOJC CO, CATALOGOS_CODIGO_NORMA CN "
+                + "WHERE DE.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                + "AND PD.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                + "AND DE.DELITO_CLAVE = PD.DELITO_CLAVE "
+                + "AND PD.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
+                + "AND DE.DELITO_CODIGO_PENAL = CN.ID_CODIGO "
+                + "AND CO.TIPO_RESOLUCION = 5 "
+                + "AND DE.CAUSA_CLAVE = '" + causaClaveJC + "' "
+                + "ORDER BY 1;";
+        System.out.println("findelitosJO:"+sql);
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    }
+    
+    public ArrayList findDelitosVictiJO(String causaClaveJO){
+        conn.Conectar();
+        deli = new ArrayList();
+        sql = "SELECT D.DELITO_CLAVEJO, CN.CODIGO "
+                + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_CODIGO_NORMA CN "
+                + "WHERE D.DELITO_NORMA_TECNICA = CN.ID_CODIGO "
+                + "AND D.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                + "ORDER BY 1;";
+        System.out.println("findelitosJO:"+sql);
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    }
+    
     public ArrayList findDRoboJC(String causaClaveJC, String delitoCLave, String cosaRoba) {
         try {
             conn.Conectar();

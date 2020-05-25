@@ -54,17 +54,17 @@ public class showDelitosJO {
         return deli;
     }
     
-    public ArrayList findDeliCausasJO(String causaClaveJO) {
+    public ArrayList findDeliCausasJO(String causaClaveJC, String delitoClave) {
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT DE.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, DE.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
-                + "FROM DATOS_DELITOS_ADOJO DE, DATOS_CAUSAS_PENALES_ADOJO CP, CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
-                + "WHERE DE.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                + "AND DE.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
+        sql = "SELECT DE.DELITO_CLAVEJO, CCN.CODIGO, CDN.DELITO, DE.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
+                + "FROM DATOS_DELITOS_ADOJO DE, CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
+                + "WHERE DE.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
                 + "AND DE.DELITO_NORMA_TECNICA = CDN.ID_DELITO "
                 + "AND DE.GRADO_CONSUMACION = CC.CONSUMACION_ID "
                 + "AND DE.FORMA_COMISION = CFC.COMISION_ID "
-                + "AND CP.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                + "AND DE.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+                + "AND DE.DELITO_CLAVEJC = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         System.out.println(sql);
         resul = conn.consultar(sql);
@@ -239,16 +239,16 @@ public class showDelitosJO {
         return conteoDel;
     }
     
-     public ArrayList findDeliTabla(String delitoClave) {
+     public ArrayList findDeliTablaJO(String delitoClaveJO) {
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT D.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, D.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
+        sql = "SELECT D.DELITO_CLAVEJO, CCN.CODIGO, CDN.DELITO, D.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
                 + "FROM DATOS_DELITOS_ADOJO D,CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
                 + "WHERE D.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
                 + "AND D.DELITO_NORMA_TECNICA = CDN.ID_DELITO "
                 + "AND D.GRADO_CONSUMACION = CC.CONSUMACION_ID "
                 + "AND D.FORMA_COMISION = CFC.COMISION_ID "
-                + "AND D.DELITO_CLAVE = '" + delitoClave + "' "
+                + "AND D.DELITO_CLAVEJO = '" + delitoClaveJO + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {

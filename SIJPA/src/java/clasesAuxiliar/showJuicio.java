@@ -55,7 +55,7 @@ public class showJuicio {
                     + "WHERE EO.CAUSA_CLAVEJO = PR.CAUSA_CLAVEJO "
                     + "AND EO.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
                     + "AND PR.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                    + "AND EO.PROCESADO_CLAVE = PR.PROCESADO_CLAVE " 
+                    + "AND EO.PROCESADO_CLAVE = PR.PROCESADO_CLAVEJO " 
                     + "AND CP.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
                     + "AND EO.PROCESADO_CLAVE = '" + proceClave + "' "
                     + "ORDER BY 1;";

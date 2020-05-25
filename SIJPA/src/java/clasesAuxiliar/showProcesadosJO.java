@@ -52,13 +52,12 @@ public class showProcesadosJO {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT PR.PROCESADO_CLAVE, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
-                    + "FROM DATOS_PROCESADOS_ADOJO PR, DATOS_CAUSAS_PENALES_ADOJO CP, CATALOGOS_REINCIDENCIA RE, CATALOGOS_SEXO S "
-                    + "WHERE PR.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                    + "AND PR.REINCIDENCIA = RE.REINCIDENCIA_ID "
+            sql = "SELECT PR.PROCESADO_CLAVEJO, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
+                    + "FROM DATOS_PROCESADOS_ADOJO PR, CATALOGOS_REINCIDENCIA RE, CATALOGOS_SEXO S "
+                    + "WHERE PR.REINCIDENCIA = RE.REINCIDENCIA_ID "
                     + "AND PR.SEXO = S.SEXO_ID "
-                    + "AND CP.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
-                    + "AND PR.PROCESADO_CLAVE = '" + proceClave + "' "
+                    + "AND PR.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+                    + "AND PR.PROCESADO_CLAVEJC = '" + proceClave + "' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
@@ -78,11 +77,11 @@ public class showProcesadosJO {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT PR.PROCESADO_CLAVE, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
+            sql = "SELECT PR.PROCESADO_CLAVEJO, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
                     + "FROM DATOS_PROCESADOS_ADOJO PR, CATALOGOS_REINCIDENCIA RE, CATALOGOS_SEXO S "
                     + "WHERE PR.REINCIDENCIA = RE.REINCIDENCIA_ID "
                     + "AND PR.SEXO = S.SEXO_ID "
-                    + "AND PR.PROCESADO_CLAVE = '" + proceClave + "' "
+                    + "AND PR.PROCESADO_CLAVEJO = '" + proceClave + "' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
@@ -138,7 +137,7 @@ public class showProcesadosJO {
             proce = new ArrayList();
             sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJO P, CATALOGOS_MUNICIPIOS CM "
                     + "WHERE P.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                    + "AND P.PROCESADO_CLAVE = '" + proceClave + "';";
+                    + "AND P.PROCESADO_CLAVEJO = '" + proceClave + "';";
             resul = conn.consultar(sql);
             while(resul.next()){
                 proce.add(new String[]{

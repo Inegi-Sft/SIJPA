@@ -109,6 +109,19 @@ $(document).ready(function () {
             $('input[name="dCosaRobadaJO"]').focus();
             return false;
         }
+        if($('#delitoNT').val() === '1' || $('#delitoNT').val() === '4'){//Homicidio
+             if ($('input[name="contextoSitua"]:checked').length === 0) {
+                alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
+                $('input[name="contextoSitua"]').focus();
+                return false;
+            }
+        }else if($('#delitoNT').val() === '31'){//Robo a casa abitacón
+            if ($('input[name="dCosaRobada"]:checked').length === 0) {
+                alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
+                $('input[name="dCosaRobada"]').focus();
+                return false;
+            }
+        }
         $.ajax({
             type: 'post',
             url: 'insrtDelitosJO',
@@ -121,10 +134,10 @@ $(document).ready(function () {
                     for (var i = 1; i < 7; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaDeliJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
-   
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
-                    var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si' + '&title=Editar';
+                    //var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
+                    var enlace = 'delitosJO.jsp?delitoClave=' + response[1] + '&edita=Si';
                     parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     console.log('Captu: ' + response[7] + ' Existen: ' + numDeli);
                     if (response[7] === numDeli) {

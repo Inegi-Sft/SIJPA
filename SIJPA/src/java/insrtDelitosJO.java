@@ -63,14 +63,8 @@ public class insrtDelitosJO extends HttpServlet {
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
         String delitoClave = request.getParameter("delitoClave");
-        String [] delitoSepara=delitoClave.split("-");
-        String delitoClaveJO="";
-        System.out.println(delitoSepara[1]);//D6
-        if(causaClaveJO.replace(jConcatenado, "").length()==0){
-         delitoClaveJO=causaClaveJO.replace(jConcatenado, "")+delitoSepara[1];   
-        }else{
-          delitoClaveJO=causaClaveJO.replace(jConcatenado, "")+"-"+delitoSepara[1];  
-        }
+        String [] delitoSepara = delitoClave.split("-");
+        String delitoClaveJO = causaClaveJO.replace(jConcatenado, "") + "-" + delitoSepara[1];
         String delitoCP = request.getParameter("delitoCP");
         String fuero = request.getParameter("fuero");
         String articuloCP = request.getParameter("articuloCP");
@@ -97,24 +91,14 @@ public class insrtDelitosJO extends HttpServlet {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
-            System.out.println("ENTRO A ");
             
-            if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo
-              /*  System.out.println("nuevo dato");
-                sql = "UPDATE DATOS_DELITOS_ADOJO SET DELITO_CODIGO_PENAL = " + delitoCP + ",ART_CODIGO_PENAL = '" + articuloCP + "',"
-                        + "DELITO_NORMA_TECNICA = " + delitoNT + ",TIPO_FUERO = " + fuero + ",DELITO_RECLASIFICADO = " + reclasificaDel + ","
-                       + "FECHA_RECLASIFICACION = '" +fechaReclaDel + "',FECHA_OCURRENCIA = '" + ocurrencia + "',SITIO_OCURRENCIA = " + sitioO + ","
-                        + "GRADO_CONSUMACION = " + consumacion + ",CALIFICACION = " + calificacion + ",CLASIFICACION = " + clasificacion + ","
-                        + "CONCURSO = " +concurso + ",FORMA_COMISION = " + comision + ",FORMA_ACCION = " + accion + ",MODALIDAD = " + modalidad + ","
-                        + "INSTRUMENTO_COMISION = " + instrumentos + ",OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
-                        + "COMENTARIOS = '" + comentarios + "' "
-                        + "WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
-                        + "AND DELITO_CLAVE = '" + delitoClave + jConcatenado + "';";*/
-               
-                sql="INSERT INTO DATOS_DELITOS_ADOJO VALUES("+jEntidad+","+jMunicipio+",'"+jNumero+"','"+causaClaveJO+"','"+delitoClaveJO+jConcatenado+"',"
-                        + ""+delitoCP+","+articuloCP+","+delitoNT+","+fuero+","+reclasificaDel+",'"+fechaReclaDel+"','"+ocurrencia+"', "
-                        + ""+sitioO+","+consumacion+","+calificacion+","+clasificacion+","+concurso+","+comision+","+accion+", "
-                        + ""+modalidad+","+instrumentos+","+entidadD+","+municipioD+",0,0,'"+comentarios+"',2020);";                
+            if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo               
+                sql="INSERT INTO DATOS_DELITOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + ",'" + jNumero + "','"
+                        + causaClaveJO + "','" + delitoClaveJO + jConcatenado + "'," + delitoCP + "," + articuloCP + ","
+                        + delitoNT + "," + fuero + "," + reclasificaDel + ",'" + fechaReclaDel + "','" + ocurrencia + "',"
+                        + sitioO + "," + consumacion + "," + calificacion + "," + clasificacion + "," + concurso + ","
+                        + comision + "," + accion + "," + modalidad + "," + instrumentos + "," + entidadD + ","
+                        + municipioD + ",0,0,'" + comentarios + "',(select YEAR(NOW())) );";                
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     if (delitoNT == 31) {
@@ -143,7 +127,7 @@ public class insrtDelitosJO extends HttpServlet {
                         usuario usuario = new usuario();
                         usuario.insrtAvance(causaClaveJO, 3);//Actualizamos el avance de la causa penal
                     }*/
-                    lis = deli.findDeliTabla(delitoClaveJO + jConcatenado);
+                    lis = deli.findDeliTablaJO(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
                     resp.add(lis.get(0)[0].replace(jConcatenado, ""));
@@ -160,7 +144,6 @@ public class insrtDelitosJO extends HttpServlet {
                     conn.close();
                 }
             }else{//Se actualiza el dato que viene de recuperacion
-                System.out.println("actualizando dato");
                 sql = "UPDATE DATOS_DELITOS_ADOJO SET DELITO_CODIGO_PENAL = " + delitoCP + ",ART_CODIGO_PENAL = '" + articuloCP + "',"
                         + "DELITO_NORMA_TECNICA = " + delitoNT + ",TIPO_FUERO = " + fuero + ",DELITO_RECLASIFICADO = " + reclasificaDel + ","
                         + "FECHA_RECLASIFICACION = '" +fechaReclaDel + "',FECHA_OCURRENCIA = '" + ocurrencia + "',SITIO_OCURRENCIA = " + sitioO + ","
@@ -197,9 +180,10 @@ public class insrtDelitosJO extends HttpServlet {
                     showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     int totDelInsrt = deli.countDelitosInsertados(causaClaveJO);
-                    lis = deli.findDeliTabla(delitoClave + jConcatenado);
+                    lis = deli.findDeliTablaJO(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);

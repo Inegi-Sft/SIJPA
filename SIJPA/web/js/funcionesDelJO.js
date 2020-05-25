@@ -110,7 +110,7 @@ $(document).ready(function () {
                 $('input[name="contextoSitua"]').focus();
                 return false;
             }
-        }else if($('#delitoNT').val() === '31'){//Robo a casa abitacón
+        }else if($('#delitoNT').val() === '31'){//Robo a casa abitacÃ³n
             if ($('input[name="dCosaRobada"]:checked').length === 0) {
                 alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
                 $('input[name="dCosaRobada"]').focus();

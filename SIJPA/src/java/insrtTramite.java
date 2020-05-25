@@ -58,7 +58,7 @@ public class insrtTramite extends HttpServlet {
         String estIntermedia = request.getParameter("estIntermedia");
         String especifique = request.getParameter("especifique");
         String fechaActo=request.getParameter("uActo");
-
+ 
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 
 $(document).ready(function() {
    
@@ -50,9 +50,10 @@ $(document).ready(function() {
                             <td><a class="pop" href="tramiteJO.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaTramiteJO tbody tr').length +
                             '&edita=Si"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
                     }else{
-                        for (var i = 2; i <= 4; i++) {//pone filas correspondientes en la tabla de inicial
+                        for (var i = 1; i <= 4; i++) {//pone filas correspondientes en la tabla de inicial
                             parent.$('#tablaTramiteJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
-                        }
+                        } 
+                        alert(response[0]+response[1]+response[2]+response[3]+response[4]);
                         //editamos enlance para que pueda ser actualizado ya estando lleno
                         var enlace = parent.$('#tablaTramiteJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                         parent.$('#tablaTramiteJO tbody tr').eq(response[0]).find('a').attr('href',enlace);

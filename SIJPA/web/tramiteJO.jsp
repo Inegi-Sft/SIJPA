@@ -35,7 +35,7 @@
             String jMunicipioJO = jDividido[1];
             String jNumeroJO = jDividido[2];
             String jConcatenado = jEntidadJO + jMunicipioJO + jNumeroJO;
-            String causaClave = (String) session.getAttribute("causaClave");
+            String causaClave = (String) session.getAttribute("causaClaveJO");
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
             String etapaProcesalJO = "";
             String estatusJO="";
@@ -97,7 +97,7 @@
                     </fieldset>
                     <div class="cols">
                         <label for="uActo">Fecha del último acto procesal</label>
-                        <input type="date" name="uActo" id="uActoJO" value="<%=fechaActoJO%>" max="<%=fechas%>" required>
+                        <input type="date" name="uActoJO" id="uActoJO" value="<%=fechaActoJO%>" max="<%=fechas%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkUActoJO" onclick="fechaNoIdent('#chkUActoJO', '#uActoJO');">
                             <label>No identificada</label>

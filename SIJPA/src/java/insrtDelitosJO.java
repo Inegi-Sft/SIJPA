@@ -183,7 +183,7 @@ public class insrtDelitosJO extends HttpServlet {
                     lis = deli.findDeliTabla(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
-                    resp.add(lis.get(0)[0]);
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);

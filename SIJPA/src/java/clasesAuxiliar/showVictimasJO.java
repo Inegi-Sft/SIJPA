@@ -60,15 +60,15 @@ public class showVictimasJO {
     public ArrayList findVictimasCausaJO(String causaClaveJC, String victimaCLave) {
         conn.Conectar();
         vic = new ArrayList();
-        sql = "SELECT VI.VICTIMA_CLAVE, CTV.DESCRIPCION, CS.DESCRIPCION, VI.FECHA_NACIMIENTO, CONCAT(CPA.DESCRIPCION,',',CE.DESCRIPCION,',',CM.DESCRIPCION) "
-                + "FROM DATOS_VICTIMAS_ADOJO VI, DATOS_CAUSAS_PENALES_ADOJO CP, CATALOGOS_TIPO_VICTIMA CTV, CATALOGOS_SEXO CS, CATALOGOS_PAIS CPA, CATALOGOS_MUNICIPIOS CM, CATALOGOS_ENTIDADES CE "
-                + "WHERE VI.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                + "AND VI.TIPO_VICTIMA = CTV.VICTIMA_ID "
+        sql = "SELECT VI.VICTIMA_CLAVEJO, CTV.DESCRIPCION, CS.DESCRIPCION, VI.FECHA_NACIMIENTO, CONCAT(CPA.DESCRIPCION,',',CE.DESCRIPCION,',',CM.DESCRIPCION) "
+                + "FROM DATOS_VICTIMAS_ADOJO VI, CATALOGOS_TIPO_VICTIMA CTV, CATALOGOS_SEXO CS, CATALOGOS_PAIS CPA, CATALOGOS_MUNICIPIOS CM, CATALOGOS_ENTIDADES CE "
+                + "WHERE VI.TIPO_VICTIMA = CTV.VICTIMA_ID "
                 + "AND VI.SEXO = CS.SEXO_ID "
                 + "AND VI.NACIMIENTO_MUNICIPIO = CM.MUNICIPIO_ID "
                 + "AND VI.NACIMIENTO_ENTIDAD = CE.ENTIDAD_ID "
                 + "AND VI.NACIMIENTO_PAIS = CPA.PAIS_ID "
-                + "AND CP.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+                + "AND VI.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+                + "AND VI.VICTIMA_CLAVEJC = '" + victimaCLave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {

@@ -412,7 +412,6 @@ fieldset legend{
     font-size: 13px;
     display: inline;
     color: #0077CB;
-    vertical-align: text-top;
 }
 
 .contenedor input[type="radio"]{
@@ -601,8 +600,9 @@ a.addJuz img{
 }
 
 input[type=text]:read-only, input[type=date]:read-only{
-    background: rgb(235, 235, 228);
     cursor: default;
+    background-color: rgba(239, 239, 239, 0.3);
+    border-color: rgba(118, 118, 118, 0.3);
 }
 
 .lista{

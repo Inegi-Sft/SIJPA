@@ -69,7 +69,6 @@
                 lisCausaJC = causaPenalJO.findCausaPenalJC(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
                 if(lisCausaJC.size() > 0){
                     session.setAttribute("causaClave", causaClaveJC + juzgadoClave.replace("-", ""));//Actualizamos variable de sesion con causa clave JC
-                    operacion = "insertar";
                     //Solo recuperamos las necesarias que se comparten JC y JO
                     fechaIngreso = lisCausaJC.get(0)[0];
                     totDelitos = lisCausaJC.get(0)[1];

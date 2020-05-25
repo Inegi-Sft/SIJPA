@@ -104,11 +104,11 @@ $(document).ready(function () {
     $('#formDelitosJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-     //   if ($('input[name="dCosaRobadaJO"]:checked').length === 0) {
-       //     alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
-         //   $('input[name="dCosaRobadaJO"]').focus();
-          //  return false;
-        //}
+        if ($('input[name="dCosaRobadaJO"]:checked').length === 0) {
+            alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
+            $('input[name="dCosaRobadaJO"]').focus();
+            return false;
+        }
         $.ajax({
             type: 'post',
             url: 'insrtDelitosJO',

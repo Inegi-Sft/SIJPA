@@ -204,9 +204,11 @@
                         <%
                             if(!ccJC.equals("")){
                                 y = 0;
+                                String vicClaveJO="";
                                 vicJC = victi.findVictimasCausaJC(ccJuzJC);
                                 for(String[] viJC : vicJC){//For para recorrer todas las victimas registradas en BD de JC
-                                    vicJO = victi.findVictimasCausaJO(ccJuzJC, viJC[0]);
+                                    vicClaveJO= ccJO + viJC[0].substring(viJC[0].indexOf("-V"));
+                                    vicJO = victi.findVictimasCausaJO(ccJuzJO, vicClaveJO);
                                     if(vicJO.size() > 0){//Si tenemos victimas registradas en la BD de JO las mostramos
                                         out.println("<tr>");
                                         out.println("<td>" + vicJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");

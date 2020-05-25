@@ -385,10 +385,10 @@
                             if(!ccJC.equals("")){
                                 y = 0;
                                 int i=1,m=0;
-                                   tramJC = tramite.findTramiteCausaJC(ccJuzJC);
+                                   tramJC = tramite.findTramiteCausaJC(ccJuz);
                                     for(String[] traJC : tramJC){//For para recorrer todos los procesados que pasan a JO en JC
-                                    int countTram=tramite.countTramitesInsertados(ccJuzJO);
-                                    tramJO = tramite.findTramiteCausaJO(ccJuzJO);
+                                    int countTram=tramite.countTramitesInsertados(ccJuz);
+                                    tramJO = tramite.findTramiteCausaJO(ccJuz);
                                     if(i <=countTram){//Si el procesado esta en inicial de la BD lo agregamos
                                         out.println("<tr>");
                                         out.println("<td>" + tramJO.get(m)[0].replace(jc.replace("-", ""), "") + "</td>");

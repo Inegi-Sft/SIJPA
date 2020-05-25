@@ -137,7 +137,7 @@ public class showProcesadosJO {
             proce = new ArrayList();
             sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJO P, CATALOGOS_MUNICIPIOS CM "
                     + "WHERE P.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                    + "AND P.PROCESADO_CLAVE = '" + proceClave + "';";
+                    + "AND P.PROCESADO_CLAVEJO = '" + proceClave + "';";
             resul = conn.consultar(sql);
             while(resul.next()){
                 proce.add(new String[]{

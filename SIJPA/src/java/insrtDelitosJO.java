@@ -127,7 +127,7 @@ public class insrtDelitosJO extends HttpServlet {
                         usuario usuario = new usuario();
                         usuario.insrtAvance(causaClaveJO, 3);//Actualizamos el avance de la causa penal
                     }*/
-                    lis = deli.findDeliTabla(delitoClaveJO + jConcatenado);
+                    lis = deli.findDeliTablaJO(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
                     resp.add(lis.get(0)[0].replace(jConcatenado, ""));
@@ -180,7 +180,7 @@ public class insrtDelitosJO extends HttpServlet {
                     showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     int totDelInsrt = deli.countDelitosInsertados(causaClaveJO);
-                    lis = deli.findDeliTabla(delitoClaveJO + jConcatenado);
+                    lis = deli.findDeliTablaJO(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
                     resp.add(lis.get(0)[0].replace(jConcatenado, ""));

@@ -57,14 +57,13 @@ public class showTramiteJO {
                 + "WHERE TR.CAUSA_CLAVEJO = PO.CAUSA_CLAVEJO "
                 + "AND TR.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
                 + "AND PO.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                + "AND TR.PROCESADO_CLAVE = PO.PROCESADO_CLAVE "
+                + "AND TR.PROCESADO_CLAVE = PO.PROCESADO_CLAVEJO "
                 + "AND CP.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "ORDER BY 1;"; 
         System.out.println("findtramitecausajo:"  +sql);   
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
-
                 tramite.add(new String[]{
                     resul.getString(1), resul.getString(2), resul.getString(3)
                 });

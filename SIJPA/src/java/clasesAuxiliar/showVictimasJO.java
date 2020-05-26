@@ -273,8 +273,8 @@ public class showVictimasJO {
         try {
             conn.Conectar();
             vicIngre = new ArrayList();
-            sql = "SELECT INGRESO FROM DATOS_VFUENTE_INGRESOS_ADOJC "
-                    + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+            sql = "SELECT INGRESO FROM DATOS_VFUENTE_INGRESOS_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND VICTIMA_CLAVE = '" + victiClave + "' "
                     + "AND INGRESO = " + ingreso + ";";
             resul = conn.consultar(sql);

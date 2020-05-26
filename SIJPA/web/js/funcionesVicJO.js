@@ -12,6 +12,11 @@ $(document).ready(function() {
             $('#victiFisicas, #mediProtec').show();
         }else if(tipoVi === '2'){
             $('#tipoMoral').show();
+            $('#tvic_moral').prop('required', true);
+            $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
+            $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
+            $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
         }
         $("#tipoVictima option[value='" + tipoVi + "']").prop('selected', true);
     }
@@ -86,14 +91,14 @@ $(document).ready(function() {
                 $('#victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
                 $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
-                $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
+                $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
                 $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
                 break;
             default:
                 $('#tipoMoral, #victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
                 $('#tvic_moral, #sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #rangoIngresos, #extrangera').val('-2').prop('required', false);
-                $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
+                $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
                 $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
                 break;
         }
@@ -210,33 +215,3 @@ $(document).ready(function() {
         });
     });
 });
-
-
-//function tipo_Victima(obj){
-//    switch ($(obj).val()) {
-//        case '1':
-//            $('#victiFisicas').fadeIn('slow');
-//            $('#sexoV, #fnacimientoV, #edadVi, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
-//                #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #extrangera, #ocupa, #ingresos').val('').prop('required', true);
-//            $('#tipoMoral').fadeOut('slow');
-//            $('#tvic_moral').val('-2').prop('required', false);
-//            break;
-//        case '2':
-//            $('#tipoMoral').fadeIn('slow');
-//            $('#tvic_moral').val('').prop('required', true);
-//
-//            $('#victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
-//            $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-//                #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
-//            $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
-//            $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
-//            break;
-//        default:
-//            $('#tipoMoral, #victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
-//            $('#tvic_moral, #sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
-//                #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #rangoIngresos, #extrangera').val('-2').prop('required', false);
-//            $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
-//            $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
-//            break;
-//    }
-//}

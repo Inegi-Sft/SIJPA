@@ -104,11 +104,6 @@ $(document).ready(function () {
     $('#formDelitosJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if ($('input[name="dCosaRobadaJO"]:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
-            $('input[name="dCosaRobadaJO"]').focus();
-            return false;
-        }
         if($('#delitoNT').val() === '1' || $('#delitoNT').val() === '4'){//Homicidio
              if ($('input[name="contextoSitua"]:checked').length === 0) {
                 alert('Selecciona al menos una opcion de Caracteristicas Adicionales');

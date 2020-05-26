@@ -6,6 +6,54 @@
 
 $(document).ready(function () {
     
+    //Se usa para la recuperacion de datos de DB
+    if($('#medidasDis').val() === '1'){
+        $('#dTipoMedida').show();
+    }
+    //Se usa para la recuperacion de datos de DB
+    if($('#incidentes').val() === '1'){
+        $('#dResoIncidente, #dPromueveIncidente').show();
+    }
+    //Se usa para la recuperacion de datos de DB
+    if($('#suspencionA').val() === '1'){
+        $('#dFechaSuspencion, #dFechaReanudacion').show();
+    }
+    //Se usa para la recuperacion de datos de DB
+    if($('#deliberacion').val() === '1'){
+        $('#dFechaDeliberacion, #dSentidoFallo').show();
+    }
+    //Se usa para la recuperacion de datos de DB FECHAS No identificadas
+    if($('#autoApertura').val() === '1899-09-09'){
+        $('#autoApertura').prop('readonly', true);
+        $('#chkAutoApertura').prop('checked', true);
+    }
+    //Se usa para la recuperacion de datos de DB FECHAS No identificadas
+    if($('#celebracionA').val() === '1899-09-09'){
+        $('#celebracionA').prop('readonly', true);
+        $('#chkCelebracionA').prop('checked', true);
+    }
+    //Se usa para la recuperacion de datos de DB FECHAS No identificadas
+    if($('#resoIncidente').val() === '1899-09-09'){
+        $('#resoIncidente').prop('readonly', true);
+        $('#chkResoIncidente').prop('checked', true);
+    }
+    //Se usa para la recuperacion de datos de DB FECHAS No identificadas
+    if($('#fechaSuspencion').val() === '1899-09-09'){
+        $('#fechaSuspencion').prop('readonly', true);
+        $('#chkFechaSuspencion').prop('checked', true);
+    }
+    //Se usa para la recuperacion de datos de DB FECHAS No identificadas
+    if($('#fechaReanudacion').val() === '1899-09-09'){
+        $('#fechaReanudacion').prop('readonly', true);
+        $('#chkFechaReanudacion').prop('checked', true);
+    }
+    //Se usa para la recuperacion de datos de DB FECHAS No identificadas
+    if($('#fechaDeliberacion').val() === '1899-09-09'){
+        $('#fechaDeliberacion').prop('readonly', true);
+        $('#chkFechaDeliberacion').prop('checked', true);
+    }
+    
+    
     $('#medidasDis').change(function(){
         if ($('#medidasDis').val() === '1') {
             $('#dTipoMedida').fadeIn("slow");
@@ -57,6 +105,44 @@ $(document).ready(function () {
         } else if ($('#sentidoFallo').val() === '2'){
             alert("Este procesado debe registrarse en Resoluciones bajo la sentencia Condenatoria");
         }
+    });
+    
+    //Guarda Etapa Oral
+    $('#fromJuicioO').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        
+        $.ajax({
+            type: 'post',
+            url: 'insrtEtapaOral',
+            data: $('#fromJuicioO').serialize(),
+            success: function (response) { 
+                console.log("Respuesta del servidor Etapa Oral: ", response);
+                alert("Guardado con exito!!!");
+                var numProce = parseInt(parent.$('#TadolescentesJO').val());
+                if (response !== null && $.isArray(response)) {
+                    for (var i = 1; i < 7; i++) {
+                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
+                        parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
+                    }
+                    //editamos enlance para que pueda ser actualizado ya estando lleno
+                    var enlace = 'etapaOral.jsp?proceClave=' + response[1] + '&edita=Si';
+                    parent.$('#tablaJuicioJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
+                    console.log('Captu: ' + response[7] + ' Existen: ' + numProce);
+                    if (response[7] === numProce) {
+                        parent.openPestana('btn7', 'p7');
+                        parent.openPestana('btn6', 'p6');
+                    } else {
+                        alert('Falta por capturar ' + (numProce - response[7]) + ' adolescentes');
+                    }
+                }
+                parent.$.fancybox.close();
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor Etapa Oral: ", response);
+                alert('Error al guardar, cunsulte al administrador!');
+            }
+        });
     });
     
 });

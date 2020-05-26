@@ -61,10 +61,6 @@ public class insrtVictimasJO extends HttpServlet {
         String victiClaveJC = request.getParameter("victiClaveJC");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
         String victiClaveJO = request.getParameter("victiClaveJO");
-        System.out.println("causaJC "+ causaClaveJC);
-        System.out.println("vicitmaJC "+ victiClaveJC);
-        System.out.println("causaJO "+ causaClaveJO);
-        System.out.println("vicitmaJC "+ victiClaveJO);
         String tipoVictima = request.getParameter("tipoVictima");
         String victima_moral = request.getParameter("tvic_moral");
         String conto_asesor = request.getParameter("con_asesor");

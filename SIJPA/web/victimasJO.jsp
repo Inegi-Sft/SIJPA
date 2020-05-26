@@ -75,6 +75,7 @@
                     victiJO = sVictima.findVictimasJO(causaClaveJO, victiClave + jConcatenado);
                     if(victiJO.size() > 0){
                         operacion = "actualizar";
+                        victiClaveJO=victiClave;
                         tipoVicti = victiJO.get(0)[0];
                         victiMoral = victiJO.get(0)[1];
                         contoAsesor = victiJO.get(0)[2];
@@ -161,10 +162,10 @@
                                 <div class="cols">
                                     <label for="victima_clave">Víctima Clave</label>
                                     <% if(operacion.equals("insertar")){ %>
-                                        <input type="text" value="<%=victiClave%>" readonly/>
-                                        <input type="hidden" name="victiClave" id="victiClave" value="<%=victiClaveJO%>" readonly/>
+                                        <input type="text" name="victiClaveJC" id="victiClaveJC" value="<%=victiClave%>" readonly/>
+                                        <input type="hidden" name="victiClaveJO" id="victiClaveJO" value="<%=victiClaveJO%>" readonly/>
                                     <% }else{ %>
-                                        <input type="text" name="victiClave" id="victiClave" value="<%=victiClave%>" readonly/>
+                                        <input type="text" name="victiClaveJO" id="victiClaveJO" value="<%=victiClaveJO%>" readonly/>
                                     <% } %>
                                     <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
                                     <input type="hidden" name="opera" id="opera" value="<%=operacion%>"/>
@@ -173,7 +174,7 @@
                                     <!--Usamos un input invisible para recuperar el dato de tipo victima de BD y llenarlo con jquery-->
                                     <input type="hidden" id="tipoVictiHi" name="tipoVictiHi" value="<%=tipoVicti%>">
                                     <label for="tipoVictima">Tipo de Víctima</label>
-                                    <select name="tipoVictima" id="tipoVictima" onchange="tipo_Victima(this)" required>
+                                    <select name="tipoVictima" id="tipoVictima" required>
                                         <option value="">--Seleccione--</option>
                                         <option value="1">1.- Persona física</option>
                                         <option value="2">2.- Persona moral</option>
@@ -299,15 +300,15 @@
                         <%
                             vic = sVictima.findVprocesadosJC(causaClaveJC);
                             int i = 0;
-                            String procesadoClave="";
+                            String proceClaveJO="";
                             for (String[] ls : vic) {
-                                procesadoClave= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-P"));//crea nueva clave de procesado jo
+                                proceClaveJO= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-P"));//crea nueva clave de procesado jo
                                 out.println("<tr>");
                                 out.println("<td>");
                                 if(!edicion.equals("")){//si es editar muestra la nueva clave de procesado jo
-                                    out.println(procesadoClave.replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + procesadoClave + "'>");
+                                    out.println(proceClaveJO.replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + proceClaveJO + "'>");
                                 }else{//si es insertar muestra la clave de procesado jc pero inserta la clave jo
-                                    out.println(ls[0].replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + procesadoClave + "'>");
+                                    out.println(ls[0].replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + proceClaveJO + "'>");
                                 }
                                     out.println("</td>");
                                 out.println("<td>");
@@ -317,7 +318,7 @@
                                     viPro.clear();//limpiamos el array para poder llenar de manera correcta todos los check
                                     //Recuperamos el dato de la bd, si existe lo checheamos si no se encuentra vacio
                                     if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
-                                        viPro = sVictima.findViRelProcesadoJO(causaClaveJO, victiClave + jConcatenado, ls[0], los[0]);
+                                        viPro = sVictima.findViRelProcesadoJO(causaClaveJO, victiClaveJO + jConcatenado, proceClaveJO, los[0]);
                                         if(viPro.size() != 0){
                                             out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + " checked>");
                                         }else{

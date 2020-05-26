@@ -297,6 +297,7 @@
                                 <label for="edadVi">Edad</label>
                                 <select name="edadVi" id="edadVi" required>
                                     <option value="">--Seleccione--</option>
+                                    <option value="-2">-2</option>
                                     <%
                                         for (int m = 0; m <= 99; m++) {
                                             out.println("<option value='" + m + "'");

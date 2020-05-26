@@ -57,7 +57,7 @@ public class showVictimasJO {
         return vic;
     }
     
-    public ArrayList findVictimasCausaJO(String causaClaveJO, String victimaCLave) {
+    public ArrayList findVictimasCausaJO(String causaClaveJC, String victimaCLave) {
         conn.Conectar();
         vic = new ArrayList();
         sql = "SELECT VI.VICTIMA_CLAVEJO, CTV.DESCRIPCION, CS.DESCRIPCION, VI.FECHA_NACIMIENTO, CONCAT(CPA.DESCRIPCION,',',CE.DESCRIPCION,',',CM.DESCRIPCION) "
@@ -119,7 +119,7 @@ public class showVictimasJO {
         vic = new ArrayList();
         sql = "SELECT * FROM DATOS_VICTIMAS_ADOJO "
                 + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                + "AND VICTIMA_CLAVE = '" + victimaClave + "' "
+                + "AND VICTIMA_CLAVEJO = '" + victimaClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
@@ -186,8 +186,14 @@ public class showVictimasJO {
     public ArrayList findVprocesadosJC(String causaClaveJC) {
         conn.Conectar();
         vicProce = new ArrayList();
-        sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
-                + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "'";
+//        sql = "SELECT PROCESADO_CLAVEJO FROM DATOS_PROCESADOS_ADOJO "
+//                + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+        sql = "SELECT P.PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC P"
+            + " INNER JOIN DATOS_CONCLUSIONES_ADOJC C"
+            + " ON C.CAUSA_CLAVE=P.CAUSA_CLAVE AND P.PROCESADO_CLAVE=C.PROCESADO_CLAVE"
+            + " WHERE P.CAUSA_CLAVE = '" + causaClaveJC + "'"
+            + " AND C.TIPO_RESOLUCION = 5"
+            + " ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

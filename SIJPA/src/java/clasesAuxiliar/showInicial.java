@@ -201,7 +201,8 @@ public class showInicial {
                     + "JOIN DATOS_PROCESADOS_ADOJC P "
                     + "ON EI.CAUSA_CLAVE = P.CAUSA_CLAVE "
                     + "AND EI.PROCESADO_CLAVE = P.PROCESADO_CLAVE "
-                    + "WHERE EI.CAUSA_CLAVE = '" + causaClave + "' AND EI.PROCESADO_CLAVE = '" + proceClave + "' "
+                    + "WHERE EI.CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND EI.PROCESADO_CLAVE = '" + proceClave + "' "
                     + "ORDER BY 1;";
             System.out.println(sql);
             resul = conn.consultar(sql);
@@ -226,7 +227,8 @@ public class showInicial {
                     + "JOIN DATOS_PROCESADOS_ADOJC P "
                     + "ON EI.CAUSA_CLAVE = P.CAUSA_CLAVE "
                     + "AND EI.PROCESADO_CLAVE = P.PROCESADO_CLAVE "
-                    + "WHERE EI.CAUSA_CLAVE = '" + causaClave + "' AND EI.ETAPA = " + etapa + " ORDER BY 1;";
+                    + "WHERE EI.CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND EI.ETAPA = " + etapa + " ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proceEtapa.add(new String[]{

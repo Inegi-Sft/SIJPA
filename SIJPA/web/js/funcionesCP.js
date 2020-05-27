@@ -104,7 +104,7 @@ $(document).ready(function () {
                     if(response[0] === 1){//organo competente
                         var expe = $('#expClave').val();
                         for(var x = 1; x <= response[2]; x++){
-                            $('#tablaDeli tbody').append('<tr><td>' + expe + "-D" + x + '</td><td></td><td></td><td></td><td></td>\n\
+                            $('#tablaDeli tbody').append('<tr><td>' + expe + '-D' + x + '</td><td></td><td></td><td></td><td></td>\n\
                             <td></td><td><a class="pop" href="delitos.jsp?delitoClave=' + expe + '-D' + x + '&posicion=' + (x-1) + '">\n\
                             <img src="img/editar.png" title="Modificar"/></a></td>\n\
                             <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
@@ -112,19 +112,19 @@ $(document).ready(function () {
                             </td></a></tr>');
                         }
                         for(var x = 1; x <= response[3]; x++){
-                            $('#tablaProcesa tbody').append('<tr><td>' + expe + "-P" + x + '</td><td></td><td></td><td></td>\n\
+                            $('#tablaProcesa tbody').append('<tr><td>' + expe + '-P' + x + '</td><td></td><td></td><td></td>\n\
                             <td></td><td><a class="pop" href="procesados.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
                             <img src="img/editar.png" title="Modificar"/></a></td>\n\
                             <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
                                 onclick="borraRegistro(\'' + expe + '-P' + x + response[1] + '\',' + (x-1) + ',\'tablaProcesa\',\'#Tadolescentes\')"/>\n\
                             </td></a></tr>');
                             
-                            $('#tablaInicial tbody').append('<tr><td>' + expe + "-P" + x + '</td><td></td><td></td><td></td><td></td>\n\
+                            $('#tablaInicial tbody').append('<tr><td>' + expe + '-P' + x + '</td><td></td><td></td><td></td><td></td>\n\
                             <td></td><td><a class="pop" href="etapaInicial.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
                             <img src="img/editar.png" title="Modificar"/></a></td></tr>');
                         }
                         for(var x = 1; x <= response[4]; x++){
-                            $('#tablaVictimas tbody').append('<tr><td>' + expe + "-V" + x + '</td><td></td><td></td><td></td>\n\
+                            $('#tablaVictimas tbody').append('<tr><td>' + expe + '-V' + x + '</td><td></td><td></td><td></td>\n\
                             <td></td><td><a class="pop" href="victimas.jsp?victiClave=' + expe + '-V' + x + '&posicion=' + (x-1) + '">\n\
                             <img src="img/editar.png" title="Modificar"/></a></td>\n\
                             <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\

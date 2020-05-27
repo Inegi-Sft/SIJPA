@@ -29,7 +29,7 @@
             ArrayList<String[]> vicJC, vicJO;
             
             showJuicio juicio = new showJuicio();
-            ArrayList<String[]> juiciJC, juiciJO ;
+            ArrayList<String[]> juiciJC, juiciJO , etapaProce;
 
             showConclusionesJO conclusion = new showConclusionesJO();
             ArrayList<String[]> concJC, concJO;
@@ -40,8 +40,9 @@
             String jc = (String)session.getAttribute("juzgadoClave");
             int y = 0;
             String ccJC = "";
-            String ccJuz = "";
             String ccJO = "";
+            String ccJuz = "";
+            String extraeClave = "";
             if(request.getParameter("causaClaveJC") != null){//Si viene la causa penal, recuperamos datos
                 ccJC = request.getParameter("causaClaveJC");
                 ccJuz = ccJC + jc.replace("-", "");
@@ -100,13 +101,14 @@
                                     }
                                     else{//Si el delito no esta en la BD de JO lo recuperamos de JC y se muestra
                                         out.println("<tr>");
-                                        out.println("<td>" + delJC[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        extraeClave = delJC[0].substring(delJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
+                                        out.println("<td>" + ccJO + extraeClave + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + delJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + ccJO + extraeClave
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
@@ -154,12 +156,13 @@
                                         out.println("</tr>");
                                     }else{//Si el procesado no esta en BD de JO se recupera de JC
                                         out.println("<tr>");
-                                        out.println("<td>" + proJC[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        extraeClave = proJC[0].substring(proJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
+                                        out.println("<td>" + ccJO + extraeClave + "</td>");
+                                        out.println("<td>" + proJC[1] + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + proJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + ccJO + extraeClave
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
@@ -207,12 +210,13 @@
                                         out.println("</tr>");
                                     }else{//Si la victima no esta en BD se agrega vacia
                                         out.println("<tr>");
-                                        out.println("<td>" + viJC[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        extraeClave = viJC[0].substring(viJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
+                                        out.println("<td>" + ccJO + extraeClave + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + viJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + ccJO + extraeClave
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");
@@ -236,6 +240,7 @@
                             <th>Incidentes en audiencia</th>
                             <th>Suspencion de audiencia</th>
                             <th>Emision de Fallo</th>
+                            <th>Etapa D.</th>
                             <th>Editar</th>
                         </tr>
                     </thead>
@@ -246,9 +251,9 @@
                                 String proClaveJO="";
                                 juiciJC = juicio.findProceJuicioJC(ccJuz);
                                 for(String[] juiJC : juiciJC){//For para recorrer todos los procesados que pasan a JO en JC
-                                    proClaveJO= ccJO + juiJC[0].substring(juiJC[0].indexOf("-P"));//variable de procesado jo
+                                    proClaveJO = ccJO + juiJC[0].substring(juiJC[0].indexOf("-P"));//variable de procesado JO
                                     juiciJO = juicio.findProceJuicioJO(proClaveJO);
-                                    if(juiciJO.size() > 0){//Si el procesado esta en inicial de la BD lo agregamos
+                                    if(juiciJO.size() > 0){//Si el procesado esta en oral de la BD lo agregamos
                                         out.println("<tr>");
                                         out.println("<td>" + juiciJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[1] + "</td>");
@@ -256,18 +261,21 @@
                                         out.println("<td>" + juiciJO.get(0)[3] + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[4] + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[5] + "</td>");
+                                        out.println("<td>" + juiciJO.get(0)[6] + "</td>");
                                         out.println("<td><a class='pop' href='etapaOral.jsp?proceClave=" + juiciJO.get(0)[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }else{
                                         out.println("<tr>");
-                                        out.println("<td>" + juiJC[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        extraeClave = juiJC[0].substring(juiJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
+                                        out.println("<td>" + ccJO + extraeClave + "</td>");
                                         out.println("<td>" + juiJC[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClave=" + juiJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td></td>");
+                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClave=" + ccJO + extraeClave
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }
@@ -319,30 +327,30 @@
                     <tbody>
                         <%
                             if(!ccJC.equals("")){
-                                y = 0;
-                                concJC = conclusion.findConcluCausaJC(ccJuz);
-                                for(String[] conJC : concJC){//For para recorrer todos los procesados que pasan a JO en JC
-                                    concJO = conclusion.findConcluCausaJO(ccJuz, conJC[0]);
-                                    if(concJO.size() > 0){//Si el procesado esta en inicial de la BD lo agregamos
-                                        out.println("<tr>");
-                                        out.println("<td>" + concJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + concJO.get(0)[1] + "</td>");
-                                        out.println("<td>" + concJO.get(0)[2] + "</td>");
-                                        out.println("<td>" + concJO.get(0)[3] + "</td>");
-                                        out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClave=" + concJO.get(0)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("</tr>");
-                                    }else{
-                                        out.println("<tr>");
-                                        out.println("<td>" + conJC[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + conJC[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
-                                        out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClave=" + conJC[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("</tr>");
+                                etapaProce = juicio.findCausaConcluJO(ccJO + jc.replace("-", ""));//Buscamos cuales procesados se encuentran en conclusion en etapa oral
+                                if(etapaProce.size() != 0){//Si existen entramos a mostrarlos en la tabla
+                                    for(y = 0; y < etapaProce.size(); y++){//For para recorrer todos los procesados registrados en etapa oral en BD
+                                        concJO = conclusion.findConcluTablaJO(etapaProce.get(y)[0]);//Le enviamos el procesado
+                                        if(concJO.size() > 0){//Si tel procesado esta en conclusion lo ponemos
+                                            out.println("<tr>");
+                                            out.println("<td>" + concJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + concJO.get(0)[1] + "</td>");
+                                            out.println("<td>" + concJO.get(0)[2] + "</td>");
+                                            out.println("<td>" + concJO.get(0)[3] + "</td>");
+                                            out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClave=" + concJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                                    + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                            out.println("</tr>");
+                                        }else{
+                                            out.println("<tr>");
+                                            out.println("<td>" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + etapaProce.get(y)[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
+                                            out.println("<td></td>");
+                                            out.println("<td></td>");
+                                            out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClave=" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "")
+                                                    + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                            out.println("</tr>");
+                                        }
                                     }
-                                    y++;
                                 }
                             }
                         %>
@@ -389,34 +397,30 @@
                     <tbody>
                         <%
                             if(!ccJC.equals("")){
-                                y = 0;
-                                int i=1,m=0;
-                                   tramJC = tramite.findTramiteCausaJC(ccJuz);
-                                    for(String[] traJC : tramJC){//For para recorrer todos los procesados que pasan a JO en JC
-                                    int countTram=tramite.countTramitesInsertados(ccJuz);
-                                    tramJO = tramite.findTramiteCausaJO(ccJuz);
-                                    if(i <=countTram){//Si el procesado esta en inicial de la BD lo agregamos
-                                        out.println("<tr>");
-                                        out.println("<td>" + tramJO.get(m)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + tramJO.get(m)[1] + "</td>");
-                                        out.println("<td>Juicio Oral</td>");
-                                        out.println("<td>" + tramJO.get(m)[2] + "</td>");
-                                        out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + tramJO.get(m)[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("</tr>");
-                                        i=i+1;
-                                        m=m+1;
-                                    }else{
-                                        out.println("<tr>");
-                                        out.println("<td>" + traJC[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + traJC[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
-                                        out.println("<td>Juicio Oral</td>");
-                                        out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + traJC[0].replace(jc.replace("-", ""), "")
-                                                + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("</tr>");
+                                etapaProce = juicio.findCausaTramJO(ccJO + jc.replace("-", ""));//Buscamos cuales procesados se encuentran en tramite en etapa inicial
+                                if(etapaProce.size() != 0){//Si existen entramos a mostrarlos en la tabla
+                                    for(y = 0; y < etapaProce.size(); y++){//For para recorrer todos los procesados registrados en etapa oral en BD
+                                        tramJO = tramite.findTramiteTablaJO(etapaProce.get(y)[0]);//Le enviamos el procesado
+                                        if(tramJO.size() != 0){//Si tel procesado esta en tramite lo ponemos
+                                            out.println("<tr>");
+                                            out.println("<td>" + tramJO.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + tramJO.get(y)[1] + "</td>");
+                                            out.println("<td>Juicio Oral</td>");
+                                            out.println("<td>" + tramJO.get(y)[2] + "</td>");
+                                            out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + tramJO.get(y)[0].replace(jc.replace("-", ""), "")
+                                                    + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                            out.println("</tr>");
+                                        }else{
+                                            out.println("<tr>");
+                                            out.println("<td>" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + etapaProce.get(y)[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
+                                            out.println("<td>Juicio Oral</td>");
+                                            out.println("<td></td>");
+                                            out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "")
+                                                    + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                            out.println("</tr>");
+                                        }
                                     }
-                                    y++;
                                 }
                             }
                         %>

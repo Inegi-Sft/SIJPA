@@ -105,15 +105,16 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopImmediatePropagation();
         if($('#delitoNT').val() === '1' || $('#delitoNT').val() === '4'){//Homicidio
-             if ($('input[name="contextoSitua"]:checked').length === 0) {
+            if ($('input[name="contextoSitua"]:checked').length === 0) {
                 alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
                 $('input[name="contextoSitua"]').focus();
                 return false;
             }
-        }else if($('#delitoNT').val() === '31'){//Robo a casa abitacón
-            if ($('input[name="dCosaRobada"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
-                $('input[name="dCosaRobada"]').focus();
+        }else if($('#delitoNT').val() === '31'){//Robo a casa habitacion
+            if ($('input[name="cosaRobada"]:checked').length === 0) {
+                alert('entramos  delitosJO');
+                alert('Selecciona al menos una opcion de Cosa Robada');
+                $('input[name="CosaRobada"]').focus();
                 return false;
             }
         }

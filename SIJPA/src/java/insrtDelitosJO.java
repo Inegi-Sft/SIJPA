@@ -6,6 +6,7 @@
 
 import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.showCausasPenales;
+import clasesAuxiliar.showCausasPenalesJO;
 import clasesAuxiliar.showDelitosJO;
 import clasesAuxiliar.usuario;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class insrtDelitosJO extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     showCausasPenales cp = new showCausasPenales();
+    showCausasPenales cp = new showCausasPenales();
     showDelitosJO sd = new showDelitosJO();
     Conexion_Mysql conn = new Conexion_Mysql();
 
@@ -64,8 +65,10 @@ public class insrtDelitosJO extends HttpServlet {
         String causaClaveJC = (String) sesion.getAttribute("causaClave");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
         
-        String delitoClaveJC = request.getParameter("delitoClave");
-        String [] delitoSepara = delitoClaveJC.split("-");
+        /*Si es la primera vez que se inserta entonces trae clave de JC, tendremos que extraerla para 
+        convertiral en JO*/
+        String delitoClave = request.getParameter("delitoClave");
+        String [] delitoSepara = delitoClave.split("-");
         String delitoClaveJO = causaClaveJO.replace(jConcatenado, "") + "-" + delitoSepara[1];
         
         String delitoCP = request.getParameter("delitoCP");
@@ -97,7 +100,7 @@ public class insrtDelitosJO extends HttpServlet {
             
             if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo               
                 sql="INSERT INTO DATOS_DELITOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + ",'" + jNumero + "','"
-                        + causaClaveJC + "','" + delitoClaveJC + jConcatenado + "','" + causaClaveJO + "','"
+                        + causaClaveJC + "','" + delitoClave + jConcatenado + "','" + causaClaveJO + "','"
                         + delitoClaveJO + jConcatenado + "'," + delitoCP + "," + articuloCP + ","
                         + delitoNT + "," + fuero + "," + reclasificaDel + ",'" + fechaReclaDel + "','" + ocurrencia + "',"
                         + sitioO + "," + consumacion + "," + calificacion + "," + clasificacion + "," + concurso + ","
@@ -124,13 +127,13 @@ public class insrtDelitosJO extends HttpServlet {
 
                     showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
-                    showCausasPenales causa = new showCausasPenales();
-                    int totDelInsrt = deli.countDelitosInsertados(causaClaveJO);
-                    int totDel = causa.countTotalDelitos(causaClaveJO);
-                   /* if(totDel == totDelInsrt){
+                    showCausasPenalesJO causa = new showCausasPenalesJO();
+                    int totDelInsrt = deli.countDelitosInsertadosJO(causaClaveJO);
+                    int totDel = causa.countTotalDelitosJO(causaClaveJO);
+                    if(totDel == totDelInsrt){
                         usuario usuario = new usuario();
-                        usuario.insrtAvance(causaClaveJO, 3);//Actualizamos el avance de la causa penal
-                    }*/
+                        usuario.insrtAvanceJO(causaClaveJC, causaClaveJO, 3);//Actualizamos el avance de la causa penal JO
+                    }
                     lis = deli.findDeliTablaJO(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
@@ -183,7 +186,7 @@ public class insrtDelitosJO extends HttpServlet {
                     }
                     showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
-                    int totDelInsrt = deli.countDelitosInsertados(causaClaveJO);
+                    int totDelInsrt = deli.countDelitosInsertadosJO(causaClaveJO);
                     lis = deli.findDeliTablaJO(delitoClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);

@@ -102,48 +102,69 @@ $(document).ready(function () {
             data: $('#formCausaPenalJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Causa Penal JO: ", response);
-                if(response === "Realizado"){
-                    alert("Guardado con exito!!!");
-                    $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
-                    $("#guardarExpJO").prop("hidden", true);
-                    openPestana('btn2', 'p2');
-                }else{
-                    alert("Ocurrio un error, favor de verificarlo");
-                }
-                /*if (response !== null && $.isArray(response)) {
-                    if(response[0] === 1){//organo competente
-                        var expe = $('#expClave').val();
-                        for(var x = 1; x <= response[2]; x++){
-                            $('#tablaDeli tbody').append('<tr><td>' + expe + "-D" + x + '</td><td></td><td></td><td></td><td></td>\n\
-                            <td></td><td><a class="pop" href="delitos.jsp?delitoClave=' + expe + '-D' + x + '&posicion=' + (x-1) + '">\n\
-                            <img src="img/editar.png" title="Modificar"/></a></td>\n\
-                            <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
-                                onclick="borraRegistro(\'' + expe + '-D' + x + response[1] + '\',' + (x-1) + ',\'tablaDeli\',\'#Tdelitos\')"/>\n\
-                            </td></a></tr>');
-                        }
-                        for(var x = 1; x <= response[3]; x++){
-                            $('#tablaProcesa tbody').append('<tr><td>' + expe + "-P" + x + '</td><td></td><td></td><td></td>\n\
-                            <td></td><td><a class="pop" href="procesados.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
-                            <img src="img/editar.png" title="Modificar"/></a></td>\n\
-                            <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
-                                onclick="borraRegistro(\'' + expe + '-P' + x + response[1] + '\',' + (x-1) + ',\'tablaProcesa\',\'#Tadolescentes\')"/>\n\
-                            </td></a></tr>');
-                            
-                            $('#tablaInicial tbody').append('<tr><td>' + expe + "-P" + x + '</td><td></td><td></td><td></td><td></td>\n\
-                            <td></td><td><a class="pop" href="etapaInicial.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
-                            <img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        }
-                        for(var x = 1; x <= response[4]; x++){
-                            $('#tablaVictimas tbody').append('<tr><td>' + expe + "-V" + x + '</td><td></td><td></td><td></td>\n\
-                            <td></td><td><a class="pop" href="victimas.jsp?victiClave=' + expe + '-V' + x + '&posicion=' + (x-1) + '">\n\
-                            <img src="img/editar.png" title="Modificar"/></a></td>\n\
-                            <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
-                                onclick="borraRegistro(\'' + expe + '-V' + x + response[1] + '\',' + (x-1) + ',\'tablaVictimas\',\'#Tvictimas\')"/>\n\
-                            </td></a></tr>');
-                        }
-                        openPestana('btn2', 'p2');
+                alert("Guardado con exito!!!");
+                $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
+                $("#guardarExpJO").prop("hidden", true);
+                var ccJO = $('#expClaveJO').val();
+                var x = 0;
+                var text = '';
+                if(response[0] === '1'){
+                    //Recorremos la tabla de delitos JO
+                    for(x = 0; x < $('#tablaDeliJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaDeliJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaDeliJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
                     }
-                }*/
+                    //Recorremos la tabla de procesados
+                    for(x = 0; x < $('#tablaProcesaJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaProcesaJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaProcesaJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
+                    }
+                    //Recorremos la tabla de victimas
+                    for(x = 0; x < $('#tablaVictimasJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaVictimasJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaVictimasJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
+                    }
+                    //Recorremos la tabla de etapa oral
+                    for(x = 0; x < $('#tablaJuicioJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaJuicioJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaJuicioJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
+                    }
+                    openPestana('btn2', 'p2');
+                }
+//                if (response !== null && $.isArray(response)) {
+//                    var expe = $('#expClaveJO').val();
+//                    for(var x = 1; x <= response[1]; x++){
+//                        $('#tablaDeliJO tbody').append('<tr><td>' + expe + "-D" + x + '</td><td></td><td></td><td></td><td></td>\n\
+//                        <td></td><td><a class="pop" href="delitosJO.jsp?delitoClave=' + expe + '-D' + x + '&posicion=' + (x-1) + '">\n\
+//                        <img src="img/editar.png" title="Modificar"/></a></td>\n\
+//                        <td></tr>');
+//                    }
+//                    for(var x = 1; x <= response[2]; x++){
+//                        $('#tablaProcesaJO tbody').append('<tr><td>' + expe + "-P" + x + '</td><td></td><td></td><td></td>\n\
+//                        <td></td><td><a class="pop" href="procesadosJO.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
+//                        <img src="img/editar.png" title="Modificar"/></a></td>\n\
+//                        <td></tr>');
+//
+//                        $('#tablaJuicioJO tbody').append('<tr><td>' + expe + "-P" + x + '</td><td></td><td></td><td></td><td></td>\n\
+//                        <td></td><td><a class="pop" href="etapaOral.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
+//                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+//                    }
+//                    for(var x = 1; x <= response[3]; x++){
+//                        $('#tablaVictimasJO tbody').append('<tr><td>' + expe + "-V" + x + '</td><td></td><td></td><td></td>\n\
+//                        <td></td><td><a class="pop" href="victimasJO.jsp?victiClave=' + expe + '-V' + x + '&posicion=' + (x-1) + '">\n\
+//                        <img src="img/editar.png" title="Modificar"/></a></td>\n\
+//                        <td></tr>');
+//                    }
+//                    openPestana('btn2', 'p2');
+//                }
             },
             error: function (response) {
                 console.log("Respuesta del servidor Causa Penal: ", response);

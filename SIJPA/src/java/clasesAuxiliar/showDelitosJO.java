@@ -271,11 +271,11 @@ public class showDelitosJO {
         return deliAdi;
     }
     
-    public int countDelitosInsertados(String causaClave) {
+    public int countDelitosInsertadosJO(String causaClaveJO) {
         try {
             conn.Conectar();
             conteoDel = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND DELITO_CODIGO_PENAL <> -2;";
             resul = conn.consultar(sql);
             while (resul.next()) {

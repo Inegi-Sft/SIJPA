@@ -5,7 +5,9 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showCausasPenalesJO;
 import clasesAuxiliar.showProcesadosJO;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -45,6 +47,7 @@ public class insrtProcesadosJO extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
+        
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
@@ -58,8 +61,8 @@ public class insrtProcesadosJO extends HttpServlet {
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
 
         // VARIABLES PROCESADOS
-        String proceClaveJC = request.getParameter("proceClave");
-        String [] proceSepara = proceClaveJC.split("-");
+        String proceClave = request.getParameter("proceClave");
+        String [] proceSepara = proceClave.split("-");
         String proceClaveJO = causaClaveJO.replace(jConcatenado, "") + "-" + proceSepara[1];
         
         String nombre = request.getParameter("nombre").toUpperCase();
@@ -118,7 +121,7 @@ public class insrtProcesadosJO extends HttpServlet {
             
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_PROCESADOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                        + causaClaveJC + "','" + proceClaveJC + jConcatenado + "','" + causaClaveJO + "','"
+                        + causaClaveJC + "','" + proceClave + jConcatenado + "','" + causaClaveJO + "','"
                         + proceClaveJO + jConcatenado + "','" + nombre + "','"+ apaterno + "','" + amaterno + "','"
                         + alias + "','" + curp + "','" + fNacimiento + "'," + sexo + "," + edad + "," + nPais + "," + nEntidad + ","
                         + nMunicipio + "," + nacionalidad + "," + residencia + "," + rEntidad + "," + rMunicipio + "," + edoCivil + ","
@@ -153,13 +156,13 @@ public class insrtProcesadosJO extends HttpServlet {
                     if(insertPD){
                         showProcesadosJO pro = new showProcesadosJO();
                         ArrayList<String[]> lis = new ArrayList<>();
-                        //showCausasPenalesJO causa = new showCausasPenalesJO();
+                        showCausasPenalesJO causa = new showCausasPenalesJO();
                         int totProceInsrt = pro.countProcesadosJO(causaClaveJO);
-                        /*int totProce = causa.countTotalProcesados(causaClaveJO);
+                        int totProce = causa.countTotalProcesadosJO(causaClaveJO);
                         if(totProce == totProceInsrt){
                             usuario usuario = new usuario();
-                            usuario.insrtAvance(causaClaveJO, 4);//Actualizamos el avance de la causa penal
-                        */
+                            usuario.insrtAvanceJO(causaClaveJO, causaClaveJO, 4);//Actualizamos el avance de la causa penal JO
+                        }
                         lis = pro.findProcesasdosTablaJO(proceClaveJO + jConcatenado);
                         JSONArray resp = new JSONArray();
                         resp.add(posicion);

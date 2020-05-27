@@ -133,7 +133,7 @@ public class showVictimasJO {
                     resul.getString("CONDICION_ALFABETISMO"), resul.getString("GRADO_ESTUDIOS"), resul.getString("HABLA_ESPANOL"),
                     resul.getString("LENGUA_EXTRANJERA"), resul.getString("HABLA_INDIGENA"), resul.getString("LENGUA_INDIGENA"),
                     resul.getString("INTERPRETE"), resul.getString("OCUPACION"), resul.getString("INGRESOS"), resul.getString("RANGO_INGRESOS"),
-                    resul.getString("COMENTARIOS")
+                    resul.getString("MEDIDAS_PROTECCION"), resul.getString("MEDIDAS_MUJER"), resul.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -183,17 +183,11 @@ public class showVictimasJO {
         return vicDelito;
     }
     
-    public ArrayList findVprocesadosJC(String causaClaveJC) {
+    public ArrayList findVprocesadosJO(String causaClaveJO) {
         conn.Conectar();
         vicProce = new ArrayList();
-//        sql = "SELECT PROCESADO_CLAVEJO FROM DATOS_PROCESADOS_ADOJO "
-//                + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
-        sql = "SELECT P.PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC P"
-            + " INNER JOIN DATOS_CONCLUSIONES_ADOJC C"
-            + " ON C.CAUSA_CLAVE=P.CAUSA_CLAVE AND P.PROCESADO_CLAVE=C.PROCESADO_CLAVE"
-            + " WHERE P.CAUSA_CLAVE = '" + causaClaveJC + "'"
-            + " AND C.TIPO_RESOLUCION = 5"
-            + " ORDER BY 1";
+        sql = "SELECT PROCESADO_CLAVEJO FROM DATOS_PROCESADOS_ADOJO "
+                + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -273,8 +267,8 @@ public class showVictimasJO {
         try {
             conn.Conectar();
             vicIngre = new ArrayList();
-            sql = "SELECT INGRESO FROM DATOS_VFUENTE_INGRESOS_ADOJO "
-                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+            sql = "SELECT INGRESO FROM DATOS_VFUENTE_INGRESOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
                     + "AND VICTIMA_CLAVE = '" + victiClave + "' "
                     + "AND INGRESO = " + ingreso + ";";
             resul = conn.consultar(sql);

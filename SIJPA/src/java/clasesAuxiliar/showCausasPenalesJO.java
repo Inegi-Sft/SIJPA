@@ -153,6 +153,40 @@ public class showCausasPenalesJO {
         return total;
     }
     
+    public int countTotalDelitosJO(String causaClaveJO) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public int countTotalProcesadosJO(String causaClaveJO) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = " + causaClaveJO + "'";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
     public int countTotalVictimasJC(String causaClaveJC) {
         total = 0;
         try {

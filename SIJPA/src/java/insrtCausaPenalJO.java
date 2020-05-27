@@ -5,6 +5,7 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -48,8 +50,8 @@ public class insrtCausaPenalJO extends HttpServlet {
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
-        String causaClaveJC = request.getParameter("expClaveJC");
-        String causaClaveJO = request.getParameter("expClaveJO");
+        String causaClaveJC = request.getParameter("expClaveJC").toUpperCase();
+        String causaClaveJO = request.getParameter("expClaveJO").toUpperCase();
         String fecha_ingreso = request.getParameter("fIngresoJO");
         String totalDeli = request.getParameter("TdelitosJO");
         String totalAdo = request.getParameter("TadolescentesJO");
@@ -67,7 +69,7 @@ public class insrtCausaPenalJO extends HttpServlet {
             PrintWriter out = response.getWriter();
             conn.Conectar();
             
-            if(opera.equals("insertar")){//Si hay causa entonces se inserta
+            if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
                 sesion.setAttribute("causaClaveJO", causaClaveJO + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + causaClaveJC + jConcatenado +"','" + causaClaveJO + jConcatenado + "','" + fecha_ingreso + "',"
@@ -75,22 +77,14 @@ public class insrtCausaPenalJO extends HttpServlet {
                         + juezJO1 +","+ juezJO2 +","+ juezJO3 +",'"+ comentario + "', (select YEAR(NOW())));";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
-                    out.write("Realizado");
-//                    usuario usuario = new usuario();
-//                    usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal
-//                    usuario.insrtRegDPV(causaClave, juzgadClave, Integer.parseInt(totalDeli), Integer.parseInt(totalAdo), Integer.parseInt(totalVic));
-//                    JSONArray resp = new JSONArray();
-//                    resp.add(competencia);//regresamos competencia
-//                    resp.add(jConcatenado);//regresamos juzgado concatenado
-//                    resp.add(totalDeli);//regresamos total de delitos
-//                    resp.add(totalAdo);//regresamos total de adolescenetes
-//                    resp.add(totalVic);//regresamos total de victimas
-//                    out.write(resp.toJSONString());
+                    usuario usuario = new usuario();
+                    usuario.insrtAvanceJO(causaClaveJC + jConcatenado, causaClaveJO + jConcatenado, 2);//Insertamos el avance de la causa penal
+                    out.write("1");
                     conn.close();
                 } else {
                     conn.close();
                 }
-            }else if(opera.equals("actualizar")){//Si NO hay causa entonces es actulizacion
+            }else{
                 sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJO SET FECHA_INGRESO = '"+ fecha_ingreso +"', TOTAL_DELITOS = "+ totalDeli +","
                     + " TOTAL_PROCESADOS = "+ totalAdo +", TOTAL_VICTIMAS = "+ totalVic +", ATENDIDA_ORGDIFERENTE = "+ organoDiferente +","
                     + " JUZGADO_DIFERENTE = '"+ juzgadoDiferente +"', CANTIDAD_JUECES = "+ cantJuez +", JUEZ_CLAVE_1 = "+ juezJO1 +","
@@ -99,7 +93,7 @@ public class insrtCausaPenalJO extends HttpServlet {
                     + " AND CAUSA_CLAVEJO = '" + sesion.getAttribute("causaClaveJO") + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
-                    out.write("Realizado");
+                    out.write("0");
                     conn.close();
                 } else {
                     conn.close();

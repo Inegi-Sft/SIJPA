@@ -100,7 +100,7 @@ public class insrtConclusiones extends HttpServlet {
                             sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
                                     + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolu + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
-                            insrtDConclu=conn.escribir(sql);
+                            insrtDConclu = conn.escribir(sql);
                         }
                     }
                     //Solo se actualizan los que estan volando (etapa 5)

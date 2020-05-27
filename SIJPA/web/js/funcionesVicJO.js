@@ -12,6 +12,11 @@ $(document).ready(function() {
             $('#victiFisicas, #mediProtec').show();
         }else if(tipoVi === '2'){
             $('#tipoMoral').show();
+            $('#tvic_moral').prop('required', true);
+            $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
+            $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
+            $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
         }
         $("#tipoVictima option[value='" + tipoVi + "']").prop('selected', true);
     }
@@ -74,7 +79,7 @@ $(document).ready(function() {
         switch ($(this).val()) {
             case '1':
                 $('#victiFisicas').fadeIn('slow');
-                $('#sexoV, #fnacimientoV, #edad, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
+                $('#sexoV, #fnacimientoV, #edadVi, #vulnera, #Pnacimiento, #naciona, #Preside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #interprete, #hablaesp, #indigena, #extrangera, #ocupa, #ingresos').val('').prop('required', true);
                 $('#tipoMoral').fadeOut('slow');
                 $('#tvic_moral').val('-2').prop('required', false);
@@ -84,16 +89,16 @@ $(document).ready(function() {
                 $('#tvic_moral').val('').prop('required', true);
 
                 $('#victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
-                $('#sexoV, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
-                $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
+                $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
                 $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
                 break;
             default:
                 $('#tipoMoral, #victiFisicas, #estaNaci, #munNaci, #estaResi, #munResi, #famLingui, #rangoInge, #fuenteIngre').fadeOut('slow');
-                $('#tvic_moral, #sexoV, #edad, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                $('#tvic_moral, #sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
                     #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #rangoIngresos, #extrangera').val('-2').prop('required', false);
-                $('#fnacimientoV').val("1899-09-09").prop({'required': false, 'readonly':false});
+                $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
                 $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
                 break;
         }
@@ -185,20 +190,20 @@ $(document).ready(function() {
             success: function (response) {
                 console.log("Respuesta del servidor Victimas: ", response);
                 alert("Guardado con exito!!!");
-                var numProce = parseInt(parent.$('#Tvictimas').val());
+                var numProce = parseInt(parent.$('#TvictimasJO').val());
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i < 5; i++) {
+                    for (var i = 1; i < 6; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaVictimas tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+                        parent.$('#tablaVictimasJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                     }
-                    //editamos enlance para que pueda ser actualizado ya estando lleno
-                    var enlace = parent.$('#tablaVictimas tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
-                    parent.$('#tablaVictimas tbody tr').eq(response[0]).find('a').attr('href',enlace);
-                    console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
-                    if (response[5] === numProce) {
+                    //editamos enlance para que pueda ser actualizado con la nueva clav jo ya estando lleno
+                    var enlace = 'victimasJO.jsp?victiClave='+ response[1] +'&posicion='+ response[0] +'&edita=Si';
+                    parent.$('#tablaVictimasJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
+                    console.log('Captu: ' + response[6] + ' Existen: ' + numProce);
+                    if (response[6] === numProce) {
                         parent.openPestana('btn5', 'p5');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[5]) + ' victimas');
+                        alert('Falta por capturar ' + (numProce - response[6]) + ' victimas');
                     }
                 }
                 parent.$.fancybox.close();

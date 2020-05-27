@@ -177,6 +177,19 @@ public class usuario {
         }
     }
     
+    public void insrtAvanceJO(String causaClaveJC, String causaClaveJO, int avanceJO){
+        try{
+            conn.Conectar();
+            sql = "UPDATE USUARIOS_CONTROL SET CAUSA_CLAVEJO = '" + causaClaveJO + "', AVANCEJO = " + avanceJO + " "
+                    + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "';";
+            System.out.println(sql);
+            conn.escribir(sql);
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void insrtRegDPV(String causaClave, String juzgadoClave, int totDel, int totPro, int totVict){
         try{
             int x;

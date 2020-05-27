@@ -40,6 +40,7 @@ $(document).ready(function () {
             $('#cosaRobada' + i).prop("checked", false).prop("disabled", true);
         }
     }
+    
     //Si mediante la captura sufre cambios el check, entonces se valida
     $('#cosaRobada99').change(function () {
         if ($(this).is(":checked")) {
@@ -59,6 +60,7 @@ $(document).ready(function () {
             $('#contextoSitua' + i).prop("checked", false).prop("disabled", true);
         }
     }
+    
     //Si mediante la captura sufre cambios el check, entonces se valida
     $('#contextoSitua99').change(function () {
         if ($(this).is(":checked")) {
@@ -104,6 +106,19 @@ $(document).ready(function () {
     $('#formDelitos').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+         if($('#delitoNT').val() === '1' || $('#delitoNT').val() === '4'){//Homicidio
+             if ($('input[name="contextoSitua"]:checked').length === 0) {
+                alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
+                $('input[name="contextoSitua"]').focus();
+                return false;
+            }
+        }else if($('#delitoNT').val() === '31'){//Robo a casa abitacón
+            if ($('input[name="dCosaRobada"]:checked').length === 0) {
+                alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
+                $('input[name="dCosaRobada"]').focus();
+                return false;
+            }
+        }
         $.ajax({
             type: 'post',
             url: 'insrtDelitos',

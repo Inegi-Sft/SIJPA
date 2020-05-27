@@ -38,7 +38,6 @@ public class showDelitosJO {
                 + "AND CO.TIPO_RESOLUCION = 5 "
                 + "AND DE.CAUSA_CLAVE = '" + causaClaveJC + "' "
                 + "ORDER BY 1;";
-        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -54,17 +53,17 @@ public class showDelitosJO {
         return deli;
     }
     
-    public ArrayList findDeliCausasJO(String causaClaveJO) {
+    public ArrayList findDeliCausasJO(String causaClaveJC, String delitoClave) {
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT DE.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, DE.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
-                + "FROM DATOS_DELITOS_ADOJO DE, DATOS_CAUSAS_PENALES_ADOJO CP, CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
-                + "WHERE DE.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                + "AND DE.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
+        sql = "SELECT DE.DELITO_CLAVEJO, CCN.CODIGO, CDN.DELITO, DE.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
+                + "FROM DATOS_DELITOS_ADOJO DE, CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
+                + "WHERE DE.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
                 + "AND DE.DELITO_NORMA_TECNICA = CDN.ID_DELITO "
                 + "AND DE.GRADO_CONSUMACION = CC.CONSUMACION_ID "
                 + "AND DE.FORMA_COMISION = CFC.COMISION_ID "
-                + "AND CP.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                + "AND DE.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+                + "AND DE.DELITO_CLAVEJC = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         System.out.println(sql);
         resul = conn.consultar(sql);
@@ -119,7 +118,7 @@ public class showDelitosJO {
                 + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
                 + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                + "AND DELITO_CLAVE = '" + delitoClave + "' "
+                + "AND DELITO_CLAVEJO = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         System.out.println("findelitosJO:"+sql);
         resul = conn.consultar(sql);
@@ -132,7 +131,58 @@ public class showDelitosJO {
                     resul.getString("D.GRADO_CONSUMACION"), resul.getString("D.CALIFICACION"), resul.getString("D.CLASIFICACION"),
                     resul.getString("D.CONCURSO"), resul.getString("D.FORMA_COMISION"), resul.getString("D.FORMA_ACCION"), resul.getString("D.MODALIDAD"),
                     resul.getString("D.INSTRUMENTO_COMISION"), resul.getString("D.OCURRIO_ENTIDAD"), resul.getString("D.OCURRIO_MUNICIPIO"),
-                    resul.getString("D.COMENTARIOS"),resul.getString("D.DELITO_CLAVE")
+                    resul.getString("D.COMENTARIOS"),resul.getString("D.DELITO_CLAVEJO")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    }
+    
+    public ArrayList findDelitosVictiJC(String causaClaveJC){
+        conn.Conectar();
+        deli = new ArrayList();
+        sql = "SELECT DISTINCT DE.DELITO_CLAVE, CN.CODIGO "
+                + "FROM DATOS_DELITOS_ADOJC DE, DATOS_PDELITOS_ADOJC PD, DATOS_CONCLUSIONES_ADOJC CO, CATALOGOS_CODIGO_NORMA CN "
+                + "WHERE DE.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                + "AND PD.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                + "AND DE.DELITO_CLAVE = PD.DELITO_CLAVE "
+                + "AND PD.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
+                + "AND DE.DELITO_CODIGO_PENAL = CN.ID_CODIGO "
+                + "AND CO.TIPO_RESOLUCION = 5 "
+                + "AND DE.CAUSA_CLAVE = '" + causaClaveJC + "' "
+                + "ORDER BY 1;";
+        System.out.println("findelitosJO:"+sql);
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showDelitosJO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deli;
+    }
+    
+    public ArrayList findDelitosVictiJO(String causaClaveJO){
+        conn.Conectar();
+        deli = new ArrayList();
+        sql = "SELECT D.DELITO_CLAVEJO, CN.CODIGO "
+                + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_CODIGO_NORMA CN "
+                + "WHERE D.DELITO_NORMA_TECNICA = CN.ID_CODIGO "
+                + "AND D.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                + "ORDER BY 1;";
+        System.out.println("findelitosJO:"+sql);
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                deli.add(new String[]{
+                    resul.getString(1), resul.getString(2)
                 });
             }
             conn.close();
@@ -221,11 +271,11 @@ public class showDelitosJO {
         return deliAdi;
     }
     
-    public int countDelitosInsertados(String causaClave) {
+    public int countDelitosInsertadosJO(String causaClaveJO) {
         try {
             conn.Conectar();
             conteoDel = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND DELITO_CODIGO_PENAL <> -2;";
             resul = conn.consultar(sql);
             while (resul.next()) {
@@ -239,16 +289,16 @@ public class showDelitosJO {
         return conteoDel;
     }
     
-     public ArrayList findDeliTabla(String delitoClave) {
+     public ArrayList findDeliTablaJO(String delitoClaveJO) {
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT D.DELITO_CLAVE, CCN.CODIGO, CDN.DELITO, D.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
+        sql = "SELECT D.DELITO_CLAVEJO, CCN.CODIGO, CDN.DELITO, D.FECHA_OCURRENCIA, CC.DESCRIPCION, CFC.DESCRIPCION "
                 + "FROM DATOS_DELITOS_ADOJO D,CATALOGOS_CODIGO_NORMA CCN, CATALOGOS_DELITOS_NORMA CDN, CATALOGOS_CONSUMACION CC, CATALOGOS_FORMA_COMISION CFC "
                 + "WHERE D.DELITO_CODIGO_PENAL = CCN.ID_CODIGO "
                 + "AND D.DELITO_NORMA_TECNICA = CDN.ID_DELITO "
                 + "AND D.GRADO_CONSUMACION = CC.CONSUMACION_ID "
                 + "AND D.FORMA_COMISION = CFC.COMISION_ID "
-                + "AND D.DELITO_CLAVE = '" + delitoClave + "' "
+                + "AND D.DELITO_CLAVEJO = '" + delitoClaveJO + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {

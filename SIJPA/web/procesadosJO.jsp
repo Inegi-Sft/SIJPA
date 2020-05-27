@@ -69,9 +69,6 @@
             String rangoIngre = "";
             String ocupacion = "";
             String condiActi = "";
-            String inicioPro = "";
-            String tipoDeten = "";
-            String formaCondu = "";
             String gradoParti = "";
             String reinciden = "";
             String edoPsicofi = "";
@@ -117,17 +114,14 @@
                         rangoIngre = procesado.get(0)[28];
                         ocupacion = procesado.get(0)[29];
                         condiActi = procesado.get(0)[30];
-                        inicioPro = procesado.get(0)[31];
-                        tipoDeten = procesado.get(0)[32];
-                        formaCondu = procesado.get(0)[33];
-                        gradoParti = procesado.get(0)[34];
-                        reinciden = procesado.get(0)[35];
-                        edoPsicofi = procesado.get(0)[36];
-                        gpoDeli = procesado.get(0)[37];
-                        nomGpoDeli = procesado.get(0)[38];
-                        defensor = procesado.get(0)[39];
-                        personaRes = procesado.get(0)[40];
-                        comen = procesado.get(0)[41];
+                        gradoParti = procesado.get(0)[31];
+                        reinciden = procesado.get(0)[32];
+                        edoPsicofi = procesado.get(0)[33];
+                        gpoDeli = procesado.get(0)[34];
+                        nomGpoDeli = procesado.get(0)[35];
+                        defensor = procesado.get(0)[36];
+                        personaRes = procesado.get(0)[37];
+                        comen = procesado.get(0)[38];
                     }else{
                         out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
@@ -167,9 +161,6 @@
                     rangoIngre = procesado.get(0)[28];
                     ocupacion = procesado.get(0)[29];
                     condiActi = procesado.get(0)[30];
-                    inicioPro = procesado.get(0)[31];
-                    tipoDeten = procesado.get(0)[32];
-                    formaCondu = procesado.get(0)[33];
                     gradoParti = procesado.get(0)[34];
                     reinciden = procesado.get(0)[35];
                     edoPsicofi = procesado.get(0)[36];
@@ -288,7 +279,7 @@
                                     </div>
                                     <div class="colsx oculto" id="dNEntidad">
                                         <label for="nEntidad">Entidad</label>
-                                        <select name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')" required>
+                                        <select name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();
@@ -304,7 +295,7 @@
                                     </div>
                                     <div class="colsx oculto" id="dNMunicipio">
                                         <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
-                                        <select name="nMunicipio" id="nMunicipio" required>
+                                        <select name="nMunicipio" id="nMunicipio">
                                             <%
                                                 if(!naciPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
                                                     out.println("<option value=''>--Seleccione--</option>");
@@ -836,7 +827,12 @@
                         </tr>
                         <%
                             int totVic = sCausaPen.countTotalVictimasJC(causaClaveJC);
-                            lista = sDeli.findDeliCausasJC(causaClaveJC);
+                            if(!edicion.equals("")){
+                                lista = sDeli.findDelitosVictiJO(causaClaveJO);
+                            }else{
+                                lista = sDeli.findDelitosVictiJC(causaClaveJC);
+                            }
+                            
                             for (String[] ls : lista) {
                         %>
                         <tr>
@@ -855,9 +851,9 @@
                                         for (int i = 0; i <= totVic; i++) {
                                             out.println("<option value=" + i + "");
                                             if(i == numVicti){
-                                                if(numVicti != 0){//Si el resultado es 0, entonces no lo seleccionamos en el select
+//                                                if(numVicti != 0){//Si el resultado es 0, entonces no lo seleccionamos en el select
                                                     out.println(" selected ");
-                                                }
+//                                                }
                                             }
                                             out.println(">" + i + "</option>");
                                         }

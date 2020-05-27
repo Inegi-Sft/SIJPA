@@ -4,6 +4,7 @@
     Author     : CESAR.OSORIO
 --%>
 
+<%@page import="clasesAuxiliar.showProcesadosJO"%>
 <%@page import="clasesAuxiliar.showDelitosJO"%>
 <%@page import="clasesAuxiliar.showVictimasJO"%>
 <%@page import="clasesAuxiliar.FechaMax"%>
@@ -75,6 +76,7 @@
                     victiJO = sVictima.findVictimasJO(causaClaveJO, victiClave + jConcatenado);
                     if(victiJO.size() > 0){
                         operacion = "actualizar";
+                        victiClaveJO=victiClave;
                         tipoVicti = victiJO.get(0)[0];
                         victiMoral = victiJO.get(0)[1];
                         contoAsesor = victiJO.get(0)[2];
@@ -101,7 +103,7 @@
                         ocupa = victiJO.get(0)[23];
                         ingresos = victiJO.get(0)[24];
                         rangoIngre = victiJO.get(0)[25];
-                        comen = victiJO.get(0)[28];
+                        comen = victiJO.get(0)[26];
                     }else{
                         out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
@@ -161,10 +163,10 @@
                                 <div class="cols">
                                     <label for="victima_clave">Víctima Clave</label>
                                     <% if(operacion.equals("insertar")){ %>
-                                        <input type="text" value="<%=victiClave%>" readonly/>
-                                        <input type="hidden" name="victiClave" id="victiClave" value="<%=victiClaveJO%>" readonly/>
+                                        <input type="text" name="victiClaveJC" id="victiClaveJC" value="<%=victiClave%>" readonly/>
+                                        <input type="hidden" name="victiClaveJO" id="victiClaveJO" value="<%=victiClaveJO%>" readonly/>
                                     <% }else{ %>
-                                        <input type="text" name="victiClave" id="victiClave" value="<%=victiClave%>" readonly/>
+                                        <input type="text" name="victiClaveJO" id="victiClaveJO" value="<%=victiClaveJO%>" readonly/>
                                     <% } %>
                                     <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>"/>
                                     <input type="hidden" name="opera" id="opera" value="<%=operacion%>"/>
@@ -218,26 +220,30 @@
                         <tbody>
                         <%
                             vic = sDelitos.findDeliCausasJC(causaClaveJC);
-                            String delitoClave="";
+                            String delitoClaveJO="";
                             for (String[] ls : vic) {
+                                delitoClaveJO= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-D"));//crea nueva clave de delito jo
                                 out.println("<tr>");
-                                out.println("<td>" + ls[0].replace(jConcatenado, "") + "</td>");
+                                if(!edicion.equals("")){//si es editar muestra la nueva clave de delito jo
+                                    out.println("<td>" + delitoClaveJO.replace(jConcatenado, "") + "</td>");
+                                }else{// si es insertar muestra la clave de delito jc pero inserta la clave jo
+                                    out.println("<td>" + ls[0].replace(jConcatenado, "") + "</td>");
+                                }
                                 out.println("<td>" + ls[1] + "</td>");
                                 out.println("<td>");
                                 if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
-                                    viDel = sVictima.findVDelitoJO(causaClaveJO, victiClave + jConcatenado, ls[0]);
+                                    viDel = sVictima.findVDelitoJO(causaClaveJO, victiClave + jConcatenado, delitoClaveJO);
                                     if(viDel.size() != 0){
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "' checked>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + viDel.get(0) + "' checked>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "'/>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "'/>");
                                     }
                                 }else{//SI edicion viene vacio entonces traemos JC
                                     viDel = sVictima.findVDelitoJC(causaClaveJC, victiClave + jConcatenado, ls[0]);
-                                    delitoClave= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-D"));//crea nueva clave de delito jo
                                     if(viDel.size() != 0){
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClave + "' checked>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "' checked>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClave + "'/>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "'/>");
                                     }
                                 }
                                 out.println("</td>");
@@ -293,13 +299,19 @@
                         </thead>
                         <tbody>
                         <%
-                            vic = sVictima.findVprocesadosJC(causaClaveJC);
+                            vic = sVictima.findVprocesadosJO(causaClaveJO);
                             int i = 0;
+                            String proceClaveJO="";
                             for (String[] ls : vic) {
+                                proceClaveJO= causaClaveJOSimple + ls[0].substring(ls[0].indexOf("-P"));//crea nueva clave de procesado jo
                                 out.println("<tr>");
                                 out.println("<td>");
-                                out.println(ls[0].replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + ls[0] + "'>");
-                                out.println("</td>");
+                                if(!edicion.equals("")){//si es editar muestra la nueva clave de procesado jo
+                                    out.println(proceClaveJO.replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + proceClaveJO + "'>");
+                                }else{//si es insertar muestra la clave de procesado jc pero inserta la clave jo
+                                    out.println(ls[0].replace(jConcatenado, "") + "<input type='hidden' name='proRela' value='" + proceClaveJO + "'>");
+                                }
+                                    out.println("</td>");
                                 out.println("<td>");
                                 lista = cat.findRelacionImputado();
                                 for (String[] los : lista) {
@@ -307,7 +319,7 @@
                                     viPro.clear();//limpiamos el array para poder llenar de manera correcta todos los check
                                     //Recuperamos el dato de la bd, si existe lo checheamos si no se encuentra vacio
                                     if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
-                                        viPro = sVictima.findViRelProcesadoJO(causaClaveJO, victiClave + jConcatenado, ls[0], los[0]);
+                                        viPro = sVictima.findViRelProcesadoJO(causaClaveJO, victiClaveJO + jConcatenado, proceClaveJO, los[0]);
                                         if(viPro.size() != 0){
                                             out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + los[0] + "' value=" + los[0] + " checked>");
                                         }else{
@@ -364,6 +376,7 @@
                                 <label for="edadVi">Edad</label>
                                 <select name="edadVi" id="edadVi" required>
                                     <option value="">--Seleccione--</option>
+                                    <option value="-2">-2</option>
                                     <%
                                         for (int m = 0; m <= 99; m++) {
                                             out.println("<option value='" + m + "'");

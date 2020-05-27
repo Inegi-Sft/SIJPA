@@ -135,19 +135,20 @@ $(document).ready(function() {
                 alert("Guardado con exito!!!");
                 var numProce = parseInt(parent.$('#TadolescentesJO').val());
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i < 5; i++) {
+                    for (var i = 1; i < 6; i++) {
 //                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaProcesaJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
+                        parent.$('#tablaProcesaJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
-                    var enlace = parent.$('#tablaProcesaJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
+                    var enlace = 'procesadosJO.jsp?proceClave=' + response[1] + '&posicion='+ response[0] +'&edita=Si';
                     parent.$('#tablaProcesaJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     //coloca el nombre del procesado en la tabla de etapa inicial
-                    parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[1]);
-                    if (response[5] === numProce) {
+                    parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[2]);
+                    console.log("datos interesantes: ", response[6],"",numProce);
+                    if (response[6] === numProce) {
                         parent.openPestana('btn4', 'p4');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
+                        alert('Falta por capturar ' + (numProce - response[6]) + ' procesados');
                     }
                 }
                 parent.$.fancybox.close();

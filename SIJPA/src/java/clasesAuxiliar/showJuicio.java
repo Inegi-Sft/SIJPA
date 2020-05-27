@@ -18,9 +18,10 @@ import java.util.logging.Logger;
  */
 public class showJuicio {
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> juicio;
+    ArrayList<String[]> juicio, proceEtapa;
     String sql;
     ResultSet resul;
+    int totProcesa;
     
     public ArrayList findProceJuicioJC(String causaClaveJC){
         try {
@@ -46,17 +47,19 @@ public class showJuicio {
         return juicio;
     }
     
-    public ArrayList findProceJuicioJO(String causaClaveJC, String proceClave){
+    public ArrayList findProceJuicioJO(String proceClave){
         try {
             conn.Conectar();
             juicio = new ArrayList();
-            sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), EO.MEDIDAS_DISCIPLINARIAS, EO.INCIDENTES_AUDIENCIA, EO.SUSPENCION_AUDIENCIA, EO.SENTIDO_FALLO "
-                    + "FROM DATOS_ETAPA_ORAL_ADOJO EO, DATOS_PROCESADOS_ADOJO PR, DATOS_CAUSAS_PENALES_ADOJO CP "
-                    + "WHERE EO.CAUSA_CLAVEJO = PR.CAUSA_CLAVEJO "
-                    + "AND EO.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                    + "AND PR.CAUSA_CLAVEJO = CP.CAUSA_CLAVEJO "
-                    + "AND EO.PROCESADO_CLAVE = PR.PROCESADO_CLAVE " 
-                    + "AND CP.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+            sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSM.DESCRIPCION, RSI.DESCRIPCION, RSS.DESCRIPCION, RSF.DESCRIPCION, CE.DESCRIPCION "
+                    + "FROM DATOS_ETAPA_ORAL_ADOJO EO, DATOS_PROCESADOS_ADOJO P, CATALOGOS_RESPUESTA_SIMPLE RSM, CATALOGOS_RESPUESTA_SIMPLE RSI, "
+                    + "CATALOGOS_RESPUESTA_SIMPLE RSS, CATALOGOS_RESPUESTA_SIMPLE RSF, CATALOGOS_ETAPAS CE "
+                    + "WHERE EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
+                    + "AND EO.MEDIDAS_DISCIPLINARIAS = RSM.RESPUESTA_ID "
+                    + "AND EO.INCIDENTES_AUDIENCIA = RSI.RESPUESTA_ID "
+                    + "AND EO.SUSPENCION_AUDIENCIA = RSS.RESPUESTA_ID "
+                    + "AND EO.DELIBERACION = RSF.RESPUESTA_ID "
+                    + "AND EO.ETAPA = CE.ETAPA_ID "
                     + "AND EO.PROCESADO_CLAVE = '" + proceClave + "' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
@@ -71,5 +74,124 @@ public class showJuicio {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return juicio;
+    }
+    
+    public int countProcesadosOral(String causaClave) {
+        try {
+            conn.Conectar();
+            totProcesa = 0;
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_ETAPA_ORAL_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClave + "'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                totProcesa = resul.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return totProcesa;
+    }
+    
+    public ArrayList findOralTabla(String proceClave) {
+        conn.Conectar();
+        juicio = new ArrayList();
+        sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSM.DESCRIPCION, RSI.DESCRIPCION, RSS.DESCRIPCION, RSF.DESCRIPCION "
+                + "FROM DATOS_ETAPA_ORAL_ADOJO EO, DATOS_PROCESADOS_ADOJO P, CATALOGOS_RESPUESTA_SIMPLE RSM, CATALOGOS_RESPUESTA_SIMPLE RSI, CATALOGOS_RESPUESTA_SIMPLE RSS, CATALOGOS_RESPUESTA_SIMPLE RSF "
+                + "WHERE EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
+                + "AND EO.MEDIDAS_DISCIPLINARIAS = RSM.RESPUESTA_ID "
+                + "AND EO.INCIDENTES_AUDIENCIA = RSI.RESPUESTA_ID "
+                + "AND EO.SUSPENCION_AUDIENCIA = RSS.RESPUESTA_ID "
+                + "AND EO.DELIBERACION = RSF.RESPUESTA_ID "
+                + "AND EO.PROCESADO_CLAVE = '" + proceClave + "' "
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                juicio.add(new String[]{
+                    resul.getString(1), resul.getString(2), resul.getString(3),
+                    resul.getString(4), resul.getString(5), resul.getString(6)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return juicio;
+    }
+    
+    public ArrayList findAllEtapaOral(String causaClave, String proceClave) {
+        conn.Conectar();
+        juicio = new ArrayList();
+        sql = "SELECT * FROM DATOS_ETAPA_ORAL_ADOJO "
+                + "WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
+                + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                juicio.add(new String[]{
+                    resul.getString("FECHA_APERTURA_JUICIOORAL"), resul.getString("FECHA_AUDIENCIA_JUICIO"), resul.getString("MEDIDAS_DISCIPLINARIAS"),
+                    resul.getString("TIPO_DISCIPLINARIA"), resul.getString("INCIDENTES_AUDIENCIA"), resul.getString("FECHA_RESOLUCION_INCIDENTE"),
+                    resul.getString("PROMUEVE_INCIDENTE"), resul.getString("PD_TESTIMONIAL"), resul.getString("PD_PERICIAL"),
+                    resul.getString("PD_DECLARACION_ACUSADO"), resul.getString("PD_DOCUMENTAL_MATERIAL"), resul.getString("PD_OTRA_PRUEBA"),
+                    resul.getString("SUSPENCION_AUDIENCIA"), resul.getString("FECHA_SUSPENCION"), resul.getString("FECHA_REANUDACION"),
+                    resul.getString("DELIBERACION"), resul.getString("FECHA_DELIBERACION"), resul.getString("SENTIDO_FALLO"),resul.getString("COMENTARIOS")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return juicio;
+    }
+    
+    public ArrayList findCausaConcluJO(String causaClaveJO){
+        proceEtapa = new ArrayList();
+        try {
+            conn.Conectar();
+            sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO) "
+                    + "FROM DATOS_ETAPA_ORAL_ADOJO EO "
+                    + "JOIN DATOS_PROCESADOS_ADOJO P "
+                    + "ON EO.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
+                    + "AND EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
+                    + "WHERE EO.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND EO.ETAPA REGEXP '1' "
+                    + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                proceEtapa.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proceEtapa;
+    }
+    
+    public ArrayList findCausaTramJO(String causaClaveJO){
+        proceEtapa = new ArrayList();
+        try {
+            conn.Conectar();
+            sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO) "
+                    + "FROM DATOS_ETAPA_ORAL_ADOJO EO "
+                    + "JOIN DATOS_PROCESADOS_ADOJO P "
+                    + "ON EO.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
+                    + "AND EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
+                    + "WHERE EO.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND EO.ETAPA REGEXP '2' "
+                    + "ORDER BY 1;";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                proceEtapa.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proceEtapa;
     }
 }

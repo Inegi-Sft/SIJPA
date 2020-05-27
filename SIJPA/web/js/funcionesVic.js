@@ -13,6 +13,11 @@ $(document).ready(function() {
             $('#victiFisicas, #mediProtec').show();
         }else if(tipoVi === '2'){
             $('#tipoMoral').show();
+            $('#tvic_moral').prop('required', true);
+            $('#sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
+            $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
+            $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
         }
         $("#tipoVictima option[value='" + tipoVi + "']").prop('selected', true);
     }

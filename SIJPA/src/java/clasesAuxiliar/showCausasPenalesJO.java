@@ -62,7 +62,7 @@ public class showCausasPenalesJO {
             causas = new ArrayList();
             sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' AND "
                     + "CAUSA_CLAVEJO = '" + causaClaveJO + "';";
-            System.out.println(sql);
+            System.out.println("findCausaPenalJO:"+sql);
             rs = conn.consultar(sql);
             while(rs.next()){
                 causas.add(new String[]{
@@ -216,7 +216,7 @@ public class showCausasPenalesJO {
         }
         return total;
     }
-    
+  
     public int countTotalVictimasJO(String causaClaveJO) {
         total = 0;
         try {
@@ -232,6 +232,44 @@ public class showCausasPenalesJO {
         } catch (SQLException ex) {
             Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return total;
+      return total;
+    }
+    
+
+        public boolean CarpetaInvesJO(String juzgadoClave, String numcarpetaJO) {
+        boolean Exis = false;
+        try {
+            conn.Conectar();
+            sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJO WHERE CAUSA_CLAVEJO='" + numcarpetaJO + "' AND "
+                    + " JUZGADO_CLAVE = '" + juzgadoClave + "'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            if (rs.next()) {
+                Exis = true;
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Exis;
+    }
+        
+        public String FechaIngJO(String juzgadoClave, String causaClaveJO) {
+        String FechaIngreso = "";
+        try {
+            conn.Conectar();
+            sql = "SELECT FECHA_INGRESO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' AND "
+                    + "CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            if (rs.next()) {
+                FechaIngreso = rs.getString("FECHA_INGRESO");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return FechaIngreso;
     }
 }

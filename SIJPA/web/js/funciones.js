@@ -723,14 +723,14 @@ function VFechaOcurrencia(Ocurr) {
 }
 
 function ValidaCarpeInvest(InputCarpInves) {
-    var CarpInves = $(InputCarpInves).val();
-    if (CarpInves !== '') {
+    var CarpInvestiga = $(InputCarpInves).val();
+    if (CarpInvestiga !== '') {
         $.ajax({
             type: 'post',
             url: 'obtenCarpeInves',
             data: {
-                CarpInves: CarpInves
-            },
+            CarpInvestiga: CarpInvestiga,
+             },
             success: function (response) {
                 console.log("Respuesta del servidor", response);
                 // alert("respuesta del servidor= "+response);

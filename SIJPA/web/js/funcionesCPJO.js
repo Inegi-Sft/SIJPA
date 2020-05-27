@@ -105,7 +105,38 @@ $(document).ready(function () {
                 alert("Guardado con exito!!!");
                 $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
                 $("#guardarExpJO").prop("hidden", true);
+                var ccJO = $('#expClaveJO').val();
+                var x = 0;
+                var text = '';
                 if(response[0] === '1'){
+                    //Recorremos la tabla de delitos JO
+                    for(x = 0; x < $('#tablaDeliJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaDeliJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaDeliJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
+                    }
+                    //Recorremos la tabla de procesados
+                    for(x = 0; x < $('#tablaProcesaJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaProcesaJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaProcesaJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
+                    }
+                    //Recorremos la tabla de victimas
+                    for(x = 0; x < $('#tablaVictimasJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaVictimasJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaVictimasJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
+                    }
+                    //Recorremos la tabla de etapa oral
+                    for(x = 0; x < $('#tablaJuicioJO tbody tr').length; x++){
+                        //Obtenemos las claves de las tablas columna 0
+                        text = $('#tablaJuicioJO tbody tr').eq(x).find('td:eq(0)').html();
+                        //le ponemos el nuevo texto con la nueva causaClave JO
+                        $('#tablaJuicioJO tbody tr').eq(x).find('td:eq(0)').html(ccJO + text.substring(text.indexOf('-')));
+                    }
                     openPestana('btn2', 'p2');
                 }
 //                if (response !== null && $.isArray(response)) {

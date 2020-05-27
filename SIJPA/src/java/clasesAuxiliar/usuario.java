@@ -180,7 +180,7 @@ public class usuario {
     public void insrtAvanceJO(String causaClaveJC, String causaClaveJO, int avanceJO){
         try{
             conn.Conectar();
-            sql = "UPDATE USUARIOS_CONTROL SET 	CAUSA_CLAVEJO = '" + causaClaveJO + "', AVANCEJO = " + avanceJO
+            sql = "UPDATE USUARIOS_CONTROL SET CAUSA_CLAVEJO = '" + causaClaveJO + "', AVANCEJO = " + avanceJO + " "
                     + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "';";
             System.out.println(sql);
             conn.escribir(sql);

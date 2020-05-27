@@ -119,7 +119,7 @@ public class showVictimasJO {
         vic = new ArrayList();
         sql = "SELECT * FROM DATOS_VICTIMAS_ADOJO "
                 + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                + "AND VICTIMA_CLAVE = '" + victimaClave + "' "
+                + "AND VICTIMA_CLAVEJO = '" + victimaClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
@@ -183,11 +183,11 @@ public class showVictimasJO {
         return vicDelito;
     }
     
-    public ArrayList findVprocesadosJC(String causaClaveJC) {
+    public ArrayList findVprocesadosJO(String causaClaveJO) {
         conn.Conectar();
         vicProce = new ArrayList();
-        sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
-                + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "'";
+        sql = "SELECT PROCESADO_CLAVEJO FROM DATOS_PROCESADOS_ADOJO "
+                + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

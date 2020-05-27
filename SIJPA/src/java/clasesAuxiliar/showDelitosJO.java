@@ -118,8 +118,8 @@ public class showDelitosJO {
         sql = "SELECT D.*, CD.DELITO "
                 + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
-                + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                + "AND DELITO_CLAVE = '" + delitoClave + "' "
+                + "AND D.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                + "AND D.DELITO_CLAVEJO = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         System.out.println("findelitosJO:"+sql);
         resul = conn.consultar(sql);
@@ -132,7 +132,7 @@ public class showDelitosJO {
                     resul.getString("D.GRADO_CONSUMACION"), resul.getString("D.CALIFICACION"), resul.getString("D.CLASIFICACION"),
                     resul.getString("D.CONCURSO"), resul.getString("D.FORMA_COMISION"), resul.getString("D.FORMA_ACCION"), resul.getString("D.MODALIDAD"),
                     resul.getString("D.INSTRUMENTO_COMISION"), resul.getString("D.OCURRIO_ENTIDAD"), resul.getString("D.OCURRIO_MUNICIPIO"),
-                    resul.getString("D.COMENTARIOS"),resul.getString("D.DELITO_CLAVE")
+                    resul.getString("D.COMENTARIOS")
                 });
             }
             conn.close();
@@ -272,11 +272,11 @@ public class showDelitosJO {
         return deliAdi;
     }
     
-    public int countDelitosInsertados(String causaClave) {
+    public int countDelitosInsertadosJO(String causaClaveJO) {
         try {
             conn.Conectar();
             conteoDel = 0;
-            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
+            sql = "SELECT COUNT(*) AS TOTAL FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND DELITO_CODIGO_PENAL <> -2;";
             resul = conn.consultar(sql);
             while (resul.next()) {

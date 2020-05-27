@@ -4,6 +4,7 @@
     Author     : CESAR.OSORIO
 --%>
 
+<%@page import="clasesAuxiliar.showProcesadosJO"%>
 <%@page import="clasesAuxiliar.showDelitosJO"%>
 <%@page import="clasesAuxiliar.showVictimasJO"%>
 <%@page import="clasesAuxiliar.FechaMax"%>
@@ -293,7 +294,7 @@
                         </thead>
                         <tbody>
                         <%
-                            vic = sVictima.findVprocesadosJC(causaClaveJC);
+                            vic = sVictima.findVprocesadosJO(causaClaveJO);
                             int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");

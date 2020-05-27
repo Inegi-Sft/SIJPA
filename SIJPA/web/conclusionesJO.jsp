@@ -3,6 +3,8 @@
     Created on : 4/05/2020, 02:16:37 PM
     Author     : FERMIN.GOMEZ
 --%>
+<%@page import="clasesAuxiliar.showConclusionesJO"%>
+<%@page import="clasesAuxiliar.showProcesadosJO"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,7 +17,10 @@
         <script type="text/javascript" src="js/funcionesConcJO.js"></script>
         <%
             catalogos cat = new catalogos();
-            ArrayList<String[]> lista = new ArrayList();
+            showConclusionesJO sConclu = new showConclusionesJO();
+            showProcesadosJO sProce = new showProcesadosJO();
+            ArrayList<String[]> lista, conclusiones = new ArrayList();
+            ArrayList<String> concluPA = new ArrayList();
             
             String proceClave = "", posicion = "", edicion = "";
             if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
@@ -23,7 +28,64 @@
                 posicion = request.getParameter("posicion");
             }
             
+            String juzgadClave = (String) session.getAttribute("juzgadoClave");
+            String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+            String jEntidad = jDividido[0];
+            String jMunicipio = jDividido[1];
+            String jNumero = jDividido[2];
+            String jConcatenado = jEntidad + jMunicipio + jNumero;
+            String causaClaveJC = (String)session.getAttribute("causaClave");//Obtenemos la causa clave de JC
+            String causaClaveJO = (String)session.getAttribute("causaClaveJO");//Obtenemos la causa clave de JO
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
+            String fechaResol = "";
+            String tipoResol = "";
+            String sobreseimto = "";
+            String proceSobre = "";
+            String excluAccion = "";
+            String tipoSentencia = "";
+            String medidaPriva = "";
+            String medidaNoPriva = "";
+            String tiempoInter = "";
+            String reparaDanio = "";
+            String tipoRepara = "";
+            String montoRepara = "";
+            String impugna = "";
+            String tipoImpugna = "";
+            String fechaImpugna = "";
+            String persoImpugna = "";
+            String comen = "";
+            if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
+                edicion = request.getParameter("edita");
+                if(edicion.equals("Si")){
+                    conclusiones = sConclu.findConclusionJO(causaClaveJO, proceClave + jConcatenado);
+                    if(conclusiones.size() > 0){
+                        operacion = "actualizar";
+                        fechaResol = conclusiones.get(0)[0];
+                        tipoResol = conclusiones.get(0)[1];
+                        sobreseimto = conclusiones.get(0)[2];
+                        proceSobre = conclusiones.get(0)[3];
+                        excluAccion = conclusiones.get(0)[4];
+                        medidaPriva = conclusiones.get(0)[5];
+                        medidaNoPriva = conclusiones.get(0)[6];
+                        tiempoInter = conclusiones.get(0)[7];
+                        reparaDanio = conclusiones.get(0)[8];
+                        tipoRepara = conclusiones.get(0)[9];
+                        montoRepara = conclusiones.get(0)[10];
+                        impugna = conclusiones.get(0)[11];
+                        tipoImpugna = conclusiones.get(0)[12];
+                        fechaImpugna = conclusiones.get(0)[13];
+                        persoImpugna = conclusiones.get(0)[14];
+                        comen = conclusiones.get(0)[15];
+                    }
+                }
+            }
+            
+            //String tResolucion = "";
+            //Control si es cptura verifica cual es tu tipo de resolucion en etapa inicial
+            if(tipoResol.equals("") && !proceClave.equals("")){
+                //tipoResol = inicial.verificaSobreAperturaJO(causaClave, proceClave + jConcatenado);
+                System.out.println("Tipo res: " + tipoResol);
+            }
         %>
           
     </head>
@@ -145,7 +207,7 @@
                             </select>
                         </div>
                         <div class="cols oculto" id="dTipoMedidaPL">
-                            <label for="tipoMedidaPL">Tipo de medida privativa de la libertad</label>
+                            <label for="tipoMedidaPL" class="lblExBig">Tipo de medida privativa de la libertad</label>
                             <select name="tipoMedidaPL" id="tipoMedidaPL">
                                 <option value="">--Seleccione--</option>
                                 <%
@@ -161,7 +223,7 @@
                             </select>
                         </div>
                         <div class="cols oculto" id="dTipoMedidaNPL">
-                            <label for="tipoMedidaNPL" id="lblTipoMedidaNPL">Tipo de medida no privativa de la libertad</label>
+                            <label for="tipoMedidaNPL" class="lblExBig">Tipo de medida no privativa de la libertad</label>
                             <select name="tipoMedidaNPL" id="tipoMedidaNPL" >
                                 <option value="">--Seleccione--</option>
                                 <%
@@ -201,13 +263,13 @@
                                 <th>No identificado</th>
                             </tr>
                             <%
-                                /*lista = proce.findProcesadoDelitos(causaClave, proceClave + jConcatenado);
+                                lista = sProce.findProcesadoDelitosJO(causaClaveJO, proceClave + jConcatenado);
                                 for(int i = 0; i < lista.size(); i++){
                                     out.println("<tr>");
                                     out.println("<td>");
                                     out.println(lista.get(i)[1] + "<input type='hidden' name='delitoConclu' value='" + lista.get(i)[0] + "'>");
                                     out.println("</td>");
-                                    concluPA = sConclu.findConcluPA(causaClave, proceClave + jConcatenado, lista.get(i)[0]);
+                                    concluPA = sConclu.findConcluPAJO(causaClaveJO, proceClave + jConcatenado, lista.get(i)[0]);
                                     if(concluPA.size() != 0){
                                         String concluAP = concluPA.get(0);
                                         if(concluAP.equals("1")){
@@ -231,7 +293,7 @@
                                         out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia'></td>");
                                     }
                                     out.println("</tr>");
-                                }*/
+                                }
                             %>
                         </table>
                     </fieldset>
@@ -354,13 +416,13 @@
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>
-        <% /*if(!tipoResol.equals("")){ %>
+        <%-- /*if(!tipoResol.equals("")){ %>
             <script type="text/javascript"> 
 //                $(document).ready(function(){ 
 //                    //tipoResolucion(); 
 //                    $("#resolucion option:not(:selected)").attr("disabled", "disabled");
 //                });
             </script>
-        <%  } */%>
+        <%  } */--%>
     </body>
 </html>

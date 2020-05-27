@@ -45,30 +45,33 @@ public class borraProce extends HttpServlet {
             String proceClave = request.getParameter("proceClave");
             String nomTabla = request.getParameter("nomTabla");
             String juzgadoClave = (String)sesion.getAttribute("juzgadoClave");
-            if(nomTabla.equals("inter")){
-                sql = "DELETE FROM DATOS_ETAPA_INTERMEDIA_ADOJC "
-                        + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
-                System.out.println(sql);
-                if(conn.escribir(sql)){
-                    out.write("Procesado Borrado de Intermedia");
-                }
-                conn.close();
-            }else if(nomTabla.equals("conclu")){
-                sql = "DELETE FROM DATOS_CONCLUSIONES_ADOJC "
-                        + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
-                System.out.println(sql);
-                if(conn.escribir(sql)){
-                    out.write("Procesado Borrado de Conclusiones");
-                }
-                conn.close();
-            }else if(nomTabla.equals("tramite")){
-                sql = "DELETE FROM DATOS_TRAMITE_ADOJC "
-                        + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
-                System.out.println(sql);
-                if(conn.escribir(sql)){
-                    out.write("Procesado Borrado de Tramite");
-                }
-                conn.close();
+            switch (nomTabla) {
+                case "inter":
+                    sql = "DELETE FROM DATOS_ETAPA_INTERMEDIA_ADOJC "
+                            + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        out.write("Procesado Borrado de Intermedia");
+                    }   conn.close();
+                    break;
+                case "conclu":
+                    sql = "DELETE FROM DATOS_CONCLUSIONES_ADOJC "
+                            + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        out.write("Procesado Borrado de Conclusiones");
+                    }   conn.close();
+                    break;
+                case "tramite":
+                    sql = "DELETE FROM DATOS_TRAMITE_ADOJC "
+                            + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        out.write("Procesado Borrado de Tramite");
+                    }   conn.close();
+                    break;
+                default:
+                    break;
             }
         } catch (SQLException ex) {
             Logger.getLogger(borraProce.class.getName()).log(Level.SEVERE, null, ex);

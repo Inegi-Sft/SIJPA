@@ -135,7 +135,7 @@ public class showProcesadosJO {
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJO P, CATALOGOS_MUNICIPIOS CM "
+            sql = "SELECT P.* FROM DATOS_PROCESADOS_ADOJO P "
                     + "WHERE P.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND P.PROCESADO_CLAVEJO = '" + proceClave + "';";
             resul = conn.consultar(sql);
@@ -150,8 +150,7 @@ public class showProcesadosJO {
                     resul.getString("P.HABLA_ESPANOL"), resul.getString("P.POBLACION_INDIGENA"), resul.getString("P.TIPO_PUEBLO_INDIGENA"),
                     resul.getString("P.HABLA_INDIGENA"), resul.getString("P.FAMILIA_LINGUISTICA"), resul.getString("P.LENGUA_EXTRANJERA"),
                     resul.getString("P.INTERPRETE"), resul.getString("P.INGRESOS"), resul.getString("P.RANGO_INGRESOS"),
-                    resul.getString("P.OCUPACION"), resul.getString("P.CONDICION_ACTIVIDAD"), resul.getString("P.INICIO_IMPUTADO"),
-                    resul.getString("P.TIPO_DETENCION"), resul.getString("P.FORMA_CONDUCCION"), resul.getString("P.GRADO_PARTICIPACION"),
+                    resul.getString("P.OCUPACION"), resul.getString("P.CONDICION_ACTIVIDAD"), resul.getString("P.GRADO_PARTICIPACION"),
                     resul.getString("P.REINCIDENCIA"), resul.getString("P.ESTADO_PSICOFISICO"), resul.getString("P.DELICTIVO"),
                     resul.getString("P.GRUPO_DELICTIVO"), resul.getString("P.TIPO_DEFENSOR"), resul.getString("P.PERSONA_RESPONSABLE"),
                     resul.getString("P.COMENTARIOS")
@@ -257,5 +256,31 @@ public class showProcesadosJO {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return numVictiPro;
+    }
+    
+    public ArrayList findProcesadoDelitosJO(String causaClaveJO, String proceClave) {
+        try {
+            conn.Conectar();
+            proce = new ArrayList();
+            sql = "SELECT PD.DELITO_CLAVE, CN.CODIGO "
+                    + "FROM DATOS_PDELITOS_ADOJO PD, DATOS_DELITOS_ADOJO D, CATALOGOS_CODIGO_NORMA CN "
+                    + "WHERE PD.CAUSA_CLAVEJO = D.CAUSA_CLAVEJO "
+                    + "AND PD.DELITO_CLAVE = D.DELITO_CLAVEJO "
+                    + "AND D.DELITO_CODIGO_PENAL = CN.ID_CODIGO "
+                    + "AND PD.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND PD.PROCESADO_CLAVE = '" + proceClave + "';";
+
+            resul = conn.consultar(sql);
+            while(resul.next()){
+                proce.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proce;
     }
 }

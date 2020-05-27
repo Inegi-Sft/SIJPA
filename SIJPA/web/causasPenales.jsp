@@ -44,7 +44,7 @@
             if(session.getAttribute("causaClave") != null){
                 session.setAttribute("causaClave", "");
             }
-            
+            session.setAttribute("Sistema", "JC");
             int tCausasJuz=cp.countCausasPenales(juzgado);
         %>
     </head>

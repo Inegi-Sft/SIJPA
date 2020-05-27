@@ -5,6 +5,7 @@
  */
 
 import clasesAuxiliar.showCausasPenales;
+import clasesAuxiliar.showCausasPenalesJO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -32,12 +33,16 @@ public class obtenFechaOcurr extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     showCausasPenales penales = new showCausasPenales();
+    showCausasPenalesJO penalesJO = new showCausasPenalesJO();
     String FechaIngreso=null;
     String FechaOcurrencia=null;
     String juzgadoClave=null;
     String causaClave=null;
+    String causaClaveJO=null;
     String ExtrAño=null;
+    String Sistema=null;
     int AñoOcurr=0;
+    Date fechaing;
     Boolean ver;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -51,10 +56,17 @@ public class obtenFechaOcurr extends HttpServlet {
             if (request.getParameter("fechaOcurren") != null) {
                 juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
                 causaClave = (String) sesion.getAttribute("causaClave");
+                causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
+                Sistema=(String) sesion.getAttribute("Sistema");
                 Date fechaOcurr = Date.valueOf(request.getParameter("fechaOcurren"));
                 ExtrAño = String.valueOf(fechaOcurr).substring(0,4);
                 AñoOcurr=Integer.parseInt(ExtrAño);
-                Date fechaing = Date.valueOf(penales.FechaIng(juzgadoClave, causaClave));
+                
+                if (Sistema.equals("JC")){
+                 fechaing = Date.valueOf(penales.FechaIng(juzgadoClave, causaClave));   
+                }else if (Sistema.equals("JO")){
+                 fechaing = Date.valueOf(penalesJO.FechaIngJO(juzgadoClave, causaClaveJO));    
+                }
                 FechaIngreso = fechaing.toString();
                 ver = fechaing.after(fechaOcurr);
                 if (FechaIngreso.equals("1899-09-09")) {

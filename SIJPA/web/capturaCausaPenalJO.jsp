@@ -91,14 +91,14 @@
                                 <label for="jClave">Juzgado Clave</label>
                                 <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" readonly>
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
-                            </td>
+                             </td>
                             <td>
                                 <label for="expClaveJC">No. Asunto Asignado JC</label>
                                 <input type="text" name="expClaveJC" id="expClaveJC" value="<%=causaClaveJC%>" readonly>
                             </td>
                             <td>
                                 <label for="expClaveJO">No. Asunto Asignado JO</label>
-                                <input type="text" name="expClaveJO" id="expClaveJO"  value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>readonly<%}%>>
+                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>disabled="true"<%}%> onblur="ValidaCarpeInvest('#expClaveJO')">
                             </td>
                         </tr>
                         <tr>

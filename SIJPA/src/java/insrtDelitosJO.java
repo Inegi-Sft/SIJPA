@@ -99,22 +99,11 @@ public class insrtDelitosJO extends HttpServlet {
             conn.Conectar();
             System.out.println("ENTRO A ");
             
-            if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo
-              /*  System.out.println("nuevo dato");
-                sql = "UPDATE DATOS_DELITOS_ADOJO SET DELITO_CODIGO_PENAL = " + delitoCP + ",ART_CODIGO_PENAL = '" + articuloCP + "',"
-                        + "DELITO_NORMA_TECNICA = " + delitoNT + ",TIPO_FUERO = " + fuero + ",DELITO_RECLASIFICADO = " + reclasificaDel + ","
-                       + "FECHA_RECLASIFICACION = '" +fechaReclaDel + "',FECHA_OCURRENCIA = '" + ocurrencia + "',SITIO_OCURRENCIA = " + sitioO + ","
-                        + "GRADO_CONSUMACION = " + consumacion + ",CALIFICACION = " + calificacion + ",CLASIFICACION = " + clasificacion + ","
-                        + "CONCURSO = " +concurso + ",FORMA_COMISION = " + comision + ",FORMA_ACCION = " + accion + ",MODALIDAD = " + modalidad + ","
-                        + "INSTRUMENTO_COMISION = " + instrumentos + ",OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
-                        + "COMENTARIOS = '" + comentarios + "' "
-                        + "WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
-                        + "AND DELITO_CLAVE = '" + delitoClave + jConcatenado + "';";*/
-               
+            if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo  
                 sql="INSERT INTO DATOS_DELITOS_ADOJO VALUES("+jEntidad+","+jMunicipio+",'"+jNumero+"','"+causaClaveJO+"','"+delitoClaveJO+jConcatenado+"',"
                         + ""+delitoCP+","+articuloCP+","+delitoNT+","+fuero+","+reclasificaDel+",'"+fechaReclaDel+"','"+ocurrencia+"', "
                         + ""+sitioO+","+consumacion+","+calificacion+","+clasificacion+","+concurso+","+comision+","+accion+", "
-                        + ""+modalidad+","+instrumentos+","+entidadD+","+municipioD+",0,0,'"+comentarios+"',2020);";                
+                        + ""+modalidad+","+instrumentos+","+entidadD+","+municipioD+",0,0,'"+comentarios+"',(select YEAR(NOW())));";                
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     if (delitoNT == 31) {

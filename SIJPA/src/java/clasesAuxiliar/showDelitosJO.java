@@ -38,7 +38,6 @@ public class showDelitosJO {
                 + "AND CO.TIPO_RESOLUCION = 5 "
                 + "AND DE.CAUSA_CLAVE = '" + causaClaveJC + "' "
                 + "ORDER BY 1;";
-        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -119,7 +118,7 @@ public class showDelitosJO {
                 + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_DELITOS_NORMA CD "
                 + "WHERE D.DELITO_NORMA_TECNICA = CD.ID_DELITO "
                 + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                + "AND DELITO_CLAVE = '" + delitoClave + "' "
+                + "AND DELITO_CLAVEJO = '" + delitoClave + "' "
                 + "ORDER BY 1;";
         System.out.println("findelitosJO:"+sql);
         resul = conn.consultar(sql);
@@ -132,7 +131,7 @@ public class showDelitosJO {
                     resul.getString("D.GRADO_CONSUMACION"), resul.getString("D.CALIFICACION"), resul.getString("D.CLASIFICACION"),
                     resul.getString("D.CONCURSO"), resul.getString("D.FORMA_COMISION"), resul.getString("D.FORMA_ACCION"), resul.getString("D.MODALIDAD"),
                     resul.getString("D.INSTRUMENTO_COMISION"), resul.getString("D.OCURRIO_ENTIDAD"), resul.getString("D.OCURRIO_MUNICIPIO"),
-                    resul.getString("D.COMENTARIOS"),resul.getString("D.DELITO_CLAVE")
+                    resul.getString("D.COMENTARIOS"),resul.getString("D.DELITO_CLAVEJO")
                 });
             }
             conn.close();

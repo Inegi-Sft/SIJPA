@@ -69,9 +69,6 @@
             String rangoIngre = "";
             String ocupacion = "";
             String condiActi = "";
-            String inicioPro = "";
-            String tipoDeten = "";
-            String formaCondu = "";
             String gradoParti = "";
             String reinciden = "";
             String edoPsicofi = "";
@@ -117,17 +114,14 @@
                         rangoIngre = procesado.get(0)[28];
                         ocupacion = procesado.get(0)[29];
                         condiActi = procesado.get(0)[30];
-                        inicioPro = procesado.get(0)[31];
-                        tipoDeten = procesado.get(0)[32];
-                        formaCondu = procesado.get(0)[33];
-                        gradoParti = procesado.get(0)[34];
-                        reinciden = procesado.get(0)[35];
-                        edoPsicofi = procesado.get(0)[36];
-                        gpoDeli = procesado.get(0)[37];
-                        nomGpoDeli = procesado.get(0)[38];
-                        defensor = procesado.get(0)[39];
-                        personaRes = procesado.get(0)[40];
-                        comen = procesado.get(0)[41];
+                        gradoParti = procesado.get(0)[31];
+                        reinciden = procesado.get(0)[32];
+                        edoPsicofi = procesado.get(0)[33];
+                        gpoDeli = procesado.get(0)[34];
+                        nomGpoDeli = procesado.get(0)[35];
+                        defensor = procesado.get(0)[36];
+                        personaRes = procesado.get(0)[37];
+                        comen = procesado.get(0)[38];
                     }else{
                         out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
@@ -167,9 +161,6 @@
                     rangoIngre = procesado.get(0)[28];
                     ocupacion = procesado.get(0)[29];
                     condiActi = procesado.get(0)[30];
-                    inicioPro = procesado.get(0)[31];
-                    tipoDeten = procesado.get(0)[32];
-                    formaCondu = procesado.get(0)[33];
                     gradoParti = procesado.get(0)[34];
                     reinciden = procesado.get(0)[35];
                     edoPsicofi = procesado.get(0)[36];
@@ -860,9 +851,9 @@
                                         for (int i = 0; i <= totVic; i++) {
                                             out.println("<option value=" + i + "");
                                             if(i == numVicti){
-                                                if(numVicti != 0){//Si el resultado es 0, entonces no lo seleccionamos en el select
+//                                                if(numVicti != 0){//Si el resultado es 0, entonces no lo seleccionamos en el select
                                                     out.println(" selected ");
-                                                }
+//                                                }
                                             }
                                             out.println(">" + i + "</option>");
                                         }

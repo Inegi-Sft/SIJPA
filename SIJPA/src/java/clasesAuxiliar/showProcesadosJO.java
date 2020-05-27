@@ -150,8 +150,7 @@ public class showProcesadosJO {
                     resul.getString("P.HABLA_ESPANOL"), resul.getString("P.POBLACION_INDIGENA"), resul.getString("P.TIPO_PUEBLO_INDIGENA"),
                     resul.getString("P.HABLA_INDIGENA"), resul.getString("P.FAMILIA_LINGUISTICA"), resul.getString("P.LENGUA_EXTRANJERA"),
                     resul.getString("P.INTERPRETE"), resul.getString("P.INGRESOS"), resul.getString("P.RANGO_INGRESOS"),
-                    resul.getString("P.OCUPACION"), resul.getString("P.CONDICION_ACTIVIDAD"), resul.getString("P.INICIO_IMPUTADO"),
-                    resul.getString("P.TIPO_DETENCION"), resul.getString("P.FORMA_CONDUCCION"), resul.getString("P.GRADO_PARTICIPACION"),
+                    resul.getString("P.OCUPACION"), resul.getString("P.CONDICION_ACTIVIDAD"),resul.getString("P.GRADO_PARTICIPACION"),
                     resul.getString("P.REINCIDENCIA"), resul.getString("P.ESTADO_PSICOFISICO"), resul.getString("P.DELICTIVO"),
                     resul.getString("P.GRUPO_DELICTIVO"), resul.getString("P.TIPO_DEFENSOR"), resul.getString("P.PERSONA_RESPONSABLE"),
                     resul.getString("P.COMENTARIOS")

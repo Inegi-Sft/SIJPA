@@ -132,7 +132,7 @@ $(document).ready(function () {
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
                     //var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
-                    var enlace = 'delitosJO.jsp?delitoClave=' + response[1] + '&edita=Si';
+                    var enlace = 'delitosJO.jsp?delitoClave=' + response[1] + '&posicion='+ response[0] +'&edita=Si';
                     parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     console.log('Captu: ' + response[7] + ' Existen: ' + numDeli);
                     if (response[7] === numDeli) {

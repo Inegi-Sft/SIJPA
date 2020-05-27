@@ -839,9 +839,9 @@
                                         for (int i = 0; i <= totVic; i++) {
                                             out.println("<option value=" + i + "");
                                             if(i == numVicti){
-                                                if(numVicti != 0){//Si el resultado es 0, entonces no lo seleccionamos en el select
+//                                                if(numVicti != 0){//Si el resultado es 0, entonces no lo seleccionamos en el select
                                                     out.println(" selected ");
-                                                }
+//                                                }
                                             }
                                             out.println(">" + i + "</option>");
                                         }

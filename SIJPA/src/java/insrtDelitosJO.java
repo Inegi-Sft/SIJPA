@@ -5,57 +5,6 @@
  */
 
 import ConexionDB.Conexion_Mysql;
-import clasesAuxiliar.showCausasPenales;
-import clasesAuxiliar.showDelitosJO;
-import clasesAuxiliar.usuario;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.json.simple.JSONArray;
-
-/**
- *
- * @author ANTONIO.CORIA
- */
-@WebServlet(urlPatterns = {"/insrtDelitosJO"})
-public class insrtDelitosJO extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-     showCausasPenales cp = new showCausasPenales();
-    showDelitosJO sd = new showDelitosJO();
-    Conexion_Mysql conn = new Conexion_Mysql();
-
-    String sql;
-    ResultSet rs;
-    int deliExp;
-    int deliInsertados;
-    
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import ConexionDB.Conexion_Mysql;
-import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showCausasPenalesJO;
 import clasesAuxiliar.showDelitosJO;
 import clasesAuxiliar.usuario;
@@ -90,14 +39,10 @@ public class insrtDelitosJO extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    showCausasPenales cp = new showCausasPenales();
-    showDelitosJO sd = new showDelitosJO();
+    
     Conexion_Mysql conn = new Conexion_Mysql();
-
     String sql;
     ResultSet rs;
-    int deliExp;
-    int deliInsertados;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -142,7 +87,7 @@ public class insrtDelitosJO extends HttpServlet {
         String[] chkCR = request.getParameterValues("cosaRobada");
         String[] chkCS = request.getParameterValues("contextoSitua");
         String comentarios = request.getParameter("comentarios");
-         System.out.println("ENTRO A ");
+         
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -174,7 +119,6 @@ public class insrtDelitosJO extends HttpServlet {
                             conn.escribir(sql);
                         }
                     }
-
                     showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     showCausasPenalesJO causa = new showCausasPenalesJO();

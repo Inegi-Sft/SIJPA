@@ -77,9 +77,9 @@ public class showTramite {
         trami = new ArrayList();
         sql = "SELECT T.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ', P.A_PATERNO,' ', P.A_MATERNO), EP.DESCRIPCION, T.FECHA_ACTO_PROCESAL "
                 + " FROM DATOS_TRAMITES_ADOJC T, DATOS_PROCESADOS_ADOJC P, CATALOGOS_ETAPA_PROCESAL EP"
-                + " WHERE T.PROCESADO_CLAVE=P.PROCESADO_CLAVE"
-                + " AND T.ETAPA_PROCESAL=EP.PROCESAL_ID"
-                + " AND T.PROCESADO_CLAVE='" + proceClave + "'";
+                + " WHERE T.PROCESADO_CLAVE = P.PROCESADO_CLAVE"
+                + " AND T.ETAPA_PROCESAL = EP.PROCESAL_ID"
+                + " AND T.PROCESADO_CLAVE = '" + proceClave + "'";
         resul = conn.consultar(sql);
         try {
             while(resul.next()){

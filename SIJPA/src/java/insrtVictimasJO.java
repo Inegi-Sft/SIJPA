@@ -144,11 +144,11 @@ public class insrtVictimasJO extends HttpServlet {
                     ArrayList<String[]> lis = new ArrayList<>();
                     showCausasPenalesJO causa = new showCausasPenalesJO();
                     int totVictiInsrt = vic.countVictimasJO(causaClaveJO);
-//                    int totVicti = causa.countTotalVictimasJO(causaClaveJO);
-//                    if(totVicti == totVictiInsrt){
-//                        usuario usuario = new usuario();
-//                        usuario.insrtAvance(causaClaveJO, 5);//Actualizamos el avance de la causa penal
-//                    }
+                    int totVicti = causa.countTotalVictimasJO(causaClaveJO);
+                    if(totVicti == totVictiInsrt){
+                        usuario usuario = new usuario();
+                        usuario.insrtAvanceJO(causaClaveJC, causaClaveJO, 5);//Actualizamos el avance de la causa penal JO
+                    }
                     lis = vic.findVictimasTablaJO(victiClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);

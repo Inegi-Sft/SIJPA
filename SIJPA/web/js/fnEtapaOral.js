@@ -121,19 +121,36 @@ $(document).ready(function () {
                 alert("Guardado con exito!!!");
                 var numProce = parseInt(parent.$('#TadolescentesJO').val());
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i < 7; i++) {
+                    for (var i = 2; i < 8; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
                     var enlace = 'etapaOral.jsp?proceClave=' + response[1] + '&edita=Si';
                     parent.$('#tablaJuicioJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
-                    console.log('Captu: ' + response[7] + ' Existen: ' + numProce);
-                    if (response[7] === numProce) {
-                        parent.openPestana('btn7', 'p7');
-                        parent.openPestana('btn6', 'p6');
+                    console.log('Bandera: ' + response[8]);
+                    if(response[8] === 1){//Condicion para mandar al procesado a etapa conclusiones JO
+                        parent.$('#tablaConcluJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
+                        <td></td><td><a class="pop" href="conclusionesJO.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#conclusionesJO tbody tr').length + '">\n\
+                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                        parent.$('#btn6').addClass(' activar');
+                    }else if(response[8] === 2){//Condicion para mandar al procesado a etapa tramite JO
+                        parent.$('#tablaTramiteJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
+                        <td><a class="pop" href="conclusiones.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaTramiteJO tbody tr').length + '">\n\
+                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                        parent.$('#btn7').addClass(' activar');
+                    }
+                    console.log('Captu: ' + response[9] + ' Existen: ' + numProce);
+                    if (response[9] === numProce) {
+                        for(var x = 6; x <= 7; x++){
+                            //Validamos que pestañas activamos en JO
+                            if(parent.$('#btn' + x).hasClass('activar')){
+                                parent.openPestana('btn' + x, 'p' + x);
+                                parent.$('#btn' + x).removeClass('activar');
+                            }
+                        }
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[7]) + ' adolescentes');
+                        alert('Falta por capturar ' + (numProce - response[9]) + ' adolescentes');
                     }
                 }
                 parent.$.fancybox.close();

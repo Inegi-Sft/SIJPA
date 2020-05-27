@@ -216,4 +216,22 @@ public class showCausasPenalesJO {
         }
         return total;
     }
+    
+    public int countTotalVictimasJO(String causaClaveJO) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT TOTAL_VICTIMAS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("TOTAL");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
 }

@@ -103,6 +103,29 @@ public class showConclusionesJO {
         return conc;
     }
     
+    public ArrayList findConcluTablaJO(String proceClave) {
+        conn.Conectar();
+        conc = new ArrayList();
+        sql = "SELECT C.PROCESADO_CLAVE, CONCAT(P.NOMBRE, ' ', P.A_PATERNO, ' ', P.A_MATERNO), C.FECHA_CONCLUSION, TR.DESCRIPCION "
+                + "FROM DATOS_CONCLUSIONES_ADOJO C, DATOS_PROCESADOS_ADOJO P, CATALOGOS_TIPO_RESOLUCION TR"
+                + "WHERE C.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
+                + "AND C.TIPO_RESOLUCION = TR.RESOLUCION_ID "
+                + "AND C.PROCESADO_CLAVE = '" + proceClave + "';";
+        resul = conn.consultar(sql);
+        try {
+            while(resul.next()){
+                conc.add(new String[]{
+                    resul.getString(1), resul.getString(2),resul.getString(3),resul.getString(4)
+                });
+            }
+            conn.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(showConclusiones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conc;
+    }
+    
     public ArrayList findConcluPAJO(String causaClaveJO, String proceClave, String deliClave){
         concPA = new ArrayList();
         try {

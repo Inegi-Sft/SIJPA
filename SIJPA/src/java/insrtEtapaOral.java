@@ -5,7 +5,9 @@
  */
 
 import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showCausasPenalesJO;
 import clasesAuxiliar.showJuicio;
+import clasesAuxiliar.usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -39,6 +41,8 @@ public class insrtEtapaOral extends HttpServlet {
      
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
+    int banderaEtapa = 0;
+    String banderaDesc = "";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,7 +74,7 @@ public class insrtEtapaOral extends HttpServlet {
         String suspencionA = request.getParameter("suspencionA");
         String fechaSuspencion = request.getParameter("fechaSuspencion");
         String fechaReanudacion = request.getParameter("fechaReanudacion");
-        String deliberacion = request.getParameter("deliberacion");
+        int deliberacion = Integer.parseInt(request.getParameter("deliberacion"));
         String fechaDeliberacion = request.getParameter("fechaDeliberacion");
         String sentidoFallo = request.getParameter("sentidoFallo");
         String comentarios = request.getParameter("comentarios");
@@ -78,29 +82,46 @@ public class insrtEtapaOral extends HttpServlet {
         try{
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            conn.Conectar();
+            //Control para saber la etapa donde sera enviado
+            if (deliberacion == 2) {
+                banderaEtapa = 3;//pasa a Tramite JO
+                banderaDesc = "Tramite";
+            } else{
+                banderaEtapa = 2;//pasa a Conclusiones JO
+                banderaDesc = "Conclusiones";
+            }
             
+            conn.Conectar();
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                sql = "INSERT INTO DATOS_ETAPA_ORAL_ADOJO VALUES ("+ jEntidad +","+ jMunicipio +","+ jNumero +",'"+ causaClaveJO +"','"
-                    + proceClave+jConcatenado +"','"+ autoApertura +"','"+ celebracionA +"',"+ medidasDis +","+ tipoMedida +","
-                    + incidentes +",'"+ resoIncidente +"',"+ promueveIncidente +","+ testimonial +","+ pericial +","+ declaracion +"," 
-                    + documental +","+ otro +","+ suspencionA +",'"+ fechaSuspencion +"','"+ fechaReanudacion +"',"+ deliberacion +",'"
-                    + fechaDeliberacion +"',"+ sentidoFallo +",'"+ comentarios +"', (select YEAR(NOW())) )";
+                sql = "INSERT INTO DATOS_ETAPA_ORAL_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                        + causaClaveJO + "','" + proceClave + jConcatenado + "','" + autoApertura + "','" + celebracionA + "',"
+                        + medidasDis + ","+ tipoMedida + "," + incidentes + ",'" + resoIncidente + "'," + promueveIncidente + ","
+                        + testimonial + "," + pericial + "," + declaracion + "," + documental + "," + otro + "," + suspencionA +",'"
+                        + fechaSuspencion + "','" + fechaReanudacion + "'," + deliberacion + ",'" + fechaDeliberacion + "',"
+                        + sentidoFallo + ",'" + comentarios + "', (select YEAR(NOW()))" + banderaEtapa + " )";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showJuicio sEO = new showJuicio();
                     ArrayList<String[]> lis = new ArrayList<>();
-                    int totProcInsrt = sEO.countProcesadosOral(causaClaveJO);
+                    showCausasPenalesJO causa = new showCausasPenalesJO();
+                    int totProceInsrt = sEO.countProcesadosOral(causaClaveJO);
+                    int totProce = causa.countTotalProcesadosJO(causaClaveJO);
+                    if(totProce == totProceInsrt){
+                        usuario usuario = new usuario();
+                        usuario.insrtAvanceJO(causaClaveJO, causaClaveJO, 6);//Actualizamos el avance de la causa penal JO
+                    }
                     lis = sEO.findOralTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
-                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                    resp.add(proceClave);//Se usa para agregar el procesado a la etapa correspondiente JO
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
                     resp.add(lis.get(0)[4]);
                     resp.add(lis.get(0)[5]);
-                    resp.add(totProcInsrt);
+                    resp.add(banderaDesc);//Descripcion de la bandera para la tabla
+                    resp.add(banderaEtapa);//dato para saber a que etapa se agrega el procesado
+                    resp.add(totProceInsrt);
                     out.write(resp.toJSONString());
                     conn.close();
                 } else {

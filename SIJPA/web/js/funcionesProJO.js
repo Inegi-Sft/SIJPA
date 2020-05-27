@@ -140,7 +140,7 @@ $(document).ready(function() {
                         parent.$('#tablaProcesaJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
-                    var enlace = 'procesadosJO.jsp?proceClave=' + response[1] + '&edita=Si';
+                    var enlace = 'procesadosJO.jsp?proceClave=' + response[1] + '&posicion='+ response[0] +'&edita=Si';
                     parent.$('#tablaProcesaJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     //coloca el nombre del procesado en la tabla de etapa inicial
                     parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[2]);

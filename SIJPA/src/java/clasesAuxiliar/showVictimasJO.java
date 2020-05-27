@@ -172,6 +172,7 @@ public class showVictimasJO {
                         + "AND VICTIMA_CLAVE = '" + victiClave + "' "
                         + "AND DELITO_CLAVE = '" + deliClave + "' "
                         + "ORDER BY 1;";
+                System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 vicDelito.add(resul.getString("DELITO_CLAVE"));

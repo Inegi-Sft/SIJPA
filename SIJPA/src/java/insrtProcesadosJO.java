@@ -96,9 +96,6 @@ public class insrtProcesadosJO extends HttpServlet {
         String rangoIngresosPro = request.getParameter("rangoIngresosPro");
         String ocupacion = request.getParameter("ocupacion");
         String condicionActi = request.getParameter("condicionActi");
-        String presentAdo = request.getParameter("presentAdo");
-        String tipoDetencion = request.getParameter("tipoDetencion");
-        String formaConduc = request.getParameter("formaConduc");
         String participacion = request.getParameter("participacion");
         String reincidencia = request.getParameter("reincidencia");
         String psicofisico = request.getParameter("psicofisico");
@@ -193,16 +190,16 @@ public class insrtProcesadosJO extends HttpServlet {
                         + "REINCIDENCIA = " + reincidencia + ",ESTADO_PSICOFISICO = " + psicofisico + ",DELICTIVO = " + grupoDelictivo + ","
                         + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
                         + "COMENTARIOS = '" + comentarios + "' "
-                        + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                        + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                         + "AND PROCESADO_CLAVEJO = '" + proceClaveJO + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     //Borramos los Pingresos por si sufren de acutliazcion o bien se cambie que no tuve ingresos
-                    sql = "DELETE FROM DATOS_PFUENTE_INGRESOS_ADOJO WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    sql = "DELETE FROM DATOS_PFUENTE_INGRESOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
                     conn.escribir(sql);
                     //Borramos pdelitos por si sufre actualizacion se inserten los nuevos o bien cambie de opcion
-                    sql = "DELETE FROM DATOS_PDELITOS_ADOJO WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    sql = "DELETE FROM DATOS_PDELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
                     conn.escribir(sql);
                     if (ingresosPro == 1) {
@@ -230,6 +227,7 @@ public class insrtProcesadosJO extends HttpServlet {
                         lis = pro.findProcesasdosTablaJO(proceClaveJO + jConcatenado);
                         JSONArray resp = new JSONArray();
                         resp.add(posicion);
+                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                         resp.add(lis.get(0)[1]);
                         resp.add(lis.get(0)[2]);
                         resp.add(lis.get(0)[3]);

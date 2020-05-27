@@ -236,7 +236,7 @@
                                     if(viDel.size() != 0){
                                         out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + viDel.get(0) + "' checked>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + viDel.get(0) + "'/>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "'/>");
                                     }
                                 }else{//SI edicion viene vacio entonces traemos JC
                                     viDel = sVictima.findVDelitoJC(causaClaveJC, victiClave + jConcatenado, ls[0]);

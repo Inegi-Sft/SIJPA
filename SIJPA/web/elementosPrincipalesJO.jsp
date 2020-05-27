@@ -41,9 +41,13 @@
             int y = 0;
             String ccJC = "";
             String ccJuz = "";
+            String ccJO = "";
             if(request.getParameter("causaClaveJC") != null){//Si viene la causa penal, recuperamos datos
                 ccJC = request.getParameter("causaClaveJC");
                 ccJuz = ccJC + jc.replace("-", "");
+            }
+            if(request.getParameter("causaClaveJO") != null){//Si viene la causa penal, recuperamos datos
+                ccJO = request.getParameter("causaClaveJO");
             }
         %>
     </head>
@@ -239,9 +243,11 @@
                         <%
                             if(!ccJC.equals("")){
                                 y = 0;
+                                String proClaveJO="";
                                 juiciJC = juicio.findProceJuicioJC(ccJuz);
                                 for(String[] juiJC : juiciJC){//For para recorrer todos los procesados que pasan a JO en JC
-                                    juiciJO = juicio.findProceJuicioJO(ccJuz, juiJC[0]);
+                                    proClaveJO= ccJO + juiJC[0].substring(juiJC[0].indexOf("-P"));//variable de procesado jo
+                                    juiciJO = juicio.findProceJuicioJO(proClaveJO);
                                     if(juiciJO.size() > 0){//Si el procesado esta en inicial de la BD lo agregamos
                                         out.println("<tr>");
                                         out.println("<td>" + juiciJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");

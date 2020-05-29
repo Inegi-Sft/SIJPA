@@ -97,7 +97,7 @@
                             </td>
                             <td>
                                 <label for="expClaveJO">No. Asunto Asignado JO</label>
-                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>disabled="true"<%}%> onblur="ValidaCarpeInvest('#expClaveJO')">
+                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>readonly<%}%> onblur="ValidaCarpeInvest('#expClaveJO')">
                             </td>
                         </tr>
                         <tr>
@@ -154,10 +154,10 @@
                                 <label for="cantJuez" class="lblExBig">Cantidad de jueces a quien corresponde conocer de la Causa Penal</label>
                                 <select name="cantJuez" id="cantJuez">
                                         <option value="">--Seleccione--</option>
-                                        <option value="-2">-2</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        <option <%if(cantJueces.equals("-2")){%>selected <%}%>value="-2">-2</option>
+                                        <option <%if(cantJueces.equals("1")){%>selected <%}%>value="1">1</option>
+                                        <option <%if(cantJueces.equals("2")){%>selected <%}%>value="2">2</option>
+                                        <option <%if(cantJueces.equals("3")){%>selected <%}%>value="3">3</option>
                                 </select>
                             </td>
                         </tr>

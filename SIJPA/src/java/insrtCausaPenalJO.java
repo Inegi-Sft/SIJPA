@@ -42,7 +42,6 @@ public class insrtCausaPenalJO extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         HttpSession sesion = request.getSession();
-        
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
         String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
         String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
@@ -51,7 +50,8 @@ public class insrtCausaPenalJO extends HttpServlet {
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJC = request.getParameter("expClaveJC").toUpperCase();
-        String causaClaveJO = request.getParameter("expClaveJO").toUpperCase();
+        String causaClaveJO = request.getParameter("expClaveJO");
+        System.out.println("La causa clave es="+causaClaveJO);
         String fecha_ingreso = request.getParameter("fIngresoJO");
         String totalDeli = request.getParameter("TdelitosJO");
         String totalAdo = request.getParameter("TadolescentesJO");
@@ -63,11 +63,13 @@ public class insrtCausaPenalJO extends HttpServlet {
         String juezJO2 = request.getParameter("juezJO2");
         String juezJO3 = request.getParameter("juezJO3");
         String comentario = request.getParameter("ComentaExpeJO");
+        
 
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            conn.Conectar();
+        try {         
+               response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+  
+        conn.Conectar();
             
             if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
                 sesion.setAttribute("causaClaveJO", causaClaveJO + jConcatenado);

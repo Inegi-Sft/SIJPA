@@ -3,6 +3,7 @@
     Created on : 15/01/2020, 09:22:30 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="clasesAuxiliar.showJueces"%>
@@ -21,6 +22,8 @@
             showJueces juez = new showJueces();
             showJuzgados juzgados = new showJuzgados();
             showCausasPenalesJO causaPenalJO = new showCausasPenalesJO();
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
 
             ArrayList<String[]> lista, lisCausaJC, lisCausaJO;
             ArrayList<String> lis;
@@ -103,7 +106,7 @@
                         <tr>
                             <td colspan="3">
                                 <label for="fIngresoJO">Fecha de ingreso</label>
-                                <input type="date" name="fIngresoJO" id="fIngresoJO" value="<%=fechaIngreso%>" required>
+                                <input type="date" name="fIngresoJO" id="fIngresoJO" value="<%=fechaIngreso%>" max="<%=fechas%>" required>
                                 <div class="noIdentificada">
                                     <input type="checkbox" id="chkFechaIngreJO" onclick="fechaNoIdent('#chkFechaIngreJO', '#fIngresoJO')">
                                     <label>No identificada</label>

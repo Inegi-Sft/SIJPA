@@ -3,6 +3,7 @@
     Created on : 4/05/2020, 02:16:37 PM
     Author     : FERMIN.GOMEZ
 --%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page import="clasesAuxiliar.showJuicio"%>
 <%@page import="clasesAuxiliar.showConclusionesJO"%>
 <%@page import="clasesAuxiliar.showProcesadosJO"%>
@@ -23,6 +24,8 @@
             showJuicio sEtaOral = new showJuicio();
             ArrayList<String[]> lista, conclusiones = new ArrayList();
             ArrayList<String> concluPA = new ArrayList();
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
             
             String proceClave = "", posicion = "", edicion = "";
             if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
@@ -109,7 +112,7 @@
                     <legend>Resolución</legend>
                     <div class="cols">
                         <label for="fechaReso">Fecha en que se dictó la resolución</label>
-                        <input type="date" name="fechaReso" id="fechaReso" value="<%=fechaResol%>" required>
+                        <input type="date" name="fechaReso" id="fechaReso" value="<%=fechaResol%>" max="<%=fechas%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaReso" onclick="fechaNoIdent('#chkFechaReso', '#fechaReso')">
                             <label>No identificada</label>

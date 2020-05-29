@@ -161,6 +161,23 @@ public class usuario {
         return avance;
     }
     
+    public int findAvanceUsuarioJO(String causaClaveJO){
+        int avance = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT AVANCEJO FROM USUARIOS_CONTROL WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "';";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                avance = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return avance;
+    }
+    
     public void insrtAvance(String causaClave, int avance){
         try{
             conn.Conectar();

@@ -62,7 +62,6 @@ public class showCausasPenalesJO {
             causas = new ArrayList();
             sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' AND "
                     + "CAUSA_CLAVEJO = '" + causaClaveJO + "';";
-            System.out.println("findCausaPenalJO:"+sql);
             rs = conn.consultar(sql);
             while(rs.next()){
                 causas.add(new String[]{
@@ -175,9 +174,9 @@ public class showCausasPenalesJO {
         try {
             conn.Conectar();
             sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJO "
-                    + "WHERE CAUSA_CLAVEJO = " + causaClaveJO + "'";
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "';";
             rs = conn.consultar(sql);
-            while (rs.next()) {
+            if (rs.next()) {
                 total = rs.getInt("TOTAL");
             }
             conn.close();

@@ -59,12 +59,7 @@ public class insrtDelitosJO extends HttpServlet {
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJC = (String) sesion.getAttribute("causaClave");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
-        
-        /*Si es la primera vez que se inserta entonces trae clave de JC, tendremos que extraerla para 
-        convertiral en JO*/
         String delitoClave = request.getParameter("delitoClave");
-        String [] delitoSepara = delitoClave.split("-");
-        String delitoClaveJO = causaClaveJO.replace(jConcatenado, "") + "-" + delitoSepara[1];
         
         String delitoCP = request.getParameter("delitoCP");
         String fuero = request.getParameter("fuero");
@@ -93,7 +88,10 @@ public class insrtDelitosJO extends HttpServlet {
             PrintWriter out = response.getWriter();
             conn.Conectar();
             
-            if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo               
+            if(!opera.equals("actualizar")){//Se guarda el dato ya que es nuevo
+                //Al ser la primera vez que se guarda JO se crea la clave de delito JO para ser insertada
+                String causaClaveJOSimple = causaClaveJO.replace(jConcatenado, "");// causa clave simple sin concatenar
+                String delitoClaveJO = causaClaveJOSimple + delitoClave.substring(delitoClave.indexOf("-D"));
                 sql="INSERT INTO DATOS_DELITOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + ",'" + jNumero + "','"
                         + causaClaveJC + "','" + delitoClave + jConcatenado + "','" + causaClaveJO + "','"
                         + delitoClaveJO + jConcatenado + "'," + delitoCP + "," + articuloCP + ","
@@ -153,27 +151,27 @@ public class insrtDelitosJO extends HttpServlet {
                         + "INSTRUMENTO_COMISION = " + instrumentos + ",OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
                         + "COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                        + "AND DELITO_CLAVEJO = '" + delitoClaveJO + jConcatenado + "';";
+                        + "AND DELITO_CLAVEJO = '" + delitoClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     //Borramos la tabla de robo y homicidios por si en la actualizacion cambio el delito o bien por si sufren actualizaciones dichas tablas
                     sql = "DELETE FROM DATOS_DROBO_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                            + "AND DELITO_CLAVE = '" + delitoClaveJO + jConcatenado + "';";
+                            + "AND DELITO_CLAVE = '" + delitoClave + jConcatenado + "';";
                     conn.escribir(sql);
                     sql = "DELETE FROM DATOS_DHOMICIDIO_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                            + "AND DELITO_CLAVE = '" + delitoClaveJO + jConcatenado + "';";
+                            + "AND DELITO_CLAVE = '" + delitoClave + jConcatenado + "';";
                     conn.escribir(sql);
                     if (delitoNT == 31) {
                         for (String chkCR1 : chkCR) {
                             sql = "INSERT INTO DATOS_DROBO_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClaveJO + "','"+ delitoClaveJO + jConcatenado + "'," + chkCR1 + " ,(select YEAR(NOW())) );";
+                                    + causaClaveJO + "','"+ delitoClave + jConcatenado + "'," + chkCR1 + " ,(select YEAR(NOW())) );";
                             System.out.println(sql);
                             conn.escribir(sql);
                         }
                     }else if (delitoNT == 1 || delitoNT == 4) {
                         for (String chkCS1 : chkCS) {
                             sql = "INSERT INTO DATOS_DHOMICIDIO_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClaveJO + "','"+ delitoClaveJO + jConcatenado + "'," + chkCS1 + " ,(select YEAR(NOW())) );";
+                                    + causaClaveJO + "','"+ delitoClave + jConcatenado + "'," + chkCS1 + " ,(select YEAR(NOW())) );";
                             System.out.println(sql);
                             conn.escribir(sql);
                         }
@@ -181,7 +179,7 @@ public class insrtDelitosJO extends HttpServlet {
                     showDelitosJO deli = new showDelitosJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     int totDelInsrt = deli.countDelitosInsertadosJO(causaClaveJO);
-                    lis = deli.findDeliTablaJO(delitoClaveJO + jConcatenado);
+                    lis = deli.findDeliTablaJO(delitoClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
                     resp.add(lis.get(0)[0].replace(jConcatenado, ""));

@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 public class showJuicio {
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> juicio, proceEtapa;
+    ArrayList<String>list;
     String sql;
     ResultSet resul;
     int totProcesa;
@@ -66,7 +67,7 @@ public class showJuicio {
             while (resul.next()) {
                 juicio.add(new String[]{
                     resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4),
-                    resul.getString(5), resul.getString(6)
+                    resul.getString(5), resul.getString(6), resul.getString(7)
                 });
             }
             conn.close();
@@ -155,7 +156,7 @@ public class showJuicio {
                     + "ON EO.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
                     + "AND EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                     + "WHERE EO.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                    + "AND EO.ETAPA REGEXP '1' "
+                    + "AND EO.ETAPA REGEXP '2' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
@@ -180,7 +181,7 @@ public class showJuicio {
                     + "ON EO.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
                     + "AND EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                     + "WHERE EO.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                    + "AND EO.ETAPA REGEXP '2' "
+                    + "AND EO.ETAPA REGEXP '3' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
@@ -193,5 +194,46 @@ public class showJuicio {
             Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proceEtapa;
+    }
+    
+    public String verificFalloJO(String causaClave, String proceClave) {
+        String fallo = "";
+        try {
+            conn.Conectar();
+            sql = "SELECT SENTIDO_FALLO FROM DATOS_ETAPA_ORAL_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClave + "' AND PROCESADO_CLAVE = '" + proceClave + "';";
+            System.out.println(sql);
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                if(resul.getString("SENTIDO_FALLO").equals("1")){
+                    fallo = "3";//Si el fallo es 1.-Absolucion entonces se pone 3 Absolutoria
+                }else if(resul.getString("SENTIDO_FALLO").equals("2")){
+                    fallo = "2";//Si el fallo es 2.-Condena entonces se pone 2 Condenatoria
+                }
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fallo;
+    }
+    
+    public ArrayList findEtapaCausaJO(String causaClaveJO){
+        list = new ArrayList();
+        try {
+            conn.Conectar();
+            sql = "SELECT ETAPA FROM DATOS_ETAPA_ORAL_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "ORDER BY 1";
+            System.out.println(sql);
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                list.add(resul.getString("ETAPA"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }

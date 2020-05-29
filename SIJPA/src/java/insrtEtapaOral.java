@@ -59,6 +59,7 @@ public class insrtEtapaOral extends HttpServlet {
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
         String proceClave = request.getParameter("proceClave");
+        
         String autoApertura = request.getParameter("autoApertura");
         String celebracionA = request.getParameter("celebracionA");
         String medidasDis = request.getParameter("medidasDis");
@@ -98,7 +99,7 @@ public class insrtEtapaOral extends HttpServlet {
                         + medidasDis + ","+ tipoMedida + "," + incidentes + ",'" + resoIncidente + "'," + promueveIncidente + ","
                         + testimonial + "," + pericial + "," + declaracion + "," + documental + "," + otro + "," + suspencionA +",'"
                         + fechaSuspencion + "','" + fechaReanudacion + "'," + deliberacion + ",'" + fechaDeliberacion + "',"
-                        + sentidoFallo + ",'" + comentarios + "', (select YEAR(NOW()))" + banderaEtapa + " )";
+                        + sentidoFallo + ",'" + comentarios + "', (select YEAR(NOW()))," + banderaEtapa + ")";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showJuicio sEO = new showJuicio();
@@ -128,13 +129,13 @@ public class insrtEtapaOral extends HttpServlet {
                     conn.close();
                 }
             }else{//Se actualiza el dato que viene de recuperacion
-                sql = "UPDATE DATOS_ETAPA_ORAL_ADOJO SET FECHA_APERTURA_JUICIOORAL='"+ autoApertura +"', FECHA_AUDIENCIA_JUICIO='"+ celebracionA +"',"
-                    + "MEDIDAS_DISCIPLINARIAS="+ medidasDis +", TIPO_DISCIPLINARIA="+ tipoMedida +", INCIDENTES_AUDIENCIA="+ incidentes +","
-                    + "FECHA_RESOLUCION_INCIDENTE='"+ resoIncidente +"', PROMUEVE_INCIDENTE="+promueveIncidente +", PD_TESTIMONIAL="+ testimonial +","
-                    + "PD_PERICIAL="+ pericial +", PD_DECLARACION_ACUSADO="+ declaracion +", PD_DOCUMENTAL_MATERIAL="+ documental +","
-                    + "PD_OTRA_PRUEBA="+ otro +", SUSPENCION_AUDIENCIA="+ suspencionA +", FECHA_SUSPENCION='"+ fechaSuspencion +"',FECHA_REANUDACION='" 
-                    + fechaReanudacion +"', DELIBERACION="+ deliberacion +", FECHA_DELIBERACION='"+ fechaDeliberacion +"', SENTIDO_FALLO="+ sentidoFallo
-                    + ", COMENTARIOS='"+ comentarios +"'";
+                sql = "UPDATE DATOS_ETAPA_ORAL_ADOJO SET FECHA_APERTURA_JUICIOORAL = '"+ autoApertura +"', FECHA_AUDIENCIA_JUICIO = '" + celebracionA + "',"
+                        + "MEDIDAS_DISCIPLINARIAS = " + medidasDis + ", TIPO_DISCIPLINARIA = " + tipoMedida + ", INCIDENTES_AUDIENCIA = " + incidentes + ","
+                        + "FECHA_RESOLUCION_INCIDENTE = '" + resoIncidente + "', PROMUEVE_INCIDENTE = " + promueveIncidente + ", PD_TESTIMONIAL = " + testimonial + ","
+                        + "PD_PERICIAL = " + pericial + ", PD_DECLARACION_ACUSADO = "+ declaracion + ", PD_DOCUMENTAL_MATERIAL = " + documental + ","
+                        + "PD_OTRA_PRUEBA = " + otro + ", SUSPENCION_AUDIENCIA = "+ suspencionA + ", FECHA_SUSPENCION = '" + fechaSuspencion + "',"
+                        + "FECHA_REANUDACION = '" + fechaReanudacion + "', DELIBERACION = " + deliberacion + ", FECHA_DELIBERACION = '" + fechaDeliberacion + "',"
+                        + "SENTIDO_FALLO = " + sentidoFallo + ", COMENTARIOS = '" + comentarios + "', ETAPA = " + banderaEtapa;
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showJuicio sEO = new showJuicio();
@@ -149,6 +150,8 @@ public class insrtEtapaOral extends HttpServlet {
                     resp.add(lis.get(0)[3]);
                     resp.add(lis.get(0)[4]);
                     resp.add(lis.get(0)[5]);
+                    resp.add(banderaDesc);//Descripcion de la bandera para la tabla
+                    resp.add(banderaEtapa);//dato para saber a que etapa se agrega el procesado
                     resp.add(totProcInsrt);
                     out.write(resp.toJSONString());
                     conn.close();

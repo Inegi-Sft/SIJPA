@@ -65,7 +65,6 @@ public class showDelitosJO {
                 + "AND DE.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
                 + "AND DE.DELITO_CLAVEJC = '" + delitoClave + "' "
                 + "ORDER BY 1;";
-        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -174,7 +173,7 @@ public class showDelitosJO {
         deli = new ArrayList();
         sql = "SELECT D.DELITO_CLAVEJO, CN.CODIGO "
                 + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_CODIGO_NORMA CN "
-                + "WHERE D.DELITO_NORMA_TECNICA = CN.ID_CODIGO "
+                + "WHERE D.DELITO_CODIGO_PENAL = CN.ID_CODIGO "
                 + "AND D.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "ORDER BY 1;";
         System.out.println("findelitosJO:"+sql);

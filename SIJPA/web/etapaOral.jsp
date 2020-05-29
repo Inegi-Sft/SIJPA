@@ -75,7 +75,7 @@
                         comen = oral.get(0)[18];
                     }else{
                         out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
-                                + "window.location.href = 'elementosPrincipalesJO.jsp'</script>");
+                                + "parent.$.fancybox.close();</script>");
                     }
                 }
             }else{

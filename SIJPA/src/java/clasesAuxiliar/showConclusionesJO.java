@@ -26,8 +26,8 @@ public class showConclusionesJO {
     public ArrayList findConclusionJO(String causaClaveJO, String proceClave) {
         conn.Conectar();
         conc = new ArrayList();
-        sql = "SELECT * FROM DATOS_CONCLUSIONES_ADOJC "
-                + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+        sql = "SELECT * FROM DATOS_CONCLUSIONES_ADOJO "
+                + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
@@ -107,7 +107,7 @@ public class showConclusionesJO {
         conn.Conectar();
         conc = new ArrayList();
         sql = "SELECT C.PROCESADO_CLAVE, CONCAT(P.NOMBRE, ' ', P.A_PATERNO, ' ', P.A_MATERNO), C.FECHA_CONCLUSION, TR.DESCRIPCION "
-                + "FROM DATOS_CONCLUSIONES_ADOJO C, DATOS_PROCESADOS_ADOJO P, CATALOGOS_TIPO_RESOLUCION TR"
+                + "FROM DATOS_CONCLUSIONES_ADOJO C, DATOS_PROCESADOS_ADOJO P, CATALOGOS_TIPO_RESOLUCION TR "
                 + "WHERE C.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                 + "AND C.TIPO_RESOLUCION = TR.RESOLUCION_ID "
                 + "AND C.PROCESADO_CLAVE = '" + proceClave + "';";
@@ -126,7 +126,7 @@ public class showConclusionesJO {
         return conc;
     }
     
-    public ArrayList findConcluPAJO(String causaClaveJO, String proceClave, String deliClave){
+    public ArrayList findConcluAJO(String causaClaveJO, String proceClave, String deliClave){
         concPA = new ArrayList();
         try {
             conn.Conectar();
@@ -144,5 +144,21 @@ public class showConclusionesJO {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return concPA;
+    }
+    
+    public int countConclusionesExpJO(String causaClaveJO) {
+        int conteoConclu = 0;
+        try{
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoConclu = resul.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoConclu;
     }
 }

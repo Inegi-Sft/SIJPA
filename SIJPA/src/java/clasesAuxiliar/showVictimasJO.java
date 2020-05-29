@@ -133,7 +133,7 @@ public class showVictimasJO {
                     resul.getString("CONDICION_ALFABETISMO"), resul.getString("GRADO_ESTUDIOS"), resul.getString("HABLA_ESPANOL"),
                     resul.getString("LENGUA_EXTRANJERA"), resul.getString("HABLA_INDIGENA"), resul.getString("LENGUA_INDIGENA"),
                     resul.getString("INTERPRETE"), resul.getString("OCUPACION"), resul.getString("INGRESOS"), resul.getString("RANGO_INGRESOS"),
-                    resul.getString("MEDIDAS_PROTECCION"), resul.getString("MEDIDAS_MUJER"), resul.getString("COMENTARIOS")
+                    resul.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -182,6 +182,30 @@ public class showVictimasJO {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return vicDelito;
+    }
+    
+    public ArrayList findVprocesadosJC(String causaClaveJC) {
+        conn.Conectar();
+        vicProce = new ArrayList();
+        sql = "SELECT PR.PROCESADO_CLAVE, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), PR.REINCIDENCIA, PR.SEXO, PR.FECHA_NACIMIENTO "
+                    + "FROM DATOS_PROCESADOS_ADOJC PR, DATOS_CONCLUSIONES_ADOJC CO "
+                    + "WHERE PR.CAUSA_CLAVE = CO.CAUSA_CLAVE "
+                    + "AND PR.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
+                    + "AND CO.TIPO_RESOLUCION = 5 "
+                    + "AND PR.CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "ORDER BY 1;";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                vicProce.add(new String[]{
+                    resul.getString(1)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicProce;
     }
     
     public ArrayList findVprocesadosJO(String causaClaveJO) {

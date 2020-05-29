@@ -41,6 +41,7 @@
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn7', 'p7')\" id='btn7'>" + pestanas[6] + "</button>");
             }else if(etapas.indexOf("2") > -1){//Existe en Conclusion
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn6', 'p6')\" id='btn6'>" + pestanas[5] + "</button>");
+                out.println("<button class='pestanaLinks' onclick=\"openPestana('btn7', 'p7')\" id='btn7' disabled>" + pestanas[6] + "</button>");
             }else{
                 //los mostramos vacios si etapa es 0 ya que aun no se tiene nada registrado en etapa inicial
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn6', 'p6')\" id='btn6' disabled>" + pestanas[5] + "</button>");

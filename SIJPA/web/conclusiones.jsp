@@ -90,7 +90,6 @@
                 }
             }
             
-            //String tResolucion = "";
             //Control si es cptura verifica cual es tu tipo de resolucion en etapa inicial
             if(tipoResol.equals("") && !proceClave.equals("")){
                 tipoResol = inicial.verificaSobreAperturaJO(causaClave, proceClave + jConcatenado);

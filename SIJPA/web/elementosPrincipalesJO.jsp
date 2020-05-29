@@ -108,7 +108,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + ccJO + extraeClave
+                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + delJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
@@ -162,7 +162,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + ccJO + extraeClave
+                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + proJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
@@ -216,7 +216,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + ccJO + extraeClave
+                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + viJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");
@@ -275,7 +275,7 @@
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClave=" + ccJO + extraeClave
+                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClave=" + juiJC[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }
@@ -321,7 +321,6 @@
                             <th>Fecha conclusión</th>
                             <th>Tipo conclusión/terminación</th>
                             <th>Editar</th>
-                            <!--<th width="80">Borrar</th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -405,8 +404,8 @@
                                             out.println("<tr>");
                                             out.println("<td>" + tramJO.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
                                             out.println("<td>" + tramJO.get(y)[1] + "</td>");
-                                            out.println("<td>Juicio Oral</td>");
-                                            out.println("<td>" + tramJO.get(y)[2] + "</td>");
+                                            out.println("<td>JUICIO ORAL</td>");
+                                            out.println("<td>" + tramJO.get(y)[3] + "</td>");
                                             out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + tramJO.get(y)[0].replace(jc.replace("-", ""), "")
                                                     + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                             out.println("</tr>");
@@ -414,7 +413,7 @@
                                             out.println("<tr>");
                                             out.println("<td>" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
                                             out.println("<td>" + etapaProce.get(y)[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
-                                            out.println("<td>Juicio Oral</td>");
+                                            out.println("<td>JUICIO ORAL</td>");
                                             out.println("<td></td>");
                                             out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "")
                                                     + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");

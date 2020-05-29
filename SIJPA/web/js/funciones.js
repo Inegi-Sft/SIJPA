@@ -729,8 +729,8 @@ function ValidaCarpeInvest(InputCarpInves) {
             type: 'post',
             url: 'obtenCarpeInves',
             data: {
-            CarpInvestiga: CarpInvestiga,
-             },
+            CarpInvestiga: CarpInvestiga
+            },
             success: function (response) {
                 console.log("Respuesta del servidor", response);
                 // alert("respuesta del servidor= "+response);

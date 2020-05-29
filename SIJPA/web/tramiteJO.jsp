@@ -35,22 +35,23 @@
             String jMunicipioJO = jDividido[1];
             String jNumeroJO = jDividido[2];
             String jConcatenado = jEntidadJO + jMunicipioJO + jNumeroJO;
-            String causaClave = (String) session.getAttribute("causaClaveJO");
+            String causaClaveJO = (String) session.getAttribute("causaClaveJO");
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
-            String etapaProcesalJO = "";
             String estatusJO="";
             String especifiJO = "";
             String fechaActoJO = "";
             if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
-                    tramite = sTramite.findTramiteJO(causaClave, proceClave + jConcatenado);
+                    tramite = sTramite.findTramiteJO(causaClaveJO, proceClave + jConcatenado);
                     if(tramite.size() > 0){
                         operacion = "actualizar";
-                        etapaProcesalJO ="Juicio Oral";
                         estatusJO=tramite.get(0)[0];
                         especifiJO = tramite.get(0)[1];
                         fechaActoJO = tramite.get(0)[2];
+                    }else{
+                        out.println("<script>alert('Tramite " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
+                                + "parent.$.fancybox.close();</script>");
                     }
                 }
             }

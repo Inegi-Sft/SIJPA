@@ -79,16 +79,15 @@ public class showTramiteJO {
     public ArrayList findTramiteTablaJO(String proceClave) {
         conn.Conectar();
         tramite = new ArrayList();
-        sql = "SELECT T.PROCESADO_CLAVE PRO_CLAVE, CONCAT(P.NOMBRE,' ', P.A_PATERNO,' ', P.A_MATERNO) NOMBRE, 'Juicio Oral' ETAPA_PROCESAL, T.FECHA_ACTO_PROCESAL FECHA_PRO"
+        sql = "SELECT T.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ', P.A_PATERNO,' ', P.A_MATERNO), 'JUICIO ORAL', T.FECHA_ACTO_PROCESAL "
                 + " FROM DATOS_TRAMITES_ADOJO T, DATOS_PROCESADOS_ADOJO P "
-                + " WHERE T.PROCESADO_CLAVE=P.PROCESADO_CLAVE "
+                + " WHERE T.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                 + " AND T.PROCESADO_CLAVE='" + proceClave + "'";    
         resul = conn.consultar(sql);
-        System.out.println("dañada:"+sql);
         try {
             while(resul.next()){
                 tramite.add(new String[]{
-                    resul.getString("PRO_CLAVE"), resul.getString("NOMBRE"), resul.getString("ETAPA_PROCESAL"), resul.getString("FECHA_PRO")
+                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4)
                 });
             }
             conn.close();

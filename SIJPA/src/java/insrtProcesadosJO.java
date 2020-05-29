@@ -59,11 +59,7 @@ public class insrtProcesadosJO extends HttpServlet {
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJC = (String) sesion.getAttribute("causaClave");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
-
-        // VARIABLES PROCESADOS
         String proceClave = request.getParameter("proceClave");
-        String [] proceSepara = proceClave.split("-");
-        String proceClaveJO = causaClaveJO.replace(jConcatenado, "") + "-" + proceSepara[1];
         
         String nombre = request.getParameter("nombre").toUpperCase();
         String apaterno = request.getParameter("apaterno").toUpperCase();
@@ -120,6 +116,9 @@ public class insrtProcesadosJO extends HttpServlet {
             conn.Conectar();
             
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+                //Al ser la primera vez que se guarda JO se crea la clave de procesado JO para ser insertada
+                String causaClaveJOSimple = causaClaveJO.replace(jConcatenado, "");// causa clave simple sin concatenar
+                String proceClaveJO = causaClaveJOSimple + proceClave.substring(proceClave.indexOf("-P"));
                 sql = "INSERT INTO DATOS_PROCESADOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                         + causaClaveJC + "','" + proceClave + jConcatenado + "','" + causaClaveJO + "','"
                         + proceClaveJO + jConcatenado + "','" + nombre + "','"+ apaterno + "','" + amaterno + "','"
@@ -141,14 +140,13 @@ public class insrtProcesadosJO extends HttpServlet {
                             conn.escribir(sql);
                         }
                     }
-
                     for (int i = 0; i < arrayDelito.length; i++) {
                         if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
                             String []arrayDelSepara =  arrayDelito[i].split("-");
                             String delitoJO = causaClaveJO.replace(jConcatenado, "") + "-" + arrayDelSepara[1];
                             sql = "INSERT INTO DATOS_PDELITOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                                     + causaClaveJO + "','" + proceClaveJO + jConcatenado + "','" + delitoJO + "',"
-                                    + arrayNumVic[i] + ",(select YEAR(NOW())) )";
+                                    + arrayNumVic[i] + ",(select YEAR(NOW())) );";
                             System.out.println(sql);
                             insertPD = conn.escribir(sql);
                         }
@@ -191,21 +189,21 @@ public class insrtProcesadosJO extends HttpServlet {
                         + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
                         + "COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                        + "AND PROCESADO_CLAVEJO = '" + proceClaveJO + jConcatenado + "';";
+                        + "AND PROCESADO_CLAVEJO = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     //Borramos los Pingresos por si sufren de acutliazcion o bien se cambie que no tuve ingresos
                     sql = "DELETE FROM DATOS_PFUENTE_INGRESOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                            + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                     conn.escribir(sql);
                     //Borramos pdelitos por si sufre actualizacion se inserten los nuevos o bien cambie de opcion
                     sql = "DELETE FROM DATOS_PDELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                            + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                     conn.escribir(sql);
                     if (ingresosPro == 1) {
                         for (String chkIngresosPro1 : chkIngresosPro) {
                             sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClaveJO + "','" + proceClaveJO + jConcatenado + "'," + chkIngresosPro1 + ","
+                                    + causaClaveJO + "','" + proceClave + jConcatenado + "'," + chkIngresosPro1 + ","
                                     + "(select YEAR(NOW())) )";
                             System.out.println(sql);
                             conn.escribir(sql);
@@ -214,7 +212,7 @@ public class insrtProcesadosJO extends HttpServlet {
                     for (int i = 0; i < arrayDelito.length; i++) {
                         if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
                             sql = "INSERT INTO DATOS_PDELITOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClaveJO + "','" + proceClaveJO + jConcatenado + "','" + arrayDelito[i] + "',"
+                                    + causaClaveJO + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
                                     + arrayNumVic[i] + ",(select YEAR(NOW())) )";
                             System.out.println(sql);
                             insertPD = conn.escribir(sql);
@@ -224,7 +222,7 @@ public class insrtProcesadosJO extends HttpServlet {
                         showProcesadosJO pro = new showProcesadosJO();
                         ArrayList<String[]> lis = new ArrayList<>();
                         int totProceInsrt = pro.countProcesadosJO(causaClaveJO);
-                        lis = pro.findProcesasdosTablaJO(proceClaveJO + jConcatenado);
+                        lis = pro.findProcesasdosTablaJO(proceClave + jConcatenado);
                         JSONArray resp = new JSONArray();
                         resp.add(posicion);
                         resp.add(lis.get(0)[0].replace(jConcatenado, ""));

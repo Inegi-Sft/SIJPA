@@ -124,7 +124,7 @@
                         comen = procesado.get(0)[38];
                     }else{
                         out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
-                                + "window.location.href = 'elementosPrincipales.jsp'</script>");
+                                + "parent.$.fancybox.close();</script>");
                     }
                 }
             }else{//Si la variable edita viene null entonces recuperamos datos de JC
@@ -171,7 +171,7 @@
                     comen = procesado.get(0)[41];
                 }else{
                     out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
-                            + "window.location.href = 'elementosPrincipales.jsp'</script>");
+                            + "parent.$.fancybox.close();</script>");
                 }
             }
         %>

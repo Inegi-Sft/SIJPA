@@ -58,9 +58,9 @@ public class insrtVictimasJO extends HttpServlet {
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJC = (String) sesion.getAttribute("causaClave");
-        String victiClaveJC = request.getParameter("victiClaveJC");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
-        String victiClaveJO = request.getParameter("victiClaveJO");
+        String victiClave = request.getParameter("victiClave");
+        
         String tipoVictima = request.getParameter("tipoVictima");
         String victima_moral = request.getParameter("tvic_moral");
         String conto_asesor = request.getParameter("con_asesor");
@@ -99,12 +99,17 @@ public class insrtVictimasJO extends HttpServlet {
             conn.Conectar();
             
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                sql = "INSERT INTO DATOS_VICTIMAS_ADOJO VALUES ("+ jEntidad + "," + jMunicipio + "," + jNumero + ",'"+ causaClaveJC +"','"+ victiClaveJC + jConcatenado+"','"
-                    + causaClaveJO +"','"+ victiClaveJO + jConcatenado+"',"+ tipoVictima + "," + victima_moral + ","+ conto_asesor + "," + asesor + "," + sexoV + ",'" + fecha_nacimiento + "',"
-                    + edad + "," + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + "," + muniNacimiento + "," + nacionalidad + ","
-                    + paisResi + "," + entidadResi + "," + municipioResi + ","+ conyugal + "," + alfabetismo + "," + estudios + ","
-                    + espanol + "," + indigena + "," + familia + ","+ extrangera + "," + interprete + "," + ingresos + ","+ rangoingresos + ","
-                    + ocupacion + ",'" + comentarios + "', (select YEAR(NOW())))";
+                //Al ser la primera vez que se guarda JO se crea la clave de victima JO para ser insertada
+                String causaClaveJOSimple = causaClaveJO.replace(jConcatenado, "");// causa clave simple sin concatenar
+                String victiClaveJO = causaClaveJOSimple + victiClave.substring(victiClave.indexOf("-V"));
+                sql = "INSERT INTO DATOS_VICTIMAS_ADOJO VALUES ("+ jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
+                        + causaClaveJC +"','"+ victiClave + jConcatenado + "','" + causaClaveJO +"','" + victiClaveJO + jConcatenado + "',"
+                        + tipoVictima + "," + victima_moral + "," + conto_asesor + "," + asesor + "," + sexoV + ",'"
+                        + fecha_nacimiento + "'," + edad + "," + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + ","
+                        + muniNacimiento + "," + nacionalidad + "," + paisResi + "," + entidadResi + "," + municipioResi + ","
+                        + conyugal + "," + alfabetismo + "," + estudios + "," + espanol + "," + indigena + "," + familia + ","
+                        + extrangera + "," + interprete + "," + ingresos + ","+ rangoingresos + "," + ocupacion + ",'"
+                        + comentarios + "', (select YEAR(NOW())))";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     for (String chkDeliCom1 : chkDeliCom) {
@@ -174,29 +179,29 @@ public class insrtVictimasJO extends HttpServlet {
                         + "LENGUA_EXTRANJERA = " + extrangera + ",INTERPRETE = " + interprete + ",INGRESOS = " + ingresos + ","
                         + "RANGO_INGRESOS = " + rangoingresos + ",OCUPACION = " + ocupacion + ",COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                        + "AND VICTIMA_CLAVEJO = '" + victiClaveJO + jConcatenado + "';";
+                        + "AND VICTIMA_CLAVEJO = '" + victiClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     //Se borra todo de vdelitos de la victima por si sufre alguna actualizacion o bien se modifica
                     sql = "DELETE FROM DATOS_VDELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                            + "AND VICTIMA_CLAVE = '" + victiClaveJO + jConcatenado + "';";
+                            + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                     conn.escribir(sql);
                     for (String chkDeliCom1 : chkDeliCom) {
                         sql = "INSERT INTO DATOS_VDELITOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                + causaClaveJO + "','" + victiClaveJO + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
+                                + causaClaveJO + "','" + victiClave + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
                         insertaVDeli = conn.escribir(sql);
                         System.out.println(sql);
                     }
                     if (insertaVDeli) {
                         //Se borra vprocesados por si algun dato cambia o bien el disparador cambia
                         sql = "DELETE FROM DATOS_VPROCESADOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                                + "AND VICTIMA_CLAVE = '" + victiClaveJO + jConcatenado + "';";
+                                + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                         conn.escribir(sql);
                         for (int j = 0; j < procesadoRela.length; j++) {
                             String[] chkRela = request.getParameterValues("chkRelaProce" + j);
                             for (String chkRela1 : chkRela) {
                                 sql = "INSERT INTO DATOS_VPROCESADOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                        + causaClaveJO + "','" + victiClaveJO + jConcatenado + "','" + procesadoRela[j] + "'," + chkRela1 + ", "
+                                        + causaClaveJO + "','" + victiClave + jConcatenado + "','" + procesadoRela[j] + "'," + chkRela1 + ", "
                                         + "(select YEAR(NOW())))";
                                 System.out.println(sql);
                                 insertaVProce = conn.escribir(sql);
@@ -205,12 +210,12 @@ public class insrtVictimasJO extends HttpServlet {
                         if (insertaVProce) {
                             //Se borra fuentes ingresos de victimas por si algun dato cambia o bien el disparador cambia
                             sql = "DELETE FROM DATOS_VFUENTE_INGRESOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                                    + "AND VICTIMA_CLAVE = '" + victiClaveJO + jConcatenado + "';";
+                                    + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                             conn.escribir(sql);
                             if (ingresos == 1) {
                                 for (String chkIngreso : chkIngresos) {
                                     sql = "INSERT INTO DATOS_VFUENTE_INGRESOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + ","
-                                            + jNumero + ",'" + causaClaveJO + "','" + victiClaveJO + jConcatenado + "'," + chkIngreso
+                                            + jNumero + ",'" + causaClaveJO + "','" + victiClave + jConcatenado + "'," + chkIngreso
                                             + ",(select YEAR(NOW())))";
                                     System.out.println(sql);
                                     insertavingresos = conn.escribir(sql);
@@ -225,7 +230,7 @@ public class insrtVictimasJO extends HttpServlet {
                     showVictimasJO vic = new showVictimasJO();
                     ArrayList<String[]> lis = new ArrayList<>();
                     int totVictiInsrt = vic.countVictimasJO(causaClaveJO);
-                    lis = vic.findVictimasTablaJO(victiClaveJO + jConcatenado);
+                    lis = vic.findVictimasTablaJO(victiClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
                     resp.add(lis.get(0)[0].replace(jConcatenado, ""));

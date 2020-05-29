@@ -63,11 +63,27 @@ public class borraProce extends HttpServlet {
                     }   conn.close();
                     break;
                 case "tramite":
-                    sql = "DELETE FROM DATOS_TRAMITE_ADOJC "
+                    sql = "DELETE FROM DATOS_TRAMITES_ADOJC "
                             + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
                     System.out.println(sql);
                     if(conn.escribir(sql)){
                         out.write("Procesado Borrado de Tramite");
+                    }   conn.close();
+                    break;
+                case "concluJO":
+                    sql = "DELETE FROM DATOS_CONCLUSIONES_ADOJO "
+                            + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        out.write("Procesado Borrado de Conclusiones JO");
+                    }   conn.close();
+                    break;
+                case "tramiteJO":
+                    sql = "DELETE FROM DATOS_TRAMITES_ADOJO "
+                            + "WHERE PROCESADO_CLAVE = '" + proceClave + juzgadoClave.replace("-", "") + "';";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        out.write("Procesado Borrado de Tramite JO");
                     }   conn.close();
                     break;
                 default:

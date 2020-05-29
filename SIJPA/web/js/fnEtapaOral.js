@@ -128,6 +128,9 @@ $(document).ready(function () {
                     //editamos enlance para que pueda ser actualizado ya estando lleno
                     var enlace = 'etapaOral.jsp?proceClave=' + response[1] + '&edita=Si';
                     parent.$('#tablaJuicioJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
+                    //Control de banderas para saber a que etapa se manda el procesado
+                    //Funcion para determinar si esta en otra tabla
+                    buscaYremplazaJO(response[1], response[8]);//mandamos el nombre de procesado y la bandera nueva
                     console.log('Bandera Etapa Oral: ' + response[8]);
                     if(response[8] === 2){//Condicion para mandar al procesado a etapa conclusiones JO
                         parent.$('#tablaConcluJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
@@ -135,7 +138,7 @@ $(document).ready(function () {
                         <img src="img/editar.png" title="Modificar"/></a></td></tr>');
                         parent.$('#btn6').addClass(' activar');
                     }else if(response[8] === 3){//Condicion para mandar al procesado a etapa tramite JO
-                        console.log('Entrmos a insertar tramite');
+                        console.log('Entramos a insertar tramite');
                         parent.$('#tablaTramiteJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
                         <td><a class="pop" href="tramiteJO.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaTramiteJO tbody tr').length + '">\n\
                         <img src="img/editar.png" title="Modificar"/></a></td></tr>');

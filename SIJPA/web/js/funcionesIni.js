@@ -388,7 +388,7 @@ $(document).ready(function() {
                     var enlace = parent.$('#tablaInicial tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                     parent.$('#tablaInicial tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     //Control de banderas para saber a que etapa se manda el procesado
-                    ////Funcion para determinar si esta en otra tabla
+                    //Funcion para determinar si esta en otra tabla
                     buscaYremplaza(response[1], response[7]);//mandamos el nombre de procesado y la bandera nueva
                     console.log('Bandera: ' + response[7]);
                     if(response[7] === 1){//Condicion para mandar al procesado a etapa intermedia

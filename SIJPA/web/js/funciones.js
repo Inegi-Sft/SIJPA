@@ -545,7 +545,7 @@ function buscaYremplaza(proceClave, etapaProce){
                 if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
                     if($(this).parent().find('td:eq(2)').html() !== ''){
                         //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
-                        console.log('Esta sin insertar en BD');
+                        console.log('Esta insertado en BD');
                         eliminaBD = true;
                         nomTabla = "inter";
                     }
@@ -567,7 +567,7 @@ function buscaYremplaza(proceClave, etapaProce){
                     if(etapaProce !== 2 || etapaProce !== 6){//Quiere decir que cambio de etapa en la actualizacion
                         if($(this).parent().find('td:eq(2)').html() !== ''){
                             //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
-                            console.log('Esta sin insertar en BD');
+                            console.log('Esta insertado en BD');
                             eliminaBD = true;
                             nomTabla = "conclu";
                         }
@@ -592,7 +592,7 @@ function buscaYremplaza(proceClave, etapaProce){
                     if(etapaProce !== 3 || etapaProce !== 7){//Quiere decir que cambio de etapa en la actualizacion
                         if($(this).parent().find('td:eq(2)').html() !== ''){
                             //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
-                            console.log('Esta sin insertar en BD');
+                            console.log('Esta insertado en BD');
                             eliminaBD = true;
                             nomTabla = "tramite";
                         }
@@ -636,6 +636,81 @@ function buscaYremplaza(proceClave, etapaProce){
             type: 'post',
             data: {
                 proceClave: proceClave,
+                nomTabla: nomTabla
+            },
+            succes: function (data) {
+                console.log('Usuario ' + data);
+            }
+        }).done(function (d) {
+            console.log(d);
+            alert(d);
+        });
+    }
+}
+/*************************** JO **************************/
+/**
+ * 
+ * @param {type} proceClaveJO
+ * @param {type} etapaProce
+ * @returns {undefined}
+ */
+function buscaYremplazaJO(proceClaveJO, etapaProce){
+    var encontrado = false;
+    var eliminaBD = false;
+    var nomTabla = "";
+    var dato = "";
+    console.log('etapa: ' + etapaProce);
+    if(parent.$('#tablaConcluJO tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
+        parent.$('#tablaConcluJO tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
+            dato = $(this).html();
+            console.log('dato conclusion JO: ' + dato + ' proceClave: ' + proceClaveJO);
+            if(proceClaveJO === dato){
+                if(etapaProce !== 2){//Quiere decir que cambio de etapa en la actualizacion
+                    if($(this).parent().find('td:eq(2)').html() !== ''){
+                        //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                        console.log('Esta insertado en BD');
+                        eliminaBD = true;
+                        nomTabla = "concluJO";
+                    }
+                    encontrado = true;
+                    $(this).parent().remove();
+                    if(parent.$('#tablaConcluJO tbody tr').length === 0){
+                        parent.$('#btn6').prop('disabled', true);
+                    }
+                }
+            }
+        });
+    }
+    if(!encontrado){
+        if(parent.$('#tablaTramiteJO tbody tr').length > 0){
+            parent.$('#tablaTramiteJO tbody tr').find('td:eq(0)').each(function(){
+                dato = $(this).html();
+                console.log('dato tramite JO: ' + dato + ' proceClave: ' + proceClaveJO);
+                if(proceClaveJO === dato){
+                    if(etapaProce !== 3 || etapaProce !== 7){//Quiere decir que cambio de etapa en la actualizacion
+                        if($(this).parent().find('td:eq(2)').html() !== ''){
+                            //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                            console.log('Esta insertado en BD');
+                            eliminaBD = true;
+                            nomTabla = "tramiteJO";
+                        }
+                        encontrado = true;
+                        $(this).parent().remove();
+                        if(parent.$('#tablaTramiteJO tbody tr').length === 0){
+                            parent.$('#btn7').prop('disabled', true);
+                        }
+                    }
+                }
+            });
+        }
+    }
+    
+    if(eliminaBD){//Si encuentra algun caso donde se tenga qu eliminar de la BD entonces lo hacemos
+        $.ajax({
+            url: 'borraProce',
+            type: 'post',
+            data: {
+                proceClave: proceClaveJO,
                 nomTabla: nomTabla
             },
             succes: function (data) {

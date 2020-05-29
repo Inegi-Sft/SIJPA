@@ -8,6 +8,7 @@
 <%@page import="clasesAuxiliar.showProcesados"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,8 @@
             showProcesados proce = new showProcesados();
             ArrayList<String[]> lista, conclusiones = new ArrayList();
             ArrayList<String> concluPA = new ArrayList();
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
             
             String proceClave = "", posicion = "", edicion = "";
             if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
@@ -124,7 +127,7 @@
                     <legend>Resolución</legend>
                     <div class="cols">
                         <label for="fechaReso">Fecha en que se dictó la resolución</label>
-                        <input type="date" name="fechaReso" id="fechaReso" value="<%=fechaResol%>" required>
+                        <input type="date" name="fechaReso" id="fechaReso" value="<%=fechaResol%>" max="<%=fechas%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaReso" onclick="fechaNoIdent('#chkFechaReso', '#fechaReso')">
                             <label>No identificada</label>

@@ -5,6 +5,7 @@
  */
 
 import clasesAuxiliar.showCausasPenales;
+import clasesAuxiliar.showCausasPenalesJO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -40,13 +41,23 @@ public class obtenFechaNacPro extends HttpServlet {
         HttpSession sesion = request.getSession();
         String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
         String causaClave = (String) sesion.getAttribute("causaClave");
+        String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
         showCausasPenales penales = new showCausasPenales();
+        showCausasPenalesJO penalesJO = new showCausasPenalesJO();
 
         try {
             if (request.getParameter("Fnac") != null) {
                 String FechNac = request.getParameter("Fnac");
                 String AnoNac = FechNac.substring(0, 4);
+                String Sistema=(String) sesion.getAttribute("Sistema");
+                
+                if (Sistema.equals("JC")){
                 FechExpe = penales.FechaIng(juzgadoClave, causaClave);
+                }else if (Sistema.equals("JO")){
+                 FechExpe=penalesJO.FechaIngJO(juzgadoClave, causaClaveJO);
+                }
+                
+                
                 String AnoIngreso = FechExpe.substring(0, 4);
                 System.out.println("año de ingreso=" + FechExpe);
                 if (FechExpe.equals("1899-09-09")) {

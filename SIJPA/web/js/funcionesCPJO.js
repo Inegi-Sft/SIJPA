@@ -14,8 +14,9 @@ $(document).ready(function () {
     //Se usa para la recuperacion de BD
     if($('#difeOrgano').val() === '1'){
         $('#divOrgDif').show();
+        $('#cantJuez,#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
     }else if($('#difeOrgano').val() === '2'){
-        $('#regCantJuez').show();
+            $('#regCantJuez').show();
         //Si dice que NO en otro organo entonces le mostramos la cantidad de jueces y jueces
         if($('#cantJuezHi').val() !== ''){
             var cantiJuez = $('#cantJuezHi').val();
@@ -42,9 +43,8 @@ $(document).ready(function () {
             $('#orgDif').val('').prop('required', true);
             
             $('#regCantJuez').fadeOut();
-            $('#cantJuez').val('-2').prop('required', false);
             $('#divJuezJO1,#divJuezJO2,#divJuezJO3').fadeOut();
-            $('#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
+            $('#cantJuez,#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
         }
     });
     

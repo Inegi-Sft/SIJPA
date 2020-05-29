@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2020 a las 17:36:55
+-- Tiempo de generación: 29-05-2020 a las 16:48:54
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -6475,7 +6475,8 @@ CREATE TABLE `datos_causas_penales_adojc` (
 INSERT INTO `datos_causas_penales_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `CARPETA_INVESTIGA`, `CAUSA_CLAVE`, `FECHA_INGRESO`, `JUEZ_CLAVE`, `DERIVA_ACCION_PENAL`, `COMPETENCIA`, `TIPO_INCOMPETENCIA`, `EXPEDIENTE_ACUMULADO`, `EXPEDIENTE_REFERENCIA`, `TOTAL_DELITOS`, `TOTAL_PROCESADOS`, `TOTAL_VICTIMAS`, `COMENTARIOS`, `ANIO`) VALUES
 (9, 9007, 125, '9-9007-125', '1', '199007125', '1899-09-09', 1, 2, 1, -2, 2, '-2', 2, 2, 2, 'Nuevo', 2020),
 (9, 9007, 125, '9-9007-125', '2', '299007125', '1899-09-09', 2, 2, 1, -2, 2, '-2', 6, 6, 6, '', 2020),
-(9, 9007, 125, '9-9007-125', '355', '35599007125', '1899-09-09', 1, 2, 1, -2, 2, '-2', 5, 5, 5, 'actualizamos', 2020);
+(9, 9007, 125, '9-9007-125', '355', '35599007125', '1899-09-09', 1, 2, 1, -2, 2, '-2', 5, 5, 5, 'actualizamos', 2020),
+(9, 9007, 125, '9-9007-125', '5', '599007125', '1899-09-09', 1, 2, 1, -2, 2, '-2', 1, 1, 1, '', 2020);
 
 -- --------------------------------------------------------
 
@@ -6509,7 +6510,8 @@ CREATE TABLE `datos_causas_penales_adojo` (
 --
 
 INSERT INTO `datos_causas_penales_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `CAUSA_CLAVEJC`, `CAUSA_CLAVEJO`, `FECHA_INGRESO`, `TOTAL_DELITOS`, `TOTAL_PROCESADOS`, `TOTAL_VICTIMAS`, `ATENDIDA_ORGDIFERENTE`, `JUZGADO_DIFERENTE`, `CANTIDAD_JUECES`, `JUEZ_CLAVE_1`, `JUEZ_CLAVE_2`, `JUEZ_CLAVE_3`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '9-9007-125', '299007125', '5o99007125', '1899-09-09', 4, 2, 6, 1, '9-9007-125', -2, -2, -2, -2, '', 2020);
+(9, 9007, 125, '9-9007-125', '299007125', '5o99007125', '1899-09-09', 4, 2, 6, 1, '9-9007-125', -2, -2, -2, -2, '', 2020),
+(9, 9007, 125, '9-9007-125', '199007125', '6O99007125', '1899-09-09', 1, 1, 2, 1, '9-9007-125', -2, -2, -2, -2, '', 2020);
 
 -- --------------------------------------------------------
 
@@ -6622,6 +6624,7 @@ CREATE TABLE `datos_dconclusiones_adojo` (
   `PROCESADO_CLAVE` varchar(255) COLLATE utf8_bin NOT NULL,
   `DELITO_CLAVE` varchar(255) COLLATE utf8_bin NOT NULL,
   `TIPO_SENTENCIA` int(2) NOT NULL,
+  `TIPO_CONCLUSION` int(1) NOT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -6677,7 +6680,8 @@ INSERT INTO `datos_delitos_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`,
 (9, 9007, 125, '35599007125', '355-D199007125', 193, '1', 31, 2, 2, '1799-09-09', '1899-09-09', 10, 2, 2, 2, 2, 1, 1, 2, 3, 17, 17012, 0, 0, 'YA PUDE', 2020),
 (9, 9007, 125, '35599007125', '355-D299007125', 2, '2', 1, 2, 2, '1799-09-09', '1899-09-09', 2, 1, 1, 2, 2, 2, 2, 2, 2, 17, 17012, 0, 0, 'si se pudo', 2020),
 (9, 9007, 125, '35599007125', '355-D499007125', 77, '2', 5, 1, 2, '1799-09-09', '1899-09-09', 10, 2, 2, 2, 2, 2, 2, 2, 3, 17, 17015, 0, 0, '', 2020),
-(9, 9007, 125, '35599007125', '355-D599007125', 830, '2', 149, 1, 1, '1899-09-09', '1899-09-09', 8, 1, 1, 2, 2, 2, 1, 3, 4, 17, 17012, 0, 0, 'Vamos a probar algo de comentarios aqui para pobrar el guardado', 2020);
+(9, 9007, 125, '35599007125', '355-D599007125', 830, '2', 149, 1, 1, '1899-09-09', '1899-09-09', 8, 1, 1, 2, 2, 2, 1, 3, 4, 17, 17012, 0, 0, 'Vamos a probar algo de comentarios aqui para pobrar el guardado', 2020),
+(9, 9007, 125, '599007125', '5-D199007125', 1, '13', 1, 1, 2, '1899-09-09', '1899-09-09', 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2001, 0, 0, '', 2020);
 
 -- --------------------------------------------------------
 
@@ -6717,6 +6721,17 @@ CREATE TABLE `datos_delitos_adojo` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Volcado de datos para la tabla `datos_delitos_adojo`
+--
+
+INSERT INTO `datos_delitos_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJC`, `DELITO_CLAVEJC`, `CAUSA_CLAVEJO`, `DELITO_CLAVEJO`, `DELITO_CODIGO_PENAL`, `ART_CODIGO_PENAL`, `DELITO_NORMA_TECNICA`, `TIPO_FUERO`, `DELITO_RECLASIFICADO`, `FECHA_RECLASIFICACION`, `FECHA_OCURRENCIA`, `SITIO_OCURRENCIA`, `GRADO_CONSUMACION`, `CALIFICACION`, `CLASIFICACION`, `CONCURSO`, `FORMA_COMISION`, `FORMA_ACCION`, `MODALIDAD`, `INSTRUMENTO_COMISION`, `OCURRIO_ENTIDAD`, `OCURRIO_MUNICIPIO`, `NUMERO_PROCESADOS`, `NUMERO_VICTIMAS`, `COMENTARIOS`, `ANIO`) VALUES
+(9, 9007, 125, '299007125', '2-D299007125', '5o99007125', '5o-D299007125', 113, '11', 7, 2, 2, '1899-09-09', '1899-09-09', 4, 2, 1, 1, 1, 2, 1, 3, 2, 16, 16016, 0, 0, '', 2020),
+(9, 9007, 125, '299007125', '2-D499007125', '5o99007125', '5o-D499007125', 193, '13', 31, 1, 1, '1899-09-09', '1899-09-09', 5, 1, 1, 2, 2, 1, 2, 3, 2, 2, 2002, 0, 0, '', 2020),
+(9, 9007, 125, '299007125', '2-D599007125', '5o99007125', '5o-D599007125', 157, '14', 22, 1, 2, '1899-09-09', '1899-09-09', 3, 1, 2, 1, 2, 1, 1, 2, 3, 4, 4002, 0, 0, '', 2020),
+(9, 9007, 125, '299007125', '2-D699007125', '5o99007125', '5o-D699007125', 2, '15', 1, 1, 2, '1899-09-09', '1899-09-09', 2, 2, 2, 2, 1, 1, 2, 2, 3, 18, 18015, 0, 0, '', 2020),
+(9, 9007, 125, '199007125', '1-D199007125', '6O99007125', '6O-D199007125', 3, '1', 1, 2, 2, '1899-09-09', '1899-09-09', 3, 2, 1, 3, 2, 2, 2, 3, 2, 1, 1005, 0, 0, '', 2020);
+
 -- --------------------------------------------------------
 
 --
@@ -6746,7 +6761,10 @@ INSERT INTO `datos_dhomicidio_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_I
 (9, 9007, 125, '299007125', '2-D699007125', 4, 2020),
 (9, 9007, 125, '299007125', '2-D699007125', 7, 2020),
 (9, 9007, 125, '299007125', '2-D699007125', 9, 2020),
-(9, 9007, 125, '35599007125', '355-D299007125', 99, 2020);
+(9, 9007, 125, '35599007125', '355-D299007125', 99, 2020),
+(9, 9007, 125, '599007125', '5-D199007125', 1, 2020),
+(9, 9007, 125, '599007125', '5-D199007125', 2, 2020),
+(9, 9007, 125, '599007125', '5-D199007125', 3, 2020);
 
 -- --------------------------------------------------------
 
@@ -6763,6 +6781,19 @@ CREATE TABLE `datos_dhomicidio_adojo` (
   `CONTEXTO_SITUACIONAL` int(2) NOT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `datos_dhomicidio_adojo`
+--
+
+INSERT INTO `datos_dhomicidio_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `DELITO_CLAVE`, `CONTEXTO_SITUACIONAL`, `ANIO`) VALUES
+(9, 9007, 125, '5o99007125', '5o-D699007125', 4, 2020),
+(9, 9007, 125, '5o99007125', '5o-D699007125', 7, 2020),
+(9, 9007, 125, '5o99007125', '5o-D699007125', 9, 2020),
+(9, 9007, 125, '6O99007125', '6O-D199007125', 1, 2020),
+(9, 9007, 125, '6O99007125', '6O-D199007125', 2, 2020),
+(9, 9007, 125, '6O99007125', '6O-D199007125', 3, 2020),
+(9, 9007, 125, '6O99007125', '6O-D199007125', 4, 2020);
 
 -- --------------------------------------------------------
 
@@ -6804,6 +6835,15 @@ CREATE TABLE `datos_drobo_adojo` (
   `TIPO_COSA_ROBADA` int(2) NOT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `datos_drobo_adojo`
+--
+
+INSERT INTO `datos_drobo_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `DELITO_CLAVE`, `TIPO_COSA_ROBADA`, `ANIO`) VALUES
+(9, 9007, 125, '5o99007125', '5o-D499007125', 1, 2020),
+(9, 9007, 125, '5o99007125', '5o-D499007125', 2, 2020),
+(9, 9007, 125, '5o99007125', '5o-D499007125', 3, 2020);
 
 -- --------------------------------------------------------
 
@@ -6862,7 +6902,8 @@ INSERT INTO `datos_etapa_inicial_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPI
 (9, 9007, 125, '299007125', '2-P699007125', 1, 1, 1, '1799-09-09', 1, '1899-09-09', 1, '1899-09-09', 2, 1, -2, '1899-09-09', 1, 2, '1799-09-09', -2, -2, '1899-09-09', 2, 2, -2, -2, '1799-09-09', -2, 2, '', 2020, 2),
 (9, 9007, 125, '35599007125', '355-P199007125', 1, 1, 1, '1799-09-09', 1, '1899-09-09', 2, '1899-09-09', 2, 1, 1, '1899-09-09', 1, 2, '1799-09-09', -2, -2, '1899-09-09', 2, 1, 1, 1, '1899-09-09', 1, 1, '2 actualiza', 2020, 7),
 (9, 9007, 125, '35599007125', '355-P399007125', 2, -2, -2, '1799-09-09', -2, '1799-09-09', -2, '1799-09-09', -2, -2, -2, '1799-09-09', -2, -2, '1799-09-09', -2, -2, '1799-09-09', -2, -2, -2, -2, '1799-09-09', -2, -2, '', 2020, 3),
-(9, 9007, 125, '35599007125', '355-P599007125', 1, 2, -2, '1799-09-09', 2, '1799-09-09', -2, '1799-09-09', -2, -2, -2, '1799-09-09', -2, -2, '1799-09-09', -2, -2, '1799-09-09', -2, -2, -2, -2, '1799-09-09', -2, -2, '', 2020, 3);
+(9, 9007, 125, '35599007125', '355-P599007125', 1, 2, -2, '1799-09-09', 2, '1799-09-09', -2, '1799-09-09', -2, -2, -2, '1799-09-09', -2, -2, '1799-09-09', -2, -2, '1799-09-09', -2, -2, -2, -2, '1799-09-09', -2, -2, '', 2020, 3),
+(9, 9007, 125, '599007125', '5-P199007125', -2, -2, -2, '1899-09-09', -2, '1899-09-09', -2, '1899-09-09', -2, -2, -2, '1899-09-09', -2, -2, '1899-09-09', -2, -2, '1899-09-09', -2, -2, -2, -2, '1899-09-09', -2, -2, '', 2020, 0);
 
 -- --------------------------------------------------------
 
@@ -6931,8 +6972,16 @@ CREATE TABLE `datos_etapa_oral_adojo` (
   `FECHA_DELIBERACION` date NOT NULL,
   `SENTIDO_FALLO` int(1) NOT NULL,
   `COMENTARIOS` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `ANIO` int(4) NOT NULL
+  `ANIO` int(4) NOT NULL,
+  `ETAPA` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `datos_etapa_oral_adojo`
+--
+
+INSERT INTO `datos_etapa_oral_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVE`, `FECHA_APERTURA_JUICIOORAL`, `FECHA_AUDIENCIA_JUICIO`, `MEDIDAS_DISCIPLINARIAS`, `TIPO_DISCIPLINARIA`, `INCIDENTES_AUDIENCIA`, `FECHA_RESOLUCION_INCIDENTE`, `PROMUEVE_INCIDENTE`, `PD_TESTIMONIAL`, `PD_PERICIAL`, `PD_DECLARACION_ACUSADO`, `PD_DOCUMENTAL_MATERIAL`, `PD_OTRA_PRUEBA`, `SUSPENCION_AUDIENCIA`, `FECHA_SUSPENCION`, `FECHA_REANUDACION`, `DELIBERACION`, `FECHA_DELIBERACION`, `SENTIDO_FALLO`, `COMENTARIOS`, `ANIO`, `ETAPA`) VALUES
+(9, 9007, 125, '6O99007125', '6O-P299007125', '1899-09-09', '1899-09-09', 1, 2, 2, '1799-09-09', -2, 2, 2, 2, 2, 9, 2, '1799-09-09', '1799-09-09', 2, '1799-09-09', -2, '', 2020, 3);
 
 -- --------------------------------------------------------
 
@@ -7113,6 +7162,16 @@ CREATE TABLE `datos_pdelitos_adojo` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Volcado de datos para la tabla `datos_pdelitos_adojo`
+--
+
+INSERT INTO `datos_pdelitos_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVE`, `DELITO_CLAVE`, `NUMERO_VICTIMAS`, `ANIO`) VALUES
+(9, 9007, 125, '5o99007125', '5o-P199007125', '5o-D299007125', 2, 2020),
+(9, 9007, 125, '5o99007125', '5o-P199007125', '5o-D499007125', 2, 2020),
+(9, 9007, 125, '5o99007125', '5o-P199007125', '5o-D599007125', 4, 2020),
+(9, 9007, 125, '6O99007125', '6O-P299007125', '6O-D199007125', 2, 2020);
+
 -- --------------------------------------------------------
 
 --
@@ -7280,7 +7339,8 @@ INSERT INTO `datos_procesados_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_I
 (9, 9007, 125, '299007125', '2-P699007125', 'ANABEL', 'PEREZ', 'CRUZ', 'LA REINA', 'DOIUSJUOIOEMMDNSJU', '1899-09-09', 2, 12, 7, -2, -2, 7, 13, -2, -2, 3, 1, 2, 2, 2, 2, 2, -2, 2, -2, 2, 2, 2, -2, 2, -2, 1, 1, -2, 3, 2, 2, 2, '-2', 3, 2, '', 2020),
 (9, 9007, 125, '35599007125', '355-P199007125', 'MANUEL', 'ISLAS', 'SALAS', 'EL GUAPO', 'SADRHDFRMJUDKIE01E', '1978-06-06', 1, 16, 1, 4, 4004, 5, 1, 17, 17015, 2, 2, 1, 3, 2, 1, 1, 13, 1, 3, 2, 2, 1, 2, 10, 3, 1, 1, -2, 2, 1, 3, 1, 'la manitas', 1, 2, '', 2020),
 (9, 9007, 125, '35599007125', '355-P399007125', 'JORGE', 'MAGAÑA', 'CASTE', 'EL ABUELO', 'jsuyetgsjaskauiejj', '1899-09-09', 2, 13, 17, -2, -2, 13, 14, -2, -2, 6, 2, 2, 4, 9, 1, 2, -2, 2, -2, 2, 2, 2, -2, 5, -2, 1, 2, -2, 5, 2, 2, 2, '-2', 2, 2, '', 2020),
-(9, 9007, 125, '35599007125', '355-P599007125', 'FERNANDO', 'SANCHEZ ', 'VELADOR', 'EL CANIJO', 'mais880808hdfwdert', '1899-09-09', 2, 15, 16, -2, -2, 18, 15, -2, -2, 3, 2, 1, 3, 2, 2, 2, -2, 2, -2, 1, 2, 2, -2, 7, -2, 2, -2, 2, 5, 3, 2, 1, 'la manitas', 1, 5, '', 2020);
+(9, 9007, 125, '35599007125', '355-P599007125', 'FERNANDO', 'SANCHEZ ', 'VELADOR', 'EL CANIJO', 'mais880808hdfwdert', '1899-09-09', 2, 15, 16, -2, -2, 18, 15, -2, -2, 3, 2, 1, 3, 2, 2, 2, -2, 2, -2, 1, 2, 2, -2, 7, -2, 2, -2, 2, 5, 3, 2, 1, 'la manitas', 1, 5, '', 2020),
+(9, 9007, 125, '599007125', '5-P199007125', '-2', '-2', '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '-2', -2, -2, '', 2020);
 
 -- --------------------------------------------------------
 
@@ -7338,6 +7398,14 @@ CREATE TABLE `datos_procesados_adojo` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Volcado de datos para la tabla `datos_procesados_adojo`
+--
+
+INSERT INTO `datos_procesados_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJC`, `PROCESADO_CLAVEJC`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`, `NOMBRE`, `A_PATERNO`, `A_MATERNO`, `ALIAS`, `CURP`, `FECHA_NACIMIENTO`, `SEXO`, `EDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `DISCAPACIDAD`, `CONDICION_ALFABETISMO`, `ULTIMO_GRADO_ESTUDIOS`, `CONDICION_ESTUDIANTE`, `HABLA_ESPANOL`, `POBLACION_INDIGENA`, `TIPO_PUEBLO_INDIGENA`, `HABLA_INDIGENA`, `FAMILIA_LINGUISTICA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `CONDICION_ACTIVIDAD`, `GRADO_PARTICIPACION`, `REINCIDENCIA`, `ESTADO_PSICOFISICO`, `DELICTIVO`, `GRUPO_DELICTIVO`, `TIPO_DEFENSOR`, `PERSONA_RESPONSABLE`, `COMENTARIOS`, `ANIO`) VALUES
+(9, 9007, 125, '299007125', '2-P199007125', '5o99007125', '5o-P199007125', 'JORGE', 'MAGAÑA', 'CASTE', 'EL ABUELO', 'JSUYETGSJASKAUIEJJ', '1899-09-09', 1, 15, 8, -2, -2, 6, 10, -2, -2, 2, 2, 1, 2, 2, 2, 2, -2, 2, -2, 2, 1, 2, -2, 5, -2, 3, 3, 3, 2, '-2', 2, 2, '', 2020),
+(9, 9007, 125, '199007125', '1-P299007125', '6O99007125', '6O-P299007125', 'RICARDO', 'LOPEZ', 'SALAS', 'EL CHOLO', 'DOIUSJUOIOEMMDNSJU', '1899-09-09', 2, 14, 3, -2, -2, 12, 12, -2, -2, 4, 2, 1, 2, 2, 2, 2, -2, 2, -2, 2, 2, 2, -2, 4, -2, 3, 1, 3, 2, '-2', 2, 3, '', 2020);
+
 -- --------------------------------------------------------
 
 --
@@ -7385,6 +7453,13 @@ CREATE TABLE `datos_tramites_adojo` (
   `FECHA_ACTO_PROCESAL` date NOT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `datos_tramites_adojo`
+--
+
+INSERT INTO `datos_tramites_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVE`, `ESTATUS`, `ESPECIFIQUE`, `FECHA_ACTO_PROCESAL`, `ANIO`) VALUES
+(9, 9007, 125, '6O99007125', '6O-P299007125', 2, '', '1899-09-09', 2020);
 
 -- --------------------------------------------------------
 
@@ -7444,6 +7519,15 @@ CREATE TABLE `datos_vdelitos_adojo` (
   `DELITO_CLAVE` varchar(255) COLLATE utf8_bin NOT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `datos_vdelitos_adojo`
+--
+
+INSERT INTO `datos_vdelitos_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `VICTIMA_CLAVE`, `DELITO_CLAVE`, `ANIO`) VALUES
+(9, 9007, 125, '5o99007125', '5o-V199007125', '5o-D699007125', 2020),
+(9, 9007, 125, '6O99007125', '6O-V199007125', '6O-D199007125', 2020),
+(9, 9007, 125, '6O99007125', '6O-V299007125', '6O-D199007125', 2020);
 
 -- --------------------------------------------------------
 
@@ -7545,7 +7629,8 @@ INSERT INTO `datos_victimas_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`
 (9, 9007, 125, '35599007125', '355-V199007125', 2, 2, 2, -2, -2, '1899-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020),
 (9, 9007, 125, '35599007125', '355-V299007125', 1, -2, 1, 2, 1, '1899-09-09', 56, 4, 15, -2, -2, 15, 15, -2, -2, 8, 2, 3, 2, 2, -2, 2, 1, 1, 3, 5, -2, 2, 'SE GUARDO', 2020),
 (9, 9007, 125, '35599007125', '355-V499007125', 1, -2, 1, 2, 1, '1899-09-09', 23, 10, 1, 1, 1002, 9, 1, 1, 1004, 5, 1, 6, 2, 1, 11, 2, 2, 1, 2, 6, -2, 1, 'PROBAREMOS', 2020),
-(9, 9007, 125, '35599007125', '355-V599007125', 2, 2, 2, -2, -2, '1899-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020);
+(9, 9007, 125, '35599007125', '355-V599007125', 2, 2, 2, -2, -2, '1899-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020),
+(9, 9007, 125, '599007125', '5-V199007125', -2, -2, -2, -2, -2, '1899-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020);
 
 -- --------------------------------------------------------
 
@@ -7590,6 +7675,15 @@ CREATE TABLE `datos_victimas_adojo` (
   `COMENTARIOS` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `datos_victimas_adojo`
+--
+
+INSERT INTO `datos_victimas_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJC`, `VICTIMA_CLAVEJC`, `CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`, `TIPO_VICTIMA`, `TIPO_VICTIMA_MORAL`, `CONTO_ASESOR`, `ASESOR`, `SEXO`, `FECHA_NACIMIENTO`, `EDAD`, `VULNERABILIDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `CONDICION_ALFABETISMO`, `GRADO_ESTUDIOS`, `HABLA_ESPANOL`, `HABLA_INDIGENA`, `LENGUA_INDIGENA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `COMENTARIOS`, `ANIO`) VALUES
+(9, 9007, 125, '299007125', '2-V199007125', '5o99007125', '5o-V199007125', 2, 2, 1, 2, -2, '1799-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020),
+(9, 9007, 125, '199007125', '1-V199007125', '6O99007125', '6O-V199007125', 1, -2, 2, -2, 1, '1899-09-09', 5, 3, 10, -2, -2, 11, 15, -2, -2, 7, 2, 3, 2, 2, -2, 1, 1, 2, -2, 3, '', 2020),
+(9, 9007, 125, '199007125', '1-V299007125', '6O99007125', '6O-V299007125', 2, 2, 2, -2, -2, '1799-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020);
 
 -- --------------------------------------------------------
 
@@ -7745,6 +7839,17 @@ CREATE TABLE `datos_vprocesados_adojo` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Volcado de datos para la tabla `datos_vprocesados_adojo`
+--
+
+INSERT INTO `datos_vprocesados_adojo` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `VICTIMA_CLAVE`, `PROCESADO_CLAVE`, `RELACION`, `ANIO`) VALUES
+(9, 9007, 125, '5o99007125', '5o-V199007125', '5o-P199007125', 1, 2020),
+(9, 9007, 125, '6O99007125', '6O-V199007125', '6O-P299007125', 1, 2020),
+(9, 9007, 125, '6O99007125', '6O-V199007125', '6O-P299007125', 5, 2020),
+(9, 9007, 125, '6O99007125', '6O-V299007125', '6O-P299007125', 1, 2020),
+(9, 9007, 125, '6O99007125', '6O-V299007125', '6O-P299007125', 2, 2020);
+
 -- --------------------------------------------------------
 
 --
@@ -7801,17 +7906,19 @@ INSERT INTO `usuarios` (`USUARIO_ID`, `NOMBRE`, `APATERNO`, `AMATERNO`, `EDAD`, 
 
 CREATE TABLE `usuarios_control` (
   `CAUSA_CLAVE` varchar(255) COLLATE utf8_bin NOT NULL,
-  `AVANCE` int(2) NOT NULL
+  `AVANCE` int(2) NOT NULL,
+  `CAUSA_CLAVEJO` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `AVANCEJO` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `usuarios_control`
 --
 
-INSERT INTO `usuarios_control` (`CAUSA_CLAVE`, `AVANCE`) VALUES
-('199007125', 6),
-('299007125', 6),
-('35599007125', 6);
+INSERT INTO `usuarios_control` (`CAUSA_CLAVE`, `AVANCE`, `CAUSA_CLAVEJO`, `AVANCEJO`) VALUES
+('199007125', 6, '6O99007125', 5),
+('299007125', 6, NULL, NULL),
+('35599007125', 6, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -8619,7 +8726,8 @@ ALTER TABLE `datos_etapa_oral_adojo`
   ADD KEY `FK_EORAL_PERICIALJO` (`PD_PERICIAL`),
   ADD KEY `FK_EORAL_DACUSADOJO` (`PD_DECLARACION_ACUSADO`),
   ADD KEY `FK_EORAL_DOCMATERIALJO` (`PD_DOCUMENTAL_MATERIAL`),
-  ADD KEY `FK_EORAL_OTRAPRUEBAJO` (`PD_OTRA_PRUEBA`);
+  ADD KEY `FK_EORAL_OTRAPRUEBAJO` (`PD_OTRA_PRUEBA`),
+  ADD KEY `FK_ETAPAS` (`ETAPA`);
 
 --
 -- Indices de la tabla `datos_informe_adojc`
@@ -9102,6 +9210,7 @@ ALTER TABLE `datos_dconclusiones_adojc`
 --
 ALTER TABLE `datos_dconclusiones_adojo`
   ADD CONSTRAINT `FK_DCON_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DCON_CONCLUJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_conclusiones_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_DCON_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojo` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_DCON_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
   ADD CONSTRAINT `FK_DCON_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
@@ -9259,7 +9368,8 @@ ALTER TABLE `datos_etapa_oral_adojo`
   ADD CONSTRAINT `FK_EORAL_SENTIDOJO` FOREIGN KEY (`SENTIDO_FALLO`) REFERENCES `catalogos_sentido_fallo` (`SENTIDO_ID`),
   ADD CONSTRAINT `FK_EORAL_SUSPENCIONAUDIJO` FOREIGN KEY (`SUSPENCION_AUDIENCIA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
   ADD CONSTRAINT `FK_EORAL_TESTIMONIALJO` FOREIGN KEY (`PD_TESTIMONIAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_TIPODISCIPLIJO` FOREIGN KEY (`TIPO_DISCIPLINARIA`) REFERENCES `catalogos_medidas_disciplinarias` (`MEDIDA_ID`);
+  ADD CONSTRAINT `FK_EORAL_TIPODISCIPLIJO` FOREIGN KEY (`TIPO_DISCIPLINARIA`) REFERENCES `catalogos_medidas_disciplinarias` (`MEDIDA_ID`),
+  ADD CONSTRAINT `FK_ETAPAS` FOREIGN KEY (`ETAPA`) REFERENCES `catalogos_etapas` (`ETAPA_ID`);
 
 --
 -- Filtros para la tabla `datos_informe_adojc`

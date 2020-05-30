@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 public class showVictimasJO {
     
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> vic;
-    ArrayList<String> vicDelito, vicIngre, vicProce;
+    ArrayList<String[]> vic, vicProce;
+    ArrayList<String> vicDelito, vicIngre, vP;
     String sql;
     ResultSet resul;
     int conteoVic;
@@ -244,7 +244,7 @@ public class showVictimasJO {
     }
     
     public ArrayList findViRelProcesadoJO(String causaClaveJO, String victiClave, String proceClave, String relacion){
-        vicProce = new ArrayList();
+        vP = new ArrayList();
         try {
             conn.Conectar();
             sql = "SELECT RELACION FROM DATOS_VPROCESADOS_ADOJO "
@@ -253,15 +253,16 @@ public class showVictimasJO {
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                     + "AND RELACION = " + relacion + " "
                     + "ORDER BY 1;";
+            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
-                vicProce.add(resul.getString("RELACION"));
+                vP.add(resul.getString("RELACION"));
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return vicProce;
+        return vP;
     }
     
     public ArrayList findVIngresosJC(String causaClaveJC, String victiClave, String ingreso) {

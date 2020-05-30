@@ -3,6 +3,7 @@
     Created on : 15/01/2020, 09:22:30 AM
     Author     : CESAR.OSORIO
 --%>
+<%@page import="clasesAuxiliar.FechaMax"%>
 <%@page import="clasesAuxiliar.showCausasPenales"%>
 <%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="clasesAuxiliar.showJueces"%>
@@ -21,6 +22,8 @@
             showJueces juez = new showJueces();
             showJuzgados juzgados = new showJuzgados();
             showCausasPenalesJO causaPenalJO = new showCausasPenalesJO();
+            FechaMax fecha =new FechaMax();
+            String fechas= fecha.FechaValida();
 
             ArrayList<String[]> lista, lisCausaJC, lisCausaJO;
             ArrayList<String> lis;
@@ -97,13 +100,13 @@
                             </td>
                             <td>
                                 <label for="expClaveJO">No. Asunto Asignado JO</label>
-                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>disabled="true"<%}%> onblur="ValidaCarpeInvest('#expClaveJO')">
+                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>readonly<%}%> onblur="ValidaCarpeInvest('#expClaveJO')">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3">
                                 <label for="fIngresoJO">Fecha de ingreso</label>
-                                <input type="date" name="fIngresoJO" id="fIngresoJO" value="<%=fechaIngreso%>" required>
+                                <input type="date" name="fIngresoJO" id="fIngresoJO" value="<%=fechaIngreso%>" max="<%=fechas%>" required>
                                 <div class="noIdentificada">
                                     <input type="checkbox" id="chkFechaIngreJO" onclick="fechaNoIdent('#chkFechaIngreJO', '#fIngresoJO')">
                                     <label>No identificada</label>
@@ -154,10 +157,10 @@
                                 <label for="cantJuez" class="lblExBig">Cantidad de jueces a quien corresponde conocer de la Causa Penal</label>
                                 <select name="cantJuez" id="cantJuez">
                                         <option value="">--Seleccione--</option>
-                                        <option value="-2">-2</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        <option <%if(cantJueces.equals("-2")){%>selected <%}%>value="-2">-2</option>
+                                        <option <%if(cantJueces.equals("1")){%>selected <%}%>value="1">1</option>
+                                        <option <%if(cantJueces.equals("2")){%>selected <%}%>value="2">2</option>
+                                        <option <%if(cantJueces.equals("3")){%>selected <%}%>value="3">3</option>
                                 </select>
                             </td>
                         </tr>

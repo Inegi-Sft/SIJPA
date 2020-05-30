@@ -51,7 +51,7 @@ public class insrtCausaPenal extends HttpServlet {
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String carpInvestiga = request.getParameter("carpInves");
-        String causaClave = request.getParameter("expClave").toUpperCase();
+        String causaClave = request.getParameter("expClave");
         String fecha_ingreso;
         if (request.getParameter("fIngreso") != null) {
             fecha_ingreso = request.getParameter("fIngreso");
@@ -62,7 +62,8 @@ public class insrtCausaPenal extends HttpServlet {
         String particular = request.getParameter("Pparticular");
         String acomulado = request.getParameter("ExpAcomu");
         String referencia = verificaVariable(request.getParameter("ExpRefe"));
-        int competencia = Integer.parseInt(request.getParameter("compe"));
+        String competencia = request.getParameter("compe");
+        System.out.println("COMPETENCIA:"+competencia);
         String incompetencia = verificaVariable(request.getParameter("Tincompe"));
         String totalDeli = verificaVariable(request.getParameter("Tdelitos"));
         String totalAdo = verificaVariable(request.getParameter("Tadolescentes"));

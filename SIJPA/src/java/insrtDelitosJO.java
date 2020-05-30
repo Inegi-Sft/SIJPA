@@ -94,7 +94,7 @@ public class insrtDelitosJO extends HttpServlet {
                 String delitoClaveJO = causaClaveJOSimple + delitoClave.substring(delitoClave.indexOf("-D"));
                 sql="INSERT INTO DATOS_DELITOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + ",'" + jNumero + "','"
                         + causaClaveJC + "','" + delitoClave + jConcatenado + "','" + causaClaveJO + "','"
-                        + delitoClaveJO + jConcatenado + "'," + delitoCP + "," + articuloCP + ","
+                        + delitoClaveJO + jConcatenado + "'," + delitoCP + ",'" + articuloCP + "',"
                         + delitoNT + "," + fuero + "," + reclasificaDel + ",'" + fechaReclaDel + "','" + ocurrencia + "',"
                         + sitioO + "," + consumacion + "," + calificacion + "," + clasificacion + "," + concurso + ","
                         + comision + "," + accion + "," + modalidad + "," + instrumentos + "," + entidadD + ","

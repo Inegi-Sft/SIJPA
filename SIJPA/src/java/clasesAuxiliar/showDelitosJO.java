@@ -89,7 +89,6 @@ public class showDelitosJO {
                 + "AND CAUSA_CLAVE = '" + causaClaveJC + "' "
                 + "AND DELITO_CLAVE = '" + delitoClave + "' "
                 + "ORDER BY 1;";
-        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -119,7 +118,6 @@ public class showDelitosJO {
                 + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "AND DELITO_CLAVEJO = '" + delitoClave + "' "
                 + "ORDER BY 1;";
-        System.out.println("findelitosJO:"+sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -153,7 +151,6 @@ public class showDelitosJO {
                 + "AND CO.TIPO_RESOLUCION = 5 "
                 + "AND DE.CAUSA_CLAVE = '" + causaClaveJC + "' "
                 + "ORDER BY 1;";
-        System.out.println("findelitosJO:"+sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -176,7 +173,6 @@ public class showDelitosJO {
                 + "WHERE D.DELITO_CODIGO_PENAL = CN.ID_CODIGO "
                 + "AND D.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "ORDER BY 1;";
-        System.out.println("findelitosJO:"+sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -279,7 +275,6 @@ public class showDelitosJO {
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoDel = resul.getInt("TOTAL");
-                System.out.println("cpnteo delitosjo: "+conteoDel);
             }
             conn.close();
         } catch (SQLException ex) {

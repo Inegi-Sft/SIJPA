@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 public class showVictimasJO {
     
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> vic, vicProce;
-    ArrayList<String> vicDelito, vicIngre;
+    ArrayList<String[]> vic;
+    ArrayList<String> vicDelito, vicIngre, vicProce;
     String sql;
     ResultSet resul;
     int conteoVic;
@@ -172,7 +172,6 @@ public class showVictimasJO {
                         + "AND VICTIMA_CLAVE = '" + victiClave + "' "
                         + "AND DELITO_CLAVE = '" + deliClave + "' "
                         + "ORDER BY 1;";
-                System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 vicDelito.add(resul.getString("DELITO_CLAVE"));
@@ -197,9 +196,7 @@ public class showVictimasJO {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                vicProce.add(new String[]{
-                    resul.getString(1)
-                });
+                vicProce.add(resul.getString(1));
             }
             conn.close();
         } catch (SQLException ex) {
@@ -216,9 +213,7 @@ public class showVictimasJO {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                vicProce.add(new String[]{
-                    resul.getString(1)
-                });
+                vicProce.add(resul.getString(1));
             }
             conn.close();
         } catch (SQLException ex) {
@@ -239,34 +234,34 @@ public class showVictimasJO {
                         + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                vicDelito.add(resul.getString("RELACION"));
+                vicProce.add(resul.getString("RELACION"));
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return vicDelito;
+        return vicProce;
     }
     
     public ArrayList findViRelProcesadoJO(String causaClaveJO, String victiClave, String proceClave, String relacion){
         vicProce = new ArrayList();
         try {
             conn.Conectar();
-                sql = "SELECT RELACION FROM DATOS_VPROCESADOS_ADOJO "
-                        + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                        + "AND VICTIMA_CLAVE = '" + victiClave + "' "
-                        + "AND PROCESADO_CLAVE = '" + proceClave + "' "
-                        + "AND RELACION = " + relacion + " "
-                        + "ORDER BY 1;";
+            sql = "SELECT RELACION FROM DATOS_VPROCESADOS_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                    + "AND RELACION = " + relacion + " "
+                    + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                vicDelito.add(resul.getString("RELACION"));
+                vicProce.add(resul.getString("RELACION"));
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return vicDelito;
+        return vicProce;
     }
     
     public ArrayList findVIngresosJC(String causaClaveJC, String victiClave, String ingreso) {

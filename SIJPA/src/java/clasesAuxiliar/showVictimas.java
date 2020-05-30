@@ -111,15 +111,13 @@ public class showVictimas {
 
     public ArrayList findVprocesados(String causaClave) {
         conn.Conectar();
-        vic = new ArrayList();
+        vicProce = new ArrayList();
         sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
                 + "WHERE CAUSA_CLAVE = '" + causaClave + "'";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                vic.add(new String[]{
-                    resul.getString(1)
-                });
+                vicProce.add(resul.getString(1));
             }
             conn.close();
         } catch (SQLException ex) {
@@ -169,21 +167,21 @@ public class showVictimas {
         vicProce = new ArrayList();
         try {
             conn.Conectar();
-                sql = "SELECT RELACION FROM DATOS_VPROCESADOS_ADOJC "
-                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
-                        + "AND VICTIMA_CLAVE = '" + victiClave + "' "
-                        + "AND PROCESADO_CLAVE = '" + proceClave + "' "
-                        + "AND RELACION = " + relacion + " "
-                        + "ORDER BY 1;";
+            sql = "SELECT RELACION FROM DATOS_VPROCESADOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND VICTIMA_CLAVE = '" + victiClave + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+                    + "AND RELACION = " + relacion + " "
+                    + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                vicDelito.add(resul.getString("RELACION"));
+                vicProce.add(resul.getString("RELACION"));
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return vicDelito;
+        return vicProce;
     }
     
     public ArrayList findVIngresos(String causaClave, String victiClave, String ingreso) {

@@ -308,6 +308,7 @@
                                     viPro.clear();//limpiamos el array para poder llenar de manera correcta todos los check
                                     //Recuperamos el dato de la bd, si existe lo checheamos si no se encuentra vacio
                                     if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
+                                        System.out.println("Procesado: " + vi[0] + " Relacion: " + lis[0]);
                                         viPro = sVictima.findViRelProcesadoJO(causaClaveJO, victiClave + jConcatenado, vi[0], lis[0]);
                                         if(viPro.size() != 0){
                                             out.println("<input type='checkbox' class='RelaProceChk' name='chkRelaProce" + i + "' id='chkRelaProce" + i + lis[0] + "' value=" + lis[0] + " checked>");

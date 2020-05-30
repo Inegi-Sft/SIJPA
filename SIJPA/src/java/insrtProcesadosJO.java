@@ -159,7 +159,7 @@ public class insrtProcesadosJO extends HttpServlet {
                         int totProce = causa.countTotalProcesadosJO(causaClaveJO);
                         if(totProce == totProceInsrt){
                             usuario usuario = new usuario();
-                            usuario.insrtAvanceJO(causaClaveJO, causaClaveJO, 4);//Actualizamos el avance de la causa penal JO
+                            usuario.insrtAvanceJO(causaClaveJC, causaClaveJO, 4);//Actualizamos el avance de la causa penal JO
                         }
                         lis = pro.findProcesasdosTablaJO(proceClaveJO + jConcatenado);
                         JSONArray resp = new JSONArray();

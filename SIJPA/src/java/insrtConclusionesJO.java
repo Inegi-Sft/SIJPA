@@ -125,25 +125,26 @@ public class insrtConclusionesJO extends HttpServlet {
                     conn.close();
                 }
             }else{//Se actualiza el dato que viene de recuperacion
-                sql = "UPDATE DATOS_CONCLUSIONES_ADOJC SET FECHA_CONCLUSION = '" + fechaReso + "',TIPO_RESOLUCION = " + resolucion + ","
+                sql = "UPDATE DATOS_CONCLUSIONES_ADOJO SET FECHA_CONCLUSION = '" + fechaReso + "',TIPO_RESOLUCION = " + resolucion + ","
                         + "TIPO_SOBRESEIMIENTO = " + tipoSobreseimto + ",PROCEDENCIA_SOBRESEIMIENTO = " + proceSobreseimto + ","
-                        + "EXCLUSION_ACCIONP = " + excluAccion + ",FECHA_SENTENCIA = " + fechaSenten + ",TIPO_SENTENCIA = " + tipoSentencia + ","
+                        + "EXCLUSION_ACCIONP = " + excluAccion + ",FECHA_SENTENCIA = '" + fechaSenten + "',TIPO_SENTENCIA = " + tipoSentencia + ","
                         + "MEDIDA_PRIVATIVA = " + tipoMedidaPL + ",MEDIDA_NOPRIVATIVA = " + tipoMedidaNPL + ",TIEMPO_INTERNAMIENTO = " + internamiento + ","
                         + "REPARACION_DANIO = " + reparaDanio + ",TIPO_REPARACION_DANIO = " + tipoReparaD + ",MONTO_REPARA = " + montoReparaD + ","
                         + "IMPUGNACION = " + impugnacion + ",TIPO_IMPUGNACION = " + tipoImpugnacion + ",FECHA_IMPUGNACION = '" + fechaImpugnacion + "',"
                         + "PERSONA_IMPUGNA = " + personaImpugna + ",COMENTARIOS = '" + comentarios + "' "
-                        + "WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                        + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                         + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     //Borramos medios prueba por si se actualizan o bien se modifica el disparador
-                    sql = "DELETE FROM DATOS_DCONCLUSIONES_ADOJC WHERE CAUSA_CLAVE = '" + causaClaveJO + "' "
+                    sql = "DELETE FROM DATOS_DCONCLUSIONES_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                    System.out.println(sql);
                     conn.escribir(sql);
                     if(resolucion.equals("2")){
                         for (int i = 0; i < delitoClave.length; i++){
                             String resolDelito = request.getParameter("resolDelito" + i);
-                            sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClaveJO + "','"
+                            sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClaveJO + "','"
                                     + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoSentencia + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu=conn.escribir(sql);

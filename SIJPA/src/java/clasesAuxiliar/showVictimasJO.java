@@ -196,7 +196,9 @@ public class showVictimasJO {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                vicProce.add(resul.getString(1));
+                vicProce.add(new String[]{
+                    resul.getString(1)
+                });
             }
             conn.close();
         } catch (SQLException ex) {
@@ -213,7 +215,9 @@ public class showVictimasJO {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                vicProce.add(resul.getString(1));
+                vicProce.add(new String[]{
+                    resul.getString(1)
+                });
             }
             conn.close();
         } catch (SQLException ex) {
@@ -234,7 +238,9 @@ public class showVictimasJO {
                         + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                vicProce.add(resul.getString("RELACION"));
+                vicProce.add(new String[]{
+                    resul.getString("RELACION")
+                });
             }
             conn.close();
         } catch (SQLException ex) {

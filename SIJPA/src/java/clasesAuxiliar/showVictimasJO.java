@@ -239,7 +239,7 @@ public class showVictimasJO {
             resul = conn.consultar(sql);
             while (resul.next()) {
                 vicProce.add(new String[]{
-                    resul.getString("RELACION")
+                    resul.getString(1)
                 });
             }
             conn.close();

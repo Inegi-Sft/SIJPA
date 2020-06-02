@@ -202,16 +202,16 @@
                         <tr>
                             <td>
                                 <label for="Tdelitos">Total de delitos</label>
-                                <input type="number" name="Tdelitos" id="Tdelitos" value="<%=totDelitos%>" min="0">
+                                <input type="number" name="Tdelitos" id="Tdelitos" value="<%=totDelitos%>" min="-2">
 
                             </td>
                             <td>
                                 <label for="Tadolescentes">Total de imputados</label>
-                                <input type="number" name="Tadolescentes" id="Tadolescentes" value="<%=totProce%>" min="0">
+                                <input type="number" name="Tadolescentes" id="Tadolescentes" value="<%=totProce%>" min="-2">
                             </td>
                             <td>
                                 <label for="Tvictimas">Total de víctimas</label>
-                                <input type="number" name="Tvictimas" id="Tvictimas" value="<%=totVictimas%>" min="0">
+                                <input type="number" name="Tvictimas" id="Tvictimas" value="<%=totVictimas%>" min="-2">
                             </td>
                         </tr>
                     </table>

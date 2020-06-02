@@ -75,13 +75,34 @@ $(document).ready(function () {
         }
     });
     
-    $('#Tdelitos, #Tadolescentes, #Tvictimas').focus(function (e) {
+    $('#Tdelitos, #Tadolescentes, #Tvictimas').change(function () {
+    var Mnsj="LA CANTIDAD DEBE DE SER MAYOR O IGUAL A 0";
+    if ($('#Tdelitos').val()==="-1")
+    {
+      alert (Mnsj);
+      $('#Tdelitos').val("0");
+      $('#Tdelitos').focus();
+    }else if ($('#Tadolescentes').val()==="-1")
+    {
+      alert (Mnsj);
+      $('#Tadolescentes').val("0");
+      $('#Tadolescentes').focus();
+    }else if ($('#Tvictimas').val()==="-1")
+    {
+      alert (Mnsj);
+      $('#Tvictimas').val("0"); 
+      $('#Tvictimas').focus();
+    }
+     });
+  
+   $('#Tdelitos, #Tadolescentes, #Tvictimas').focus(function (e) {
         if ($('#expClave').val() === "") {
             e.stopImmediatePropagation();
             alert('Favor de capturar el expediente clave para poder agregar los datos siguientes');
             $('#expClave').focus();
         }
     });
+   
     
     $('#Tdelitos, #Tadolescentes, #Tvictimas').keydown(function(e){
         return false;

@@ -115,7 +115,7 @@
                             <td><%=ls[5]%></td>
                             <td>--</td>
                             <td><a href="elementosPrincipales.jsp?causaClave=<%=ccSimple%>"><img src='img/editar.png' title="Editar"/></a></td>
-                            <td><a href="#"><img src='img/delete.png' title="Eliminar" onclick="borraRegistro(<%=ls[0]%>,<%=pos%>,'causas')"/></a></td>
+                            <td><a href="#"><img src='img/delete.png' title="Eliminar" onclick="borraRegistro('<%=ls[0]%>',<%=pos%>,'causas')"/></a></td>
                         </tr>
                     <% 
                             pos++;

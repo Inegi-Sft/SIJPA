@@ -101,8 +101,9 @@ $(document).ready(function () {
                 $('#formCausaPenal').find('input, textarea, button, select').attr('disabled', true);
                 $("#guardarExp").prop("hidden", true);
                 if (response !== null && $.isArray(response)) {
-                    if(response[0] === 1){//organo competente
+                    if(response[0] === '1'){//organo competente
                         var expe = $('#expClave').val();
+                        console.log('Entramos  organo competente: ' , response[0]);
                         for(var x = 1; x <= response[2]; x++){
                             $('#tablaDeli tbody').append('<tr><td>' + expe + '-D' + x + '</td><td></td><td></td><td></td><td></td>\n\
                             <td></td><td><a class="pop" href="delitos.jsp?delitoClave=' + expe + '-D' + x + '&posicion=' + (x-1) + '">\n\
@@ -131,6 +132,7 @@ $(document).ready(function () {
                                 onclick="borraRegistro(\'' + expe + '-V' + x + response[1] + '\',' + (x-1) + ',\'tablaVictimas\',\'#Tvictimas\')"/>\n\
                             </td></a></tr>');
                         }
+                        console.log('Abrimos la segunda pestaña: ' , response[0]);
                         openPestana('btn2', 'p2');
                     }
                 }

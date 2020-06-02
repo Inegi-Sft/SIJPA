@@ -85,9 +85,13 @@
                         tipoRepara = conclusiones.get(0)[14];
                         montoRepara = conclusiones.get(0)[15];
                         impugna = conclusiones.get(0)[16];
+                        System.out.println("impugnacion:"+impugna);
                         tipoImpugna = conclusiones.get(0)[17];
+                        System.out.println("impugnacion:"+tipoImpugna);
                         fechaImpugna = conclusiones.get(0)[18];
+                        System.out.println("impugnacion:"+fechaImpugna);
                         persoImpugna = conclusiones.get(0)[19];
+                        System.out.println("impugnacion:"+persoImpugna);
                         comen = conclusiones.get(0)[20];
                     }
                 }

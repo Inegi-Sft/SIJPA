@@ -49,183 +49,184 @@
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
-        <a class="btnCerrar" id="btnCerrar" title="Cerrar" href="audiencias.jsp" >X</a>
-        <h1>Captura Audiencias</h1>
-        <form  method="post" action="capturaAudiencias.jsp" name="formAudiencias" id="formAudiencias">
-            <fieldset>
-                <legend>Datos generales de las Audiencias</legend>
-                <input type="hidden" name="operacion" id="operacion" value="<%=operacion%>">
-                <div class="cols">
-                    <label for="juzgadoClave">Juzgado Clave: </label> 
-                    <input type="text" name="juzgadoClave" id="juzgadoClave" value="<%=juzgadoClave%>" disabled required>
-                </div>
-                <div class="cols">
-                    <label for="causaClave">Causa Penal:</label>
-                <%
-                    String juzLimpio = juzgadoClave.replace("-", "");
-                    if(request.getParameter("causaClave") == null){
-                        out.println("<select class='demo-default txtLong' name='causaClave' id='causaClave' required>");
-                        out.println("<option value=''>--Seleccione--</option>");
-                            lista = sA.findCausasJC(juzgadoClave);
-                            for (String[] ls : lista) {
-                                out.println("<option value='" + ls[0] + "'>" + ls[0].replace(juzLimpio, "") + "</option>");
-                            }
-                        out.println("</select>");
-                    }else{
-                        out.println("<input type='text' name='causaClave' value='"+causa.replace(juzLimpio, "")+"' readonly />");
-                    }
-                %>
-                </div>
-                <fieldset id="fstJueces"><legend>Jueces que celebraron la audiencia</legend>
-                    <div id="dJueces">
+            <a class="btnCerrar" id="btnCerrar" title="Cerrar" href="audiencias.jsp" >X</a>
+            <h1>Captura Audiencias</h1>
+            <form  method="post" action="capturaAudiencias.jsp" name="formAudiencias" id="formAudiencias">
+                <fieldset>
+                    <legend>Datos generales de las Audiencias</legend>
+                    <input type="hidden" name="operacion" id="operacion" value="<%=operacion%>">
+                    <div class="cols">
+                        <label for="juzgadoClave">Juzgado Clave: </label> 
+                        <input type="text" name="juzgadoClave" id="juzgadoClave" value="<%=juzgadoClave%>" disabled required>
+                    </div>
+                    <div class="cols">
+                        <label for="causaClave">Causa Penal:</label>
                     <%
-                        jueces=sA.recuperaJuez(juzgadoClave, causa);//para recuperar datos de jueces
-                        lista = sA.findJueces(juzgadoClave);
-                        for (String[] ls : lista){ 
-                            if(jueces.size() != 0){
-                                if(ls[0].equals(jueces.get(0)[0]) || ls[0].equals(jueces.get(0)[1]) || ls[0].equals(jueces.get(0)[2])){
-                                    out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"' checked/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
-                                }else{
-                                    out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"'/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
+                        String juzLimpio = juzgadoClave.replace("-", "");
+                        if(request.getParameter("causaClave") == null){
+                            out.println("<select class='demo-default txtLong' name='causaClave' id='causaClave' required>");
+                            out.println("<option value=''>--Seleccione--</option>");
+                                lista = sA.findCausasJC(juzgadoClave);
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0].replace(juzLimpio, "") + "</option>");
                                 }
-                            }else{
-                                out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"'/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
-                            }
-                        }
-                        if(lista.isEmpty()){
-                           out.println("No hay Jueces para mostrar"); 
+                            out.println("</select>");
+                        }else{
+                            out.println("<input type='text' name='causaClave' value='"+causa.replace(juzLimpio, "")+"' readonly />");
                         }
                     %>
                     </div>
-                </fieldset>
-                <span id="msjAudi">Puedes seleccionar hasta 3 jueces</span>   
-                <label class="lblExBig">Audiencias por etapas del proceso:</label>
-                <table id="tblAudiInves" border="1" class="tablasRegis colsA">
-                    <tr>
-                        <th>Id</th>
-                        <th>Investigación</th>
-                        <th>Aplica</th>
-                        <th>Fecha celebración</th>
-                        <th>Duracion Hrs.</th>
-                    </tr>
-                <%
-                    
-                lista = cat.findAudienciasInvestigacion();
-                for (String[] ls : lista) {
-                    audi=sA.recuperaAudiencias(juzgadoClave, causa,"INVESTIGACION",ls[0]);
-                    if(audi.size() != 0){
-                %>
+                    <fieldset id="fstJueces">
+                        <legend>Jueces que celebraron la audiencia</legend>
+                        <div id="dJueces">
+                        <%
+                            jueces = sA.recuperaJuez(juzgadoClave, causa);//para recuperar datos de jueces
+                            lista = sA.findJueces(juzgadoClave);
+                            for (String[] ls : lista){ 
+                                if(jueces.size() != 0){
+                                    if(ls[0].equals(jueces.get(0)[0]) || ls[0].equals(jueces.get(0)[1]) || ls[0].equals(jueces.get(0)[2])){
+                                        out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"' checked/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
+                                    }else{
+                                        out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"'/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
+                                    }
+                                }else{
+                                    out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"'/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
+                                }
+                            }
+                            if(lista.isEmpty()){
+                               out.println("No hay Jueces para mostrar"); 
+                            }
+                        %>
+                        </div>
+                    </fieldset>
+                    <span id="msjAudi">Puedes seleccionar hasta 3 jueces</span>   
+                    <label class="lblExBig">Audiencias por etapas del proceso:</label>
+                    <table id="tblAudiInves" border="1" class="tablasRegis colsA">
                         <tr>
-                            <td><%=ls[0]%></td>
-                            <td><%=ls[1]%></td>
-                            <td>
-                                <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#duracionInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" checked/>
-                            </td>
-                            <td>
-                                <input type="date" name="fechaInves" id="fechaInves<%=ls[0]%>" class="audiFecha" value="<%=audi.get(0)[1]%>" <%if(audi.get(0)[1].equals("1899-09-09")){%>readonly<%}%>/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkFNI<%=ls[0]%>" onclick="fechaNI(this, '#fechaInves<%=ls[0]%>')" <%if(audi.get(0)[1].equals("1899-09-09")){%>checked<%}%>/>N/I
-                                </div>
-                            </td>
-                            <td>
-                                <input type="time" name="duracionInves" id="duracionInves<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("09:09:00")){%>readonly<%}%>/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#duracionInves<%=ls[0]%>')" <%if(audi.get(0)[2].equals("09:09:00")){%>checked<%}%>/>N/I
-                                </div>
-                            </td>
+                            <th>Id</th>
+                            <th>Investigación</th>
+                            <th>Aplica</th>
+                            <th>Fecha celebración</th>
+                            <th>Duracion Hrs.</th>
                         </tr>
-                <%
-                    }else{
-                %>
-                        <tr>
-                            <td><%=ls[0]%></td>
-                            <td><%=ls[1]%></td>
-                            <td>
-                                <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#duracionInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" />
-                            </td>
-                            <td>
-                                <input type="date" name="fechaInves" id="fechaInves<%=ls[0]%>" class="audiFecha" disabled/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkFNI<%=ls[0]%>" onclick="fechaNI(this, '#fechaInves<%=ls[0]%>')" disabled>N/I
-                                </div>
-                            </td>
-                            <td>
-                                <input type="time" name="duracionInves" id="duracionInves<%=ls[0]%>" class="tiempo" disabled/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#duracionInves<%=ls[0]%>')" disabled>N/I
-                                </div>
-                            </td>
-                        </tr>
-                <%
-                    }
-                }
+                        <%
 
-                %>
-                </table>
-                <br/>
-                <table id="tblAudiInter" border="1" class="tablasRegis colsA">
-                    <tr>
-                        <th>Id</th>
-                        <th>Intermedia</th>
-                        <th>Aplica</th>
-                        <th>Fecha celebración</th>
-                        <th>Duracion</th>
-                    </tr>
-                <%
-                lista = cat.findAudienciasIntermedia();
-                for (String[] ls : lista) {
-                    audi=sA.recuperaAudiencias(juzgadoClave, causa,"INTERMEDIA",ls[0]);
-                    if(audi.size() != 0){
-                %>
-                        <tr>
-                            <td><%=ls[0]%></td>
-                            <td><%=ls[1]%></td>
-                            <td>
-                                <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#duracionInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" checked/>
-                            </td>
-                            <td>
-                                <input type="date" name="fechaInter" id="fechaInter<%=ls[0]%>" class="audiFecha" value="<%=audi.get(0)[1]%>" <%if(audi.get(0)[1].equals("1899-09-09")){%>readonly<%}%>/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkFNII<%=ls[0]%>" onclick="fechaNI(this, '#fechaInter<%=ls[0]%>')" <%if(audi.get(0)[1].equals("1899-09-09")){%>checked<%}%>/>N/I
-                                </div>
-                            </td>
-                            <td>
-                                <input type="time" name="duracionInter" id="duracionInter<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("09:09:00")){%>readonly<%}%>/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#duracionInter<%=ls[0]%>')" <%if(audi.get(0)[2].equals("09:09:00")){%>checked<%}%>/>N/I
-                                </div>
-                            </td>
-                        </tr>
-                <%
-                    }else{
-                %>
-                        <tr>
-                            <td><%=ls[0]%></td>
-                            <td><%=ls[1]%></td>
-                            <td>
-                                <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#duracionInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" />
-                            </td>
-                            <td>
-                                <input type="date" name="fechaInter" id="fechaInter<%=ls[0]%>" class="audiFecha" disabled/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkFNII<%=ls[0]%>" onclick="fechaNI(this, '#fechaInter<%=ls[0]%>')" disabled>N/I
-                                </div>
-                            </td>
-                            <td>
-                                <input type="time" name="duracionInter" id="duracionInter<%=ls[0]%>" class="tiempo" disabled/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#duracionInter<%=ls[0]%>')" disabled>N/I
-                                </div>
-                            </td>
-                        </tr>
-                <%
+                        lista = cat.findAudienciasInvestigacion();
+                        for (String[] ls : lista) {
+                            audi=sA.recuperaAudiencias(juzgadoClave, causa,"INVESTIGACION",ls[0]);
+                            if(audi.size() != 0){
+                        %>
+                            <tr>
+                                <td><%=ls[0]%></td>
+                                <td><%=ls[1]%></td>
+                                <td>
+                                    <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#duracionInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" checked/>
+                                </td>
+                                <td>
+                                    <input type="date" name="fechaInves" id="fechaInves<%=ls[0]%>" class="audiFecha" value="<%=audi.get(0)[1]%>" <%if(audi.get(0)[1].equals("1899-09-09")){%>readonly<%}%>/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkFNI<%=ls[0]%>" onclick="fechaNI(this, '#fechaInves<%=ls[0]%>')" <%if(audi.get(0)[1].equals("1899-09-09")){%>checked<%}%>/>N/I
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="time" name="duracionInves" id="duracionInves<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("09:09:00")){%>readonly<%}%>/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#duracionInves<%=ls[0]%>')" <%if(audi.get(0)[2].equals("09:09:00")){%>checked<%}%>/>N/I
+                                    </div>
+                                </td>
+                            </tr>
+                        <%
+                            }else{
+                        %>
+                            <tr>
+                                <td><%=ls[0]%></td>
+                                <td><%=ls[1]%></td>
+                                <td>
+                                    <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#duracionInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" />
+                                </td>
+                                <td>
+                                    <input type="date" name="fechaInves" id="fechaInves<%=ls[0]%>" class="audiFecha" disabled/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkFNI<%=ls[0]%>" onclick="fechaNI(this, '#fechaInves<%=ls[0]%>')" disabled>N/I
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="time" name="duracionInves" id="duracionInves<%=ls[0]%>" class="tiempo" disabled/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#duracionInves<%=ls[0]%>')" disabled>N/I
+                                    </div>
+                                </td>
+                            </tr>
+                    <%
+                        }
                     }
-                }
-                %>
-                </table>
-            </fieldset>
-            <input type="submit" name="guardar" value="Guardar" />
-        </form>
+
+                    %>
+                    </table>
+                    <br/>
+                    <table id="tblAudiInter" border="1" class="tablasRegis colsA">
+                        <tr>
+                            <th>Id</th>
+                            <th>Intermedia</th>
+                            <th>Aplica</th>
+                            <th>Fecha celebración</th>
+                            <th>Duracion</th>
+                        </tr>
+                    <%
+                    lista = cat.findAudienciasIntermedia();
+                    for (String[] ls : lista) {
+                        audi=sA.recuperaAudiencias(juzgadoClave, causa,"INTERMEDIA",ls[0]);
+                        if(audi.size() != 0){
+                    %>
+                            <tr>
+                                <td><%=ls[0]%></td>
+                                <td><%=ls[1]%></td>
+                                <td>
+                                    <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#duracionInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" checked/>
+                                </td>
+                                <td>
+                                    <input type="date" name="fechaInter" id="fechaInter<%=ls[0]%>" class="audiFecha" value="<%=audi.get(0)[1]%>" <%if(audi.get(0)[1].equals("1899-09-09")){%>readonly<%}%>/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkFNII<%=ls[0]%>" onclick="fechaNI(this, '#fechaInter<%=ls[0]%>')" <%if(audi.get(0)[1].equals("1899-09-09")){%>checked<%}%>/>N/I
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="time" name="duracionInter" id="duracionInter<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("09:09:00")){%>readonly<%}%>/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#duracionInter<%=ls[0]%>')" <%if(audi.get(0)[2].equals("09:09:00")){%>checked<%}%>/>N/I
+                                    </div>
+                                </td>
+                            </tr>
+                    <%
+                        }else{
+                    %>
+                            <tr>
+                                <td><%=ls[0]%></td>
+                                <td><%=ls[1]%></td>
+                                <td>
+                                    <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#duracionInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" />
+                                </td>
+                                <td>
+                                    <input type="date" name="fechaInter" id="fechaInter<%=ls[0]%>" class="audiFecha" disabled/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkFNII<%=ls[0]%>" onclick="fechaNI(this, '#fechaInter<%=ls[0]%>')" disabled>N/I
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="time" name="duracionInter" id="duracionInter<%=ls[0]%>" class="tiempo" disabled/>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#duracionInter<%=ls[0]%>')" disabled>N/I
+                                    </div>
+                                </td>
+                            </tr>
+                    <%
+                        }
+                    }
+                    %>
+                    </table>
+                </fieldset>
+                <input type="submit" name="guardar" value="Guardar" />
+            </form>
         </section>
     </body>
 </html>

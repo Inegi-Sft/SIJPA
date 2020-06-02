@@ -24,8 +24,8 @@ public class showAudiencias {
     
      public ArrayList findJuzgados() {
         conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT JUZGADO_CLAVE FROM datos_juzgados_adojc ORDER BY 1";
+        lista = new ArrayList<>();
+        sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -42,9 +42,9 @@ public class showAudiencias {
      
     public ArrayList findCausasJC(String juzgado) {
         conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT CAUSA_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE='"+juzgado+"' "
-            + " AND CAUSA_CLAVE NOT IN (SELECT DISTINCT CAUSA_CLAVE FROM DATOS_AUDIENCIAS_ADOJC WHERE JUZGADO_CLAVE='"+juzgado+"')"
+        lista = new ArrayList<>();
+        sql = "SELECT CAUSA_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' "
+            + " AND CAUSA_CLAVE NOT IN (SELECT DISTINCT CAUSA_CLAVE FROM DATOS_AUDIENCIAS_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "')"
             + " ORDER BY 1";
         resul = conn.consultar(sql);
         try {
@@ -61,7 +61,7 @@ public class showAudiencias {
     }
     public ArrayList findAllCausaAudiencias(String juzgado) {
         conn.Conectar();
-        lista = new ArrayList<String[]>();
+        lista = new ArrayList<>();
         sql = "SELECT CAUSA_CLAVE, "
             + " CASE SUM(case AUDIENCIA_INVESTIGACION when -2 then 0 else AUDIENCIA_INVESTIGACION end)" 
             + " WHEN 0 THEN 'NO' ELSE 'SI' END INICIAL,"
@@ -106,8 +106,8 @@ public class showAudiencias {
     
     public ArrayList findJueces(String juzgado) {
         conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT * FROM datos_jueces_adojc where juzgado_clave='"+juzgado+"' and juez_clave <> -2 ORDER BY APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ";
+        lista = new ArrayList<>();
+        sql = "SELECT * FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' AND JUEZ_CLAVE <> -2 ORDER BY APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ";	
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -130,7 +130,7 @@ public class showAudiencias {
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         
-        sql = "SELECT COUNT(*) EXISTE FROM datos_jueces_adojc where juzgado_clave='"+juzgado+"' and juez_clave= -2";
+        sql = "SELECT COUNT(*) EXISTE FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' AND JUEZ_CLAVE= -2";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -138,7 +138,8 @@ public class showAudiencias {
             }
             System.out.println(existe);
             if(existe==0){
-                sql = "INSERT INTO datos_jueces_adojc  VALUES ("+jEntidad+","+ jMunicipio +","+ jNumero+",'"+ juzgado +"', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
+                sql = "INSERT INTO DATOS_JUECES_ADOJC  VALUES (" 
+                        + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgado + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
                 System.out.println(sql);
                 if(conn.escribir(sql))
                     System.out.println("Juez No aplica insertado!");
@@ -152,9 +153,9 @@ public class showAudiencias {
     
     public ArrayList recuperaJuez(String juzgado, String causa) {
         conn.Conectar();
-        jueces = new ArrayList<String[]>();
-        sql = "SELECT DISTINCT JUEZ_CLAVE1, JUEZ_CLAVE2, JUEZ_CLAVE3 FROM datos_audiencias_adojc"
-            + " where juzgado_clave='"+juzgado+"' and causa_clave='"+causa+"'";
+        jueces = new ArrayList<>();
+        sql = "SELECT DISTINCT JUEZ_CLAVE1, JUEZ_CLAVE2, JUEZ_CLAVE3 FROM DATOS_AUDIENCIAS_ADOJC"
+            + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVE = '" + causa + "'";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -171,9 +172,9 @@ public class showAudiencias {
     
     public ArrayList recuperaAudiencias(String juzgado, String causa, String columna, String audi) {
         conn.Conectar();
-        audiencias = new ArrayList<String[]>();
-        sql = "SELECT AUDIENCIA_"+columna+",FECHA_CELEBRACION,DURACION FROM DATOS_AUDIENCIAS_ADOJC"
-            + " WHERE juzgado_clave='"+juzgado+"' and causa_clave='"+causa+"' and AUDIENCIA_"+columna+"="+audi;
+        audiencias = new ArrayList<>();
+        sql = "SELECT AUDIENCIA_" + columna + ",FECHA_CELEBRACION,DURACION FROM DATOS_AUDIENCIAS_ADOJC"
+            + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVE = '" + causa + "' AND AUDIENCIA_" + columna + "=" + audi;
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -191,7 +192,7 @@ public class showAudiencias {
     //********************** J U I C I O  O R A L ********************
     public ArrayList findAllCausaAudienciasJO(String juzgado) {
         conn.Conectar();
-        lista = new ArrayList<String[]>();
+        lista = new ArrayList<>();
         sql = "SELECT CAUSA_CLAVEJO, "
             + " CONCAT(J.APELLIDOP_JUEZ,' ', J.APELLIDOM_JUEZ,' ',J.NOMBRE_JUEZ) AS JUEZ1,"
             + " CONCAT(J2.APELLIDOP_JUEZ,' ', J2.APELLIDOM_JUEZ,' ',J2.NOMBRE_JUEZ) AS JUEZ2,"
@@ -230,9 +231,9 @@ public class showAudiencias {
     
     public ArrayList findCausasJO(String juzgado) {
         conn.Conectar();
-        lista = new ArrayList<String[]>();
-        sql = "SELECT CAUSA_CLAVEJO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE='"+juzgado+"' "
-            + " AND CAUSA_CLAVEJO NOT IN (SELECT DISTINCT CAUSA_CLAVEJO FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE='"+juzgado+"')"
+        lista = new ArrayList<>();
+        sql = "SELECT CAUSA_CLAVEJO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgado + "' "
+            + " AND CAUSA_CLAVEJO NOT IN (SELECT DISTINCT CAUSA_CLAVEJO FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE = '" + juzgado + "')"
             + " ORDER BY 1";
         resul = conn.consultar(sql);
         try {
@@ -250,9 +251,9 @@ public class showAudiencias {
     
     public ArrayList recuperaJuezJO(String juzgado, String causa) {
         conn.Conectar();
-        jueces = new ArrayList<String[]>();
-        sql = "SELECT DISTINCT JUEZ_CLAVE1, JUEZ_CLAVE2, JUEZ_CLAVE3 FROM datos_audiencias_adojo"
-            + " where juzgado_clave='"+juzgado+"' and causa_clavejo='"+causa+"'";
+        jueces = new ArrayList<>();
+        sql = "SELECT DISTINCT JUEZ_CLAVE1, JUEZ_CLAVE2, JUEZ_CLAVE3 FROM DATOS_AUDIENCIAS_ADOJO"
+            + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVEJO = '" + causa + "'";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -269,9 +270,9 @@ public class showAudiencias {
     
     public ArrayList recuperaAudienciasJO(String juzgado, String causa, String audi) {
         conn.Conectar();
-        audiencias = new ArrayList<String[]>();
+        audiencias = new ArrayList<>();
         sql = "SELECT AUDIENCIA_JUICIOORAL,FECHA_CELEBRACION,DURACION FROM DATOS_AUDIENCIAS_ADOJO"
-            + " WHERE juzgado_clave='"+juzgado+"' and causa_clavejo='"+causa+"' and AUDIENCIA_JUICIOORAL="+audi;
+            + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVEJO = '" + causa + "' AND AUDIENCIA_JUICIOORAL = " + audi;
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

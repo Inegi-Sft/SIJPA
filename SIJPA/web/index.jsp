@@ -26,6 +26,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Ingreso</title>
         <%@include file="librerias.jsp"%>
+        <script>
+            var es_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+            if(!es_chrome){
+                window.location.href = "navegador.jsp";
+            }
+        </script>
     </head>
     <body>
         <div id="splash" hidden="true">

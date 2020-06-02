@@ -107,7 +107,7 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = " + causaClave + "'";
+            sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
 
             rs = conn.consultar(sql);
             while (rs.next()) {

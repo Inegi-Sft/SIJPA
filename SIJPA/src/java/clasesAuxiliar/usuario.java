@@ -182,7 +182,7 @@ public class usuario {
         try{
             conn.Conectar();
             if(avance == 2){
-                sql = "INSERT INTO USUARIOS_CONTROL VALUES('" + causaClave + "'," + avance + ");";
+                sql = "INSERT INTO USUARIOS_CONTROL(CAUSA_CLAVE,AVANCE) VALUES('" + causaClave + "'," + avance + ");";
             }else{
                 sql = "UPDATE USUARIOS_CONTROL SET AVANCE = " + avance + " WHERE CAUSA_CLAVE = '" + causaClave + "';";
             }

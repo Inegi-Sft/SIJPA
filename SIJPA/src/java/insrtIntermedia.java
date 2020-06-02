@@ -139,7 +139,7 @@ public class insrtIntermedia extends HttpServlet {
 
                     if(conn.escribir(sql)){
                         showIntermedia inter = new showIntermedia();
-                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        ArrayList<String[]> lis = new ArrayList<>();
                         int totInterInsrt = inter.countIntermedia(causaClave);
                         lis = inter.findIntermediaTabla(proceClave + jConcatenado);
                         JSONArray resp = new JSONArray();
@@ -206,7 +206,7 @@ public class insrtIntermedia extends HttpServlet {
 
                     if(conn.escribir(sql)){
                         showIntermedia inter = new showIntermedia();
-                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        ArrayList<String[]> lis = new ArrayList<>();
                         int totInterInsrt = inter.countIntermedia(causaClave);
                         lis = inter.findIntermediaTabla(proceClave + jConcatenado);
                         JSONArray resp = new JSONArray();

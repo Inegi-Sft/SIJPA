@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 public class showVictimas {
 
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> vic;
-    ArrayList<String> vicDelito, vicProce, vIngre, viMedida;
+    ArrayList<String[]> vic, vicProce;
+    ArrayList<String> vicDelito, vIngre, viMedida;
     String sql;
     ResultSet resul;
     int conteoVic;
@@ -114,16 +114,19 @@ public class showVictimas {
         vicProce = new ArrayList();
         sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
                 + "WHERE CAUSA_CLAVE = '" + causaClave + "'";
+        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                vicProce.add(resul.getString(1));
+                vicProce.add(new String[]{
+                    resul.getString(1)
+                });
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return vic;
+        return vicProce;
     }
 
     public int countVictimas(String causaClave) {
@@ -175,7 +178,9 @@ public class showVictimas {
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
-                vicProce.add(resul.getString("RELACION"));
+                vicProce.add(new String[]{
+                    resul.getString(1)
+                });
             }
             conn.close();
         } catch (SQLException ex) {

@@ -109,17 +109,17 @@ public class showVictimas {
 
     }
 
-    public ArrayList findVprocesados(String causaClave) {
+    public ArrayList findProcesados(String causaClave) {
         conn.Conectar();
         vicProce = new ArrayList();
-        sql = "SELECT PROCESADO_CLAVE FROM DATOS_PROCESADOS_ADOJC "
+        sql = "SELECT PROCESADO_CLAVE, CONCAT(NOMBRE,' ',A_PATERNO,' ',A_MATERNO) FROM DATOS_PROCESADOS_ADOJC "
                 + "WHERE CAUSA_CLAVE = '" + causaClave + "'";
-        System.out.println(sql);
+        
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 vicProce.add(new String[]{
-                    resul.getString(1)
+                    resul.getString(1), resul.getString(2)
                 });
             }
             conn.close();
@@ -146,12 +146,13 @@ public class showVictimas {
         return conteoVic;
     }
     
-    public ArrayList findVDelito(String causaClave, String victiClave, String deliClave){
+    public ArrayList findVDelito(String causaClave, String proceClave, String victiClave, String deliClave){
         vicDelito = new ArrayList();
         try {
             conn.Conectar();
                 sql = "SELECT DELITO_CLAVE FROM DATOS_VDELITOS_ADOJC "
                         + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                         + "AND VICTIMA_CLAVE = '" + victiClave + "' "
                         + "AND DELITO_CLAVE = '" + deliClave + "' "
                         + "ORDER BY 1;";

@@ -122,12 +122,13 @@ public class insrtVictimas extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     for (String chkDeliCom1 : chkDeliCom) {
+                        String vDel[] = chkDeliCom1.split("@@@");//separa procesado y delito para poder insertarse
                         sql = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                + causaClave + "','" + victiClave + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
+                                + causaClave + "','" + vDel[0] + "','" + victiClave + jConcatenado + "','" + vDel[1] + "',(select YEAR(NOW())))";
                         insertaVDeli = conn.escribir(sql);
                         System.out.println(sql);
                     }
-                    if (insertaVDeli) {
+                    if(insertaVDeli) {
                         for (int j = 0; j < procesadoRela.length; j++) {
                             String[] chkRela = request.getParameterValues("chkRelaProce" + j);
                             for (String chkRela1 : chkRela) {
@@ -213,9 +214,10 @@ public class insrtVictimas extends HttpServlet {
                     sql = "DELETE FROM DATOS_VDELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
                             + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                     conn.escribir(sql);
-                    for (String chkDeliCom1 : chkDeliCom) {
+                    for (String chkDeliCom1 : chkDeliCom) {           
+                        String vDel[] = chkDeliCom1.split("@@@");//separa procesado y delito para poder insertarse
                         sql = "INSERT INTO DATOS_VDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                + causaClave + "','" + victiClave + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
+                                + causaClave + "','" + vDel[0] + "','" + victiClave + jConcatenado + "','" + vDel[1] + "',(select YEAR(NOW())))";
                         insertaVDeli = conn.escribir(sql);
                         System.out.println(sql);
                     }

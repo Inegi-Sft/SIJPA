@@ -86,6 +86,11 @@ $(document).ready(function() {
         $('#MedidasPro').show();
     }
     
+    //Se usa para la recuperacion de BD
+    if($('#mujProtect').val() === '1'){
+        $('#MujPro').show();
+    }
+    
     $('#tipoVictima').change(function () {
         switch ($(this).val()) {
             case '1':

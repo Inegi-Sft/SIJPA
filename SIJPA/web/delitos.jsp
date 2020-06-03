@@ -351,7 +351,7 @@
                             <td colspan="2">
                                 <fieldset>
                                     <legend>Lugar de ocurrencia</legend>
-                                    <div class="cols lblExBig">
+                                    <div class="colsA lblExBig">
                                         <label>Entidad Federativa</label>
                                         <select name="entidadD" id="entidadD" onchange="llenaMun('#entidadD', '#municipioD')" required>
                                             <option value="">--Seleccione--</option>
@@ -367,8 +367,8 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div class="cols lblExBig">
-                                        <label class="lblExBig">Municipio o Demarcación territorial de la Ciudad de México</label>
+                                    <div class="colsA lblExBig">
+                                        <label class="txtLong">Municipio o Demarcación territorial de la Ciudad de México</label>
                                         <select name="municipioD" id="municipioD" required>
                                             <%
                                                 if(ocurreEnti.equals("")){

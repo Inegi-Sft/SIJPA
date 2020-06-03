@@ -26,7 +26,7 @@
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();
             ArrayList<String[]> lista, procesado;
-            ArrayList<String> pIngre = new ArrayList();
+            ArrayList<String> pIngre, pDelito = new ArrayList();
             
             String proceClave = "", posicion = "", edicion = "";
             if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
@@ -823,47 +823,32 @@
                         <tr>
                             <th>Delito Clave</th>
                             <th>Delito</th>
-                            <th>No. Victimas</th>
+                            <th>Delito cometido</th>
                         </tr>
-                        <%
-                            int totVic = sCausaPen.countTotalVictimasJC(causaClaveJC);
+                    <%
+                        if(!edicion.equals("")){
+                            lista = sDeli.findDelitosVictiJO(causaClaveJO);
+                        }else{
+                            lista = sDeli.findDelitosVictiJC(causaClaveJC);
+                        }
+                        for (String[] ls : lista) {
+                            out.println("<tr>");
+                            out.println("<td>" + ls[0].replace(juzgadoClave.replace("-", ""), "") + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
                             if(!edicion.equals("")){
-                                lista = sDeli.findDelitosVictiJO(causaClaveJO);
+                                pDelito = sProcesa.findPDelitosJO(causaClaveJO, proceClave + juzgadoClave.replace("-", ""), ls[0]);
                             }else{
-                                lista = sDeli.findDelitosVictiJC(causaClaveJC);
+                                pDelito = sProcesa.findPDelitosJC(causaClaveJC, proceClave + juzgadoClave.replace("-", ""), ls[0]);
                             }
-                            
-                            for (String[] ls : lista) {
-                        %>
-                        <tr>
-                            <td> <input type="hidden" name="arrayDelito" value="<%=ls[0]%>"> <%=ls[0].replace(juzgadoClave.replace("-", ""), "")%></td>
-                            <td> <%=ls[1]%> </td>
-                            <td>
-                                <select class="txtSmall" name="arrayNumVic" required>
-                                    <option value=""> - - - </option>
-                                    <%
-                                        int numVicti = 0;
-                                        if(!edicion.equals("")){
-                                            numVicti = sProcesa.findPDelitosJO(causaClaveJO, proceClave + juzgadoClave.replace("-", ""), ls[0]);
-                                        }else{
-                                            numVicti = sProcesa.findPDelitosJC(causaClaveJC, proceClave + juzgadoClave.replace("-", ""), ls[0]);
-                                        }
-                                        for (int i = 0; i <= totVic; i++) {
-                                            out.println("<option value=" + i + "");
-                                            if(i == numVicti){
-//                                                if(numVicti != 0){//Si el resultado es 0, entonces no lo seleccionamos en el select
-                                                    out.println(" selected ");
-//                                                }
-                                            }
-                                            out.println(">" + i + "</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                        </tr>
-                        <%
+                            out.println("<td>");
+                            if(pDelito.size() != 0){
+                                out.println("<input type='checkbox' name='arrayDelito' value='" + ls[0] + "' checked/> ");
+                            }else{
+                                out.println("<input type='checkbox' name='arrayDelito' value='" + ls[0] + "'/> ");
                             }
-                        %>
+                            out.println("</td>");
+                        }
+                    %>
                     </table>
                 </fieldset>
                 <div class="comentarios">

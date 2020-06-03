@@ -18,8 +18,7 @@ import java.util.logging.Logger;
  */
 public class showConclusionesJO {
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> conc;
-    ArrayList<String> concPA;
+    ArrayList<String[]> conc, concPA;
     String sql;
     ResultSet resul;
     
@@ -130,14 +129,14 @@ public class showConclusionesJO {
         concPA = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT TIPO_SENTENCIA FROM DATOS_DCONCLUSIONES_ADOJO "
+            sql = "SELECT TIPO_SENTENCIA, TIPO_CONCLUSION FROM DATOS_DCONCLUSIONES_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                     + "AND DELITO_CLAVE = '" + deliClave + "' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             if(resul.next()) {
-               concPA.add(resul.getString("TIPO_SENTENCIA"));
+               concPA.add(new String []{resul.getString("TIPO_SENTENCIA"), resul.getString("TIPO_CONCLUSION")});
             }
             conn.close();
         } catch (SQLException ex) {

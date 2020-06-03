@@ -109,7 +109,7 @@ public class insrtProcesados extends HttpServlet {
 
         //VARIABLES PDELITOS
         String[] arrayDelito = request.getParameterValues("arrayDelito");
-        String[] arrayNumVic = request.getParameterValues("arrayNumVic");
+//        String[] arrayNumVic = request.getParameterValues("arrayNumVic");
 
         //***********************************INSERT*************************************************
         try {
@@ -148,13 +148,11 @@ public class insrtProcesados extends HttpServlet {
                     }
 
                     for (int i = 0; i < arrayDelito.length; i++) {
-                        if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
-                            sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                        sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                                     + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
-                                    + arrayNumVic[i] + ",(select YEAR(NOW())) )";
-                            System.out.println(sql);
-                            insertPD = conn.escribir(sql);
-                        }
+                                    + 0 + ",(select YEAR(NOW())) )";
+                        System.out.println(sql);
+                        insertPD = conn.escribir(sql);
                     }
                     if(insertPD){
                         showProcesados pro = new showProcesados();
@@ -215,13 +213,11 @@ public class insrtProcesados extends HttpServlet {
                         }
                     }
                     for (int i = 0; i < arrayDelito.length; i++) {
-                        if (!arrayNumVic[i].equals("0")) {//inserta el procesado que haya tenido un numero de victimas mayor a 0
-                            sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
+                        sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                                     + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
-                                    + arrayNumVic[i] + ",(select YEAR(NOW())) )";
-                            System.out.println(sql);
-                            insertPD = conn.escribir(sql);
-                        }
+                                    + 0 + ",(select YEAR(NOW())) )";
+                        System.out.println(sql);
+                        insertPD = conn.escribir(sql);
                     }
                     if(insertPD){
                         showProcesados pro = new showProcesados();

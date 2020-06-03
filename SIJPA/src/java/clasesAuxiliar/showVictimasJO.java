@@ -143,12 +143,13 @@ public class showVictimasJO {
         return vic;
     }
     
-    public ArrayList findVDelitoJC(String causaClaveJC, String victiClave, String deliClave){
+    public ArrayList findVDelitoJC(String causaClaveJC, String proceClave, String victiClave, String deliClave){
         vicDelito = new ArrayList();
         try {
             conn.Conectar();
                 sql = "SELECT DELITO_CLAVE FROM DATOS_VDELITOS_ADOJC "
                         + "WHERE CAUSA_CLAVE = '" + causaClaveJC + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                         + "AND VICTIMA_CLAVE = '" + victiClave + "' "
                         + "AND DELITO_CLAVE = '" + deliClave + "' "
                         + "ORDER BY 1;";
@@ -163,12 +164,13 @@ public class showVictimasJO {
         return vicDelito;
     }
     
-    public ArrayList findVDelitoJO(String causaClaveJO, String victiClave, String deliClave){
+    public ArrayList findVDelitoJO(String causaClaveJO, String proceClave, String victiClave, String deliClave){
         vicDelito = new ArrayList();
         try {
             conn.Conectar();
                 sql = "SELECT DELITO_CLAVE FROM DATOS_VDELITOS_ADOJO "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                         + "AND VICTIMA_CLAVE = '" + victiClave + "' "
                         + "AND DELITO_CLAVE = '" + deliClave + "' "
                         + "ORDER BY 1;";
@@ -351,5 +353,49 @@ public class showVictimasJO {
         }
         return vic;
 
+    }
+    
+    public ArrayList findProcesadosJO(String causaClave) {
+        conn.Conectar();
+        vicProce = new ArrayList();
+        sql = "SELECT PROCESADO_CLAVEJO, CONCAT(NOMBRE,' ',A_PATERNO,' ',A_MATERNO) FROM DATOS_PROCESADOS_ADOJO "
+                + "WHERE CAUSA_CLAVEJO = '" + causaClave + "'";
+        
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                vicProce.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicProce;
+    }
+    public ArrayList findProcesadosJC(String causaClave) {
+        conn.Conectar();
+        vicProce = new ArrayList();
+        sql = "SELECT P.PROCESADO_CLAVE, CONCAT(NOMBRE,' ',A_PATERNO,' ',A_MATERNO) "
+            + " FROM DATOS_PROCESADOS_ADOJC P, DATOS_CONCLUSIONES_ADOJC C "
+            + " WHERE P.CAUSA_CLAVE = C.CAUSA_CLAVE "
+            + " AND P.PROCESADO_CLAVE = C.PROCESADO_CLAVE "
+            + " AND C.TIPO_RESOLUCION = 5 "
+            + " AND P.CAUSA_CLAVE = '" + causaClave + "'"
+            + " ORDER BY 1;";
+        
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                vicProce.add(new String[]{
+                    resul.getString(1), resul.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showVictimas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vicProce;
     }
 }

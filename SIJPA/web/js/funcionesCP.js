@@ -8,7 +8,8 @@ $(document).ready(function () {
     /*---------------------------- FUNCIONES CAUSA PENAL JC----------------------------*/
     //Se usa para la recuperacion de datos de DB
     if($('#carpInves').val() !== ''){
-        $('#carpInves,#expClave,#compe').prop('disabled',true);
+        $('#carpInves,#expClave').prop('readonly',true);
+        $("#compe option:not(:selected)").attr("disabled", true);
     }
     
     //Se usa para la recuperacion de datos de DB

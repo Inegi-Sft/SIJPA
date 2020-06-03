@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class showProcesados {
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> proce;
-    ArrayList<String> pIngre;
+    ArrayList<String> pIngre,pDelito;
     String sql;
     ResultSet resul;
     int conteoPro;
@@ -228,7 +228,7 @@ public class showProcesados {
         return pIngre;
     }
     
-    public int findPDelitos(String causaClave, String proceCLave, String delitoClave) {
+    public int findNumVicPDelitos(String causaClave, String proceCLave, String delitoClave) {
         int numVictiPro = 0;
         try {
             conn.Conectar(); 
@@ -245,6 +245,25 @@ public class showProcesados {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return numVictiPro;
+    }
+    
+    public ArrayList findPDelitos(String causaClave, String proceCLave, String delitoClave) {
+        pDelito = new ArrayList();
+        try {
+            conn.Conectar(); 
+            sql = "SELECT DELITO_CLAVE FROM DATOS_PDELITOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceCLave + "' "
+                    + "AND DELITO_CLAVE = '" + delitoClave + "';";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                pDelito.add(resul.getString("DELITO_CLAVE"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pDelito;
     }
     
 }

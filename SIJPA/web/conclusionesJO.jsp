@@ -22,8 +22,7 @@
             showConclusionesJO sConclu = new showConclusionesJO();
             showProcesadosJO sProce = new showProcesadosJO();
             showJuicio sEtaOral = new showJuicio();
-            ArrayList<String[]> lista, conclusiones = new ArrayList();
-            ArrayList<String> concluPA = new ArrayList();
+            ArrayList<String[]> lista, conclusiones, concluPA = new ArrayList();
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();
             
@@ -281,7 +280,7 @@
                                     out.println("</td>");
                                     concluPA = sConclu.findConcluAJO(causaClaveJO, proceClave + jConcatenado, lista.get(i)[0]);
                                     if(concluPA.size() != 0){
-                                        String concluAP = concluPA.get(0);
+                                        String concluAP = concluPA.get(0)[0];
                                         if(concluAP.equals("1")){
                                             out.println("<td><input type='radio' name='resolDelito" + i + "' value='1' checked></td>");
                                         }else{
@@ -292,6 +291,7 @@
                                         }else{
                                             out.println("<td><input type='radio' name='resolDelito" + i + "' value='2'></td>");
                                         }
+                                        
                                         if(concluAP.equals("9")){
                                             out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia' checked></td>");
                                         }else{

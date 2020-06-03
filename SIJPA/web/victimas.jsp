@@ -166,25 +166,37 @@
                     <legend >Delitos cometidos a la víctima</legend>
                     <table class="tablasRegis">
                         <tr>
+                            <th>Procesado Clave</th>
+                            <th>Nombre</th>
                             <th>Delito Clave</th>
                             <th>Delito</th>
                             <th>Delito cometido</th>
                         </tr>
                         <%
-                            vic = sDelitos.findDelitosCausa(causaClave);
-                            for (String[] ls : vic) {
+                            vic = sVicti.findProcesados(causaClave);
+                            for (String[] pro : vic) {
+                                int idx=0;
+                                vic = sDelitos.findDelitosCausa(causaClave);
                                 out.println("<tr>");
-                                out.println("<td>" + ls[0].replace(juzgadoClave.replace("-", ""), "") + "</td>");
-                                out.println("<td>" + ls[1] + "</td>");
-                                out.println("<td>");
-                                viDel = sVicti.findVDelito(causaClave, victiClave + juzgadoClave.replace("-", ""), ls[0]);
-                                if(viDel.size() != 0){
-                                    out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "' checked>");
-                                }else{
-                                    out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + ls[0] + "'/>");
+                                out.println("<td rowspan='"+ vic.size() +"'>"+ pro[0].replace(juzgadoClave.replace("-", ""), "") +"</td>");
+                                out.println("<td rowspan='"+ vic.size() +"'>"+ pro[1] +"</td>");
+                                for (String[] ls : vic) {
+                                    if(idx!=0){
+                                        out.println("<tr>");
+                                    }
+                                    out.println("<td>" + ls[0].replace(juzgadoClave.replace("-", ""), "") + "</td>");
+                                    out.println("<td>" + ls[1] + "</td>");
+                                    out.println("<td>");
+                                    viDel = sVicti.findVDelito(causaClave, pro[0], victiClave + juzgadoClave.replace("-", ""), ls[0]);
+                                    if(viDel.size() != 0){
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='"+ pro[0] +"@@@"+ ls[0] +"' checked>");
+                                    }else{
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='"+ pro[0] +"@@@"+ ls[0] +"'/>");
+                                    }
+                                    out.println("</td>");
+                                    out.println("</tr>");
+                                    idx++;
                                 }
-                                out.println("</td>");
-                                out.println("</tr>");
                             }
                         %>
                     </table>
@@ -235,7 +247,7 @@
                         </thead>
                         <tbody>
                         <%
-                            vic = sVicti.findVprocesados(causaClave);
+                            vic = sVicti.findProcesados(causaClave);
                             int i = 0;
                             for (String[] ls : vic) {
                                 out.println("<tr>");
@@ -749,7 +761,7 @@
                                 out.println("<td>");
                                 vimedida = sVicti.findVMedidasMuj(causaClave, victiClave + juzgadoClave.replace("-", ""), ls[0]);
                                 if(vimedida.size() != 0){
-                                    out.println("<input type='checkbox' name='aplicaMedidaMuj' id='aplicaMedidaMuj" + ls[0] + "' value='" + ls[0] + "' cehcked>");
+                                    out.println("<input type='checkbox' name='aplicaMedidaMuj' id='aplicaMedidaMuj" + ls[0] + "' value='" + ls[0] + "' checked>");
                                 }else{
                                     out.println("<input type='checkbox' name='aplicaMedidaMuj' id='aplicaMedidaMuj" + ls[0] + "' value='" + ls[0] + "'>");
                                 }

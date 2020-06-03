@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class showProcesadosJO {
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> proce;
-    ArrayList<String> pIngre;
+    ArrayList<String> pIngre, pDelito;
     String sql;
     ResultSet resul;
     
@@ -220,7 +220,7 @@ public class showProcesadosJO {
         return pIngre;
     }
     
-    public int findPDelitosJC(String causaClaveJC, String proceCLave, String delitoClave) {
+    public int findNumVictiJC(String causaClaveJC, String proceCLave, String delitoClave) {
         int numVictiPro = 0;
         try {
             conn.Conectar(); 
@@ -239,7 +239,7 @@ public class showProcesadosJO {
         return numVictiPro;
     }
     
-    public int findPDelitosJO(String causaClaveJO, String proceCLave, String delitoClave) {
+    public int findNumVictiJO(String causaClaveJO, String proceCLave, String delitoClave) {
         int numVictiPro = 0;
         try {
             conn.Conectar(); 
@@ -282,5 +282,43 @@ public class showProcesadosJO {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proce;
+    }
+    
+    public ArrayList findPDelitosJC(String causaClave, String proceCLave, String delitoClave) {
+        pDelito = new ArrayList();
+        try {
+            conn.Conectar(); 
+            sql = "SELECT DELITO_CLAVE FROM DATOS_PDELITOS_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceCLave + "' "
+                    + "AND DELITO_CLAVE = '" + delitoClave + "';";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                pDelito.add(resul.getString("DELITO_CLAVE"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pDelito;
+    }
+    
+    public ArrayList findPDelitosJO(String causaClave, String proceCLave, String delitoClave) {
+        pDelito = new ArrayList();
+        try {
+            conn.Conectar(); 
+            sql = "SELECT DELITO_CLAVE FROM DATOS_PDELITOS_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClave + "' "
+                    + "AND PROCESADO_CLAVE = '" + proceCLave + "' "
+                    + "AND DELITO_CLAVE = '" + delitoClave + "';";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                pDelito.add(resul.getString("DELITO_CLAVE"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pDelito;
     }
 }

@@ -113,8 +113,9 @@ public class insrtVictimasJO extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     for (String chkDeliCom1 : chkDeliCom) {
+                        String vDel[] = chkDeliCom1.split("@@@");//separa procesado y delito para poder insertarse
                         sql = "INSERT INTO DATOS_VDELITOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                + causaClaveJO + "','" + victiClaveJO + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
+                                + causaClaveJO + "','" + vDel[0] + "','" + victiClaveJO + jConcatenado + "','" + vDel[1] + "',(select YEAR(NOW())))";
                         insertaVDeli = conn.escribir(sql);
                         System.out.println(sql);
                     }
@@ -187,8 +188,9 @@ public class insrtVictimasJO extends HttpServlet {
                             + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                     conn.escribir(sql);
                     for (String chkDeliCom1 : chkDeliCom) {
+                        String vDel[] = chkDeliCom1.split("@@@");//separa procesado y delito para poder insertarse
                         sql = "INSERT INTO DATOS_VDELITOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                + causaClaveJO + "','" + victiClave + jConcatenado + "','" + chkDeliCom1 + "',(select YEAR(NOW())))";
+                                + causaClaveJO + "','" + vDel[0] + "','" + victiClave + jConcatenado + "','" + vDel[1] + "',(select YEAR(NOW())))";
                         insertaVDeli = conn.escribir(sql);
                         System.out.println(sql);
                     }

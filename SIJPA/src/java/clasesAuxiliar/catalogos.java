@@ -833,6 +833,7 @@ public class catalogos {
         lista = new ArrayList();
         sql = " SELECT * FROM CATALOGOS_MUNICIPIOS WHERE ENTIDAD_ID = " + enti + " ORDER BY 1";
         resul = conn.consultar(sql);
+        System.out.println(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{

@@ -21,6 +21,7 @@ public class FechaMax {
     int mes = fecha.get(Calendar.MONTH)+1;
     int dia = fecha.get(Calendar.DAY_OF_MONTH); 
     String fechas="";
+    boolean Ban=false;
     
     if ((dia <10)&&(mes<10)){
       fechas=ano+"-"+"0"+mes+"-"+"0"+dia;
@@ -36,4 +37,14 @@ public class FechaMax {
    }
       return fechas;    
     }    
+  
+  public boolean isNumeric(String cadena){
+	try {
+		Integer.parseInt(cadena);
+                return true;
+	} catch (NumberFormatException nfe){
+		return false;
+	}
+}
+  
 }

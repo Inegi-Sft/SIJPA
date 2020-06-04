@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 
+import clasesAuxiliar.FechaMax;
 import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showCausasPenalesJO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +28,7 @@ public class obtenFechaNacPro extends HttpServlet {
 
     String FechExpe=null;
     int edad=0;
+    Boolean Numeric;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,20 +48,21 @@ public class obtenFechaNacPro extends HttpServlet {
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
         showCausasPenales penales = new showCausasPenales();
         showCausasPenalesJO penalesJO = new showCausasPenalesJO();
-
+        FechaMax Fech = new FechaMax();
+        Calendar fecha = new GregorianCalendar();
+        int ano = fecha.get(Calendar.YEAR);
+        
         try {
             if (request.getParameter("Fnac") != null) {
                 String FechNac = request.getParameter("Fnac");
                 String AnoNac = FechNac.substring(0, 4);
-                String Sistema=(String) sesion.getAttribute("Sistema");
-                
-                if (Sistema.equals("JC")){
-                FechExpe = penales.FechaIng(juzgadoClave, causaClave);
-                }else if (Sistema.equals("JO")){
-                 FechExpe=penalesJO.FechaIngJO(juzgadoClave, causaClaveJO);
+                String Sistema = (String) sesion.getAttribute("Sistema");
+
+                if (Sistema.equals("JC")) {
+                    FechExpe = penales.FechaIng(juzgadoClave, causaClave);
+                } else if (Sistema.equals("JO")) {
+                    FechExpe = penalesJO.FechaIngJO(juzgadoClave, causaClaveJO);
                 }
-                
-                
                 String AnoIngreso = FechExpe.substring(0, 4);
                 System.out.println("año de ingreso=" + FechExpe);
                 if (FechExpe.equals("1899-09-09")) {
@@ -78,12 +83,16 @@ public class obtenFechaNacPro extends HttpServlet {
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];
-                        int ValAño = Integer.parseInt(part2.substring(0, 4));
-                        System.out.println("AÑO DE INGRESO= " + ValAño);
-                        if ((ValAño > 1915) && (ValAño < 2020)) {
-                            edad = Integer.parseInt(part2.substring(0, 4)) - Integer.parseInt(AnoNac);
-                            System.out.println("la causa Clave=" + causaClave + " " + part1 + " " + part2);
-                            out.println(edad);
+                        Numeric = Fech.isNumeric(part2.substring(0, 4));
+                        if (Numeric == true) {
+                            int ValAño = Integer.parseInt(part2.substring(0, 4));
+                            if ((ValAño > 1915) && (ValAño < ano + 1)) {
+                                edad = Integer.parseInt(part2.substring(0, 4)) - Integer.parseInt(AnoNac);
+                                System.out.println("la causa Clave=" + causaClave + " " + part1 + " " + part2);
+                                out.println(edad);
+                            } else {
+                                out.write("0");       
+                            }
                         } else {
                             out.write("0");
                         }
@@ -93,10 +102,15 @@ public class obtenFechaNacPro extends HttpServlet {
                         String part1 = parts[0];
                         String part2 = parts[1];
                         String part3 = parts[2];
-                        int ValAño = Integer.parseInt(part2.substring(0, 4));
-                        if ((ValAño > 1915) && (ValAño < 2020)) {
-                            edad = Integer.parseInt(part3.substring(0, 4)) - Integer.parseInt(AnoNac);
-                            out.println(edad);
+                        Numeric = Fech.isNumeric(part2.substring(0, 4));
+                        if (Numeric == true) {
+                            int ValAño = Integer.parseInt(part2.substring(0, 4));
+                            if ((ValAño > 1915) && (ValAño < ano + 1)) {
+                                edad = Integer.parseInt(part3.substring(0, 4)) - Integer.parseInt(AnoNac);
+                                out.println(edad);
+                            } else {
+                                out.write("0");
+                            }
                         } else {
                             out.write("0");
                         }
@@ -106,7 +120,6 @@ public class obtenFechaNacPro extends HttpServlet {
                     System.out.println("la edad es mira" + edad);
                     out.println(edad);
                 }
-
             }
         } finally {
             out.close();

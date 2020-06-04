@@ -221,7 +221,7 @@
                         <tr>
                             <td>
                                 <label for="ocurrencia">Fecha de ocurrencia</label>
-                                <input type="date" name="ocurrencia" id="ocurrencia" value="<%=fechaOcurre%>" required max="<%=fechas%>" onkeydown="return false" onblur="VFechaOcurrencia('#ocurrencia')">
+                                <input type="date" name="ocurrencia" id="ocurrencia" value="<%=fechaOcurre%>" required max="<%=fechas%>" onkeydown="return false" onchange="VFechaOcurrencia('#ocurrencia')">
                                 <div class="noIdentificada">
                                     <input type="checkbox" id="chkOcurrencia" onclick="fechaNoIdent('#chkOcurrencia', '#ocurrencia')">
                                     <label>No identificada</label>

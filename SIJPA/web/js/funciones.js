@@ -936,16 +936,16 @@ function ValFechaNacPRO(FechaNac, Edad) {
             },
             success: function (response) {
                 var edadVic = parseInt(response);
-               //alert('Respuesta servidores señores'+response);
+               alert('Respuesta servidores'+response);
                 if (response !== '0'){
-                  if ((response !=='1')){
+                if (edadVic >= 0){  
                     var resp = confirm("Desea agregar la edad. Edad=" + response);
                     if (resp) {
                         $(SEdad).val(edadVic);
                     }
-                }
             }
-                if (response === '1')
+        }
+                if (edadVic < 0)
                 {
                     alert('LA FECHA DE NACIMIENTO NO DEBE SER MAYOR A LA FECHA DE INGRESO');
                     $(SEdad).val("");

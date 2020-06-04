@@ -43,6 +43,7 @@ public class insrtJuez extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession sesion= request.getSession();
         
+        String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
         String juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
         String[] juzSeparado = juzgadoClave.split("-");
         String entidad = juzSeparado[0];
@@ -65,17 +66,31 @@ public class insrtJuez extends HttpServlet {
 
         try {
             conn.Conectar();
-            sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + entidad + "," + mun + "," + num + ",'" + juzgadoClave + "'," + juezID + ",'"
-                    + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + ","
-                    + estudioJuez + "," + funcionJuez + ",(select YEAR(NOW()))"
-                    + ")";
-            System.out.println(sql);
-            if(conn.escribir(sql)){
-                conn.close();
-                response.sendRedirect("causasPenales.jsp");
-            }else{
-                conn.close();
-                response.sendRedirect("capturaJuez.jsp?error=100");
+            if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+                sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + entidad + "," + mun + "," + num + ",'" + juzgadoClave + "'," + juezID + ",'"
+                        + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + ","
+                        + estudioJuez + "," + funcionJuez + ",(select YEAR(NOW()))"
+                        + ")";
+                if(conn.escribir(sql)){
+                    conn.close();
+                    response.sendRedirect("jueces.jsp");
+                }else{
+                    conn.close();
+                    response.sendRedirect("jueces.jsp?error=100");
+                }
+            }else{//Se actualiza el dato que viene de recuperacion
+                sql = "UPDATE DATOS_JUECES_ADOJC SET NOMBRE_JUEZ = '" + nombre + "',APELLIDOP_JUEZ = '" + apaterno + "',"
+                        + "APELLIDOM_JUEZ = '" + amaterno + "',FECHA_GESTION = '" + fGestion + "',SEXO = " + sexoJuez + ","
+                        + "EDAD = " + edadJuez + ",GRADO_ESTUDIOS = " + estudioJuez + ",FUNCION_DESEMPENA = " + funcionJuez + " "
+                        + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
+                        + "AND JUEZ_CLAVE = " + juezID + ";";
+                if(conn.escribir(sql)){
+                    conn.close();
+                    response.sendRedirect("jueces.jsp");
+                }else{
+                    conn.close();
+                    response.sendRedirect("jueces.jsp?error=100");
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);

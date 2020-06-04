@@ -23,6 +23,29 @@ public class showJueces {
     String sql;
     ResultSet rs;
     
+    public ArrayList findJuezDatos(int juezCave, String juzgadoClave){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            sql = "SELECT NOMBRE_JUEZ, APELLIDOP_JUEZ, APELLIDOM_JUEZ, FECHA_GESTION, SEXO, EDAD, GRADO_ESTUDIOS, FUNCION_DESEMPENA "
+                    + "FROM DATOS_JUECES_ADOJC "
+                    + "WHERE JUEZ_CLAVE = " + juezCave + " "
+                    + "AND JUZGADO_CLAVE = '" + juzgadoClave + "' "
+                    + "ORDER BY 1";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(new String[]{
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                    rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJueces.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
     public ArrayList findJuez(String juzClave){
         try {
             conn.Conectar();
@@ -47,7 +70,7 @@ public class showJueces {
     public ArrayList findJuezTabla(String juzClave){
         try {
             conn.Conectar();
-            listaTabla = new ArrayList<String[]>();
+            listaTabla = new ArrayList<>();
             sql = "SELECT DJ.JUEZ_CLAVE,CONCAT(DJ.NOMBRE_JUEZ,' ',DJ.APELLIDOP_JUEZ,' ',DJ.APELLIDOM_JUEZ) "
                     + "AS NOMBRE_JUEZ,DJ.EDAD,DJ.FECHA_GESTION,"
                     + "CF.DESCRIPCION "

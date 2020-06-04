@@ -831,7 +831,7 @@ public class catalogos {
     public ArrayList findMunicipios(int enti) {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM CATALOGOS_MUNICIPIOS WHERE ENTIDAD_ID = " + enti + " ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MUNICIPIOS WHERE ENTIDAD_ID = " + enti + " ORDER BY 1";
         resul = conn.consultar(sql);
         System.out.println(sql);
         try {
@@ -1532,6 +1532,22 @@ public class catalogos {
         conn.Conectar();
         lista = new ArrayList();
         sql = "SELECT * FROM CATALOGOS_SENTIDO_FALLO ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+    public ArrayList findEjercicios() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM CATALOGOS_EJERCICIOS ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

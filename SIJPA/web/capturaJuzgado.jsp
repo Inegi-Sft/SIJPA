@@ -28,86 +28,103 @@
                 }
             }
             
- 
             catalogos cat = new catalogos();
-            ArrayList<String[]> lista;
-            ArrayList<String[]> listaDatJuz;
-            String ClaveJuzgado=null;
+            ArrayList<String[]> lista, listaDatJuz, informeJuz;
             
-            showJuzgados sjuzgado = new showJuzgados();
-            int totJuzgado = sjuzgado.findTotJuzgado();
+            showJuzgados sJuzgado = new showJuzgados();
+            int totJuzgado = sJuzgado.findTotJuzgado();
             
-              if (request.getParameter("claveJuz") != null) {
-                ClaveJuzgado = request.getParameter("claveJuz");
-            }
-            String edicion="";
-            String operacion="";
-            String JuzNom="";
-            String JuzNum="";
-            String JuzJuris="";
-            String JuzFun="";
-            String lada="";
-            String correo="";
-            String entidad="";
-            String municipio="";
-            String forDiv="";
-            String NomReg="";
-            String NomDis="";
-            String NomPart="";
-            String viali="";
-            String NomViali="";
-            String Asenta="";
-            String Nom_Asenta="";
-            String Num_Ext="";
-            String Num_int="";
-            String Cod_Post="";
-            String Nom_Cap="";
-            String Ape_Cap="";
-            String Ape_MCap="";
-            String Cargo_Cap="";
-             if(request.getParameter("edita") != null){
-               edicion = request.getParameter("edita");  
-                if(edicion.equals("Si")){
-                listaDatJuz=sjuzgado.findDatosJuzgado(ClaveJuzgado);
-                 if(listaDatJuz.size() > 0){
-                   operacion = listaDatJuz.get(0)[0];
-                    JuzNom=listaDatJuz.get(0)[1];
-                    JuzNum=listaDatJuz.get(0)[2];
-                    JuzJuris=listaDatJuz.get(0)[3];
-                    JuzFun=listaDatJuz.get(0)[4];
-                    lada=listaDatJuz.get(0)[5];
-                    correo=listaDatJuz.get(0)[6];
-                    entidad=listaDatJuz.get(0)[7];
-                    municipio=listaDatJuz.get(0)[8];
-                    forDiv=listaDatJuz.get(0)[9];
-                    NomReg=listaDatJuz.get(0)[10];
-                    NomDis=listaDatJuz.get(0)[11];
-                    NomPart=listaDatJuz.get(0)[12];
-                    viali=listaDatJuz.get(0)[13];
-                    NomViali=listaDatJuz.get(0)[14];
-                    Asenta=listaDatJuz.get(0)[15];
-                    Nom_Asenta=listaDatJuz.get(0)[16];
-                    Num_Ext=listaDatJuz.get(0)[17];
-                    Num_int=listaDatJuz.get(0)[18];
-                    Cod_Post=listaDatJuz.get(0)[19];
-                    Nom_Cap=listaDatJuz.get(0)[20];
-                    Ape_Cap=listaDatJuz.get(0)[21];
-                    Ape_MCap=listaDatJuz.get(0)[22];
-                    Cargo_Cap=listaDatJuz.get(0)[23];  
-                 }   
-                 else{
-                        out.println("<script>alert('Juzgado " + ClaveJuzgado + " no encontrado '); "
-                                + "window.location.href = 'elementosPrincipales.jsp'</script>");
-                    }     
-                } 
+            String juzgadoClave = (String)session.getAttribute("juzgadoClave");
+            String operacion = "";//Variable de control para saber si se inserta o se actualiza
+            String juzClaveR = "";
+            String juzNom = "";
+            String juzNum = "";
+            String juzJuris = "";
+            String juzFun = "";
+            String lada = "";
+            String correo = "";
+            String entidad = "";
+            String municipio = "";
+            String forDiv = "";
+            String nomReg = "";
+            String nomDis = "";
+            String nomPart = "";
+            String viali = "";
+            String nomViali = "";
+            String asenta = "";
+            String nomAsenta = "";
+            String numExt = "";
+            String numInt = "";
+            String codPost = "";
+            String nomCap = "";
+            String apeCap = "";
+            String apeMCap = "";
+            String cargoCap = "";
+            ////////////////
+            String causaPenaIn = "";
+            String medidasPro = "";
+            String proviPre = "";
+            String pruAnticipa = "";
+            String ordenJudici = "";
+            String actosInves = "";
+            String impugnaMp = "";
+            String otros = "";
+            String causaTram = "";
+            String causaBaja = "";
+            String ejercicio = "";
+            if(request.getParameter("claveJuz") != null){
+                listaDatJuz = sJuzgado.findJuzgadoDato(juzgadoClave);
+                informeJuz  = sJuzgado.findInformeJuz(juzgadoClave);
+                if(listaDatJuz.size() > 0){
+                    operacion = "actualizar";
+                    juzClaveR = listaDatJuz.get(0)[0];
+                    juzNom = listaDatJuz.get(0)[1];
+                    juzNum = listaDatJuz.get(0)[2];
+                    juzJuris = listaDatJuz.get(0)[3];
+                    juzFun = listaDatJuz.get(0)[4];
+                    lada = listaDatJuz.get(0)[5];
+                    correo = listaDatJuz.get(0)[6];
+                    entidad = listaDatJuz.get(0)[7];
+                    municipio = listaDatJuz.get(0)[8];
+                    forDiv = listaDatJuz.get(0)[9];
+                    nomReg = listaDatJuz.get(0)[10];
+                    nomDis = listaDatJuz.get(0)[11];
+                    nomPart = listaDatJuz.get(0)[12];
+                    viali = listaDatJuz.get(0)[13];
+                    nomViali = listaDatJuz.get(0)[14];
+                    asenta = listaDatJuz.get(0)[15];
+                    nomAsenta = listaDatJuz.get(0)[16];
+                    numExt = listaDatJuz.get(0)[17];
+                    numInt = listaDatJuz.get(0)[18];
+                    codPost = listaDatJuz.get(0)[19];
+                    nomCap = listaDatJuz.get(0)[20];
+                    apeCap = listaDatJuz.get(0)[21];
+                    apeMCap = listaDatJuz.get(0)[22];
+                    cargoCap = listaDatJuz.get(0)[23];
+                    ////////////////
+                    causaPenaIn = informeJuz.get(0)[0];
+                    medidasPro = informeJuz.get(0)[1];
+                    proviPre = informeJuz.get(0)[2];
+                    pruAnticipa = informeJuz.get(0)[3];
+                    ordenJudici = informeJuz.get(0)[4];
+                    actosInves = informeJuz.get(0)[5];
+                    impugnaMp = informeJuz.get(0)[6];
+                    otros = informeJuz.get(0)[7];
+                    causaTram = informeJuz.get(0)[8];
+                    causaBaja = informeJuz.get(0)[9];
+                    ejercicio = informeJuz.get(0)[10];
+                }else{
+                    out.println("<script>alert('Juzgado " + juzgadoClave + " no encontrado '); "
+                        + "window.location.href = 'juzgados.jsp'</script>");
+                }
              }
-
         %>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
+            <a class="btnCerrar" title="Cerrar" href="juzgados.jsp" >X</a>
             <% if(totJuzgado > 0){ %>
                 <div class="toggle-nav">
                     <div class="toggle-nav-inner"></div>
@@ -128,11 +145,13 @@
                         <tr>
                             <td>
                                 <label for="nomOrgano">Nombre Órgano Jurisdiccional</label>
-                                <input type="text" name="nomOrgano" id="nomOrgano" value="<%=JuzNom%>" required/>
+                                <input type="text" name="nomOrgano" id="nomOrgano" value="<%=juzNom%>" required/>
+                                <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                             </td>
                             <td>
                                 <label for="numJuzgado">Número Órgano Jurisdiccional</label>
-                                <input type="number" name="numOrgano" id="numOrgano" value="<%=JuzNum%>" min="0" required/>
+                                <input type="number" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" required/>
+                                <input type="hidden" name="jClaveR" id="jClaveR" value="<%=juzClaveR%>">
                             </td>
                             <td>
                                 <label for="jurisdiccion">Jurisdicción</label>
@@ -142,7 +161,7 @@
                                         lista = cat.findJurisdiccion();
                                         for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(JuzJuris)){
+                                                    if(ls[0].equals(juzJuris)){
                                                         out.println(" selected ");
                                                     }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
@@ -169,7 +188,7 @@
                                         lista = cat.findFuncionJuzgado();
                                         for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(JuzFun)){
+                                                    if(ls[0].equals(juzFun)){
                                                         out.println(" selected ");
                                                     }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
@@ -205,14 +224,18 @@
                                 <select name="municipioJ" id="municipioJ" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                    lista = cat.findMunicipios(Integer.parseInt(entidad));
-                                                    for (String[] ls : lista) {
-                                                        out.println("<option value='" + ls[0] + "'");
-                                                        if(ls[0].equals(municipio)){
-                                                            out.println(" selected ");
-                                                        }
-                                                        out.println(">" + ls[1] + "</option>");
-                                                    }
+                                        if(entidad.equals("")){
+                                            out.println("<option value = ''>--Seleccione--</option>");
+                                        }else{
+                                            lista = cat.findMunicipios(Integer.parseInt(entidad));
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'");
+                                                if(ls[0].equals(municipio)){
+                                                    out.println(" selected ");
+                                                }
+                                                out.println(">" + ls[1] + "</option>");
+                                            }
+                                        }
                                    %>
                                 </select>
                             </td>
@@ -237,15 +260,15 @@
                             <td>
                                 <div id="dRegJudicial" class="oculto">
                                     <label for="regJudicial">Nombre de la Región Judicial</label>
-                                    <input type="text" name="regJudicial" id="regJudicial" value="<%=NomReg%>"/>
+                                    <input type="text" name="regJudicial" id="regJudicial" value="<%=nomReg%>"/>
                                 </div>
                                 <div id="dDistJudicial" class="oculto">
                                     <label for="distJudicial">Nombre del Distrito Judicial</label>
-                                    <input type="text" name="distJudicial" id="distJudicial" value="<%=NomDis%>"/>
+                                    <input type="text" name="distJudicial" id="distJudicial" value="<%=nomDis%>"/>
                                 </div>
                                 <div id="dPartJudicial" class="oculto">
                                     <label for="partJudicial">Nombre del Partido Judicial</label>
-                                    <input type="text" name="partJudicial" id="partJudicial" value="<%=NomPart%>"/>
+                                    <input type="text" name="partJudicial" id="partJudicial" value="<%=nomPart%>"/>
                                 </div>
                             </td>
                         </tr>
@@ -279,7 +302,7 @@
                                         lista = cat.findAsentamientoHumano();
                                         for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(Asenta)){
+                                                    if(ls[0].equals(asenta)){
                                                         out.println(" selected ");
                                                     }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
@@ -289,23 +312,23 @@
                             </td>
                             <td>
                                 <label for="cp">Codigo Postal</label>
-                                <input type="text" class="soloNum" name="cp" id="cp" value="<%=Cod_Post%>" maxlength="5"/>
+                                <input type="text" class="soloNum" name="cp" id="cp" value="<%=codPost%>" maxlength="5"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="nomVialidad">Nombre de la Vialidad</label>
-                                <input type="text" name="nomVialidad" id="nomVialidad" value="<%=NomViali%>" required/>
+                                <input type="text" name="nomVialidad" id="nomVialidad" value="<%=nomViali%>" required/>
                             </td>
                             <td>
                                 <label for="nomAsentamiento">Nombre del Asentamiento Humano</label>
-                                <input type="text" name="nomAsentamiento" id="nomAsentamiento" value="<%=Nom_Asenta%>" required/>
+                                <input type="text" name="nomAsentamiento" id="nomAsentamiento" value="<%=nomAsenta%>" required/>
 
                             </td>
                             <td>
                                 <label for="">No. Exterior / No. Interior</label>
-                                <input type="text" class="txtSmall" name="noExterior" id="noExterior" value="<%=Num_Ext%>" />
-                                <input type="text" class="txtSmall" name="noInterior" id="noInterior" value="<%=Num_int%>" />
+                                <input type="text" class="txtSmall" name="noExterior" id="noExterior" value="<%=numExt%>" />
+                                <input type="text" class="txtSmall" name="noInterior" id="noInterior" value="<%=numInt%>" />
                             </td>
                         </tr>
                     </table>
@@ -316,22 +339,22 @@
                         <tr>
                             <td>
                                 <label for="nombreCap">Nombre(s)</label>
-                                <input type="text" name="nombreCap" id="nombreCap" value="<%=Nom_Cap%>" required/>
+                                <input type="text" name="nombreCap" id="nombreCap" value="<%=nomCap%>" required/>
                             </td>
                             <td>
                                 <label for="apaternoCap">Apellido Paterno</label>
-                                <input type="text" name="apaternoCap" id="apaternoCap" value="<%=Ape_Cap%>" required/>
+                                <input type="text" name="apaternoCap" id="apaternoCap" value="<%=apeCap%>" required/>
                             </td>
                             <td>
                                 <label for="amaternoCap">Apellido Materno</label>
-                                <input type="text" name="amaternoCap" id="amaternoCap" value="<%=Ape_MCap%>" required/>
+                                <input type="text" name="amaternoCap" id="amaternoCap" value="<%=apeMCap%>" required/>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 <label for="Cargo">Cargo</label>
-                                <input type="text" name="cargo" id="cargo" value="<%=Cargo_Cap%>" required/>
+                                <input type="text" name="cargo" id="cargo" value="<%=cargoCap%>" required/>
                             </td>
                             <td></td>
                         </tr>
@@ -345,57 +368,63 @@
                                 <label for="ejercicio">Ejercicio:</label>
                                 <select name="ejercicio" id="ejercicio" required>
                                     <option value="">--Seleccionar--</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2020">2020</option>
+                                    <%
+                                        lista = cat.findEjercicios();
+                                        for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(ejercicio)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[1] + "</option>");
+                                                }
+                                    %>
                                 </select>
                             </td>
                             <td>
                                 <label for="causasIngresa">Causas Penales Ingresadas</label>
-                                <input type="number" name="causasIngresa" id="causasIngresa" min="0">
+                                <input type="number" name="causasIngresa" id="causasIngresa" value="<%=causaPenaIn%>" min="0">
                             </td>
                             <td>
                                 <label for="mediProteccion">Medidas de Protección</label>
-                                <input type="number" name="mediProteccion" id="mediProteccion" min="0">
+                                <input type="number" name="mediProteccion" id="mediProteccion" value="<%=medidasPro%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="providenPrecauto">Providencias Precautorias</label>
-                                <input type="number" name="providenPrecauto" id="providenPrecauto" min="0">
+                                <input type="number" name="providenPrecauto" id="providenPrecauto" value="<%=proviPre%>" min="0">
                             </td>
                             <td>
                                 <label for="actosInvestiga">Pruebas Anticipadas</label>
-                                <input type="number" name="pruebaAnti" id="pruebaAnti" min="0">
+                                <input type="number" name="pruebaAnti" id="pruebaAnti" value="<%=pruAnticipa%>" min="0">
                             </td>
                             <td>
                                 <label for="ordenesJudi">Órdenes Judiciales</label>
-                                <input type="number" name="ordenesJudi" id="ordenesJudi" min="0">
+                                <input type="number" name="ordenesJudi" id="ordenesJudi" value="<%=ordenJudici%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="actosInvestiga">Actos investigación con Control Judicial</label>
-                                <input type="number" name="actosInvestiga" id="actosInvestiga" min="0">
+                                <input type="number" name="actosInvestiga" id="actosInvestiga" value="<%=actosInves%>" min="0">
                             </td>
                             <td>
                                 <label for="impugnaMp">Impugnaciones al Ministerio Publico</label>
-                                <input type="number" name="impugnaMp" id="impugnaMp" min="0">
+                                <input type="number" name="impugnaMp" id="impugnaMp" value="<%=impugnaMp%>" min="0">
                             </td>
                             <td>
                                 <label for="otros">Otros Asuntos</label>
-                                <input type="number" name="otros" id="otros" min="0">
+                                <input type="number" name="otros" id="otros" value="<%=otros%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="causasTram">Causas Penales en Trámite</label>
-                                <input type="number" name="causasTram" id="causasTram" min="0">
+                                <input type="number" name="causasTram" id="causasTram" value="<%=causaTram%>" min="0">
                             </td>
                             <td>
                                 <label for="causasBaja">Causas Penales dadas de baja</label>
-                                <input type="number" name="causasBaja" id="causasBaja" min="0">
+                                <input type="number" name="causasBaja" id="causasBaja" value="<%=causaBaja%>" min="0">
                             </td>
                             <td></td>
                         </tr>

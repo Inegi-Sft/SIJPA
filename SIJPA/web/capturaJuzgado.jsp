@@ -34,9 +34,8 @@
             showJuzgados sJuzgado = new showJuzgados();
             int totJuzgado = sJuzgado.findTotJuzgado();
             
-            String juzgadoClave = (String)session.getAttribute("juzgadoClave");
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
-            String juzClaveR = "";
+            String juzClave = "";
             String juzNom = "";
             String juzNum = "";
             String juzJuris = "";
@@ -73,11 +72,11 @@
             String causaBaja = "";
             String ejercicio = "";
             if(request.getParameter("claveJuz") != null){
-                listaDatJuz = sJuzgado.findJuzgadoDato(juzgadoClave);
-                informeJuz  = sJuzgado.findInformeJuz(juzgadoClave);
+                juzClave = request.getParameter("claveJuz");
+                listaDatJuz = sJuzgado.findJuzgadoDato(juzClave);
+                informeJuz  = sJuzgado.findInformeJuz(juzClave);
                 if(listaDatJuz.size() > 0){
                     operacion = "actualizar";
-                    juzClaveR = listaDatJuz.get(0)[0];
                     juzNom = listaDatJuz.get(0)[1];
                     juzNum = listaDatJuz.get(0)[2];
                     juzJuris = listaDatJuz.get(0)[3];
@@ -114,7 +113,7 @@
                     causaBaja = informeJuz.get(0)[9];
                     ejercicio = informeJuz.get(0)[10];
                 }else{
-                    out.println("<script>alert('Juzgado " + juzgadoClave + " no encontrado '); "
+                    out.println("<script>alert('Juzgado " + juzClave + " no encontrado '); "
                         + "window.location.href = 'juzgados.jsp'</script>");
                 }
              }
@@ -151,7 +150,7 @@
                             <td>
                                 <label for="numJuzgado">Número Órgano Jurisdiccional</label>
                                 <input type="number" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" required/>
-                                <input type="hidden" name="jClaveR" id="jClaveR" value="<%=juzClaveR%>">
+                                <input type="hidden" name="jClaveR" id="jClaveR" value="<%=juzClave%>">
                             </td>
                             <td>
                                 <label for="jurisdiccion">Jurisdicción</label>

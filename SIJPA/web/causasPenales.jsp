@@ -82,7 +82,7 @@
                 <table id="causas" class="myTable">
                     <thead>
                         <tr>
-                            <th>Posi</th>
+                            <!--<th>Posi</th>-->
                             <th>No. Asunto</th>
                             <th>Fecha Ingreso</th>
                             <th>Conductas Antisociales</th>
@@ -106,7 +106,7 @@
                             String ccSimple = ls[0].replace(juzLimpio, "");
                     %>
                         <tr>
-                            <td><%=pos%></td>
+                            <!--<td><--%=pos%></td>-->
                             <td><%=ccSimple%></td>
                             <td><%=ls[1]%></td>
                             <td><%=ls[2]%></td>
@@ -115,7 +115,7 @@
                             <td><%=ls[5]%></td>
                             <td>--</td>
                             <td><a href="elementosPrincipales.jsp?causaClave=<%=ccSimple%>"><img src='img/editar.png' title="Editar"/></a></td>
-                            <td><a href="#"><img src='img/delete.png' title="Eliminar" onclick="borraRegistro('<%=ls[0]%>',<%=pos%>,'causas')"/></a></td>
+                            <td><a href="#" class="borrar"><img src='img/delete.png' title="Eliminar" /></a></td>
                         </tr>
                     <% 
                             pos++;

@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
     
-    if($('#expClave').val() !== ''){
+    if($('#expClaveJO').val() !== ''){
         $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
         $("#guardarExp").prop("hidden", true);
     }

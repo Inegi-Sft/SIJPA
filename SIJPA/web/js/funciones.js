@@ -64,6 +64,15 @@ $(document).ready(function () {
     $('#btnJo').click(function(){
         window.location.href = "causasPenalesJO.jsp";
     });
+    $('#btnAudi').click(function(){
+        window.location.href = "audiencias.jsp";
+    });
+    $('#btnJuzga').click(function(){
+        window.location.href = "juzgados.jsp";
+    });
+    $('#btnJuez').click(function(){
+        window.location.href = "jueces.jsp";
+    });
     /*----------------Fin Sistemas Captura------------------------*/
 
     /*----------------Registro Usuarios------------------------*/
@@ -210,6 +219,56 @@ $(document).ready(function () {
                 $("#dRegJudicial,#dDistJudicial,#dPartJudicial").fadeOut("slow");
                 $("#regJudicial,#distJudicial,#partJudicial").val("-2").prop("required", false);
                 break;
+        }
+    });
+    
+    $('.borrar').click(function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        var pos = $(this).closest('tr').index();
+        var tabla = $(this).parents('table').attr('id');
+        var clave = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();
+        var numReg = $('#' +tabla + ' tbody tr').length;
+        var resp = confirm("Realmente deseas eliminar este registro con clave: " + clave);
+        if(resp){
+            alert(pos + ', ' + tabla + ', ' + clave + ', ' + numReg);
+            console.log("Se ruemve: ", clave, ' de la tabla: ', tabla);
+            $(this).closest('tr').remove();
+            var datoLLeno = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(2)').html();
+            if(datoLLeno !== ''){//Si la columna 3 de la fial seleccionada esta vacio quiere decir que no existe en BD
+                $.ajax({
+                    type: 'post',
+                    url: 'deleteDatos',
+                    data: {
+                        clave: clave,
+                        tabla: tabla,
+                        num: numReg
+                    },
+                    success: function (response) {
+                        console.log("Respuesta del servidor al borrar de BD: ", response);
+                        if (response === 'tablaJuzgados') {
+                            alert('El Juzgado ' + clave + ' se borro con exito');
+                        }else if(response === 'tablaJuez'){
+                            alert('El Juez ' + clave + ' se borro con exito');
+                        }else if (response === 'causas') {
+                            alert('La causa penal ' + clave + ' se borro con exito');
+                        } else if (response === 'tablaDeli') {
+                            alert('El Delito ' + clave + ' se borro con exito');
+                        } else if (response === 'tablaProcesa') {
+                            alert('El Procesado ' + clave + ' se borro con exito');
+                            //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
+                            $('#tablaInicial tbody tr').eq(pos).remove();
+                            buscaYremplaza(clave, 0);
+                        } else if (response === 'tablaVictimas') {
+                            alert('La Victima ' + clave + ' se borro con exito');
+                        }
+                    },
+                    error: function (response) {
+                        console.log("Respuesta del servidor al borrar: ", response);
+                        alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
+                    }
+                });
+            }
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
@@ -744,7 +803,7 @@ function borraRegistro(clave, posi, tabla, idCampo){
         alert('Se recibe causa: ' + clave + ' ,posi: ' + posi + ' ,tabla: ' + tabla + ',idcampo: ' + idCampo);
         $('#' + tabla + ' tbody tr').eq(posi).remove();
         $(idCampo).val($(idCampo).val() - 1);
-        var numCampo = $(idCampo).val();//dependiendo del id que made sabremos el tamaÃ±o del campo
+        var numCampo = $(idCampo).val();//dependiendo del id que made sabremos el tama�o del campo
         if (clave !== 'sr') {
             $.ajax({
                 type: 'post',

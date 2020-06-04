@@ -42,17 +42,62 @@ public class deleteDatos extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         HttpSession sesion = request.getSession();
+        //Validamos que la causa penal este llena para evitar el error
+        String juzgadoClave = "";
+        if(sesion.getAttribute("juzgadoClave") != null){
+            juzgadoClave = (String)sesion.getAttribute("juzgadoClave");
+        }
         
         String tabla = request.getParameter("tabla");
+        String clave = request.getParameter("clave");
         String num = request.getParameter("num");
+        
+        //Condicion para eliminar Juzgados
+        if(tabla.equals("tablaJuzgados")){
+            System.out.println("Borramos Juez");
+            try{
+                conn.Conectar();
+                sql="DELETE FROM DATOS_JUZGADOS_ADOJC "
+                        + "WHERE JUZGADO_CLAVE = '" + clave + "';";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    out.write("tablaJuzgados");
+                    conn.close();
+                } else {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        //Condicion para eliminar Juez
+        if(tabla.equals("tablaJuez")){
+            System.out.println("Borramos Juez");
+            try{
+                conn.Conectar();
+                sql="DELETE FROM DATOS_JUECES_ADOJC "
+                        + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
+                        + "AND JUEZ_CLAVE = " + clave + ";";
+                System.out.println(sql);
+                if (conn.escribir(sql)) {
+                    out.write("tablaJuez");
+                    conn.close();
+                } else {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(deleteDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         //Condicion para eliminar causas penales
         if(tabla.equals("causas")){
             System.out.println("Borramos Causa Penal");
             try{
-                String causaClave = request.getParameter("clave");
                 conn.Conectar();
-                sql="DELETE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
+                sql="DELETE FROM DATOS_CAUSAS_PENALES_ADOJC "
+                        + "WHERE CAUSA_CLAVE = '" + clave + juzgadoClave.replace("-", "") + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     out.write("causas");
@@ -69,9 +114,9 @@ public class deleteDatos extends HttpServlet {
         if(tabla.equals("tablaDeli")){
             System.out.println("Borramos Delitos");
             try{
-                String clave = request.getParameter("clave");
                 conn.Conectar();
-                sql="DELETE FROM DATOS_DELITOS_ADOJC WHERE DELITO_CLAVE = '" + clave + "'";
+                sql="DELETE FROM DATOS_DELITOS_ADOJC "
+                        + "WHERE DELITO_CLAVE = '" + clave + juzgadoClave.replace("-", "") + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET TOTAL_DELITOS = " + num
@@ -95,9 +140,9 @@ public class deleteDatos extends HttpServlet {
         if(tabla.equals("tablaProcesa")){
             System.out.println("Borramos Procesados");
             try{
-                String clave = request.getParameter("clave");
                 conn.Conectar();
-                sql="DELETE FROM DATOS_PROCESADOS_ADOJC WHERE PROCESADO_CLAVE = '" + clave + "'";
+                sql="DELETE FROM DATOS_PROCESADOS_ADOJC "
+                        + "WHERE PROCESADO_CLAVE = '" + clave + juzgadoClave.replace("-", "") + "'";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET TOTAL_PROCESADOS = " + num
@@ -121,9 +166,9 @@ public class deleteDatos extends HttpServlet {
         if(tabla.equals("tablaVictimas")){
             System.out.println("Borramos Victimas");
             try{
-                String clave = request.getParameter("clave");
                 conn.Conectar();
-                sql="DELETE FROM DATOS_VICTIMAS_ADOJC WHERE VICTIMA_CLAVE = '" + clave + "'";
+                sql="DELETE FROM DATOS_VICTIMAS_ADOJC "
+                        + "WHERE VICTIMA_CLAVE = '" + clave + juzgadoClave.replace("-", "") + "'";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET TOTAL_VICTIMAS = " + num

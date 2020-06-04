@@ -19,7 +19,7 @@ $(document).ready(function () {
             "lengthMenu": "Mostrar _MENU_ registros",
             "loadingRecords": "Cargando...",
             "processing": "Procesando...",
-            "search": "Buscar:",
+            "search": "Buscar No. Asunto:",
             "zeroRecords": "Sin resultados encontrados",
             "paginate": {
                 "first": "Primero",

@@ -45,6 +45,8 @@ public class insrtJuzgados extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession sesion = request.getSession();
         
+        String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
+        String jClaveR = request.getParameter("jClaveR");//Recibimos juzgado clave para el Update
         //Datos Organo Jurisdiccional
         String nomOrgano = request.getParameter("nomOrgano").toUpperCase();
         String numOrgano = request.getParameter("numOrgano");
@@ -89,39 +91,71 @@ public class insrtJuzgados extends HttpServlet {
           
         try {
             conn.Conectar();
-            sql = "INSERT INTO DATOS_JUZGADOS_ADOJC VALUES('" + juzgadoClave + "','" + nomOrgano + "'," + numOrgano + "," + jurisdiccion + ","
-                    + funcionJuz + "," + ladaTel + ",'" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
-                    + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "',"
-                    + noExterior + "," + noInterior + "," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
-                    + ejercicio + ")";
-            System.out.println(sql);
-            if(conn.escribir(sql)){
-                sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
-                        + causasIngresa + "," + mediProteccion + "," + providenPrecauto + "," + pruebaAnti + "," + ordenesJudi + ","
-                        + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW()))"
-                        + ")";
-
+            if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+                sql = "INSERT INTO DATOS_JUZGADOS_ADOJC VALUES('" + juzgadoClave + "','" + nomOrgano + "'," + numOrgano + "," + jurisdiccion + ","
+                        + funcionJuz + "," + ladaTel + ",'" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
+                        + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "',"
+                        + noExterior + "," + noInterior + "," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
+                        + ejercicio + ")";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                    
-                    //inserta un juez no aplica de acuerdo a el juzgado 
-                    sql = "INSERT INTO datos_jueces_adojc  VALUES ("+entidadJ+","+ municipioJ +","+ numOrgano+",'"+ juzgadoClave +"', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
+                    sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                            + causasIngresa + "," + mediProteccion + "," + providenPrecauto + "," + pruebaAnti + "," + ordenesJudi + ","
+                            + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW()))"
+                            + ")";
+
                     System.out.println(sql);
                     if(conn.escribir(sql)){
-                        System.out.println("Juez No aplica insertado!");
+                        //inserta un juez no aplica de acuerdo a el juzgado 
+                        sql = "INSERT INTO DATOS_JUECES_ADJC  VALUES (" + entidadJ + "," + municipioJ + ","
+                                + numOrgano + ",'" + juzgadoClave + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
+                        System.out.println(sql);
+                        if(conn.escribir(sql)){
+                            System.out.println("Juez No aplica insertado!");
+                        }
+
+                        conn.close();
+                        sesion.setAttribute("juzgadoClave", juzgadoClave);
+                        sesion.setMaxInactiveInterval(-1);
+                        response.sendRedirect("causasPenales.jsp");
+                    }else{
+                        conn.close();
+                        response.sendRedirect("capturaJuzgado.jsp?error=100");
                     }
-                    
-                    conn.close();
-                    sesion.setAttribute("juzgadoClave", juzgadoClave);
-                    sesion.setMaxInactiveInterval(-1);
-                    response.sendRedirect("causasPenales.jsp");
                 }else{
                     conn.close();
-                    response.sendRedirect("capturaJuzgado.jsp?error=100");
+                    response.sendRedirect("capturaJuzgado.jsp?error=200");
+                } 
+            }else{//Se actualiza el dato que viene de recuperacion
+                sql = "UPDATE DATOS_JUZGADOS_ADOJC SET JUZGADO_NOMBRE = '" + nomOrgano + "',JUZGADO_JURISDICCION = " + jurisdiccion + ","
+                        + "JUZGADO_FUNCION = " + funcionJuz + ",LADATEL = '" + ladaTel + "',CORREO = '" + correo + "',FORMA_DIVISION = " + fDivision + ","
+                        + "REGION_JUDICIAL = '" + regJudicial + "',DISTRITO_JUDICIAL = '" + distJudicial + "',"
+                        + "PARTIDO_JUDICIAL = '" + partJudicial + "',TIPO_VIALIDAD = " + vialidad + ",NOMBRE_VIALIDAD = '" + nomVialidad + "',"
+                        + "ASENTAMIENTO_HUMANO = " + asentamiento + ",NOMBRE_ASENTAMIENTO = '" + nomAsentamiento + "',NUMERO_EXT = " + noExterior + ","
+                        + "NUMERO_INT = " + noInterior + ",CODIGO_POSTAL = " + cp + ",NOMBRE_CAP = '" + nombreCap + "',"
+                        + "APELLIDOP_CAP = '" + apaternoCap + "',APELLIDOM_CAP = '" + amaternoCap + "',CARGO_CAP = '" + cargo + "' "
+                        + "WHERE JUZGADO_CLAVE = '" + jClaveR + "'; ";
+                System.out.println(sql);
+                if(conn.escribir(sql)){
+                    sql = "UPDATE DATOS_INFORME_ADOJC SET CAUSAS_PENALES_INGRESADAS = " + causasIngresa + ","
+                            + "MEDIDAS_PROTECCION_ASIG = " + mediProteccion + ",PROVIDENCIAS_PRECAUTORIAS = " + providenPrecauto + ","
+                            + "PRUEBA_ANTICIPADA = " + pruebaAnti + ",ORDENES_JUDICIALES = " + ordenesJudi + ","
+                            + "ACTOS_INVESTIGA = " + actosInvestiga + ",IMPUGNACION_MP = " + impugnaMp + ",OTROS = " + otros + ","
+                            + "CAUSAS_TRAMITE = " + causasTram + ",CAUSAS_BAJAS = " + causasBaja + " "
+                            + "WHERE JUZGADO_CLAVE = '" + jClaveR + "';";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        conn.close();
+                        sesion.setMaxInactiveInterval(-1);
+                        response.sendRedirect("juzgados.jsp");
+                    }else{
+                        conn.close();
+                        response.sendRedirect("juzgados.jsp?error=100");
+                    }
+                }else{
+                    conn.close();
+                    response.sendRedirect("juzgados.jsp?error=200");
                 }
-            }else{
-                conn.close();
-                response.sendRedirect("capturaJuzgado.jsp?error=200");
             }
         } catch (SQLException ex) {
             Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);

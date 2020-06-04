@@ -22,8 +22,8 @@
                 }
             }
             
-            showJueces ju = new showJueces();
-            int totJuez = ju.findTotJuez((String) session.getAttribute("juzgadoClave"));
+            showJueces sJuez = new showJueces();
+            int totJuez = sJuez.findTotJuez((String) session.getAttribute("juzgadoClave"));
             
             catalogos cat = new catalogos();
             ArrayList<String[]> lista, juez;
@@ -41,7 +41,6 @@
             String funcionDese = "";
             if(request.getParameter("juezClave") != null){//Si viene el juez clave, recuperamos datos
                 juezClave = Integer.parseInt(request.getParameter("juezClave"));
-                showJueces sJuez = new showJueces();
                 juez = sJuez.findJuezDatos(juezClave, juzgadoClave);
                 if(juez.size() > 0){
                     operacion = "actualizar";
@@ -59,7 +58,7 @@
                 }
             }else{
                 //Si es captura entonces obtenemos el maximo juez para sumarle uno y sea la nueva clave
-                juezClave = ju.findMaxJuez((String) session.getAttribute("juzgadoClave")) + 1;
+                juezClave = sJuez.findMaxJuez((String) session.getAttribute("juzgadoClave")) + 1;
             }
             
         %>

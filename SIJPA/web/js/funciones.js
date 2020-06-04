@@ -147,6 +147,11 @@ $(document).ready(function () {
     });
 
     /***************************** FUNCIONES JUZGADOS *******************************/
+    //para recuperacion de bd
+    if($('#numOrgano').val() !== ''){
+        $('#numOrgano, #entidadJ, #municipioJ').prop('disabled', true);
+    }
+    
     //permite solo numeros en los inputs
     /***
      * 

@@ -13,6 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Juzgados</title>
+        <script type="text/javascript" src="js/fnJuzgados.js"></script>
         <%@include file="librerias.jsp"%>
         <% 
             if(request.getParameter("errorJuzgado") != null){
@@ -298,7 +299,7 @@
                     </table>
                 </div>
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Guardar"/>
+                <input type="submit" name="guardar" id="guardar" value="Guardar" onclick="valida();"/>
             </form>
         </section>
     </body>

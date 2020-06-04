@@ -117,7 +117,7 @@ public class insrtJuzgados extends HttpServlet {
                         conn.close();
                         sesion.setAttribute("juzgadoClave", juzgadoClave);
                         sesion.setMaxInactiveInterval(-1);
-                        response.sendRedirect("causasPenales.jsp");
+                        response.sendRedirect("causasPenales.jsp?insrtJuz=Si");
                     }else{
                         conn.close();
                         response.sendRedirect("capturaJuzgado.jsp?error=100");

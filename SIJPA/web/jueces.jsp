@@ -58,8 +58,7 @@
                     <a href="#" onclick="validaAddJuez();"><img src="img/add.png" title="Agregar Juez"> Agregar Juez</a>
                 </div>
             </form>
-            
-            <table class="tablasRegis">
+            <table class="tablasRegis" id="tablaJuez">
                 <tr>
                     <th>Juez ID</th>
                     <th>Nombre</th>
@@ -79,7 +78,7 @@
                         out.println("<td>" + lsj[3] + "</td>");
                         out.println("<td>" + lsj[4] + "</td>");
                         out.println("<td><a href='capturaJuez.jsp?juezClave=" + lsj[0] + "' class='popJ'><img src='img/editar.png' title='Editar'/></a></td>");
-                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                        out.println("<td><a href='#' class='borrar'><img src='img/delete.png' title='Eliminar'/></a></td>");
                         out.println("</tr>");
                     }
                 %>

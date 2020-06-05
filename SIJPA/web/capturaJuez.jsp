@@ -177,5 +177,14 @@
                 <input type="submit" name="guardar" id="guardar" value="Guardar">
             </form>
         </section>
+        <script text="javascript">
+            $(document).ready(function () {
+                //Se usa para la recuperacion de datos de DB
+                if($('#fGestion').val() === '1899-09-09'){
+                    $('#fGestion').prop('readonly', true);
+                    $('#chkFechaInicioG').prop('checked', true);
+                }
+            });
+        </script>
     </body>
 </html>

@@ -221,20 +221,32 @@ $(document).ready(function () {
                 break;
         }
     });
+    /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
     
+    /************************* Funcion de borrado general *****************************/
+    /***
+    * @param {type} e
+    * @returns {undefined}
+    */
     $('.borrar').click(function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
-        var pos = $(this).closest('tr').index();
-        var tabla = $(this).parents('table').attr('id');
-        var clave = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();
-        var numReg = $('#' +tabla + ' tbody tr').length;
+        var pos = $(this).closest('tr').index();//Obtenemos el indice(posicion) del registro a borrar
+        var tabla = $(this).parents('table').attr('id');//Obtenemos el nombre de la tabla
+        var clave = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();//Obtenemos la clave del registro
+        var numReg = $('#' + tabla + ' tbody tr').length - 1;//Obtenemos el numero de registro despues de borrar el registro
+        if(numReg === 0){
+            var nomTabla = $(this).parents('table').attr('data-nomTabla');
+            alert('La tabla "' + nomTabla + '" no se puede quedar con 0 registros\n' +
+                'Se necesita al menos 1 registro para que las Causas Penales funcionen');
+            return false;
+        }
         var resp = confirm("Realmente deseas eliminar este registro con clave: " + clave);
         if(resp){
+            $(this).closest('tr').remove();//Removemos el registro de su tabla
             alert(pos + ', ' + tabla + ', ' + clave + ', ' + numReg);
-            console.log("Se ruemve: ", clave, ' de la tabla: ', tabla);
-            $(this).closest('tr').remove();
             var datoLLeno = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(2)').html();
+            console.log("Se remuve: ", clave, ' de la tabla: ', tabla);
             if(datoLLeno !== ''){//Si la columna 3 de la fial seleccionada esta vacio quiere decir que no existe en BD
                 $.ajax({
                     type: 'post',
@@ -253,13 +265,16 @@ $(document).ready(function () {
                         }else if (response === 'causas') {
                             alert('La causa penal ' + clave + ' se borro con exito');
                         } else if (response === 'tablaDeli') {
+                            $('#Tdelitos').val(numReg);
                             alert('El Delito ' + clave + ' se borro con exito');
                         } else if (response === 'tablaProcesa') {
-                            alert('El Procesado ' + clave + ' se borro con exito');
+                            $('#Tadolescentes').val(numReg);
                             //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
                             $('#tablaInicial tbody tr').eq(pos).remove();
+                            alert('El Procesado ' + clave + ' se borro con exito');
                             buscaYremplaza(clave, 0);
                         } else if (response === 'tablaVictimas') {
+                            $('#Tvictimas').val(numReg);
                             alert('La Victima ' + clave + ' se borro con exito');
                         }
                     },
@@ -271,7 +286,7 @@ $(document).ready(function () {
             }
         }
     });
-    /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
+    /************************* Funcion de borrado general *****************************/
 });
 
 /******************************FUNCIONES ETAPA INTERMEDIA***************************/
@@ -393,87 +408,6 @@ function llenaMun(idEnt, idMun) {
     }
 }
 /***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************/
-
-/*************************FUNCIONES PARA CAUSA PENALES JO***************************/
-/**
- * 
- * @param {type} idJclave
- * @param {type} idCpen
- * @returns {undefined}
- */
-function llenaCausaJO(idJclave, idCpen) {
-    var juzClave = $(idJclave).val();
-    if (juzClave !== '') {
-        $.ajax({
-            url: "obtenCausaJC",
-            dataType: 'html',
-            type: "post",
-            data: {juzClave: juzClave},
-            success: function (response) {
-                console.log("Respuesta del servidor: ", response);
-            }
-        }).done(function (data) {
-            $(idCpen).html(data);
-        });
-    } else {
-        $(idCpen).empty().append("<option value='0'>--Seleccione--</option>");
-    }
-}
-;
-
-function llenaElementosCPJC(jClave, idCclave, idDeli, idProce, idVic) {
-    var jClaver = $(jClave).val();
-    var causaClave = $(idCclave).val();
-    if (causaClave !== '') {
-        $.ajax({
-            url: "obtenCausaJC",
-            dataType: 'html',
-            type: "post",
-            data: {causaClave: causaClave, jClave: jClaver, bandera: "1"},
-            success: function (response) {
-                console.log("Respuesta del servidor: ", response);
-            }
-        }).done(function (data) {
-            $(idDeli).html(data);
-        });
-    } else {
-        $(idDeli).empty().append("<option value='0'>--Seleccione--</option>");
-    }
-
-    if (causaClave !== '') {
-        $.ajax({
-            url: "obtenCausaJC",
-            dataType: 'html',
-            type: "post",
-            data: {causaClave: causaClave, bandera: "2"},
-            success: function (response) {
-                console.log("Respuesta del servidor: ", response);
-            }
-        }).done(function (data) {
-            $(idProce).html(data);
-        });
-    } else {
-        $(idProce).empty().append("<option value='0'>--Seleccione--</option>");
-    }
-
-    if (causaClave !== '') {
-        $.ajax({
-            url: "obtenCausaJC",
-            dataType: 'html',
-            type: "post",
-            data: {causaClave: causaClave, bandera: "3"},
-            success: function (response) {
-                console.log("Respuesta del servidor: ", response);
-            }
-        }).done(function (data) {
-            $(idVic).html(data);
-        });
-    } else {
-        $(idVic).empty().append("<option value='0'>--Seleccione--</option>");
-    }
-}
-;
-/************************FIN DE FUNCIONES PARA CAUSA PENALES JO*********************/
 
 /****************************** FUNCIONES PROCESADOS ******************************/
 //para respuesta simple, oculta el select contenido en un div
@@ -788,55 +722,11 @@ function buscaYremplazaJO(proceClaveJO, etapaProce){
 }
 /********************* FIN BUSCA Y REMPLAZA PROCESADOS ****************************/
 
-/************************ FUNCIONES PARA DELETE AJAX ******************************/
-/**
+/***
  * 
- * @param {type} clave
- * @param {type} posi
- * @param {type} tabla
- * @param {type} idCampo
+ * @param {type} Ocurr
  * @returns {undefined}
  */
-function borraRegistro(clave, posi, tabla, idCampo){
-    var resp = confirm("Realmente deseas eliminar este registro de JC?");
-    if (resp) {
-        alert('Se recibe causa: ' + clave + ' ,posi: ' + posi + ' ,tabla: ' + tabla + ',idcampo: ' + idCampo);
-        $('#' + tabla + ' tbody tr').eq(posi).remove();
-        $(idCampo).val($(idCampo).val() - 1);
-        var numCampo = $(idCampo).val();//dependiendo del id que made sabremos el tamaño del campo
-        if (clave !== 'sr') {
-            $.ajax({
-                type: 'post',
-                url: 'deleteDatos',
-                data: {
-                    clave: clave,
-                    tabla: tabla,
-                    num: numCampo
-                },
-                success: function (response) {
-                    console.log("Respuesta del servidor al borrar: ", response);
-                    if (response === 'causas') {
-                        alert('La causa penal ' + clave + ' borro con exito');
-                    } else if (response === 'tablaDeli') {
-                        alert('El Delito ' + clave + ' se borro con exito');
-                    } else if (response === 'tablaProcesa') {
-                        alert('El Procesado ' + clave + ' se borro con exito');
-                        //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
-                        $('#tablaInicial tbody tr').eq(posi).remove();
-                        buscaYremplaza(clave, 0);
-                    } else if (response === 'tablaVictimas') {
-                        alert('La Victima ' + clave + ' se borro con exito');
-                    }
-                },
-                error: function (response) {
-                    console.log("Respuesta del servidor al borrar: ", response);
-                    alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
-                }
-            });
-        }
-    }
-}
-/*----------------------- FIN FUNCIONES PARA DELETE AJAX --------------------------*/
 function VFechaOcurrencia(Ocurr) {
     var fechaOcurren = $(Ocurr).val();
     if (fechaOcurren !== '') {

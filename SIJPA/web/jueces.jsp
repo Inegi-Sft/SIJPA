@@ -58,7 +58,7 @@
                     <a href="#" onclick="validaAddJuez();"><img src="img/add.png" title="Agregar Juez"> Agregar Juez</a>
                 </div>
             </form>
-            <table class="tablasRegis" id="tablaJuez">
+            <table class="tablasRegis" id="tablaJuez" data-nomTabla="Jueces">
                 <tr>
                     <th>Juez ID</th>
                     <th>Nombre</th>

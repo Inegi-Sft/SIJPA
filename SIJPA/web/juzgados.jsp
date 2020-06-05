@@ -29,7 +29,7 @@
             </div>
             <h1>Órganos Jurisdiccionales</h1>
             <a href="capturaJuzgado.jsp" class="addJuz"><img src="img/add.png" title="Agregar Órgano"> Agregar Órgano</a>
-            <table class="tablasRegis" id="tablaJuzgados">
+            <table class="tablasRegis" id="tablaJuzgados" data-nomTabla="Juzgados">
                 <thead>
                     <tr>
                         <th>Juzgado Clave</th>

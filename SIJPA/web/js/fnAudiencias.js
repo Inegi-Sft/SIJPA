@@ -1,15 +1,4 @@
 $(document).ready(function () {
-    /*----------------Cabecera despliega cerrar cesion------------------------*/
-    $('#usu img').click(function () {
-        $('#usu #enlace').animate({
-            right: "0",
-            width: "toggle",
-            opacity: "toggle"
-        }, 800);
-    });
-    
-    $(".load").fadeOut("slow");//proceso de carga para causas penales
-
     //Establece am pata input time y no marque error en el submit
     $('.tiempo').prop({'min': '00:01', 'max': '11:59'});
     

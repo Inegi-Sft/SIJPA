@@ -64,7 +64,7 @@
             </div>
             <div id="p2" class="pestanaContent">
                 <h2>Delitos</h2>
-                <table class="tablasRegis" id="tablaDeli">
+                <table class="tablasRegis" id="tablaDeli" data-nomTabla="Delitos">
                     <thead>
                         <tr>
                             <th>Delito clave</th>
@@ -117,7 +117,7 @@
             </div>
             <div id="p3" class="pestanaContent">
                 <h2>Adolescentes</h2>
-                <table class="tablasRegis" id="tablaProcesa">
+                <table class="tablasRegis" id="tablaProcesa" data-nomTabla="Adolescentes">
                     <thead> 
                         <tr>
                             <th>Adolescente clave</th>
@@ -167,7 +167,7 @@
             </div>
             <div id="p4" class="pestanaContent">
                 <h2>Victimas</h2>
-                <table class="tablasRegis" id="tablaVictimas">
+                <table class="tablasRegis" id="tablaVictimas" data-nomTabla="Victimas">
                     <thead> 
                         <tr>
                             <th>Victima clave</th>

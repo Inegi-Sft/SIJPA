@@ -41,7 +41,8 @@ public class showJuzgados {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC ORDER BY 1;";
+            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                    + "WHERE ESTATUS = 1 ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 lista.add(rs.getString(1));
@@ -69,15 +70,18 @@ public class showJuzgados {
         try {
             conn.Conectar();
             listaTabla = new ArrayList<>();
-            sql = "SELECT JUZGADO_CLAVE,JUZGADO_NOMBRE,JUZGADO_NUMERO,JUZGADO_JURISDICCION,ENTIDAD,MUNICIPIO "
+            sql = "SELECT DJ.JUZGADO_CLAVE, DJ.JUZGADO_NOMBRE, DJ.JUZGADO_NUMERO, CJ.DESCRIPCION, CEN.DESCRIPCION, CM.DESCRIPCION, CE.DESCRIPCION "
                     + "FROM DATOS_JUZGADOS_ADOJC DJ "
-                    + "JOIN CATALOGOS_JURISDICCION CJ "
-                    + "ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "
+                    + "JOIN CATALOGOS_JURISDICCION CJ ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "
+                    + "JOIN CATALOGOS_ENTIDADES CEN ON DJ.ENTIDAD = CEN.ENTIDAD_ID "
+                    + "JOIN CATALOGOS_MUNICIPIOS CM ON DJ.MUNICIPIO = CM.MUNICIPIO_ID "
+                    + "JOIN CATALOGOS_ESTATUS CE ON DJ.ESTATUS = CE.ESTATUS_ID "
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 listaTabla.add(new String[]{
-                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),
+                    rs.getString(7)
                 });
             }
             conn.close();

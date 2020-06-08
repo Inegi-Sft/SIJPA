@@ -69,7 +69,7 @@ public class insrtJuez extends HttpServlet {
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + entidad + "," + mun + "," + num + ",'" + juzgadoClave + "'," + juezID + ",'"
                         + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + ","
-                        + estudioJuez + "," + funcionJuez + ",(select YEAR(NOW()))"
+                        + estudioJuez + "," + funcionJuez + ",1,(select YEAR(NOW()))"
                         + ")";
                 if(conn.escribir(sql)){
                     conn.close();

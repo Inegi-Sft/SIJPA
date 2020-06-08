@@ -241,10 +241,10 @@ $(document).ready(function () {
                 'Se necesita al menos 1 registro para que las Causas Penales funcionen');
             return false;
         }
-        var resp = confirm("Realmente deseas eliminar este registro con clave: " + clave);
+        var resp = confirm("Realmente deseas eliminar este registro con clave: " + clave + "?");
         if(resp){
             $(this).closest('tr').remove();//Removemos el registro de su tabla
-            alert(pos + ', ' + tabla + ', ' + clave + ', ' + numReg);
+            //alert(pos + ', ' + tabla + ', ' + clave + ', ' + numReg);
             var datoLLeno = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(2)').html();
             console.log("Se remuve: ", clave, ' de la tabla: ', tabla);
             if(datoLLeno !== ''){//Si la columna 3 de la fial seleccionada esta vacio quiere decir que no existe en BD
@@ -286,7 +286,48 @@ $(document).ready(function () {
             }
         }
     });
-    /************************* Funcion de borrado general *****************************/
+    /************************* Fin Funcion de borrado general *****************************/
+    
+    /************************* Funcion de Actualizado *****************************/
+    
+    $('.estatus').click(function(){
+        var pos = $(this).closest('tr').index();//Obtenemos el indice(posicion) del registro a borrar
+        var tabla = $(this).parents('table').attr('id');//Obtenemos el nombre de la tabla
+        var clave = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();//Obtenemos la clave del registro
+        var valorEs = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(6)').html();//Obtenemos el estatus
+        var resp = confirm('Desea cambiar el estatus del Juzgado: ' + clave + '?');
+        if(resp){
+            console.log('Cambiamos el estatus al contrario de: ', valorEs);
+            if(valorEs === 'Inactivo'){
+                $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(6)').html('Activo');//Cambiamos el estatus a 1
+                //alert('Estatus a: 1');
+            }else{
+                $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(6)').html('Inactivo');//Cambiamos el estatus a 0
+                //alert('Estatus a: 0');
+            }
+            $.ajax({
+                type: 'post',
+                url: 'estatusDatos',
+                data: {
+                    clave: clave,
+                    tabla: tabla,
+                    valorEs: valorEs
+                },
+                success: function (response) {
+                    if (response === 'tablaJuzgados') {
+                        //alert('El jUZGADO ' + clave + ' se cambio su estatus con exito');
+                    }else if(response === 'tablaJuez'){
+                        //alert('El Juez ' + clave + ' se cambio su estatus con exito');
+                    }
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor al borrar: ", response);
+                    alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
+                }
+            });
+        }
+    });
+    /************************* Fin Funcion de Actualizado *****************************/
 });
 
 /******************************FUNCIONES ETAPA INTERMEDIA***************************/

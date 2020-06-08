@@ -107,7 +107,10 @@ public class showAudiencias {
     public ArrayList findJueces(String juzgado) {
         conn.Conectar();
         lista = new ArrayList<>();
-        sql = "SELECT * FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' AND JUEZ_CLAVE <> -2 ORDER BY APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ";	
+        sql = "SELECT * FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' "
+                + "AND JUEZ_CLAVE <> -2 "
+                + "AND ESTATUS = 1 "
+                + "ORDER BY APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ";	
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

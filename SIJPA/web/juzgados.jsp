@@ -28,7 +28,9 @@
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>Órganos Jurisdiccionales</h1>
-            <a href="capturaJuzgado.jsp" class="addJuz"><img src="img/add.png" title="Agregar Órgano"> Agregar Órgano</a>
+            <a href="capturaJuzgado.jsp" class="addJuz">
+                <img src="img/add.png" title="Agregar Órgano"> Agregar Órgano
+            </a>
             <table class="tablasRegis" id="tablaJuzgados" data-nomTabla="Juzgados">
                 <thead>
                     <tr>
@@ -38,8 +40,9 @@
                         <th>Jurisdicción</th>
                         <th>Entidad</th>
                         <th>Municipio</th>
+                        <th>Estatus</th>
                         <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Cmabiar Estatus</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,8 +56,9 @@
                         out.println("<td>" + lsj[3] + "</td>");
                         out.println("<td>" + lsj[4] + "</td>");
                         out.println("<td>" + lsj[5] + "</td>");
+                        out.println("<td>" + lsj[6] + "</td>");
                         out.println("<td><a href='capturaJuzgado.jsp?claveJuz=" + lsj[0] + "' class='popJ'><img src='img/editar.png' title='Editar'/></a></td>");
-                        out.println("<td><a href='#' class='borrar' id='borraJuzgado'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                        out.println("<td><a href='#' class='estatus' id='borraJuzgado'><img src='img/delete.png' title='Eliminar'/></a></td>");
                         out.println("</tr>");
                     }
                 %>

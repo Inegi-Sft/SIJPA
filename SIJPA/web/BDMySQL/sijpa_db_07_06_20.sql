@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2020 a las 20:26:05
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Tiempo de generación: 08-06-2020 a las 06:47:50
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,19 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ACUERDO_REPARATORIO`
+-- Estructura de tabla para la tabla `catalogos_acuerdo_reparatorio`
 --
 
-CREATE TABLE `CATALOGOS_ACUERDO_REPARATORIO` (
+CREATE TABLE `catalogos_acuerdo_reparatorio` (
   `AREPARATORIO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(70) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ACUERDO_REPARATORIO`
+-- Volcado de datos para la tabla `catalogos_acuerdo_reparatorio`
 --
 
-INSERT INTO `CATALOGOS_ACUERDO_REPARATORIO` (`AREPARATORIO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_acuerdo_reparatorio` (`AREPARATORIO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Mediación'),
 (2, 'Reunión de la víctima con la persona adolescente'),
@@ -49,19 +49,19 @@ INSERT INTO `CATALOGOS_ACUERDO_REPARATORIO` (`AREPARATORIO_ID`, `DESCRIPCION`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ALFABETISMO`
+-- Estructura de tabla para la tabla `catalogos_alfabetismo`
 --
 
-CREATE TABLE `CATALOGOS_ALFABETISMO` (
+CREATE TABLE `catalogos_alfabetismo` (
   `ALFABETISMO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ALFABETISMO`
+-- Volcado de datos para la tabla `catalogos_alfabetismo`
 --
 
-INSERT INTO `CATALOGOS_ALFABETISMO` (`ALFABETISMO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_alfabetismo` (`ALFABETISMO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Sabe leer y escribir'),
 (2, 'No sabe leer y escri'),
@@ -70,19 +70,19 @@ INSERT INTO `CATALOGOS_ALFABETISMO` (`ALFABETISMO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ASENTAMIENTO_HUMANO`
+-- Estructura de tabla para la tabla `catalogos_asentamiento_humano`
 --
 
-CREATE TABLE `CATALOGOS_ASENTAMIENTO_HUMANO` (
+CREATE TABLE `catalogos_asentamiento_humano` (
   `ASENTAMIENTO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ASENTAMIENTO_HUMANO`
+-- Volcado de datos para la tabla `catalogos_asentamiento_humano`
 --
 
-INSERT INTO `CATALOGOS_ASENTAMIENTO_HUMANO` (`ASENTAMIENTO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_asentamiento_humano` (`ASENTAMIENTO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Aeropuerto'),
 (2, 'Ampliación'),
@@ -129,19 +129,19 @@ INSERT INTO `CATALOGOS_ASENTAMIENTO_HUMANO` (`ASENTAMIENTO_ID`, `DESCRIPCION`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_AUDIENCIAS_INTERMEDIA`
+-- Estructura de tabla para la tabla `catalogos_audiencias_intermedia`
 --
 
-CREATE TABLE `CATALOGOS_AUDIENCIAS_INTERMEDIA` (
+CREATE TABLE `catalogos_audiencias_intermedia` (
   `AUDIENCIA_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_AUDIENCIAS_INTERMEDIA`
+-- Volcado de datos para la tabla `catalogos_audiencias_intermedia`
 --
 
-INSERT INTO `CATALOGOS_AUDIENCIAS_INTERMEDIA` (`AUDIENCIA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_audiencias_intermedia` (`AUDIENCIA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Audiencias de prueba anticipada'),
 (2, 'Audiencias de acumulación de procesos'),
@@ -158,19 +158,19 @@ INSERT INTO `CATALOGOS_AUDIENCIAS_INTERMEDIA` (`AUDIENCIA_ID`, `DESCRIPCION`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_AUDIENCIAS_INVESTIGACION`
+-- Estructura de tabla para la tabla `catalogos_audiencias_investigacion`
 --
 
-CREATE TABLE `CATALOGOS_AUDIENCIAS_INVESTIGACION` (
+CREATE TABLE `catalogos_audiencias_investigacion` (
   `AUDIENCIA_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_AUDIENCIAS_INVESTIGACION`
+-- Volcado de datos para la tabla `catalogos_audiencias_investigacion`
 --
 
-INSERT INTO `CATALOGOS_AUDIENCIAS_INVESTIGACION` (`AUDIENCIA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_audiencias_investigacion` (`AUDIENCIA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Audiencias relacionadas con la competencia'),
 (2, 'Audiencias relacionadas con técnicas de investigación'),
@@ -199,19 +199,19 @@ INSERT INTO `CATALOGOS_AUDIENCIAS_INVESTIGACION` (`AUDIENCIA_ID`, `DESCRIPCION`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_AUDIENCIAS_JUICIOORAL`
+-- Estructura de tabla para la tabla `catalogos_audiencias_juiciooral`
 --
 
-CREATE TABLE `CATALOGOS_AUDIENCIAS_JUICIOORAL` (
+CREATE TABLE `catalogos_audiencias_juiciooral` (
   `AUDIENCIA_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_AUDIENCIAS_JUICIOORAL`
+-- Volcado de datos para la tabla `catalogos_audiencias_juiciooral`
 --
 
-INSERT INTO `CATALOGOS_AUDIENCIAS_JUICIOORAL` (`AUDIENCIA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_audiencias_juiciooral` (`AUDIENCIA_ID`, `DESCRIPCION`) VALUES
 (1, 'Audiencias relacionadas con la competencia'),
 (2, 'Audiencias de desistimiento de la acción penal'),
 (3, 'Audiencias de medida cautelar (revisión)'),
@@ -224,19 +224,19 @@ INSERT INTO `CATALOGOS_AUDIENCIAS_JUICIOORAL` (`AUDIENCIA_ID`, `DESCRIPCION`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_AUTO_VINCULACION`
+-- Estructura de tabla para la tabla `catalogos_auto_vinculacion`
 --
 
-CREATE TABLE `CATALOGOS_AUTO_VINCULACION` (
+CREATE TABLE `catalogos_auto_vinculacion` (
   `AUTO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_AUTO_VINCULACION`
+-- Volcado de datos para la tabla `catalogos_auto_vinculacion`
 --
 
-INSERT INTO `CATALOGOS_AUTO_VINCULACION` (`AUTO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_auto_vinculacion` (`AUTO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Vinculación a proceso'),
 (2, 'No vinculación a proceso'),
@@ -245,19 +245,19 @@ INSERT INTO `CATALOGOS_AUTO_VINCULACION` (`AUTO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CALIFICACION_DELITO`
+-- Estructura de tabla para la tabla `catalogos_calificacion_delito`
 --
 
-CREATE TABLE `CATALOGOS_CALIFICACION_DELITO` (
+CREATE TABLE `catalogos_calificacion_delito` (
   `CALIFICACION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CALIFICACION_DELITO`
+-- Volcado de datos para la tabla `catalogos_calificacion_delito`
 --
 
-INSERT INTO `CATALOGOS_CALIFICACION_DELITO` (`CALIFICACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_calificacion_delito` (`CALIFICACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Grave'),
 (2, 'No grave'),
@@ -266,19 +266,19 @@ INSERT INTO `CATALOGOS_CALIFICACION_DELITO` (`CALIFICACION_ID`, `DESCRIPCION`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CAUSA_SUSPENCION`
+-- Estructura de tabla para la tabla `catalogos_causa_suspencion`
 --
 
-CREATE TABLE `CATALOGOS_CAUSA_SUSPENCION` (
+CREATE TABLE `catalogos_causa_suspencion` (
   `CSUSPENSION_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(85) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CAUSA_SUSPENCION`
+-- Volcado de datos para la tabla `catalogos_causa_suspencion`
 --
 
-INSERT INTO `CATALOGOS_CAUSA_SUSPENCION` (`CSUSPENSION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_causa_suspencion` (`CSUSPENSION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'El imputado se sustrajo de la acción de la justicia'),
 (2, 'Falta de cumplimiento de requisitos de procedibilidad para la persecución del delito'),
@@ -289,19 +289,19 @@ INSERT INTO `CATALOGOS_CAUSA_SUSPENCION` (`CSUSPENSION_ID`, `DESCRIPCION`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CLASIFICACION`
+-- Estructura de tabla para la tabla `catalogos_clasificacion`
 --
 
-CREATE TABLE `CATALOGOS_CLASIFICACION` (
+CREATE TABLE `catalogos_clasificacion` (
   `CLASIFICACION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CLASIFICACION`
+-- Volcado de datos para la tabla `catalogos_clasificacion`
 --
 
-INSERT INTO `CATALOGOS_CLASIFICACION` (`CLASIFICACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_clasificacion` (`CLASIFICACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Instantáneo '),
 (2, 'Permanente'),
@@ -311,10 +311,10 @@ INSERT INTO `CATALOGOS_CLASIFICACION` (`CLASIFICACION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CODIGO_NORMA`
+-- Estructura de tabla para la tabla `catalogos_codigo_norma`
 --
 
-CREATE TABLE `CATALOGOS_CODIGO_NORMA` (
+CREATE TABLE `catalogos_codigo_norma` (
   `ID_CODIGO` int(3) NOT NULL,
   `CODIGO` varchar(300) COLLATE utf8_bin NOT NULL,
   `NORMA` int(3) NOT NULL,
@@ -323,10 +323,10 @@ CREATE TABLE `CATALOGOS_CODIGO_NORMA` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CODIGO_NORMA`
+-- Volcado de datos para la tabla `catalogos_codigo_norma`
 --
 
-INSERT INTO `CATALOGOS_CODIGO_NORMA` (`ID_CODIGO`, `CODIGO`, `NORMA`, `ID_2018`, `NORMA_2018`) VALUES
+INSERT INTO `catalogos_codigo_norma` (`ID_CODIGO`, `CODIGO`, `NORMA`, `ID_2018`, `NORMA_2018`) VALUES
 (-2, 'No aplica', 0, 0, 0),
 (1, 'Homicidio', 1, 364, 27),
 (2, 'Homicidio agravado por razón de parentesco no consanguíneo', 1, 365, 27),
@@ -1047,7 +1047,7 @@ INSERT INTO `CATALOGOS_CODIGO_NORMA` (`ID_CODIGO`, `CODIGO`, `NORMA`, `ID_2018`,
 (717, 'Generar emisiones de energía térmica o lumínica, olores, ruidos o vibraciones que dañen la salud pública, el ecosistema o sus componentes', 129, 0, 0),
 (718, 'Realización de actividades riesgosas en contra de la ecología', 129, 591, 9),
 (719, 'Realizar el cambio de uso de suelo en un área natural protegida o área de valor ambiental', 129, 594, 9);
-INSERT INTO `CATALOGOS_CODIGO_NORMA` (`ID_CODIGO`, `CODIGO`, `NORMA`, `ID_2018`, `NORMA_2018`) VALUES
+INSERT INTO `catalogos_codigo_norma` (`ID_CODIGO`, `CODIGO`, `NORMA`, `ID_2018`, `NORMA_2018`) VALUES
 (720, 'Contra el ambiente, los recursos naturales, la gestión ambiental y la protección a la fauna', 130, 160, 9),
 (721, 'Contra el medio ambiente', 130, 167, 9),
 (722, 'Contra la ecología', 130, 177, 9),
@@ -1243,19 +1243,19 @@ INSERT INTO `CATALOGOS_CODIGO_NORMA` (`ID_CODIGO`, `CODIGO`, `NORMA`, `ID_2018`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CONCURSO`
+-- Estructura de tabla para la tabla `catalogos_concurso`
 --
 
-CREATE TABLE `CATALOGOS_CONCURSO` (
+CREATE TABLE `catalogos_concurso` (
   `CONCURSO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CONCURSO`
+-- Volcado de datos para la tabla `catalogos_concurso`
 --
 
-INSERT INTO `CATALOGOS_CONCURSO` (`CONCURSO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_concurso` (`CONCURSO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Ideal'),
 (2, 'Real'),
@@ -1264,19 +1264,19 @@ INSERT INTO `CATALOGOS_CONCURSO` (`CONCURSO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CONDICION_ACTIVIDAD`
+-- Estructura de tabla para la tabla `catalogos_condicion_actividad`
 --
 
-CREATE TABLE `CATALOGOS_CONDICION_ACTIVIDAD` (
+CREATE TABLE `catalogos_condicion_actividad` (
   `CONDICIONA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CONDICION_ACTIVIDAD`
+-- Volcado de datos para la tabla `catalogos_condicion_actividad`
 --
 
-INSERT INTO `CATALOGOS_CONDICION_ACTIVIDAD` (`CONDICIONA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_condicion_actividad` (`CONDICIONA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Estaba buscando trabajo'),
 (2, 'Se dedicaba a apoyar con los quehaceres del hogar y/o al cuidado de niños o personas dependientes'),
@@ -1289,19 +1289,19 @@ INSERT INTO `CATALOGOS_CONDICION_ACTIVIDAD` (`CONDICIONA_ID`, `DESCRIPCION`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CONDICION_ESTUDIANTE`
+-- Estructura de tabla para la tabla `catalogos_condicion_estudiante`
 --
 
-CREATE TABLE `CATALOGOS_CONDICION_ESTUDIANTE` (
+CREATE TABLE `catalogos_condicion_estudiante` (
   `CONDICIONE_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(40) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CONDICION_ESTUDIANTE`
+-- Volcado de datos para la tabla `catalogos_condicion_estudiante`
 --
 
-INSERT INTO `CATALOGOS_CONDICION_ESTUDIANTE` (`CONDICIONE_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_condicion_estudiante` (`CONDICIONE_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Se encontraba estudiando'),
 (2, 'No se encontraba estudiando'),
@@ -1310,19 +1310,19 @@ INSERT INTO `CATALOGOS_CONDICION_ESTUDIANTE` (`CONDICIONE_ID`, `DESCRIPCION`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CONSUMACION`
+-- Estructura de tabla para la tabla `catalogos_consumacion`
 --
 
-CREATE TABLE `CATALOGOS_CONSUMACION` (
+CREATE TABLE `catalogos_consumacion` (
   `CONSUMACION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CONSUMACION`
+-- Volcado de datos para la tabla `catalogos_consumacion`
 --
 
-INSERT INTO `CATALOGOS_CONSUMACION` (`CONSUMACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_consumacion` (`CONSUMACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Consumado'),
 (2, 'Tentativa'),
@@ -1331,19 +1331,19 @@ INSERT INTO `CATALOGOS_CONSUMACION` (`CONSUMACION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_CONTEXTO_SITUACIONAL`
+-- Estructura de tabla para la tabla `catalogos_contexto_situacional`
 --
 
-CREATE TABLE `CATALOGOS_CONTEXTO_SITUACIONAL` (
+CREATE TABLE `catalogos_contexto_situacional` (
   `CONTEXTO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(255) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_CONTEXTO_SITUACIONAL`
+-- Volcado de datos para la tabla `catalogos_contexto_situacional`
 --
 
-INSERT INTO `CATALOGOS_CONTEXTO_SITUACIONAL` (`CONTEXTO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_contexto_situacional` (`CONTEXTO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Relacionado con grupos de la delincuencia organizada'),
 (2, 'Relacionado con pandillas'),
@@ -1361,19 +1361,19 @@ INSERT INTO `CATALOGOS_CONTEXTO_SITUACIONAL` (`CONTEXTO_ID`, `DESCRIPCION`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_COSA_ROBADA`
+-- Estructura de tabla para la tabla `catalogos_cosa_robada`
 --
 
-CREATE TABLE `CATALOGOS_COSA_ROBADA` (
+CREATE TABLE `catalogos_cosa_robada` (
   `COSA_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(255) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_COSA_ROBADA`
+-- Volcado de datos para la tabla `catalogos_cosa_robada`
 --
 
-INSERT INTO `CATALOGOS_COSA_ROBADA` (`COSA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_cosa_robada` (`COSA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Cableado o instalación de cobre'),
 (2, 'Mobiliario'),
@@ -1391,20 +1391,20 @@ INSERT INTO `CATALOGOS_COSA_ROBADA` (`COSA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_DELITOS_NORMA`
+-- Estructura de tabla para la tabla `catalogos_delitos_norma`
 --
 
-CREATE TABLE `CATALOGOS_DELITOS_NORMA` (
+CREATE TABLE `catalogos_delitos_norma` (
   `ID_DELITO` int(3) NOT NULL,
   `JURIDICO` int(1) NOT NULL,
   `DELITO` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_DELITOS_NORMA`
+-- Volcado de datos para la tabla `catalogos_delitos_norma`
 --
 
-INSERT INTO `CATALOGOS_DELITOS_NORMA` (`ID_DELITO`, `JURIDICO`, `DELITO`) VALUES
+INSERT INTO `catalogos_delitos_norma` (`ID_DELITO`, `JURIDICO`, `DELITO`) VALUES
 (-2, -2, 'No aplica'),
 (1, 1, 'Homicidio'),
 (2, 1, 'Feminicidio'),
@@ -1559,19 +1559,19 @@ INSERT INTO `CATALOGOS_DELITOS_NORMA` (`ID_DELITO`, `JURIDICO`, `DELITO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_DOMINIO_ESPANOL`
+-- Estructura de tabla para la tabla `catalogos_dominio_espanol`
 --
 
-CREATE TABLE `CATALOGOS_DOMINIO_ESPANOL` (
+CREATE TABLE `catalogos_dominio_espanol` (
   `DOMINIO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_DOMINIO_ESPANOL`
+-- Volcado de datos para la tabla `catalogos_dominio_espanol`
 --
 
-INSERT INTO `CATALOGOS_DOMINIO_ESPANOL` (`DOMINIO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_dominio_espanol` (`DOMINIO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Habla español'),
 (2, 'No habla español'),
@@ -1580,19 +1580,40 @@ INSERT INTO `CATALOGOS_DOMINIO_ESPANOL` (`DOMINIO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ENTIDADES`
+-- Estructura de tabla para la tabla `catalogos_ejercicios`
 --
 
-CREATE TABLE `CATALOGOS_ENTIDADES` (
+CREATE TABLE `catalogos_ejercicios` (
+  `EJERCICIO_ID` int(4) NOT NULL,
+  `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `catalogos_ejercicios`
+--
+
+INSERT INTO `catalogos_ejercicios` (`EJERCICIO_ID`, `DESCRIPCION`) VALUES
+(2017, '2017'),
+(2018, '2018'),
+(2019, '2019'),
+(2020, '2020');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catalogos_entidades`
+--
+
+CREATE TABLE `catalogos_entidades` (
   `ENTIDAD_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ENTIDADES`
+-- Volcado de datos para la tabla `catalogos_entidades`
 --
 
-INSERT INTO `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_entidades` (`ENTIDAD_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Aguascalientes'),
 (2, 'Baja California'),
@@ -1631,19 +1652,19 @@ INSERT INTO `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ESTADO_CIVIL`
+-- Estructura de tabla para la tabla `catalogos_estado_civil`
 --
 
-CREATE TABLE `CATALOGOS_ESTADO_CIVIL` (
+CREATE TABLE `catalogos_estado_civil` (
   `ESTADO_CIVIL_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(40) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ESTADO_CIVIL`
+-- Volcado de datos para la tabla `catalogos_estado_civil`
 --
 
-INSERT INTO `CATALOGOS_ESTADO_CIVIL` (`ESTADO_CIVIL_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_estado_civil` (`ESTADO_CIVIL_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Casado(a)'),
 (2, 'Unión Libre'),
@@ -1659,19 +1680,19 @@ INSERT INTO `CATALOGOS_ESTADO_CIVIL` (`ESTADO_CIVIL_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ESTADO_PSICOFISICO`
+-- Estructura de tabla para la tabla `catalogos_estado_psicofisico`
 --
 
-CREATE TABLE `CATALOGOS_ESTADO_PSICOFISICO` (
+CREATE TABLE `catalogos_estado_psicofisico` (
   `ESTADO_PSICO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ESTADO_PSICOFISICO`
+-- Volcado de datos para la tabla `catalogos_estado_psicofisico`
 --
 
-INSERT INTO `CATALOGOS_ESTADO_PSICOFISICO` (`ESTADO_PSICO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_estado_psicofisico` (`ESTADO_PSICO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'En pleno uso de sus facultades mentales'),
 (2, 'Ebrio'),
@@ -1682,19 +1703,38 @@ INSERT INTO `CATALOGOS_ESTADO_PSICOFISICO` (`ESTADO_PSICO_ID`, `DESCRIPCION`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ESTATUSJO`
+-- Estructura de tabla para la tabla `catalogos_estatus`
 --
 
-CREATE TABLE `CATALOGOS_ESTATUSJO` (
+CREATE TABLE `catalogos_estatus` (
+  `ESTATUS_ID` int(1) NOT NULL,
+  `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `catalogos_estatus`
+--
+
+INSERT INTO `catalogos_estatus` (`ESTATUS_ID`, `DESCRIPCION`) VALUES
+(0, 'Inactivo'),
+(1, 'Activo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catalogos_estatusjo`
+--
+
+CREATE TABLE `catalogos_estatusjo` (
   `ESTATUS_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ESTATUSJO`
+-- Volcado de datos para la tabla `catalogos_estatusjo`
 --
 
-INSERT INTO `CATALOGOS_ESTATUSJO` (`ESTATUS_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_estatusjo` (`ESTATUS_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'En continuación de la audiencia de juicio oral'),
 (2, 'En receso para deliberar el fallo'),
@@ -1705,19 +1745,19 @@ INSERT INTO `CATALOGOS_ESTATUSJO` (`ESTATUS_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ESTUDIO_PROFESIONAL`
+-- Estructura de tabla para la tabla `catalogos_estudio_profesional`
 --
 
-CREATE TABLE `CATALOGOS_ESTUDIO_PROFESIONAL` (
+CREATE TABLE `catalogos_estudio_profesional` (
   `ESTUDIO_PRO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ESTUDIO_PROFESIONAL`
+-- Volcado de datos para la tabla `catalogos_estudio_profesional`
 --
 
-INSERT INTO `CATALOGOS_ESTUDIO_PROFESIONAL` (`ESTUDIO_PRO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_estudio_profesional` (`ESTUDIO_PRO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Licenciatura'),
 (2, 'Especialidad'),
@@ -1729,19 +1769,19 @@ INSERT INTO `CATALOGOS_ESTUDIO_PROFESIONAL` (`ESTUDIO_PRO_ID`, `DESCRIPCION`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ETAPAS`
+-- Estructura de tabla para la tabla `catalogos_etapas`
 --
 
-CREATE TABLE `CATALOGOS_ETAPAS` (
+CREATE TABLE `catalogos_etapas` (
   `ETAPA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ETAPAS`
+-- Volcado de datos para la tabla `catalogos_etapas`
 --
 
-INSERT INTO `CATALOGOS_ETAPAS` (`ETAPA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_etapas` (`ETAPA_ID`, `DESCRIPCION`) VALUES
 (0, 'Nuevo'),
 (1, 'Intermedia'),
 (2, 'Conclusiones'),
@@ -1754,19 +1794,19 @@ INSERT INTO `CATALOGOS_ETAPAS` (`ETAPA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ETAPA_INICIAL`
+-- Estructura de tabla para la tabla `catalogos_etapa_inicial`
 --
 
-CREATE TABLE `CATALOGOS_ETAPA_INICIAL` (
+CREATE TABLE `catalogos_etapa_inicial` (
   `INICIAL_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(60) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ETAPA_INICIAL`
+-- Volcado de datos para la tabla `catalogos_etapa_inicial`
 --
 
-INSERT INTO `CATALOGOS_ETAPA_INICIAL` (`INICIAL_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_etapa_inicial` (`INICIAL_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Detención ilegal'),
 (2, 'No vinculación a proceso'),
@@ -1778,19 +1818,19 @@ INSERT INTO `CATALOGOS_ETAPA_INICIAL` (`INICIAL_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ETAPA_INTERMEDIA`
+-- Estructura de tabla para la tabla `catalogos_etapa_intermedia`
 --
 
-CREATE TABLE `CATALOGOS_ETAPA_INTERMEDIA` (
+CREATE TABLE `catalogos_etapa_intermedia` (
   `INTERMEDIA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(60) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ETAPA_INTERMEDIA`
+-- Volcado de datos para la tabla `catalogos_etapa_intermedia`
 --
 
-INSERT INTO `CATALOGOS_ETAPA_INTERMEDIA` (`INTERMEDIA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_etapa_intermedia` (`INTERMEDIA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Audiencia intermedia'),
 (2, 'Suspensión condicional del proceso por cumplimentar'),
@@ -1800,19 +1840,19 @@ INSERT INTO `CATALOGOS_ETAPA_INTERMEDIA` (`INTERMEDIA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_ETAPA_PROCESAL`
+-- Estructura de tabla para la tabla `catalogos_etapa_procesal`
 --
 
-CREATE TABLE `CATALOGOS_ETAPA_PROCESAL` (
+CREATE TABLE `catalogos_etapa_procesal` (
   `PROCESAL_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_ETAPA_PROCESAL`
+-- Volcado de datos para la tabla `catalogos_etapa_procesal`
 --
 
-INSERT INTO `CATALOGOS_ETAPA_PROCESAL` (`PROCESAL_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_etapa_procesal` (`PROCESAL_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Investigación'),
 (2, 'Intermedia'),
@@ -1821,19 +1861,19 @@ INSERT INTO `CATALOGOS_ETAPA_PROCESAL` (`PROCESAL_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_EXCLUSION_ACCIONP`
+-- Estructura de tabla para la tabla `catalogos_exclusion_accionp`
 --
 
-CREATE TABLE `CATALOGOS_EXCLUSION_ACCIONP` (
+CREATE TABLE `catalogos_exclusion_accionp` (
   `EXCLUSION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_EXCLUSION_ACCIONP`
+-- Volcado de datos para la tabla `catalogos_exclusion_accionp`
 --
 
-INSERT INTO `CATALOGOS_EXCLUSION_ACCIONP` (`EXCLUSION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_exclusion_accionp` (`EXCLUSION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Muerte del acusado o sentenciado'),
 (2, 'Reconocimiento de inocencia del sentenciado o anulación de la sentencia'),
@@ -1848,19 +1888,19 @@ INSERT INTO `CATALOGOS_EXCLUSION_ACCIONP` (`EXCLUSION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FIGURA_MPRUEBA`
+-- Estructura de tabla para la tabla `catalogos_figura_mprueba`
 --
 
-CREATE TABLE `CATALOGOS_FIGURA_MPRUEBA` (
+CREATE TABLE `catalogos_figura_mprueba` (
   `FIGURA_MPRU_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FIGURA_MPRUEBA`
+-- Volcado de datos para la tabla `catalogos_figura_mprueba`
 --
 
-INSERT INTO `CATALOGOS_FIGURA_MPRUEBA` (`FIGURA_MPRU_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_figura_mprueba` (`FIGURA_MPRU_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Ministerio público'),
 (2, 'Asesor jurídico'),
@@ -1869,19 +1909,19 @@ INSERT INTO `CATALOGOS_FIGURA_MPRUEBA` (`FIGURA_MPRU_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FIGURA_PROCESO`
+-- Estructura de tabla para la tabla `catalogos_figura_proceso`
 --
 
-CREATE TABLE `CATALOGOS_FIGURA_PROCESO` (
+CREATE TABLE `catalogos_figura_proceso` (
   `FIGURA_PRO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(25) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FIGURA_PROCESO`
+-- Volcado de datos para la tabla `catalogos_figura_proceso`
 --
 
-INSERT INTO `CATALOGOS_FIGURA_PROCESO` (`FIGURA_PRO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_figura_proceso` (`FIGURA_PRO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Víctima'),
 (2, 'Asesor jurídico'),
@@ -1893,19 +1933,19 @@ INSERT INTO `CATALOGOS_FIGURA_PROCESO` (`FIGURA_PRO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FORMA_ACCION`
+-- Estructura de tabla para la tabla `catalogos_forma_accion`
 --
 
-CREATE TABLE `CATALOGOS_FORMA_ACCION` (
+CREATE TABLE `catalogos_forma_accion` (
   `ACCION_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FORMA_ACCION`
+-- Volcado de datos para la tabla `catalogos_forma_accion`
 --
 
-INSERT INTO `CATALOGOS_FORMA_ACCION` (`ACCION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_forma_accion` (`ACCION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Con violencia'),
 (2, 'Sin violencia'),
@@ -1914,19 +1954,19 @@ INSERT INTO `CATALOGOS_FORMA_ACCION` (`ACCION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FORMA_COMISION`
+-- Estructura de tabla para la tabla `catalogos_forma_comision`
 --
 
-CREATE TABLE `CATALOGOS_FORMA_COMISION` (
+CREATE TABLE `catalogos_forma_comision` (
   `COMISION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FORMA_COMISION`
+-- Volcado de datos para la tabla `catalogos_forma_comision`
 --
 
-INSERT INTO `CATALOGOS_FORMA_COMISION` (`COMISION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_forma_comision` (`COMISION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Doloso'),
 (2, 'Culposo'),
@@ -1935,19 +1975,19 @@ INSERT INTO `CATALOGOS_FORMA_COMISION` (`COMISION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FORMA_CONDUCCION`
+-- Estructura de tabla para la tabla `catalogos_forma_conduccion`
 --
 
-CREATE TABLE `CATALOGOS_FORMA_CONDUCCION` (
+CREATE TABLE `catalogos_forma_conduccion` (
   `CONDUCCION_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FORMA_CONDUCCION`
+-- Volcado de datos para la tabla `catalogos_forma_conduccion`
 --
 
-INSERT INTO `CATALOGOS_FORMA_CONDUCCION` (`CONDUCCION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_forma_conduccion` (`CONDUCCION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Citatorio'),
 (2, 'Orden de comparecencia'),
@@ -1956,19 +1996,19 @@ INSERT INTO `CATALOGOS_FORMA_CONDUCCION` (`CONDUCCION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FORMA_DIVISION`
+-- Estructura de tabla para la tabla `catalogos_forma_division`
 --
 
-CREATE TABLE `CATALOGOS_FORMA_DIVISION` (
+CREATE TABLE `catalogos_forma_division` (
   `DIVISION_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FORMA_DIVISION`
+-- Volcado de datos para la tabla `catalogos_forma_division`
 --
 
-INSERT INTO `CATALOGOS_FORMA_DIVISION` (`DIVISION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_forma_division` (`DIVISION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Región judicial'),
 (2, 'Distrito judicial'),
@@ -1980,19 +2020,19 @@ INSERT INTO `CATALOGOS_FORMA_DIVISION` (`DIVISION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FUENTE_INGRESOS`
+-- Estructura de tabla para la tabla `catalogos_fuente_ingresos`
 --
 
-CREATE TABLE `CATALOGOS_FUENTE_INGRESOS` (
+CREATE TABLE `catalogos_fuente_ingresos` (
   `FUENTE_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(65) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FUENTE_INGRESOS`
+-- Volcado de datos para la tabla `catalogos_fuente_ingresos`
 --
 
-INSERT INTO `CATALOGOS_FUENTE_INGRESOS` (`FUENTE_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_fuente_ingresos` (`FUENTE_ID`, `DESCRIPCION`) VALUES
 (1, 'Trabajo'),
 (2, 'Apoyo de familiares'),
 (3, 'Apoyo de conocidos'),
@@ -2005,19 +2045,19 @@ INSERT INTO `CATALOGOS_FUENTE_INGRESOS` (`FUENTE_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FUERO`
+-- Estructura de tabla para la tabla `catalogos_fuero`
 --
 
-CREATE TABLE `CATALOGOS_FUERO` (
+CREATE TABLE `catalogos_fuero` (
   `FUERO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FUERO`
+-- Volcado de datos para la tabla `catalogos_fuero`
 --
 
-INSERT INTO `CATALOGOS_FUERO` (`FUERO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_fuero` (`FUERO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Común'),
 (2, 'Federal'),
@@ -2026,19 +2066,19 @@ INSERT INTO `CATALOGOS_FUERO` (`FUERO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_FUNCION_JUZGADO`
+-- Estructura de tabla para la tabla `catalogos_funcion_juzgado`
 --
 
-CREATE TABLE `CATALOGOS_FUNCION_JUZGADO` (
+CREATE TABLE `catalogos_funcion_juzgado` (
   `FUNCION_JUZ_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_FUNCION_JUZGADO`
+-- Volcado de datos para la tabla `catalogos_funcion_juzgado`
 --
 
-INSERT INTO `CATALOGOS_FUNCION_JUZGADO` (`FUNCION_JUZ_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_funcion_juzgado` (`FUNCION_JUZ_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Control'),
 (2, 'Enjuiciamiento'),
@@ -2047,19 +2087,19 @@ INSERT INTO `CATALOGOS_FUNCION_JUZGADO` (`FUNCION_JUZ_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_GRADO_ESTUDIOS`
+-- Estructura de tabla para la tabla `catalogos_grado_estudios`
 --
 
-CREATE TABLE `CATALOGOS_GRADO_ESTUDIOS` (
+CREATE TABLE `catalogos_grado_estudios` (
   `ESTUDIO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_GRADO_ESTUDIOS`
+-- Volcado de datos para la tabla `catalogos_grado_estudios`
 --
 
-INSERT INTO `CATALOGOS_GRADO_ESTUDIOS` (`ESTUDIO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_grado_estudios` (`ESTUDIO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Ninguno'),
 (2, 'Preescolar o primaria'),
@@ -2074,19 +2114,19 @@ INSERT INTO `CATALOGOS_GRADO_ESTUDIOS` (`ESTUDIO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_GRADO_PARTICIPACION`
+-- Estructura de tabla para la tabla `catalogos_grado_participacion`
 --
 
-CREATE TABLE `CATALOGOS_GRADO_PARTICIPACION` (
+CREATE TABLE `catalogos_grado_participacion` (
   `PARTICIPACION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_GRADO_PARTICIPACION`
+-- Volcado de datos para la tabla `catalogos_grado_participacion`
 --
 
-INSERT INTO `CATALOGOS_GRADO_PARTICIPACION` (`PARTICIPACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_grado_participacion` (`PARTICIPACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Autor intelectual'),
 (2, 'Autor material'),
@@ -2102,19 +2142,19 @@ INSERT INTO `CATALOGOS_GRADO_PARTICIPACION` (`PARTICIPACION_ID`, `DESCRIPCION`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_INCOMPETENCIA`
+-- Estructura de tabla para la tabla `catalogos_incompetencia`
 --
 
-CREATE TABLE `CATALOGOS_INCOMPETENCIA` (
+CREATE TABLE `catalogos_incompetencia` (
   `INCOMPETENCIA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_INCOMPETENCIA`
+-- Volcado de datos para la tabla `catalogos_incompetencia`
 --
 
-INSERT INTO `CATALOGOS_INCOMPETENCIA` (`INCOMPETENCIA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_incompetencia` (`INCOMPETENCIA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Fuero común de otra entidad federativa'),
 (2, 'Fuero común de la entidad federativa (en razón de territorio)'),
@@ -2124,19 +2164,19 @@ INSERT INTO `CATALOGOS_INCOMPETENCIA` (`INCOMPETENCIA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_INSTRUMENTO_COMISION`
+-- Estructura de tabla para la tabla `catalogos_instrumento_comision`
 --
 
-CREATE TABLE `CATALOGOS_INSTRUMENTO_COMISION` (
+CREATE TABLE `catalogos_instrumento_comision` (
   `INSTRUMENTO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_INSTRUMENTO_COMISION`
+-- Volcado de datos para la tabla `catalogos_instrumento_comision`
 --
 
-INSERT INTO `CATALOGOS_INSTRUMENTO_COMISION` (`INSTRUMENTO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_instrumento_comision` (`INSTRUMENTO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Con arma de fuego'),
 (2, 'Con arma blanca'),
@@ -2149,19 +2189,19 @@ INSERT INTO `CATALOGOS_INSTRUMENTO_COMISION` (`INSTRUMENTO_ID`, `DESCRIPCION`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_JURISDICCION`
+-- Estructura de tabla para la tabla `catalogos_jurisdiccion`
 --
 
-CREATE TABLE `CATALOGOS_JURISDICCION` (
+CREATE TABLE `catalogos_jurisdiccion` (
   `JURISDICCION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(150) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_JURISDICCION`
+-- Volcado de datos para la tabla `catalogos_jurisdiccion`
 --
 
-INSERT INTO `CATALOGOS_JURISDICCION` (`JURISDICCION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_jurisdiccion` (`JURISDICCION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'En toda la entidad federativa'),
 (2, 'Solo en la división territorial a la que pertenece'),
@@ -2170,19 +2210,19 @@ INSERT INTO `CATALOGOS_JURISDICCION` (`JURISDICCION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_LINGUISTICAS`
+-- Estructura de tabla para la tabla `catalogos_linguisticas`
 --
 
-CREATE TABLE `CATALOGOS_LINGUISTICAS` (
+CREATE TABLE `catalogos_linguisticas` (
   `LINGUISTICA_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_LINGUISTICAS`
+-- Volcado de datos para la tabla `catalogos_linguisticas`
 --
 
-INSERT INTO `CATALOGOS_LINGUISTICAS` (`LINGUISTICA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_linguisticas` (`LINGUISTICA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Hokana'),
 (2, 'Chinanteca'),
@@ -2202,19 +2242,19 @@ INSERT INTO `CATALOGOS_LINGUISTICAS` (`LINGUISTICA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MEDIDAS_CAUTELARES`
+-- Estructura de tabla para la tabla `catalogos_medidas_cautelares`
 --
 
-CREATE TABLE `CATALOGOS_MEDIDAS_CAUTELARES` (
+CREATE TABLE `catalogos_medidas_cautelares` (
   `CAUTELARES_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MEDIDAS_CAUTELARES`
+-- Volcado de datos para la tabla `catalogos_medidas_cautelares`
 --
 
-INSERT INTO `CATALOGOS_MEDIDAS_CAUTELARES` (`CAUTELARES_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_medidas_cautelares` (`CAUTELARES_ID`, `DESCRIPCION`) VALUES
 (-2, 'No identificado'),
 (1, 'Presentación periódica ante autoridad que el juez designe'),
 (2, 'La prohibición de salir del país, de la localidad en la cual reside o del ámbito territorial que fije el órgano Jurisdiccional, sin autorización del juez'),
@@ -2234,19 +2274,19 @@ INSERT INTO `CATALOGOS_MEDIDAS_CAUTELARES` (`CAUTELARES_ID`, `DESCRIPCION`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MEDIDAS_DISCIPLINARIAS`
+-- Estructura de tabla para la tabla `catalogos_medidas_disciplinarias`
 --
 
-CREATE TABLE `CATALOGOS_MEDIDAS_DISCIPLINARIAS` (
+CREATE TABLE `catalogos_medidas_disciplinarias` (
   `MEDIDA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MEDIDAS_DISCIPLINARIAS`
+-- Volcado de datos para la tabla `catalogos_medidas_disciplinarias`
 --
 
-INSERT INTO `CATALOGOS_MEDIDAS_DISCIPLINARIAS` (`MEDIDA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_medidas_disciplinarias` (`MEDIDA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Apercibimiento'),
 (2, 'Multa de veinte a cinco mil salarios mínimos'),
@@ -2257,19 +2297,19 @@ INSERT INTO `CATALOGOS_MEDIDAS_DISCIPLINARIAS` (`MEDIDA_ID`, `DESCRIPCION`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MEDIDAS_DURACION`
+-- Estructura de tabla para la tabla `catalogos_medidas_duracion`
 --
 
-CREATE TABLE `CATALOGOS_MEDIDAS_DURACION` (
+CREATE TABLE `catalogos_medidas_duracion` (
   `MEDIDA_DURA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MEDIDAS_DURACION`
+-- Volcado de datos para la tabla `catalogos_medidas_duracion`
 --
 
-INSERT INTO `CATALOGOS_MEDIDAS_DURACION` (`MEDIDA_DURA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_medidas_duracion` (`MEDIDA_DURA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Menos de 1 mes'),
 (2, 'De 1 a 2 meses'),
@@ -2281,19 +2321,19 @@ INSERT INTO `CATALOGOS_MEDIDAS_DURACION` (`MEDIDA_DURA_ID`, `DESCRIPCION`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MEDIDAS_MUJER`
+-- Estructura de tabla para la tabla `catalogos_medidas_mujer`
 --
 
-CREATE TABLE `CATALOGOS_MEDIDAS_MUJER` (
+CREATE TABLE `catalogos_medidas_mujer` (
   `MUJER_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MEDIDAS_MUJER`
+-- Volcado de datos para la tabla `catalogos_medidas_mujer`
 --
 
-INSERT INTO `CATALOGOS_MEDIDAS_MUJER` (`MUJER_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_medidas_mujer` (`MUJER_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Acceso al domicilio en común, de autoridades policíacas o de personas que auxilien a la víctima a tomar sus pertenencias personales y las de sus hijas e hijos'),
 (2, 'Auxilio policíaco de reacción inmediata a favor de la víctima, con autorización expresa de ingreso al domicilio donde se localice o se encuentre la Víctima en el momento de solicitar el auxilio'),
@@ -2317,19 +2357,19 @@ INSERT INTO `CATALOGOS_MEDIDAS_MUJER` (`MUJER_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MEDIDAS_PROTECCION`
+-- Estructura de tabla para la tabla `catalogos_medidas_proteccion`
 --
 
-CREATE TABLE `CATALOGOS_MEDIDAS_PROTECCION` (
+CREATE TABLE `catalogos_medidas_proteccion` (
   `PROTECCION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MEDIDAS_PROTECCION`
+-- Volcado de datos para la tabla `catalogos_medidas_proteccion`
 --
 
-INSERT INTO `CATALOGOS_MEDIDAS_PROTECCION` (`PROTECCION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_medidas_proteccion` (`PROTECCION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Auxilio inmediato por integrantes de instituciones policiales, al domicilio en donde se localice o se encuentre la víctima u ofendido en el momento de solicitarlo'),
 (2, 'El reingreso de la víctima u ofendido a su domicilio, una vez que se salvaguarde su seguridad'),
@@ -2347,19 +2387,19 @@ INSERT INTO `CATALOGOS_MEDIDAS_PROTECCION` (`PROTECCION_ID`, `DESCRIPCION`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MEDIDAS_SOLICITA`
+-- Estructura de tabla para la tabla `catalogos_medidas_solicita`
 --
 
-CREATE TABLE `CATALOGOS_MEDIDAS_SOLICITA` (
+CREATE TABLE `catalogos_medidas_solicita` (
   `MEDIDA_SOLICITA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MEDIDAS_SOLICITA`
+-- Volcado de datos para la tabla `catalogos_medidas_solicita`
 --
 
-INSERT INTO `CATALOGOS_MEDIDAS_SOLICITA` (`MEDIDA_SOLICITA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_medidas_solicita` (`MEDIDA_SOLICITA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Ministerio Público'),
 (2, 'Ofendido'),
@@ -2371,19 +2411,19 @@ INSERT INTO `CATALOGOS_MEDIDAS_SOLICITA` (`MEDIDA_SOLICITA_ID`, `DESCRIPCION`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MEDIOS_PRUEBA`
+-- Estructura de tabla para la tabla `catalogos_medios_prueba`
 --
 
-CREATE TABLE `CATALOGOS_MEDIOS_PRUEBA` (
+CREATE TABLE `catalogos_medios_prueba` (
   `PRUEBA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MEDIOS_PRUEBA`
+-- Volcado de datos para la tabla `catalogos_medios_prueba`
 --
 
-INSERT INTO `CATALOGOS_MEDIOS_PRUEBA` (`PRUEBA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_medios_prueba` (`PRUEBA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Testimonial'),
 (2, 'Pericial'),
@@ -2395,19 +2435,19 @@ INSERT INTO `CATALOGOS_MEDIOS_PRUEBA` (`PRUEBA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MODALIDAD`
+-- Estructura de tabla para la tabla `catalogos_modalidad`
 --
 
-CREATE TABLE `CATALOGOS_MODALIDAD` (
+CREATE TABLE `catalogos_modalidad` (
   `MODALIDAD_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MODALIDAD`
+-- Volcado de datos para la tabla `catalogos_modalidad`
 --
 
-INSERT INTO `CATALOGOS_MODALIDAD` (`MODALIDAD_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_modalidad` (`MODALIDAD_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Simple'),
 (2, 'Atenuado'),
@@ -2419,19 +2459,19 @@ INSERT INTO `CATALOGOS_MODALIDAD` (`MODALIDAD_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MULTA`
+-- Estructura de tabla para la tabla `catalogos_multa`
 --
 
-CREATE TABLE `CATALOGOS_MULTA` (
+CREATE TABLE `catalogos_multa` (
   `MULTA_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MULTA`
+-- Volcado de datos para la tabla `catalogos_multa`
 --
 
-INSERT INTO `CATALOGOS_MULTA` (`MULTA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_multa` (`MULTA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Hasta 5,000 pesos'),
 (2, 'De 5,001 a 10,000 pesos'),
@@ -2449,20 +2489,20 @@ INSERT INTO `CATALOGOS_MULTA` (`MULTA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_MUNICIPIOS`
+-- Estructura de tabla para la tabla `catalogos_municipios`
 --
 
-CREATE TABLE `CATALOGOS_MUNICIPIOS` (
+CREATE TABLE `catalogos_municipios` (
   `ENTIDAD_ID` int(2) NOT NULL,
   `MUNICIPIO_ID` int(5) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_MUNICIPIOS`
+-- Volcado de datos para la tabla `catalogos_municipios`
 --
 
-INSERT INTO `CATALOGOS_MUNICIPIOS` (`ENTIDAD_ID`, `MUNICIPIO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_municipios` (`ENTIDAD_ID`, `MUNICIPIO_ID`, `DESCRIPCION`) VALUES
 (-2, -2, 'No aplica'),
 (1, 1001, 'Aguascalientes'),
 (1, 1002, 'Asientos'),
@@ -4182,7 +4222,7 @@ INSERT INTO `CATALOGOS_MUNICIPIOS` (`ENTIDAD_ID`, `MUNICIPIO_ID`, `DESCRIPCION`)
 (21, 21123, 'San Felipe Tepatlán'),
 (21, 21124, 'San Gabriel Chilac'),
 (21, 21125, 'San Gregorio Atzompa');
-INSERT INTO `CATALOGOS_MUNICIPIOS` (`ENTIDAD_ID`, `MUNICIPIO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_municipios` (`ENTIDAD_ID`, `MUNICIPIO_ID`, `DESCRIPCION`) VALUES
 (21, 21126, 'San Jerónimo Tecuanipan'),
 (21, 21127, 'San Jerónimo Xayacatlán'),
 (21, 21128, 'San José Chiapa'),
@@ -4964,19 +5004,19 @@ INSERT INTO `CATALOGOS_MUNICIPIOS` (`ENTIDAD_ID`, `MUNICIPIO_ID`, `DESCRIPCION`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_NACIONALIDAD`
+-- Estructura de tabla para la tabla `catalogos_nacionalidad`
 --
 
-CREATE TABLE `CATALOGOS_NACIONALIDAD` (
+CREATE TABLE `catalogos_nacionalidad` (
   `NACIONALIDAD_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_NACIONALIDAD`
+-- Volcado de datos para la tabla `catalogos_nacionalidad`
 --
 
-INSERT INTO `CATALOGOS_NACIONALIDAD` (`NACIONALIDAD_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_nacionalidad` (`NACIONALIDAD_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Mexicana'),
 (2, 'Estadounidense'),
@@ -5002,19 +5042,19 @@ INSERT INTO `CATALOGOS_NACIONALIDAD` (`NACIONALIDAD_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_NOPRIVATIVAS`
+-- Estructura de tabla para la tabla `catalogos_noprivativas`
 --
 
-CREATE TABLE `CATALOGOS_NOPRIVATIVAS` (
+CREATE TABLE `catalogos_noprivativas` (
   `NOPRIVATIVAS_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_NOPRIVATIVAS`
+-- Volcado de datos para la tabla `catalogos_noprivativas`
 --
 
-INSERT INTO `CATALOGOS_NOPRIVATIVAS` (`NOPRIVATIVAS_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_noprivativas` (`NOPRIVATIVAS_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Amonestación'),
 (2, 'Apercibimiento'),
@@ -5032,19 +5072,19 @@ INSERT INTO `CATALOGOS_NOPRIVATIVAS` (`NOPRIVATIVAS_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_NUMERO`
+-- Estructura de tabla para la tabla `catalogos_numero`
 --
 
-CREATE TABLE `CATALOGOS_NUMERO` (
+CREATE TABLE `catalogos_numero` (
   `NUMERO_ID` int(3) NOT NULL,
   `DESCRIPCION` varchar(15) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_NUMERO`
+-- Volcado de datos para la tabla `catalogos_numero`
 --
 
-INSERT INTO `CATALOGOS_NUMERO` (`NUMERO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_numero` (`NUMERO_ID`, `DESCRIPCION`) VALUES
 (-9, 'No identificado'),
 (-2, 'No aplica'),
 (0, '0'),
@@ -5552,19 +5592,19 @@ INSERT INTO `CATALOGOS_NUMERO` (`NUMERO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_OCUPACION`
+-- Estructura de tabla para la tabla `catalogos_ocupacion`
 --
 
-CREATE TABLE `CATALOGOS_OCUPACION` (
+CREATE TABLE `catalogos_ocupacion` (
   `OCUPACION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_OCUPACION`
+-- Volcado de datos para la tabla `catalogos_ocupacion`
 --
 
-INSERT INTO `CATALOGOS_OCUPACION` (`OCUPACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_ocupacion` (`OCUPACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Funcionarios, directores y jefes'),
 (2, 'Profesionistas y técnicos '),
@@ -5581,19 +5621,19 @@ INSERT INTO `CATALOGOS_OCUPACION` (`OCUPACION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_PAIS`
+-- Estructura de tabla para la tabla `catalogos_pais`
 --
 
-CREATE TABLE `CATALOGOS_PAIS` (
+CREATE TABLE `catalogos_pais` (
   `PAIS_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_PAIS`
+-- Volcado de datos para la tabla `catalogos_pais`
 --
 
-INSERT INTO `CATALOGOS_PAIS` (`PAIS_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_pais` (`PAIS_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Estados Unidos Mexicanos'),
 (2, 'Estados Unidos de América'),
@@ -5619,19 +5659,19 @@ INSERT INTO `CATALOGOS_PAIS` (`PAIS_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_PLAZO_CIERRE`
+-- Estructura de tabla para la tabla `catalogos_plazo_cierre`
 --
 
-CREATE TABLE `CATALOGOS_PLAZO_CIERRE` (
+CREATE TABLE `catalogos_plazo_cierre` (
   `CIERRE_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_PLAZO_CIERRE`
+-- Volcado de datos para la tabla `catalogos_plazo_cierre`
 --
 
-INSERT INTO `CATALOGOS_PLAZO_CIERRE` (`CIERRE_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_plazo_cierre` (`CIERRE_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'De 1 a 15 días '),
 (2, 'De 16 días a 1 mes'),
@@ -5643,19 +5683,19 @@ INSERT INTO `CATALOGOS_PLAZO_CIERRE` (`CIERRE_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_PLAZO_CONSTITUCIONAL`
+-- Estructura de tabla para la tabla `catalogos_plazo_constitucional`
 --
 
-CREATE TABLE `CATALOGOS_PLAZO_CONSTITUCIONAL` (
+CREATE TABLE `catalogos_plazo_constitucional` (
   `PLAZO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_PLAZO_CONSTITUCIONAL`
+-- Volcado de datos para la tabla `catalogos_plazo_constitucional`
 --
 
-INSERT INTO `CATALOGOS_PLAZO_CONSTITUCIONAL` (`PLAZO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_plazo_constitucional` (`PLAZO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, '72 horas '),
 (2, '144 horas');
@@ -5663,19 +5703,19 @@ INSERT INTO `CATALOGOS_PLAZO_CONSTITUCIONAL` (`PLAZO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_PRIVATIVAS`
+-- Estructura de tabla para la tabla `catalogos_privativas`
 --
 
-CREATE TABLE `CATALOGOS_PRIVATIVAS` (
+CREATE TABLE `catalogos_privativas` (
   `PRIVATIVAS_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(60) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_PRIVATIVAS`
+-- Volcado de datos para la tabla `catalogos_privativas`
 --
 
-INSERT INTO `CATALOGOS_PRIVATIVAS` (`PRIVATIVAS_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_privativas` (`PRIVATIVAS_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Estancia domiciliaria'),
 (2, 'Internamiento'),
@@ -5685,19 +5725,19 @@ INSERT INTO `CATALOGOS_PRIVATIVAS` (`PRIVATIVAS_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_PROC_ABREVIADO`
+-- Estructura de tabla para la tabla `catalogos_proc_abreviado`
 --
 
-CREATE TABLE `CATALOGOS_PROC_ABREVIADO` (
+CREATE TABLE `catalogos_proc_abreviado` (
   `PROCABREV_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_PROC_ABREVIADO`
+-- Volcado de datos para la tabla `catalogos_proc_abreviado`
 --
 
-INSERT INTO `CATALOGOS_PROC_ABREVIADO` (`PROCABREV_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_proc_abreviado` (`PROCABREV_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Medida privativa de la libertad'),
 (2, 'Medida no privativa de la libertad'),
@@ -5707,19 +5747,19 @@ INSERT INTO `CATALOGOS_PROC_ABREVIADO` (`PROCABREV_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_PROMUEVE_INCIDENTE`
+-- Estructura de tabla para la tabla `catalogos_promueve_incidente`
 --
 
-CREATE TABLE `CATALOGOS_PROMUEVE_INCIDENTE` (
+CREATE TABLE `catalogos_promueve_incidente` (
   `PROMUEVE_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_PROMUEVE_INCIDENTE`
+-- Volcado de datos para la tabla `catalogos_promueve_incidente`
 --
 
-INSERT INTO `CATALOGOS_PROMUEVE_INCIDENTE` (`PROMUEVE_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_promueve_incidente` (`PROMUEVE_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Victima'),
 (2, 'Defensor del imputado'),
@@ -5730,19 +5770,19 @@ INSERT INTO `CATALOGOS_PROMUEVE_INCIDENTE` (`PROMUEVE_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_PUEBLO_INDIGENA`
+-- Estructura de tabla para la tabla `catalogos_pueblo_indigena`
 --
 
-CREATE TABLE `CATALOGOS_PUEBLO_INDIGENA` (
+CREATE TABLE `catalogos_pueblo_indigena` (
   `PUEBLO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_PUEBLO_INDIGENA`
+-- Volcado de datos para la tabla `catalogos_pueblo_indigena`
 --
 
-INSERT INTO `CATALOGOS_PUEBLO_INDIGENA` (`PUEBLO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_pueblo_indigena` (`PUEBLO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Chinanteco'),
 (2, 'Chol'),
@@ -5773,19 +5813,19 @@ INSERT INTO `CATALOGOS_PUEBLO_INDIGENA` (`PUEBLO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_RANGO_INGRESOS`
+-- Estructura de tabla para la tabla `catalogos_rango_ingresos`
 --
 
-CREATE TABLE `CATALOGOS_RANGO_INGRESOS` (
+CREATE TABLE `catalogos_rango_ingresos` (
   `ID_INGRESOS` int(1) NOT NULL,
   `DESCRIPCION` varchar(35) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_RANGO_INGRESOS`
+-- Volcado de datos para la tabla `catalogos_rango_ingresos`
 --
 
-INSERT INTO `CATALOGOS_RANGO_INGRESOS` (`ID_INGRESOS`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_rango_ingresos` (`ID_INGRESOS`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'De 1 peso a 500 pesos'),
 (2, 'De 501 peso a 1,000 pesos'),
@@ -5800,19 +5840,19 @@ INSERT INTO `CATALOGOS_RANGO_INGRESOS` (`ID_INGRESOS`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_REINCIDENCIA`
+-- Estructura de tabla para la tabla `catalogos_reincidencia`
 --
 
-CREATE TABLE `CATALOGOS_REINCIDENCIA` (
+CREATE TABLE `catalogos_reincidencia` (
   `REINCIDENCIA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_REINCIDENCIA`
+-- Volcado de datos para la tabla `catalogos_reincidencia`
 --
 
-INSERT INTO `CATALOGOS_REINCIDENCIA` (`REINCIDENCIA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_reincidencia` (`REINCIDENCIA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Reincidente'),
 (2, 'No reincidente'),
@@ -5823,19 +5863,19 @@ INSERT INTO `CATALOGOS_REINCIDENCIA` (`REINCIDENCIA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_RELACION_IMPUTADO`
+-- Estructura de tabla para la tabla `catalogos_relacion_imputado`
 --
 
-CREATE TABLE `CATALOGOS_RELACION_IMPUTADO` (
+CREATE TABLE `catalogos_relacion_imputado` (
   `RELACION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_RELACION_IMPUTADO`
+-- Volcado de datos para la tabla `catalogos_relacion_imputado`
 --
 
-INSERT INTO `CATALOGOS_RELACION_IMPUTADO` (`RELACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_relacion_imputado` (`RELACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Académica'),
 (2, 'Autoridad'),
@@ -5852,19 +5892,19 @@ INSERT INTO `CATALOGOS_RELACION_IMPUTADO` (`RELACION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_REPARACION_DANO`
+-- Estructura de tabla para la tabla `catalogos_reparacion_dano`
 --
 
-CREATE TABLE `CATALOGOS_REPARACION_DANO` (
+CREATE TABLE `catalogos_reparacion_dano` (
   `REPARACION_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_REPARACION_DANO`
+-- Volcado de datos para la tabla `catalogos_reparacion_dano`
 --
 
-INSERT INTO `CATALOGOS_REPARACION_DANO` (`REPARACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_reparacion_dano` (`REPARACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Restitución de las cosa'),
 (2, 'Pago de la cosa'),
@@ -5873,19 +5913,19 @@ INSERT INTO `CATALOGOS_REPARACION_DANO` (`REPARACION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_REPRESENTANTE_LEGAL`
+-- Estructura de tabla para la tabla `catalogos_representante_legal`
 --
 
-CREATE TABLE `CATALOGOS_REPRESENTANTE_LEGAL` (
+CREATE TABLE `catalogos_representante_legal` (
   `REPRESENTANTE_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(40) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_REPRESENTANTE_LEGAL`
+-- Volcado de datos para la tabla `catalogos_representante_legal`
 --
 
-INSERT INTO `CATALOGOS_REPRESENTANTE_LEGAL` (`REPRESENTANTE_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_representante_legal` (`REPRESENTANTE_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Padre'),
 (2, 'Madre '),
@@ -5898,19 +5938,19 @@ INSERT INTO `CATALOGOS_REPRESENTANTE_LEGAL` (`REPRESENTANTE_ID`, `DESCRIPCION`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_RESOLUCION_MPRUEBA`
+-- Estructura de tabla para la tabla `catalogos_resolucion_mprueba`
 --
 
-CREATE TABLE `CATALOGOS_RESOLUCION_MPRUEBA` (
+CREATE TABLE `catalogos_resolucion_mprueba` (
   `MPRUEBA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_RESOLUCION_MPRUEBA`
+-- Volcado de datos para la tabla `catalogos_resolucion_mprueba`
 --
 
-INSERT INTO `CATALOGOS_RESOLUCION_MPRUEBA` (`MPRUEBA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_resolucion_mprueba` (`MPRUEBA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Admitida'),
 (2, 'Excluida'),
@@ -5919,19 +5959,19 @@ INSERT INTO `CATALOGOS_RESOLUCION_MPRUEBA` (`MPRUEBA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_RESPUESTA_SIMPLE`
+-- Estructura de tabla para la tabla `catalogos_respuesta_simple`
 --
 
-CREATE TABLE `CATALOGOS_RESPUESTA_SIMPLE` (
+CREATE TABLE `catalogos_respuesta_simple` (
   `RESPUESTA_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_RESPUESTA_SIMPLE`
+-- Volcado de datos para la tabla `catalogos_respuesta_simple`
 --
 
-INSERT INTO `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_respuesta_simple` (`RESPUESTA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Sí'),
 (2, 'No'),
@@ -5940,19 +5980,19 @@ INSERT INTO `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_SENTIDO_FALLO`
+-- Estructura de tabla para la tabla `catalogos_sentido_fallo`
 --
 
-CREATE TABLE `CATALOGOS_SENTIDO_FALLO` (
+CREATE TABLE `catalogos_sentido_fallo` (
   `SENTIDO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(25) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_SENTIDO_FALLO`
+-- Volcado de datos para la tabla `catalogos_sentido_fallo`
 --
 
-INSERT INTO `CATALOGOS_SENTIDO_FALLO` (`SENTIDO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_sentido_fallo` (`SENTIDO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Absolución '),
 (2, 'Condena'),
@@ -5961,19 +6001,19 @@ INSERT INTO `CATALOGOS_SENTIDO_FALLO` (`SENTIDO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_SEXO`
+-- Estructura de tabla para la tabla `catalogos_sexo`
 --
 
-CREATE TABLE `CATALOGOS_SEXO` (
+CREATE TABLE `catalogos_sexo` (
   `SEXO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_SEXO`
+-- Volcado de datos para la tabla `catalogos_sexo`
 --
 
-INSERT INTO `CATALOGOS_SEXO` (`SEXO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_sexo` (`SEXO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Hombre'),
 (2, 'Mujer'),
@@ -5982,19 +6022,19 @@ INSERT INTO `CATALOGOS_SEXO` (`SEXO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_SITIO_OCURRENCIA`
+-- Estructura de tabla para la tabla `catalogos_sitio_ocurrencia`
 --
 
-CREATE TABLE `CATALOGOS_SITIO_OCURRENCIA` (
+CREATE TABLE `catalogos_sitio_ocurrencia` (
   `SITIO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(255) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_SITIO_OCURRENCIA`
+-- Volcado de datos para la tabla `catalogos_sitio_ocurrencia`
 --
 
-INSERT INTO `CATALOGOS_SITIO_OCURRENCIA` (`SITIO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_sitio_ocurrencia` (`SITIO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Hogar '),
 (2, 'Escuela'),
@@ -6013,19 +6053,19 @@ INSERT INTO `CATALOGOS_SITIO_OCURRENCIA` (`SITIO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_SOBRESEIMIENTO`
+-- Estructura de tabla para la tabla `catalogos_sobreseimiento`
 --
 
-CREATE TABLE `CATALOGOS_SOBRESEIMIENTO` (
+CREATE TABLE `catalogos_sobreseimiento` (
   `SOBRESEIMIENTO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_SOBRESEIMIENTO`
+-- Volcado de datos para la tabla `catalogos_sobreseimiento`
 --
 
-INSERT INTO `CATALOGOS_SOBRESEIMIENTO` (`SOBRESEIMIENTO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_sobreseimiento` (`SOBRESEIMIENTO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'El hecho no se cometió'),
 (2, 'El hecho cometido no constituye delito'),
@@ -6044,19 +6084,19 @@ INSERT INTO `CATALOGOS_SOBRESEIMIENTO` (`SOBRESEIMIENTO_ID`, `DESCRIPCION`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_SUSPENSION_CONDICIONAL`
+-- Estructura de tabla para la tabla `catalogos_suspension_condicional`
 --
 
-CREATE TABLE `CATALOGOS_SUSPENSION_CONDICIONAL` (
+CREATE TABLE `catalogos_suspension_condicional` (
   `SUSPENSION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(255) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_SUSPENSION_CONDICIONAL`
+-- Volcado de datos para la tabla `catalogos_suspension_condicional`
 --
 
-INSERT INTO `CATALOGOS_SUSPENSION_CONDICIONAL` (`SUSPENSION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_suspension_condicional` (`SUSPENSION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Abstenerse de consumir drogas o estupefacientes o de abusar de las bebidas alcohólicas'),
 (2, 'Abstenerse de viajar al extranjero'),
@@ -6081,19 +6121,19 @@ INSERT INTO `CATALOGOS_SUSPENSION_CONDICIONAL` (`SUSPENSION_ID`, `DESCRIPCION`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIEMPO_INTERNAMIENTO`
+-- Estructura de tabla para la tabla `catalogos_tiempo_internamiento`
 --
 
-CREATE TABLE `CATALOGOS_TIEMPO_INTERNAMIENTO` (
+CREATE TABLE `catalogos_tiempo_internamiento` (
   `INTERNAMIENTO_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIEMPO_INTERNAMIENTO`
+-- Volcado de datos para la tabla `catalogos_tiempo_internamiento`
 --
 
-INSERT INTO `CATALOGOS_TIEMPO_INTERNAMIENTO` (`INTERNAMIENTO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tiempo_internamiento` (`INTERNAMIENTO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Menos de 6 meses'),
 (2, 'De 6 meses hasta menos de 1 año '),
@@ -6110,19 +6150,19 @@ INSERT INTO `CATALOGOS_TIEMPO_INTERNAMIENTO` (`INTERNAMIENTO_ID`, `DESCRIPCION`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_CONSIGNACION`
+-- Estructura de tabla para la tabla `catalogos_tipo_consignacion`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_CONSIGNACION` (
+CREATE TABLE `catalogos_tipo_consignacion` (
   `CONSIGNACION_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_CONSIGNACION`
+-- Volcado de datos para la tabla `catalogos_tipo_consignacion`
 --
 
-INSERT INTO `CATALOGOS_TIPO_CONSIGNACION` (`CONSIGNACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_consignacion` (`CONSIGNACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Detenido'),
 (2, 'En libertad'),
@@ -6131,19 +6171,19 @@ INSERT INTO `CATALOGOS_TIPO_CONSIGNACION` (`CONSIGNACION_ID`, `DESCRIPCION`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_DEFENSOR`
+-- Estructura de tabla para la tabla `catalogos_tipo_defensor`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_DEFENSOR` (
+CREATE TABLE `catalogos_tipo_defensor` (
   `DEFENSOR_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_DEFENSOR`
+-- Volcado de datos para la tabla `catalogos_tipo_defensor`
 --
 
-INSERT INTO `CATALOGOS_TIPO_DEFENSOR` (`DEFENSOR_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_defensor` (`DEFENSOR_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Público'),
 (2, 'Privado'),
@@ -6153,19 +6193,19 @@ INSERT INTO `CATALOGOS_TIPO_DEFENSOR` (`DEFENSOR_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_DETENCION`
+-- Estructura de tabla para la tabla `catalogos_tipo_detencion`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_DETENCION` (
+CREATE TABLE `catalogos_tipo_detencion` (
   `TDETENCION_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_DETENCION`
+-- Volcado de datos para la tabla `catalogos_tipo_detencion`
 --
 
-INSERT INTO `CATALOGOS_TIPO_DETENCION` (`TDETENCION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_detencion` (`TDETENCION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Flagrancia'),
 (2, 'Caso urgente'),
@@ -6175,19 +6215,19 @@ INSERT INTO `CATALOGOS_TIPO_DETENCION` (`TDETENCION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_IMPUGNACION`
+-- Estructura de tabla para la tabla `catalogos_tipo_impugnacion`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_IMPUGNACION` (
+CREATE TABLE `catalogos_tipo_impugnacion` (
   `IMPUGNACION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_IMPUGNACION`
+-- Volcado de datos para la tabla `catalogos_tipo_impugnacion`
 --
 
-INSERT INTO `CATALOGOS_TIPO_IMPUGNACION` (`IMPUGNACION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_impugnacion` (`IMPUGNACION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Recurso de revocación '),
 (2, 'Recurso de apelación '),
@@ -6198,19 +6238,19 @@ INSERT INTO `CATALOGOS_TIPO_IMPUGNACION` (`IMPUGNACION_ID`, `DESCRIPCION`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_RESOLUCION`
+-- Estructura de tabla para la tabla `catalogos_tipo_resolucion`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_RESOLUCION` (
+CREATE TABLE `catalogos_tipo_resolucion` (
   `RESOLUCION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_RESOLUCION`
+-- Volcado de datos para la tabla `catalogos_tipo_resolucion`
 --
 
-INSERT INTO `CATALOGOS_TIPO_RESOLUCION` (`RESOLUCION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_resolucion` (`RESOLUCION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Sobreseimiento (diferente al que resulte por el cumplimiento del acuerdo reparatorio o la suspensión condicional del proceso)'),
 (2, 'Suspensión condicional del proceso (cumplimentada)'),
@@ -6222,19 +6262,19 @@ INSERT INTO `CATALOGOS_TIPO_RESOLUCION` (`RESOLUCION_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_RESOLUCIONJO`
+-- Estructura de tabla para la tabla `catalogos_tipo_resolucionjo`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_RESOLUCIONJO` (
+CREATE TABLE `catalogos_tipo_resolucionjo` (
   `RESOLUCION_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(200) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_RESOLUCIONJO`
+-- Volcado de datos para la tabla `catalogos_tipo_resolucionjo`
 --
 
-INSERT INTO `CATALOGOS_TIPO_RESOLUCIONJO` (`RESOLUCION_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_resolucionjo` (`RESOLUCION_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Sobreseimiento '),
 (2, 'Sentencia condenatoria'),
@@ -6244,19 +6284,19 @@ INSERT INTO `CATALOGOS_TIPO_RESOLUCIONJO` (`RESOLUCION_ID`, `DESCRIPCION`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_SOBRESEIMIENTO`
+-- Estructura de tabla para la tabla `catalogos_tipo_sobreseimiento`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_SOBRESEIMIENTO` (
+CREATE TABLE `catalogos_tipo_sobreseimiento` (
   `TSOBRESEIMIENTO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_SOBRESEIMIENTO`
+-- Volcado de datos para la tabla `catalogos_tipo_sobreseimiento`
 --
 
-INSERT INTO `CATALOGOS_TIPO_SOBRESEIMIENTO` (`TSOBRESEIMIENTO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_sobreseimiento` (`TSOBRESEIMIENTO_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Total '),
 (2, 'Parcial'),
@@ -6265,19 +6305,19 @@ INSERT INTO `CATALOGOS_TIPO_SOBRESEIMIENTO` (`TSOBRESEIMIENTO_ID`, `DESCRIPCION`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_TIPO_VICTIMA`
+-- Estructura de tabla para la tabla `catalogos_tipo_victima`
 --
 
-CREATE TABLE `CATALOGOS_TIPO_VICTIMA` (
+CREATE TABLE `catalogos_tipo_victima` (
   `VICTIMA_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_TIPO_VICTIMA`
+-- Volcado de datos para la tabla `catalogos_tipo_victima`
 --
 
-INSERT INTO `CATALOGOS_TIPO_VICTIMA` (`VICTIMA_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_tipo_victima` (`VICTIMA_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Persona física'),
 (2, 'Persona moral'),
@@ -6289,19 +6329,19 @@ INSERT INTO `CATALOGOS_TIPO_VICTIMA` (`VICTIMA_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_VIALIDAD`
+-- Estructura de tabla para la tabla `catalogos_vialidad`
 --
 
-CREATE TABLE `CATALOGOS_VIALIDAD` (
+CREATE TABLE `catalogos_vialidad` (
   `VIALIDAD_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_VIALIDAD`
+-- Volcado de datos para la tabla `catalogos_vialidad`
 --
 
-INSERT INTO `CATALOGOS_VIALIDAD` (`VIALIDAD_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_vialidad` (`VIALIDAD_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Ampliación'),
 (2, 'Andador'),
@@ -6333,19 +6373,19 @@ INSERT INTO `CATALOGOS_VIALIDAD` (`VIALIDAD_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_VICTIMA_MORAL`
+-- Estructura de tabla para la tabla `catalogos_victima_moral`
 --
 
-CREATE TABLE `CATALOGOS_VICTIMA_MORAL` (
+CREATE TABLE `catalogos_victima_moral` (
   `MORAL_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_VICTIMA_MORAL`
+-- Volcado de datos para la tabla `catalogos_victima_moral`
 --
 
-INSERT INTO `CATALOGOS_VICTIMA_MORAL` (`MORAL_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_victima_moral` (`MORAL_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Sociedad mercantil'),
 (2, 'Sociedad civil'),
@@ -6356,19 +6396,19 @@ INSERT INTO `CATALOGOS_VICTIMA_MORAL` (`MORAL_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CATALOGOS_VULNERABILIDAD`
+-- Estructura de tabla para la tabla `catalogos_vulnerabilidad`
 --
 
-CREATE TABLE `CATALOGOS_VULNERABILIDAD` (
+CREATE TABLE `catalogos_vulnerabilidad` (
   `VULNERABILIDAD_ID` int(2) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `CATALOGOS_VULNERABILIDAD`
+-- Volcado de datos para la tabla `catalogos_vulnerabilidad`
 --
 
-INSERT INTO `CATALOGOS_VULNERABILIDAD` (`VULNERABILIDAD_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `catalogos_vulnerabilidad` (`VULNERABILIDAD_ID`, `DESCRIPCION`) VALUES
 (-2, 'No aplica'),
 (1, 'Candidato'),
 (2, 'Persona adulta mayor'),
@@ -6387,10 +6427,10 @@ INSERT INTO `CATALOGOS_VULNERABILIDAD` (`VULNERABILIDAD_ID`, `DESCRIPCION`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_AUDIENCIAS_ADOJC`
+-- Estructura de tabla para la tabla `datos_audiencias_adojc`
 --
 
-CREATE TABLE `DATOS_AUDIENCIAS_ADOJC` (
+CREATE TABLE `datos_audiencias_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO` int(3) NOT NULL,
@@ -6409,10 +6449,10 @@ CREATE TABLE `DATOS_AUDIENCIAS_ADOJC` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_AUDIENCIAS_ADOJO`
+-- Estructura de tabla para la tabla `datos_audiencias_adojo`
 --
 
-CREATE TABLE `DATOS_AUDIENCIAS_ADOJO` (
+CREATE TABLE `datos_audiencias_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO` int(3) NOT NULL,
@@ -6430,10 +6470,10 @@ CREATE TABLE `DATOS_AUDIENCIAS_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_CAUSAS_PENALES_ADOJC`
+-- Estructura de tabla para la tabla `datos_causas_penales_adojc`
 --
 
-CREATE TABLE `DATOS_CAUSAS_PENALES_ADOJC` (
+CREATE TABLE `datos_causas_penales_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6455,20 +6495,19 @@ CREATE TABLE `DATOS_CAUSAS_PENALES_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_CAUSAS_PENALES_ADOJC`
+-- Volcado de datos para la tabla `datos_causas_penales_adojc`
 --
 
-INSERT INTO `DATOS_CAUSAS_PENALES_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `CARPETA_INVESTIGA`, `CAUSA_CLAVE`, `FECHA_INGRESO`, `JUEZ_CLAVE`, `DERIVA_ACCION_PENAL`, `COMPETENCIA`, `TIPO_INCOMPETENCIA`, `EXPEDIENTE_ACUMULADO`, `EXPEDIENTE_REFERENCIA`, `TOTAL_DELITOS`, `TOTAL_PROCESADOS`, `TOTAL_VICTIMAS`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '9-9007-125', 'hnhs', '001/202099007125', '1899-09-09', 7, 2, 1, -2, 2, '-2', 5, 4, 3, '', 2020),
-(9, 9007, 125, '9-9007-125', 'sdf', '355/202099007125', '1899-09-09', 4, 2, 1, -2, 2, '-2', 3, 2, 3, '', 2020);
+INSERT INTO `datos_causas_penales_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `CARPETA_INVESTIGA`, `CAUSA_CLAVE`, `FECHA_INGRESO`, `JUEZ_CLAVE`, `DERIVA_ACCION_PENAL`, `COMPETENCIA`, `TIPO_INCOMPETENCIA`, `EXPEDIENTE_ACUMULADO`, `EXPEDIENTE_REFERENCIA`, `TOTAL_DELITOS`, `TOTAL_PROCESADOS`, `TOTAL_VICTIMAS`, `COMENTARIOS`, `ANIO`) VALUES
+(9, 9007, 125, '9-9007-125', 'sdf', '355/202099007125', '1899-09-09', 4, 2, 1, -2, 2, '-2', 1, 1, 1, '', 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_CAUSAS_PENALES_ADOJO`
+-- Estructura de tabla para la tabla `datos_causas_penales_adojo`
 --
 
-CREATE TABLE `DATOS_CAUSAS_PENALES_ADOJO` (
+CREATE TABLE `datos_causas_penales_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6489,20 +6528,13 @@ CREATE TABLE `DATOS_CAUSAS_PENALES_ADOJO` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_CAUSAS_PENALES_ADOJO`
---
-
-INSERT INTO `DATOS_CAUSAS_PENALES_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `CAUSA_CLAVEJC`, `CAUSA_CLAVEJO`, `FECHA_INGRESO`, `TOTAL_DELITOS`, `TOTAL_PROCESADOS`, `TOTAL_VICTIMAS`, `ATENDIDA_ORGDIFERENTE`, `JUZGADO_DIFERENTE`, `CANTIDAD_JUECES`, `JUEZ_CLAVE_1`, `JUEZ_CLAVE_2`, `JUEZ_CLAVE_3`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '9-9007-125', '001/202099007125', 'borrame/202099007125', '2020-01-02', 4, 2, 3, 1, '9-9007-125', -2, -2, -2, -2, '', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_CONCLUSIONES_ADOJC`
+-- Estructura de tabla para la tabla `datos_conclusiones_adojc`
 --
 
-CREATE TABLE `DATOS_CONCLUSIONES_ADOJC` (
+CREATE TABLE `datos_conclusiones_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6533,22 +6565,19 @@ CREATE TABLE `DATOS_CONCLUSIONES_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_CONCLUSIONES_ADOJC`
+-- Volcado de datos para la tabla `datos_conclusiones_adojc`
 --
 
-INSERT INTO `DATOS_CONCLUSIONES_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `FECHA_CONCLUSION`, `TIPO_RESOLUCION`, `TIPO_SOBRESEIMIENTO`, `PROCEDENCIA_SOBRESEIMIENTO`, `EXCLUSION_ACCIONP`, `SUSPENCION_CONDICIONAL`, `FECHA_SUSPENCION`, `MECANISMO_ACUERDO`, `FECHA_ACUERDO`, `TIPO_CONCLUSION_PA`, `MEDIDA_PRIVATIVA`, `MEDIDA_NOPRIVATIVA`, `TIEMPO_INTERNAMIENTO`, `REPARACION_DANIO`, `TIPO_REPARACION_DANIO`, `MONTO_REPARA`, `IMPUGNACION`, `TIPO_IMPUGNACION`, `FECHA_IMPUGNACION`, `PERSONA_IMPUGNA`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '1899-09-09', 5, -2, -2, -2, -2, '1799-09-09', -2, '1799-09-09', -2, -2, -2, -2, -2, -2, -2, 1, 3, '1899-09-09', 3, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '1899-09-09', 5, -2, -2, -2, -2, '1799-09-09', -2, '1799-09-09', -2, -2, -2, -2, -2, -2, -2, 2, -2, '1899-09-09', -2, '', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '1899-09-09', 5, -2, -2, -2, -2, '1799-09-09', -2, '1799-09-09', -2, -2, -2, -2, -2, -2, -2, 9, -2, '1899-09-09', -2, '', 2020),
+INSERT INTO `datos_conclusiones_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `FECHA_CONCLUSION`, `TIPO_RESOLUCION`, `TIPO_SOBRESEIMIENTO`, `PROCEDENCIA_SOBRESEIMIENTO`, `EXCLUSION_ACCIONP`, `SUSPENCION_CONDICIONAL`, `FECHA_SUSPENCION`, `MECANISMO_ACUERDO`, `FECHA_ACUERDO`, `TIPO_CONCLUSION_PA`, `MEDIDA_PRIVATIVA`, `MEDIDA_NOPRIVATIVA`, `TIEMPO_INTERNAMIENTO`, `REPARACION_DANIO`, `TIPO_REPARACION_DANIO`, `MONTO_REPARA`, `IMPUGNACION`, `TIPO_IMPUGNACION`, `FECHA_IMPUGNACION`, `PERSONA_IMPUGNA`, `COMENTARIOS`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-P299007125', '1899-09-09', 5, -2, -2, -2, -2, '1799-09-09', -2, '1799-09-09', -2, -2, -2, -2, -2, -2, -2, 1, 3, '1899-09-09', 3, '', 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_CONCLUSIONES_ADOJO`
+-- Estructura de tabla para la tabla `datos_conclusiones_adojo`
 --
 
-CREATE TABLE `DATOS_CONCLUSIONES_ADOJO` (
+CREATE TABLE `datos_conclusiones_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6578,10 +6607,10 @@ CREATE TABLE `DATOS_CONCLUSIONES_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DCONCLUSIONES_ADOJC`
+-- Estructura de tabla para la tabla `datos_dconclusiones_adojc`
 --
 
-CREATE TABLE `DATOS_DCONCLUSIONES_ADOJC` (
+CREATE TABLE `datos_dconclusiones_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6596,10 +6625,10 @@ CREATE TABLE `DATOS_DCONCLUSIONES_ADOJC` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DCONCLUSIONES_ADOJO`
+-- Estructura de tabla para la tabla `datos_dconclusiones_adojo`
 --
 
-CREATE TABLE `DATOS_DCONCLUSIONES_ADOJO` (
+CREATE TABLE `datos_dconclusiones_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6614,10 +6643,10 @@ CREATE TABLE `DATOS_DCONCLUSIONES_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DELITOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_delitos_adojc`
 --
 
-CREATE TABLE `DATOS_DELITOS_ADOJC` (
+CREATE TABLE `datos_delitos_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6648,26 +6677,19 @@ CREATE TABLE `DATOS_DELITOS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_DELITOS_ADOJC`
+-- Volcado de datos para la tabla `datos_delitos_adojc`
 --
 
-INSERT INTO `DATOS_DELITOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `DELITO_CLAVE`, `DELITO_CODIGO_PENAL`, `ART_CODIGO_PENAL`, `DELITO_NORMA_TECNICA`, `TIPO_FUERO`, `DELITO_RECLASIFICADO`, `FECHA_RECLASIFICACION`, `FECHA_OCURRENCIA`, `SITIO_OCURRENCIA`, `GRADO_CONSUMACION`, `CALIFICACION`, `CLASIFICACION`, `CONCURSO`, `FORMA_COMISION`, `FORMA_ACCION`, `MODALIDAD`, `INSTRUMENTO_COMISION`, `OCURRIO_ENTIDAD`, `OCURRIO_MUNICIPIO`, `NUMERO_PROCESADOS`, `NUMERO_VICTIMAS`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-D199007125', 157, '15', 22, 2, 2, '1899-09-09', '1899-09-09', 4, 1, 2, 3, 9, 1, 2, 5, 3, 9, 9005, 0, 0, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-D299007125', 249, '85', 53, 9, 2, '1899-09-09', '1899-09-09', 3, 1, 9, 3, 9, 1, 1, 3, 5, 7, 7003, 0, 0, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-D399007125', 391, '78h', 91, 2, 2, '1899-09-09', '2020-05-13', 6, 9, 9, 9, 9, 9, 9, 4, 4, 10, 10010, 0, 0, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-D499007125', 418, 'lo89', 103, 2, 2, '1899-09-09', '2020-05-04', 4, 2, 9, 3, 9, 2, 2, 3, 3, 6, 6006, 0, 0, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-D599007125', 124, 'fp8', 9, 2, 9, '1899-09-09', '1899-09-09', 5, 2, 9, 2, 2, 2, 2, 4, 4, 4, 4005, 0, 0, '', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-D199007125', 3, 'sadf15', 1, 2, 2, '1899-09-09', '1899-09-09', 7, 9, 1, 2, 2, 9, 2, 4, 4, 9, 9010, 0, 0, '', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-D299007125', 192, 'asdf415', 30, 2, 1, '1899-09-09', '1899-09-09', 3, 9, 1, 1, 1, 1, 1, 2, 4, 13, 13014, 0, 0, '', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-D399007125', 34, '51', 4, 2, 2, '1899-09-09', '1899-09-09', 5, 2, 2, 2, 2, 2, 2, 4, 3, 15, 15011, 0, 0, '', 2020);
+INSERT INTO `datos_delitos_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `DELITO_CLAVE`, `DELITO_CODIGO_PENAL`, `ART_CODIGO_PENAL`, `DELITO_NORMA_TECNICA`, `TIPO_FUERO`, `DELITO_RECLASIFICADO`, `FECHA_RECLASIFICACION`, `FECHA_OCURRENCIA`, `SITIO_OCURRENCIA`, `GRADO_CONSUMACION`, `CALIFICACION`, `CLASIFICACION`, `CONCURSO`, `FORMA_COMISION`, `FORMA_ACCION`, `MODALIDAD`, `INSTRUMENTO_COMISION`, `OCURRIO_ENTIDAD`, `OCURRIO_MUNICIPIO`, `NUMERO_PROCESADOS`, `NUMERO_VICTIMAS`, `COMENTARIOS`, `ANIO`) VALUES
+(9, 9007, 125, '355/202099007125', '355/2020-D199007125', 3, 'sadf15', 1, 2, 2, '1899-09-09', '1899-09-09', 7, 9, 1, 2, 2, 9, 2, 4, 4, 9, 9010, 0, 0, '', 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DELITOS_ADOJO`
+-- Estructura de tabla para la tabla `datos_delitos_adojo`
 --
 
-CREATE TABLE `DATOS_DELITOS_ADOJO` (
+CREATE TABLE `datos_delitos_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6699,23 +6721,13 @@ CREATE TABLE `DATOS_DELITOS_ADOJO` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_DELITOS_ADOJO`
---
-
-INSERT INTO `DATOS_DELITOS_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJC`, `DELITO_CLAVEJC`, `CAUSA_CLAVEJO`, `DELITO_CLAVEJO`, `DELITO_CODIGO_PENAL`, `ART_CODIGO_PENAL`, `DELITO_NORMA_TECNICA`, `TIPO_FUERO`, `DELITO_RECLASIFICADO`, `FECHA_RECLASIFICACION`, `FECHA_OCURRENCIA`, `SITIO_OCURRENCIA`, `GRADO_CONSUMACION`, `CALIFICACION`, `CLASIFICACION`, `CONCURSO`, `FORMA_COMISION`, `FORMA_ACCION`, `MODALIDAD`, `INSTRUMENTO_COMISION`, `OCURRIO_ENTIDAD`, `OCURRIO_MUNICIPIO`, `NUMERO_PROCESADOS`, `NUMERO_VICTIMAS`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-D199007125', 'borrame/202099007125', 'borrame/2020-D199007125', 157, '15', 22, 2, 2, '1899-09-09', '1899-09-09', 4, 1, 2, 3, 9, 1, 2, 5, 3, 9, 9005, 0, 0, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-D299007125', 'borrame/202099007125', 'borrame/2020-D299007125', 249, '85', 53, 9, 2, '1899-09-09', '1899-09-09', 3, 1, 9, 3, 9, 1, 1, 3, 5, 7, 7003, 0, 0, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-D399007125', 'borrame/202099007125', 'borrame/2020-D399007125', 391, '78h', 91, 2, 2, '1899-09-09', '2020-05-13', 6, 9, 9, 9, 9, 9, 9, 4, 4, 10, 10010, 0, 0, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-D599007125', 'borrame/202099007125', 'borrame/2020-D599007125', 124, 'fp8', 9, 2, 9, '1899-09-09', '1899-09-09', 5, 2, 9, 2, 2, 2, 2, 4, 4, 4, 4005, 0, 0, '', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DHOMICIDIO_ADOJC`
+-- Estructura de tabla para la tabla `datos_dhomicidio_adojc`
 --
 
-CREATE TABLE `DATOS_DHOMICIDIO_ADOJC` (
+CREATE TABLE `datos_dhomicidio_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6726,22 +6738,20 @@ CREATE TABLE `DATOS_DHOMICIDIO_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_DHOMICIDIO_ADOJC`
+-- Volcado de datos para la tabla `datos_dhomicidio_adojc`
 --
 
-INSERT INTO `DATOS_DHOMICIDIO_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `DELITO_CLAVE`, `CONTEXTO_SITUACIONAL`, `ANIO`) VALUES
+INSERT INTO `datos_dhomicidio_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `DELITO_CLAVE`, `CONTEXTO_SITUACIONAL`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-D199007125', 2, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-D199007125', 4, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-D399007125', 3, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-D399007125', 11, 2020);
+(9, 9007, 125, '355/202099007125', '355/2020-D199007125', 4, 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DHOMICIDIO_ADOJO`
+-- Estructura de tabla para la tabla `datos_dhomicidio_adojo`
 --
 
-CREATE TABLE `DATOS_DHOMICIDIO_ADOJO` (
+CREATE TABLE `datos_dhomicidio_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6754,10 +6764,10 @@ CREATE TABLE `DATOS_DHOMICIDIO_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DROBO_ADOJC`
+-- Estructura de tabla para la tabla `datos_drobo_adojc`
 --
 
-CREATE TABLE `DATOS_DROBO_ADOJC` (
+CREATE TABLE `datos_drobo_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6770,10 +6780,10 @@ CREATE TABLE `DATOS_DROBO_ADOJC` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_DROBO_ADOJO`
+-- Estructura de tabla para la tabla `datos_drobo_adojo`
 --
 
-CREATE TABLE `DATOS_DROBO_ADOJO` (
+CREATE TABLE `datos_drobo_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6786,10 +6796,10 @@ CREATE TABLE `DATOS_DROBO_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_ETAPA_INICIAL_ADOJC`
+-- Estructura de tabla para la tabla `datos_etapa_inicial_adojc`
 --
 
-CREATE TABLE `DATOS_ETAPA_INICIAL_ADOJC` (
+CREATE TABLE `datos_etapa_inicial_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6826,24 +6836,19 @@ CREATE TABLE `DATOS_ETAPA_INICIAL_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_ETAPA_INICIAL_ADOJC`
+-- Volcado de datos para la tabla `datos_etapa_inicial_adojc`
 --
 
-INSERT INTO `DATOS_ETAPA_INICIAL_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `AUDIENCIA_INICIAL`, `CTRL_DETENCION`, `DETENCION_LEGAL`, `FECHA_LIBERTAD`, `FORMULACION_IMPUTACION`, `FECHA_IMPUTACION`, `IMPUTADO_DECLARO`, `FECHA_DECLARACION`, `PLAZO_CONSTITUCIONAL`, `TIEMPO_PLAZO`, `AUTO_VINCULACION`, `FECHA_VINCULACION`, `IMPUSO_MCAUTELARES`, `INVESTIGACION_COMPLEMENTARIA`, `FECHA_PLAZO_INVESTIGACION`, `PRORROGA_PLAZO_CIERRE`, `PLAZO_CIERRE_INVESTIGACION`, `FECHA_CIERRE_INVESTIGACION`, `SOBRESEIMIENTO_CAUSAP`, `SUSPENSION_PROCESO`, `CAUSA_SUSPENSION_PROCESO`, `REAPERTURA_PROCESO`, `FECHA_REAPERTURA_PROCESO`, `SOLICITO_REAPERTURA`, `FORMULO_ACUSACION`, `COMENTARIOS`, `ANIO`, `ETAPA`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', 1, 1, 1, '1799-09-09', 1, '1899-09-09', 1, '1899-09-09', 2, 1, -2, '1899-09-09', 1, 2, '1799-09-09', -2, -2, '1899-09-09', 2, 2, -2, -2, '1799-09-09', -2, 2, '', 2020, 2),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', 1, 1, 1, '1799-09-09', 1, '1899-09-09', 2, '1899-09-09', 9, 2, -2, '1899-09-09', -2, -2, '1799-09-09', -2, -2, '1799-09-09', -2, -2, -2, -2, '1799-09-09', -2, -2, '', 2020, 5),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', 1, 1, 1, '1799-09-09', 1, '1899-09-09', 2, '1899-09-09', 2, 1, -2, '1899-09-09', 2, 1, '1899-09-09', 2, 3, '1899-09-09', 2, 1, 2, 1, '1899-09-09', 3, 1, '', 2020, 6),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', 1, 1, 1, '1799-09-09', 1, '1899-09-09', 2, '1899-09-09', 2, 1, -2, '1899-09-09', 2, 2, '1799-09-09', -2, -2, '1699-09-09', -2, -2, -2, -2, '1799-09-09', -2, -2, '', 2020, 3),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', 1, 2, -2, '1799-09-09', 1, '1899-09-09', 1, '1899-09-09', 2, 1, -2, '1899-09-09', 9, 2, '1799-09-09', -2, -2, '1899-09-09', 2, 2, -2, -2, '1799-09-09', -2, 2, '', 2020, 2),
+INSERT INTO `datos_etapa_inicial_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `AUDIENCIA_INICIAL`, `CTRL_DETENCION`, `DETENCION_LEGAL`, `FECHA_LIBERTAD`, `FORMULACION_IMPUTACION`, `FECHA_IMPUTACION`, `IMPUTADO_DECLARO`, `FECHA_DECLARACION`, `PLAZO_CONSTITUCIONAL`, `TIEMPO_PLAZO`, `AUTO_VINCULACION`, `FECHA_VINCULACION`, `IMPUSO_MCAUTELARES`, `INVESTIGACION_COMPLEMENTARIA`, `FECHA_PLAZO_INVESTIGACION`, `PRORROGA_PLAZO_CIERRE`, `PLAZO_CIERRE_INVESTIGACION`, `FECHA_CIERRE_INVESTIGACION`, `SOBRESEIMIENTO_CAUSAP`, `SUSPENSION_PROCESO`, `CAUSA_SUSPENSION_PROCESO`, `REAPERTURA_PROCESO`, `FECHA_REAPERTURA_PROCESO`, `SOLICITO_REAPERTURA`, `FORMULO_ACUSACION`, `COMENTARIOS`, `ANIO`, `ETAPA`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-P299007125', 1, 2, -2, '1799-09-09', 1, '1899-09-09', 9, '1899-09-09', 9, 1, -2, '1899-09-09', 1, 2, '1799-09-09', -2, -2, '1899-09-09', 2, 2, -2, -2, '1799-09-09', -2, 2, '', 2020, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_ETAPA_INTERMEDIA_ADOJC`
+-- Estructura de tabla para la tabla `datos_etapa_intermedia_adojc`
 --
 
-CREATE TABLE `DATOS_ETAPA_INTERMEDIA_ADOJC` (
+CREATE TABLE `datos_etapa_intermedia_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6865,20 +6870,13 @@ CREATE TABLE `DATOS_ETAPA_INTERMEDIA_ADOJC` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_ETAPA_INTERMEDIA_ADOJC`
---
-
-INSERT INTO `DATOS_ETAPA_INTERMEDIA_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `FECHA_ESCRITO_ACUSACION`, `FECHA_CONTESTACION`, `DESCUBRIMIENTO_PROBATORIO`, `AUDIENCIA_INTERMEDIA`, `FECHA_AUDIENCIA_INTERMEDIA`, `SEPARACION_ACUSACION`, `PRESENTACION_MPRUEBA`, `PRESENTA_MP_MINISTERIO`, `PRESENTA_MP_ASESOR`, `PRESENTA_MP_DEFENSA`, `ACUERDOS_PROBATORIOS`, `APERTURA_JUICIO_ORAL`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '1899-09-09', '1899-09-09', 2, 1, '1899-09-09', 2, 1, 9, 1, 9, 2, 1, '', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_ETAPA_ORAL_ADOJO`
+-- Estructura de tabla para la tabla `datos_etapa_oral_adojo`
 --
 
-CREATE TABLE `DATOS_ETAPA_ORAL_ADOJO` (
+CREATE TABLE `datos_etapa_oral_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6910,10 +6908,10 @@ CREATE TABLE `DATOS_ETAPA_ORAL_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_INFORME_ADOJC`
+-- Estructura de tabla para la tabla `datos_informe_adojc`
 --
 
-CREATE TABLE `DATOS_INFORME_ADOJC` (
+CREATE TABLE `datos_informe_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6932,20 +6930,19 @@ CREATE TABLE `DATOS_INFORME_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Información general de los asuntos conocidos por el Órgano j';
 
 --
--- Volcado de datos para la tabla `DATOS_INFORME_ADOJC`
+-- Volcado de datos para la tabla `datos_informe_adojc`
 --
 
-INSERT INTO `DATOS_INFORME_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `CAUSAS_PENALES_INGRESADAS`, `MEDIDAS_PROTECCION_ASIG`, `PROVIDENCIAS_PRECAUTORIAS`, `PRUEBA_ANTICIPADA`, `ORDENES_JUDICIALES`, `ACTOS_INVESTIGA`, `IMPUGNACION_MP`, `OTROS`, `CAUSAS_TRAMITE`, `CAUSAS_BAJAS`, `ANIO`) VALUES
-(13, 13048, 2, '13-13048-2', 3, 1, 0, 0, 0, 0, 0, 0, 2, 1, 2020),
-(9, 9007, 125, '9-9007-125', -9, -9, -9, -9, -9, -9, -9, -9, -9, -9, 2020);
+INSERT INTO `datos_informe_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `CAUSAS_PENALES_INGRESADAS`, `MEDIDAS_PROTECCION_ASIG`, `PROVIDENCIAS_PRECAUTORIAS`, `PRUEBA_ANTICIPADA`, `ORDENES_JUDICIALES`, `ACTOS_INVESTIGA`, `IMPUGNACION_MP`, `OTROS`, `CAUSAS_TRAMITE`, `CAUSAS_BAJAS`, `ANIO`) VALUES
+(9, 9007, 125, '9-9007-125', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_JUECES_ADOJC`
+-- Estructura de tabla para la tabla `datos_jueces_adojc`
 --
 
-CREATE TABLE `DATOS_JUECES_ADOJC` (
+CREATE TABLE `datos_jueces_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -6959,44 +6956,43 @@ CREATE TABLE `DATOS_JUECES_ADOJC` (
   `EDAD` int(2) NOT NULL,
   `GRADO_ESTUDIOS` int(2) NOT NULL,
   `FUNCION_DESEMPENA` int(2) NOT NULL,
+  `ESTATUS` int(1) NOT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Jueces/zas adscritas al Órgano jurisdiccional especializado ';
 
 --
--- Volcado de datos para la tabla `DATOS_JUECES_ADOJC`
+-- Volcado de datos para la tabla `datos_jueces_adojc`
 --
 
-INSERT INTO `DATOS_JUECES_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `JUEZ_CLAVE`, `NOMBRE_JUEZ`, `APELLIDOP_JUEZ`, `APELLIDOM_JUEZ`, `FECHA_GESTION`, `SEXO`, `EDAD`, `GRADO_ESTUDIOS`, `FUNCION_DESEMPENA`, `ANIO`) VALUES
-(13, 13048, 2, '13-13048-2', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2),
-(9, 9007, 125, '9-9007-125', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2),
-(9, 9007, 125, '9-9007-125', 1, 'MANUEL', 'TREVIÑO', 'MARTINEZ', '1987-04-05', 1, 56, 3, 3, 2020),
-(9, 9007, 125, '9-9007-125', 2, 'FERMIN', 'GOMEZ', 'ALVARADO', '2018-04-08', 1, 32, 3, 3, 2020),
-(9, 9007, 125, '9-9007-125', 3, 'PATRICIA', 'MENDOZA', 'FLORES', '2015-11-30', 2, 33, 4, 1, 2020),
-(9, 9007, 125, '9-9007-125', 4, 'CECILIA', 'PINEDA', 'ANGELES', '2013-02-27', 2, 37, 1, 1, 2020),
-(9, 9007, 125, '9-9007-125', 5, 'DIEGO FRANCISCO', 'DEL ANGEL', 'VILLANUEVA', '1899-09-09', 1, 45, 2, 2, 2020),
-(9, 9007, 125, '9-9007-125', 6, 'SERGIO AGUSITIN', 'FERNANDEZ', 'TORREZ', '1899-09-09', 1, 58, 4, 2, 2020),
-(9, 9007, 125, '9-9007-125', 7, 'GISELA GUADALUPE', 'OLIVERA', 'VELAZQUEZ', '1899-09-09', 2, 35, 1, 1, 2020);
+INSERT INTO `datos_jueces_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `JUZGADO_CLAVE`, `JUEZ_CLAVE`, `NOMBRE_JUEZ`, `APELLIDOP_JUEZ`, `APELLIDOM_JUEZ`, `FECHA_GESTION`, `SEXO`, `EDAD`, `GRADO_ESTUDIOS`, `FUNCION_DESEMPENA`, `ESTATUS`, `ANIO`) VALUES
+(9, 9007, 125, '9-9007-125', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, 0, -2),
+(9, 9007, 125, '9-9007-125', 1, 'MANUEL', 'TREVIÑO', 'MARTINEZ', '1987-04-05', 1, 30, 3, 3, 1, 2020),
+(9, 9007, 125, '9-9007-125', 2, 'FERMIN', 'GOMEZ', 'ALVARADO', '2018-04-08', 1, 50, 3, 3, 1, 2020),
+(9, 9007, 125, '9-9007-125', 3, 'PATRICIA', 'MENDOZA', 'FLORES', '2015-11-30', 2, 33, 4, 1, 1, 2020),
+(9, 9007, 125, '9-9007-125', 4, 'CECILIA', 'PINEDA', 'ANGELES', '2013-02-27', 2, 37, 1, 1, 1, 2020),
+(9, 9007, 125, '9-9007-125', 5, 'DIEGO FRANCISCO', 'DEL ANGEL', 'VILLANUEVA', '1899-09-09', 1, 45, 2, 2, 1, 2020),
+(9, 9007, 125, '9-9007-125', 6, 'SERGIO AGUSITIN', 'FERNANDEZ', 'TORREZ', '1899-09-09', 1, 58, 4, 2, 1, 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_JUZGADOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_juzgados_adojc`
 --
 
-CREATE TABLE `DATOS_JUZGADOS_ADOJC` (
+CREATE TABLE `datos_juzgados_adojc` (
   `JUZGADO_CLAVE` varchar(255) COLLATE utf8_bin NOT NULL,
   `JUZGADO_NOMBRE` varchar(255) COLLATE utf8_bin NOT NULL,
   `JUZGADO_NUMERO` int(3) NOT NULL,
   `JUZGADO_JURISDICCION` int(2) NOT NULL,
   `JUZGADO_FUNCION` int(2) NOT NULL,
-  `LADATEL` varchar(10) COLLATE utf8_bin NOT NULL,
+  `LADATEL` varchar(15) COLLATE utf8_bin NOT NULL,
   `CORREO` varchar(65) COLLATE utf8_bin NOT NULL,
   `ENTIDAD` int(2) NOT NULL,
   `MUNICIPIO` int(5) NOT NULL,
   `FORMA_DIVISION` int(1) NOT NULL,
-  `NOMBRE_REGION_JUDICIAL` varchar(255) COLLATE utf8_bin NOT NULL,
-  `NOMBRE_DISTRITO_JUDICIAL` varchar(255) COLLATE utf8_bin NOT NULL,
-  `NOMBRE_PARTIDO_JUDICIAL` varchar(255) COLLATE utf8_bin NOT NULL,
+  `REGION_JUDICIAL` varchar(255) COLLATE utf8_bin NOT NULL,
+  `DISTRITO_JUDICIAL` varchar(255) COLLATE utf8_bin NOT NULL,
+  `PARTIDO_JUDICIAL` varchar(255) COLLATE utf8_bin NOT NULL,
   `TIPO_VIALIDAD` int(2) NOT NULL,
   `NOMBRE_VIALIDAD` varchar(255) COLLATE utf8_bin NOT NULL,
   `ASENTAMIENTO_HUMANO` int(2) NOT NULL,
@@ -7008,24 +7004,24 @@ CREATE TABLE `DATOS_JUZGADOS_ADOJC` (
   `APELLIDOP_CAP` varchar(255) COLLATE utf8_bin NOT NULL,
   `APELLIDOM_CAP` varchar(100) COLLATE utf8_bin NOT NULL,
   `CARGO_CAP` varchar(100) COLLATE utf8_bin NOT NULL,
+  `ESTATUS` int(1) NOT NULL,
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_JUZGADOS_ADOJC`
+-- Volcado de datos para la tabla `datos_juzgados_adojc`
 --
 
-INSERT INTO `DATOS_JUZGADOS_ADOJC` (`JUZGADO_CLAVE`, `JUZGADO_NOMBRE`, `JUZGADO_NUMERO`, `JUZGADO_JURISDICCION`, `JUZGADO_FUNCION`, `LADATEL`, `CORREO`, `ENTIDAD`, `MUNICIPIO`, `FORMA_DIVISION`, `NOMBRE_REGION_JUDICIAL`, `NOMBRE_DISTRITO_JUDICIAL`, `NOMBRE_PARTIDO_JUDICIAL`, `TIPO_VIALIDAD`, `NOMBRE_VIALIDAD`, `ASENTAMIENTO_HUMANO`, `NOMBRE_ASENTAMIENTO`, `NUMERO_EXT`, `NUMERO_INT`, `CODIGO_POSTAL`, `NOMBRE_CAP`, `APELLIDOP_CAP`, `APELLIDOM_CAP`, `CARGO_CAP`, `ANIO`) VALUES
-('13-13048-2', 'BORRAME ORAGANO PRUEBA', 2, 1, 1, '5500000000', 'ALGUEIN@SDA.COM', 13, 13048, 3, '-2', '-2', 'FAFSDF', 17, 'ADFS', 10, 'ASDF', 0, 0, 65464, 'ALGUIEN', 'DSFSD', 'ASDF', 'ASDF', 2020),
-('9-9007-125', 'CASOS', 125, 1, 3, '5554789632', 'CASOS@MAIL.COM', 9, 9007, 4, '-2', '-2', '-2', 17, 'ORIENTE', 3, 'AZTAHUACAN', 89, 12, 12345, 'ROBERTO', 'SACARIAS', 'BLANCO', 'DIRECTOR', 2019);
+INSERT INTO `datos_juzgados_adojc` (`JUZGADO_CLAVE`, `JUZGADO_NOMBRE`, `JUZGADO_NUMERO`, `JUZGADO_JURISDICCION`, `JUZGADO_FUNCION`, `LADATEL`, `CORREO`, `ENTIDAD`, `MUNICIPIO`, `FORMA_DIVISION`, `REGION_JUDICIAL`, `DISTRITO_JUDICIAL`, `PARTIDO_JUDICIAL`, `TIPO_VIALIDAD`, `NOMBRE_VIALIDAD`, `ASENTAMIENTO_HUMANO`, `NOMBRE_ASENTAMIENTO`, `NUMERO_EXT`, `NUMERO_INT`, `CODIGO_POSTAL`, `NOMBRE_CAP`, `APELLIDOP_CAP`, `APELLIDOM_CAP`, `CARGO_CAP`, `ESTATUS`, `ANIO`) VALUES
+('9-9007-125', 'CASOS', 125, 1, 3, '555554789632', 'CASOS@MAIL.COM', 9, 9007, 4, '-2', '-2', '-2', 17, 'ORIENTE', 3, 'AZTAHUACAN', 89, 12, 12345, 'ROBERTO', 'SACARIAS', 'BLANCO', 'DIRECTOR', 1, 2019);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PDELITOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_pdelitos_adojc`
 --
 
-CREATE TABLE `DATOS_PDELITOS_ADOJC` (
+CREATE TABLE `datos_pdelitos_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) DEFAULT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) DEFAULT NULL,
   `JUZGADO_NUMERO_ID` int(3) DEFAULT NULL,
@@ -7036,34 +7032,13 @@ CREATE TABLE `DATOS_PDELITOS_ADOJC` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_PDELITOS_ADOJC`
---
-
-INSERT INTO `DATOS_PDELITOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `DELITO_CLAVE`, `NUMERO_VICTIMAS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-D199007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-D399007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-D199007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-D299007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-D499007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-D299007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-D399007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-D599007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-D399007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-D499007125', 0, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-D599007125', 0, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '355/2020-D199007125', 0, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '355/2020-D299007125', 0, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P299007125', '355/2020-D299007125', 0, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P299007125', '355/2020-D399007125', 0, 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PDELITOS_ADOJO`
+-- Estructura de tabla para la tabla `datos_pdelitos_adojo`
 --
 
-CREATE TABLE `DATOS_PDELITOS_ADOJO` (
+CREATE TABLE `datos_pdelitos_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) DEFAULT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) DEFAULT NULL,
   `JUZGADO_NUMERO_ID` int(3) DEFAULT NULL,
@@ -7074,24 +7049,13 @@ CREATE TABLE `DATOS_PDELITOS_ADOJO` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_PDELITOS_ADOJO`
---
-
-INSERT INTO `DATOS_PDELITOS_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVE`, `DELITO_CLAVE`, `NUMERO_VICTIMAS`, `ANIO`) VALUES
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 'borrame/2020-D199007125', 0, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 'borrame/2020-D399007125', 0, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 'borrame/2020-D299007125', 0, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 'borrame/2020-D399007125', 0, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 'borrame/2020-D599007125', 0, 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PFUENTE_INGRESOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_pfuente_ingresos_adojc`
 --
 
-CREATE TABLE `DATOS_PFUENTE_INGRESOS_ADOJC` (
+CREATE TABLE `datos_pfuente_ingresos_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7102,23 +7066,20 @@ CREATE TABLE `DATOS_PFUENTE_INGRESOS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_PFUENTE_INGRESOS_ADOJC`
+-- Volcado de datos para la tabla `datos_pfuente_ingresos_adojc`
 --
 
-INSERT INTO `DATOS_PFUENTE_INGRESOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `INGRESO`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', 1, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', 2, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', 2, 2020),
+INSERT INTO `datos_pfuente_ingresos_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `INGRESO`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-P299007125', 3, 2020),
 (9, 9007, 125, '355/202099007125', '355/2020-P299007125', 6, 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PFUENTE_INGRESOS_ADOJO`
+-- Estructura de tabla para la tabla `datos_pfuente_ingresos_adojo`
 --
 
-CREATE TABLE `DATOS_PFUENTE_INGRESOS_ADOJO` (
+CREATE TABLE `datos_pfuente_ingresos_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7128,22 +7089,13 @@ CREATE TABLE `DATOS_PFUENTE_INGRESOS_ADOJO` (
   `ANIO` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_PFUENTE_INGRESOS_ADOJO`
---
-
-INSERT INTO `DATOS_PFUENTE_INGRESOS_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVE`, `INGRESO`, `ANIO`) VALUES
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 1, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 2, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 2, 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PMEDIDAS_ADOJC`
+-- Estructura de tabla para la tabla `datos_pmedidas_adojc`
 --
 
-CREATE TABLE `DATOS_PMEDIDAS_ADOJC` (
+CREATE TABLE `datos_pmedidas_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) DEFAULT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) DEFAULT NULL,
   `JUZGADO_NUMERO_ID` int(3) DEFAULT NULL,
@@ -7157,22 +7109,20 @@ CREATE TABLE `DATOS_PMEDIDAS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_PMEDIDAS_ADOJC`
+-- Volcado de datos para la tabla `datos_pmedidas_adojc`
 --
 
-INSERT INTO `DATOS_PMEDIDAS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `SOLICITA_MEDIDA`, `CAUTELARES`, `DURACION_MEDIDA`, `ESPECIFIQUE`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', 4, 2, 3, '-2', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', 4, 6, 1, '-2', 2020),
+INSERT INTO `datos_pmedidas_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `SOLICITA_MEDIDA`, `CAUTELARES`, `DURACION_MEDIDA`, `ESPECIFIQUE`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-P299007125', 1, 3, 2, '-2', 2020),
 (9, 9007, 125, '355/202099007125', '355/2020-P299007125', 1, 5, 2, '-2', 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PRESENTA_MP_ADOJC`
+-- Estructura de tabla para la tabla `datos_presenta_mp_adojc`
 --
 
-CREATE TABLE `DATOS_PRESENTA_MP_ADOJC` (
+CREATE TABLE `datos_presenta_mp_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) DEFAULT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) DEFAULT NULL,
   `JUZGADO_NUMERO_ID` int(3) DEFAULT NULL,
@@ -7183,21 +7133,13 @@ CREATE TABLE `DATOS_PRESENTA_MP_ADOJC` (
   `ANIO` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_PRESENTA_MP_ADOJC`
---
-
-INSERT INTO `DATOS_PRESENTA_MP_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `FIGURA_MPRUEBA`, `MEDIO_PRUEBA_ID`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', 2, 2, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', 2, 3, 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PROCESADOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_procesados_adojc`
 --
 
-CREATE TABLE `DATOS_PROCESADOS_ADOJC` (
+CREATE TABLE `datos_procesados_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7249,24 +7191,19 @@ CREATE TABLE `DATOS_PROCESADOS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_PROCESADOS_ADOJC`
+-- Volcado de datos para la tabla `datos_procesados_adojc`
 --
 
-INSERT INTO `DATOS_PROCESADOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `NOMBRE`, `A_PATERNO`, `A_MATERNO`, `ALIAS`, `CURP`, `FECHA_NACIMIENTO`, `SEXO`, `EDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `DISCAPACIDAD`, `CONDICION_ALFABETISMO`, `ULTIMO_GRADO_ESTUDIOS`, `CONDICION_ESTUDIANTE`, `HABLA_ESPANOL`, `POBLACION_INDIGENA`, `TIPO_PUEBLO_INDIGENA`, `HABLA_INDIGENA`, `FAMILIA_LINGUISTICA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `CONDICION_ACTIVIDAD`, `INICIO_IMPUTADO`, `TIPO_DETENCION`, `FORMA_CONDUCCION`, `GRADO_PARTICIPACION`, `REINCIDENCIA`, `ESTADO_PSICOFISICO`, `DELICTIVO`, `GRUPO_DELICTIVO`, `TIPO_DEFENSOR`, `PERSONA_RESPONSABLE`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', 'SERGIO', 'RAMOS', 'CORONA', 'EL TESORITO', 'ASDFSDFASDFASDFASD', '1899-09-09', 1, 14, 1, 5, 5005, 7, 2, -2, -2, 2, 2, 2, 2, 2, 2, 2, -2, 1, 5, 2, 2, 1, 3, 5, -2, 1, 2, -2, 3, 3, 3, 2, '-2', 1, 4, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', 'GERARDO', 'ZAMUDIO', 'ZEPEDA', 'EL BEBE SINCLER', 'ASDFSDFASDFASDFASD', '1899-09-09', 1, 13, 1, 4, 4003, 6, 1, 5, 5008, 4, 2, 2, 3, 2, 2, 2, -2, 2, -2, 2, 2, 2, -2, 1, -2, 9, -2, -2, 4, 3, 2, 9, '-2', 2, 3, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', 'YAMILE', 'RODRIGUEZ', 'CARMONA', 'LA BESITOS', 'ASDFSDFASDFASDFASD', '1899-09-09', 2, 15, 1, 6, 6005, 1, 2, -2, -2, 5, 2, 1, 3, 2, 1, 2, -2, 2, -2, 2, 2, 1, 3, 10, 4, 1, 1, -2, 1, 2, 1, 2, '-2', 1, 1, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', 'PALOMA', 'HERNANDEZ', 'PEREZ', 'TODOS MIOS', 'ASDFSDFASDFASDFASD', '2002-06-02', 2, 16, 2, -2, -2, 12, 5, -2, -2, 6, 2, 2, 3, 2, 1, 1, 13, 2, -2, 2, 2, 9, -2, 6, -2, 2, -2, 2, 7, 3, 3, 2, '-2', 3, 3, '', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', 'ALBERTO', 'LINARAES', 'PAREDES', 'BEBOTE', 'ASDFSDFASDFASDFASD', '2003-02-03', 1, 16, 14, -2, -2, 11, 7, -2, -2, 6, 2, 2, 4, 9, 1, 2, -2, 9, -2, 1, 9, 9, -2, 7, -2, 9, -2, -2, 8, 9, 3, 2, '-2', 3, 4, '', 2020),
+INSERT INTO `datos_procesados_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `NOMBRE`, `A_PATERNO`, `A_MATERNO`, `ALIAS`, `CURP`, `FECHA_NACIMIENTO`, `SEXO`, `EDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `DISCAPACIDAD`, `CONDICION_ALFABETISMO`, `ULTIMO_GRADO_ESTUDIOS`, `CONDICION_ESTUDIANTE`, `HABLA_ESPANOL`, `POBLACION_INDIGENA`, `TIPO_PUEBLO_INDIGENA`, `HABLA_INDIGENA`, `FAMILIA_LINGUISTICA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `CONDICION_ACTIVIDAD`, `INICIO_IMPUTADO`, `TIPO_DETENCION`, `FORMA_CONDUCCION`, `GRADO_PARTICIPACION`, `REINCIDENCIA`, `ESTADO_PSICOFISICO`, `DELICTIVO`, `GRUPO_DELICTIVO`, `TIPO_DEFENSOR`, `PERSONA_RESPONSABLE`, `COMENTARIOS`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-P299007125', 'ROCIO ANEL', 'GONZALEZ', 'BAUTISTA', 'LA TELETUBI', 'ASDFSDFASDFASDFASD', '2008-10-03', 9, 15, 1, 5, 5005, 5, 12, -2, -2, 4, 9, 1, 3, 2, 2, 1, 7, 1, 5, 2, 2, 1, 6, 1, -2, 1, 2, -2, 99, 2, 1, 1, 'null', 2, 3, '', 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_PROCESADOS_ADOJO`
+-- Estructura de tabla para la tabla `datos_procesados_adojo`
 --
 
-CREATE TABLE `DATOS_PROCESADOS_ADOJO` (
+CREATE TABLE `datos_procesados_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7316,21 +7253,13 @@ CREATE TABLE `DATOS_PROCESADOS_ADOJO` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_PROCESADOS_ADOJO`
---
-
-INSERT INTO `DATOS_PROCESADOS_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJC`, `PROCESADO_CLAVEJC`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`, `NOMBRE`, `A_PATERNO`, `A_MATERNO`, `ALIAS`, `CURP`, `FECHA_NACIMIENTO`, `SEXO`, `EDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `DISCAPACIDAD`, `CONDICION_ALFABETISMO`, `ULTIMO_GRADO_ESTUDIOS`, `CONDICION_ESTUDIANTE`, `HABLA_ESPANOL`, `POBLACION_INDIGENA`, `TIPO_PUEBLO_INDIGENA`, `HABLA_INDIGENA`, `FAMILIA_LINGUISTICA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `CONDICION_ACTIVIDAD`, `GRADO_PARTICIPACION`, `REINCIDENCIA`, `ESTADO_PSICOFISICO`, `DELICTIVO`, `GRUPO_DELICTIVO`, `TIPO_DEFENSOR`, `PERSONA_RESPONSABLE`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', 'borrame/202099007125', 'borrame/2020-P199007125', 'SERGIO', 'RAMOS', 'CORONA', 'EL TESORITO', 'ASDFSDFASDFASDFASD', '1899-09-09', 1, 14, 1, 5, 5005, 7, 2, -2, -2, 2, 2, 2, 2, 2, 2, 2, -2, 1, 5, 2, 2, 1, 3, 5, -2, 3, 3, 3, 2, '-2', 1, 4, 'entra', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', 'borrame/202099007125', 'borrame/2020-P399007125', 'YAMILE', 'RODRIGUEZ', 'CARMONA', 'LA BESITOS', 'ASDFSDFASDFASDFASD', '1899-09-09', 2, 15, 1, 6, 6005, 1, 2, -2, -2, 5, 2, 1, 3, 2, 1, 2, -2, 2, -2, 2, 2, 1, 3, 10, 4, 1, 2, 1, 2, '-2', 1, 1, '', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_TRAMITES_ADOJC`
+-- Estructura de tabla para la tabla `datos_tramites_adojc`
 --
 
-CREATE TABLE `DATOS_TRAMITES_ADOJC` (
+CREATE TABLE `datos_tramites_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7344,20 +7273,13 @@ CREATE TABLE `DATOS_TRAMITES_ADOJC` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_TRAMITES_ADOJC`
---
-
-INSERT INTO `DATOS_TRAMITES_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `ETAPA_PROCESAL`, `ESTATUS_INVESTIGACION`, `ESTATUS_INTERMEDIA`, `ESPECIFIQUE`, `FECHA_ACTO_PROCESAL`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', 1, 3, -2, '-2', '1899-09-09', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_TRAMITES_ADOJO`
+-- Estructura de tabla para la tabla `datos_tramites_adojo`
 --
 
-CREATE TABLE `DATOS_TRAMITES_ADOJO` (
+CREATE TABLE `datos_tramites_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7372,10 +7294,10 @@ CREATE TABLE `DATOS_TRAMITES_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VDELITOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_vdelitos_adojc`
 --
 
-CREATE TABLE `DATOS_VDELITOS_ADOJC` (
+CREATE TABLE `datos_vdelitos_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7386,52 +7308,13 @@ CREATE TABLE `DATOS_VDELITOS_ADOJC` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_VDELITOS_ADOJC`
---
-
-INSERT INTO `DATOS_VDELITOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `PROCESADO_CLAVE`, `VICTIMA_CLAVE`, `DELITO_CLAVE`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-V199007125', '001/2020-D199007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-V199007125', '001/2020-D199007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-V199007125', '001/2020-D299007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-V199007125', '001/2020-D299007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-V199007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-V199007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-V199007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-V199007125', '001/2020-D499007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-V199007125', '001/2020-D499007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-V199007125', '001/2020-D599007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-V199007125', '001/2020-D599007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-V299007125', '001/2020-D299007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-V299007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-V299007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-V299007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-V299007125', '001/2020-D499007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-V299007125', '001/2020-D499007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-V399007125', '001/2020-D299007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-V399007125', '001/2020-D299007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P199007125', '001/2020-V399007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-V399007125', '001/2020-D399007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P399007125', '001/2020-V399007125', '001/2020-D499007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P299007125', '001/2020-V399007125', '001/2020-D599007125', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-P499007125', '001/2020-V399007125', '001/2020-D599007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '355/2020-V199007125', '355/2020-D199007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '355/2020-V199007125', '355/2020-D299007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P299007125', '355/2020-V199007125', '355/2020-D299007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '355/2020-V199007125', '355/2020-D399007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '355/2020-V299007125', '355/2020-D199007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P299007125', '355/2020-V299007125', '355/2020-D299007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P299007125', '355/2020-V299007125', '355/2020-D399007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P199007125', '355/2020-V399007125', '355/2020-D299007125', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-P299007125', '355/2020-V399007125', '355/2020-D299007125', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VDELITOS_ADOJO`
+-- Estructura de tabla para la tabla `datos_vdelitos_adojo`
 --
 
-CREATE TABLE `DATOS_VDELITOS_ADOJO` (
+CREATE TABLE `datos_vdelitos_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7442,28 +7325,13 @@ CREATE TABLE `DATOS_VDELITOS_ADOJO` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_VDELITOS_ADOJO`
---
-
-INSERT INTO `DATOS_VDELITOS_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `PROCESADO_CLAVE`, `VICTIMA_CLAVE`, `DELITO_CLAVE`, `ANIO`) VALUES
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 'borrame/2020-V199007125', 'borrame/2020-D199007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 'borrame/2020-V199007125', 'borrame/2020-D299007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 'borrame/2020-V199007125', 'borrame/2020-D399007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 'borrame/2020-V199007125', 'borrame/2020-D399007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 'borrame/2020-V199007125', 'borrame/2020-D599007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P399007125', 'borrame/2020-V299007125', 'borrame/2020-D299007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 'borrame/2020-V299007125', 'borrame/2020-D399007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 'borrame/2020-V399007125', 'borrame/2020-D299007125', 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-P199007125', 'borrame/2020-V399007125', 'borrame/2020-D399007125', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VFUENTE_INGRESOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_vfuente_ingresos_adojc`
 --
 
-CREATE TABLE `DATOS_VFUENTE_INGRESOS_ADOJC` (
+CREATE TABLE `datos_vfuente_ingresos_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7474,10 +7342,10 @@ CREATE TABLE `DATOS_VFUENTE_INGRESOS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_VFUENTE_INGRESOS_ADOJC`
+-- Volcado de datos para la tabla `datos_vfuente_ingresos_adojc`
 --
 
-INSERT INTO `DATOS_VFUENTE_INGRESOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `INGRESO`, `ANIO`) VALUES
+INSERT INTO `datos_vfuente_ingresos_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `INGRESO`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-V199007125', 5, 2020),
 (9, 9007, 125, '355/202099007125', '355/2020-V199007125', 6, 2020),
 (9, 9007, 125, '355/202099007125', '355/2020-V299007125', 9, 2020);
@@ -7485,10 +7353,10 @@ INSERT INTO `DATOS_VFUENTE_INGRESOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNIC
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VFUENTE_INGRESOS_ADOJO`
+-- Estructura de tabla para la tabla `datos_vfuente_ingresos_adojo`
 --
 
-CREATE TABLE `DATOS_VFUENTE_INGRESOS_ADOJO` (
+CREATE TABLE `datos_vfuente_ingresos_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7501,10 +7369,10 @@ CREATE TABLE `DATOS_VFUENTE_INGRESOS_ADOJO` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VICTIMAS_ADOJC`
+-- Estructura de tabla para la tabla `datos_victimas_adojc`
 --
 
-CREATE TABLE `DATOS_VICTIMAS_ADOJC` (
+CREATE TABLE `datos_victimas_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7543,24 +7411,20 @@ CREATE TABLE `DATOS_VICTIMAS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_VICTIMAS_ADOJC`
+-- Volcado de datos para la tabla `datos_victimas_adojc`
 --
 
-INSERT INTO `DATOS_VICTIMAS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `TIPO_VICTIMA`, `TIPO_VICTIMA_MORAL`, `CONTO_ASESOR`, `ASESOR`, `SEXO`, `FECHA_NACIMIENTO`, `EDAD`, `VULNERABILIDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `CONDICION_ALFABETISMO`, `GRADO_ESTUDIOS`, `HABLA_ESPANOL`, `HABLA_INDIGENA`, `LENGUA_INDIGENA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `MEDIDAS_MUJER`, `MEDIDAS_PROTECCION`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-V199007125', 1, -2, 2, -2, 2, '2007-02-02', 16, 6, 6, -2, -2, 9, 14, -2, -2, 5, 1, 5, 2, 2, -2, 2, 2, 2, -2, 5, 2, 2, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V299007125', 2, 9, 2, -2, -2, '1899-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', 1, -2, 2, -2, 1, '1899-09-09', 33, 7, 6, -2, -2, 7, 13, -2, -2, 6, 1, 4, 2, 2, -2, 9, 2, 2, -2, 6, -2, 1, '', 2020),
+INSERT INTO `datos_victimas_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `TIPO_VICTIMA`, `TIPO_VICTIMA_MORAL`, `CONTO_ASESOR`, `ASESOR`, `SEXO`, `FECHA_NACIMIENTO`, `EDAD`, `VULNERABILIDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `CONDICION_ALFABETISMO`, `GRADO_ESTUDIOS`, `HABLA_ESPANOL`, `HABLA_INDIGENA`, `LENGUA_INDIGENA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `MEDIDAS_MUJER`, `MEDIDAS_PROTECCION`, `COMENTARIOS`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-V199007125', 1, -2, 9, -2, 1, '1899-09-09', 18, 7, 6, -2, -2, 9, 10, -2, -2, 5, 2, 6, 2, 1, 1, 2, 2, 1, 3, 6, -2, 1, '', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-V299007125', 1, -2, 2, -2, 2, '1899-09-09', 35, 7, 4, -2, -2, 7, 13, -2, -2, 2, 1, 3, 2, 1, 3, 2, 2, 1, 5, 7, 1, 1, '', 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-V399007125', 2, 3, 9, -2, -2, '1899-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020);
+(9, 9007, 125, '355/202099007125', '355/2020-V299007125', 1, -2, 2, -2, 2, '1899-09-09', 35, 7, 4, -2, -2, 7, 13, -2, -2, 2, 1, 3, 2, 1, 3, 2, 2, 1, 5, 7, 1, 1, '', 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VICTIMAS_ADOJO`
+-- Estructura de tabla para la tabla `datos_victimas_adojo`
 --
 
-CREATE TABLE `DATOS_VICTIMAS_ADOJO` (
+CREATE TABLE `datos_victimas_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7598,22 +7462,13 @@ CREATE TABLE `DATOS_VICTIMAS_ADOJO` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_VICTIMAS_ADOJO`
---
-
-INSERT INTO `DATOS_VICTIMAS_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJC`, `VICTIMA_CLAVEJC`, `CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`, `TIPO_VICTIMA`, `TIPO_VICTIMA_MORAL`, `CONTO_ASESOR`, `ASESOR`, `SEXO`, `FECHA_NACIMIENTO`, `EDAD`, `VULNERABILIDAD`, `NACIMIENTO_PAIS`, `NACIMIENTO_ENTIDAD`, `NACIMIENTO_MUNICIPIO`, `NACIONALIDAD`, `RESIDENCIA_PAIS`, `RESIDENCIA_ENTIDAD`, `RESIDENCIA_MUNICIPIO`, `ESTADO_CIVIL`, `CONDICION_ALFABETISMO`, `GRADO_ESTUDIOS`, `HABLA_ESPANOL`, `HABLA_INDIGENA`, `LENGUA_INDIGENA`, `LENGUA_EXTRANJERA`, `INTERPRETE`, `INGRESOS`, `RANGO_INGRESOS`, `OCUPACION`, `COMENTARIOS`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-V199007125', 'borrame/202099007125', 'borrame/2020-V199007125', 1, -2, 2, -2, 2, '2007-02-02', 16, 6, 6, -2, -2, 9, 14, -2, -2, 5, 1, 5, 2, 2, -2, 2, 2, 2, -2, 5, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V299007125', 'borrame/202099007125', 'borrame/2020-V299007125', 2, 9, 2, -2, -2, '1799-09-09', -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, '', 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', 'borrame/202099007125', 'borrame/2020-V399007125', 1, -2, 2, -2, 1, '1899-09-09', 33, 7, 6, -2, -2, 7, 13, -2, -2, 6, 1, 4, 2, 2, -2, 9, 2, 2, -2, 6, '', 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VMEDIDAS_ADOJC`
+-- Estructura de tabla para la tabla `datos_vmedidas_adojc`
 --
 
-CREATE TABLE `DATOS_VMEDIDAS_ADOJC` (
+CREATE TABLE `datos_vmedidas_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) DEFAULT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) DEFAULT NULL,
   `JUZGADO_NUMERO_ID` int(3) DEFAULT NULL,
@@ -7624,12 +7479,10 @@ CREATE TABLE `DATOS_VMEDIDAS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_VMEDIDAS_ADOJC`
+-- Volcado de datos para la tabla `datos_vmedidas_adojc`
 --
 
-INSERT INTO `DATOS_VMEDIDAS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `TIPO_MEDIDA_PROT`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', 2, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', 4, 2020),
+INSERT INTO `datos_vmedidas_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `TIPO_MEDIDA_PROT`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-V199007125', 2, 2020),
 (9, 9007, 125, '355/202099007125', '355/2020-V199007125', 6, 2020),
 (9, 9007, 125, '355/202099007125', '355/2020-V299007125', 7, 2020),
@@ -7638,10 +7491,10 @@ INSERT INTO `DATOS_VMEDIDAS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VMEDIDAS_DMUJ_ADOJC`
+-- Estructura de tabla para la tabla `datos_vmedidas_dmuj_adojc`
 --
 
-CREATE TABLE `DATOS_VMEDIDAS_DMUJ_ADOJC` (
+CREATE TABLE `datos_vmedidas_dmuj_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7652,20 +7505,20 @@ CREATE TABLE `DATOS_VMEDIDAS_DMUJ_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_VMEDIDAS_DMUJ_ADOJC`
+-- Volcado de datos para la tabla `datos_vmedidas_dmuj_adojc`
 --
 
-INSERT INTO `DATOS_VMEDIDAS_DMUJ_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `TIPO_MEDIDA_MUJER`, `ANIO`) VALUES
+INSERT INTO `datos_vmedidas_dmuj_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `TIPO_MEDIDA_MUJER`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-V299007125', 14, 2020),
 (9, 9007, 125, '355/202099007125', '355/2020-V299007125', 16, 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VPROCESADOS_ADOJC`
+-- Estructura de tabla para la tabla `datos_vprocesados_adojc`
 --
 
-CREATE TABLE `DATOS_VPROCESADOS_ADOJC` (
+CREATE TABLE `datos_vprocesados_adojc` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7677,37 +7530,20 @@ CREATE TABLE `DATOS_VPROCESADOS_ADOJC` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `DATOS_VPROCESADOS_ADOJC`
+-- Volcado de datos para la tabla `datos_vprocesados_adojc`
 --
 
-INSERT INTO `DATOS_VPROCESADOS_ADOJC` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `PROCESADO_CLAVE`, `RELACION`, `ANIO`) VALUES
-(9, 9007, 125, '001/202099007125', '001/2020-V199007125', '001/2020-P199007125', 10, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V299007125', '001/2020-P199007125', 9, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', '001/2020-P199007125', 99, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V199007125', '001/2020-P299007125', 10, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V299007125', '001/2020-P299007125', 2, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', '001/2020-P299007125', 10, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V199007125', '001/2020-P399007125', 3, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V199007125', '001/2020-P399007125', 7, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V299007125', '001/2020-P399007125', 5, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', '001/2020-P399007125', 8, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V199007125', '001/2020-P499007125', 99, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V299007125', '001/2020-P499007125', 10, 2020),
-(9, 9007, 125, '001/202099007125', '001/2020-V399007125', '001/2020-P499007125', 9, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-V199007125', '355/2020-P199007125', 99, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-V299007125', '355/2020-P199007125', 4, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-V399007125', '355/2020-P199007125', 10, 2020),
+INSERT INTO `datos_vprocesados_adojc` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVE`, `VICTIMA_CLAVE`, `PROCESADO_CLAVE`, `RELACION`, `ANIO`) VALUES
 (9, 9007, 125, '355/202099007125', '355/2020-V199007125', '355/2020-P299007125', 10, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-V299007125', '355/2020-P299007125', 6, 2020),
-(9, 9007, 125, '355/202099007125', '355/2020-V399007125', '355/2020-P299007125', 99, 2020);
+(9, 9007, 125, '355/202099007125', '355/2020-V299007125', '355/2020-P299007125', 6, 2020);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DATOS_VPROCESADOS_ADOJO`
+-- Estructura de tabla para la tabla `datos_vprocesados_adojo`
 --
 
-CREATE TABLE `DATOS_VPROCESADOS_ADOJO` (
+CREATE TABLE `datos_vprocesados_adojo` (
   `JUZGADO_ENTIDAD_ID` int(2) NOT NULL,
   `JUZGADO_MUNICIPIO_ID` int(5) NOT NULL,
   `JUZGADO_NUMERO_ID` int(3) NOT NULL,
@@ -7718,35 +7554,22 @@ CREATE TABLE `DATOS_VPROCESADOS_ADOJO` (
   `ANIO` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `DATOS_VPROCESADOS_ADOJO`
---
-
-INSERT INTO `DATOS_VPROCESADOS_ADOJO` (`JUZGADO_ENTIDAD_ID`, `JUZGADO_MUNICIPIO_ID`, `JUZGADO_NUMERO_ID`, `CAUSA_CLAVEJO`, `VICTIMA_CLAVE`, `PROCESADO_CLAVE`, `RELACION`, `ANIO`) VALUES
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-V199007125', 'borrame/2020-P199007125', 10, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-V299007125', 'borrame/2020-P199007125', 9, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-V399007125', 'borrame/2020-P199007125', 99, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-V199007125', 'borrame/2020-P399007125', 3, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-V199007125', 'borrame/2020-P399007125', 7, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-V299007125', 'borrame/2020-P399007125', 5, 2020),
-(9, 9007, 125, 'borrame/202099007125', 'borrame/2020-V399007125', 'borrame/2020-P399007125', 8, 2020);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `TIPO_USUARIOS`
+-- Estructura de tabla para la tabla `tipo_usuarios`
 --
 
-CREATE TABLE `TIPO_USUARIOS` (
+CREATE TABLE `tipo_usuarios` (
   `TIPO_USUARIO_ID` int(1) NOT NULL,
   `DESCRIPCION` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `TIPO_USUARIOS`
+-- Volcado de datos para la tabla `tipo_usuarios`
 --
 
-INSERT INTO `TIPO_USUARIOS` (`TIPO_USUARIO_ID`, `DESCRIPCION`) VALUES
+INSERT INTO `tipo_usuarios` (`TIPO_USUARIO_ID`, `DESCRIPCION`) VALUES
 (1, 'Administrador'),
 (2, 'Captura'),
 (3, 'Consulta');
@@ -7754,10 +7577,10 @@ INSERT INTO `TIPO_USUARIOS` (`TIPO_USUARIO_ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `USUARIOS`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `USUARIOS` (
+CREATE TABLE `usuarios` (
   `USUARIO_ID` int(2) NOT NULL,
   `NOMBRE` varchar(150) COLLATE utf8_bin NOT NULL,
   `APATERNO` varchar(150) COLLATE utf8_bin NOT NULL,
@@ -7772,20 +7595,20 @@ CREATE TABLE `USUARIOS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `USUARIOS`
+-- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `USUARIOS` (`USUARIO_ID`, `NOMBRE`, `APATERNO`, `AMATERNO`, `EDAD`, `CORREO`, `ENTIDAD`, `CONTRASENIA`, `TIPO_USUARIO`, `VISITA`, `ESTATUS`) VALUES
+INSERT INTO `usuarios` (`USUARIO_ID`, `NOMBRE`, `APATERNO`, `AMATERNO`, `EDAD`, `CORREO`, `ENTIDAD`, `CONTRASENIA`, `TIPO_USUARIO`, `VISITA`, `ESTATUS`) VALUES
 (5, 'CARLOS', 'SANCHEZ', 'GARCIA', 32, 'ADMIN@MAIL.COM', 9, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, 1, 1),
 (6, 'CHARLY', 'ROMERO', 'TERCERO', 33, 'TRES@MAIL.COM', 9, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `USUARIOS_CONTROL`
+-- Estructura de tabla para la tabla `usuarios_control`
 --
 
-CREATE TABLE `USUARIOS_CONTROL` (
+CREATE TABLE `usuarios_control` (
   `CAUSA_CLAVE` varchar(255) COLLATE utf8_bin NOT NULL,
   `AVANCE` int(2) NOT NULL,
   `CAUSA_CLAVEJO` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -7793,11 +7616,10 @@ CREATE TABLE `USUARIOS_CONTROL` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `USUARIOS_CONTROL`
+-- Volcado de datos para la tabla `usuarios_control`
 --
 
-INSERT INTO `USUARIOS_CONTROL` (`CAUSA_CLAVE`, `AVANCE`, `CAUSA_CLAVEJO`, `AVANCEJO`) VALUES
-('001/202099007125', 6, 'borrame/202099007125', 5),
+INSERT INTO `usuarios_control` (`CAUSA_CLAVE`, `AVANCE`, `CAUSA_CLAVEJO`, `AVANCEJO`) VALUES
 ('355/202099007125', 6, NULL, NULL);
 
 --
@@ -7805,543 +7627,555 @@ INSERT INTO `USUARIOS_CONTROL` (`CAUSA_CLAVE`, `AVANCE`, `CAUSA_CLAVEJO`, `AVANC
 --
 
 --
--- Indices de la tabla `CATALOGOS_ACUERDO_REPARATORIO`
+-- Indices de la tabla `catalogos_acuerdo_reparatorio`
 --
-ALTER TABLE `CATALOGOS_ACUERDO_REPARATORIO`
+ALTER TABLE `catalogos_acuerdo_reparatorio`
   ADD PRIMARY KEY (`AREPARATORIO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ALFABETISMO`
+-- Indices de la tabla `catalogos_alfabetismo`
 --
-ALTER TABLE `CATALOGOS_ALFABETISMO`
+ALTER TABLE `catalogos_alfabetismo`
   ADD PRIMARY KEY (`ALFABETISMO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ASENTAMIENTO_HUMANO`
+-- Indices de la tabla `catalogos_asentamiento_humano`
 --
-ALTER TABLE `CATALOGOS_ASENTAMIENTO_HUMANO`
+ALTER TABLE `catalogos_asentamiento_humano`
   ADD PRIMARY KEY (`ASENTAMIENTO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_AUDIENCIAS_INTERMEDIA`
+-- Indices de la tabla `catalogos_audiencias_intermedia`
 --
-ALTER TABLE `CATALOGOS_AUDIENCIAS_INTERMEDIA`
+ALTER TABLE `catalogos_audiencias_intermedia`
   ADD PRIMARY KEY (`AUDIENCIA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_AUDIENCIAS_INVESTIGACION`
+-- Indices de la tabla `catalogos_audiencias_investigacion`
 --
-ALTER TABLE `CATALOGOS_AUDIENCIAS_INVESTIGACION`
+ALTER TABLE `catalogos_audiencias_investigacion`
   ADD PRIMARY KEY (`AUDIENCIA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_AUDIENCIAS_JUICIOORAL`
+-- Indices de la tabla `catalogos_audiencias_juiciooral`
 --
-ALTER TABLE `CATALOGOS_AUDIENCIAS_JUICIOORAL`
+ALTER TABLE `catalogos_audiencias_juiciooral`
   ADD PRIMARY KEY (`AUDIENCIA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_AUTO_VINCULACION`
+-- Indices de la tabla `catalogos_auto_vinculacion`
 --
-ALTER TABLE `CATALOGOS_AUTO_VINCULACION`
+ALTER TABLE `catalogos_auto_vinculacion`
   ADD PRIMARY KEY (`AUTO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CALIFICACION_DELITO`
+-- Indices de la tabla `catalogos_calificacion_delito`
 --
-ALTER TABLE `CATALOGOS_CALIFICACION_DELITO`
+ALTER TABLE `catalogos_calificacion_delito`
   ADD PRIMARY KEY (`CALIFICACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CAUSA_SUSPENCION`
+-- Indices de la tabla `catalogos_causa_suspencion`
 --
-ALTER TABLE `CATALOGOS_CAUSA_SUSPENCION`
+ALTER TABLE `catalogos_causa_suspencion`
   ADD PRIMARY KEY (`CSUSPENSION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CLASIFICACION`
+-- Indices de la tabla `catalogos_clasificacion`
 --
-ALTER TABLE `CATALOGOS_CLASIFICACION`
+ALTER TABLE `catalogos_clasificacion`
   ADD PRIMARY KEY (`CLASIFICACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CODIGO_NORMA`
+-- Indices de la tabla `catalogos_codigo_norma`
 --
-ALTER TABLE `CATALOGOS_CODIGO_NORMA`
+ALTER TABLE `catalogos_codigo_norma`
   ADD PRIMARY KEY (`ID_CODIGO`);
 
 --
--- Indices de la tabla `CATALOGOS_CONCURSO`
+-- Indices de la tabla `catalogos_concurso`
 --
-ALTER TABLE `CATALOGOS_CONCURSO`
+ALTER TABLE `catalogos_concurso`
   ADD PRIMARY KEY (`CONCURSO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CONDICION_ACTIVIDAD`
+-- Indices de la tabla `catalogos_condicion_actividad`
 --
-ALTER TABLE `CATALOGOS_CONDICION_ACTIVIDAD`
+ALTER TABLE `catalogos_condicion_actividad`
   ADD PRIMARY KEY (`CONDICIONA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CONDICION_ESTUDIANTE`
+-- Indices de la tabla `catalogos_condicion_estudiante`
 --
-ALTER TABLE `CATALOGOS_CONDICION_ESTUDIANTE`
+ALTER TABLE `catalogos_condicion_estudiante`
   ADD PRIMARY KEY (`CONDICIONE_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CONSUMACION`
+-- Indices de la tabla `catalogos_consumacion`
 --
-ALTER TABLE `CATALOGOS_CONSUMACION`
+ALTER TABLE `catalogos_consumacion`
   ADD PRIMARY KEY (`CONSUMACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_CONTEXTO_SITUACIONAL`
+-- Indices de la tabla `catalogos_contexto_situacional`
 --
-ALTER TABLE `CATALOGOS_CONTEXTO_SITUACIONAL`
+ALTER TABLE `catalogos_contexto_situacional`
   ADD PRIMARY KEY (`CONTEXTO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_COSA_ROBADA`
+-- Indices de la tabla `catalogos_cosa_robada`
 --
-ALTER TABLE `CATALOGOS_COSA_ROBADA`
+ALTER TABLE `catalogos_cosa_robada`
   ADD PRIMARY KEY (`COSA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_DELITOS_NORMA`
+-- Indices de la tabla `catalogos_delitos_norma`
 --
-ALTER TABLE `CATALOGOS_DELITOS_NORMA`
+ALTER TABLE `catalogos_delitos_norma`
   ADD PRIMARY KEY (`ID_DELITO`);
 
 --
--- Indices de la tabla `CATALOGOS_DOMINIO_ESPANOL`
+-- Indices de la tabla `catalogos_dominio_espanol`
 --
-ALTER TABLE `CATALOGOS_DOMINIO_ESPANOL`
+ALTER TABLE `catalogos_dominio_espanol`
   ADD PRIMARY KEY (`DOMINIO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ENTIDADES`
+-- Indices de la tabla `catalogos_ejercicios`
 --
-ALTER TABLE `CATALOGOS_ENTIDADES`
+ALTER TABLE `catalogos_ejercicios`
+  ADD PRIMARY KEY (`EJERCICIO_ID`);
+
+--
+-- Indices de la tabla `catalogos_entidades`
+--
+ALTER TABLE `catalogos_entidades`
   ADD PRIMARY KEY (`ENTIDAD_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ESTADO_CIVIL`
+-- Indices de la tabla `catalogos_estado_civil`
 --
-ALTER TABLE `CATALOGOS_ESTADO_CIVIL`
+ALTER TABLE `catalogos_estado_civil`
   ADD PRIMARY KEY (`ESTADO_CIVIL_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ESTADO_PSICOFISICO`
+-- Indices de la tabla `catalogos_estado_psicofisico`
 --
-ALTER TABLE `CATALOGOS_ESTADO_PSICOFISICO`
+ALTER TABLE `catalogos_estado_psicofisico`
   ADD PRIMARY KEY (`ESTADO_PSICO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ESTATUSJO`
+-- Indices de la tabla `catalogos_estatus`
 --
-ALTER TABLE `CATALOGOS_ESTATUSJO`
+ALTER TABLE `catalogos_estatus`
   ADD PRIMARY KEY (`ESTATUS_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ESTUDIO_PROFESIONAL`
+-- Indices de la tabla `catalogos_estatusjo`
 --
-ALTER TABLE `CATALOGOS_ESTUDIO_PROFESIONAL`
+ALTER TABLE `catalogos_estatusjo`
+  ADD PRIMARY KEY (`ESTATUS_ID`);
+
+--
+-- Indices de la tabla `catalogos_estudio_profesional`
+--
+ALTER TABLE `catalogos_estudio_profesional`
   ADD PRIMARY KEY (`ESTUDIO_PRO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ETAPAS`
+-- Indices de la tabla `catalogos_etapas`
 --
-ALTER TABLE `CATALOGOS_ETAPAS`
+ALTER TABLE `catalogos_etapas`
   ADD PRIMARY KEY (`ETAPA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ETAPA_INICIAL`
+-- Indices de la tabla `catalogos_etapa_inicial`
 --
-ALTER TABLE `CATALOGOS_ETAPA_INICIAL`
+ALTER TABLE `catalogos_etapa_inicial`
   ADD PRIMARY KEY (`INICIAL_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ETAPA_INTERMEDIA`
+-- Indices de la tabla `catalogos_etapa_intermedia`
 --
-ALTER TABLE `CATALOGOS_ETAPA_INTERMEDIA`
+ALTER TABLE `catalogos_etapa_intermedia`
   ADD PRIMARY KEY (`INTERMEDIA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_ETAPA_PROCESAL`
+-- Indices de la tabla `catalogos_etapa_procesal`
 --
-ALTER TABLE `CATALOGOS_ETAPA_PROCESAL`
+ALTER TABLE `catalogos_etapa_procesal`
   ADD PRIMARY KEY (`PROCESAL_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_EXCLUSION_ACCIONP`
+-- Indices de la tabla `catalogos_exclusion_accionp`
 --
-ALTER TABLE `CATALOGOS_EXCLUSION_ACCIONP`
+ALTER TABLE `catalogos_exclusion_accionp`
   ADD PRIMARY KEY (`EXCLUSION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FIGURA_MPRUEBA`
+-- Indices de la tabla `catalogos_figura_mprueba`
 --
-ALTER TABLE `CATALOGOS_FIGURA_MPRUEBA`
+ALTER TABLE `catalogos_figura_mprueba`
   ADD PRIMARY KEY (`FIGURA_MPRU_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FIGURA_PROCESO`
+-- Indices de la tabla `catalogos_figura_proceso`
 --
-ALTER TABLE `CATALOGOS_FIGURA_PROCESO`
+ALTER TABLE `catalogos_figura_proceso`
   ADD PRIMARY KEY (`FIGURA_PRO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FORMA_ACCION`
+-- Indices de la tabla `catalogos_forma_accion`
 --
-ALTER TABLE `CATALOGOS_FORMA_ACCION`
+ALTER TABLE `catalogos_forma_accion`
   ADD PRIMARY KEY (`ACCION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FORMA_COMISION`
+-- Indices de la tabla `catalogos_forma_comision`
 --
-ALTER TABLE `CATALOGOS_FORMA_COMISION`
+ALTER TABLE `catalogos_forma_comision`
   ADD PRIMARY KEY (`COMISION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FORMA_CONDUCCION`
+-- Indices de la tabla `catalogos_forma_conduccion`
 --
-ALTER TABLE `CATALOGOS_FORMA_CONDUCCION`
+ALTER TABLE `catalogos_forma_conduccion`
   ADD PRIMARY KEY (`CONDUCCION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FORMA_DIVISION`
+-- Indices de la tabla `catalogos_forma_division`
 --
-ALTER TABLE `CATALOGOS_FORMA_DIVISION`
+ALTER TABLE `catalogos_forma_division`
   ADD PRIMARY KEY (`DIVISION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FUENTE_INGRESOS`
+-- Indices de la tabla `catalogos_fuente_ingresos`
 --
-ALTER TABLE `CATALOGOS_FUENTE_INGRESOS`
+ALTER TABLE `catalogos_fuente_ingresos`
   ADD PRIMARY KEY (`FUENTE_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FUERO`
+-- Indices de la tabla `catalogos_fuero`
 --
-ALTER TABLE `CATALOGOS_FUERO`
+ALTER TABLE `catalogos_fuero`
   ADD PRIMARY KEY (`FUERO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_FUNCION_JUZGADO`
+-- Indices de la tabla `catalogos_funcion_juzgado`
 --
-ALTER TABLE `CATALOGOS_FUNCION_JUZGADO`
+ALTER TABLE `catalogos_funcion_juzgado`
   ADD PRIMARY KEY (`FUNCION_JUZ_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_GRADO_ESTUDIOS`
+-- Indices de la tabla `catalogos_grado_estudios`
 --
-ALTER TABLE `CATALOGOS_GRADO_ESTUDIOS`
+ALTER TABLE `catalogos_grado_estudios`
   ADD PRIMARY KEY (`ESTUDIO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_GRADO_PARTICIPACION`
+-- Indices de la tabla `catalogos_grado_participacion`
 --
-ALTER TABLE `CATALOGOS_GRADO_PARTICIPACION`
+ALTER TABLE `catalogos_grado_participacion`
   ADD PRIMARY KEY (`PARTICIPACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_INCOMPETENCIA`
+-- Indices de la tabla `catalogos_incompetencia`
 --
-ALTER TABLE `CATALOGOS_INCOMPETENCIA`
+ALTER TABLE `catalogos_incompetencia`
   ADD PRIMARY KEY (`INCOMPETENCIA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_INSTRUMENTO_COMISION`
+-- Indices de la tabla `catalogos_instrumento_comision`
 --
-ALTER TABLE `CATALOGOS_INSTRUMENTO_COMISION`
+ALTER TABLE `catalogos_instrumento_comision`
   ADD PRIMARY KEY (`INSTRUMENTO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_JURISDICCION`
+-- Indices de la tabla `catalogos_jurisdiccion`
 --
-ALTER TABLE `CATALOGOS_JURISDICCION`
+ALTER TABLE `catalogos_jurisdiccion`
   ADD PRIMARY KEY (`JURISDICCION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_LINGUISTICAS`
+-- Indices de la tabla `catalogos_linguisticas`
 --
-ALTER TABLE `CATALOGOS_LINGUISTICAS`
+ALTER TABLE `catalogos_linguisticas`
   ADD PRIMARY KEY (`LINGUISTICA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MEDIDAS_CAUTELARES`
+-- Indices de la tabla `catalogos_medidas_cautelares`
 --
-ALTER TABLE `CATALOGOS_MEDIDAS_CAUTELARES`
+ALTER TABLE `catalogos_medidas_cautelares`
   ADD PRIMARY KEY (`CAUTELARES_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MEDIDAS_DISCIPLINARIAS`
+-- Indices de la tabla `catalogos_medidas_disciplinarias`
 --
-ALTER TABLE `CATALOGOS_MEDIDAS_DISCIPLINARIAS`
+ALTER TABLE `catalogos_medidas_disciplinarias`
   ADD PRIMARY KEY (`MEDIDA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MEDIDAS_DURACION`
+-- Indices de la tabla `catalogos_medidas_duracion`
 --
-ALTER TABLE `CATALOGOS_MEDIDAS_DURACION`
+ALTER TABLE `catalogos_medidas_duracion`
   ADD PRIMARY KEY (`MEDIDA_DURA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MEDIDAS_MUJER`
+-- Indices de la tabla `catalogos_medidas_mujer`
 --
-ALTER TABLE `CATALOGOS_MEDIDAS_MUJER`
+ALTER TABLE `catalogos_medidas_mujer`
   ADD PRIMARY KEY (`MUJER_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MEDIDAS_PROTECCION`
+-- Indices de la tabla `catalogos_medidas_proteccion`
 --
-ALTER TABLE `CATALOGOS_MEDIDAS_PROTECCION`
+ALTER TABLE `catalogos_medidas_proteccion`
   ADD PRIMARY KEY (`PROTECCION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MEDIDAS_SOLICITA`
+-- Indices de la tabla `catalogos_medidas_solicita`
 --
-ALTER TABLE `CATALOGOS_MEDIDAS_SOLICITA`
+ALTER TABLE `catalogos_medidas_solicita`
   ADD PRIMARY KEY (`MEDIDA_SOLICITA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MEDIOS_PRUEBA`
+-- Indices de la tabla `catalogos_medios_prueba`
 --
-ALTER TABLE `CATALOGOS_MEDIOS_PRUEBA`
+ALTER TABLE `catalogos_medios_prueba`
   ADD PRIMARY KEY (`PRUEBA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MODALIDAD`
+-- Indices de la tabla `catalogos_modalidad`
 --
-ALTER TABLE `CATALOGOS_MODALIDAD`
+ALTER TABLE `catalogos_modalidad`
   ADD PRIMARY KEY (`MODALIDAD_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MULTA`
+-- Indices de la tabla `catalogos_multa`
 --
-ALTER TABLE `CATALOGOS_MULTA`
+ALTER TABLE `catalogos_multa`
   ADD PRIMARY KEY (`MULTA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_MUNICIPIOS`
+-- Indices de la tabla `catalogos_municipios`
 --
-ALTER TABLE `CATALOGOS_MUNICIPIOS`
+ALTER TABLE `catalogos_municipios`
   ADD PRIMARY KEY (`MUNICIPIO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_NACIONALIDAD`
+-- Indices de la tabla `catalogos_nacionalidad`
 --
-ALTER TABLE `CATALOGOS_NACIONALIDAD`
+ALTER TABLE `catalogos_nacionalidad`
   ADD PRIMARY KEY (`NACIONALIDAD_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_NOPRIVATIVAS`
+-- Indices de la tabla `catalogos_noprivativas`
 --
-ALTER TABLE `CATALOGOS_NOPRIVATIVAS`
+ALTER TABLE `catalogos_noprivativas`
   ADD PRIMARY KEY (`NOPRIVATIVAS_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_NUMERO`
+-- Indices de la tabla `catalogos_numero`
 --
-ALTER TABLE `CATALOGOS_NUMERO`
+ALTER TABLE `catalogos_numero`
   ADD PRIMARY KEY (`NUMERO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_OCUPACION`
+-- Indices de la tabla `catalogos_ocupacion`
 --
-ALTER TABLE `CATALOGOS_OCUPACION`
+ALTER TABLE `catalogos_ocupacion`
   ADD PRIMARY KEY (`OCUPACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_PAIS`
+-- Indices de la tabla `catalogos_pais`
 --
-ALTER TABLE `CATALOGOS_PAIS`
+ALTER TABLE `catalogos_pais`
   ADD PRIMARY KEY (`PAIS_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_PLAZO_CIERRE`
+-- Indices de la tabla `catalogos_plazo_cierre`
 --
-ALTER TABLE `CATALOGOS_PLAZO_CIERRE`
+ALTER TABLE `catalogos_plazo_cierre`
   ADD PRIMARY KEY (`CIERRE_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_PLAZO_CONSTITUCIONAL`
+-- Indices de la tabla `catalogos_plazo_constitucional`
 --
-ALTER TABLE `CATALOGOS_PLAZO_CONSTITUCIONAL`
+ALTER TABLE `catalogos_plazo_constitucional`
   ADD PRIMARY KEY (`PLAZO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_PRIVATIVAS`
+-- Indices de la tabla `catalogos_privativas`
 --
-ALTER TABLE `CATALOGOS_PRIVATIVAS`
+ALTER TABLE `catalogos_privativas`
   ADD PRIMARY KEY (`PRIVATIVAS_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_PROC_ABREVIADO`
+-- Indices de la tabla `catalogos_proc_abreviado`
 --
-ALTER TABLE `CATALOGOS_PROC_ABREVIADO`
+ALTER TABLE `catalogos_proc_abreviado`
   ADD PRIMARY KEY (`PROCABREV_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_PROMUEVE_INCIDENTE`
+-- Indices de la tabla `catalogos_promueve_incidente`
 --
-ALTER TABLE `CATALOGOS_PROMUEVE_INCIDENTE`
+ALTER TABLE `catalogos_promueve_incidente`
   ADD PRIMARY KEY (`PROMUEVE_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_PUEBLO_INDIGENA`
+-- Indices de la tabla `catalogos_pueblo_indigena`
 --
-ALTER TABLE `CATALOGOS_PUEBLO_INDIGENA`
+ALTER TABLE `catalogos_pueblo_indigena`
   ADD PRIMARY KEY (`PUEBLO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_RANGO_INGRESOS`
+-- Indices de la tabla `catalogos_rango_ingresos`
 --
-ALTER TABLE `CATALOGOS_RANGO_INGRESOS`
+ALTER TABLE `catalogos_rango_ingresos`
   ADD PRIMARY KEY (`ID_INGRESOS`);
 
 --
--- Indices de la tabla `CATALOGOS_REINCIDENCIA`
+-- Indices de la tabla `catalogos_reincidencia`
 --
-ALTER TABLE `CATALOGOS_REINCIDENCIA`
+ALTER TABLE `catalogos_reincidencia`
   ADD PRIMARY KEY (`REINCIDENCIA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_RELACION_IMPUTADO`
+-- Indices de la tabla `catalogos_relacion_imputado`
 --
-ALTER TABLE `CATALOGOS_RELACION_IMPUTADO`
+ALTER TABLE `catalogos_relacion_imputado`
   ADD PRIMARY KEY (`RELACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_REPARACION_DANO`
+-- Indices de la tabla `catalogos_reparacion_dano`
 --
-ALTER TABLE `CATALOGOS_REPARACION_DANO`
+ALTER TABLE `catalogos_reparacion_dano`
   ADD PRIMARY KEY (`REPARACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_REPRESENTANTE_LEGAL`
+-- Indices de la tabla `catalogos_representante_legal`
 --
-ALTER TABLE `CATALOGOS_REPRESENTANTE_LEGAL`
+ALTER TABLE `catalogos_representante_legal`
   ADD PRIMARY KEY (`REPRESENTANTE_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_RESOLUCION_MPRUEBA`
+-- Indices de la tabla `catalogos_resolucion_mprueba`
 --
-ALTER TABLE `CATALOGOS_RESOLUCION_MPRUEBA`
+ALTER TABLE `catalogos_resolucion_mprueba`
   ADD PRIMARY KEY (`MPRUEBA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_RESPUESTA_SIMPLE`
+-- Indices de la tabla `catalogos_respuesta_simple`
 --
-ALTER TABLE `CATALOGOS_RESPUESTA_SIMPLE`
+ALTER TABLE `catalogos_respuesta_simple`
   ADD PRIMARY KEY (`RESPUESTA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_SENTIDO_FALLO`
+-- Indices de la tabla `catalogos_sentido_fallo`
 --
-ALTER TABLE `CATALOGOS_SENTIDO_FALLO`
+ALTER TABLE `catalogos_sentido_fallo`
   ADD PRIMARY KEY (`SENTIDO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_SEXO`
+-- Indices de la tabla `catalogos_sexo`
 --
-ALTER TABLE `CATALOGOS_SEXO`
+ALTER TABLE `catalogos_sexo`
   ADD PRIMARY KEY (`SEXO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_SITIO_OCURRENCIA`
+-- Indices de la tabla `catalogos_sitio_ocurrencia`
 --
-ALTER TABLE `CATALOGOS_SITIO_OCURRENCIA`
+ALTER TABLE `catalogos_sitio_ocurrencia`
   ADD PRIMARY KEY (`SITIO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_SOBRESEIMIENTO`
+-- Indices de la tabla `catalogos_sobreseimiento`
 --
-ALTER TABLE `CATALOGOS_SOBRESEIMIENTO`
+ALTER TABLE `catalogos_sobreseimiento`
   ADD PRIMARY KEY (`SOBRESEIMIENTO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_SUSPENSION_CONDICIONAL`
+-- Indices de la tabla `catalogos_suspension_condicional`
 --
-ALTER TABLE `CATALOGOS_SUSPENSION_CONDICIONAL`
+ALTER TABLE `catalogos_suspension_condicional`
   ADD PRIMARY KEY (`SUSPENSION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIEMPO_INTERNAMIENTO`
+-- Indices de la tabla `catalogos_tiempo_internamiento`
 --
-ALTER TABLE `CATALOGOS_TIEMPO_INTERNAMIENTO`
+ALTER TABLE `catalogos_tiempo_internamiento`
   ADD PRIMARY KEY (`INTERNAMIENTO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_CONSIGNACION`
+-- Indices de la tabla `catalogos_tipo_consignacion`
 --
-ALTER TABLE `CATALOGOS_TIPO_CONSIGNACION`
+ALTER TABLE `catalogos_tipo_consignacion`
   ADD PRIMARY KEY (`CONSIGNACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_DEFENSOR`
+-- Indices de la tabla `catalogos_tipo_defensor`
 --
-ALTER TABLE `CATALOGOS_TIPO_DEFENSOR`
+ALTER TABLE `catalogos_tipo_defensor`
   ADD PRIMARY KEY (`DEFENSOR_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_DETENCION`
+-- Indices de la tabla `catalogos_tipo_detencion`
 --
-ALTER TABLE `CATALOGOS_TIPO_DETENCION`
+ALTER TABLE `catalogos_tipo_detencion`
   ADD PRIMARY KEY (`TDETENCION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_IMPUGNACION`
+-- Indices de la tabla `catalogos_tipo_impugnacion`
 --
-ALTER TABLE `CATALOGOS_TIPO_IMPUGNACION`
+ALTER TABLE `catalogos_tipo_impugnacion`
   ADD PRIMARY KEY (`IMPUGNACION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_RESOLUCION`
+-- Indices de la tabla `catalogos_tipo_resolucion`
 --
-ALTER TABLE `CATALOGOS_TIPO_RESOLUCION`
+ALTER TABLE `catalogos_tipo_resolucion`
   ADD PRIMARY KEY (`RESOLUCION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_RESOLUCIONJO`
+-- Indices de la tabla `catalogos_tipo_resolucionjo`
 --
-ALTER TABLE `CATALOGOS_TIPO_RESOLUCIONJO`
+ALTER TABLE `catalogos_tipo_resolucionjo`
   ADD PRIMARY KEY (`RESOLUCION_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_SOBRESEIMIENTO`
+-- Indices de la tabla `catalogos_tipo_sobreseimiento`
 --
-ALTER TABLE `CATALOGOS_TIPO_SOBRESEIMIENTO`
+ALTER TABLE `catalogos_tipo_sobreseimiento`
   ADD PRIMARY KEY (`TSOBRESEIMIENTO_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_TIPO_VICTIMA`
+-- Indices de la tabla `catalogos_tipo_victima`
 --
-ALTER TABLE `CATALOGOS_TIPO_VICTIMA`
+ALTER TABLE `catalogos_tipo_victima`
   ADD PRIMARY KEY (`VICTIMA_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_VIALIDAD`
+-- Indices de la tabla `catalogos_vialidad`
 --
-ALTER TABLE `CATALOGOS_VIALIDAD`
+ALTER TABLE `catalogos_vialidad`
   ADD PRIMARY KEY (`VIALIDAD_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_VICTIMA_MORAL`
+-- Indices de la tabla `catalogos_victima_moral`
 --
-ALTER TABLE `CATALOGOS_VICTIMA_MORAL`
+ALTER TABLE `catalogos_victima_moral`
   ADD PRIMARY KEY (`MORAL_ID`);
 
 --
--- Indices de la tabla `CATALOGOS_VULNERABILIDAD`
+-- Indices de la tabla `catalogos_vulnerabilidad`
 --
-ALTER TABLE `CATALOGOS_VULNERABILIDAD`
+ALTER TABLE `catalogos_vulnerabilidad`
   ADD PRIMARY KEY (`VULNERABILIDAD_ID`);
 
 --
--- Indices de la tabla `DATOS_AUDIENCIAS_ADOJC`
+-- Indices de la tabla `datos_audiencias_adojc`
 --
-ALTER TABLE `DATOS_AUDIENCIAS_ADOJC`
+ALTER TABLE `datos_audiencias_adojc`
   ADD PRIMARY KEY (`JUZGADO_CLAVE`,`CAUSA_CLAVE`,`JUEZ_CLAVE1`,`JUEZ_CLAVE2`,`JUEZ_CLAVE3`,`AUDIENCIA_INVESTIGACION`,`AUDIENCIA_INTERMEDIA`) USING BTREE,
   ADD KEY `FK_AUDI_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_AUDI_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`),
@@ -8353,9 +8187,9 @@ ALTER TABLE `DATOS_AUDIENCIAS_ADOJC`
   ADD KEY `FK_AUDI_INTERMEDIA` (`AUDIENCIA_INTERMEDIA`);
 
 --
--- Indices de la tabla `DATOS_AUDIENCIAS_ADOJO`
+-- Indices de la tabla `datos_audiencias_adojo`
 --
-ALTER TABLE `DATOS_AUDIENCIAS_ADOJO`
+ALTER TABLE `datos_audiencias_adojo`
   ADD PRIMARY KEY (`JUZGADO_CLAVE`,`CAUSA_CLAVEJO`,`JUEZ_CLAVE1`,`JUEZ_CLAVE2`,`JUEZ_CLAVE3`,`AUDIENCIA_JUICIOORAL`) USING BTREE,
   ADD KEY `FK_AUDI_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_AUDI_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
@@ -8366,9 +8200,9 @@ ALTER TABLE `DATOS_AUDIENCIAS_ADOJO`
   ADD KEY `FK_AUDI_JUICIOORAL` (`AUDIENCIA_JUICIOORAL`);
 
 --
--- Indices de la tabla `DATOS_CAUSAS_PENALES_ADOJC`
+-- Indices de la tabla `datos_causas_penales_adojc`
 --
-ALTER TABLE `DATOS_CAUSAS_PENALES_ADOJC`
+ALTER TABLE `datos_causas_penales_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`),
   ADD KEY `FK_CAUSASP_JUZGADOS` (`JUZGADO_CLAVE`),
   ADD KEY `FK_DERIVAACCIONPENAL` (`DERIVA_ACCION_PENAL`),
@@ -8381,9 +8215,9 @@ ALTER TABLE `DATOS_CAUSAS_PENALES_ADOJC`
   ADD KEY `FK_CAUSA_JUEZ` (`JUZGADO_CLAVE`,`JUEZ_CLAVE`);
 
 --
--- Indices de la tabla `DATOS_CAUSAS_PENALES_ADOJO`
+-- Indices de la tabla `datos_causas_penales_adojo`
 --
-ALTER TABLE `DATOS_CAUSAS_PENALES_ADOJO`
+ALTER TABLE `datos_causas_penales_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`),
   ADD KEY `FK_CAUSASP_JUZGADOS` (`JUZGADO_CLAVE`),
   ADD KEY `FK_EXPEDIENTES_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
@@ -8396,9 +8230,9 @@ ALTER TABLE `DATOS_CAUSAS_PENALES_ADOJO`
   ADD KEY `FK_JUEZCLAVE_3JO` (`JUZGADO_CLAVE`,`JUEZ_CLAVE_3`);
 
 --
--- Indices de la tabla `DATOS_CONCLUSIONES_ADOJC`
+-- Indices de la tabla `datos_conclusiones_adojc`
 --
-ALTER TABLE `DATOS_CONCLUSIONES_ADOJC`
+ALTER TABLE `datos_conclusiones_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`),
   ADD KEY `FK_CONCLUISONES_ACUERDO_REPARATORIO` (`MECANISMO_ACUERDO`),
   ADD KEY `FK_CONCLUISONES_PROCEDIMIENTO_ABREV` (`TIPO_CONCLUSION_PA`),
@@ -8420,9 +8254,9 @@ ALTER TABLE `DATOS_CONCLUSIONES_ADOJC`
   ADD KEY `FK_CONCLUSIONES_TSOBRESEIMIENTO` (`TIPO_SOBRESEIMIENTO`);
 
 --
--- Indices de la tabla `DATOS_CONCLUSIONES_ADOJO`
+-- Indices de la tabla `datos_conclusiones_adojo`
 --
-ALTER TABLE `DATOS_CONCLUSIONES_ADOJO`
+ALTER TABLE `datos_conclusiones_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`),
   ADD KEY `FK_CONCLU_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_CONCLU_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
@@ -8442,9 +8276,9 @@ ALTER TABLE `DATOS_CONCLUSIONES_ADOJO`
   ADD KEY `FK_CONCLU_PERSONAIMPUGJO` (`PERSONA_IMPUGNA`);
 
 --
--- Indices de la tabla `DATOS_DCONCLUSIONES_ADOJC`
+-- Indices de la tabla `datos_dconclusiones_adojc`
 --
-ALTER TABLE `DATOS_DCONCLUSIONES_ADOJC`
+ALTER TABLE `datos_dconclusiones_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_DCONCLUSIONES_DELITOS` (`CAUSA_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_DCONCLUSIONES_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
@@ -8453,9 +8287,9 @@ ALTER TABLE `DATOS_DCONCLUSIONES_ADOJC`
   ADD KEY `FK_DCONCLUSIONES_TCONCLUSIONDELI` (`TIPO_CONCLUSION_PA`);
 
 --
--- Indices de la tabla `DATOS_DCONCLUSIONES_ADOJO`
+-- Indices de la tabla `datos_dconclusiones_adojo`
 --
-ALTER TABLE `DATOS_DCONCLUSIONES_ADOJO`
+ALTER TABLE `datos_dconclusiones_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_DCON_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_DCON_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
@@ -8463,9 +8297,9 @@ ALTER TABLE `DATOS_DCONCLUSIONES_ADOJO`
   ADD KEY `FK_DCON_SENTENCIAJO` (`TIPO_SENTENCIA`);
 
 --
--- Indices de la tabla `DATOS_DELITOS_ADOJC`
+-- Indices de la tabla `datos_delitos_adojc`
 --
-ALTER TABLE `DATOS_DELITOS_ADOJC`
+ALTER TABLE `datos_delitos_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_DELITOCODIGOPENAL` (`DELITO_CODIGO_PENAL`),
   ADD KEY `FK_DELITORECLASIFICADO` (`DELITO_RECLASIFICADO`),
@@ -8486,9 +8320,9 @@ ALTER TABLE `DATOS_DELITOS_ADOJC`
   ADD KEY `FK_DELITOS_COMISION` (`FORMA_COMISION`);
 
 --
--- Indices de la tabla `DATOS_DELITOS_ADOJO`
+-- Indices de la tabla `datos_delitos_adojo`
 --
-ALTER TABLE `DATOS_DELITOS_ADOJO`
+ALTER TABLE `datos_delitos_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVEJO`),
   ADD KEY `FK_DELI_ENTIDADESJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_DELI_CODIGOPENALJO` (`DELITO_CODIGO_PENAL`),
@@ -8509,45 +8343,45 @@ ALTER TABLE `DATOS_DELITOS_ADOJO`
   ADD KEY `FK_DELITO_CLAVEJC` (`CAUSA_CLAVEJC`,`DELITO_CLAVEJC`);
 
 --
--- Indices de la tabla `DATOS_DHOMICIDIO_ADOJC`
+-- Indices de la tabla `datos_dhomicidio_adojc`
 --
-ALTER TABLE `DATOS_DHOMICIDIO_ADOJC`
+ALTER TABLE `datos_dhomicidio_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`,`CONTEXTO_SITUACIONAL`),
   ADD KEY `FK_DHOMCIDIO_CSITUACIONAL` (`CONTEXTO_SITUACIONAL`),
   ADD KEY `FK_DHOMICIDIOS_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_DHOMICIDIO_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`);
 
 --
--- Indices de la tabla `DATOS_DHOMICIDIO_ADOJO`
+-- Indices de la tabla `datos_dhomicidio_adojo`
 --
-ALTER TABLE `DATOS_DHOMICIDIO_ADOJO`
+ALTER TABLE `datos_dhomicidio_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`,`CONTEXTO_SITUACIONAL`),
   ADD KEY `FK_DHOMI_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_DHOMI_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
   ADD KEY `FK_DHOMI_CONTEXTOSITUAJO` (`CONTEXTO_SITUACIONAL`);
 
 --
--- Indices de la tabla `DATOS_DROBO_ADOJC`
+-- Indices de la tabla `datos_drobo_adojc`
 --
-ALTER TABLE `DATOS_DROBO_ADOJC`
+ALTER TABLE `datos_drobo_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`,`TIPO_COSA_ROBADA`),
   ADD KEY `FK_DROBOS_MUNICIPIO` (`JUZGADO_MUNICIPIO_ID`),
   ADD KEY `FK_DROBO_COSAROBADA` (`TIPO_COSA_ROBADA`),
   ADD KEY `FK_DROBO_ENTIDADES` (`JUZGADO_ENTIDAD_ID`);
 
 --
--- Indices de la tabla `DATOS_DROBO_ADOJO`
+-- Indices de la tabla `datos_drobo_adojo`
 --
-ALTER TABLE `DATOS_DROBO_ADOJO`
+ALTER TABLE `datos_drobo_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`,`TIPO_COSA_ROBADA`),
   ADD KEY `FK_DROBO_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_DROBO_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
   ADD KEY `FK_DROBO_COSAROBADAJO` (`TIPO_COSA_ROBADA`);
 
 --
--- Indices de la tabla `DATOS_ETAPA_INICIAL_ADOJC`
+-- Indices de la tabla `datos_etapa_inicial_adojc`
 --
-ALTER TABLE `DATOS_ETAPA_INICIAL_ADOJC`
+ALTER TABLE `datos_etapa_inicial_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`),
   ADD KEY `FK_EINICIAL_FACUSACION` (`FORMULO_ACUSACION`),
   ADD KEY `FK_ESTAPAINICIAL_PCONSTITUCIONAL` (`PLAZO_CONSTITUCIONAL`),
@@ -8572,9 +8406,9 @@ ALTER TABLE `DATOS_ETAPA_INICIAL_ADOJC`
   ADD KEY `FK_ETAPAINICIAL_ETAPAS` (`ETAPA`);
 
 --
--- Indices de la tabla `DATOS_ETAPA_INTERMEDIA_ADOJC`
+-- Indices de la tabla `datos_etapa_intermedia_adojc`
 --
-ALTER TABLE `DATOS_ETAPA_INTERMEDIA_ADOJC`
+ALTER TABLE `datos_etapa_intermedia_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`),
   ADD KEY `FK_EINTERMEDIA_AINTERMEDIA` (`AUDIENCIA_INTERMEDIA`),
   ADD KEY `FK_EINTERMEDIA_AJUICIOORAL` (`APERTURA_JUICIO_ORAL`),
@@ -8589,9 +8423,9 @@ ALTER TABLE `DATOS_ETAPA_INTERMEDIA_ADOJC`
   ADD KEY `FK_EINTERMEDIA_SACUSACION` (`SEPARACION_ACUSACION`);
 
 --
--- Indices de la tabla `DATOS_ETAPA_ORAL_ADOJO`
+-- Indices de la tabla `datos_etapa_oral_adojo`
 --
-ALTER TABLE `DATOS_ETAPA_ORAL_ADOJO`
+ALTER TABLE `datos_etapa_oral_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`),
   ADD KEY `FK_EORAL_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_EORAL_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
@@ -8610,25 +8444,26 @@ ALTER TABLE `DATOS_ETAPA_ORAL_ADOJO`
   ADD KEY `FK_ETAPAS` (`ETAPA`);
 
 --
--- Indices de la tabla `DATOS_INFORME_ADOJC`
+-- Indices de la tabla `datos_informe_adojc`
 --
-ALTER TABLE `DATOS_INFORME_ADOJC`
+ALTER TABLE `datos_informe_adojc`
   ADD PRIMARY KEY (`JUZGADO_CLAVE`);
 
 --
--- Indices de la tabla `DATOS_JUECES_ADOJC`
+-- Indices de la tabla `datos_jueces_adojc`
 --
-ALTER TABLE `DATOS_JUECES_ADOJC`
+ALTER TABLE `datos_jueces_adojc`
   ADD PRIMARY KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE`) USING BTREE,
   ADD KEY `FK_JUECES_EDAD` (`EDAD`),
   ADD KEY `FK_JUECES_ESTUDIOPROF` (`GRADO_ESTUDIOS`),
   ADD KEY `FK_JUECES_FUNCION` (`FUNCION_DESEMPENA`),
-  ADD KEY `FK_JUECES_SEXO` (`SEXO`);
+  ADD KEY `FK_JUECES_SEXO` (`SEXO`),
+  ADD KEY `FK_JUECES_ESTATUS` (`ESTATUS`);
 
 --
--- Indices de la tabla `DATOS_JUZGADOS_ADOJC`
+-- Indices de la tabla `datos_juzgados_adojc`
 --
-ALTER TABLE `DATOS_JUZGADOS_ADOJC`
+ALTER TABLE `datos_juzgados_adojc`
   ADD PRIMARY KEY (`JUZGADO_CLAVE`),
   ADD KEY `FK_ASENTAMIENTOHUMANO` (`ASENTAMIENTO_HUMANO`),
   ADD KEY `FK_FUNCION_JUZGADO` (`JUZGADO_FUNCION`),
@@ -8637,48 +8472,49 @@ ALTER TABLE `DATOS_JUZGADOS_ADOJC`
   ADD KEY `FK_JUZGADOS_VIALIDAD` (`TIPO_VIALIDAD`),
   ADD KEY `FK_JUZGADO_ENTIDADES` (`ENTIDAD`),
   ADD KEY `FK_JUZGADO_FORMADIVISION` (`FORMA_DIVISION`),
-  ADD KEY `FK_JUZGADO_NUMERO` (`JUZGADO_NUMERO`);
+  ADD KEY `FK_JUZGADO_NUMERO` (`JUZGADO_NUMERO`),
+  ADD KEY `FK_JUZGADO_ESTATUS` (`ESTATUS`);
 
 --
--- Indices de la tabla `DATOS_PDELITOS_ADOJC`
+-- Indices de la tabla `datos_pdelitos_adojc`
 --
-ALTER TABLE `DATOS_PDELITOS_ADOJC`
+ALTER TABLE `datos_pdelitos_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_PDELITOS_DELITOS` (`CAUSA_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_PDELITOS_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_PDELITOS_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`);
 
 --
--- Indices de la tabla `DATOS_PDELITOS_ADOJO`
+-- Indices de la tabla `datos_pdelitos_adojo`
 --
-ALTER TABLE `DATOS_PDELITOS_ADOJO`
+ALTER TABLE `datos_pdelitos_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_PDELI_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_PDELI_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
   ADD KEY `FK_PDELI_DELITOCLAVEJO` (`CAUSA_CLAVEJO`,`DELITO_CLAVE`);
 
 --
--- Indices de la tabla `DATOS_PFUENTE_INGRESOS_ADOJC`
+-- Indices de la tabla `datos_pfuente_ingresos_adojc`
 --
-ALTER TABLE `DATOS_PFUENTE_INGRESOS_ADOJC`
+ALTER TABLE `datos_pfuente_ingresos_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`,`INGRESO`),
   ADD KEY `FK_PFUENTE_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_PFUENTE_FINGRESOS` (`INGRESO`),
   ADD KEY `FK_PFUENTE_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`);
 
 --
--- Indices de la tabla `DATOS_PFUENTE_INGRESOS_ADOJO`
+-- Indices de la tabla `datos_pfuente_ingresos_adojo`
 --
-ALTER TABLE `DATOS_PFUENTE_INGRESOS_ADOJO`
+ALTER TABLE `datos_pfuente_ingresos_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`,`INGRESO`),
   ADD KEY `FK_PFUENT_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_PFUENT_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
   ADD KEY `FK_PFUENT_INGRESOSJO` (`INGRESO`);
 
 --
--- Indices de la tabla `DATOS_PMEDIDAS_ADOJC`
+-- Indices de la tabla `datos_pmedidas_adojc`
 --
-ALTER TABLE `DATOS_PMEDIDAS_ADOJC`
+ALTER TABLE `datos_pmedidas_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`,`CAUTELARES`,`SOLICITA_MEDIDA`) USING BTREE,
   ADD KEY `FK_PMEDIDAS_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_PMEDIDAS_MCAUTELARES` (`CAUTELARES`),
@@ -8687,9 +8523,9 @@ ALTER TABLE `DATOS_PMEDIDAS_ADOJC`
   ADD KEY `FK_PMEDIDAS_DURACION` (`DURACION_MEDIDA`);
 
 --
--- Indices de la tabla `DATOS_PRESENTA_MP_ADOJC`
+-- Indices de la tabla `datos_presenta_mp_adojc`
 --
-ALTER TABLE `DATOS_PRESENTA_MP_ADOJC`
+ALTER TABLE `datos_presenta_mp_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`,`FIGURA_MPRUEBA`,`MEDIO_PRUEBA_ID`) USING BTREE,
   ADD KEY `FK_MEDIOPRUEBA_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_MEDIOPRUEBA_FIGURA` (`FIGURA_MPRUEBA`),
@@ -8697,9 +8533,9 @@ ALTER TABLE `DATOS_PRESENTA_MP_ADOJC`
   ADD KEY `FK_MEDIOPRUEBA_RESOLUCION` (`MEDIO_PRUEBA_ID`);
 
 --
--- Indices de la tabla `DATOS_PROCESADOS_ADOJC`
+-- Indices de la tabla `datos_procesados_adojc`
 --
-ALTER TABLE `DATOS_PROCESADOS_ADOJC`
+ALTER TABLE `datos_procesados_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`),
   ADD KEY `FK_PORCESADOS_NACIMIENTOENTIDADES` (`NACIMIENTO_ENTIDAD`),
   ADD KEY `FK_PORCESADOS_NACIMIENTOMUNICIPIO` (`NACIMIENTO_MUNICIPIO`),
@@ -8739,9 +8575,9 @@ ALTER TABLE `DATOS_PROCESADOS_ADOJC`
   ADD KEY `FK_PROCESADO_PERTENECEGPODELICTIVO` (`DELICTIVO`);
 
 --
--- Indices de la tabla `DATOS_PROCESADOS_ADOJO`
+-- Indices de la tabla `datos_procesados_adojo`
 --
-ALTER TABLE `DATOS_PROCESADOS_ADOJO`
+ALTER TABLE `datos_procesados_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVEJO`),
   ADD KEY `FK_PRO_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_PRO_SEXOJO` (`SEXO`),
@@ -8778,9 +8614,9 @@ ALTER TABLE `DATOS_PROCESADOS_ADOJO`
   ADD KEY `FK_PROCESADO_CLAVEJC` (`CAUSA_CLAVEJC`,`PROCESADO_CLAVEJC`);
 
 --
--- Indices de la tabla `DATOS_TRAMITES_ADOJC`
+-- Indices de la tabla `datos_tramites_adojc`
 --
-ALTER TABLE `DATOS_TRAMITES_ADOJC`
+ALTER TABLE `datos_tramites_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`),
   ADD KEY `FK_TRAMITES_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_TRAMITES_EPROCESAL` (`ETAPA_PROCESAL`),
@@ -8789,18 +8625,18 @@ ALTER TABLE `DATOS_TRAMITES_ADOJC`
   ADD KEY `FK_TRAMITE_INVESTIGACION` (`ESTATUS_INVESTIGACION`);
 
 --
--- Indices de la tabla `DATOS_TRAMITES_ADOJO`
+-- Indices de la tabla `datos_tramites_adojo`
 --
-ALTER TABLE `DATOS_TRAMITES_ADOJO`
+ALTER TABLE `datos_tramites_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`),
   ADD KEY `FK_TRAM_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_TRAM_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
   ADD KEY `FK_TRAM_ESTATUSJO` (`ESTATUS`);
 
 --
--- Indices de la tabla `DATOS_VDELITOS_ADOJC`
+-- Indices de la tabla `datos_vdelitos_adojc`
 --
-ALTER TABLE `DATOS_VDELITOS_ADOJC`
+ALTER TABLE `datos_vdelitos_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`,`DELITO_CLAVE`,`PROCESADO_CLAVE`) USING BTREE,
   ADD KEY `FK_VDELITOS_DELITOS` (`CAUSA_CLAVE`,`DELITO_CLAVE`),
   ADD KEY `FK_VDELITOS_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
@@ -8808,9 +8644,9 @@ ALTER TABLE `DATOS_VDELITOS_ADOJC`
   ADD KEY `FK_VDELITOS_PROCESADOSJC` (`CAUSA_CLAVE`,`PROCESADO_CLAVE`);
 
 --
--- Indices de la tabla `DATOS_VDELITOS_ADOJO`
+-- Indices de la tabla `datos_vdelitos_adojo`
 --
-ALTER TABLE `DATOS_VDELITOS_ADOJO`
+ALTER TABLE `datos_vdelitos_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`,`DELITO_CLAVE`,`PROCESADO_CLAVE`) USING BTREE,
   ADD KEY `FK_VDELI_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VDELI_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
@@ -8818,27 +8654,27 @@ ALTER TABLE `DATOS_VDELITOS_ADOJO`
   ADD KEY `FK_VDELI_PROCESADOSJO` (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`);
 
 --
--- Indices de la tabla `DATOS_VFUENTE_INGRESOS_ADOJC`
+-- Indices de la tabla `datos_vfuente_ingresos_adojc`
 --
-ALTER TABLE `DATOS_VFUENTE_INGRESOS_ADOJC`
+ALTER TABLE `datos_vfuente_ingresos_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`,`INGRESO`),
   ADD KEY `FK_VFUENTE_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VFUENTE_INGRESOS` (`INGRESO`),
   ADD KEY `FK_VFUENTE_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`);
 
 --
--- Indices de la tabla `DATOS_VFUENTE_INGRESOS_ADOJO`
+-- Indices de la tabla `datos_vfuente_ingresos_adojo`
 --
-ALTER TABLE `DATOS_VFUENTE_INGRESOS_ADOJO`
+ALTER TABLE `datos_vfuente_ingresos_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`,`INGRESO`),
   ADD KEY `FK_VFUENT_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VFUENT_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
   ADD KEY `FK_VFUENT_INGRESO` (`INGRESO`);
 
 --
--- Indices de la tabla `DATOS_VICTIMAS_ADOJC`
+-- Indices de la tabla `datos_victimas_adojc`
 --
-ALTER TABLE `DATOS_VICTIMAS_ADOJC`
+ALTER TABLE `datos_victimas_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`),
   ADD KEY `FK_VICITIMAS_NACIONALIDAD` (`NACIONALIDAD`),
   ADD KEY `FK_VICITIMAS_RANGOINGRESOS` (`RANGO_INGRESOS`),
@@ -8871,9 +8707,9 @@ ALTER TABLE `DATOS_VICTIMAS_ADOJC`
   ADD KEY `FK_VICTIMAS_VULNERABILIDAD` (`VULNERABILIDAD`);
 
 --
--- Indices de la tabla `DATOS_VICTIMAS_ADOJO`
+-- Indices de la tabla `datos_victimas_adojo`
 --
-ALTER TABLE `DATOS_VICTIMAS_ADOJO`
+ALTER TABLE `datos_victimas_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVEJO`),
   ADD KEY `FK_VICT_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VICT_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
@@ -8905,27 +8741,27 @@ ALTER TABLE `DATOS_VICTIMAS_ADOJO`
   ADD KEY `FK_VICTIMA_CLAVEJC` (`CAUSA_CLAVEJC`,`VICTIMA_CLAVEJC`);
 
 --
--- Indices de la tabla `DATOS_VMEDIDAS_ADOJC`
+-- Indices de la tabla `datos_vmedidas_adojc`
 --
-ALTER TABLE `DATOS_VMEDIDAS_ADOJC`
+ALTER TABLE `datos_vmedidas_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`,`TIPO_MEDIDA_PROT`),
   ADD KEY `FK_VMEDIDAS_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VMEDIDAS_MPROTECCION` (`TIPO_MEDIDA_PROT`),
   ADD KEY `FK_VMEDIDAS_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`);
 
 --
--- Indices de la tabla `DATOS_VMEDIDAS_DMUJ_ADOJC`
+-- Indices de la tabla `datos_vmedidas_dmuj_adojc`
 --
-ALTER TABLE `DATOS_VMEDIDAS_DMUJ_ADOJC`
+ALTER TABLE `datos_vmedidas_dmuj_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`,`TIPO_MEDIDA_MUJER`),
   ADD KEY `FK_VMED_DMUJ_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VMED_DMUJ_MEDIDAS` (`TIPO_MEDIDA_MUJER`),
   ADD KEY `FK_VMED_DMUJ_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`);
 
 --
--- Indices de la tabla `DATOS_VPROCESADOS_ADOJC`
+-- Indices de la tabla `datos_vprocesados_adojc`
 --
-ALTER TABLE `DATOS_VPROCESADOS_ADOJC`
+ALTER TABLE `datos_vprocesados_adojc`
   ADD PRIMARY KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`,`VICTIMA_CLAVE`,`RELACION`),
   ADD KEY `FK_VPROCESADOS_ENTIDADES` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VPROCESADOS_MUNICIPIOS` (`JUZGADO_MUNICIPIO_ID`),
@@ -8933,9 +8769,9 @@ ALTER TABLE `DATOS_VPROCESADOS_ADOJC`
   ADD KEY `FK_VPROCESADOS_VICTIMAS` (`CAUSA_CLAVE`,`VICTIMA_CLAVE`);
 
 --
--- Indices de la tabla `DATOS_VPROCESADOS_ADOJO`
+-- Indices de la tabla `datos_vprocesados_adojo`
 --
-ALTER TABLE `DATOS_VPROCESADOS_ADOJO`
+ALTER TABLE `datos_vprocesados_adojo`
   ADD PRIMARY KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`,`VICTIMA_CLAVE`,`RELACION`),
   ADD KEY `FK_VPRO_ENTIDADJO` (`JUZGADO_ENTIDAD_ID`),
   ADD KEY `FK_VPRO_MUNICIPIOJO` (`JUZGADO_MUNICIPIO_ID`),
@@ -8943,23 +8779,23 @@ ALTER TABLE `DATOS_VPROCESADOS_ADOJO`
   ADD KEY `FK_VPRO_RELACIONJO` (`RELACION`);
 
 --
--- Indices de la tabla `TIPO_USUARIOS`
+-- Indices de la tabla `tipo_usuarios`
 --
-ALTER TABLE `TIPO_USUARIOS`
+ALTER TABLE `tipo_usuarios`
   ADD PRIMARY KEY (`TIPO_USUARIO_ID`);
 
 --
--- Indices de la tabla `USUARIOS`
+-- Indices de la tabla `usuarios`
 --
-ALTER TABLE `USUARIOS`
+ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`USUARIO_ID`),
   ADD KEY `FK_USUARIO_TIPO_USUARIO` (`TIPO_USUARIO`),
   ADD KEY `FK_USUARIO_ENTIDAD` (`ENTIDAD`);
 
 --
--- Indices de la tabla `USUARIOS_CONTROL`
+-- Indices de la tabla `usuarios_control`
 --
-ALTER TABLE `USUARIOS_CONTROL`
+ALTER TABLE `usuarios_control`
   ADD PRIMARY KEY (`CAUSA_CLAVE`);
 
 --
@@ -8967,9 +8803,9 @@ ALTER TABLE `USUARIOS_CONTROL`
 --
 
 --
--- AUTO_INCREMENT de la tabla `USUARIOS`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
-ALTER TABLE `USUARIOS`
+ALTER TABLE `usuarios`
   MODIFY `USUARIO_ID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
@@ -8977,638 +8813,640 @@ ALTER TABLE `USUARIOS`
 --
 
 --
--- Filtros para la tabla `DATOS_AUDIENCIAS_ADOJC`
+-- Filtros para la tabla `datos_audiencias_adojc`
 --
-ALTER TABLE `DATOS_AUDIENCIAS_ADOJC`
-  ADD CONSTRAINT `FK_AUDI_CAUSACLAVE` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_AUDI_INVESTIGACION` FOREIGN KEY (`AUDIENCIA_INVESTIGACION`) REFERENCES `CATALOGOS_AUDIENCIAS_INVESTIGACION` (`AUDIENCIA_ID`),
-  ADD CONSTRAINT `FK_AUDI_JUEZ1` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE1`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_JUEZ2` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE2`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_JUEZ3` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE3`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_JUZGADOCLAVE` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `DATOS_JUZGADOS_ADOJC` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`);
+ALTER TABLE `datos_audiencias_adojc`
+  ADD CONSTRAINT `FK_AUDI_CAUSACLAVE` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_AUDI_INVESTIGACION` FOREIGN KEY (`AUDIENCIA_INVESTIGACION`) REFERENCES `catalogos_audiencias_investigacion` (`AUDIENCIA_ID`),
+  ADD CONSTRAINT `FK_AUDI_JUEZ1` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE1`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_JUEZ2` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE2`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_JUEZ3` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE3`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_JUZGADOCLAVE` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `datos_juzgados_adojc` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`);
 
 --
--- Filtros para la tabla `DATOS_AUDIENCIAS_ADOJO`
+-- Filtros para la tabla `datos_audiencias_adojo`
 --
-ALTER TABLE `DATOS_AUDIENCIAS_ADOJO`
-  ADD CONSTRAINT `FK_AUDI_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_AUDI_JUEZ1JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE1`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_JUEZ2JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE2`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_JUEZ3JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE3`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_JUICIOORAL` FOREIGN KEY (`AUDIENCIA_JUICIOORAL`) REFERENCES `CATALOGOS_AUDIENCIAS_JUICIOORAL` (`AUDIENCIA_ID`),
-  ADD CONSTRAINT `FK_AUDI_JUZGADOCLAVEJO` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `DATOS_JUZGADOS_ADOJC` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_AUDI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`);
+ALTER TABLE `datos_audiencias_adojo`
+  ADD CONSTRAINT `FK_AUDI_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_AUDI_JUEZ1JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE1`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_JUEZ2JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE2`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_JUEZ3JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE3`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_JUICIOORAL` FOREIGN KEY (`AUDIENCIA_JUICIOORAL`) REFERENCES `catalogos_audiencias_juiciooral` (`AUDIENCIA_ID`),
+  ADD CONSTRAINT `FK_AUDI_JUZGADOCLAVEJO` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `datos_juzgados_adojc` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_AUDI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`);
 
 --
--- Filtros para la tabla `DATOS_CAUSAS_PENALES_ADOJC`
+-- Filtros para la tabla `datos_causas_penales_adojc`
 --
-ALTER TABLE `DATOS_CAUSAS_PENALES_ADOJC`
-  ADD CONSTRAINT `FK_CAUSA_JUEZ` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_CAUSA_JUZGADOS` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `DATOS_JUZGADOS_ADOJC` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DERIVAACCIONPENAL` FOREIGN KEY (`DERIVA_ACCION_PENAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EXPEDIENTES_COMPETENCIA` FOREIGN KEY (`COMPETENCIA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EXPEDIENTES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_EXPEDIENTES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_EXPEDIENTES_TIPOINCOMPETENCIA` FOREIGN KEY (`TIPO_INCOMPETENCIA`) REFERENCES `CATALOGOS_INCOMPETENCIA` (`INCOMPETENCIA_ID`),
-  ADD CONSTRAINT `FK_EXPEDIENTE_ACUMULADO` FOREIGN KEY (`EXPEDIENTE_ACUMULADO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`);
+ALTER TABLE `datos_causas_penales_adojc`
+  ADD CONSTRAINT `FK_CAUSA_JUEZ` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_CAUSA_JUZGADOS` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `datos_juzgados_adojc` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DERIVAACCIONPENAL` FOREIGN KEY (`DERIVA_ACCION_PENAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EXPEDIENTES_COMPETENCIA` FOREIGN KEY (`COMPETENCIA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EXPEDIENTES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_EXPEDIENTES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_EXPEDIENTES_TIPOINCOMPETENCIA` FOREIGN KEY (`TIPO_INCOMPETENCIA`) REFERENCES `catalogos_incompetencia` (`INCOMPETENCIA_ID`),
+  ADD CONSTRAINT `FK_EXPEDIENTE_ACUMULADO` FOREIGN KEY (`EXPEDIENTE_ACUMULADO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`);
 
 --
--- Filtros para la tabla `DATOS_CAUSAS_PENALES_ADOJO`
+-- Filtros para la tabla `datos_causas_penales_adojo`
 --
-ALTER TABLE `DATOS_CAUSAS_PENALES_ADOJO`
-  ADD CONSTRAINT `FK_ATENDIDA_ORGANODIFERENTEJO` FOREIGN KEY (`ATENDIDA_ORGDIFERENTE`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_CAUSA_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_JUEZCLAVE_1JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE_1`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_JUEZCLAVE_2JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE_2`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_JUEZCLAVE_3JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE_3`) REFERENCES `DATOS_JUECES_ADOJC` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_JUZGADOSJO` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `DATOS_JUZGADOS_ADOJC` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`);
+ALTER TABLE `datos_causas_penales_adojo`
+  ADD CONSTRAINT `FK_ATENDIDA_ORGANODIFERENTEJO` FOREIGN KEY (`ATENDIDA_ORGDIFERENTE`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_CAUSA_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_JUEZCLAVE_1JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE_1`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_JUEZCLAVE_2JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE_2`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_JUEZCLAVE_3JO` FOREIGN KEY (`JUZGADO_CLAVE`,`JUEZ_CLAVE_3`) REFERENCES `datos_jueces_adojc` (`JUZGADO_CLAVE`, `JUEZ_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_JUZGADOSJO` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `datos_juzgados_adojc` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`);
 
 --
--- Filtros para la tabla `DATOS_CONCLUSIONES_ADOJC`
+-- Filtros para la tabla `datos_conclusiones_adojc`
 --
-ALTER TABLE `DATOS_CONCLUSIONES_ADOJC`
-  ADD CONSTRAINT `FK_CONCLUISONES_ACUERDO_REPARATORIO` FOREIGN KEY (`MECANISMO_ACUERDO`) REFERENCES `CATALOGOS_ACUERDO_REPARATORIO` (`AREPARATORIO_ID`),
-  ADD CONSTRAINT `FK_CONCLUISONES_PROCEDIMIENTO_ABREV` FOREIGN KEY (`TIPO_CONCLUSION_PA`) REFERENCES `CATALOGOS_PROC_ABREVIADO` (`PROCABREV_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_EXCLUSION_AP` FOREIGN KEY (`EXCLUSION_ACCIONP`) REFERENCES `CATALOGOS_EXCLUSION_ACCIONP` (`EXCLUSION_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_EXPEDIENTE` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_CONCLUSIONES_IMPUGNACION` FOREIGN KEY (`IMPUGNACION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_IMPUGNA_RESOL` FOREIGN KEY (`PERSONA_IMPUGNA`) REFERENCES `CATALOGOS_FIGURA_PROCESO` (`FIGURA_PRO_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_INTERNAMIENTO` FOREIGN KEY (`TIEMPO_INTERNAMIENTO`) REFERENCES `CATALOGOS_TIEMPO_INTERNAMIENTO` (`INTERNAMIENTO_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_MPRIVATIVAS` FOREIGN KEY (`MEDIDA_PRIVATIVA`) REFERENCES `CATALOGOS_PRIVATIVAS` (`PRIVATIVAS_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_MULTA` FOREIGN KEY (`MONTO_REPARA`) REFERENCES `CATALOGOS_MULTA` (`MULTA_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_NOM_PRIVACION` FOREIGN KEY (`MEDIDA_NOPRIVATIVA`) REFERENCES `CATALOGOS_NOPRIVATIVAS` (`NOPRIVATIVAS_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_PROCEDENCIA_SOB` FOREIGN KEY (`PROCEDENCIA_SOBRESEIMIENTO`) REFERENCES `CATALOGOS_SOBRESEIMIENTO` (`SOBRESEIMIENTO_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_PROCE_INICIAL` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_ETAPA_INICIAL_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_CONCLUSIONES_RDANIO` FOREIGN KEY (`REPARACION_DANIO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_SUSPENCIONC` FOREIGN KEY (`SUSPENCION_CONDICIONAL`) REFERENCES `CATALOGOS_SUSPENSION_CONDICIONAL` (`SUSPENSION_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_TDANIO` FOREIGN KEY (`TIPO_REPARACION_DANIO`) REFERENCES `CATALOGOS_REPARACION_DANO` (`REPARACION_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_TIMPUGNACION` FOREIGN KEY (`TIPO_IMPUGNACION`) REFERENCES `CATALOGOS_TIPO_IMPUGNACION` (`IMPUGNACION_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_TIPOR` FOREIGN KEY (`TIPO_RESOLUCION`) REFERENCES `CATALOGOS_TIPO_RESOLUCION` (`RESOLUCION_ID`),
-  ADD CONSTRAINT `FK_CONCLUSIONES_TSOBRESEIMIENTO` FOREIGN KEY (`TIPO_SOBRESEIMIENTO`) REFERENCES `CATALOGOS_TIPO_SOBRESEIMIENTO` (`TSOBRESEIMIENTO_ID`);
+ALTER TABLE `datos_conclusiones_adojc`
+  ADD CONSTRAINT `FK_CONCLUISONES_ACUERDO_REPARATORIO` FOREIGN KEY (`MECANISMO_ACUERDO`) REFERENCES `catalogos_acuerdo_reparatorio` (`AREPARATORIO_ID`),
+  ADD CONSTRAINT `FK_CONCLUISONES_PROCEDIMIENTO_ABREV` FOREIGN KEY (`TIPO_CONCLUSION_PA`) REFERENCES `catalogos_proc_abreviado` (`PROCABREV_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_EXCLUSION_AP` FOREIGN KEY (`EXCLUSION_ACCIONP`) REFERENCES `catalogos_exclusion_accionp` (`EXCLUSION_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_EXPEDIENTE` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_CONCLUSIONES_IMPUGNACION` FOREIGN KEY (`IMPUGNACION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_IMPUGNA_RESOL` FOREIGN KEY (`PERSONA_IMPUGNA`) REFERENCES `catalogos_figura_proceso` (`FIGURA_PRO_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_INTERNAMIENTO` FOREIGN KEY (`TIEMPO_INTERNAMIENTO`) REFERENCES `catalogos_tiempo_internamiento` (`INTERNAMIENTO_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_MPRIVATIVAS` FOREIGN KEY (`MEDIDA_PRIVATIVA`) REFERENCES `catalogos_privativas` (`PRIVATIVAS_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_MULTA` FOREIGN KEY (`MONTO_REPARA`) REFERENCES `catalogos_multa` (`MULTA_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_NOM_PRIVACION` FOREIGN KEY (`MEDIDA_NOPRIVATIVA`) REFERENCES `catalogos_noprivativas` (`NOPRIVATIVAS_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_PROCEDENCIA_SOB` FOREIGN KEY (`PROCEDENCIA_SOBRESEIMIENTO`) REFERENCES `catalogos_sobreseimiento` (`SOBRESEIMIENTO_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_PROCE_INICIAL` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_etapa_inicial_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_CONCLUSIONES_RDANIO` FOREIGN KEY (`REPARACION_DANIO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_SUSPENCIONC` FOREIGN KEY (`SUSPENCION_CONDICIONAL`) REFERENCES `catalogos_suspension_condicional` (`SUSPENSION_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_TDANIO` FOREIGN KEY (`TIPO_REPARACION_DANIO`) REFERENCES `catalogos_reparacion_dano` (`REPARACION_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_TIMPUGNACION` FOREIGN KEY (`TIPO_IMPUGNACION`) REFERENCES `catalogos_tipo_impugnacion` (`IMPUGNACION_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_TIPOR` FOREIGN KEY (`TIPO_RESOLUCION`) REFERENCES `catalogos_tipo_resolucion` (`RESOLUCION_ID`),
+  ADD CONSTRAINT `FK_CONCLUSIONES_TSOBRESEIMIENTO` FOREIGN KEY (`TIPO_SOBRESEIMIENTO`) REFERENCES `catalogos_tipo_sobreseimiento` (`TSOBRESEIMIENTO_ID`);
 
 --
--- Filtros para la tabla `DATOS_CONCLUSIONES_ADOJO`
+-- Filtros para la tabla `datos_conclusiones_adojo`
 --
-ALTER TABLE `DATOS_CONCLUSIONES_ADOJO`
-  ADD CONSTRAINT `FKK_CONCLU_IMPUGNACIONJO` FOREIGN KEY (`IMPUGNACION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_CONCLU_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_CONCLU_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_CONCLU_EXTINAPENALJO` FOREIGN KEY (`EXCLUSION_ACCIONP`) REFERENCES `CATALOGOS_EXCLUSION_ACCIONP` (`EXCLUSION_ID`),
-  ADD CONSTRAINT `FK_CONCLU_INTERNAMIENTOJO` FOREIGN KEY (`TIEMPO_INTERNAMIENTO`) REFERENCES `CATALOGOS_TIEMPO_INTERNAMIENTO` (`INTERNAMIENTO_ID`),
-  ADD CONSTRAINT `FK_CONCLU_MONTOREPARAJO` FOREIGN KEY (`MONTO_REPARA`) REFERENCES `CATALOGOS_MULTA` (`MULTA_ID`),
-  ADD CONSTRAINT `FK_CONCLU_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_CONCLU_NOPRIVATIVAJO` FOREIGN KEY (`MEDIDA_NOPRIVATIVA`) REFERENCES `CATALOGOS_NOPRIVATIVAS` (`NOPRIVATIVAS_ID`),
-  ADD CONSTRAINT `FK_CONCLU_PERSONAIMPUGJO` FOREIGN KEY (`PERSONA_IMPUGNA`) REFERENCES `CATALOGOS_FIGURA_PROCESO` (`FIGURA_PRO_ID`),
-  ADD CONSTRAINT `FK_CONCLU_PRIVATIVAJO` FOREIGN KEY (`MEDIDA_PRIVATIVA`) REFERENCES `CATALOGOS_PRIVATIVAS` (`PRIVATIVAS_ID`),
-  ADD CONSTRAINT `FK_CONCLU_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_CONCLU_REPARADANIOJO` FOREIGN KEY (`REPARACION_DANIO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_CONCLU_SENTENCIAJO` FOREIGN KEY (`TIPO_SENTENCIA`) REFERENCES `CATALOGOS_PROC_ABREVIADO` (`PROCABREV_ID`),
-  ADD CONSTRAINT `FK_CONCLU_SOBRESEIJO` FOREIGN KEY (`PROCEDENCIA_SOBRESEIMIENTO`) REFERENCES `CATALOGOS_SOBRESEIMIENTO` (`SOBRESEIMIENTO_ID`),
-  ADD CONSTRAINT `FK_CONCLU_TIPOIMPUGNAJO` FOREIGN KEY (`TIPO_IMPUGNACION`) REFERENCES `CATALOGOS_TIPO_IMPUGNACION` (`IMPUGNACION_ID`),
-  ADD CONSTRAINT `FK_CONCLU_TIPOREPARAJO` FOREIGN KEY (`TIPO_REPARACION_DANIO`) REFERENCES `CATALOGOS_REPARACION_DANO` (`REPARACION_ID`),
-  ADD CONSTRAINT `FK_CONCLU_TIPORESOLUJO` FOREIGN KEY (`TIPO_RESOLUCION`) REFERENCES `CATALOGOS_TIPO_RESOLUCIONJO` (`RESOLUCION_ID`),
-  ADD CONSTRAINT `FK_CONCLU_TIPOSOBRESEIJO` FOREIGN KEY (`TIPO_SOBRESEIMIENTO`) REFERENCES `CATALOGOS_TIPO_SOBRESEIMIENTO` (`TSOBRESEIMIENTO_ID`);
+ALTER TABLE `datos_conclusiones_adojo`
+  ADD CONSTRAINT `FKK_CONCLU_IMPUGNACIONJO` FOREIGN KEY (`IMPUGNACION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_CONCLU_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_CONCLU_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_CONCLU_EXTINAPENALJO` FOREIGN KEY (`EXCLUSION_ACCIONP`) REFERENCES `catalogos_exclusion_accionp` (`EXCLUSION_ID`),
+  ADD CONSTRAINT `FK_CONCLU_INTERNAMIENTOJO` FOREIGN KEY (`TIEMPO_INTERNAMIENTO`) REFERENCES `catalogos_tiempo_internamiento` (`INTERNAMIENTO_ID`),
+  ADD CONSTRAINT `FK_CONCLU_MONTOREPARAJO` FOREIGN KEY (`MONTO_REPARA`) REFERENCES `catalogos_multa` (`MULTA_ID`),
+  ADD CONSTRAINT `FK_CONCLU_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_CONCLU_NOPRIVATIVAJO` FOREIGN KEY (`MEDIDA_NOPRIVATIVA`) REFERENCES `catalogos_noprivativas` (`NOPRIVATIVAS_ID`),
+  ADD CONSTRAINT `FK_CONCLU_PERSONAIMPUGJO` FOREIGN KEY (`PERSONA_IMPUGNA`) REFERENCES `catalogos_figura_proceso` (`FIGURA_PRO_ID`),
+  ADD CONSTRAINT `FK_CONCLU_PRIVATIVAJO` FOREIGN KEY (`MEDIDA_PRIVATIVA`) REFERENCES `catalogos_privativas` (`PRIVATIVAS_ID`),
+  ADD CONSTRAINT `FK_CONCLU_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_CONCLU_REPARADANIOJO` FOREIGN KEY (`REPARACION_DANIO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_CONCLU_SENTENCIAJO` FOREIGN KEY (`TIPO_SENTENCIA`) REFERENCES `catalogos_proc_abreviado` (`PROCABREV_ID`),
+  ADD CONSTRAINT `FK_CONCLU_SOBRESEIJO` FOREIGN KEY (`PROCEDENCIA_SOBRESEIMIENTO`) REFERENCES `catalogos_sobreseimiento` (`SOBRESEIMIENTO_ID`),
+  ADD CONSTRAINT `FK_CONCLU_TIPOIMPUGNAJO` FOREIGN KEY (`TIPO_IMPUGNACION`) REFERENCES `catalogos_tipo_impugnacion` (`IMPUGNACION_ID`),
+  ADD CONSTRAINT `FK_CONCLU_TIPOREPARAJO` FOREIGN KEY (`TIPO_REPARACION_DANIO`) REFERENCES `catalogos_reparacion_dano` (`REPARACION_ID`),
+  ADD CONSTRAINT `FK_CONCLU_TIPORESOLUJO` FOREIGN KEY (`TIPO_RESOLUCION`) REFERENCES `catalogos_tipo_resolucionjo` (`RESOLUCION_ID`),
+  ADD CONSTRAINT `FK_CONCLU_TIPOSOBRESEIJO` FOREIGN KEY (`TIPO_SOBRESEIMIENTO`) REFERENCES `catalogos_tipo_sobreseimiento` (`TSOBRESEIMIENTO_ID`);
 
 --
--- Filtros para la tabla `DATOS_DCONCLUSIONES_ADOJC`
+-- Filtros para la tabla `datos_dconclusiones_adojc`
 --
-ALTER TABLE `DATOS_DCONCLUSIONES_ADOJC`
-  ADD CONSTRAINT `FK_DCONCLUSIONES_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJC` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DCONCLUSIONES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DCONCLUSIONES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_DCONCLUSIONES_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_CONCLUSIONES_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DCONCLUSIONES_TCONCLUSIONDELI` FOREIGN KEY (`TIPO_CONCLUSION_PA`) REFERENCES `CATALOGOS_PROC_ABREVIADO` (`PROCABREV_ID`),
-  ADD CONSTRAINT `FK_DCONCLUSIONES_TRESOLUCION` FOREIGN KEY (`TIPO_RESOLUCION`) REFERENCES `CATALOGOS_TIPO_RESOLUCION` (`RESOLUCION_ID`);
+ALTER TABLE `datos_dconclusiones_adojc`
+  ADD CONSTRAINT `FK_DCONCLUSIONES_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojc` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DCONCLUSIONES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DCONCLUSIONES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_DCONCLUSIONES_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_conclusiones_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DCONCLUSIONES_TCONCLUSIONDELI` FOREIGN KEY (`TIPO_CONCLUSION_PA`) REFERENCES `catalogos_proc_abreviado` (`PROCABREV_ID`),
+  ADD CONSTRAINT `FK_DCONCLUSIONES_TRESOLUCION` FOREIGN KEY (`TIPO_RESOLUCION`) REFERENCES `catalogos_tipo_resolucion` (`RESOLUCION_ID`);
 
 --
--- Filtros para la tabla `DATOS_DCONCLUSIONES_ADOJO`
+-- Filtros para la tabla `datos_dconclusiones_adojo`
 --
-ALTER TABLE `DATOS_DCONCLUSIONES_ADOJO`
-  ADD CONSTRAINT `FK_DCON_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DCON_CONCLUJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_CONCLUSIONES_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DCON_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJO` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DCON_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DCON_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_DCON_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DCON_SENTENCIAJO` FOREIGN KEY (`TIPO_SENTENCIA`) REFERENCES `CATALOGOS_PROC_ABREVIADO` (`PROCABREV_ID`);
+ALTER TABLE `datos_dconclusiones_adojo`
+  ADD CONSTRAINT `FK_DCON_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DCON_CONCLUJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_conclusiones_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DCON_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojo` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DCON_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DCON_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_DCON_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DCON_SENTENCIAJO` FOREIGN KEY (`TIPO_SENTENCIA`) REFERENCES `catalogos_proc_abreviado` (`PROCABREV_ID`);
 
 --
--- Filtros para la tabla `DATOS_DELITOS_ADOJC`
+-- Filtros para la tabla `datos_delitos_adojc`
 --
-ALTER TABLE `DATOS_DELITOS_ADOJC`
-  ADD CONSTRAINT `FK_CAUSA_CLAVE` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DELITOCODIGOPENAL` FOREIGN KEY (`DELITO_CODIGO_PENAL`) REFERENCES `CATALOGOS_CODIGO_NORMA` (`ID_CODIGO`),
-  ADD CONSTRAINT `FK_DELITORECLASIFICADO` FOREIGN KEY (`DELITO_RECLASIFICADO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_DELITOS_CALIFICACION` FOREIGN KEY (`CALIFICACION`) REFERENCES `CATALOGOS_CALIFICACION_DELITO` (`CALIFICACION_ID`),
-  ADD CONSTRAINT `FK_DELITOS_CLASIFICACION` FOREIGN KEY (`CLASIFICACION`) REFERENCES `CATALOGOS_CLASIFICACION` (`CLASIFICACION_ID`),
-  ADD CONSTRAINT `FK_DELITOS_COMISION` FOREIGN KEY (`FORMA_COMISION`) REFERENCES `CATALOGOS_FORMA_COMISION` (`COMISION_ID`),
-  ADD CONSTRAINT `FK_DELITOS_CONCURSO` FOREIGN KEY (`CONCURSO`) REFERENCES `CATALOGOS_CONCURSO` (`CONCURSO_ID`),
-  ADD CONSTRAINT `FK_DELITOS_CONSUMACION` FOREIGN KEY (`GRADO_CONSUMACION`) REFERENCES `CATALOGOS_CONSUMACION` (`CONSUMACION_ID`),
-  ADD CONSTRAINT `FK_DELITOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DELITOS_FORMAACCION` FOREIGN KEY (`FORMA_ACCION`) REFERENCES `CATALOGOS_FORMA_ACCION` (`ACCION_ID`),
-  ADD CONSTRAINT `FK_DELITOS_ISNTRUMENTOCOMISION` FOREIGN KEY (`INSTRUMENTO_COMISION`) REFERENCES `CATALOGOS_INSTRUMENTO_COMISION` (`INSTRUMENTO_ID`),
-  ADD CONSTRAINT `FK_DELITOS_MODALIDAD` FOREIGN KEY (`MODALIDAD`) REFERENCES `CATALOGOS_MODALIDAD` (`MODALIDAD_ID`),
-  ADD CONSTRAINT `FK_DELITOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_DELITOS_NORMATECNICA` FOREIGN KEY (`DELITO_NORMA_TECNICA`) REFERENCES `CATALOGOS_DELITOS_NORMA` (`ID_DELITO`),
-  ADD CONSTRAINT `FK_DELITOS_OCURRIOENTIDAD` FOREIGN KEY (`OCURRIO_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DELITOS_OCURRIO_MUNICIPIO` FOREIGN KEY (`OCURRIO_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_DELITOS_SITIOOCURERENCIA` FOREIGN KEY (`SITIO_OCURRENCIA`) REFERENCES `CATALOGOS_SITIO_OCURRENCIA` (`SITIO_ID`),
-  ADD CONSTRAINT `FK_DELITOS_TIPOFUERO` FOREIGN KEY (`TIPO_FUERO`) REFERENCES `CATALOGOS_FUERO` (`FUERO_ID`);
+ALTER TABLE `datos_delitos_adojc`
+  ADD CONSTRAINT `FK_CAUSA_CLAVE` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DELITOCODIGOPENAL` FOREIGN KEY (`DELITO_CODIGO_PENAL`) REFERENCES `catalogos_codigo_norma` (`ID_CODIGO`),
+  ADD CONSTRAINT `FK_DELITORECLASIFICADO` FOREIGN KEY (`DELITO_RECLASIFICADO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_DELITOS_CALIFICACION` FOREIGN KEY (`CALIFICACION`) REFERENCES `catalogos_calificacion_delito` (`CALIFICACION_ID`),
+  ADD CONSTRAINT `FK_DELITOS_CLASIFICACION` FOREIGN KEY (`CLASIFICACION`) REFERENCES `catalogos_clasificacion` (`CLASIFICACION_ID`),
+  ADD CONSTRAINT `FK_DELITOS_COMISION` FOREIGN KEY (`FORMA_COMISION`) REFERENCES `catalogos_forma_comision` (`COMISION_ID`),
+  ADD CONSTRAINT `FK_DELITOS_CONCURSO` FOREIGN KEY (`CONCURSO`) REFERENCES `catalogos_concurso` (`CONCURSO_ID`),
+  ADD CONSTRAINT `FK_DELITOS_CONSUMACION` FOREIGN KEY (`GRADO_CONSUMACION`) REFERENCES `catalogos_consumacion` (`CONSUMACION_ID`),
+  ADD CONSTRAINT `FK_DELITOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DELITOS_FORMAACCION` FOREIGN KEY (`FORMA_ACCION`) REFERENCES `catalogos_forma_accion` (`ACCION_ID`),
+  ADD CONSTRAINT `FK_DELITOS_ISNTRUMENTOCOMISION` FOREIGN KEY (`INSTRUMENTO_COMISION`) REFERENCES `catalogos_instrumento_comision` (`INSTRUMENTO_ID`),
+  ADD CONSTRAINT `FK_DELITOS_MODALIDAD` FOREIGN KEY (`MODALIDAD`) REFERENCES `catalogos_modalidad` (`MODALIDAD_ID`),
+  ADD CONSTRAINT `FK_DELITOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_DELITOS_NORMATECNICA` FOREIGN KEY (`DELITO_NORMA_TECNICA`) REFERENCES `catalogos_delitos_norma` (`ID_DELITO`),
+  ADD CONSTRAINT `FK_DELITOS_OCURRIOENTIDAD` FOREIGN KEY (`OCURRIO_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DELITOS_OCURRIO_MUNICIPIO` FOREIGN KEY (`OCURRIO_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_DELITOS_SITIOOCURERENCIA` FOREIGN KEY (`SITIO_OCURRENCIA`) REFERENCES `catalogos_sitio_ocurrencia` (`SITIO_ID`),
+  ADD CONSTRAINT `FK_DELITOS_TIPOFUERO` FOREIGN KEY (`TIPO_FUERO`) REFERENCES `catalogos_fuero` (`FUERO_ID`);
 
 --
--- Filtros para la tabla `DATOS_DELITOS_ADOJO`
+-- Filtros para la tabla `datos_delitos_adojo`
 --
-ALTER TABLE `DATOS_DELITOS_ADOJO`
-  ADD CONSTRAINT `FK_CAUSA_CLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DELITO_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`,`DELITO_CLAVEJC`) REFERENCES `DATOS_DELITOS_ADOJC` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DELI_CALIFICACIONJO` FOREIGN KEY (`CALIFICACION`) REFERENCES `CATALOGOS_CALIFICACION_DELITO` (`CALIFICACION_ID`),
-  ADD CONSTRAINT `FK_DELI_CLASIFICACIONJO` FOREIGN KEY (`CLASIFICACION`) REFERENCES `CATALOGOS_CLASIFICACION` (`CLASIFICACION_ID`),
-  ADD CONSTRAINT `FK_DELI_CODIGOPENALJO` FOREIGN KEY (`DELITO_CODIGO_PENAL`) REFERENCES `CATALOGOS_CODIGO_NORMA` (`ID_CODIGO`),
-  ADD CONSTRAINT `FK_DELI_CONCURSOJO` FOREIGN KEY (`CONCURSO`) REFERENCES `CATALOGOS_CONCURSO` (`CONCURSO_ID`),
-  ADD CONSTRAINT `FK_DELI_CONSUMACIONJO` FOREIGN KEY (`GRADO_CONSUMACION`) REFERENCES `CATALOGOS_CONSUMACION` (`CONSUMACION_ID`),
-  ADD CONSTRAINT `FK_DELI_ENTIDADESJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DELI_FORMAACCIONJO` FOREIGN KEY (`FORMA_ACCION`) REFERENCES `CATALOGOS_FORMA_ACCION` (`ACCION_ID`),
-  ADD CONSTRAINT `FK_DELI_FORMACOMISIONJO` FOREIGN KEY (`FORMA_COMISION`) REFERENCES `CATALOGOS_FORMA_COMISION` (`COMISION_ID`),
-  ADD CONSTRAINT `FK_DELI_INSTRUMENTOSJO` FOREIGN KEY (`INSTRUMENTO_COMISION`) REFERENCES `CATALOGOS_INSTRUMENTO_COMISION` (`INSTRUMENTO_ID`),
-  ADD CONSTRAINT `FK_DELI_MODALIDAD` FOREIGN KEY (`MODALIDAD`) REFERENCES `CATALOGOS_MODALIDAD` (`MODALIDAD_ID`),
-  ADD CONSTRAINT `FK_DELI_MUNICIPIOSJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_DELI_NORMATECNICAJO` FOREIGN KEY (`DELITO_NORMA_TECNICA`) REFERENCES `CATALOGOS_DELITOS_NORMA` (`ID_DELITO`),
-  ADD CONSTRAINT `FK_DELI_OCURRIOENTIJO` FOREIGN KEY (`OCURRIO_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DELI_OCURRIOMUNJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_DELI_RECLASIFICADOJO` FOREIGN KEY (`DELITO_RECLASIFICADO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_DELI_SITIOOCURRENCIA` FOREIGN KEY (`SITIO_OCURRENCIA`) REFERENCES `CATALOGOS_SITIO_OCURRENCIA` (`SITIO_ID`),
-  ADD CONSTRAINT `FK_DELI_TIPOFUEROJO` FOREIGN KEY (`TIPO_FUERO`) REFERENCES `CATALOGOS_FUERO` (`FUERO_ID`);
+ALTER TABLE `datos_delitos_adojo`
+  ADD CONSTRAINT `FK_CAUSA_CLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DELITO_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`,`DELITO_CLAVEJC`) REFERENCES `datos_delitos_adojc` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DELI_CALIFICACIONJO` FOREIGN KEY (`CALIFICACION`) REFERENCES `catalogos_calificacion_delito` (`CALIFICACION_ID`),
+  ADD CONSTRAINT `FK_DELI_CLASIFICACIONJO` FOREIGN KEY (`CLASIFICACION`) REFERENCES `catalogos_clasificacion` (`CLASIFICACION_ID`),
+  ADD CONSTRAINT `FK_DELI_CODIGOPENALJO` FOREIGN KEY (`DELITO_CODIGO_PENAL`) REFERENCES `catalogos_codigo_norma` (`ID_CODIGO`),
+  ADD CONSTRAINT `FK_DELI_CONCURSOJO` FOREIGN KEY (`CONCURSO`) REFERENCES `catalogos_concurso` (`CONCURSO_ID`),
+  ADD CONSTRAINT `FK_DELI_CONSUMACIONJO` FOREIGN KEY (`GRADO_CONSUMACION`) REFERENCES `catalogos_consumacion` (`CONSUMACION_ID`),
+  ADD CONSTRAINT `FK_DELI_ENTIDADESJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DELI_FORMAACCIONJO` FOREIGN KEY (`FORMA_ACCION`) REFERENCES `catalogos_forma_accion` (`ACCION_ID`),
+  ADD CONSTRAINT `FK_DELI_FORMACOMISIONJO` FOREIGN KEY (`FORMA_COMISION`) REFERENCES `catalogos_forma_comision` (`COMISION_ID`),
+  ADD CONSTRAINT `FK_DELI_INSTRUMENTOSJO` FOREIGN KEY (`INSTRUMENTO_COMISION`) REFERENCES `catalogos_instrumento_comision` (`INSTRUMENTO_ID`),
+  ADD CONSTRAINT `FK_DELI_MODALIDAD` FOREIGN KEY (`MODALIDAD`) REFERENCES `catalogos_modalidad` (`MODALIDAD_ID`),
+  ADD CONSTRAINT `FK_DELI_MUNICIPIOSJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_DELI_NORMATECNICAJO` FOREIGN KEY (`DELITO_NORMA_TECNICA`) REFERENCES `catalogos_delitos_norma` (`ID_DELITO`),
+  ADD CONSTRAINT `FK_DELI_OCURRIOENTIJO` FOREIGN KEY (`OCURRIO_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DELI_OCURRIOMUNJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_DELI_RECLASIFICADOJO` FOREIGN KEY (`DELITO_RECLASIFICADO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_DELI_SITIOOCURRENCIA` FOREIGN KEY (`SITIO_OCURRENCIA`) REFERENCES `catalogos_sitio_ocurrencia` (`SITIO_ID`),
+  ADD CONSTRAINT `FK_DELI_TIPOFUEROJO` FOREIGN KEY (`TIPO_FUERO`) REFERENCES `catalogos_fuero` (`FUERO_ID`);
 
 --
--- Filtros para la tabla `DATOS_DHOMICIDIO_ADOJC`
+-- Filtros para la tabla `datos_dhomicidio_adojc`
 --
-ALTER TABLE `DATOS_DHOMICIDIO_ADOJC`
-  ADD CONSTRAINT `FK_DHOMCIDIO_CSITUACIONAL` FOREIGN KEY (`CONTEXTO_SITUACIONAL`) REFERENCES `CATALOGOS_CONTEXTO_SITUACIONAL` (`CONTEXTO_ID`),
-  ADD CONSTRAINT `FK_DHOMICIDIOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DHOMICIDIO_CAUSASP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DHOMICIDIO_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJC` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DHOMICIDIO_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`);
+ALTER TABLE `datos_dhomicidio_adojc`
+  ADD CONSTRAINT `FK_DHOMCIDIO_CSITUACIONAL` FOREIGN KEY (`CONTEXTO_SITUACIONAL`) REFERENCES `catalogos_contexto_situacional` (`CONTEXTO_ID`),
+  ADD CONSTRAINT `FK_DHOMICIDIOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DHOMICIDIO_CAUSASP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DHOMICIDIO_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojc` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DHOMICIDIO_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`);
 
 --
--- Filtros para la tabla `DATOS_DHOMICIDIO_ADOJO`
+-- Filtros para la tabla `datos_dhomicidio_adojo`
 --
-ALTER TABLE `DATOS_DHOMICIDIO_ADOJO`
-  ADD CONSTRAINT `FK_DHOMI_CAUSA_CLAVE` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DHOMI_CONTEXTOSITUAJO` FOREIGN KEY (`CONTEXTO_SITUACIONAL`) REFERENCES `CATALOGOS_CONTEXTO_SITUACIONAL` (`CONTEXTO_ID`),
-  ADD CONSTRAINT `FK_DHOMI_DELITOCLAVE` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJO` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DHOMI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DHOMI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`);
+ALTER TABLE `datos_dhomicidio_adojo`
+  ADD CONSTRAINT `FK_DHOMI_CAUSA_CLAVE` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DHOMI_CONTEXTOSITUAJO` FOREIGN KEY (`CONTEXTO_SITUACIONAL`) REFERENCES `catalogos_contexto_situacional` (`CONTEXTO_ID`),
+  ADD CONSTRAINT `FK_DHOMI_DELITOCLAVE` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojo` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DHOMI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DHOMI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`);
 
 --
--- Filtros para la tabla `DATOS_DROBO_ADOJC`
+-- Filtros para la tabla `datos_drobo_adojc`
 --
-ALTER TABLE `DATOS_DROBO_ADOJC`
-  ADD CONSTRAINT `FK_DROBOS_MUNICIPIO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_DROBO_COSAROBADA` FOREIGN KEY (`TIPO_COSA_ROBADA`) REFERENCES `CATALOGOS_COSA_ROBADA` (`COSA_ID`),
-  ADD CONSTRAINT `FK_DROBO_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJC` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DROBO_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DROBO_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_drobo_adojc`
+  ADD CONSTRAINT `FK_DROBOS_MUNICIPIO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_DROBO_COSAROBADA` FOREIGN KEY (`TIPO_COSA_ROBADA`) REFERENCES `catalogos_cosa_robada` (`COSA_ID`),
+  ADD CONSTRAINT `FK_DROBO_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojc` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DROBO_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DROBO_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_DROBO_ADOJO`
+-- Filtros para la tabla `datos_drobo_adojo`
 --
-ALTER TABLE `DATOS_DROBO_ADOJO`
-  ADD CONSTRAINT `FK_DROBO_CAUSA_CLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DROBO_COSAROBADAJO` FOREIGN KEY (`TIPO_COSA_ROBADA`) REFERENCES `CATALOGOS_COSA_ROBADA` (`COSA_ID`),
-  ADD CONSTRAINT `FK_DROBO_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJO` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DROBO_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_DROBO_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`);
+ALTER TABLE `datos_drobo_adojo`
+  ADD CONSTRAINT `FK_DROBO_CAUSA_CLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DROBO_COSAROBADAJO` FOREIGN KEY (`TIPO_COSA_ROBADA`) REFERENCES `catalogos_cosa_robada` (`COSA_ID`),
+  ADD CONSTRAINT `FK_DROBO_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojo` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_DROBO_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_DROBO_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`);
 
 --
--- Filtros para la tabla `DATOS_ETAPA_INICIAL_ADOJC`
+-- Filtros para la tabla `datos_etapa_inicial_adojc`
 --
-ALTER TABLE `DATOS_ETAPA_INICIAL_ADOJC`
-  ADD CONSTRAINT `FK_EINICIAL_AVINCULACION` FOREIGN KEY (`AUTO_VINCULACION`) REFERENCES `CATALOGOS_AUTO_VINCULACION` (`AUTO_ID`),
-  ADD CONSTRAINT `FK_EINICIAL_FACUSACION` FOREIGN KEY (`FORMULO_ACUSACION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ESTAPAINICIAL_PCONSTITUCIONAL` FOREIGN KEY (`PLAZO_CONSTITUCIONAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINCIAL_CAUSASUSPENSION` FOREIGN KEY (`CAUSA_SUSPENSION_PROCESO`) REFERENCES `CATALOGOS_CAUSA_SUSPENCION` (`CSUSPENSION_ID`),
-  ADD CONSTRAINT `FK_ETAPAINCIAL_CINVCOMPLEMENTARIA` FOREIGN KEY (`INVESTIGACION_COMPLEMENTARIA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINCIAL_SUSPENSIONP` FOREIGN KEY (`SUSPENSION_PROCESO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_AUTOVINCULACION` FOREIGN KEY (`AUTO_VINCULACION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_CELEBRACION` FOREIGN KEY (`AUDIENCIA_INICIAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_CTRLDETENCION` FOREIGN KEY (`CTRL_DETENCION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_DETENCIONLEGAL` FOREIGN KEY (`DETENCION_LEGAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_ETAPAS` FOREIGN KEY (`ETAPA`) REFERENCES `CATALOGOS_ETAPAS` (`ETAPA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_FORMIMPUTACION` FOREIGN KEY (`FORMULACION_IMPUTACION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_IMPUTADODECLARO` FOREIGN KEY (`IMPUTADO_DECLARO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_MEDIDACAUTELAR` FOREIGN KEY (`IMPUSO_MCAUTELARES`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_PCIERRE` FOREIGN KEY (`PLAZO_CIERRE_INVESTIGACION`) REFERENCES `CATALOGOS_PLAZO_CIERRE` (`CIERRE_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_PCONSTITUCIONAL` FOREIGN KEY (`TIEMPO_PLAZO`) REFERENCES `CATALOGOS_PLAZO_CONSTITUCIONAL` (`PLAZO_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_ETAPAINICIAL_PRORROGAPCIERRE` FOREIGN KEY (`PRORROGA_PLAZO_CIERRE`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_REAPERTURA` FOREIGN KEY (`SOLICITO_REAPERTURA`) REFERENCES `CATALOGOS_FIGURA_PROCESO` (`FIGURA_PRO_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_REAPERTURA_PRO` FOREIGN KEY (`REAPERTURA_PROCESO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_ETAPAINICIAL_SOBRESEIMIENTOCAUSAP` FOREIGN KEY (`SOBRESEIMIENTO_CAUSAP`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`);
+ALTER TABLE `datos_etapa_inicial_adojc`
+  ADD CONSTRAINT `FK_EINICIAL_AVINCULACION` FOREIGN KEY (`AUTO_VINCULACION`) REFERENCES `catalogos_auto_vinculacion` (`AUTO_ID`),
+  ADD CONSTRAINT `FK_EINICIAL_FACUSACION` FOREIGN KEY (`FORMULO_ACUSACION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ESTAPAINICIAL_PCONSTITUCIONAL` FOREIGN KEY (`PLAZO_CONSTITUCIONAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINCIAL_CAUSASUSPENSION` FOREIGN KEY (`CAUSA_SUSPENSION_PROCESO`) REFERENCES `catalogos_causa_suspencion` (`CSUSPENSION_ID`),
+  ADD CONSTRAINT `FK_ETAPAINCIAL_CINVCOMPLEMENTARIA` FOREIGN KEY (`INVESTIGACION_COMPLEMENTARIA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINCIAL_SUSPENSIONP` FOREIGN KEY (`SUSPENSION_PROCESO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_AUTOVINCULACION` FOREIGN KEY (`AUTO_VINCULACION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_CELEBRACION` FOREIGN KEY (`AUDIENCIA_INICIAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_CTRLDETENCION` FOREIGN KEY (`CTRL_DETENCION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_DETENCIONLEGAL` FOREIGN KEY (`DETENCION_LEGAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_ETAPAS` FOREIGN KEY (`ETAPA`) REFERENCES `catalogos_etapas` (`ETAPA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_FORMIMPUTACION` FOREIGN KEY (`FORMULACION_IMPUTACION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_IMPUTADODECLARO` FOREIGN KEY (`IMPUTADO_DECLARO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_MEDIDACAUTELAR` FOREIGN KEY (`IMPUSO_MCAUTELARES`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_PCIERRE` FOREIGN KEY (`PLAZO_CIERRE_INVESTIGACION`) REFERENCES `catalogos_plazo_cierre` (`CIERRE_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_PCONSTITUCIONAL` FOREIGN KEY (`TIEMPO_PLAZO`) REFERENCES `catalogos_plazo_constitucional` (`PLAZO_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ETAPAINICIAL_PRORROGAPCIERRE` FOREIGN KEY (`PRORROGA_PLAZO_CIERRE`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_REAPERTURA` FOREIGN KEY (`SOLICITO_REAPERTURA`) REFERENCES `catalogos_figura_proceso` (`FIGURA_PRO_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_REAPERTURA_PRO` FOREIGN KEY (`REAPERTURA_PROCESO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_ETAPAINICIAL_SOBRESEIMIENTOCAUSAP` FOREIGN KEY (`SOBRESEIMIENTO_CAUSAP`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`);
 
 --
--- Filtros para la tabla `DATOS_ETAPA_INTERMEDIA_ADOJC`
+-- Filtros para la tabla `datos_etapa_intermedia_adojc`
 --
-ALTER TABLE `DATOS_ETAPA_INTERMEDIA_ADOJC`
-  ADD CONSTRAINT `FK_EINTERMEDIA_AINTERMEDIA` FOREIGN KEY (`AUDIENCIA_INTERMEDIA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_AJUICIOORAL` FOREIGN KEY (`APERTURA_JUICIO_ORAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_APROBATORIOS` FOREIGN KEY (`ACUERDOS_PROBATORIOS`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_DPROBATORIO` FOREIGN KEY (`DESCUBRIMIENTO_PROBATORIO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_MP_MP` FOREIGN KEY (`PRESENTA_MP_MINISTERIO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_PMPRUEBA` FOREIGN KEY (`PRESENTACION_MPRUEBA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_PRESENTA_MP_ASESOR` FOREIGN KEY (`PRESENTA_MP_ASESOR`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_PRESENTA_MP_DEFENSA` FOREIGN KEY (`PRESENTA_MP_DEFENSA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EINTERMEDIA_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_ETAPA_INICIAL_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_EINTERMEDIA_SACUSACION` FOREIGN KEY (`SEPARACION_ACUSACION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`);
+ALTER TABLE `datos_etapa_intermedia_adojc`
+  ADD CONSTRAINT `FK_EINTERMEDIA_AINTERMEDIA` FOREIGN KEY (`AUDIENCIA_INTERMEDIA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_AJUICIOORAL` FOREIGN KEY (`APERTURA_JUICIO_ORAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_APROBATORIOS` FOREIGN KEY (`ACUERDOS_PROBATORIOS`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_DPROBATORIO` FOREIGN KEY (`DESCUBRIMIENTO_PROBATORIO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_MP_MP` FOREIGN KEY (`PRESENTA_MP_MINISTERIO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_PMPRUEBA` FOREIGN KEY (`PRESENTACION_MPRUEBA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_PRESENTA_MP_ASESOR` FOREIGN KEY (`PRESENTA_MP_ASESOR`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_PRESENTA_MP_DEFENSA` FOREIGN KEY (`PRESENTA_MP_DEFENSA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EINTERMEDIA_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_etapa_inicial_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_EINTERMEDIA_SACUSACION` FOREIGN KEY (`SEPARACION_ACUSACION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`);
 
 --
--- Filtros para la tabla `DATOS_ETAPA_ORAL_ADOJO`
+-- Filtros para la tabla `datos_etapa_oral_adojo`
 --
-ALTER TABLE `DATOS_ETAPA_ORAL_ADOJO`
-  ADD CONSTRAINT `FK_EORAL_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_EORAL_DACUSADOJO` FOREIGN KEY (`PD_DECLARACION_ACUSADO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_DELIBERACIONJO` FOREIGN KEY (`DELIBERACION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_DISCIPLINARIASJO` FOREIGN KEY (`MEDIDAS_DISCIPLINARIAS`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_DOCMATERIALJO` FOREIGN KEY (`PD_DOCUMENTAL_MATERIAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_EORAL_HUBOINCIDENTEJO` FOREIGN KEY (`INCIDENTES_AUDIENCIA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_EORAL_OTRAPRUEBAJO` FOREIGN KEY (`PD_OTRA_PRUEBA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_PERICIALJO` FOREIGN KEY (`PD_PERICIAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_EORAL_PROMUEVEINCJO` FOREIGN KEY (`PROMUEVE_INCIDENTE`) REFERENCES `CATALOGOS_PROMUEVE_INCIDENTE` (`PROMUEVE_ID`),
-  ADD CONSTRAINT `FK_EORAL_SENTIDOJO` FOREIGN KEY (`SENTIDO_FALLO`) REFERENCES `CATALOGOS_SENTIDO_FALLO` (`SENTIDO_ID`),
-  ADD CONSTRAINT `FK_EORAL_SUSPENCIONAUDIJO` FOREIGN KEY (`SUSPENCION_AUDIENCIA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_TESTIMONIALJO` FOREIGN KEY (`PD_TESTIMONIAL`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_EORAL_TIPODISCIPLIJO` FOREIGN KEY (`TIPO_DISCIPLINARIA`) REFERENCES `CATALOGOS_MEDIDAS_DISCIPLINARIAS` (`MEDIDA_ID`),
-  ADD CONSTRAINT `FK_ETAPAS` FOREIGN KEY (`ETAPA`) REFERENCES `CATALOGOS_ETAPAS` (`ETAPA_ID`);
+ALTER TABLE `datos_etapa_oral_adojo`
+  ADD CONSTRAINT `FK_EORAL_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_EORAL_DACUSADOJO` FOREIGN KEY (`PD_DECLARACION_ACUSADO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_DELIBERACIONJO` FOREIGN KEY (`DELIBERACION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_DISCIPLINARIASJO` FOREIGN KEY (`MEDIDAS_DISCIPLINARIAS`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_DOCMATERIALJO` FOREIGN KEY (`PD_DOCUMENTAL_MATERIAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_EORAL_HUBOINCIDENTEJO` FOREIGN KEY (`INCIDENTES_AUDIENCIA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_EORAL_OTRAPRUEBAJO` FOREIGN KEY (`PD_OTRA_PRUEBA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_PERICIALJO` FOREIGN KEY (`PD_PERICIAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_EORAL_PROMUEVEINCJO` FOREIGN KEY (`PROMUEVE_INCIDENTE`) REFERENCES `catalogos_promueve_incidente` (`PROMUEVE_ID`),
+  ADD CONSTRAINT `FK_EORAL_SENTIDOJO` FOREIGN KEY (`SENTIDO_FALLO`) REFERENCES `catalogos_sentido_fallo` (`SENTIDO_ID`),
+  ADD CONSTRAINT `FK_EORAL_SUSPENCIONAUDIJO` FOREIGN KEY (`SUSPENCION_AUDIENCIA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_TESTIMONIALJO` FOREIGN KEY (`PD_TESTIMONIAL`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_EORAL_TIPODISCIPLIJO` FOREIGN KEY (`TIPO_DISCIPLINARIA`) REFERENCES `catalogos_medidas_disciplinarias` (`MEDIDA_ID`),
+  ADD CONSTRAINT `FK_ETAPAS` FOREIGN KEY (`ETAPA`) REFERENCES `catalogos_etapas` (`ETAPA_ID`);
 
 --
--- Filtros para la tabla `DATOS_INFORME_ADOJC`
+-- Filtros para la tabla `datos_informe_adojc`
 --
-ALTER TABLE `DATOS_INFORME_ADOJC`
-  ADD CONSTRAINT `FK_INFORME_JUZGADO` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `DATOS_JUZGADOS_ADOJC` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_informe_adojc`
+  ADD CONSTRAINT `FK_INFORME_JUZGADO` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `datos_juzgados_adojc` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_JUECES_ADOJC`
+-- Filtros para la tabla `datos_jueces_adojc`
 --
-ALTER TABLE `DATOS_JUECES_ADOJC`
-  ADD CONSTRAINT `FK_JUECES_EDAD` FOREIGN KEY (`EDAD`) REFERENCES `CATALOGOS_NUMERO` (`NUMERO_ID`),
-  ADD CONSTRAINT `FK_JUECES_ESTUDIOPROF` FOREIGN KEY (`GRADO_ESTUDIOS`) REFERENCES `CATALOGOS_ESTUDIO_PROFESIONAL` (`ESTUDIO_PRO_ID`),
-  ADD CONSTRAINT `FK_JUECES_FUNCION` FOREIGN KEY (`FUNCION_DESEMPENA`) REFERENCES `CATALOGOS_FUNCION_JUZGADO` (`FUNCION_JUZ_ID`),
-  ADD CONSTRAINT `FK_JUECES_SEXO` FOREIGN KEY (`SEXO`) REFERENCES `CATALOGOS_SEXO` (`SEXO_ID`),
-  ADD CONSTRAINT `FK_JUZGADO_CLAVE` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `DATOS_JUZGADOS_ADOJC` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_jueces_adojc`
+  ADD CONSTRAINT `FK_JUECES_EDAD` FOREIGN KEY (`EDAD`) REFERENCES `catalogos_numero` (`NUMERO_ID`),
+  ADD CONSTRAINT `FK_JUECES_ESTATUS` FOREIGN KEY (`ESTATUS`) REFERENCES `catalogos_estatus` (`ESTATUS_ID`),
+  ADD CONSTRAINT `FK_JUECES_ESTUDIOPROF` FOREIGN KEY (`GRADO_ESTUDIOS`) REFERENCES `catalogos_estudio_profesional` (`ESTUDIO_PRO_ID`),
+  ADD CONSTRAINT `FK_JUECES_FUNCION` FOREIGN KEY (`FUNCION_DESEMPENA`) REFERENCES `catalogos_funcion_juzgado` (`FUNCION_JUZ_ID`),
+  ADD CONSTRAINT `FK_JUECES_SEXO` FOREIGN KEY (`SEXO`) REFERENCES `catalogos_sexo` (`SEXO_ID`),
+  ADD CONSTRAINT `FK_JUZGADO_CLAVE` FOREIGN KEY (`JUZGADO_CLAVE`) REFERENCES `datos_juzgados_adojc` (`JUZGADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_JUZGADOS_ADOJC`
+-- Filtros para la tabla `datos_juzgados_adojc`
 --
-ALTER TABLE `DATOS_JUZGADOS_ADOJC`
-  ADD CONSTRAINT `FK_ASENTAMIENTOHUMANO` FOREIGN KEY (`ASENTAMIENTO_HUMANO`) REFERENCES `CATALOGOS_ASENTAMIENTO_HUMANO` (`ASENTAMIENTO_ID`),
-  ADD CONSTRAINT `FK_FUNCION_JUZGADO` FOREIGN KEY (`JUZGADO_FUNCION`) REFERENCES `CATALOGOS_FUNCION_JUZGADO` (`FUNCION_JUZ_ID`),
-  ADD CONSTRAINT `FK_JURISDICCION` FOREIGN KEY (`JUZGADO_JURISDICCION`) REFERENCES `CATALOGOS_JURISDICCION` (`JURISDICCION_ID`),
-  ADD CONSTRAINT `FK_JUZGADOS_MUNICIPIOS` FOREIGN KEY (`MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_JUZGADOS_VIALIDAD` FOREIGN KEY (`TIPO_VIALIDAD`) REFERENCES `CATALOGOS_VIALIDAD` (`VIALIDAD_ID`),
-  ADD CONSTRAINT `FK_JUZGADO_ENTIDADES` FOREIGN KEY (`ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_JUZGADO_FORMADIVISION` FOREIGN KEY (`FORMA_DIVISION`) REFERENCES `CATALOGOS_FORMA_DIVISION` (`DIVISION_ID`),
-  ADD CONSTRAINT `FK_JUZGADO_NUMERO` FOREIGN KEY (`JUZGADO_NUMERO`) REFERENCES `CATALOGOS_NUMERO` (`NUMERO_ID`);
+ALTER TABLE `datos_juzgados_adojc`
+  ADD CONSTRAINT `FK_ASENTAMIENTOHUMANO` FOREIGN KEY (`ASENTAMIENTO_HUMANO`) REFERENCES `catalogos_asentamiento_humano` (`ASENTAMIENTO_ID`),
+  ADD CONSTRAINT `FK_FUNCION_JUZGADO` FOREIGN KEY (`JUZGADO_FUNCION`) REFERENCES `catalogos_funcion_juzgado` (`FUNCION_JUZ_ID`),
+  ADD CONSTRAINT `FK_JURISDICCION` FOREIGN KEY (`JUZGADO_JURISDICCION`) REFERENCES `catalogos_jurisdiccion` (`JURISDICCION_ID`),
+  ADD CONSTRAINT `FK_JUZGADOS_MUNICIPIOS` FOREIGN KEY (`MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_JUZGADOS_VIALIDAD` FOREIGN KEY (`TIPO_VIALIDAD`) REFERENCES `catalogos_vialidad` (`VIALIDAD_ID`),
+  ADD CONSTRAINT `FK_JUZGADO_ENTIDADES` FOREIGN KEY (`ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_JUZGADO_ESTATUS` FOREIGN KEY (`ESTATUS`) REFERENCES `catalogos_estatus` (`ESTATUS_ID`),
+  ADD CONSTRAINT `FK_JUZGADO_FORMADIVISION` FOREIGN KEY (`FORMA_DIVISION`) REFERENCES `catalogos_forma_division` (`DIVISION_ID`),
+  ADD CONSTRAINT `FK_JUZGADO_NUMERO` FOREIGN KEY (`JUZGADO_NUMERO`) REFERENCES `catalogos_numero` (`NUMERO_ID`);
 
 --
--- Filtros para la tabla `DATOS_PDELITOS_ADOJC`
+-- Filtros para la tabla `datos_pdelitos_adojc`
 --
-ALTER TABLE `DATOS_PDELITOS_ADOJC`
-  ADD CONSTRAINT `FK_PDELITOS_CAUSAP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PDELITOS_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJC` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PDELITOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PDELITOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PDELITOS_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_pdelitos_adojc`
+  ADD CONSTRAINT `FK_PDELITOS_CAUSAP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PDELITOS_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojc` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PDELITOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PDELITOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PDELITOS_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_PDELITOS_ADOJO`
+-- Filtros para la tabla `datos_pdelitos_adojo`
 --
-ALTER TABLE `DATOS_PDELITOS_ADOJO`
-  ADD CONSTRAINT `FK_PDELI_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PDELI_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJO` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PDELI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PDELI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PDELI_PROCESADOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_pdelitos_adojo`
+  ADD CONSTRAINT `FK_PDELI_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PDELI_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojo` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PDELI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PDELI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PDELI_PROCESADOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_PFUENTE_INGRESOS_ADOJC`
+-- Filtros para la tabla `datos_pfuente_ingresos_adojc`
 --
-ALTER TABLE `DATOS_PFUENTE_INGRESOS_ADOJC`
-  ADD CONSTRAINT `FK_PFUENTE_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PFUENTE_FINGRESOS` FOREIGN KEY (`INGRESO`) REFERENCES `CATALOGOS_FUENTE_INGRESOS` (`FUENTE_ID`),
-  ADD CONSTRAINT `FK_PFUENTE_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PFUENTE_PROCESADO` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_pfuente_ingresos_adojc`
+  ADD CONSTRAINT `FK_PFUENTE_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PFUENTE_FINGRESOS` FOREIGN KEY (`INGRESO`) REFERENCES `catalogos_fuente_ingresos` (`FUENTE_ID`),
+  ADD CONSTRAINT `FK_PFUENTE_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PFUENTE_PROCESADO` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_PFUENTE_INGRESOS_ADOJO`
+-- Filtros para la tabla `datos_pfuente_ingresos_adojo`
 --
-ALTER TABLE `DATOS_PFUENTE_INGRESOS_ADOJO`
-  ADD CONSTRAINT `FK_PFUENT_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PFUENT_INGRESOSJO` FOREIGN KEY (`INGRESO`) REFERENCES `CATALOGOS_FUENTE_INGRESOS` (`FUENTE_ID`),
-  ADD CONSTRAINT `FK_PFUENT_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PFUENT_PROCECLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_pfuente_ingresos_adojo`
+  ADD CONSTRAINT `FK_PFUENT_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PFUENT_INGRESOSJO` FOREIGN KEY (`INGRESO`) REFERENCES `catalogos_fuente_ingresos` (`FUENTE_ID`),
+  ADD CONSTRAINT `FK_PFUENT_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PFUENT_PROCECLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_PMEDIDAS_ADOJC`
+-- Filtros para la tabla `datos_pmedidas_adojc`
 --
-ALTER TABLE `DATOS_PMEDIDAS_ADOJC`
-  ADD CONSTRAINT `FK_PMEDIDAS_DURACION` FOREIGN KEY (`DURACION_MEDIDA`) REFERENCES `CATALOGOS_MEDIDAS_DURACION` (`MEDIDA_DURA_ID`),
-  ADD CONSTRAINT `FK_PMEDIDAS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PMEDIDAS_MCAUTELARES` FOREIGN KEY (`CAUTELARES`) REFERENCES `CATALOGOS_MEDIDAS_CAUTELARES` (`CAUTELARES_ID`),
-  ADD CONSTRAINT `FK_PMEDIDAS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PMEDIDAS_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_ETAPA_INICIAL_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PMEDIDAS_SOLICITA` FOREIGN KEY (`SOLICITA_MEDIDA`) REFERENCES `CATALOGOS_MEDIDAS_SOLICITA` (`MEDIDA_SOLICITA_ID`);
+ALTER TABLE `datos_pmedidas_adojc`
+  ADD CONSTRAINT `FK_PMEDIDAS_DURACION` FOREIGN KEY (`DURACION_MEDIDA`) REFERENCES `catalogos_medidas_duracion` (`MEDIDA_DURA_ID`),
+  ADD CONSTRAINT `FK_PMEDIDAS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PMEDIDAS_MCAUTELARES` FOREIGN KEY (`CAUTELARES`) REFERENCES `catalogos_medidas_cautelares` (`CAUTELARES_ID`),
+  ADD CONSTRAINT `FK_PMEDIDAS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PMEDIDAS_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_etapa_inicial_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PMEDIDAS_SOLICITA` FOREIGN KEY (`SOLICITA_MEDIDA`) REFERENCES `catalogos_medidas_solicita` (`MEDIDA_SOLICITA_ID`);
 
 --
--- Filtros para la tabla `DATOS_PRESENTA_MP_ADOJC`
+-- Filtros para la tabla `datos_presenta_mp_adojc`
 --
-ALTER TABLE `DATOS_PRESENTA_MP_ADOJC`
-  ADD CONSTRAINT `FK_MEDIOPRUEBA_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_MEDIOPRUEBA_FIGURA` FOREIGN KEY (`FIGURA_MPRUEBA`) REFERENCES `CATALOGOS_FIGURA_MPRUEBA` (`FIGURA_MPRU_ID`),
-  ADD CONSTRAINT `FK_MEDIOPRUEBA_MEDIOSP` FOREIGN KEY (`MEDIO_PRUEBA_ID`) REFERENCES `CATALOGOS_MEDIOS_PRUEBA` (`PRUEBA_ID`),
-  ADD CONSTRAINT `FK_MEDIOPRUEBA_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_MEDIOPRUEBA_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_ETAPA_INTERMEDIA_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_presenta_mp_adojc`
+  ADD CONSTRAINT `FK_MEDIOPRUEBA_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_MEDIOPRUEBA_FIGURA` FOREIGN KEY (`FIGURA_MPRUEBA`) REFERENCES `catalogos_figura_mprueba` (`FIGURA_MPRU_ID`),
+  ADD CONSTRAINT `FK_MEDIOPRUEBA_MEDIOSP` FOREIGN KEY (`MEDIO_PRUEBA_ID`) REFERENCES `catalogos_medios_prueba` (`PRUEBA_ID`),
+  ADD CONSTRAINT `FK_MEDIOPRUEBA_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_MEDIOPRUEBA_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_etapa_intermedia_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_PROCESADOS_ADOJC`
+-- Filtros para la tabla `datos_procesados_adojc`
 --
-ALTER TABLE `DATOS_PROCESADOS_ADOJC`
-  ADD CONSTRAINT `FK_PORCESADOS_NACIMIENTOENTIDADES` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PORCESADOS_NACIMIENTOMUNICIPIO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PORCESADOS_PSICOFISICO` FOREIGN KEY (`ESTADO_PSICOFISICO`) REFERENCES `CATALOGOS_ESTADO_PSICOFISICO` (`ESTADO_PSICO_ID`),
-  ADD CONSTRAINT `FK_PORCESADOS_RINGRESOS` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `CATALOGOS_RANGO_INGRESOS` (`ID_INGRESOS`),
-  ADD CONSTRAINT `FK_PROCESADOSLINGUISTICAS` FOREIGN KEY (`FAMILIA_LINGUISTICA`) REFERENCES `CATALOGOS_LINGUISTICAS` (`LINGUISTICA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_ALFABETISMO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `CATALOGOS_ALFABETISMO` (`ALFABETISMO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_CONDICIONACTIVIDAD` FOREIGN KEY (`CONDICION_ACTIVIDAD`) REFERENCES `CATALOGOS_CONDICION_ACTIVIDAD` (`CONDICIONA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_CONDICIONESTUDIANTE` FOREIGN KEY (`CONDICION_ESTUDIANTE`) REFERENCES `CATALOGOS_CONDICION_ESTUDIANTE` (`CONDICIONE_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_CONSIGNACION` FOREIGN KEY (`INICIO_IMPUTADO`) REFERENCES `CATALOGOS_TIPO_CONSIGNACION` (`CONSIGNACION_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_DISCAPACIDAD` FOREIGN KEY (`DISCAPACIDAD`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_DOMINIOESPANOL` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `CATALOGOS_DOMINIO_ESPANOL` (`DOMINIO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_EDAD` FOREIGN KEY (`EDAD`) REFERENCES `CATALOGOS_NUMERO` (`NUMERO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PROCESADOS_FORMACONDUCCION` FOREIGN KEY (`FORMA_CONDUCCION`) REFERENCES `CATALOGOS_FORMA_CONDUCCION` (`CONDUCCION_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_GRADOESTUDIOS` FOREIGN KEY (`ULTIMO_GRADO_ESTUDIOS`) REFERENCES `CATALOGOS_GRADO_ESTUDIOS` (`ESTUDIO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_GRADOPARTICIPACION` FOREIGN KEY (`GRADO_PARTICIPACION`) REFERENCES `CATALOGOS_GRADO_PARTICIPACION` (`PARTICIPACION_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_HABLAINDIGENA` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_INTERPRETE` FOREIGN KEY (`INTERPRETE`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_LENGUAEXTRANJERA` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_NACIMIENTOPAIS` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_NACIONALIDAD` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `CATALOGOS_NACIONALIDAD` (`NACIONALIDAD_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_OCUPACION` FOREIGN KEY (`OCUPACION`) REFERENCES `CATALOGOS_OCUPACION` (`OCUPACION_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_PERCIBEINGRESO` FOREIGN KEY (`INGRESOS`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_POBLACIONINDIGENA` FOREIGN KEY (`POBLACION_INDIGENA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_PUEBLOINDIGENA` FOREIGN KEY (`TIPO_PUEBLO_INDIGENA`) REFERENCES `CATALOGOS_PUEBLO_INDIGENA` (`PUEBLO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_REINCIDENCIA` FOREIGN KEY (`REINCIDENCIA`) REFERENCES `CATALOGOS_REINCIDENCIA` (`REINCIDENCIA_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_REPRESENTANTELEGAL` FOREIGN KEY (`PERSONA_RESPONSABLE`) REFERENCES `CATALOGOS_REPRESENTANTE_LEGAL` (`REPRESENTANTE_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_RESIDENCIA_ENTIDADES` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_RESIDENCIA_MUNICIPIOS` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_RESIDENCIA_PAIS` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_SEXO` FOREIGN KEY (`SEXO`) REFERENCES `CATALOGOS_SEXO` (`SEXO_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_SITUACIONCONYUGAL` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `CATALOGOS_ESTADO_CIVIL` (`ESTADO_CIVIL_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_TIPODEFENSOR` FOREIGN KEY (`TIPO_DEFENSOR`) REFERENCES `CATALOGOS_TIPO_DEFENSOR` (`DEFENSOR_ID`),
-  ADD CONSTRAINT `FK_PROCESADOS_TIPODETENCION` FOREIGN KEY (`TIPO_DETENCION`) REFERENCES `CATALOGOS_TIPO_DETENCION` (`TDETENCION_ID`),
-  ADD CONSTRAINT `FK_PROCESADO_PERTENECEGPODELICTIVO` FOREIGN KEY (`DELICTIVO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`);
+ALTER TABLE `datos_procesados_adojc`
+  ADD CONSTRAINT `FK_PORCESADOS_NACIMIENTOENTIDADES` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PORCESADOS_NACIMIENTOMUNICIPIO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PORCESADOS_PSICOFISICO` FOREIGN KEY (`ESTADO_PSICOFISICO`) REFERENCES `catalogos_estado_psicofisico` (`ESTADO_PSICO_ID`),
+  ADD CONSTRAINT `FK_PORCESADOS_RINGRESOS` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `catalogos_rango_ingresos` (`ID_INGRESOS`),
+  ADD CONSTRAINT `FK_PROCESADOSLINGUISTICAS` FOREIGN KEY (`FAMILIA_LINGUISTICA`) REFERENCES `catalogos_linguisticas` (`LINGUISTICA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_ALFABETISMO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `catalogos_alfabetismo` (`ALFABETISMO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_CONDICIONACTIVIDAD` FOREIGN KEY (`CONDICION_ACTIVIDAD`) REFERENCES `catalogos_condicion_actividad` (`CONDICIONA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_CONDICIONESTUDIANTE` FOREIGN KEY (`CONDICION_ESTUDIANTE`) REFERENCES `catalogos_condicion_estudiante` (`CONDICIONE_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_CONSIGNACION` FOREIGN KEY (`INICIO_IMPUTADO`) REFERENCES `catalogos_tipo_consignacion` (`CONSIGNACION_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_DISCAPACIDAD` FOREIGN KEY (`DISCAPACIDAD`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_DOMINIOESPANOL` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `catalogos_dominio_espanol` (`DOMINIO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_EDAD` FOREIGN KEY (`EDAD`) REFERENCES `catalogos_numero` (`NUMERO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PROCESADOS_FORMACONDUCCION` FOREIGN KEY (`FORMA_CONDUCCION`) REFERENCES `catalogos_forma_conduccion` (`CONDUCCION_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_GRADOESTUDIOS` FOREIGN KEY (`ULTIMO_GRADO_ESTUDIOS`) REFERENCES `catalogos_grado_estudios` (`ESTUDIO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_GRADOPARTICIPACION` FOREIGN KEY (`GRADO_PARTICIPACION`) REFERENCES `catalogos_grado_participacion` (`PARTICIPACION_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_HABLAINDIGENA` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_INTERPRETE` FOREIGN KEY (`INTERPRETE`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_LENGUAEXTRANJERA` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_NACIMIENTOPAIS` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_NACIONALIDAD` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `catalogos_nacionalidad` (`NACIONALIDAD_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_OCUPACION` FOREIGN KEY (`OCUPACION`) REFERENCES `catalogos_ocupacion` (`OCUPACION_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_PERCIBEINGRESO` FOREIGN KEY (`INGRESOS`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_POBLACIONINDIGENA` FOREIGN KEY (`POBLACION_INDIGENA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_PUEBLOINDIGENA` FOREIGN KEY (`TIPO_PUEBLO_INDIGENA`) REFERENCES `catalogos_pueblo_indigena` (`PUEBLO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_REINCIDENCIA` FOREIGN KEY (`REINCIDENCIA`) REFERENCES `catalogos_reincidencia` (`REINCIDENCIA_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_REPRESENTANTELEGAL` FOREIGN KEY (`PERSONA_RESPONSABLE`) REFERENCES `catalogos_representante_legal` (`REPRESENTANTE_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_RESIDENCIA_ENTIDADES` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_RESIDENCIA_MUNICIPIOS` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_RESIDENCIA_PAIS` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_SEXO` FOREIGN KEY (`SEXO`) REFERENCES `catalogos_sexo` (`SEXO_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_SITUACIONCONYUGAL` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `catalogos_estado_civil` (`ESTADO_CIVIL_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_TIPODEFENSOR` FOREIGN KEY (`TIPO_DEFENSOR`) REFERENCES `catalogos_tipo_defensor` (`DEFENSOR_ID`),
+  ADD CONSTRAINT `FK_PROCESADOS_TIPODETENCION` FOREIGN KEY (`TIPO_DETENCION`) REFERENCES `catalogos_tipo_detencion` (`TDETENCION_ID`),
+  ADD CONSTRAINT `FK_PROCESADO_PERTENECEGPODELICTIVO` FOREIGN KEY (`DELICTIVO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`);
 
 --
--- Filtros para la tabla `DATOS_PROCESADOS_ADOJO`
+-- Filtros para la tabla `datos_procesados_adojo`
 --
-ALTER TABLE `DATOS_PROCESADOS_ADOJO`
-  ADD CONSTRAINT `FK_PROCESADO_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`,`PROCESADO_CLAVEJC`) REFERENCES `DATOS_PROCESADOS_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PRO_ACTIVIDADJO` FOREIGN KEY (`CONDICION_ACTIVIDAD`) REFERENCES `CATALOGOS_CONDICION_ACTIVIDAD` (`CONDICIONA_ID`),
-  ADD CONSTRAINT `FK_PRO_ALFABETISMOJO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `CATALOGOS_ALFABETISMO` (`ALFABETISMO_ID`),
-  ADD CONSTRAINT `FK_PRO_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_PRO_CONDICIONESTUJO` FOREIGN KEY (`CONDICION_ESTUDIANTE`) REFERENCES `CATALOGOS_CONDICION_ESTUDIANTE` (`CONDICIONE_ID`),
-  ADD CONSTRAINT `FK_PRO_DEFENSORJO` FOREIGN KEY (`TIPO_DEFENSOR`) REFERENCES `CATALOGOS_TIPO_DEFENSOR` (`DEFENSOR_ID`),
-  ADD CONSTRAINT `FK_PRO_DELICTIVOJO` FOREIGN KEY (`DELICTIVO`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PRO_DISCAPACIDADJO` FOREIGN KEY (`DISCAPACIDAD`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PRO_EDADJO` FOREIGN KEY (`EDAD`) REFERENCES `CATALOGOS_NUMERO` (`NUMERO_ID`),
-  ADD CONSTRAINT `FK_PRO_EDOCIVILJO` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `CATALOGOS_ESTADO_CIVIL` (`ESTADO_CIVIL_ID`),
-  ADD CONSTRAINT `FK_PRO_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PRO_ESPANIOLJO` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `CATALOGOS_DOMINIO_ESPANOL` (`DOMINIO_ID`),
-  ADD CONSTRAINT `FK_PRO_ESTUDIOSJO` FOREIGN KEY (`ULTIMO_GRADO_ESTUDIOS`) REFERENCES `CATALOGOS_GRADO_ESTUDIOS` (`ESTUDIO_ID`),
-  ADD CONSTRAINT `FK_PRO_FAMILIALINJO` FOREIGN KEY (`FAMILIA_LINGUISTICA`) REFERENCES `CATALOGOS_LINGUISTICAS` (`LINGUISTICA_ID`),
-  ADD CONSTRAINT `FK_PRO_HABLAINDIGENAJO` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PRO_INGRESOSJO` FOREIGN KEY (`INGRESOS`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PRO_INTERPRETEJO` FOREIGN KEY (`INTERPRETE`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PRO_LENGUAEXTRANJO` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PRO_MUNICIPIOJO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PRO_NACIENTIDADJO` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PRO_NACIMIENTOPAISJO` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_PRO_NACIMUNICIPIOJO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PRO_NACIONALIDADJO` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `CATALOGOS_NACIONALIDAD` (`NACIONALIDAD_ID`),
-  ADD CONSTRAINT `FK_PRO_OCUPACIONJO` FOREIGN KEY (`OCUPACION`) REFERENCES `CATALOGOS_OCUPACION` (`OCUPACION_ID`),
-  ADD CONSTRAINT `FK_PRO_PARTICIPACIONJO` FOREIGN KEY (`GRADO_PARTICIPACION`) REFERENCES `CATALOGOS_GRADO_PARTICIPACION` (`PARTICIPACION_ID`),
-  ADD CONSTRAINT `FK_PRO_POBLAINDIGENAJO` FOREIGN KEY (`POBLACION_INDIGENA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_PRO_PSICOFISICOJO` FOREIGN KEY (`ESTADO_PSICOFISICO`) REFERENCES `CATALOGOS_ESTADO_PSICOFISICO` (`ESTADO_PSICO_ID`),
-  ADD CONSTRAINT `FK_PRO_PUEBLOINDIGEJO` FOREIGN KEY (`TIPO_PUEBLO_INDIGENA`) REFERENCES `CATALOGOS_PUEBLO_INDIGENA` (`PUEBLO_ID`),
-  ADD CONSTRAINT `FK_PRO_RANGOINGRESOJO` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `CATALOGOS_RANGO_INGRESOS` (`ID_INGRESOS`),
-  ADD CONSTRAINT `FK_PRO_REINCIDENCIAJO` FOREIGN KEY (`REINCIDENCIA`) REFERENCES `CATALOGOS_REINCIDENCIA` (`REINCIDENCIA_ID`),
-  ADD CONSTRAINT `FK_PRO_RESIDENCIAPAISJO` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_PRO_RESIENTIDADJO` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_PRO_RESIMUNICIPIOJO` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_PRO_RESPONSABLEJO` FOREIGN KEY (`PERSONA_RESPONSABLE`) REFERENCES `CATALOGOS_REPRESENTANTE_LEGAL` (`REPRESENTANTE_ID`),
-  ADD CONSTRAINT `FK_PRO_SEXOJO` FOREIGN KEY (`SEXO`) REFERENCES `CATALOGOS_SEXO` (`SEXO_ID`);
+ALTER TABLE `datos_procesados_adojo`
+  ADD CONSTRAINT `FK_PROCESADO_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`,`PROCESADO_CLAVEJC`) REFERENCES `datos_procesados_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PRO_ACTIVIDADJO` FOREIGN KEY (`CONDICION_ACTIVIDAD`) REFERENCES `catalogos_condicion_actividad` (`CONDICIONA_ID`),
+  ADD CONSTRAINT `FK_PRO_ALFABETISMOJO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `catalogos_alfabetismo` (`ALFABETISMO_ID`),
+  ADD CONSTRAINT `FK_PRO_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PRO_CONDICIONESTUJO` FOREIGN KEY (`CONDICION_ESTUDIANTE`) REFERENCES `catalogos_condicion_estudiante` (`CONDICIONE_ID`),
+  ADD CONSTRAINT `FK_PRO_DEFENSORJO` FOREIGN KEY (`TIPO_DEFENSOR`) REFERENCES `catalogos_tipo_defensor` (`DEFENSOR_ID`),
+  ADD CONSTRAINT `FK_PRO_DELICTIVOJO` FOREIGN KEY (`DELICTIVO`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PRO_DISCAPACIDADJO` FOREIGN KEY (`DISCAPACIDAD`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PRO_EDADJO` FOREIGN KEY (`EDAD`) REFERENCES `catalogos_numero` (`NUMERO_ID`),
+  ADD CONSTRAINT `FK_PRO_EDOCIVILJO` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `catalogos_estado_civil` (`ESTADO_CIVIL_ID`),
+  ADD CONSTRAINT `FK_PRO_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PRO_ESPANIOLJO` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `catalogos_dominio_espanol` (`DOMINIO_ID`),
+  ADD CONSTRAINT `FK_PRO_ESTUDIOSJO` FOREIGN KEY (`ULTIMO_GRADO_ESTUDIOS`) REFERENCES `catalogos_grado_estudios` (`ESTUDIO_ID`),
+  ADD CONSTRAINT `FK_PRO_FAMILIALINJO` FOREIGN KEY (`FAMILIA_LINGUISTICA`) REFERENCES `catalogos_linguisticas` (`LINGUISTICA_ID`),
+  ADD CONSTRAINT `FK_PRO_HABLAINDIGENAJO` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PRO_INGRESOSJO` FOREIGN KEY (`INGRESOS`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PRO_INTERPRETEJO` FOREIGN KEY (`INTERPRETE`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PRO_LENGUAEXTRANJO` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PRO_MUNICIPIOJO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PRO_NACIENTIDADJO` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PRO_NACIMIENTOPAISJO` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_PRO_NACIMUNICIPIOJO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PRO_NACIONALIDADJO` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `catalogos_nacionalidad` (`NACIONALIDAD_ID`),
+  ADD CONSTRAINT `FK_PRO_OCUPACIONJO` FOREIGN KEY (`OCUPACION`) REFERENCES `catalogos_ocupacion` (`OCUPACION_ID`),
+  ADD CONSTRAINT `FK_PRO_PARTICIPACIONJO` FOREIGN KEY (`GRADO_PARTICIPACION`) REFERENCES `catalogos_grado_participacion` (`PARTICIPACION_ID`),
+  ADD CONSTRAINT `FK_PRO_POBLAINDIGENAJO` FOREIGN KEY (`POBLACION_INDIGENA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_PRO_PSICOFISICOJO` FOREIGN KEY (`ESTADO_PSICOFISICO`) REFERENCES `catalogos_estado_psicofisico` (`ESTADO_PSICO_ID`),
+  ADD CONSTRAINT `FK_PRO_PUEBLOINDIGEJO` FOREIGN KEY (`TIPO_PUEBLO_INDIGENA`) REFERENCES `catalogos_pueblo_indigena` (`PUEBLO_ID`),
+  ADD CONSTRAINT `FK_PRO_RANGOINGRESOJO` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `catalogos_rango_ingresos` (`ID_INGRESOS`),
+  ADD CONSTRAINT `FK_PRO_REINCIDENCIAJO` FOREIGN KEY (`REINCIDENCIA`) REFERENCES `catalogos_reincidencia` (`REINCIDENCIA_ID`),
+  ADD CONSTRAINT `FK_PRO_RESIDENCIAPAISJO` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_PRO_RESIENTIDADJO` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_PRO_RESIMUNICIPIOJO` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_PRO_RESPONSABLEJO` FOREIGN KEY (`PERSONA_RESPONSABLE`) REFERENCES `catalogos_representante_legal` (`REPRESENTANTE_ID`),
+  ADD CONSTRAINT `FK_PRO_SEXOJO` FOREIGN KEY (`SEXO`) REFERENCES `catalogos_sexo` (`SEXO_ID`);
 
 --
--- Filtros para la tabla `DATOS_TRAMITES_ADOJC`
+-- Filtros para la tabla `datos_tramites_adojc`
 --
-ALTER TABLE `DATOS_TRAMITES_ADOJC`
-  ADD CONSTRAINT `FK_TRAMITES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_TRAMITES_EPROCESAL` FOREIGN KEY (`ETAPA_PROCESAL`) REFERENCES `CATALOGOS_ETAPA_PROCESAL` (`PROCESAL_ID`),
-  ADD CONSTRAINT `FK_TRAMITES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_TRAMITES_PROCE_INICIAL` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_ETAPA_INICIAL_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_TRAMITE_ESTATUSINTERMEDIA` FOREIGN KEY (`ESTATUS_INTERMEDIA`) REFERENCES `CATALOGOS_ETAPA_INTERMEDIA` (`INTERMEDIA_ID`),
-  ADD CONSTRAINT `FK_TRAMITE_INVESTIGACION` FOREIGN KEY (`ESTATUS_INVESTIGACION`) REFERENCES `CATALOGOS_ETAPA_INICIAL` (`INICIAL_ID`);
+ALTER TABLE `datos_tramites_adojc`
+  ADD CONSTRAINT `FK_TRAMITES_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_TRAMITES_EPROCESAL` FOREIGN KEY (`ETAPA_PROCESAL`) REFERENCES `catalogos_etapa_procesal` (`PROCESAL_ID`),
+  ADD CONSTRAINT `FK_TRAMITES_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_TRAMITES_PROCE_INICIAL` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_etapa_inicial_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_TRAMITE_ESTATUSINTERMEDIA` FOREIGN KEY (`ESTATUS_INTERMEDIA`) REFERENCES `catalogos_etapa_intermedia` (`INTERMEDIA_ID`),
+  ADD CONSTRAINT `FK_TRAMITE_INVESTIGACION` FOREIGN KEY (`ESTATUS_INVESTIGACION`) REFERENCES `catalogos_etapa_inicial` (`INICIAL_ID`);
 
 --
--- Filtros para la tabla `DATOS_TRAMITES_ADOJO`
+-- Filtros para la tabla `datos_tramites_adojo`
 --
-ALTER TABLE `DATOS_TRAMITES_ADOJO`
-  ADD CONSTRAINT `FK_TRAM_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_TRAM_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_TRAM_ESTATUSJO` FOREIGN KEY (`ESTATUS`) REFERENCES `CATALOGOS_ESTATUSJO` (`ESTATUS_ID`),
-  ADD CONSTRAINT `FK_TRAM_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_TRAM_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_tramites_adojo`
+  ADD CONSTRAINT `FK_TRAM_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_TRAM_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_TRAM_ESTATUSJO` FOREIGN KEY (`ESTATUS`) REFERENCES `catalogos_estatusjo` (`ESTATUS_ID`),
+  ADD CONSTRAINT `FK_TRAM_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_TRAM_PROCESACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VDELITOS_ADOJC`
+-- Filtros para la tabla `datos_vdelitos_adojc`
 --
-ALTER TABLE `DATOS_VDELITOS_ADOJC`
-  ADD CONSTRAINT `FK_VDELITOS_CAUSASP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VDELITOS_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJC` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VDELITOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VDELITOS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VDELITOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VDELITOS_PROCESADOSJC` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VDELITOS_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJC` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vdelitos_adojc`
+  ADD CONSTRAINT `FK_VDELITOS_CAUSASP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VDELITOS_DELITOS` FOREIGN KEY (`CAUSA_CLAVE`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojc` (`CAUSA_CLAVE`, `DELITO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VDELITOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VDELITOS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VDELITOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VDELITOS_PROCESADOSJC` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VDELITOS_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojc` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VDELITOS_ADOJO`
+-- Filtros para la tabla `datos_vdelitos_adojo`
 --
-ALTER TABLE `DATOS_VDELITOS_ADOJO`
-  ADD CONSTRAINT `FK_VDELI_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VDELI_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `DATOS_DELITOS_ADOJO` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VDELI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VDELI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VDELI_PROCESADOSJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VDELI_VICTIMACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJO` (`CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vdelitos_adojo`
+  ADD CONSTRAINT `FK_VDELI_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VDELI_DELITOCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`DELITO_CLAVE`) REFERENCES `datos_delitos_adojo` (`CAUSA_CLAVEJO`, `DELITO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VDELI_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VDELI_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VDELI_PROCESADOSJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VDELI_VICTIMACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojo` (`CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VFUENTE_INGRESOS_ADOJC`
+-- Filtros para la tabla `datos_vfuente_ingresos_adojc`
 --
-ALTER TABLE `DATOS_VFUENTE_INGRESOS_ADOJC`
-  ADD CONSTRAINT `FK_VFUENTE_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VFUENTE_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VFUENTE_INGRESOS` FOREIGN KEY (`INGRESO`) REFERENCES `CATALOGOS_FUENTE_INGRESOS` (`FUENTE_ID`),
-  ADD CONSTRAINT `FK_VFUENTE_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VFUENTE_VICTIMA` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJC` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vfuente_ingresos_adojc`
+  ADD CONSTRAINT `FK_VFUENTE_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VFUENTE_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VFUENTE_INGRESOS` FOREIGN KEY (`INGRESO`) REFERENCES `catalogos_fuente_ingresos` (`FUENTE_ID`),
+  ADD CONSTRAINT `FK_VFUENTE_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VFUENTE_VICTIMA` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojc` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VFUENTE_INGRESOS_ADOJO`
+-- Filtros para la tabla `datos_vfuente_ingresos_adojo`
 --
-ALTER TABLE `DATOS_VFUENTE_INGRESOS_ADOJO`
-  ADD CONSTRAINT `FK_VFUENT_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VFUENT_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VFUENT_INGRESO` FOREIGN KEY (`INGRESO`) REFERENCES `CATALOGOS_FUENTE_INGRESOS` (`FUENTE_ID`),
-  ADD CONSTRAINT `FK_VFUENT_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VFUENT_VICTIMACLAVE` FOREIGN KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJO` (`CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vfuente_ingresos_adojo`
+  ADD CONSTRAINT `FK_VFUENT_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VFUENT_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VFUENT_INGRESO` FOREIGN KEY (`INGRESO`) REFERENCES `catalogos_fuente_ingresos` (`FUENTE_ID`),
+  ADD CONSTRAINT `FK_VFUENT_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VFUENT_VICTIMACLAVE` FOREIGN KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojo` (`CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VICTIMAS_ADOJC`
+-- Filtros para la tabla `datos_victimas_adojc`
 --
-ALTER TABLE `DATOS_VICTIMAS_ADOJC`
-  ADD CONSTRAINT `FK_VICITIMAS_NACIONALIDAD` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `CATALOGOS_NACIONALIDAD` (`NACIONALIDAD_ID`),
-  ADD CONSTRAINT `FK_VICITIMAS_RANGOINGRESOS` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `CATALOGOS_RANGO_INGRESOS` (`ID_INGRESOS`),
-  ADD CONSTRAINT `FK_VICITMAS_ENTIDADESNAC` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_ALFABETISMO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `CATALOGOS_ALFABETISMO` (`ALFABETISMO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_ASESOR` FOREIGN KEY (`ASESOR`) REFERENCES `CATALOGOS_TIPO_DEFENSOR` (`DEFENSOR_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_CAUSASP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VICTIMAS_CONTOASESOR` FOREIGN KEY (`CONTO_ASESOR`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_DOMINIOESPANIOL` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `CATALOGOS_DOMINIO_ESPANOL` (`DOMINIO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_EDAD` FOREIGN KEY (`EDAD`) REFERENCES `CATALOGOS_NUMERO` (`NUMERO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_EDOCIVIL` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `CATALOGOS_ESTADO_CIVIL` (`ESTADO_CIVIL_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_ENTIDADRESID` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_GRADOESTUDIOS` FOREIGN KEY (`GRADO_ESTUDIOS`) REFERENCES `CATALOGOS_GRADO_ESTUDIOS` (`ESTUDIO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_HABLAINDIGENA` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_INGRESOS` FOREIGN KEY (`INGRESOS`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_INTERPRETE` FOREIGN KEY (`INTERPRETE`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_LENGUAEXTRANJERA` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_LENGUAINDIGENA` FOREIGN KEY (`LENGUA_INDIGENA`) REFERENCES `CATALOGOS_LINGUISTICAS` (`LINGUISTICA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_MMUJER` FOREIGN KEY (`MEDIDAS_MUJER`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_MPORTECCION` FOREIGN KEY (`MEDIDAS_PROTECCION`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_MUNICIPIONAC` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_MUNICIPIOSRESID` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_OCUPACION` FOREIGN KEY (`OCUPACION`) REFERENCES `CATALOGOS_OCUPACION` (`OCUPACION_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_PAISNAC` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_PAISRESID` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_SEXO` FOREIGN KEY (`SEXO`) REFERENCES `CATALOGOS_SEXO` (`SEXO_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_TVICTIMA` FOREIGN KEY (`TIPO_VICTIMA`) REFERENCES `CATALOGOS_TIPO_VICTIMA` (`VICTIMA_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_VMORAL` FOREIGN KEY (`TIPO_VICTIMA_MORAL`) REFERENCES `CATALOGOS_VICTIMA_MORAL` (`MORAL_ID`),
-  ADD CONSTRAINT `FK_VICTIMAS_VULNERABILIDAD` FOREIGN KEY (`VULNERABILIDAD`) REFERENCES `CATALOGOS_VULNERABILIDAD` (`VULNERABILIDAD_ID`);
+ALTER TABLE `datos_victimas_adojc`
+  ADD CONSTRAINT `FK_VICITIMAS_NACIONALIDAD` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `catalogos_nacionalidad` (`NACIONALIDAD_ID`),
+  ADD CONSTRAINT `FK_VICITIMAS_RANGOINGRESOS` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `catalogos_rango_ingresos` (`ID_INGRESOS`),
+  ADD CONSTRAINT `FK_VICITMAS_ENTIDADESNAC` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_ALFABETISMO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `catalogos_alfabetismo` (`ALFABETISMO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_ASESOR` FOREIGN KEY (`ASESOR`) REFERENCES `catalogos_tipo_defensor` (`DEFENSOR_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_CAUSASP` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VICTIMAS_CONTOASESOR` FOREIGN KEY (`CONTO_ASESOR`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_DOMINIOESPANIOL` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `catalogos_dominio_espanol` (`DOMINIO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_EDAD` FOREIGN KEY (`EDAD`) REFERENCES `catalogos_numero` (`NUMERO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_EDOCIVIL` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `catalogos_estado_civil` (`ESTADO_CIVIL_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_ENTIDADRESID` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_GRADOESTUDIOS` FOREIGN KEY (`GRADO_ESTUDIOS`) REFERENCES `catalogos_grado_estudios` (`ESTUDIO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_HABLAINDIGENA` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_INGRESOS` FOREIGN KEY (`INGRESOS`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_INTERPRETE` FOREIGN KEY (`INTERPRETE`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_LENGUAEXTRANJERA` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_LENGUAINDIGENA` FOREIGN KEY (`LENGUA_INDIGENA`) REFERENCES `catalogos_linguisticas` (`LINGUISTICA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_MMUJER` FOREIGN KEY (`MEDIDAS_MUJER`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_MPORTECCION` FOREIGN KEY (`MEDIDAS_PROTECCION`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_MUNICIPIONAC` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_MUNICIPIOSRESID` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_OCUPACION` FOREIGN KEY (`OCUPACION`) REFERENCES `catalogos_ocupacion` (`OCUPACION_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_PAISNAC` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_PAISRESID` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_SEXO` FOREIGN KEY (`SEXO`) REFERENCES `catalogos_sexo` (`SEXO_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_TVICTIMA` FOREIGN KEY (`TIPO_VICTIMA`) REFERENCES `catalogos_tipo_victima` (`VICTIMA_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_VMORAL` FOREIGN KEY (`TIPO_VICTIMA_MORAL`) REFERENCES `catalogos_victima_moral` (`MORAL_ID`),
+  ADD CONSTRAINT `FK_VICTIMAS_VULNERABILIDAD` FOREIGN KEY (`VULNERABILIDAD`) REFERENCES `catalogos_vulnerabilidad` (`VULNERABILIDAD_ID`);
 
 --
--- Filtros para la tabla `DATOS_VICTIMAS_ADOJO`
+-- Filtros para la tabla `datos_victimas_adojo`
 --
-ALTER TABLE `DATOS_VICTIMAS_ADOJO`
-  ADD CONSTRAINT `FK_VICTIMA_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`,`VICTIMA_CLAVEJC`) REFERENCES `DATOS_VICTIMAS_ADOJC` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VICT_ALFABETISMOJO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `CATALOGOS_ALFABETISMO` (`ALFABETISMO_ID`),
-  ADD CONSTRAINT `FK_VICT_ASESORJO` FOREIGN KEY (`ASESOR`) REFERENCES `CATALOGOS_TIPO_DEFENSOR` (`DEFENSOR_ID`),
-  ADD CONSTRAINT `FK_VICT_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VICT_CONTOASESORJO` FOREIGN KEY (`CONTO_ASESOR`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICT_EDADJO` FOREIGN KEY (`EDAD`) REFERENCES `CATALOGOS_NUMERO` (`NUMERO_ID`),
-  ADD CONSTRAINT `FK_VICT_EDOCIVILJO` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `CATALOGOS_ESTADO_CIVIL` (`ESTADO_CIVIL_ID`),
-  ADD CONSTRAINT `FK_VICT_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VICT_ESPANIOLJO` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `CATALOGOS_DOMINIO_ESPANOL` (`DOMINIO_ID`),
-  ADD CONSTRAINT `FK_VICT_ESTUDIOSJO` FOREIGN KEY (`GRADO_ESTUDIOS`) REFERENCES `CATALOGOS_GRADO_ESTUDIOS` (`ESTUDIO_ID`),
-  ADD CONSTRAINT `FK_VICT_HABLAEXTRAGERAJO` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICT_HABLAINDIGENAJO` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICT_INGRESOSJO` FOREIGN KEY (`INGRESOS`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICT_INTERPRETE` FOREIGN KEY (`INTERPRETE`) REFERENCES `CATALOGOS_RESPUESTA_SIMPLE` (`RESPUESTA_ID`),
-  ADD CONSTRAINT `FK_VICT_LENGUAINDIGENAJO` FOREIGN KEY (`LENGUA_INDIGENA`) REFERENCES `CATALOGOS_LINGUISTICAS` (`LINGUISTICA_ID`),
-  ADD CONSTRAINT `FK_VICT_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VICT_NACIMTOENTIDADJO` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VICT_NACIMTOPAISJO` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_VICT_NACIONALIDADJO` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `CATALOGOS_NACIONALIDAD` (`NACIONALIDAD_ID`),
-  ADD CONSTRAINT `FK_VICT_NACMUNICIPIOJO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VICT_OCUPACIONJO` FOREIGN KEY (`OCUPACION`) REFERENCES `CATALOGOS_OCUPACION` (`OCUPACION_ID`),
-  ADD CONSTRAINT `FK_VICT_RANGOINGRESOSJO` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `CATALOGOS_RANGO_INGRESOS` (`ID_INGRESOS`),
-  ADD CONSTRAINT `FK_VICT_RESIDENPAISJO` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `CATALOGOS_PAIS` (`PAIS_ID`),
-  ADD CONSTRAINT `FK_VICT_RESIENTIDADJO` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VICT_RESIMUNICIPIOJO` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VICT_SEXOJO` FOREIGN KEY (`SEXO`) REFERENCES `CATALOGOS_SEXO` (`SEXO_ID`),
-  ADD CONSTRAINT `FK_VICT_TIPOVICTIMAJO` FOREIGN KEY (`TIPO_VICTIMA`) REFERENCES `CATALOGOS_TIPO_VICTIMA` (`VICTIMA_ID`),
-  ADD CONSTRAINT `FK_VICT_VICTMORALJO` FOREIGN KEY (`TIPO_VICTIMA_MORAL`) REFERENCES `CATALOGOS_VICTIMA_MORAL` (`MORAL_ID`),
-  ADD CONSTRAINT `FK_VICT_VULNERABLEJO` FOREIGN KEY (`VULNERABILIDAD`) REFERENCES `CATALOGOS_VULNERABILIDAD` (`VULNERABILIDAD_ID`);
+ALTER TABLE `datos_victimas_adojo`
+  ADD CONSTRAINT `FK_VICTIMA_CLAVEJC` FOREIGN KEY (`CAUSA_CLAVEJC`,`VICTIMA_CLAVEJC`) REFERENCES `datos_victimas_adojc` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VICT_ALFABETISMOJO` FOREIGN KEY (`CONDICION_ALFABETISMO`) REFERENCES `catalogos_alfabetismo` (`ALFABETISMO_ID`),
+  ADD CONSTRAINT `FK_VICT_ASESORJO` FOREIGN KEY (`ASESOR`) REFERENCES `catalogos_tipo_defensor` (`DEFENSOR_ID`),
+  ADD CONSTRAINT `FK_VICT_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VICT_CONTOASESORJO` FOREIGN KEY (`CONTO_ASESOR`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICT_EDADJO` FOREIGN KEY (`EDAD`) REFERENCES `catalogos_numero` (`NUMERO_ID`),
+  ADD CONSTRAINT `FK_VICT_EDOCIVILJO` FOREIGN KEY (`ESTADO_CIVIL`) REFERENCES `catalogos_estado_civil` (`ESTADO_CIVIL_ID`),
+  ADD CONSTRAINT `FK_VICT_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VICT_ESPANIOLJO` FOREIGN KEY (`HABLA_ESPANOL`) REFERENCES `catalogos_dominio_espanol` (`DOMINIO_ID`),
+  ADD CONSTRAINT `FK_VICT_ESTUDIOSJO` FOREIGN KEY (`GRADO_ESTUDIOS`) REFERENCES `catalogos_grado_estudios` (`ESTUDIO_ID`),
+  ADD CONSTRAINT `FK_VICT_HABLAEXTRAGERAJO` FOREIGN KEY (`LENGUA_EXTRANJERA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICT_HABLAINDIGENAJO` FOREIGN KEY (`HABLA_INDIGENA`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICT_INGRESOSJO` FOREIGN KEY (`INGRESOS`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICT_INTERPRETE` FOREIGN KEY (`INTERPRETE`) REFERENCES `catalogos_respuesta_simple` (`RESPUESTA_ID`),
+  ADD CONSTRAINT `FK_VICT_LENGUAINDIGENAJO` FOREIGN KEY (`LENGUA_INDIGENA`) REFERENCES `catalogos_linguisticas` (`LINGUISTICA_ID`),
+  ADD CONSTRAINT `FK_VICT_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VICT_NACIMTOENTIDADJO` FOREIGN KEY (`NACIMIENTO_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VICT_NACIMTOPAISJO` FOREIGN KEY (`NACIMIENTO_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_VICT_NACIONALIDADJO` FOREIGN KEY (`NACIONALIDAD`) REFERENCES `catalogos_nacionalidad` (`NACIONALIDAD_ID`),
+  ADD CONSTRAINT `FK_VICT_NACMUNICIPIOJO` FOREIGN KEY (`NACIMIENTO_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VICT_OCUPACIONJO` FOREIGN KEY (`OCUPACION`) REFERENCES `catalogos_ocupacion` (`OCUPACION_ID`),
+  ADD CONSTRAINT `FK_VICT_RANGOINGRESOSJO` FOREIGN KEY (`RANGO_INGRESOS`) REFERENCES `catalogos_rango_ingresos` (`ID_INGRESOS`),
+  ADD CONSTRAINT `FK_VICT_RESIDENPAISJO` FOREIGN KEY (`RESIDENCIA_PAIS`) REFERENCES `catalogos_pais` (`PAIS_ID`),
+  ADD CONSTRAINT `FK_VICT_RESIENTIDADJO` FOREIGN KEY (`RESIDENCIA_ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VICT_RESIMUNICIPIOJO` FOREIGN KEY (`RESIDENCIA_MUNICIPIO`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VICT_SEXOJO` FOREIGN KEY (`SEXO`) REFERENCES `catalogos_sexo` (`SEXO_ID`),
+  ADD CONSTRAINT `FK_VICT_TIPOVICTIMAJO` FOREIGN KEY (`TIPO_VICTIMA`) REFERENCES `catalogos_tipo_victima` (`VICTIMA_ID`),
+  ADD CONSTRAINT `FK_VICT_VICTMORALJO` FOREIGN KEY (`TIPO_VICTIMA_MORAL`) REFERENCES `catalogos_victima_moral` (`MORAL_ID`),
+  ADD CONSTRAINT `FK_VICT_VULNERABLEJO` FOREIGN KEY (`VULNERABILIDAD`) REFERENCES `catalogos_vulnerabilidad` (`VULNERABILIDAD_ID`);
 
 --
--- Filtros para la tabla `DATOS_VMEDIDAS_ADOJC`
+-- Filtros para la tabla `datos_vmedidas_adojc`
 --
-ALTER TABLE `DATOS_VMEDIDAS_ADOJC`
-  ADD CONSTRAINT `FK_VMEDIDAS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VMEDIDAS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VMEDIDAS_MPROTECCION` FOREIGN KEY (`TIPO_MEDIDA_PROT`) REFERENCES `CATALOGOS_MEDIDAS_PROTECCION` (`PROTECCION_ID`),
-  ADD CONSTRAINT `FK_VMEDIDAS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VMEDIDAS_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJC` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vmedidas_adojc`
+  ADD CONSTRAINT `FK_VMEDIDAS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VMEDIDAS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VMEDIDAS_MPROTECCION` FOREIGN KEY (`TIPO_MEDIDA_PROT`) REFERENCES `catalogos_medidas_proteccion` (`PROTECCION_ID`),
+  ADD CONSTRAINT `FK_VMEDIDAS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VMEDIDAS_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojc` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VMEDIDAS_DMUJ_ADOJC`
+-- Filtros para la tabla `datos_vmedidas_dmuj_adojc`
 --
-ALTER TABLE `DATOS_VMEDIDAS_DMUJ_ADOJC`
-  ADD CONSTRAINT `FK_VMED_DMUJ_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VMED_DMUJ_MEDIDAS` FOREIGN KEY (`TIPO_MEDIDA_MUJER`) REFERENCES `CATALOGOS_MEDIDAS_MUJER` (`MUJER_ID`),
-  ADD CONSTRAINT `FK_VMED_DMUJ_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VMED_DMUJ_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJC` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vmedidas_dmuj_adojc`
+  ADD CONSTRAINT `FK_VMED_DMUJ_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VMED_DMUJ_MEDIDAS` FOREIGN KEY (`TIPO_MEDIDA_MUJER`) REFERENCES `catalogos_medidas_mujer` (`MUJER_ID`),
+  ADD CONSTRAINT `FK_VMED_DMUJ_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VMED_DMUJ_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojc` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VPROCESADOS_ADOJC`
+-- Filtros para la tabla `datos_vprocesados_adojc`
 --
-ALTER TABLE `DATOS_VPROCESADOS_ADOJC`
-  ADD CONSTRAINT `FK_VPROCESADOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VPROCESADOS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VPROCESADOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VPROCESADOS_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJC` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VPROCESADOS_RIMPUTADO` FOREIGN KEY (`RELACION`) REFERENCES `CATALOGOS_RELACION_IMPUTADO` (`RELACION_ID`),
-  ADD CONSTRAINT `FK_VPROCESADOS_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJC` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vprocesados_adojc`
+  ADD CONSTRAINT `FK_VPROCESADOS_ENTIDADES` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VPROCESADOS_EXPEDIENTES` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VPROCESADOS_MUNICIPIOS` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VPROCESADOS_PROCESADOS` FOREIGN KEY (`CAUSA_CLAVE`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojc` (`CAUSA_CLAVE`, `PROCESADO_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VPROCESADOS_RIMPUTADO` FOREIGN KEY (`RELACION`) REFERENCES `catalogos_relacion_imputado` (`RELACION_ID`),
+  ADD CONSTRAINT `FK_VPROCESADOS_VICTIMAS` FOREIGN KEY (`CAUSA_CLAVE`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojc` (`CAUSA_CLAVE`, `VICTIMA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `DATOS_VPROCESADOS_ADOJO`
+-- Filtros para la tabla `datos_vprocesados_adojo`
 --
-ALTER TABLE `DATOS_VPROCESADOS_ADOJO`
-  ADD CONSTRAINT `FK_VPRO_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJO` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VPRO_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_VPRO_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `CATALOGOS_MUNICIPIOS` (`MUNICIPIO_ID`),
-  ADD CONSTRAINT `FK_VPRO_PROCESCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `DATOS_PROCESADOS_ADOJO` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_VPRO_RELACIONJO` FOREIGN KEY (`RELACION`) REFERENCES `CATALOGOS_RELACION_IMPUTADO` (`RELACION_ID`),
-  ADD CONSTRAINT `FK_VPRO_VICTIMACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`) REFERENCES `DATOS_VICTIMAS_ADOJO` (`CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `datos_vprocesados_adojo`
+  ADD CONSTRAINT `FK_VPRO_CAUSACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`) REFERENCES `datos_causas_penales_adojo` (`CAUSA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VPRO_ENTIDADJO` FOREIGN KEY (`JUZGADO_ENTIDAD_ID`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_VPRO_MUNICIPIOJO` FOREIGN KEY (`JUZGADO_MUNICIPIO_ID`) REFERENCES `catalogos_municipios` (`MUNICIPIO_ID`),
+  ADD CONSTRAINT `FK_VPRO_PROCESCLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`PROCESADO_CLAVE`) REFERENCES `datos_procesados_adojo` (`CAUSA_CLAVEJO`, `PROCESADO_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VPRO_RELACIONJO` FOREIGN KEY (`RELACION`) REFERENCES `catalogos_relacion_imputado` (`RELACION_ID`),
+  ADD CONSTRAINT `FK_VPRO_VICTIMACLAVEJO` FOREIGN KEY (`CAUSA_CLAVEJO`,`VICTIMA_CLAVE`) REFERENCES `datos_victimas_adojo` (`CAUSA_CLAVEJO`, `VICTIMA_CLAVEJO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `USUARIOS`
+-- Filtros para la tabla `usuarios`
 --
-ALTER TABLE `USUARIOS`
-  ADD CONSTRAINT `FK_USUARIO_ENTIDAD` FOREIGN KEY (`ENTIDAD`) REFERENCES `CATALOGOS_ENTIDADES` (`ENTIDAD_ID`),
-  ADD CONSTRAINT `FK_USUARIO_TIPO_USUARIO` FOREIGN KEY (`TIPO_USUARIO`) REFERENCES `TIPO_USUARIOS` (`TIPO_USUARIO_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `FK_USUARIO_ENTIDAD` FOREIGN KEY (`ENTIDAD`) REFERENCES `catalogos_entidades` (`ENTIDAD_ID`),
+  ADD CONSTRAINT `FK_USUARIO_TIPO_USUARIO` FOREIGN KEY (`TIPO_USUARIO`) REFERENCES `tipo_usuarios` (`TIPO_USUARIO_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `USUARIOS_CONTROL`
+-- Filtros para la tabla `usuarios_control`
 --
-ALTER TABLE `USUARIOS_CONTROL`
-  ADD CONSTRAINT `FK_CONTROL_CAUSA` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `DATOS_CAUSAS_PENALES_ADOJC` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `usuarios_control`
+  ADD CONSTRAINT `FK_CONTROL_CAUSA` FOREIGN KEY (`CAUSA_CLAVE`) REFERENCES `datos_causas_penales_adojc` (`CAUSA_CLAVE`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

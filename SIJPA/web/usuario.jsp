@@ -37,8 +37,9 @@
                     <th>Correo/Usuario</th>
                     <th>Entidad</th>
                     <th>Nivel Usuario</th>
+                    <th>Estatus</th>
                     <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Cambiar Estatus</th>
                 </tr>
                 <% 
                     lista = usuario.findUsuarioTabla();

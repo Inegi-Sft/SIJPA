@@ -53,6 +53,7 @@ public class showJueces {
             sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                     + "FROM DATOS_JUECES_ADOJC "
                     + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "AND ESTATUS = 1"
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -71,18 +72,18 @@ public class showJueces {
         try {
             conn.Conectar();
             listaTabla = new ArrayList<>();
-            sql = "SELECT DJ.JUEZ_CLAVE,CONCAT(DJ.NOMBRE_JUEZ,' ',DJ.APELLIDOP_JUEZ,' ',DJ.APELLIDOM_JUEZ) "
-                    + "AS NOMBRE_JUEZ,DJ.EDAD,DJ.FECHA_GESTION,"
-                    + "CF.DESCRIPCION "
+            sql = "SELECT DJ.JUEZ_CLAVE,CONCAT(DJ.NOMBRE_JUEZ,' ',DJ.APELLIDOP_JUEZ,' ',DJ.APELLIDOM_JUEZ), "
+                    + "DJ.EDAD,DJ.FECHA_GESTION,DJ.GRADO_ESTUDIOS,CF.DESCRIPCION,CE.DESCRIPCION "
                     + "FROM DATOS_JUECES_ADOJC DJ "
-                    + "JOIN CATALOGOS_FUNCION_JUZGADO CF "
-                    + "ON DJ.FUNCION_DESEMPENA = CF.FUNCION_JUZ_ID "
+                    + "JOIN CATALOGOS_FUNCION_JUZGADO CF ON DJ.FUNCION_DESEMPENA = CF.FUNCION_JUZ_ID "
+                    + "JOIN CATALOGOS_ESTATUS CE ON DJ.ESTATUS = CE.ESTATUS_ID "
                     + "WHERE JUZGADO_CLAVE = '" + juzClave + "' AND JUEZ_CLAVE <> -2 "
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 listaTabla.add(new String[]{
-                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)
+                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
+                    rs.getString(5),rs.getString(6),rs.getString(7)
                 });
             }
             conn.close();

@@ -36,6 +36,7 @@ public class deleteDatos extends HttpServlet {
     
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -54,7 +55,7 @@ public class deleteDatos extends HttpServlet {
         
         //Condicion para eliminar Juzgados
         if(tabla.equals("tablaJuzgados")){
-            System.out.println("Borramos Juez");
+            System.out.println("Borramos Juzgado");
             try{
                 conn.Conectar();
                 sql="DELETE FROM DATOS_JUZGADOS_ADOJC "

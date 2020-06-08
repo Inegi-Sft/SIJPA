@@ -96,7 +96,7 @@ public class insrtJuzgados extends HttpServlet {
                         + funcionJuz + "," + ladaTel + ",'" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
                         + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "',"
                         + noExterior + "," + noInterior + "," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
-                        + ejercicio + ")";
+                        + "1," + ejercicio + ")";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                     sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"

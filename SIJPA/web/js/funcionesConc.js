@@ -36,8 +36,6 @@ $(document).ready(function() {
             break;
         case '5':
             $('#flsImpugnacion').show();
-            $('#flsImpugnacion select').val('').prop("required", true);
-            $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
             $('#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
 
             $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();

@@ -107,7 +107,7 @@ public class insrtJuzgados extends HttpServlet {
                     System.out.println(sql);
                     if(conn.escribir(sql)){
                         //inserta un juez no aplica de acuerdo a el juzgado 
-                        sql = "INSERT INTO DATOS_JUECES_ADJC  VALUES (" + entidadJ + "," + municipioJ + ","
+                        sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES (" + entidadJ + "," + municipioJ + ","
                                 + numOrgano + ",'" + juzgadoClave + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
                         System.out.println(sql);
                         if(conn.escribir(sql)){

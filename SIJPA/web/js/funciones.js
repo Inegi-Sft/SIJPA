@@ -235,11 +235,13 @@ $(document).ready(function () {
         var tabla = $(this).parents('table').attr('id');//Obtenemos el nombre de la tabla
         var clave = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();//Obtenemos la clave del registro
         var numReg = $('#' + tabla + ' tbody tr').length - 1;//Obtenemos el numero de registro despues de borrar el registro
-        if(numReg === 0){
-            var nomTabla = $(this).parents('table').attr('data-nomTabla');
-            alert('La tabla "' + nomTabla + '" no se puede quedar con 0 registros\n' +
-                'Se necesita al menos 1 registro para que las Causas Penales funcionen');
-            return false;
+        if(tabla !== 'causas'){
+            if(numReg === 0){
+                var nomTabla = $(this).parents('table').attr('data-nomTabla');
+                alert('La tabla "' + nomTabla + '" no se puede quedar con 0 registros\n' +
+                    'Se necesita al menos 1 registro para que las Causas Penales funcionen');
+                return false;
+            }
         }
         var resp = confirm("Realmente deseas eliminar este registro con clave: " + clave + "?");
         if(resp){

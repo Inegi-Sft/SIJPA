@@ -8,7 +8,7 @@ $(document).ready(function () {
     
     if($('#expClaveJO').val() !== ''){
         $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
-        $("#guardarExp").prop("hidden", true);
+        $("#guardarExpJO").prop("hidden", true);
     }
     
     //Se usa para la recuperacion de datos de DB
@@ -102,8 +102,8 @@ $(document).ready(function () {
     $('#formCausaPenalJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        var resp = confirm("Una vez guardada la Causa Penal no podre hacer niingun cambio\n\
-                    ¿Esta seguro que los datos son los correctos?");
+        var resp = confirm("Una vez guardada la Causa Penal no podre hacer niingun cambio,\n"
+                    + "Esta seguro que los datos son los correctos?");
         if(resp){
             $.ajax({
                 type: 'post',

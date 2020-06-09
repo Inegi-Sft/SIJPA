@@ -96,6 +96,7 @@ public class showCausasPenalesJO {
                     + "AND CP.JUZGADO_CLAVE = '" + juzgadoClave + "' "
                     + "GROUP BY CO.CAUSA_CLAVE "
                     + "ORDER BY 1;";
+            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 causas.add(new String[]{

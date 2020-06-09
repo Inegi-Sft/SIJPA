@@ -683,7 +683,7 @@ function buscaYremplaza(proceClave, etapaProce){
                 console.log('Usuario ' + data);
             }
         }).done(function (d) {
-            console.log(d);
+            console.log('Con exito: ' + d);
             alert(d);
         });
     }

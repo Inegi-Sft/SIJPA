@@ -794,31 +794,6 @@ function VFechaOcurrencia(Ocurr) {
     }
 }
 
-function ValidaCarpeInvest(InputCarpInves) {
-    var CarpInvestiga = $(InputCarpInves).val();
-    if (CarpInvestiga !== '') {
-        $.ajax({
-            type: 'post',
-            url: 'obtenCarpeInves',
-            data: {
-            CarpInvestiga: CarpInvestiga
-            },
-            success: function (response) {
-                console.log("Respuesta del servidor", response);
-                // alert("respuesta del servidor= "+response);
-                if (response === '1') {
-                    alert('La Causa Penal Ya Existe');
-                    $(InputCarpInves).val("");
-                    $(InputCarpInves).focus();
-                }
-            },
-            error: function (response) {
-                console.log("Respuesta del servidor", response);
-            }
-        });
-    }
-}
-
 function ValFechaNacPRO(FechaNac, Edad) {
     var Fnac = $(FechaNac).val();
     if (Fnac !== '') {

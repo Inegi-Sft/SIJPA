@@ -84,7 +84,7 @@
                             </td>
                             <td>
                                 <label for="expClave">No. Asunto Asignado</label>
-                                <input type="text" name="expClave" id="expClave" onblur="ValidaCarpeInvest('#expClave')" value="<%=causaClave%>" required>
+                                <input type="text" name="expClave" id="expClave" maxlength="15" onkeypress="return validaMascara(event)" onblur="ValidaCarpeInvest('#expClave')" value="<%=causaClave%>"  placeholder="Ej: 00001/2020" required>
                             </td>
                         </tr>
                         <tr>

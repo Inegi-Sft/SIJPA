@@ -165,9 +165,9 @@ public class insrtJuzgados extends HttpServlet {
     public String verificaVariable(String variable){
         String verificada = "";
         if(variable == null){
-            verificada = "-9";
+            verificada = "0";
         }else if(variable.equals("")){
-            verificada = "-9";
+            verificada = "0";
         }else{
             verificada = variable;
         }

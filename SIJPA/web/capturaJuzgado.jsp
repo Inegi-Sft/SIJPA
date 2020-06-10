@@ -149,7 +149,7 @@
                             </td>
                             <td>
                                 <label for="numJuzgado">Número Órgano Jurisdiccional</label>
-                                <input type="number" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" required/>
+                                <input type="text" class="soloNum" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" maxlength="3" required/>
                                 <input type="hidden" name="jClaveR" id="jClaveR" value="<%=juzClave%>">
                             </td>
                             <td>
@@ -159,12 +159,12 @@
                                     <%
                                         lista = cat.findJurisdiccion();
                                         for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(juzJuris)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(juzJuris)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
                                     %>
                                 </select>
                             </td>
@@ -186,12 +186,12 @@
                                     <%
                                         lista = cat.findFuncionJuzgado();
                                         for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(juzFun)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(juzFun)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
                                     %>
                                 </select>
                             </td>
@@ -209,12 +209,12 @@
                                     <%
                                         lista = cat.findEntidades();
                                         for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(entidad)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(entidad)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
                                     %>
                                 </select>
                             </td>
@@ -247,12 +247,12 @@
                                     <%
                                         lista=cat.findFormaDivision();
                                         for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(forDiv)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(forDiv)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
                                     %>
                                 </select>
                             </td>
@@ -284,12 +284,12 @@
                                     <%
                                         lista = cat.findVialidad();
                                         for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(viali)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(viali)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
                                     %>
                                 </select>
                             </td>
@@ -300,12 +300,12 @@
                                     <%
                                         lista = cat.findAsentamientoHumano();
                                         for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(asenta)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(asenta)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                        }
                                     %>
                                 </select>
                             </td>
@@ -326,8 +326,8 @@
                             </td>
                             <td>
                                 <label for="">No. Exterior / No. Interior</label>
-                                <input type="text" class="txtSmall" name="noExterior" id="noExterior" value="<%=numExt%>" />
-                                <input type="text" class="txtSmall" name="noInterior" id="noInterior" value="<%=numInt%>" />
+                                <input type="text" class="txtSmall soloNum" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
+                                <input type="text" class="txtSmall soloNum" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
                             </td>
                         </tr>
                     </table>
@@ -370,12 +370,12 @@
                                     <%
                                         lista = cat.findEjercicios();
                                         for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(ejercicio)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[1] + "</option>");
-                                                }
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(ejercicio)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[1] + "</option>");
+                                        }
                                     %>
                                 </select>
                             </td>

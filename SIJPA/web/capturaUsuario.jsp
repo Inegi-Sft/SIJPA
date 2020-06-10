@@ -24,8 +24,8 @@
     </head>
     <body>
         <% if(tot != 0){ %>
-        <%@include file="cabecera.jsp"%>
-        <%@include file="menu.jsp"%>
+            <%@include file="cabecera.jsp"%>
+            <%@include file="menu.jsp"%>
         <% } %>
         <section class="contenedor">
             <% 

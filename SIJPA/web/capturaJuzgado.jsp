@@ -241,7 +241,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="fDivicion">Forma de División</label>
+                                <label for="fDivision">Forma de División</label>
                                 <select name="fDivision" id="fDivision" required>
                                     <option value="">--Seleccione--</option>
                                     <%

@@ -13,7 +13,13 @@ function valida(){
     }else if ($('#municipioJ').val() ==='') {
         alert('Seccion Ubicacion: \n\n Llena el campo Municipio o Demarcacion Territorial de la CDMX');
     }else if ($('#fDivision').val() ==='') {
-        alert('Seccion Ubicacion: \n\n Llena el campo Forma de División');
+        alert('Seccion Ubicacion: \n\n Llena el campo Forma de Division');
+    }else if($('#regJudicial').val() ===''){
+        alert('Seccion Ubicacion: \n\n Llena el campo Nombre de la Region Judicial'); 
+    }else if($('#distJudicial').val() ===''){
+        alert('Seccion Ubicacion: \n\n Llena el campo Nombre del Distrito Judicial');
+    }else if($('#partJudicial').val() ===''){
+        alert('Seccion Ubicacion: \n\n Llena el campo Nombre del Nombre del Partido Judicial');
     }else if ($('#vialidad').val() ==='') {
         alert('Seccion Domicilio: \n\n Llena el campo Vialidad');
     }else if ($('#nomVialidad').val() ==='') {

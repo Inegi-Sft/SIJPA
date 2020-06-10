@@ -12,7 +12,7 @@ function valida(){
         alert('Seccion Ubicacion: \n\n Llena el campo Entidad Federativa');
     }else if ($('#municipioJ').val() ==='') {
         alert('Seccion Ubicacion: \n\n Llena el campo Municipio o Demarcacion Territorial de la CDMX');
-    }else if ($('#fDivicion').val() ==='') {
+    }else if ($('#fDivision').val() ==='') {
         alert('Seccion Ubicacion: \n\n Llena el campo Forma de División');
     }else if ($('#vialidad').val() ==='') {
         alert('Seccion Domicilio: \n\n Llena el campo Vialidad');

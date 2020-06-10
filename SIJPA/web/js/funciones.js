@@ -46,7 +46,12 @@ $(document).ready(function () {
                 if (response === 1) {
                     window.location.href = "bienvenida.jsp";
                 } else {
-                    alert('Usuario no encontrado, favor de revisar usuario o contraseÃ±a');
+                    alertify.alert('Mensaje Importante', 'Usuario no Encontrado\n Intente de nuevo', function(){
+                        alertify.error('Verifique las credenciales de acceso'); 
+                    });
+                    //alert('Usuario no encontrado, favor de revisar usuario o contraseÃ±a');
+                    $('#nomUsu').val('');
+                    $('#passUsu').val('');
                 }
             },
             error: function (response) {
@@ -110,11 +115,11 @@ $(document).ready(function () {
     $('#confPass').keyup(function () {
         if ($('#confPass').val() !== '') {
             if ($('#confPass').val() === $('#pass').val()) {
-                $('#mesajePass').text('Las contraseÃ±as son correctas');
+                $('#mesajePass').text('Las contrase�as son correctas');
                 $('#mesajePass').css({'color': '#66cc00'});
                 $('#guardar').fadeIn('slow');
             } else {
-                $('#mesajePass').text('Las contraseÃ±as no coinciden');
+                $('#mesajePass').text('Las contrase�as no coinciden');
                 $('#mesajePass').css({'color': '#ff0000'});
                 $('#guardar').fadeOut('slow');
             }

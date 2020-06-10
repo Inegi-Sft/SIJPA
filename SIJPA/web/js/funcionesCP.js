@@ -83,24 +83,21 @@ $(document).ready(function () {
     });
     
     $('#Tdelitos, #Tadolescentes, #Tvictimas').change(function () {
-    var Mnsj="LA CANTIDAD DEBE DE SER MAYOR A 0";
-    if ( $('#Tdelitos').val()==="-1" || $('#Tdelitos').val()==="0" )
-    {
-      alert (Mnsj);
-      $('#Tdelitos').val("1");
-      $('#Tdelitos').focus();
-    }else if ( $('#Tadolescentes').val()==="-1" || $('#Tadolescentes').val()==="0" )
-    {
-      alert (Mnsj);
-      $('#Tadolescentes').val("1");
-      $('#Tadolescentes').focus();
-    }else if ( $('#Tvictimas').val()==="-1" || $('#Tvictimas').val()==="0" )
-    {
-      alert (Mnsj);
-      $('#Tvictimas').val("1"); 
-      $('#Tvictimas').focus();
-    }
-     });
+        var Mnsj="LA CANTIDAD DEBE DE SER MAYOR A 0";
+        if ( $('#Tdelitos').val()==="-1" || $('#Tdelitos').val()==="0" ){
+            alert (Mnsj);
+            $('#Tdelitos').val("1");
+            $('#Tdelitos').focus();
+        }else if ( $('#Tadolescentes').val()==="-1" || $('#Tadolescentes').val()==="0" ){
+            alert (Mnsj);
+            $('#Tadolescentes').val("1");
+            $('#Tadolescentes').focus();
+        }else if ( $('#Tvictimas').val()==="-1" || $('#Tvictimas').val()==="0" ){
+            alert (Mnsj);
+            $('#Tvictimas').val("1"); 
+            $('#Tvictimas').focus();
+        }
+    });
   
    $('#Tdelitos, #Tadolescentes, #Tvictimas').focus(function (e) {
         if ($('#expClave').val() === "") {

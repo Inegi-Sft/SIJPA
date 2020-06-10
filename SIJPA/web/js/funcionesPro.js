@@ -147,6 +147,11 @@ $(document).ready(function() {
                 return false;
             }
         }
+        if ($('input[name="arrayDelito"]:checked').length === 0) {
+            alert('Selecciona al menos un delito atribuido al adolescente');
+            $('input[name="arrayDelito"]').focus();
+            return false;
+        }
         $.ajax({
             type: 'post',
             url: 'insrtProcesados',

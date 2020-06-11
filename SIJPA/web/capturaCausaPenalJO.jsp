@@ -100,7 +100,7 @@
                             </td>
                             <td>
                                 <label for="expClaveJO">No. Asunto Asignado JO</label>
-                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>readonly<%}%> onblur="ValidaCarpeInvest('#expClaveJO')">
+                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" onblur="ValidaCarpeInvest('#expClaveJO')">
                             </td>
                         </tr>
                         <tr>

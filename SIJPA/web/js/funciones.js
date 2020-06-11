@@ -166,6 +166,15 @@ $(document).ready(function () {
         $('#numOrgano, #entidadJ, #municipioJ').prop('disabled', true);
     }
     
+    //para recuperacion de bd
+    if($('#fDivision').val() !== '1'){
+        $('#dRegJudicial').show();
+    }else if($('#fDivision').val() !== '2'){
+        $('#dDistJudicial').show();
+    }else if($('#fDivision').val() !== '3'){
+        $('#dPartJudicial').show();
+    }
+    
     //permite solo numeros en los inputs
     /***
      * 
@@ -227,6 +236,14 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
+    
+    /***************************** FUNCIONES JUEZ *******************************/
+    //Se usa para la recuperacion de datos de DB
+    if($('#fGestion').val() === '1899-09-09'){
+        $('#fGestion').prop('readonly', true);
+        $('#chkFechaInicioG').prop('checked', true);
+    }
+    /***************************** FIN FUNCIONES JUEZ *******************************/
     
     /************************* Funcion de borrado general *****************************/
     /***

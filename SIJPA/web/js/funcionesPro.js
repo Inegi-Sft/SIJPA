@@ -148,7 +148,7 @@ $(document).ready(function() {
             }
         }
         if ($('input[name="arrayDelito"]:checked').length === 0) {
-            alert('Selecciona al menos un delito atribuido al adolescente');
+            alert('Selecciona al menos un Delito Atribuido al Adolescente');
             $('input[name="arrayDelito"]').focus();
             return false;
         }

@@ -17,7 +17,6 @@
         etapas = sEtapaOral.findEtapaCausaJO(request.getParameter("causaClaveJO") + juzgadoClave.replace("-", ""));
         String [] pestanas = {"Causa Penal","Delitos","Adolescentes","Victimas","Juicio Oral",
             "Conclusión y/o Terminación","Tramite"};
-        System.out.println("Avance: " + avance);
         
         out.println("<button class='pestanaLinks active' onclick=\"openPestana('btn1', 'p1')\" id='btn1'>" + pestanas[0] + "</button>");
         

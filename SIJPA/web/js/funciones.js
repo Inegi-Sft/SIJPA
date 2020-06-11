@@ -889,3 +889,57 @@ function ValFechaNacPRO(FechaNac, Edad) {
         });
     }
 }
+
+function validaMascara(e) {
+    var key = e.keyCode || e.which,
+    tecla = String.fromCharCode(key).toLowerCase(),
+    letras = "abcdefghijklmnopqrstuvwxyz1234567890",
+    especiales = [47,95], //   47= / 95= _
+    tecla_especial = false;
+
+    for (var i in especiales) {
+        if (key === especiales[i]) {
+            tecla_especial = true;
+        break;
+        }
+    }
+
+    if (letras.indexOf(tecla) === -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+function ValidaCarpeInvest(InputCarpInves) {
+    // ^ No debe de haber nada antes
+    // \w Coincide con cualquier carácter alfanumérico, incluyendo el guión bajo. Equivalente a [A-Za-z0-9_]. No permite caracteres raros
+    // \/ La diagonal invertida escapa a la diagonal simple indicando que debe de llevar /
+    // [0-9] Solo debe haber numeros enteros. {4} De esos numeros deben de haber exclusivamente 4 
+    var CarpInvestiga = $(InputCarpInves).val();
+    if (CarpInvestiga !== '') {
+        var mascara= /^\w{1,10}\/[0-9]{4}$/;
+        if(mascara.test(CarpInvestiga)){
+            $.ajax({
+                type: 'post',
+                url: 'obtenCarpeInves',
+                data: {
+                    CarpInvestiga: CarpInvestiga
+                },
+                success: function (response) {
+                    console.log("Respuesta del servidor", response);
+                    // alert("respuesta del servidor= "+response);
+                    if (response === '1') {
+                        alert('La Causa Penal Ya Existe');
+                        $(InputCarpInves).val("");
+                        $(InputCarpInves).focus();
+                    }
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor", response);
+                }
+            });
+        }else {
+            alert("El numero de asunto debe contener de 1 a 10 caracteres seguido de una diagonal ( / ) y del a\361o de ingreso \n\nEjemplo:  00001/2020,     REF_001/2020");
+            $(InputCarpInves).val('').focus();
+        } 
+    }
+}

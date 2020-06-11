@@ -58,14 +58,15 @@
                 }
             }
             
-            if(etapaProcesal.equals("") && !proceClave.equals("")){
-                String etapaInter = "";
+            //Control si es captura verifica cual es tu tipo de resolucion en etapa intermedia si es que tiene
+            String etapaInter = "";//;//variable donde guardaremos si en intermedia ya tiene tramite
+            if(!proceClave.equals("")){
                 etapaInter = inter.findProcesadoClave(causaClave, proceClave + jConcatenado);//Buscamos etapa a nivel de procesado
                 if(!etapaInter.equals("")){
                     etapaProcesal = etapaInter;
                 }
+                System.out.println("Etapa resul: " + etapaProcesal);
             }
-            System.out.println("Etapa resul: " + etapaProcesal);
         %>
     </head>
     <body style="zoom: .9;">
@@ -160,7 +161,7 @@
                 <input type="submit" name="guardar" id="guardarTram" value="Guardar">
             </form>
         </section>
-        <% if(!etapaProcesal.equals("")){ %>
+        <% if(!etapaInter.equals("")){ %>
             <script type="text/javascript"> 
                 $(document).ready(function(){ 
                     //etapaProcesal(); 

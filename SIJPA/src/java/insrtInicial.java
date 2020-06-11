@@ -235,7 +235,7 @@ public class insrtInicial extends HttpServlet {
                     resp.add(lis.get(0)[3]);
                     resp.add(lis.get(0)[4]);
                     resp.add(banderaDesc);//Descripcion de la bandera para la tabla
-                    resp.add(0);//dato para saber a que etapa se agrega el procesado
+                    resp.add(banderaEtapa);//dato para saber a que etapa se agrega el procesado
                     resp.add(totInicialInsrt);
                     out.write(resp.toJSONString());
                     conn.close();

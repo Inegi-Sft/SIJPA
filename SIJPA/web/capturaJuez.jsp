@@ -136,7 +136,19 @@
                             </td>
                             <td>
                                 <label for="edadJuez">Edad</label>
-                                <input type="number" class="txtSmall" name="edadJuez" id="edadJuez" value="<%=edadJuez%>" min="18" required/>
+                                <select class="txtSmall" name="edadJuez" id="edadJuez" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findEstudioProfesional();
+                                        for (int i = 18; i <= 99; i++) {
+                                            out.println("<option value='" + i + "'");
+                                            if(Integer.toString(i).equals(edadJuez)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + i + "</option>");
+                                        }
+                                    %>
+                                </select>
                             </td>
                             <td>
                                 <label for="estudioJuez">Grado de Estudios</label>
@@ -177,14 +189,5 @@
                 <input type="submit" name="guardar" id="guardar" value="Guardar">
             </form>
         </section>
-        <script text="javascript">
-            $(document).ready(function () {
-                //Se usa para la recuperacion de datos de DB
-                if($('#fGestion').val() === '1899-09-09'){
-                    $('#fGestion').prop('readonly', true);
-                    $('#chkFechaInicioG').prop('checked', true);
-                }
-            });
-        </script>
     </body>
 </html>

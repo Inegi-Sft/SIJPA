@@ -42,8 +42,8 @@ public class obtenCarpeInves extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-       PrintWriter out = response.getWriter();
-       Sistema=(String) sesion.getAttribute("Sistema");
+        PrintWriter out = response.getWriter();
+        Sistema = (String) sesion.getAttribute("Sistema");
        
         try {
             response.setContentType("text/html;charset=UTF-8");            
@@ -51,18 +51,16 @@ public class obtenCarpeInves extends HttpServlet {
                 juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
                 causaClave = request.getParameter("CarpInvestiga") + juzgadoClave.replace("-", "");
                 Existe = penales.CarpetaInves(juzgadoClave, causaClave);
-                System.out.println("Causa_clave:" + causaClave + "juzgado_clave:" + juzgadoClave + "Existe:" + Existe);
                 if (Existe == true) {
                     out.write("1");
                 } else {
                     out.write("0");
                 }
             }else if ((request.getParameter("CarpInvestiga") != null) && (Sistema.equals("JO"))){
-             juzgadoClave = (String) sesion.getAttribute("juzgadoClave"); 
-             causaClaveJO= request.getParameter("CarpInvestiga") + juzgadoClave.replace("-", "");
-             Existe = penalesJO.CarpetaInvesJO(juzgadoClave, causaClaveJO);
-             System.out.println("Causa_claveJO:" + causaClaveJO + "juzgado_clave:" + juzgadoClave + "Existe:" + Existe);
-            if (Existe == true) {
+                juzgadoClave = (String) sesion.getAttribute("juzgadoClave"); 
+                causaClaveJO= request.getParameter("CarpInvestiga") + juzgadoClave.replace("-", "");
+                Existe = penalesJO.CarpetaInvesJO(juzgadoClave, causaClaveJO);
+                if (Existe == true) {
                     out.write("1");
                 } else {
                     out.write("0");

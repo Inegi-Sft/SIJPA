@@ -117,10 +117,10 @@ public class insrtJuzgados extends HttpServlet {
                         conn.close();
                         sesion.setAttribute("juzgadoClave", juzgadoClave);
                         sesion.setMaxInactiveInterval(-1);
-                        response.sendRedirect("causasPenales.jsp?insrtJuz=Si");
+                        response.sendRedirect("causasPenales.jsp?insrtJuz=100");
                     }else{
                         conn.close();
-                        response.sendRedirect("capturaJuzgado.jsp?error=100");
+                        response.sendRedirect("capturaJuzgado.jsp?insrtJuz=200");
                     }
                 }else{
                     conn.close();
@@ -165,9 +165,9 @@ public class insrtJuzgados extends HttpServlet {
     public String verificaVariable(String variable){
         String verificada = "";
         if(variable == null){
-            verificada = "-9";
+            verificada = "0";
         }else if(variable.equals("")){
-            verificada = "-9";
+            verificada = "0";
         }else{
             verificada = variable;
         }

@@ -42,7 +42,7 @@
                         <th>Municipio</th>
                         <th>Estatus</th>
                         <th>Editar</th>
-                        <th>Cmabiar Estatus</th>
+                        <th>Cambiar Estatus</th>
                     </tr>
                 </thead>
                 <tbody>

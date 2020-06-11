@@ -166,7 +166,6 @@ $(document).ready(function() {
             $('#flsImpugnacion select').val('').prop("required", true);
             $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
             $('#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
-
             $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();
             $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
             $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);

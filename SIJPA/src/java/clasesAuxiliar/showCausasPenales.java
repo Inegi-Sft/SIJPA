@@ -166,7 +166,6 @@ public class showCausasPenales {
             if (rs.next()) {
                 Exis = true;
             }
-
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);

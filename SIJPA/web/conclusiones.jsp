@@ -97,9 +97,13 @@
                 }
             }
             
-            //Control si es cptura verifica cual es tu tipo de resolucion en etapa inicial
-            if(tipoResol.equals("") && !proceClave.equals("")){
-                tipoResol = inicial.verificaSobreAperturaJO(causaClave, proceClave + jConcatenado);
+            //Control si es cptura verifica cual es tu tipo de resolucion en etapa inicial si es que tiene
+            String tipoResIn = "";//variable donde guardaremos si en inicial o intermedia ya tiene conclusion
+            if(!proceClave.equals("")){
+                tipoResIn = inicial.verificaSobreAperturaJO(causaClave, proceClave + jConcatenado);
+                if(!tipoResIn.equals("")){
+                    tipoResol = tipoResIn;
+                }
                 System.out.println("Tipo res: " + tipoResol);
             }
             
@@ -488,7 +492,7 @@
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>
-        <% if(!tipoResol.equals("")){ %>
+        <% if(!tipoResIn.equals("")){ %>
             <script type="text/javascript"> 
                 $(document).ready(function(){ 
                     //tipoResolucion(); 

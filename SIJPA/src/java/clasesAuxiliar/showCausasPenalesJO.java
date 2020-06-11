@@ -96,7 +96,6 @@ public class showCausasPenalesJO {
                     + "AND CP.JUZGADO_CLAVE = '" + juzgadoClave + "' "
                     + "GROUP BY CO.CAUSA_CLAVE "
                     + "ORDER BY 1;";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 causas.add(new String[]{
@@ -242,7 +241,6 @@ public class showCausasPenalesJO {
             conn.Conectar();
             sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJO WHERE CAUSA_CLAVEJO='" + numcarpetaJO + "' AND "
                     + " JUZGADO_CLAVE = '" + juzgadoClave + "'";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             if (rs.next()) {
                 Exis = true;
@@ -261,7 +259,6 @@ public class showCausasPenalesJO {
             conn.Conectar();
             sql = "SELECT FECHA_INGRESO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' AND "
                     + "CAUSA_CLAVEJO = '" + causaClaveJO + "'";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             if (rs.next()) {
                 FechaIngreso = rs.getString("FECHA_INGRESO");

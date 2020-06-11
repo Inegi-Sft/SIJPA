@@ -56,7 +56,6 @@ public class usuario {
             sql = "SELECT * FROM USUARIOS WHERE CORREO = '" + nomUsuario + "' "
                     + "AND CONTRASENIA = '" + passUsuario + "' "
                     + "AND ESTATUS = 1;";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             return rs.next();
         } catch (SQLException ex) {
@@ -71,7 +70,6 @@ public class usuario {
             conn.Conectar();
             sql = "SELECT TIPO_USUARIO FROM USUARIOS WHERE CORREO = '" + nomUsuario + "' "
                     + "AND CONTRASENIA = '" + passUsuario + "';";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while(rs.next()){
                 tipo = rs.getInt(1);
@@ -88,7 +86,6 @@ public class usuario {
         try {
             conn.Conectar();
             sql = "SELECT VISITA FROM USUARIOS WHERE CORREO = '" + nomUsuario + "';";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while(rs.next()){
                 visita = rs.getInt(1);
@@ -107,7 +104,6 @@ public class usuario {
             sql = "SELECT U.ENTIDAD, CE.DESCRIPCION FROM USUARIOS U JOIN CATALOGOS_ENTIDADES CE "
                     + "ON U.ENTIDAD = CE.ENTIDAD_ID "
                     + "WHERE U.TIPO_USUARIO = 1";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while(rs.next()){
                 listaTabla.add(new String[]{
@@ -149,7 +145,6 @@ public class usuario {
         try {
             conn.Conectar();
             sql = "SELECT AVANCE FROM USUARIOS_CONTROL WHERE CAUSA_CLAVE = '" + causaClave + "';";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 avance = rs.getInt(1);
@@ -166,7 +161,6 @@ public class usuario {
         try {
             conn.Conectar();
             sql = "SELECT AVANCEJO FROM USUARIOS_CONTROL WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "';";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 avance = rs.getInt(1);

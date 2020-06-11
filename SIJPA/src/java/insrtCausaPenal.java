@@ -63,7 +63,6 @@ public class insrtCausaPenal extends HttpServlet {
         String acomulado = request.getParameter("ExpAcomu");
         String referencia = verificaVariable(request.getParameter("ExpRefe"));
         String competencia = request.getParameter("compe");
-        System.out.println("COMPETENCIA:"+competencia);
         String incompetencia = verificaVariable(request.getParameter("Tincompe"));
         String totalDeli = verificaVariable(request.getParameter("Tdelitos"));
         String totalAdo = verificaVariable(request.getParameter("Tadolescentes"));

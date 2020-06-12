@@ -49,7 +49,7 @@ $(document).ready(function () {
                     alertify.alert('Mensaje Importante', 'Usuario no Encontrado\n Intente de nuevo', function(){
                         alertify.error('Verifique las credenciales de acceso'); 
                     });
-                    //alert('Usuario no encontrado, favor de revisar usuario o contraseÃ±a');
+                    //alert('Usuario no encontrado, favor de revisar usuario o contrase�a');
                     $('#nomUsu').val('');
                     $('#passUsu').val('');
                 }
@@ -167,11 +167,11 @@ $(document).ready(function () {
     }
     
     //para recuperacion de bd
-    if($('#fDivision').val() !== '1'){
+    if($('#fDivision').val() === '1'){
         $('#dRegJudicial').show();
-    }else if($('#fDivision').val() !== '2'){
+    }else if($('#fDivision').val() === '2'){
         $('#dDistJudicial').show();
-    }else if($('#fDivision').val() !== '3'){
+    }else if($('#fDivision').val() === '3'){
         $('#dPartJudicial').show();
     }
     

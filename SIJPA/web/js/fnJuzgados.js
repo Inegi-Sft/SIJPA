@@ -6,6 +6,8 @@ function valida(){
         alert('Seccion Datos Principales: \n\n Llena el campo Numero Organo Jurisdiccional');
     }else if ($('#jurisdiccion').val() ==='') {
         alert('Seccion Datos Principales: \n\n Llena el campo Jurisdiccion');
+    }else if ($('#correo').val() ==='') {
+        alert('Seccion Datos Principales: \n\n Llena el campo Correo Organo Jurisdiccional o intruduce un correo de forma valida');
     }else if ($('#funcionJuz').val() ==='') {
         alert('Seccion Datos Principales: \n\n Llena el campo Funcion del organo Jurisdiccional');
     }else if ($('#entidadJ').val() ==='') {

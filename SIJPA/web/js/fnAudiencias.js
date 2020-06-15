@@ -1,23 +1,10 @@
 $(document).ready(function () {
-    //Establece am pata input time y no marque error en el submit
-    //$('.tiempo').prop('maxlength','5'); 
-    
-//    if($('.tiempo').val() === ''){
-//        $('.tiempo').prop('placeholder','00:00 Hrs');
-//        $('.tiempo').on('input', function(e){
-//            if (e.charCode < 48 || e.charCode > 57) return false;
-//            var con = $('.tiempo').val();
-//            if(con.length === 2){
-//                $(this).val(con + ':');
-//            }else if(con.length === 5){
-//                //alert(con.substring(3,5));
-//                if(con.substring(3,5) > '60'){
-//                    alert(con.substring(3,5));
-//                }
-//            }
-//        });
-//    }
-    
+ //Establece am pata input time y no marque error en el submit
+    $('input[name="hrsInves"]').prop({'min': '0', 'max': '30', 'maxlength':'2'});
+    $('input[name="minInves"]').prop({'min': '0', 'max': '59', 'maxlength':'2'});
+    $('input[name="hrsInter"]').prop({'min': '0', 'max': '30', 'maxlength':'2'});
+    $('input[name="minInter"]').prop({'min': '0', 'max': '59', 'maxlength':'2'});
+
     //auto acompletado para las causas penales
     $("#causaClave").selectize({
         onBlur: function () {
@@ -62,15 +49,17 @@ $(document).ready(function () {
 });
 
 // habilita las audiencias de acuaerdo si el checkbox esta checkeado
-function habilitaTxt(obj, idTxt1, idTxt2, chkNi1, chkNi2) {
+function habilitaTxt(obj, idTxt1, hrs, min, chkNi1, chkNi2) {
     if (obj.checked) {
         $(idTxt1).prop({"required": true, "disabled": false});
-        $(idTxt2).prop({"required": true, "disabled": false});
+        $(hrs).prop({"required": true, "disabled": false});
+        $(min).prop({"required": true, "disabled": false});
         $(chkNi1).prop("disabled", false);
         $(chkNi2).prop("disabled", false);
     } else {
         $(idTxt1).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(idTxt2).prop({"required": false, "disabled": true, "readonly": false}).val("");
+        $(hrs).prop({"required": false, "disabled": true, "readonly": false}).val("");
+        $(min).prop({"required": false, "disabled": true, "readonly": false}).val("");
         $(chkNi1).prop({"disabled": true, "checked": false});
         $(chkNi2).prop({"disabled": true, "checked": false});
     }
@@ -93,11 +82,13 @@ function fechaNI(obj, idTxtDate) {
     }
 }
 //duracion no identificada
-function duracionNI(obj, idTxtDate) {
+function duracionNI(obj, hrs, min) {
     if (obj.checked) {
-        $(idTxtDate).prop("readonly", true).val("09:09");
+        $(hrs).prop("readonly", true).val("99");
+        $(min).prop("readonly", true).val("99");
     } else {
-        $(idTxtDate).prop("readonly", false).val("");
+        $(hrs).prop("readonly", false).val("");
+        $(min).prop("readonly", false).val("");
     }
 }
 //Comprueba que primero se haya seleccionado un juzgado clave antes de agregar audiencias
@@ -129,5 +120,7 @@ function deleteAudiencias(causa) {
                 alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
-    }
+    }   
 }
+
+

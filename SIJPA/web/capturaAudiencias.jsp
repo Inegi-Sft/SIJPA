@@ -78,7 +78,11 @@
                     </div>
                     <fieldset id="fstJueces">
                         <legend>Jueces que celebraron la audiencia</legend>
+                        
                         <div id="dJueces">
+                            <a href="capturaJuez.jsp" class="addJuez">
+                                <img src="img/add.png" title="Agregar Juez"> Agregar Juez
+                            </a>
                         <%
                             jueces = sA.recuperaJuez(juzgadoClave, causa);//para recuperar datos de jueces
                             lista = sA.findJueces(juzgadoClave);
@@ -107,7 +111,7 @@
                             <th>Investigación</th>
                             <th>Aplica</th>
                             <th>Fecha celebración</th>
-                            <th>Duracion Hrs.</th>
+                            <th>Duracion (Hrs / Min)</th>
                         </tr>
                         <%
 
@@ -120,7 +124,7 @@
                                 <td><%=ls[0]%></td>
                                 <td><%=ls[1]%></td>
                                 <td>
-                                    <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#duracionInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" checked/>
+                                    <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#hrsInves<%=ls[0]%>','#minInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" checked/>
                                 </td>
                                 <td>
                                     <input type="date" name="fechaInves" id="fechaInves<%=ls[0]%>" class="audiFecha" value="<%=audi.get(0)[1]%>" <%if(audi.get(0)[1].equals("1899-09-09")){%>readonly<%}%>/>
@@ -129,9 +133,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="time" name="duracionInves" id="duracionInves<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("09:09:00")){%>readonly<%}%>/>
+                                    <input type="number" name="hrsInves" id="hrsInves<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("99")){%>readonly<%}%>/>:
+                                    <input type="number" name="minInves" id="minInves<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[3]%>" <%if(audi.get(0)[3].equals("99")){%>readonly<%}%>/>
                                     <div class="noIden">
-                                        <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#duracionInves<%=ls[0]%>')" <%if(audi.get(0)[2].equals("09:09:00")){%>checked<%}%>/>N/I
+                                        <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#hrsInves<%=ls[0]%>','#minInves<%=ls[0]%>')" <%if(audi.get(0)[2].equals("99")){%>checked<%}%>/>N/I
                                     </div>
                                 </td>
                             </tr>
@@ -142,7 +147,7 @@
                                 <td><%=ls[0]%></td>
                                 <td><%=ls[1]%></td>
                                 <td>
-                                    <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#duracionInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" />
+                                    <input type="checkbox" name="chkInves" id="chkInves<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInves<%=ls[0]%>','#hrsInves<%=ls[0]%>','#minInves<%=ls[0]%>','#chkFNI<%=ls[0]%>','#chkDNI<%=ls[0]%>')" />
                                 </td>
                                 <td>
                                     <input type="date" name="fechaInves" id="fechaInves<%=ls[0]%>" class="audiFecha" disabled/>
@@ -151,9 +156,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="time" name="duracionInves" id="duracionInves<%=ls[0]%>" class="tiempo" disabled/>
+                                    <input type="number" name="hrsInves" id="hrsInves<%=ls[0]%>" class="tiempo" disabled/>:
+                                    <input type="number" name="minInves" id="minInves<%=ls[0]%>" class="tiempo" disabled/>
                                     <div class="noIden">
-                                        <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#duracionInves<%=ls[0]%>')" disabled>N/I
+                                        <input type="checkbox" id="chkDNI<%=ls[0]%>" onclick="duracionNI(this, '#hrsInves<%=ls[0]%>','#minInves<%=ls[0]%>')" disabled>N/I
                                     </div>
                                 </td>
                             </tr>
@@ -170,7 +176,7 @@
                             <th>Intermedia</th>
                             <th>Aplica</th>
                             <th>Fecha celebración</th>
-                            <th>Duracion</th>
+                            <th>Duracion (Hrs / Min)</th>
                         </tr>
                     <%
                     lista = cat.findAudienciasIntermedia();
@@ -182,7 +188,7 @@
                                 <td><%=ls[0]%></td>
                                 <td><%=ls[1]%></td>
                                 <td>
-                                    <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#duracionInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" checked/>
+                                    <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#hrsInter<%=ls[0]%>','#minInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" checked/>
                                 </td>
                                 <td>
                                     <input type="date" name="fechaInter" id="fechaInter<%=ls[0]%>" class="audiFecha" value="<%=audi.get(0)[1]%>" <%if(audi.get(0)[1].equals("1899-09-09")){%>readonly<%}%>/>
@@ -191,9 +197,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="time" name="duracionInter" id="duracionInter<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("09:09:00")){%>readonly<%}%>/>
+                                    <input type="number" name="hrsInter" id="hrsInter<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[2]%>" <%if(audi.get(0)[2].equals("99")){%>readonly<%}%>/>:
+                                    <input type="number" name="minInter" id="minInter<%=ls[0]%>" class="tiempo" value="<%=audi.get(0)[3]%>" <%if(audi.get(0)[3].equals("99")){%>readonly<%}%>/>
                                     <div class="noIden">
-                                        <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#duracionInter<%=ls[0]%>')" <%if(audi.get(0)[2].equals("09:09:00")){%>checked<%}%>/>N/I
+                                        <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#hrsInter<%=ls[0]%>','#minInter<%=ls[0]%>')" <%if(audi.get(0)[2].equals("99")){%>checked<%}%>/>N/I
                                     </div>
                                 </td>
                             </tr>
@@ -204,7 +211,7 @@
                                 <td><%=ls[0]%></td>
                                 <td><%=ls[1]%></td>
                                 <td>
-                                    <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#duracionInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" />
+                                    <input type="checkbox" name="chkInter" id="chkInter<%=ls[0]%>" value="<%=ls[0]%>" onchange="habilitaTxt(this,'#fechaInter<%=ls[0]%>','#hrsInter<%=ls[0]%>','#minInter<%=ls[0]%>','#chkFNII<%=ls[0]%>','#chkDNII<%=ls[0]%>')" />
                                 </td>
                                 <td>
                                     <input type="date" name="fechaInter" id="fechaInter<%=ls[0]%>" class="audiFecha" disabled/>
@@ -213,9 +220,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="time" name="duracionInter" id="duracionInter<%=ls[0]%>" class="tiempo" disabled/>
+                                    <input type="number" name="hrsInter" id="hrsInter<%=ls[0]%>" class="tiempo" disabled/>:
+                                    <input type="number" name="minInter" id="minInter<%=ls[0]%>" class="tiempo" disabled/>
                                     <div class="noIden">
-                                        <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#duracionInter<%=ls[0]%>')" disabled>N/I
+                                        <input type="checkbox" id="chkDNII<%=ls[0]%>" onclick="duracionNI(this, '#hrsInter<%=ls[0]%>','#minInter<%=ls[0]%>')" disabled>N/I
                                     </div>
                                 </td>
                             </tr>

@@ -14,7 +14,7 @@
     }
     
     if(request.getParameter("errorbd") != null){
-        out.println("<script>alert('Error con la Base de Datos, favor de chacarlo')</script>");
+        out.println("<script>alert('Error con la Base de Datos, favor de checarlo')</script>");
     }
 %>
 <!DOCTYPE html>

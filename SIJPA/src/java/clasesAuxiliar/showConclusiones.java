@@ -33,7 +33,6 @@ public class showConclusiones {
                 + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
-        System.out.println(sql);
         try {
             while(resul.next()){
                 conc.add(new String[]{

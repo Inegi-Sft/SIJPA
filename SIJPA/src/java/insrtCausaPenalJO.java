@@ -50,7 +50,6 @@ public class insrtCausaPenalJO extends HttpServlet {
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJC = request.getParameter("expClaveJC").toUpperCase();
         String causaClaveJO = request.getParameter("expClaveJO");
-        System.out.println("La causa clave es="+causaClaveJO);
         String fecha_ingreso = request.getParameter("fIngresoJO");
         String totalDeli = request.getParameter("TdelitosJO");
         String totalAdo = request.getParameter("TadolescentesJO");

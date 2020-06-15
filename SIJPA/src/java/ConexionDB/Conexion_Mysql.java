@@ -49,7 +49,7 @@ public class Conexion_Mysql {
             sentencia.executeUpdate(sql);
             sentencia.close();
         } catch (SQLException e) { 
-            System.err.println("ERROR SQL " + e); 
+            System.err.println("ERROR SQL AL ESCRIBIR" + e); 
             return false; 
         }         
         return true; 
@@ -62,7 +62,7 @@ public class Conexion_Mysql {
             sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             rst = sentencia.executeQuery(sql);
         } catch (SQLException e) { 
-            System.out.println("error sql "+e);
+            System.out.println("ERROR SQL AL CONSULTAR " + e);
             return null; 
         }
         return rst; 

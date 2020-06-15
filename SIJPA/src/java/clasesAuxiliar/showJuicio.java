@@ -202,7 +202,6 @@ public class showJuicio {
             conn.Conectar();
             sql = "SELECT SENTIDO_FALLO FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClave + "' AND PROCESADO_CLAVE = '" + proceClave + "';";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 if(resul.getString("SENTIDO_FALLO").equals("1")){
@@ -225,7 +224,6 @@ public class showJuicio {
             sql = "SELECT ETAPA FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "ORDER BY 1";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 list.add(resul.getString("ETAPA"));

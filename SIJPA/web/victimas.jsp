@@ -189,9 +189,9 @@
                                     out.println("<td>");
                                     viDel = sVicti.findVDelito(causaClave, pro[0], victiClave + juzgadoClave.replace("-", ""), ls[0]);
                                     if(viDel.size() != 0){
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='"+ pro[0] +"@@@"+ ls[0] +"' checked>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='"+ pro[0] +"@@@"+ ls[0] +"' normaT="+ls[2]+" onclick='victimaDelito(this)' checked/>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='"+ pro[0] +"@@@"+ ls[0] +"'/>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='"+ pro[0] +"@@@"+ ls[0] +"' normaT="+ls[2]+" onclick='victimaDelito(this)' />");
                                     }
                                     out.println("</td>");
                                     out.println("</tr>");

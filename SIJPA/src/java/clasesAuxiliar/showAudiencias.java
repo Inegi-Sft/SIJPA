@@ -176,13 +176,14 @@ public class showAudiencias {
     public ArrayList recuperaAudiencias(String juzgado, String causa, String columna, String audi) {
         conn.Conectar();
         audiencias = new ArrayList<>();
-        sql = "SELECT AUDIENCIA_" + columna + ",FECHA_CELEBRACION,DURACION FROM DATOS_AUDIENCIAS_ADOJC"
+        sql = "SELECT AUDIENCIA_" + columna + ",FECHA_CELEBRACION, HORAS, MINUTOS FROM DATOS_AUDIENCIAS_ADOJC"
             + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVE = '" + causa + "' AND AUDIENCIA_" + columna + "=" + audi;
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 audiencias.add(new String[]{
-                    resul.getString("AUDIENCIA_"+columna), resul.getString("FECHA_CELEBRACION"), resul.getString("DURACION")
+                    resul.getString("AUDIENCIA_"+columna), resul.getString("FECHA_CELEBRACION"), 
+                    resul.getString("HORAS"), resul.getString("MINUTOS")
                 });
             }
             conn.close();

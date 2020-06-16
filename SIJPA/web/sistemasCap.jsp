@@ -22,6 +22,15 @@
             <button class="btnSisCap" id="btnAudi" name="btnAudi">Audiencias</button>
             <button class="btnSisCap" id="btnJuzga" name="btnJuzga">Juzgados</button>
             <button class="btnSisCap" id="btnJuez" name="btnJuez">Jueces</button>
+            <%
+                if(session.getAttribute("tipoUsuario") != null){
+                    if((Integer)session.getAttribute("tipoUsuario") == 1){
+                        out.print("<button class='btnSisCap' id='btnUsuario' name='btnUsuario'>Usuarios</button>");
+                    }
+                }else{
+                    response.sendRedirect("index.jsp");
+                }
+            %>
         </section>
     </body>
 </html>

@@ -125,7 +125,7 @@ $(document).ready(function () {
                 data: $('#formCausaPenal').serialize(),
                 success: function (response) {
                     console.log("Respuesta del servidor Causa Penal: ", response);
-                    alert("Guardado con exito!!!");
+                    alert("Guardado con éxito!!!");
                     $('#formCausaPenal').find('input, textarea, button, select').attr('disabled', true);
                     $("#guardarExp").prop("hidden", true);
                     if (response !== null && $.isArray(response)) {

@@ -240,7 +240,7 @@ $(document).ready(function() {
             data: $('#formConclusionesJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Conclusiones JO: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i <= 4; i++) {//pone filas correspondientes en la tabla de conclusiones
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);

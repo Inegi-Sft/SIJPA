@@ -58,7 +58,7 @@
                         out.println("<td>" + lsj[5] + "</td>");
                         out.println("<td>" + lsj[6] + "</td>");
                         out.println("<td><a href='capturaJuzgado.jsp?claveJuz=" + lsj[0] + "' class='popJ'><img src='img/editar.png' title='Editar'/></a></td>");
-                        out.println("<td><a href='#' class='estatus' id='borraJuzgado'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                        out.println("<td><a href='#' class='estatus'><img src='img/update.png' title='Cambiar Estatus'/></a></td>");
                         out.println("</tr>");
                     }
                 %>

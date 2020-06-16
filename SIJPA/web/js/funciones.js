@@ -78,6 +78,9 @@ $(document).ready(function () {
     $('#btnJuez').click(function(){
         window.location.href = "jueces.jsp";
     });
+    $('#btnUsuario').click(function(){
+        window.location.href = "usuario.jsp";
+    });
     /*----------------Fin Sistemas Captura------------------------*/
 
     /*----------------Registro Usuarios------------------------*/
@@ -87,6 +90,10 @@ $(document).ready(function () {
         },
         1500);
     });
+    
+    if($('#usuarioId').val() === '1'){
+        $('input').prop('disabled', true);
+    }
 
     $('#pass').focusout(function () {
         if ($('#pass').val() === "") {
@@ -115,11 +122,11 @@ $(document).ready(function () {
     $('#confPass').keyup(function () {
         if ($('#confPass').val() !== '') {
             if ($('#confPass').val() === $('#pass').val()) {
-                $('#mesajePass').text('Las contraseñas son correctas');
+                $('#mesajePass').text('Los passwords coinciden');
                 $('#mesajePass').css({'color': '#66cc00'});
                 $('#guardar').fadeIn('slow');
             } else {
-                $('#mesajePass').text('Las contraseñas no coinciden');
+                $('#mesajePass').text('Los passwords no coinciden');
                 $('#mesajePass').css({'color': '#ff0000'});
                 $('#guardar').fadeOut('slow');
             }

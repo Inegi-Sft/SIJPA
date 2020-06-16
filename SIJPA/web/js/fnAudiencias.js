@@ -49,7 +49,7 @@ $(document).ready(function () {
             data: $('#formAudiencias').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Audiencias guardar: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 window.location='audiencias.jsp';
             },
             error: function (response) {

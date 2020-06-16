@@ -25,7 +25,8 @@ public class showAudiencias {
      public ArrayList findJuzgados() {
         conn.Conectar();
         lista = new ArrayList<>();
-        sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC ORDER BY 1";
+        sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                + "WHERE ESTATUS = 1 ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -275,13 +276,14 @@ public class showAudiencias {
     public ArrayList recuperaAudienciasJO(String juzgado, String causa, String audi) {
         conn.Conectar();
         audiencias = new ArrayList<>();
-        sql = "SELECT AUDIENCIA_JUICIOORAL,FECHA_CELEBRACION,DURACION FROM DATOS_AUDIENCIAS_ADOJO"
+        sql = "SELECT AUDIENCIA_JUICIOORAL,FECHA_CELEBRACION, HORAS, MINUTOS FROM DATOS_AUDIENCIAS_ADOJO"
             + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVEJO = '" + causa + "' AND AUDIENCIA_JUICIOORAL = " + audi;
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 audiencias.add(new String[]{
-                    resul.getString("AUDIENCIA_JUICIOORAL"), resul.getString("FECHA_CELEBRACION"), resul.getString("DURACION")
+                    resul.getString("AUDIENCIA_JUICIOORAL"), resul.getString("FECHA_CELEBRACION"),
+                    resul.getString("HORAS"), resul.getString("MINUTOS")
                 });
             }
             conn.close();

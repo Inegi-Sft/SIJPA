@@ -29,7 +29,7 @@
             <a href="capturaUsuario.jsp" class="addJuz">Agregar Usuario 
                 <img src="img/add.png" title="Agregar Usuario">
             </a>
-            <table class="tablasRegis">
+            <table class="tablasRegis" id="tablaUsuario" data-nomTabla="Usuarios">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -51,8 +51,9 @@
                         out.println("<td>" + lsj[3] + "</td>");
                         out.println("<td>" + lsj[4] + "</td>");
                         out.println("<td>" + lsj[5] + "</td>");
-                        out.println("<td><a href='#' class='popJ'><img src='img/editar.png' title='Editar'/></a></td>");
-                        out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                        out.println("<td>" + lsj[6] + "</td>");
+                        out.println("<td><a href='capturaUsuario.jsp?usuarioClave=" + lsj[0] + "' class='popJ'><img src='img/editar.png' title='Editar'/></a></td>");
+                        out.println("<td><a href='#' class='estatus'><img src='img/update.png' title='Cambiar Estatus'/></a></td>");
                         out.println("</tr>");
                     }
                 %>

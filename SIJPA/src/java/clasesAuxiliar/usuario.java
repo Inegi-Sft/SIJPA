@@ -38,6 +38,44 @@ public class usuario {
         return totUsu;
     }
     
+    public ArrayList findUsuarioDat(int usuarioClave){
+        listaTabla = new ArrayList<>();
+        try {
+            conn.Conectar();
+            sql = "SELECT NOMBRE, APATERNO, AMATERNO, EDAD, CORREO, ENTIDAD "
+                    + "FROM USUARIOS WHERE USUARIO_ID = '" + usuarioClave + "';";
+            rs = conn.consultar(sql);
+            while(rs.next()){
+                listaTabla.add(new String[]{
+                    //comenzamos desde nombre por eso es columna 2
+                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
+                    rs.getString(5),rs.getString(6)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaTabla;
+    }
+    
+    public int findMaxUsu(){
+        int max = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT MAX(USUARIO_ID) "
+                    + "FROM USUARIOS;";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                max = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJueces.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return max;
+    }
+    
     public boolean findUsuarioExist(String usuario){
         try{
             conn.Conectar();
@@ -121,16 +159,19 @@ public class usuario {
         try {
             conn.Conectar();
             listaTabla = new ArrayList<>();
-            sql = "SELECT U.USUARIO_ID,CONCAT(U.NOMBRE,' ',U.APATERNO,' ',U.AMATERNO),U.EDAD,U.CORREO,CE.DESCRIPCION, TU.DESCRIPCION "
+            sql = "SELECT U.USUARIO_ID,CONCAT(U.NOMBRE,' ',U.APATERNO,' ',U.AMATERNO),U.EDAD,U.CORREO,CE.DESCRIPCION, TU.DESCRIPCION, CA.DESCRIPCION "
                     + "FROM USUARIOS U JOIN CATALOGOS_ENTIDADES CE "
                     + "ON U.ENTIDAD = CE.ENTIDAD_ID "
                     + "JOIN TIPO_USUARIOS TU "
                     + "ON U.TIPO_USUARIO = TU.TIPO_USUARIO_ID "
+                    + "JOIN CATALOGOS_ESTATUS CA "
+                    + "ON U.ESTATUS = CA.ESTATUS_ID "
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 listaTabla.add(new String[]{
-                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
+                    rs.getString(5),rs.getString(6),rs.getString(7)
                 });
             }
             conn.close();

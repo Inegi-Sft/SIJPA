@@ -218,7 +218,7 @@
                                     </select>
                                 </div>
                                 <div class="colsA oculto" id="divOrgDif">
-                                    <label for="orgDif" class="lblExBig">Clave del Organo Jurisdiccional que atendio la Causa Penal</label>
+                                    <label for="orgDif" class="lblExBig">Clave del Organo Jurisdiccional que atendió la Causa Penal</label>
                                     <select name="orgDif" id="orgDif">
                                         <option value="">--Seleccione--</option>
                                         <option value="-2">-2</option>

@@ -135,7 +135,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="edadJuez">Edad</label>
+                                <label for="edadJuez">Edad</label>                               
                                 <select class="txtSmall" name="edadJuez" id="edadJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%

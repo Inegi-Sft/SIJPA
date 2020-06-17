@@ -67,6 +67,28 @@ public class showJueces {
         }
         return lista;
     }
+    public ArrayList findJuezJO(String juzClave, String causa){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
+                + "FROM DATOS_JUECES_ADOJC "
+                + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                + "AND NOT JUEZ_CLAVE= (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='"+causa+"') "
+                + "AND ESTATUS = 1 "
+                + "ORDER BY 1";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(new String[]{
+                    rs.getString(1), rs.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJueces.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
     
     public ArrayList findJuezTabla(String juzClave){
         try {

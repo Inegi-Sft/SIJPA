@@ -46,7 +46,12 @@ $(document).ready(function () {
                 if (response === 1) {
                     window.location.href = "bienvenida.jsp";
                 } else {
-                    alert('Usuario no encontrado, favor de revisar usuario o contraseÃƒÂ±a');
+                    alertify.alert('Mensaje Importante', 'Usuario no Encontrado\n Intente de nuevo', function(){
+                        alertify.error('Verifique las credenciales de acceso'); 
+                    });
+                    //alert('Usuario no encontrado, favor de revisar usuario o contraseña');
+                    $('#nomUsu').val('');
+                    $('#passUsu').val('');
                 }
             },
             error: function (response) {
@@ -73,54 +78,10 @@ $(document).ready(function () {
     $('#btnJuez').click(function(){
         window.location.href = "jueces.jsp";
     });
+    $('#btnUsuario').click(function(){
+        window.location.href = "usuario.jsp";
+    });
     /*----------------Fin Sistemas Captura------------------------*/
-
-    /*----------------Registro Usuarios------------------------*/
-    $('#buttonAdmin').click(function () {
-        $('#mensajeAdmin').animate({
-            top: "-600"
-        },
-        1500);
-    });
-
-    $('#pass').focusout(function () {
-        if ($('#pass').val() === "") {
-            $('#confPass').val('');
-        }
-    });
-
-    $('#correo').focusout(function () {
-        var usuario = $('#correo').val();
-        $.ajax({
-            url: 'obtenUsuario',
-            type: 'post',
-            data: {usuario: usuario},
-            succes: function (data) {
-                console.log('Usuario ' + data);
-            }
-        }).done(function (d) {
-            console.log(d);
-            if (d === 1) {
-                alert('Usuario ya registrado, verificar');
-                $('#correo').val('');
-            }
-        });
-    });
-
-    $('#confPass').keyup(function () {
-        if ($('#confPass').val() !== '') {
-            if ($('#confPass').val() === $('#pass').val()) {
-                $('#mesajePass').text('Las contraseÃƒÂ±as son correctas');
-                $('#mesajePass').css({'color': '#66cc00'});
-                $('#guardar').fadeIn('slow');
-            } else {
-                $('#mesajePass').text('Las contraseÃƒÂ±as no coinciden');
-                $('#mesajePass').css({'color': '#ff0000'});
-                $('#guardar').fadeOut('slow');
-            }
-        }
-    });
-    /*----------------Fin Registro Usuarios------------------------*/
 
     /*----------------Cabecera------------------------*/
     $('#usu img').click(function () {
@@ -159,6 +120,15 @@ $(document).ready(function () {
     //para recuperacion de bd
     if($('#numOrgano').val() !== ''){
         $('#numOrgano, #entidadJ, #municipioJ').prop('disabled', true);
+    }
+    
+    //para recuperacion de bd
+    if($('#fDivision').val() === '1'){
+        $('#dRegJudicial').show();
+    }else if($('#fDivision').val() === '2'){
+        $('#dDistJudicial').show();
+    }else if($('#fDivision').val() === '3'){
+        $('#dPartJudicial').show();
     }
     
     //permite solo numeros en los inputs
@@ -222,6 +192,14 @@ $(document).ready(function () {
         }
     });
     /*---------------------------- FIN FUNCIONES JUZGADOS ----------------------------*/
+    
+    /***************************** FUNCIONES JUEZ *******************************/
+    //Se usa para la recuperacion de datos de DB
+    if($('#fGestion').val() === '1899-09-09'){
+        $('#fGestion').prop('readonly', true);
+        $('#chkFechaInicioG').prop('checked', true);
+    }
+    /***************************** FIN FUNCIONES JUEZ *******************************/
     
     /************************* Funcion de borrado general *****************************/
     /***
@@ -421,7 +399,6 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
         $(idChkNi).prop("disabled", false);
     }
 }
-;
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 /*****************************FUNCIONES LLENAR MUNICIPIOS***************************/
@@ -683,7 +660,7 @@ function buscaYremplaza(proceClave, etapaProce){
                 console.log('Usuario ' + data);
             }
         }).done(function (d) {
-            console.log(d);
+            console.log('Con exito: ' + d);
             alert(d);
         });
     }
@@ -865,5 +842,59 @@ function ValFechaNacPRO(FechaNac, Edad) {
                 console.log("Respuesta del servidor", response);
             }
         });
+    }
+}
+
+function validaMascara(e) {
+    var key = e.keyCode || e.which,
+    tecla = String.fromCharCode(key).toLowerCase(),
+    letras = "abcdefghijklmnopqrstuvwxyz1234567890",
+    especiales = [47,95], //   47= / 95= _
+    tecla_especial = false;
+
+    for (var i in especiales) {
+        if (key === especiales[i]) {
+            tecla_especial = true;
+        break;
+        }
+    }
+
+    if (letras.indexOf(tecla) === -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+function ValidaCarpeInvest(InputCarpInves) {
+    // ^ No debe de haber nada antes
+    // \w Coincide con cualquier carácter alfanumérico, incluyendo el guión bajo. Equivalente a [A-Za-z0-9_]. No permite caracteres raros
+    // \/ La diagonal invertida escapa a la diagonal simple indicando que debe de llevar /
+    // [0-9] Solo debe haber numeros enteros. {4} De esos numeros deben de haber exclusivamente 4 
+    var CarpInvestiga = $(InputCarpInves).val();
+    if (CarpInvestiga !== '') {
+        var mascara= /^\w{1,10}\/[0-9]{4}$/;
+        if(mascara.test(CarpInvestiga)){
+            $.ajax({
+                type: 'post',
+                url: 'obtenCarpeInves',
+                data: {
+                    CarpInvestiga: CarpInvestiga
+                },
+                success: function (response) {
+                    console.log("Respuesta del servidor", response);
+                    // alert("respuesta del servidor= "+response);
+                    if (response === '1') {
+                        alert('La Causa Penal Ya Existe');
+                        $(InputCarpInves).val("");
+                        $(InputCarpInves).focus();
+                    }
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor", response);
+                }
+            });
+        }else {
+            alert("El numero de asunto debe contener de 1 a 10 caracteres seguido de una diagonal ( / ) y del a\361o de ingreso \n\nEjemplo:  00001/2020,     REF_001/2020");
+            $(InputCarpInves).val('').focus();
+        } 
     }
 }

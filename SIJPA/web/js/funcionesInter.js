@@ -197,7 +197,7 @@ $(document).ready(function() {
             data: $('#formuMedia').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Intermedia: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 var numProce = parseInt(parent.$('#tablaIntermedia tbody tr').length);//Tomamos el total de la tabla de Intermedia
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i <= 5; i++) {

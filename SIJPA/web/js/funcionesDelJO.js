@@ -124,7 +124,7 @@ $(document).ready(function () {
             data: $('#formDelitosJO').serialize(),
             success: function (response) { 
                 console.log("Respuesta del servidor Delitos JO: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 var numDeli = parseInt(parent.$('#TdelitosJO').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 7; i++) {

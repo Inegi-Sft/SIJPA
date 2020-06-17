@@ -67,10 +67,11 @@ public class insrtJuez extends HttpServlet {
         try {
             conn.Conectar();
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + entidad + "," + mun + "," + num + ",'" + juzgadoClave + "'," + juezID + ",'"
-                        + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "'," + sexoJuez + "," + edadJuez + ","
-                        + estudioJuez + "," + funcionJuez + ",1,(select YEAR(NOW()))"
+                sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES(" + entidad + "," + mun + "," + num + ",'" + juzgadoClave + "',"
+                        + juezID + ",'" + nombre + "','" + apaterno + "','" + amaterno + "','" + fGestion + "',"
+                        + sexoJuez + "," + edadJuez + "," + estudioJuez + "," + funcionJuez + ",1,(select YEAR(NOW()))"
                         + ")";
+                System.out.println(sql);
                 if(conn.escribir(sql)){
                     conn.close();
                     response.sendRedirect("jueces.jsp");
@@ -84,6 +85,7 @@ public class insrtJuez extends HttpServlet {
                         + "EDAD = " + edadJuez + ",GRADO_ESTUDIOS = " + estudioJuez + ",FUNCION_DESEMPENA = " + funcionJuez + " "
                         + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
                         + "AND JUEZ_CLAVE = " + juezID + ";";
+                System.out.println(sql);
                 if(conn.escribir(sql)){
                     conn.close();
                     response.sendRedirect("jueces.jsp");

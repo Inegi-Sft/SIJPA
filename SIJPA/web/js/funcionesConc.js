@@ -166,7 +166,6 @@ $(document).ready(function() {
             $('#flsImpugnacion select').val('').prop("required", true);
             $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
             $('#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
-
             $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();
             $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
             $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);
@@ -294,7 +293,7 @@ $(document).ready(function() {
             data: $('#formConclusiones').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Conclusiones: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 if (response !== null && $.isArray(response)) {
                     if(response[0] === "null"){//No traemos posicion entonces agregamos la fila a la tabla por que se encuentra volando
                         //Si no tare posicion significa que esta volando y se resta de adol por asignar estatus

@@ -45,6 +45,7 @@ public class borraProce extends HttpServlet {
             String proceClave = request.getParameter("proceClave");
             String nomTabla = request.getParameter("nomTabla");
             String juzgadoClave = (String)sesion.getAttribute("juzgadoClave");
+            conn.Conectar();
             switch (nomTabla) {
                 case "inter":
                     sql = "DELETE FROM DATOS_ETAPA_INTERMEDIA_ADOJC "

@@ -378,7 +378,7 @@ $(document).ready(function() {
             data: $('#fromInicial').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Inicial: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 var numProce = parseInt(parent.$('#Tadolescentes').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i <= 6; i++) {//pone filas correspondientes en la tabla de inicial

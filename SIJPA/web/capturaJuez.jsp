@@ -136,7 +136,7 @@
                             </td>
                             <td>
                                 <label for="edadJuez">Edad</label>
-                                <input type="number" class="txtSmall" name="edadJuez" id="edadJuez" value="<%=edadJuez%>" min="18" required/>
+                                <input type="number" class="txtSmall" name="edadJuez" id="edadJuez" value="<%=edadJuez%>" min="18" max="70" required/>
                             </td>
                             <td>
                                 <label for="estudioJuez">Grado de Estudios</label>

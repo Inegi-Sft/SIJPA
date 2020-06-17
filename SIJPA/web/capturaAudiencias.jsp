@@ -113,7 +113,7 @@
 
                         lista = cat.findAudienciasInvestigacion();
                         for (String[] ls : lista) {
-                            audi=sA.recuperaAudiencias(juzgadoClave, causa,"INVESTIGACION",ls[0]);
+                            audi = sA.recuperaAudiencias(juzgadoClave, causa,"INVESTIGACION",ls[0]);
                             if(audi.size() != 0){
                         %>
                             <tr>

@@ -27,11 +27,11 @@ public class Conexion_Mysql {
     public boolean Conectar() { 
         try { 
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://node42241-sjpa2020.in1.cloudjiffy.net:3306/sijpa_db";
-            //String url = "jdbc:mysql://localhost:3306/sijpa_db";
+            //String url = "jdbc:mysql://node42241-sjpa2020.in1.cloudjiffy.net:3306/sijpa_db";
+            String url = "jdbc:mysql://localhost:3306/sijpa_db";
             //String url = "jdbc:mysql://10.15.130.27:3306/sijpa_dbp";
-            //conexion = (Connection) DriverManager.getConnection(url,"root","");
-            conexion = (Connection) DriverManager.getConnection(url,"root","HLAhki79491");
+            conexion = (Connection) DriverManager.getConnection(url,"root","");
+            //conexion = (Connection) DriverManager.getConnection(url,"root","HLAhki79491");
             return conexion != null; //System.out.println("Conexion oracle exitosa!");
             //System.out.println("Conexion oracle fallida!");
         } catch (ClassNotFoundException e) { 
@@ -49,7 +49,7 @@ public class Conexion_Mysql {
             sentencia.executeUpdate(sql);
             sentencia.close();
         } catch (SQLException e) { 
-            System.err.println("ERROR SQL AL ESCRIBIR" + e); 
+            System.err.println("ERROR SQL AL ESCRIBIR: " + e); 
             return false; 
         }         
         return true; 
@@ -62,7 +62,7 @@ public class Conexion_Mysql {
             sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             rst = sentencia.executeQuery(sql);
         } catch (SQLException e) { 
-            System.out.println("ERROR SQL AL CONSULTAR " + e);
+            System.out.println("ERROR SQL AL CONSULTAR: " + e);
             return null; 
         }
         return rst; 

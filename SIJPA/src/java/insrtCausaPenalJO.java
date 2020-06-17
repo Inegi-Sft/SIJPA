@@ -49,7 +49,7 @@ public class insrtCausaPenalJO extends HttpServlet {
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJC = request.getParameter("expClaveJC").toUpperCase();
-        String causaClaveJO = request.getParameter("expClaveJO");
+        String causaClaveJO = request.getParameter("expClaveJO").toUpperCase();
         String fecha_ingreso = request.getParameter("fIngresoJO");
         String totalDeli = request.getParameter("TdelitosJO");
         String totalAdo = request.getParameter("TadolescentesJO");
@@ -62,7 +62,6 @@ public class insrtCausaPenalJO extends HttpServlet {
         String juezJO3 = request.getParameter("juezJO3");
         String comentario = request.getParameter("ComentaExpeJO");
         
-
         try {         
                response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

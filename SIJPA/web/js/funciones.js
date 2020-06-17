@@ -83,57 +83,6 @@ $(document).ready(function () {
     });
     /*----------------Fin Sistemas Captura------------------------*/
 
-    /*----------------Registro Usuarios------------------------*/
-    $('#buttonAdmin').click(function () {
-        $('#mensajeAdmin').animate({
-            top: "-600"
-        },
-        1500);
-    });
-    
-    if($('#usuarioId').val() === '1'){
-        $('input').prop('disabled', true);
-    }
-
-    $('#pass').focusout(function () {
-        if ($('#pass').val() === "") {
-            $('#confPass').val('');
-        }
-    });
-
-    $('#correo').focusout(function () {
-        var usuario = $('#correo').val();
-        $.ajax({
-            url: 'obtenUsuario',
-            type: 'post',
-            data: {usuario: usuario},
-            succes: function (data) {
-                console.log('Usuario ' + data);
-            }
-        }).done(function (d) {
-            console.log(d);
-            if (d === 1) {
-                alert('Usuario ya registrado, verificar');
-                $('#correo').val('');
-            }
-        });
-    });
-
-    $('#confPass').keyup(function () {
-        if ($('#confPass').val() !== '') {
-            if ($('#confPass').val() === $('#pass').val()) {
-                $('#mesajePass').text('Los passwords coinciden');
-                $('#mesajePass').css({'color': '#66cc00'});
-                $('#guardar').fadeIn('slow');
-            } else {
-                $('#mesajePass').text('Los passwords no coinciden');
-                $('#mesajePass').css({'color': '#ff0000'});
-                $('#guardar').fadeOut('slow');
-            }
-        }
-    });
-    /*----------------Fin Registro Usuarios------------------------*/
-
     /*----------------Cabecera------------------------*/
     $('#usu img').click(function () {
         $('#usu #enlace').animate({
@@ -450,7 +399,6 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
         $(idChkNi).prop("disabled", false);
     }
 }
-;
 /*****************************FIN DE FUNCIONES ETAPA INICIAL***************************/
 
 /*****************************FUNCIONES LLENAR MUNICIPIOS***************************/

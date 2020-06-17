@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Registro Usuarios</title>
         <%@include file="librerias.jsp"%>
+        <script type="text/javascript" src="js/fnUsuarios.js"></script>
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> lista, sUsuario;
@@ -42,10 +43,10 @@
                     entidad = sUsuario.get(0)[5];
                 }else{
                     out.println("<script>alert('El usuario_id " + usuarioClave + " no se encontro dentro de los Usuarios'); "
-                        + "window.location.href = 'usuario.jsp'</script>");
+                            + "window.location.href = 'usuario.jsp'</script>");
                 }
             }else{
-                usuarioClave = usuario.findMaxUsu();
+                usuarioClave = usuario.findMaxUsu() + 1;
             }
         %>
     </head>
@@ -67,46 +68,47 @@
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1">Usuario</button>
             </div>
-            <form action="insrtUsuario" method="post" name="formUsuario" id="formAdmin">
+            <form action="insrtUsuario" method="post" name="formUsuario" id="formUsuario">
                 <!--Contenido pestañas--> 
                 <div id="p1" class="pestanaContent" style="display: block">
                     <!--<h2>Datos Generales</h2>-->
                     <table class="tablaFormu">
                         <tr>
-                            <td>
+                            <td colspan="3">
                                 <label for="usuarioId">Usuario ID</label>
                                 <input type="text" name="usuarioId" id="usuarioId" value="<%=usuarioClave%>" readonly/>
+                                <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <% 
-                                    if(tot == 0){ 
+                                <label for="nom">Nombre(s)</label>
+                                <input type="text" name="nom" id="nom" value="<%=nombreUsu%>" required>
+                                <% //Si no tenemos usuarios insertados en BD entonces el primero es el admin, posterior seran captura
+                                    if(tot == 0){
                                         out.println("<input type='hidden' name='tipoUsuario' id='tipoUsuario' value='1'/>");
                                     }else{
                                         out.println("<input type='hidden' name='tipoUsuario' id='tipoUsuario' value='2'/>");
                                     }
                                 %>
-                                <label for="nom">Nombre(s)</label>
-                                <input type="text" name="nom" id="nom" required>
                             </td>
                             <td>
                                 <label for="paterno">Apellido Paterno</label>
-                                <input type="text" name="paterno" id="paterno" required>
+                                <input type="text" name="paterno" id="paterno" value="<%=aPaterno%>" required>
                             </td>
                             <td>
                                 <label for="materno">Apellido Materno</label>
-                                <input type="text" name="materno" id="materno" required>
+                                <input type="text" name="materno" id="materno" value="<%=aMaterno%>" required>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="edad">Edad</label>
-                                <input type="number" class="txtSmall" min="18" name="edad" id="edad" required>
+                                <input type="number" class="txtSmall" min="17" name="edad" id="edad" value="<%=edad%>" required>
                             </td>
                             <td>
-                                <label for="correo">E-Mail</label><div class="ayuda"></div>
-                                <input type="text" name="correo" id="correo" placeholder="usuario@correo.com" required>
+                                <label for="correo">E-Mail</label>
+                                <input type="text" name="correo" id="correo" placeholder="usuario@correo.com" value="<%=correo%>" required>
                             </td>
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
@@ -123,7 +125,11 @@
                                         out.println("<select name='entidad' id='entidad' required>");
                                         lista = usuario.findEntidad();
                                         for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(entidad)){
+                                                out.println(" select ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                         out.println("</select>");
                                     }

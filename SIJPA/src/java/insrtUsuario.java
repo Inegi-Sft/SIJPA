@@ -8,6 +8,9 @@ import ConexionDB.Conexion_Mysql;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,10 +41,12 @@ public class insrtUsuario extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        if(request.getParameter("tipoUsuario") != null){
+        if(request.getParameter("tipoUsuario") != null){//validamos que traiga datos validos
+            String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
+            int usuarioId = Integer.parseInt(request.getParameter("usuarioId"));
             int tipoUsuario = Integer.parseInt(request.getParameter("tipoUsuario"));
             String nom = request.getParameter("nom").toUpperCase();
             String paterno = request.getParameter("paterno").toUpperCase();
@@ -51,20 +56,54 @@ public class insrtUsuario extends HttpServlet {
             String entidad = request.getParameter("entidad");
             String pass = request.getParameter("pass");
             
-            //Validacion para que se inserte el Administrador por primera vez
-            conn.Conectar();
-            sql = "INSERT INTO USUARIOS VALUES(null,'" + nom + "','" + paterno + "','" + materno + "'," + edad + ",'"
-                    + correo + "'," + entidad + ",SHA1('" + pass + "')," + tipoUsuario + ",0,1"
-                    + ")";
-            System.out.println(sql);
-            if(conn.escribir(sql)){
-                if(tipoUsuario == 1){
-                    response.sendRedirect("index.jsp");
-                }else{
-                    response.sendRedirect("usuario.jsp");
+            try {
+                //Validacion para que se inserte el Administrador por primera vez
+                conn.Conectar();
+                if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+                    sql = "INSERT INTO USUARIOS VALUES(" + usuarioId + ",'" + nom + "','" + paterno + "','" + materno + "',"
+                            + edad + ",'" + correo + "'," + entidad + ",SHA1('" + pass + "')," + tipoUsuario + ",0,1"
+                            + ")";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        if(tipoUsuario == 1){
+                            request.setAttribute("insert", 100);
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            conn.close();
+                        }else{
+                            request.setAttribute("insert", 100);
+                            request.getRequestDispatcher("usuario.jsp").forward(request, response);
+                            conn.close();
+                        }
+                    }else{//Errores en la conexion de BD o en las consultas
+                        if(tipoUsuario == 1){
+                            request.setAttribute("insert", 200);
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            conn.close();
+                        }else{
+                            request.setAttribute("insert", 200);
+                            request.getRequestDispatcher("usuario.jsp").forward(request, response);
+                            conn.close();
+                        }
+                        conn.close();
+                    }
+                }else{//Se actualiza el dato que viene de recuperacion
+                    sql = "UPDATE USUARIOS SET NOMBRE = '" + nom + "',APATERNO = '" + paterno + "',AMATERNO = '" + materno + "',"
+                            + "EDAD = " + edad + ",CORREO = '" + correo + "',ENTIDAD = " + entidad + ","
+                            + "CONTRASENIA = SHA1('" + pass + "') "
+                            + "WHERE USUARIO_ID = " + usuarioId + ";";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        request.setAttribute("insert", 101);
+                        request.getRequestDispatcher("usuario.jsp").forward(request, response);
+                        conn.close();
+                    }else{
+                        request.setAttribute("insert", 201);
+                        request.getRequestDispatcher("usuario.jsp").forward(request, response);
+                        conn.close();
+                    }
                 }
-            }else{
-                response.sendRedirect("index.jsp?errorbd=si");
+            } catch (SQLException ex) {
+                Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
@@ -72,16 +111,23 @@ public class insrtUsuario extends HttpServlet {
         if(request.getParameter("aceptarAcuerdo") != null){
             HttpSession sesion = request.getSession();
             String usuario = (String) sesion.getAttribute("usuActivo");
-            conn.Conectar();
-            sql = "UPDATE USUARIOS SET VISITA = 1 WHERE CORREO = '" + usuario + "';";
-            System.out.println(sql);
-            if(conn.escribir(sql)){
-                int visita = 1;
-                sesion.setAttribute("visitaUsuario", visita);
-                sesion.setMaxInactiveInterval(-1);
-                response.sendRedirect("causasPenales.jsp");
-            }else{
-                response.sendRedirect("index.jsp?errorbd=si");
+            
+            try {
+                conn.Conectar();
+                sql = "UPDATE USUARIOS SET VISITA = 1 WHERE CORREO = '" + usuario + "';";
+                System.out.println(sql);
+                if(conn.escribir(sql)){
+                    int visita = 1;
+                    sesion.setAttribute("visitaUsuario", visita);
+                    sesion.setMaxInactiveInterval(-1);
+                    response.sendRedirect("causasPenales.jsp");
+                    conn.close();
+                }else{
+                    response.sendRedirect("index.jsp?errorbd=si");
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(insrtJuzgados.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

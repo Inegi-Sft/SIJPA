@@ -98,6 +98,31 @@ nav ul li a.active{
     color: #000;
 }
 
+nav ul li ul{
+    display: none;
+    position: absolute;
+    width: 0;
+    margin-left: 280px;
+    margin-top: -60px;
+    -webkit-transition: width 0.3s ease;
+    -moz-transition: width 0.3s ease;
+    -o-transition: width 0.3s ease;
+    -ms-transition: width 0.3s ease;
+    transition: width 0.3s ease;
+}
+
+nav ul li:hover > ul{
+    width: 200px;
+    display:block;
+    background-color: #666666;
+    border-bottom: 1px solid #27251F;
+}
+
+nav ul li ul li{
+    background-color: #666666;
+    border-bottom: 1px solid #27251F;
+}
+
 .toggle-nav {
     height: 40px;
     width: 40px;

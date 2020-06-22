@@ -219,7 +219,7 @@ public class usuario {
             for(x = 1; x <= totDel; x++){
                 sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-D" + x + jConcatenado + "'," 
-                        + "-2,-2,-2,-2,-2,'1899-09-09','1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,0,0,'',(select YEAR(NOW())) )";
+                        + "-2,-2,-2,-2,-2,'1899-09-09','1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,0,0,'REGNUEVO',(select YEAR(NOW())) )";
                 System.out.println(sql);
                 conn.escribir(sql);
             }
@@ -227,13 +227,13 @@ public class usuario {
                 sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-P" + x + jConcatenado + "'," 
                         + "-2,-2,-2,-2,-2,'1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,"
-                        + "-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,'',(select YEAR(NOW())) )";
+                        + "-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,'REGNUEVO',(select YEAR(NOW())) )";
                 System.out.println(sql);
                 conn.escribir(sql);
                 sql = "INSERT INTO DATOS_ETAPA_INICIAL_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-P" + x + jConcatenado + "'," 
                         + "-2,-2,-2,'1899-09-09',-2,'1899-09-09',-2,'1899-09-09',-2,-2,-2,'1899-09-09',-2,-2,"
-                        + "'1899-09-09',-2,-2,'1899-09-09',-2,-2,-2,-2,'1899-09-09',-2,-2,'',(select YEAR(NOW())),0)";
+                        + "'1899-09-09',-2,-2,'1899-09-09',-2,-2,-2,-2,'1899-09-09',-2,-2,'REGNUEVO',(select YEAR(NOW())),0)";
                 System.out.println(sql);
                 conn.escribir(sql);
             }
@@ -241,7 +241,7 @@ public class usuario {
                 sql = "INSERT INTO DATOS_VICTIMAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-V" + x + jConcatenado + "'," 
                         + "-2,-2,-2,-2,-2,'1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,"
-                        + "-2,-2,-2,-2,-2,'',(select YEAR(NOW())) )";
+                        + "-2,-2,-2,-2,-2,'REGNUEVO',(select YEAR(NOW())) )";
                 System.out.println(sql);
                 conn.escribir(sql);
             }

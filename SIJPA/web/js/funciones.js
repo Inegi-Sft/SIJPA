@@ -555,7 +555,7 @@ function validaAddCausa() {
         $(".msjAviso").fadeIn("slow");
     }
 }
-
+       
 //Funcion para Jueces: comprueba que primero se haya seleccionado un juzgado clave antes de agregar una un juez
 function validaAddJuez() {
     if ($("#juzgado").val() !== "") {

@@ -4,6 +4,11 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="com.sun.xml.internal.ws.api.message.saaj.SAAJFactory"%>
+<%@page import="clasesAuxiliar.estatusEtapaJO"%>
+<%@page import="clasesAuxiliar.showJuicio"%>
+<%@page import="clasesAuxiliar.usuario"%>
+<%@page import="clasesAuxiliar.estatusJO"%>
 <%@page import="clasesAuxiliar.showCausasPenalesJO"%>
 <%@page import="clasesAuxiliar.showJueces"%>
 <%@page import="clasesAuxiliar.showJuzgados"%>
@@ -19,9 +24,14 @@
             showJuzgados juz = new showJuzgados();
             showJueces juez = new showJueces();
             showCausasPenalesJO cp = new showCausasPenalesJO();
+            estatusJO esJO= new estatusJO();
+            usuario us=new usuario();
+            showJuicio Juicio=new showJuicio();
+            estatusEtapaJO EtapaJO=new estatusEtapaJO();
+            int ExisEJO=0;
             ArrayList<String[]> lsCausasJC, lisCausaJO;
             ArrayList<String> lista;
-            
+            int Estatus=0,cInicial=0;
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
                 if(request.getParameter("juzgado") != ""){
@@ -99,6 +109,7 @@
                     <%
                         lsCausasJC = cp.findCausasJOenJC(juzgado);
                         String juzLimpio = "";
+                        String Est1="",Est2="",Est3="",EI,Com="";
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");
                         }
@@ -110,6 +121,26 @@
                             //Validamos si ya esiste en JO o aun sigue en JC
                             lisCausaJO = cp.findCausasPenalesJO(juzgado, lsJC[0]);
                             if(lisCausaJO.size() > 0){//Si se encuentra en JO recuperamos los datos
+                                cInicial = Juicio.findEtapaCausaClaveJO(lisCausaJO.get(0)[1]);
+                                Estatus = us.findAvanceUsuarioJO(lisCausaJO.get(0)[1]);
+                                Est1 = "";
+                                Est2 = "";
+                                Est3 = "";
+                                System.out.println("El Estatus essss "+Estatus+" cinicial "+cInicial);
+                                if ((Estatus != 5 || cInicial > 0)) {
+                                    Est1 = esJO.findEstatus(Estatus, lisCausaJO.get(0)[1]);
+                                }
+                                if (Estatus == 5) {
+                                    Est2 = EtapaJO.findEstatusOral(lisCausaJO.get(0)[1], juzgado);
+                                }
+                                Est3 = Est1 + "---" + Est2;
+                                if (Est3.equals("---")) {
+                                    Com = "Completo";
+                                } else {
+                                    Com = "Incompleto";
+                                }
+                                System.out.println(Est1+Com+"fin validacion");
+                                
                                 out.println("<tr>");
                                 out.println("<td>" + pos + "</td>");
                                 out.println("<td>" + ccJCSimple + "</td>");
@@ -120,7 +151,7 @@
                                 out.println("<td>" + lisCausaJO.get(0)[4] + "</td>");
                                 out.println("<td>" + lisCausaJO.get(0)[5] + "</td>");
                                 out.println("<td>" + lisCausaJO.get(0)[6] + "</td>");
-                                out.println("<td>--</td>");
+                                out.println("<td><a data-title='"+ Est3 +"'> "+ Com +"</a></td>");
                                 out.println("<td><a href='elementosPrincipalesJO.jsp?causaClaveJC=" + ccJCSimple + "&causaClaveJO=" + ccJOSimple + "'><img src='img/editar.png' title='Editar'/></a></td>");
                                 //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' onclick=\"borraRegistro(" + ls[0] + "," + pos + ",'causasJO')\"/></a></td>");
                                 out.println("</tr>");

@@ -271,4 +271,72 @@ public class showCausasPenalesJO {
         }
         return FechaIngreso;
     }
+   
+   public int total_reg_DelitosJO(String causaClaveJO) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_delitos_adojo WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
+    public int total_reg_ProcesadosJO(String causaClaveJO) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_procesados_adojo WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
+    public int total_reg_VictimasJO(String causaClaveJO) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_victimas_adojO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public int total_reg_etaInicialJO(String causaClaveJO) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_etapa_oral_adojo WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
 }

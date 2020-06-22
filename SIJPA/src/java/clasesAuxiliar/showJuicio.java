@@ -236,4 +236,43 @@ public class showJuicio {
         }
         return list;
     }
+ public ArrayList findEtapaCausaProClaveJO(String causaClave){
+        proceEtapa = new ArrayList();
+        try {
+            conn.Conectar();
+            sql = "SELECT PROCESADO_CLAVE,ETAPA FROM datos_etapa_oral_adojo "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClave + "'"
+                    + "ORDER BY 1";
+            System.out.println(sql);
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                 proceEtapa.add(new String[]{
+                    resul.getString("PROCESADO_CLAVE"), resul.getString("ETAPA")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proceEtapa;
+    }
+   
+    public int findEtapaCausaClaveJO(String causaClave){
+       int CEcausa=0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_etapa_oral_adojo "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClave + "'"
+                    + "ORDER BY 1";
+            System.out.println(sql);
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                CEcausa = resul.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return CEcausa;
+    }
 }

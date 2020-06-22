@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 public class showConclusionesJO {
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> conc, concPA;
+    int conteoConclu;
     String sql;
     ResultSet resul;
     
@@ -160,4 +161,21 @@ public class showConclusionesJO {
         }
         return conteoConclu;
     }
+    public int countConclusionesProcJO(String causaClaveJO,String procesadoClaveJO) {
+        try{
+            conn.Conectar();
+            conteoConclu = 0;
+            sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'"
+                    + "AND PROCESADO_CLAVE='"+ procesadoClaveJO +"'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoConclu = resul.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoConclu;
+    }
+    
 }

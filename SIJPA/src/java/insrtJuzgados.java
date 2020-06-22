@@ -94,8 +94,8 @@ public class insrtJuzgados extends HttpServlet {
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_JUZGADOS_ADOJC VALUES('" + juzgadoClave + "','" + nomOrgano + "'," + numOrgano + "," + jurisdiccion + ","
                         + funcionJuz + "," + ladaTel + ",'" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
-                        + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "',"
-                        + noExterior + "," + noInterior + "," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
+                        + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "','"
+                        + noExterior + "','" + noInterior + "'," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
                         + "1," + ejercicio + ")";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
@@ -131,8 +131,8 @@ public class insrtJuzgados extends HttpServlet {
                         + "JUZGADO_FUNCION = " + funcionJuz + ",LADATEL = '" + ladaTel + "',CORREO = '" + correo + "',FORMA_DIVISION = " + fDivision + ","
                         + "REGION_JUDICIAL = '" + regJudicial + "',DISTRITO_JUDICIAL = '" + distJudicial + "',"
                         + "PARTIDO_JUDICIAL = '" + partJudicial + "',TIPO_VIALIDAD = " + vialidad + ",NOMBRE_VIALIDAD = '" + nomVialidad + "',"
-                        + "ASENTAMIENTO_HUMANO = " + asentamiento + ",NOMBRE_ASENTAMIENTO = '" + nomAsentamiento + "',NUMERO_EXT = " + noExterior + ","
-                        + "NUMERO_INT = " + noInterior + ",CODIGO_POSTAL = " + cp + ",NOMBRE_CAP = '" + nombreCap + "',"
+                        + "ASENTAMIENTO_HUMANO = " + asentamiento + ",NOMBRE_ASENTAMIENTO = '" + nomAsentamiento + "',NUMERO_EXT = '" + noExterior + "',"
+                        + "NUMERO_INT = '" + noInterior + "',CODIGO_POSTAL = " + cp + ",NOMBRE_CAP = '" + nombreCap + "',"
                         + "APELLIDOP_CAP = '" + apaternoCap + "',APELLIDOM_CAP = '" + amaternoCap + "',CARGO_CAP = '" + cargo + "' "
                         + "WHERE JUZGADO_CLAVE = '" + jClaveR + "'; ";
                 System.out.println(sql);

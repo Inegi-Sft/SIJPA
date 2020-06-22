@@ -54,6 +54,25 @@ public class showJuzgados {
         return lista;
     }
     
+    public ArrayList findJuzgadosJO(String juzgadoOld){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                + "WHERE ESTATUS = 1 "
+                + "AND NOT JUZGADO_CLAVE='"+juzgadoOld+"' "
+                + "ORDER BY 1;";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
     public boolean findJuzgadoExist(String juzgadoClave){
         try{
             conn.Conectar();

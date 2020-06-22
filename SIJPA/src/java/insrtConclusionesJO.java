@@ -38,7 +38,7 @@ public class insrtConclusionesJO extends HttpServlet {
      */
     Conexion_Mysql conn = new Conexion_Mysql();
     String sql;
-    boolean insrtDConclu = false;
+    boolean insrtDConclu = true;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -94,6 +94,7 @@ public class insrtConclusionesJO extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     if(resolucion.equals("2")){
+                        insrtDConclu=false;
                         for (int i = 0; i < delitoClave.length; i++){
                             String resolDelito = request.getParameter("resolDelito" + i);
                             sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClaveJO + "','"
@@ -116,10 +117,10 @@ public class insrtConclusionesJO extends HttpServlet {
                         //resp.add(tipoResolu);//Tipo de resolucion
                         resp.add(totConcluInsrt);
                         out.write(resp.toJSONString());
-                        conn.close();
+                        conn.close();        
                     } else {
-                        //conn.close();
-                    }
+                        conn.close();
+                    } 
                 }else {
                     conn.close();
                 }
@@ -135,12 +136,13 @@ public class insrtConclusionesJO extends HttpServlet {
                         + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
-                    //Borramos medios prueba por si se actualizan o bien se modifica el disparador
+                    //Borramos deconclusiones por si se actualizan o bien se modifica el disparador
                     sql = "DELETE FROM DATOS_DCONCLUSIONES_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                     System.out.println(sql);
                     conn.escribir(sql);
                     if(resolucion.equals("2")){
+                        insrtDConclu=false;
                         for (int i = 0; i < delitoClave.length; i++){
                             String resolDelito = request.getParameter("resolDelito" + i);
                             sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClaveJO + "','"
@@ -149,19 +151,23 @@ public class insrtConclusionesJO extends HttpServlet {
                             insrtDConclu=conn.escribir(sql);
                         }
                     }
-                    showConclusionesJO con = new showConclusionesJO();
-                    ArrayList<String[]> lis = new ArrayList<>();
-                    int totConcluInsrt = con.countConclusionesExpJO(causaClaveJO);
-                    lis = con.findConcluTablaJO(proceClave + jConcatenado);
-                    JSONArray resp = new JSONArray();
-                    resp.add(posicion);
-                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
-                    resp.add(lis.get(0)[1]);
-                    resp.add(lis.get(0)[2]);
-                    resp.add(lis.get(0)[3]);
-                    resp.add(totConcluInsrt);
-                    out.write(resp.toJSONString());
-                    conn.close();
+                    if(insrtDConclu){
+                        showConclusionesJO con = new showConclusionesJO();
+                        ArrayList<String[]> lis = new ArrayList<>();
+                        int totConcluInsrt = con.countConclusionesExpJO(causaClaveJO);
+                        lis = con.findConcluTablaJO(proceClave + jConcatenado);
+                        JSONArray resp = new JSONArray();
+                        resp.add(posicion);
+                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                        resp.add(lis.get(0)[1]);
+                        resp.add(lis.get(0)[2]);
+                        resp.add(lis.get(0)[3]);
+                        resp.add(totConcluInsrt);
+                        out.write(resp.toJSONString());
+                        conn.close();
+                    }else{
+                       conn.close(); 
+                    }
                 }else {
                     conn.close();
                 }

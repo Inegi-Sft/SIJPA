@@ -14,22 +14,27 @@ $(document).ready(function() {
     //Se usa para la recuperacion de BD
     switch ($('#resolucion').val()){
         case '1':
-            $('#flsSobreseimto,#flsImpugnacion,#flsReparaDanio').fadeIn("slow");
+            $('#flsSobreseimto,#flsImpugnacion,#flsReparaDanio').show();
             $('#fechaExtinAR').val('1799-09-09');
             break;
         case '2':
-            $('#flsSentencia,#flsImpugnacion,#flsReparaDanio').fadeIn("slow");
+            $('#flsSentencia,#flsImpugnacion,#flsReparaDanio').show();
             $('#flsSobreseimto select').val('-2');
             $('#fechaExtinAR').val('1799-09-09');
             break;
         case '3':
-            $('#flsImpugnacion').fadeIn("slow");
+            $('#flsImpugnacion').show();
+            $('#flsReparaDanio').hide();
             $('#flsSobreseimto select, #flsSentencia select, #flsReparaDanio select').val('-2');
             $('#fechaExtinAR').val('1799-09-09');
             break;
+        default:
+            $('#flsReparaDanio,#flsImpugnacion').hide();
+            break;
+            
     }
     
-       //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#fechaSenten').val() === '1899-09-09'){
         $('#fechaSenten').prop("readonly", true);
         $('#chkFechaSenten').prop("checked", true);
@@ -46,22 +51,18 @@ $(document).ready(function() {
             $('#dTipoMedidaPL').fadeIn("slow");
             $('#tblDConclusiones tr > *:nth-child(2)').fadeIn('slow');
             $('#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
-            $('#tblDConclusiones tr > *:nth-child(2) input').prop("checked", true);
             break;
         case '2':
             $('#dTipoMedidaNPL').fadeIn("slow");
             $('#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(4)').hide();
-            $('#tblDConclusiones tr > *:nth-child(3) input').prop("checked", true);
             break;
         case '3':
-            $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');
+            $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').show();
             $('#tblDConclusiones tr > *:nth-child(4)').hide();
-            $('#tblDConclusiones input').prop({"checked": false, "required": true});
             break;
         case '9':
-            $('#tblDConclusiones tr > *:nth-child(4)').hide();
-            $('#tblDConclusiones tr > *:nth-child(4) input').prop("checked", true);
+            $('#tblDConclusiones tr > *:nth-child(4)').show();
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').hide();
             break;
         default:
@@ -72,7 +73,7 @@ $(document).ready(function() {
     
     //Se usa para la recuperacion de BD
     if (($('#tipoMedidaPL').val() === '2') || ($('#tipoMedidaPL').val() === '3')) {
-        $('#Dinternamiento').show();
+        $('#dInternamiento').show();
     }
     
     //Se usa para la recuperacion de BD

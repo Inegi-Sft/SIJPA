@@ -106,7 +106,7 @@ public class showConclusionesJO {
         conn.Conectar();
         conc = new ArrayList();
         sql = "SELECT C.PROCESADO_CLAVE, CONCAT(P.NOMBRE, ' ', P.A_PATERNO, ' ', P.A_MATERNO), C.FECHA_CONCLUSION, TR.DESCRIPCION "
-                + "FROM DATOS_CONCLUSIONES_ADOJO C, DATOS_PROCESADOS_ADOJO P, CATALOGOS_TIPO_RESOLUCION TR "
+                + "FROM DATOS_CONCLUSIONES_ADOJO C, DATOS_PROCESADOS_ADOJO P, CATALOGOS_TIPO_RESOLUCIONJO TR "
                 + "WHERE C.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                 + "AND C.TIPO_RESOLUCION = TR.RESOLUCION_ID "
                 + "AND C.PROCESADO_CLAVE = '" + proceClave + "';";

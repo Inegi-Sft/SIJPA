@@ -175,6 +175,7 @@ public class showInicial {
             if(sobre.equals("1")){//condicion para saber si en datos_etapa_inicial seleccionaron sobreseimiento
                 valor = "1";//valor del sobreseimiento en el catalogo tipo_resolucion
             }else{
+                //Si no esta en inicial comprobamos si esta en intermedia
                 sql = "SELECT APERTURA_JUICIO_ORAL FROM DATOS_ETAPA_INTERMEDIA_ADOJC "
                         + "WHERE CAUSA_CLAVE = '" + causaClave + "' AND PROCESADO_CLAVE = '" + proceClave + "';";
                 resul = conn.consultar(sql);

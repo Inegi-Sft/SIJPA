@@ -202,13 +202,14 @@ public class showJuicio {
             conn.Conectar();
             sql = "SELECT SENTIDO_FALLO FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClave + "' AND PROCESADO_CLAVE = '" + proceClave + "';";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 if(resul.getString("SENTIDO_FALLO").equals("1")){
                     fallo = "3";//Si el fallo es 1.-Absolucion entonces se pone 3 Absolutoria
                 }else if(resul.getString("SENTIDO_FALLO").equals("2")){
                     fallo = "2";//Si el fallo es 2.-Condena entonces se pone 2 Condenatoria
+                }else if(resul.getString("SENTIDO_FALLO").equals("9")){
+                    fallo = "9";//Si el fallo es 9.-No identificado
                 }
             }
             conn.close();
@@ -225,7 +226,6 @@ public class showJuicio {
             sql = "SELECT ETAPA FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "ORDER BY 1";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 list.add(resul.getString("ETAPA"));

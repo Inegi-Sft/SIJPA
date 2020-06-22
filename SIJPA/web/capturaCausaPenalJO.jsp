@@ -100,7 +100,7 @@
                             </td>
                             <td>
                                 <label for="expClaveJO">No. Asunto Asignado JO</label>
-                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" <%if(causaClaveJO!=""){%>readonly<%}%> onblur="ValidaCarpeInvest('#expClaveJO')">
+                                <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" maxlength="15" onkeypress="return validaMascara(event)" onblur="ValidaCarpeInvest('#expClaveJO')" placeholder="Ej: 00001/2020" required/>
                             </td>
                         </tr>
                         <tr>
@@ -157,10 +157,10 @@
                                 <label for="cantJuez" class="lblExBig">Cantidad de jueces a quien corresponde conocer de la Causa Penal</label>
                                 <select name="cantJuez" id="cantJuez">
                                         <option value="">--Seleccione--</option>
-                                        <option <%if(cantJueces.equals("-2")){%>selected <%}%>value="-2">-2</option>
-                                        <option <%if(cantJueces.equals("1")){%>selected <%}%>value="1">1</option>
-                                        <option <%if(cantJueces.equals("2")){%>selected <%}%>value="2">2</option>
-                                        <option <%if(cantJueces.equals("3")){%>selected <%}%>value="3">3</option>
+                                        <option value="-2">-2</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
                                 </select>
                             </td>
                         </tr>
@@ -171,7 +171,7 @@
                                     <select name="juezJO1" id="juezJO1">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuez(juzgadoClave);
+                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez1)){
@@ -188,7 +188,7 @@
                                     <select name="juezJO2" id="juezJO2">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuez(juzgadoClave);
+                                            lista = juez.findJuezJO(juzgadoClave,causaClaveJC + juzgadoClave.replace("-", ""));
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez2)){
@@ -205,7 +205,7 @@
                                     <select name="juezJO3" id="juezJO3">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuez(juzgadoClave);
+                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez3)){
@@ -218,12 +218,12 @@
                                     </select>
                                 </div>
                                 <div class="colsA oculto" id="divOrgDif">
-                                    <label for="orgDif" class="lblExBig">Clave del Organo Jurisdiccional que atendio la Causa Penal</label>
+                                    <label for="orgDif" class="lblExBig">Clave del Organo Jurisdiccional que atendió la Causa Penal</label>
                                     <select name="orgDif" id="orgDif">
                                         <option value="">--Seleccione--</option>
                                         <option value="-2">-2</option>
                                         <%
-                                            lis = juzgados.findJuzgados();
+                                            lis = juzgados.findJuzgadosJO(juzgadoClave);
                                             for (String ls : lis) {
                                                 out.println("<option value='" + ls + "'");
                                                 if(ls.equals(juzgaDif)){

@@ -94,8 +94,8 @@ public class insrtJuzgados extends HttpServlet {
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_JUZGADOS_ADOJC VALUES('" + juzgadoClave + "','" + nomOrgano + "'," + numOrgano + "," + jurisdiccion + ","
                         + funcionJuz + "," + ladaTel + ",'" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
-                        + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "',"
-                        + noExterior + "," + noInterior + "," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
+                        + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "','"
+                        + noExterior + "','" + noInterior + "'," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
                         + "1," + ejercicio + ")";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
@@ -108,7 +108,7 @@ public class insrtJuzgados extends HttpServlet {
                     if(conn.escribir(sql)){
                         //inserta un juez no aplica de acuerdo a el juzgado 
                         sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES (" + entidadJ + "," + municipioJ + ","
-                                + numOrgano + ",'" + juzgadoClave + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
+                                + numOrgano + ",'" + juzgadoClave + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, 1, (select YEAR(NOW())))";
                         System.out.println(sql);
                         if(conn.escribir(sql)){
                             System.out.println("Juez No aplica insertado!");
@@ -117,10 +117,10 @@ public class insrtJuzgados extends HttpServlet {
                         conn.close();
                         sesion.setAttribute("juzgadoClave", juzgadoClave);
                         sesion.setMaxInactiveInterval(-1);
-                        response.sendRedirect("causasPenales.jsp?insrtJuz=Si");
+                        response.sendRedirect("causasPenales.jsp?insrtJuz=100");
                     }else{
                         conn.close();
-                        response.sendRedirect("capturaJuzgado.jsp?error=100");
+                        response.sendRedirect("capturaJuzgado.jsp?insrtJuz=200");
                     }
                 }else{
                     conn.close();
@@ -131,8 +131,8 @@ public class insrtJuzgados extends HttpServlet {
                         + "JUZGADO_FUNCION = " + funcionJuz + ",LADATEL = '" + ladaTel + "',CORREO = '" + correo + "',FORMA_DIVISION = " + fDivision + ","
                         + "REGION_JUDICIAL = '" + regJudicial + "',DISTRITO_JUDICIAL = '" + distJudicial + "',"
                         + "PARTIDO_JUDICIAL = '" + partJudicial + "',TIPO_VIALIDAD = " + vialidad + ",NOMBRE_VIALIDAD = '" + nomVialidad + "',"
-                        + "ASENTAMIENTO_HUMANO = " + asentamiento + ",NOMBRE_ASENTAMIENTO = '" + nomAsentamiento + "',NUMERO_EXT = " + noExterior + ","
-                        + "NUMERO_INT = " + noInterior + ",CODIGO_POSTAL = " + cp + ",NOMBRE_CAP = '" + nombreCap + "',"
+                        + "ASENTAMIENTO_HUMANO = " + asentamiento + ",NOMBRE_ASENTAMIENTO = '" + nomAsentamiento + "',NUMERO_EXT = '" + noExterior + "',"
+                        + "NUMERO_INT = '" + noInterior + "',CODIGO_POSTAL = " + cp + ",NOMBRE_CAP = '" + nombreCap + "',"
                         + "APELLIDOP_CAP = '" + apaternoCap + "',APELLIDOM_CAP = '" + amaternoCap + "',CARGO_CAP = '" + cargo + "' "
                         + "WHERE JUZGADO_CLAVE = '" + jClaveR + "'; ";
                 System.out.println(sql);
@@ -165,9 +165,9 @@ public class insrtJuzgados extends HttpServlet {
     public String verificaVariable(String variable){
         String verificada = "";
         if(variable == null){
-            verificada = "-9";
+            verificada = "0";
         }else if(variable.equals("")){
-            verificada = "-9";
+            verificada = "0";
         }else{
             verificada = variable;
         }

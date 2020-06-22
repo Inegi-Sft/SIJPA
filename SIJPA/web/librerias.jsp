@@ -10,6 +10,8 @@
 <link type="text/css" href="css/datatables.min.css" rel="stylesheet"/>
 <link type="text/css" href="css/jquery.fancybox.min.css" rel="stylesheet"/>
 <link type="text/css" href="css/selectize.bootstrap2.css" rel="stylesheet"/>
+<link type="text/css" href="css/alertify.css" rel="stylesheet"/>
+<link type="text/css" href="css/default.css" rel="stylesheet"/>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/selectize.js"></script>
 <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
@@ -18,3 +20,4 @@
 <script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript" src="js/pestanas.js"></script>
 <script type="text/javascript" src="js/funciones.js"></script>
+<script type="text/javascript" src="js/alertify.js"></script>

@@ -115,9 +115,7 @@
                         }
                         int pos = 0;
                         for (String[] lsJC : lsCausasJC) {
-                            System.out.println(lsJC[0]);
                             String ccJCSimple = lsJC[0].replace(juzLimpio, "");
-                            System.out.println(ccJCSimple);
                             //Validamos si ya esiste en JO o aun sigue en JC
                             lisCausaJO = cp.findCausasPenalesJO(juzgado, lsJC[0]);
                             if(lisCausaJO.size() > 0){//Si se encuentra en JO recuperamos los datos

@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    //Establece am pata input time y no marque error en el submit
+    $('input[name="hrsJO"]').prop({'min': '0', 'max': '30', 'maxlength':'2'});
+    $('input[name="minJO"]').prop({'min': '0', 'max': '59', 'maxlength':'2'});
+    
     /*----------------Cabecera despliega cerrar cesion------------------------*/
     $('#usu img').click(function () {
         $('#usu #enlace').animate({
@@ -10,8 +14,6 @@ $(document).ready(function () {
     
     $(".load").fadeOut("slow");//proceso de carga para causas penales
 
-    //Establece am pata input time y no marque error en el submit
-    $('.tiempo').prop({'min': '00:01', 'max': '11:59'});
     
     //auto acompletado para las causas penales
     $("#causaClaveJO").selectize({
@@ -44,7 +46,7 @@ $(document).ready(function () {
             data: $('#formAudienciasJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Audiencias guardar: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 window.location='audienciasJO.jsp';
             },
             error: function (response) {
@@ -57,15 +59,17 @@ $(document).ready(function () {
 });
 
 // habilita las audiencias de acuaerdo si el checkbox esta checkeado
-function habilitaTxt(obj, idTxt1, idTxt2, chkNi1, chkNi2) {
+function habilitaTxt(obj, idTxt1, hrs, min, chkNi1, chkNi2) {
     if (obj.checked) {
         $(idTxt1).prop({"required": true, "disabled": false});
-        $(idTxt2).prop({"required": true, "disabled": false});
+        $(hrs).prop({"required": true, "disabled": false});
+        $(min).prop({"required": true, "disabled": false});
         $(chkNi1).prop("disabled", false);
         $(chkNi2).prop("disabled", false);
     } else {
         $(idTxt1).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(idTxt2).prop({"required": false, "disabled": true, "readonly": false}).val("");
+        $(hrs).prop({"required": false, "disabled": true, "readonly": false}).val("");
+        $(min).prop({"required": false, "disabled": true, "readonly": false}).val("");
         $(chkNi1).prop({"disabled": true, "checked": false});
         $(chkNi2).prop({"disabled": true, "checked": false});
     }
@@ -88,11 +92,13 @@ function fechaNI(obj, idTxtDate) {
     }
 }
 //duracion no identificada
-function duracionNI(obj, idTxtDate) {
+function duracionNI(obj, hrs, min) {
     if (obj.checked) {
-        $(idTxtDate).prop("readonly", true).val("09:09");
+        $(hrs).prop("readonly", true).val("99");
+        $(min).prop("readonly", true).val("99");
     } else {
-        $(idTxtDate).prop("readonly", false).val("");
+        $(hrs).prop("readonly", false).val("");
+        $(min).prop("readonly", false).val("");
     }
 }
 //Comprueba que primero se haya seleccionado un juzgado clave antes de agregar audiencias

@@ -90,11 +90,13 @@
                 }
             }
             
-            //Control si es cptura verifica cual es tu tipo de resolucion en etapa inicial
-            if(tipoResol.equals("")){
-                tipoResol = sEtaOral.verificFalloJO(causaClaveJO, proceClave + jConcatenado);
-                System.out.println("Tipo res: " + tipoResol);
+            //Control verifica cual es tu tipo de resolucion en etapa oral
+            String fallo = sEtaOral.verificFalloJO(causaClaveJO, proceClave + jConcatenado);
+            if(!fallo.equals("9")){
+                tipoResol = fallo;
             }
+            System.out.println("Tipo res: " + tipoResol);
+            
         %>
           
     </head>
@@ -280,22 +282,35 @@
                                     out.println("</td>");
                                     concluPA = sConclu.findConcluAJO(causaClaveJO, proceClave + jConcatenado, lista.get(i)[0]);
                                     if(concluPA.size() != 0){
-                                        String concluAP = concluPA.get(0)[0];
-                                        if(concluAP.equals("1")){
-                                            out.println("<td><input type='radio' name='resolDelito" + i + "' value='1' checked></td>");
-                                        }else{
-                                            out.println("<td><input type='radio' name='resolDelito" + i + "' value='1'></td>");
-                                        }
-                                        if(concluAP.equals("2")){
-                                            out.println("<td><input type='radio' name='resolDelito" + i + "' value='2' checked></td>");
-                                        }else{
-                                            out.println("<td><input type='radio' name='resolDelito" + i + "' value='2'></td>");
-                                        }
-                                        
-                                        if(concluAP.equals("9")){
-                                            out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia' checked></td>");
-                                        }else{
-                                            out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia'></td>");
+                                        int sentencia = Integer.parseInt(concluPA.get(0)[0]);
+                                        String conclu = concluPA.get(0)[1];
+                                        switch (sentencia){
+                                            case 1:
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='1' checked></td>");
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='2'></td>");
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia'></td>");
+                                                break;
+                                            case 2:
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='1'></td>");
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='2' checked></td>");
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia'></td>");
+                                                break;
+                                            case 3:
+                                                if(conclu.equals("1")){
+                                                    out.println("<td><input type='radio' name='resolDelito" + i + "' value='1' checked></td>");
+                                                    out.println("<td><input type='radio' name='resolDelito" + i + "' value='2'></td>");
+                                                    out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia'></td>");
+                                                }else{
+                                                    out.println("<td><input type='radio' name='resolDelito" + i + "' value='1'></td>");
+                                                    out.println("<td><input type='radio' name='resolDelito" + i + "' value='2' checked></td>");
+                                                    out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia'></td>");
+                                                }
+                                                break;
+                                            case 9:
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='1'></td>");
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='2'></td>");
+                                                out.println("<td><input type='radio' name='resolDelito" + i + "' value='9' class='radValCambia' checked></td>");
+                                                break;
                                         }
                                     }else{
                                         out.println("<td><input type='radio' name='resolDelito" + i + "' value='1'></td>");
@@ -426,7 +441,7 @@
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>
-        <%if(!tipoResol.equals("")){ %>
+        <%if(!fallo.equals("9")){ %>
             <script type="text/javascript"> 
                 $(document).ready(function(){ 
                     //tipoResolucion(); 

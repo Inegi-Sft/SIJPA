@@ -147,13 +147,18 @@ $(document).ready(function() {
                 return false;
             }
         }
+        if ($('input[name="arrayDelito"]:checked').length === 0) {
+            alert('Selecciona al menos un Delito Atribuido al Adolescente');
+            $('input[name="arrayDelito"]').focus();
+            return false;
+        }
         $.ajax({
             type: 'post',
             url: 'insrtProcesados',
             data: $('#formProcesados').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Procesados: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 var numProce = parseInt(parent.$('#Tadolescentes').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 5; i++) {

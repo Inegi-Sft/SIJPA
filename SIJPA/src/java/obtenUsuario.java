@@ -35,8 +35,7 @@ public class obtenUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             String usuario  = request.getParameter("usuario").toUpperCase();
             if(usu.findUsuarioExist(usuario)){
                 out.write("1");
@@ -44,8 +43,6 @@ public class obtenUsuario extends HttpServlet {
             }else{
                 out.write("0");
             }
-        } finally {
-            out.close();
         }
     }
 

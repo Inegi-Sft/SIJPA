@@ -50,20 +50,19 @@ public class insrtCausaPenal extends HttpServlet {
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
-        String carpInvestiga = request.getParameter("carpInves");
-        String causaClave = request.getParameter("expClave");
-        String fecha_ingreso;
+        String carpInvestiga = request.getParameter("carpInves").toUpperCase();
+        String causaClave = request.getParameter("expClave").toUpperCase();
+        String fechaIngreso;
         if (request.getParameter("fIngreso") != null) {
-            fecha_ingreso = request.getParameter("fIngreso");
+            fechaIngreso = request.getParameter("fIngreso");
         } else {
-            fecha_ingreso = "1899-09-09";
+            fechaIngreso = "1899-09-09";
         }
         String nomJuez = request.getParameter("nomJuez");
         String particular = request.getParameter("Pparticular");
         String acomulado = request.getParameter("ExpAcomu");
         String referencia = verificaVariable(request.getParameter("ExpRefe"));
         String competencia = request.getParameter("compe");
-        System.out.println("COMPETENCIA:"+competencia);
         String incompetencia = verificaVariable(request.getParameter("Tincompe"));
         String totalDeli = verificaVariable(request.getParameter("Tdelitos"));
         String totalAdo = verificaVariable(request.getParameter("Tadolescentes"));
@@ -78,7 +77,7 @@ public class insrtCausaPenal extends HttpServlet {
             if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
                 sesion.setAttribute("causaClave", causaClave + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
-                        + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fecha_ingreso + "',"
+                        + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fechaIngreso + "',"
                         + nomJuez + "," + particular + "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "',"
                         + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
                 System.out.println(sql);
@@ -98,7 +97,7 @@ public class insrtCausaPenal extends HttpServlet {
                     conn.close();
                 }
             }else{//Si hay causa entonces es actulizacion
-                sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET CARPETA_INVESTIGA = '" + carpInvestiga + "',FECHA_INGRESO = '" + fecha_ingreso + "',"
+                sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET CARPETA_INVESTIGA = '" + carpInvestiga + "',FECHA_INGRESO = '" + fechaIngreso + "',"
                         + "JUEZ_CLAVE = " + nomJuez + ",DERIVA_ACCION_PENAL = " + particular + ",COMPETENCIA = " + competencia + ","
                         + "TIPO_INCOMPETENCIA = " + incompetencia + ",EXPEDIENTE_ACUMULADO = " + acomulado + ",EXPEDIENTE_REFERENCIA = '" + referencia + "',"
                         + "TOTAL_DELITOS = " + totalDeli + ",TOTAL_PROCESADOS = " + totalAdo + ",TOTAL_VICTIMAS = " + totalVic + ","

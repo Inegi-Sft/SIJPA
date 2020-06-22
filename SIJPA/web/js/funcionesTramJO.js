@@ -39,7 +39,7 @@ $(document).ready(function() {
             data: $('#formTramiteJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Tramite JO: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i < 5; i++) {//pone filas correspondientes en la tabla de inicial
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);

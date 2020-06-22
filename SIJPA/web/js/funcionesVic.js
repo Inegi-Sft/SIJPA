@@ -92,6 +92,7 @@ $(document).ready(function() {
     }
     
     $('#tipoVictima').change(function () {
+        $('input[name="deliCometido"]').prop("checked", false);
         switch ($(this).val()) {
             case '1':
                 $('#victiFisicas, #mediProtec').fadeIn('slow');
@@ -290,7 +291,7 @@ $(document).ready(function() {
             data: $('#formVictimas').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Victimas: ", response);
-                alert("Guardado con exito!!!");
+                alert("Guardado con éxito!!!");
                 var numProce = parseInt(parent.$('#Tvictimas').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 5; i++) {
@@ -317,3 +318,26 @@ $(document).ready(function() {
     });
     /*---------------------------- FIN VICTIMAS DELITOS JC----------------------------*/
 });
+
+function victimaDelito(obj){
+    var norma=parseInt($(obj).attr("normaT"));
+    var tipoVic= $("#tipoVictima").val();
+    var sexo= $("#sexoV").val();
+    
+    if(tipoVic===""){
+        alert("Seleccione el tipo de victima para poder asignar el delito");
+        $(obj).prop("checked", false);
+    }else{
+        if(tipoVic !=='1'){
+            if((norma>=1 && norma<=28) || (norma>=60 && norma<=62)){
+                alert("Este delito no puede aplicarse al tipo de victima seleccionada. Es unicamente para Personas Fisicas");
+                $(obj).prop("checked", false);
+            }
+        }else{
+            if(norma===2 && sexo!=='2'){
+                alert("El delito de Feminicidio solo puede aplicarse unicamente a mujeres. Selecciona el sexo correspondiente");
+                $(obj).prop("checked", false);
+            }
+        }
+    }
+}

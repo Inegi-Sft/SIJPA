@@ -51,7 +51,6 @@ public class accesoSistema extends HttpServlet {
             md.reset();
             md.update(passUsu.getBytes("utf8"));
             String hash = String.format("%040x", new BigInteger(1, md.digest()));
-            System.out.println("PASS: " + hash);
             
             usuario usuario = new usuario();
             if(usuario.findUsuario(nomUsu,hash)){

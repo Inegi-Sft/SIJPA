@@ -115,7 +115,7 @@ public class insrtInicial extends HttpServlet {
                 sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET AUDIENCIA_INICIAL = " + audiInicial + ",CTRL_DETENCION = " + detencion + ","
                         + "DETENCION_LEGAL = " + legaldetencion + ",FECHA_LIBERTAD = '" + fechaAutoLiber + "',FORMULACION_IMPUTACION = " + formuImputa + ","
                         + "FECHA_IMPUTACION = '" + fechaFormuImpu + "',IMPUTADO_DECLARO = " + declaro + ",FECHA_DECLARACION = '" + fechDeclara + "',"
-                        + "PLAZO_CONSTITUCIONAL = " + huboPlazo + ",TIEMPO_PLAZO = " + Plazo + ",TIEMPO_PLAZO = " + autovincula + ","
+                        + "PLAZO_CONSTITUCIONAL = " + huboPlazo + ",TIEMPO_PLAZO = " + Plazo + ",AUTO_VINCULACION = " + autovincula + ","
                         + "FECHA_VINCULACION = '" + fechavincula + "',IMPUSO_MCAUTELARES = " + drecretaMC + ",INVESTIGACION_COMPLEMENTARIA = " + cierreinvestiga + ","
                         + "FECHA_PLAZO_INVESTIGACION = '" + fechaplazo + "',PRORROGA_PLAZO_CIERRE = " + soliProrroga + ","
                         + "PLAZO_CIERRE_INVESTIGACION = " + plazofijado + ",FECHA_CIERRE_INVESTIGACION = '" + fechCierreI + "',"
@@ -182,7 +182,7 @@ public class insrtInicial extends HttpServlet {
                 sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET AUDIENCIA_INICIAL = " + audiInicial + ",CTRL_DETENCION = " + detencion + ","
                         + "DETENCION_LEGAL = " + legaldetencion + ",FECHA_LIBERTAD = '" + fechaAutoLiber + "',FORMULACION_IMPUTACION = " + formuImputa + ","
                         + "FECHA_IMPUTACION = '" + fechaFormuImpu + "',IMPUTADO_DECLARO = " + declaro + ",FECHA_DECLARACION = '" + fechDeclara + "',"
-                        + "PLAZO_CONSTITUCIONAL = " + huboPlazo + ",TIEMPO_PLAZO = " + Plazo + ",TIEMPO_PLAZO = " + autovincula + ","
+                        + "PLAZO_CONSTITUCIONAL = " + huboPlazo + ",TIEMPO_PLAZO = " + Plazo + ",AUTO_VINCULACION = " + autovincula + ","
                         + "FECHA_VINCULACION = '" + fechavincula + "',IMPUSO_MCAUTELARES = " + drecretaMC + ",INVESTIGACION_COMPLEMENTARIA = " + cierreinvestiga + ","
                         + "FECHA_PLAZO_INVESTIGACION = '" + fechaplazo + "',PRORROGA_PLAZO_CIERRE = " + soliProrroga + ","
                         + "PLAZO_CIERRE_INVESTIGACION = " + plazofijado + ",FECHA_CIERRE_INVESTIGACION = '" + fechCierreI + "',"
@@ -235,7 +235,7 @@ public class insrtInicial extends HttpServlet {
                     resp.add(lis.get(0)[3]);
                     resp.add(lis.get(0)[4]);
                     resp.add(banderaDesc);//Descripcion de la bandera para la tabla
-                    resp.add(0);//dato para saber a que etapa se agrega el procesado
+                    resp.add(banderaEtapa);//dato para saber a que etapa se agrega el procesado
                     resp.add(totInicialInsrt);
                     out.write(resp.toJSONString());
                     conn.close();

@@ -67,26 +67,31 @@ $(document).ready(function() {
     }
     
     //Se usa para la recuperacion de BD
-    if($('#tipoResolucionPA').val() === '1'){
-        $('#dTipoMedidaPL').show();
-        $('#tblDConclusiones tr > *:nth-child(2)').show();
-        $('#tblDConclusiones tr > *:nth-child(2) input').prop("checked", true);
-        $('#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
-    }else if($('#tipoResolucionPA').val() === '2'){
-        $('#dTipoMedidaNPL').show();
-        $('#dTipoMedidaNPL').show();
-        $('#tblDConclusiones tr > *:nth-child(3)').show();
-        $('#tblDConclusiones tr > *:nth-child(3) input').prop("checked", true);
-        $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(4)').hide();
-    }else if($('#tipoResolucionPA').val() === '3'){
-        $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').show();
-        $('#tblDConclusiones tr > *:nth-child(4)').hide();
-    }else{
-        $('#tblDConclusiones tr > *:nth-child(4)').show();
-        $('#tblDConclusiones tr > *:nth-child(4) input').prop("checked", true);
-        $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').hide();
+    switch ($('#tipoResolucionPA').val()) {
+        case '1':
+            $('#dTipoMedidaPL').fadeIn("slow");
+            $('#tblDConclusiones tr > *:nth-child(2)').fadeIn('slow');
+            $('#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
+            break;
+        case '2':
+            $('#dTipoMedidaNPL').fadeIn("slow");
+            $('#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');
+            $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(4)').hide();
+            break;
+        case '3':
+            $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').show();
+            $('#tblDConclusiones tr > *:nth-child(4)').hide();
+            break;
+        case '9':
+            $('#tblDConclusiones tr > *:nth-child(4)').show();
+            $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').hide();
+            break;
+        default:
+            $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3),\n\
+                #tblDConclusiones tr > *:nth-child(4)').hide();
+            break;
     }
-    
+  
     //Se usa para la recuperacion de BD
     if (($('#tipoMedidaPL').val() === '2') || ($('#tipoMedidaPL').val() === '3')) {
         $('#Dinternamiento').show();
@@ -177,18 +182,6 @@ $(document).ready(function() {
         }
     });
     
-   
-   
-    if ($('#resolucion').val() === '5') { 
-//            $('#flsImpugnacion').fadeIn("slow");
-            //$('#flsImpugnacion select').val('').prop("required", true);
-//            $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
-////          $('#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
-            $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').fadeOut("slow");
-            $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
-            $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);
-        }
-   
     $('#tipoResolucionPA').change(function(){
         $('#tblDConclusiones input.radValCambia').val("9");
         switch ($('#tipoResolucionPA').val()) {

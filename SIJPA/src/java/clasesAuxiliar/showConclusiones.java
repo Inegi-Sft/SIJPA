@@ -159,4 +159,21 @@ public class showConclusiones {
         return concPA;
     }
     
+    public int countConclusionesProc(String causaClave,String procesadoClave) {
+        try{
+            conn.Conectar();
+            conteoConclu = 0;
+            sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
+                    + "AND PROCESADO_CLAVE='"+ procesadoClave +"'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoConclu = resul.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoConclu;
+    }
+    
 }

@@ -19,9 +19,9 @@ import java.util.logging.Logger;
 public class showInicial {
 
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> ini, vdeli,proceEtapa,mediCau;
+    ArrayList<String[]> ini, vdeli,proceEtapa,mediCau,listEp;
     ArrayList<String> list;
-    String sql;
+    String sql,etapa;
     ResultSet resul;
     int conteoIni;
     int totalProcesa;
@@ -378,5 +378,44 @@ public class showInicial {
         }
         return list;
     }
-    
+     
+   public ArrayList findEtapaCausaProClave(String causaClave){
+        listEp = new ArrayList();
+        try {
+            conn.Conectar();
+            sql = "SELECT PROCESADO_CLAVE,ETAPA FROM DATOS_ETAPA_INICIAL_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' AND ETAPA<>0 "
+                    + "ORDER BY 1";
+            System.out.println(sql);
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                 listEp.add(new String[]{
+                    resul.getString("PROCESADO_CLAVE"), resul.getString("ETAPA")
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listEp;
+    }
+   
+    public int findEtapaCausaClave(String causaClave){
+       int CEcausa=0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM DATOS_ETAPA_INICIAL_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' AND ETAPA=0 "
+                    + "ORDER BY 1";
+            System.out.println(sql);
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                CEcausa = resul.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return CEcausa;
+    }
 }

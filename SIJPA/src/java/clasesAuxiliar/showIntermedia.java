@@ -177,4 +177,20 @@ public class showIntermedia {
         }
         return lisPruebas;
     }
+    public int countIntermediaProc(String causaClave,String ProcesadoClave) {
+        try{
+            conn.Conectar();
+            conteoInter = 0;
+            sql = "SELECT COUNT(*) FROM DATOS_ETAPA_INTERMEDIA_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                    + "AND PROCESADO_CLAVE='"+ ProcesadoClave +"'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteoInter= resul.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showTramite .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteoInter;
+    }
 }

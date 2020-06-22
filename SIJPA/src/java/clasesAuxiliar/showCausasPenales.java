@@ -20,6 +20,7 @@ public class showCausasPenales {
 
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> causas;
+    ArrayList<Integer[]> Total;
     int total;
     String sql;
     ResultSet rs;
@@ -90,8 +91,8 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
-
+            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";      
+            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("TOTAL");
@@ -108,7 +109,7 @@ public class showCausasPenales {
         try {
             conn.Conectar();
             sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
-
+            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("TOTAL");
@@ -169,6 +170,78 @@ public class showCausasPenales {
             Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Exis;
+    }
+    
+   public int total_reg_Delitos(String causaClave) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_delitos_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+                  + " AND COMENTARIOS<>'REGNUEVO'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
+    public int total_reg_Procesados(String causaClave) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_procesados_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+                    + " AND COMENTARIOS<>'REGNUEVO'";
+            System.out.println(sql);
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
+    public int total_reg_Victimas(String causaClave) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_victimas_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+                    + " AND COMENTARIOS<>'REGNUEVO'";
+
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public int total_reg_etaInicial(String causaClave) {
+        total = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT COUNT(*) FROM datos_etapa_inicial_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+                    + " AND COMENTARIOS<>'REGNUEVO'";
+
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
     }
 }
 

@@ -4,6 +4,10 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="clasesAuxiliar.estatusEtapaIn"%>
+<%@page import="clasesAuxiliar.estatus"%>
+<%@page import="clasesAuxiliar.showInicial"%>
+<%@page import="clasesAuxiliar.showIntermedia"%>
 <%@page import="clasesAuxiliar.showJueces"%>
 <%@page import="clasesAuxiliar.usuario"%>
 <%@page import="clasesAuxiliar.showCausasPenales"%>
@@ -20,7 +24,12 @@
             showJuzgados juz = new showJuzgados();
             showJueces juez = new showJueces();
             showCausasPenales cp = new showCausasPenales();
+            estatus es= new estatus();
+            usuario us=new usuario();
+            showInicial Ini=new showInicial();
+            estatusEtapaIn EtapaIn=new estatusEtapaIn();
             ArrayList<String[]> lsCausas;
+            int Estatus=0,cInicial=0;
             ArrayList<String> lista;
             
             String juzgado = "";
@@ -98,12 +107,31 @@
                     <%
                         lsCausas = cp.findCausasPenales(juzgado);
                         String juzLimpio = "";
+                        String Est1="",Est2="",Est3="",EI,Com="";
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");
                         }
                         int pos = 0;
-                        for (String[] ls : lsCausas) {
-                            String ccSimple = ls[0].replace(juzLimpio, "");
+                            for (String[] ls : lsCausas) {
+                                String ccSimple = ls[0].replace(juzLimpio, "");
+                                cInicial = Ini.findEtapaCausaClave(ls[0]);
+                                Estatus = us.findAvanceUsuario(ls[0]);
+                                Est1 = "";
+                                Est2 = "";
+                                Est3 = "";
+                                if ((Estatus != 6 || cInicial >= 1)) {
+                                    Est1 = es.finEstatus(Estatus, ls[0]);
+                                }
+                                if (Estatus == 6) {
+                                    Est2 = EtapaIn.findEstatusEtapaIn(ls[0], juzgado);
+                                }
+                                Est3 = Est1 + "---" + Est2;
+                                if (Est3.equals("---")) {
+                                    Com = "Completo";
+                                } else {
+                                    Com = "Incompleto";
+                                }
+                            
                     %>
                         <tr>
                             <!--<td><--%=pos%></td>-->
@@ -113,14 +141,14 @@
                             <td><%=ls[3]%></td>
                             <td><%=ls[4]%></td>
                             <td><%=ls[5]%></td>
-                            <td>--</td>
+                            <td><a  data-title="<%=Est3%>"> <%=Com%>  </a></td> 
                             <td><a href="elementosPrincipales.jsp?causaClave=<%=ccSimple%>"><img src='img/editar.png' title="Editar"/></a></td>
                             <td><a href="#" class="borrar"><img src='img/delete.png' title="Eliminar" /></a></td>
                         </tr>
                     <% 
                             pos++;
                         }
-                    %>
+                    %>  
                     </tbody>
                 </table>
             </form>

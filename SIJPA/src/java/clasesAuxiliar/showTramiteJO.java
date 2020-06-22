@@ -21,7 +21,7 @@ public class showTramiteJO {
     ArrayList<String[]> tramite;
     String sql;
     ResultSet resul;
-    int conteoTram;
+    int conteoTram,conteo;
     
     public ArrayList findTramiteCausaJC(String causaClaveJC) {
         conn.Conectar();
@@ -138,4 +138,22 @@ public class showTramiteJO {
         }
         return conteoTram;
     }
+public int countTramiteProcJO(String causaClaveJO,String ProcesadoClaveJO) {
+        try{
+            conn.Conectar();
+            conteo = 0;
+            sql = "SELECT COUNT(*) FROM DATOS_TRAMITES_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                    + "AND PROCESADO_CLAVE='"+ ProcesadoClaveJO +"'";
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                conteo= resul.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showTramite .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteo;
+    }
+    
+    
 }

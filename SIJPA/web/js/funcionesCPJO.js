@@ -114,7 +114,7 @@ $(document).ready(function () {
                     alert("Guardado con éxito!!!");
                     $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
                     $("#guardarExpJO").prop("hidden", true);
-                    var ccJO = $('#expClaveJO').val();
+                    var ccJO = $('#expClaveJO').val().toUpperCase();
                     var x = 0;
                     var text = '';
                     if(response[0] === '1'){

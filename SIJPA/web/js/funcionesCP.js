@@ -130,7 +130,7 @@ $(document).ready(function () {
                     $("#guardarExp").prop("hidden", true);
                     if (response !== null && $.isArray(response)) {
                         if(response[0] === '1'){//organo competente
-                            var expe = $('#expClave').val();
+                            var expe = $('#expClave').val().toUpperCase();
                             console.log('Entramos  organo competente: ' , response[0]);
                             for(var x = 1; x <= response[2]; x++){
                                 $('#tablaDeli tbody').append('<tr><td>' + expe + '-D' + x + '</td><td></td><td></td><td></td><td></td>\n\

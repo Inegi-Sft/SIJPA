@@ -102,7 +102,6 @@
                 }
                 System.out.println("Tipo res: " + tipoResol);
             }
-            
         %>
     </head>
     <body style="zoom: .9;">

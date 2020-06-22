@@ -308,7 +308,7 @@
                         </table>
                     </fieldset>
                 </fieldset>
-                <fieldset id="flsReparaDanio">
+                <fieldset id="flsReparaDanio" class="oculto">
                     <legend>Reparación del daño</legend>
                     <div class="cols">
                         <label for="reparaDanio">¿Hubo reparación del daño?</label>

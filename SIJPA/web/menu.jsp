@@ -14,7 +14,7 @@
         </li>
         <li><a href="causasPenales.jsp">JC</a></li>
         <li><a href="causasPenalesJO.jsp">JO</a></li>
-        <li><a href="audiencias.jsp">Audiencias</a>
+        <li><a href="">Audiencias</a>
             <ul>
                 <li><a href="audiencias.jsp">Audiencias JC</a></li>
                 <li><a href="audienciasJO.jsp">Audiencias JO</a></li>
@@ -27,7 +27,7 @@
             if(session.getAttribute("tipoUsuario") != null){
                 if((Integer)session.getAttribute("tipoUsuario") == 1){ %>
                     <li><a href="usuario.jsp">Usuarios</a></li>
-                    <li><a href="BDMySQL/sijpa_db_07_06_20.sql" download="sijpa_db.sql">Base de Datos SIJPA</a></li>
+                    <!--<li><a href="BDMySQL/sijpa_db_07_06_20.sql" download="sijpa_db.sql">Base de Datos SIJPA</a></li>-->
         <% 
                 }
             }else{

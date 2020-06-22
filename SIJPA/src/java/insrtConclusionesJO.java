@@ -102,7 +102,6 @@ public class insrtConclusionesJO extends HttpServlet {
                             insrtDConclu = conn.escribir(sql);
                         }
                     }
-                    System.out.println(sql);
                     if(insrtDConclu){
                         showConclusionesJO con = new showConclusionesJO();
                         ArrayList<String[]> lis = new ArrayList();

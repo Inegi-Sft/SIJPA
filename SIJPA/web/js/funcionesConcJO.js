@@ -24,7 +24,7 @@ $(document).ready(function() {
             break;
         case '3':
             $('#flsImpugnacion').fadeIn("slow");
-            $('#flsSobreseimto select').val('-2');
+            $('#flsSobreseimto select, #flsSentencia select, #flsReparaDanio select').val('-2');
             $('#fechaExtinAR').val('1799-09-09');
             break;
     }
@@ -240,7 +240,7 @@ $(document).ready(function() {
             data: $('#formConclusionesJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Conclusiones JO: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado Correctamente");
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i <= 4; i++) {//pone filas correspondientes en la tabla de conclusiones
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);

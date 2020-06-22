@@ -208,6 +208,8 @@ public class showJuicio {
                     fallo = "3";//Si el fallo es 1.-Absolucion entonces se pone 3 Absolutoria
                 }else if(resul.getString("SENTIDO_FALLO").equals("2")){
                     fallo = "2";//Si el fallo es 2.-Condena entonces se pone 2 Condenatoria
+                }else if(resul.getString("SENTIDO_FALLO").equals("9")){
+                    fallo = "9";//Si el fallo es 9.-No identificado
                 }
             }
             conn.close();

@@ -120,7 +120,7 @@
                     <%
                         lsCausas = cp.findCausasPenales(juzgado);
                         String juzLimpio = "";
-                        String Est1="",Est2="",Est3="",EI,Com="";
+                        String Est1="",Est2="",Est3="",Incom="",Com="";
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");
                         }
@@ -129,6 +129,8 @@
                             String ccSimple = ls[0].replace(juzLimpio, "");
                             cInicial = Ini.findEtapaCausaClave(ls[0]);
                             Estatus = us.findAvanceUsuario(ls[0]);
+                            Incom=ls[2]+ls[3]+ls[4];
+                            System.out.println(Incom);
                             Est1 = "";
                             Est2 = "";
                             Est3 = "";
@@ -139,8 +141,9 @@
                                 Est2 = EtapaIn.findEstatusEtapaIn(ls[0], juzgado);
                             }
                             Est3 = Est1 + "---" + Est2;
-                            if (Est3.equals("---")) {
-                                Com = "Completo";
+                            if (Est3.equals("---")|| (Incom.equals("-2-2-2"))) {
+                                Est3="---";
+                                Com = "Completo";  
                             } else {
                                 Com = "Incompleto";
                             }

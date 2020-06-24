@@ -98,7 +98,7 @@ public class insrtConclusiones extends HttpServlet {
                         for (int i = 0; i < delitoClave.length; i++){
                             String resolDelito = request.getParameter("resolDelito" + i);
                             sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                                    + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolu + "," + resolDelito + ", (select YEAR(NOW())) )";
+                                    + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolucionPA + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu = conn.escribir(sql);
                         }
@@ -135,7 +135,7 @@ public class insrtConclusiones extends HttpServlet {
                         + "TIPO_SOBRESEIMIENTO = " + tipoSobre + ",PROCEDENCIA_SOBRESEIMIENTO = " + proceSobre + ",EXCLUSION_ACCIONP = " + excluAccion + ","
                         + "SUSPENCION_CONDICIONAL = " + tipoCondiSCP + ",FECHA_SUSPENCION = '" + fechaExtSCP + "',"
                         + "MECANISMO_ACUERDO = " + tipoMecanismoAR + ",FECHA_ACUERDO = '" + fechaExtinAR + "',TIPO_CONCLUSION_PA = " + tipoResolucionPA + ","
-                        + "TIPO_CONCLUSION_PA = " + privativa + ",MEDIDA_NOPRIVATIVA = " + noprivativa + ",TIEMPO_INTERNAMIENTO = " + internamiento + ","
+                        + "MEDIDA_PRIVATIVA = " + privativa + ",MEDIDA_NOPRIVATIVA = " + noprivativa + ",TIEMPO_INTERNAMIENTO = " + internamiento + ","
                         + "REPARACION_DANIO = " + reparacion + ",TIPO_REPARACION_DANIO = " + tipoRepara + ",MONTO_REPARA = " + multa + ","
                         + "IMPUGNACION = " + impugnacion + ",TIPO_IMPUGNACION = " + tipoImpugnacion + ",FECHA_IMPUGNACION = '" + fechaImpugna + "',"
                         + "PERSONA_IMPUGNA = " + personaImpugna + ",COMENTARIOS = '" + comentario + "' "
@@ -151,7 +151,7 @@ public class insrtConclusiones extends HttpServlet {
                         for (int i = 0; i < delitoClave.length; i++){
                             String resolDelito = request.getParameter("resolDelito" + i);
                             sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                                    + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolu + "," + resolDelito + ", (select YEAR(NOW())) )";
+                                    + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolucionPA + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu=conn.escribir(sql);
                         }

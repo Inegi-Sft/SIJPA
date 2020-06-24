@@ -19,8 +19,7 @@ import java.util.logging.Logger;
 public class showConclusiones {
 
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> conc;
-    ArrayList<String> concPA;
+    ArrayList<String[]> conc, concPA;
     String sql;
     ResultSet resul;
     int conteoConclu;
@@ -143,14 +142,16 @@ public class showConclusiones {
         concPA = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT TIPO_CONCLUSION_PA FROM DATOS_DCONCLUSIONES_ADOJC "
+            sql = "SELECT TIPO_RESOLUCION, TIPO_CONCLUSION_PA FROM DATOS_DCONCLUSIONES_ADOJC "
                     + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                     + "AND DELITO_CLAVE = '" + deliClave + "' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             if(resul.next()) {
-               concPA.add(resul.getString("TIPO_CONCLUSION_PA"));
+               concPA.add(new String[] {
+                   resul.getString("TIPO_RESOLUCION"),resul.getString("TIPO_CONCLUSION_PA")
+               });
             }
             conn.close();
         } catch (SQLException ex) {

@@ -63,11 +63,10 @@ public class insrtCausaPenalJO extends HttpServlet {
         String comentario = request.getParameter("ComentaExpeJO");
         
         try {         
-               response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
   
-        conn.Conectar();
-            
+            conn.Conectar();
             if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
                 sesion.setAttribute("causaClaveJO", causaClaveJO + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
@@ -83,7 +82,7 @@ public class insrtCausaPenalJO extends HttpServlet {
                 } else {
                     conn.close();
                 }
-            }else{
+            }else{//Existe causa entonces es actualizacion
                 sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJO SET FECHA_INGRESO = '"+ fecha_ingreso +"', TOTAL_DELITOS = "+ totalDeli +","
                     + " TOTAL_PROCESADOS = "+ totalAdo +", TOTAL_VICTIMAS = "+ totalVic +", ATENDIDA_ORGDIFERENTE = "+ organoDiferente +","
                     + " JUZGADO_DIFERENTE = '"+ juzgadoDiferente +"', CANTIDAD_JUECES = "+ cantJuez +", JUEZ_CLAVE_1 = "+ juezJO1 +","

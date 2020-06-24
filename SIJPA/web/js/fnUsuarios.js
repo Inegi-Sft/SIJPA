@@ -54,29 +54,4 @@ $(document).ready(function () {
             }
         }
     });
-    
-//    //Guarda Causa Penal
-//    $('#formUsuario').submit(function (e) {
-//        e.preventDefault();
-//        e.stopImmediatePropagation();
-//        $.ajax({
-//            type: 'post',
-//            url: 'insrtUsuario',
-//            data: $('#formUsuario').serialize(),
-//            success: function (response) {
-//                console.log("Respuesta del servidor Usuarios: ", response);
-//                if (response === '0') {
-//                    window.location.href = "index.jsp";
-//                    alertify.success('Usuario Guardado Correctamente');
-//                }else if (response === '1'){
-//                    window.location.href = "usuario.jsp";
-//                    alertify.success('Usuario Guardado Correctamente');
-//                }
-//            },
-//            error: function (response) {
-//                console.log("Respuesta del servidor Usuario: ", response);
-//                alertify.error('Error al guradar usuario');
-//            }
-//        });
-//    });
 });

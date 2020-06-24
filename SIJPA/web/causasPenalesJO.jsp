@@ -20,41 +20,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales JO</title>
         <%@include file="librerias.jsp" %>
-        <%  
-            showJuzgados juz = new showJuzgados();
-            showJueces juez = new showJueces();
-            showCausasPenalesJO cp = new showCausasPenalesJO();
-            estatusJO esJO= new estatusJO();
-            usuario us=new usuario();
-            showJuicio Juicio=new showJuicio();
-            estatusEtapaJO EtapaJO=new estatusEtapaJO();
-            int ExisEJO=0;
-            ArrayList<String[]> lsCausasJC, lisCausaJO;
-            ArrayList<String> lista;
-            int Estatus=0,cInicial=0;
+        <%
+            //Controlamos el juzgado para que tenga siempre uno seleccionado
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
                 if(request.getParameter("juzgado") != ""){
-                    juzgado=request.getParameter("juzgado");
+                    juzgado = request.getParameter("juzgado");
                     session.setAttribute("juzgadoClave", juzgado);
                 }
             }else if(session.getAttribute("juzgadoClave") != null){
                 juzgado = (String) session.getAttribute("juzgadoClave");
             }
             
-            if(juz.findTotJuzgado() == 0){
-                response.sendRedirect("capturaJuzgado.jsp");
-            }else if(session.getAttribute("juzgadoClave") != null){
-                if(juez.findTotJuez((String)session.getAttribute("juzgadoClave")) == 0){
-                    response.sendRedirect("capturaJuez.jsp");
-                }
-            }
-            
+            //Vaciamos la variable para que pueda entrar una nueva causa penal
             if(session.getAttribute("causaClave") != null){
                 session.setAttribute("causaClave", "");
                 session.setAttribute("causaClaveJO", "");
             }
-            session.setAttribute("Sistema", "JO");
+            
+            showJuzgados juz = new showJuzgados();
+            showCausasPenalesJO cp = new showCausasPenalesJO();
+            estatusJO esJO = new estatusJO();
+            usuario us = new usuario();
+            showJuicio Juicio = new showJuicio();
+            estatusEtapaJO EtapaJO = new estatusEtapaJO();
+            int ExisEJO = 0;
+            ArrayList<String[]> lsCausasJC, lisCausaJO;
+            ArrayList<String> lista;
+            int Estatus = 0, cInicial = 0;
+            
+            session.setAttribute("Sistema", "JO");//Lanzamos variable de session dependiendo del sistema
             int tCausasJuz = cp.countCausasPenalesJO(juzgado);
         %>
     </head>
@@ -85,10 +80,6 @@
                     </select>
                 </div>
                 <span class="totExp">Total: <%=tCausasJuz%></span>
-<!--                <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
-                <a class="add" href="#" onclick="validaAddCausa();">
-                    <img src="img/add3.png" width="20" height="20"/> Agregar Expediente
-                </a>-->
                 <table id="causasJO" class="myTable">
                     <thead>
                         <tr>

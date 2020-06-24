@@ -103,28 +103,30 @@ public class insrtJuzgados extends HttpServlet {
                             + causasIngresa + "," + mediProteccion + "," + providenPrecauto + "," + pruebaAnti + "," + ordenesJudi + ","
                             + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW()))"
                             + ")";
-
                     System.out.println(sql);
                     if(conn.escribir(sql)){
-                        //inserta un juez no aplica de acuerdo a el juzgado 
+                        //inserta un juez no aplica de acuerdo a el juzgado necesario para que funcionen los no identificados
                         sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES (" + entidadJ + "," + municipioJ + ","
                                 + numOrgano + ",'" + juzgadoClave + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, 1, (select YEAR(NOW())))";
                         System.out.println(sql);
                         if(conn.escribir(sql)){
                             System.out.println("Juez No aplica insertado!");
+                            conn.close();
+                            sesion.setAttribute("juzgadoClave", juzgadoClave);
+                            sesion.setMaxInactiveInterval(-1);
+                            //Si se inserta correctamente lo mandamos a capturar el primer juez por que no tiene
+                            response.sendRedirect("capturaJuez.jsp?insert=100");
+                        }else{
+                            conn.close();
+                            response.sendRedirect("juzgados.jsp?insert=200");
                         }
-
-                        conn.close();
-                        sesion.setAttribute("juzgadoClave", juzgadoClave);
-                        sesion.setMaxInactiveInterval(-1);
-                        response.sendRedirect("causasPenales.jsp?insrtJuz=100");
                     }else{
                         conn.close();
-                        response.sendRedirect("capturaJuzgado.jsp?insrtJuz=200");
+                        response.sendRedirect("juzgados.jsp?insert=200");
                     }
                 }else{
                     conn.close();
-                    response.sendRedirect("capturaJuzgado.jsp?error=200");
+                    response.sendRedirect("juzgados.jsp?insert=200");
                 } 
             }else{//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_JUZGADOS_ADOJC SET JUZGADO_NOMBRE = '" + nomOrgano + "',JUZGADO_JURISDICCION = " + jurisdiccion + ","
@@ -146,15 +148,14 @@ public class insrtJuzgados extends HttpServlet {
                     System.out.println(sql);
                     if(conn.escribir(sql)){
                         conn.close();
-                        sesion.setMaxInactiveInterval(-1);
-                        response.sendRedirect("juzgados.jsp");
+                        response.sendRedirect("juzgados.jsp?insert=101");
                     }else{
                         conn.close();
-                        response.sendRedirect("juzgados.jsp?error=100");
+                        response.sendRedirect("juzgados.jsp?insert=201");
                     }
                 }else{
                     conn.close();
-                    response.sendRedirect("juzgados.jsp?error=200");
+                    response.sendRedirect("juzgados.jsp?insert=201");
                 }
             }
         } catch (SQLException ex) {

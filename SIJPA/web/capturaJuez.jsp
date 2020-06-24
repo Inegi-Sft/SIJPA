@@ -15,11 +15,15 @@
         <title>SIJPA::Captura Juzgados</title>
         <%@include file="librerias.jsp"%>
         <% 
-            if(request.getParameter("error") != null){
-                int error = Integer.parseInt(request.getParameter("error"));
-                if(error == 100){
-                    out.println("<script>alert('Clave duplicada: El juez, distrito, entidad, municipio ya existe  verificar')</script>");
+            //Unicamente lo utilizamos cuando recibimos la variable de Binevenida
+            if(request.getParameter("insert") != null){
+                int integer = Integer.parseInt(request.getParameter("insert"));
+                out.println("<script>$(document).ready(function () {");
+                if(integer == 100){
+                    out.println("alertify.alert('Confirmado','El Juzgado fue guardado correctamente', function(){"
+                            + "alertify.success('Juzgado Guardado OK')});");
                 }
+                out.println("});</script>");
             }
             
             showJueces sJuez = new showJueces();
@@ -69,9 +73,9 @@
         <section class="contenedor">
             <a class="btnCerrar" title="Cerrar" href="jueces.jsp" >X</a>
             <% if(totJuez > 0){ %>
-            <div class="toggle-nav">
-                <div class="toggle-nav-inner"></div>
-            </div>
+                <div class="toggle-nav">
+                    <div class="toggle-nav-inner"></div>
+                </div>
             <% } %>
             <h1>Captura Juez del Órgano</h1>
             <div class="pestana">

@@ -20,41 +20,54 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales JC</title>
         <%@include file="librerias.jsp" %>
-        <%  
-            showJuzgados juz = new showJuzgados();
-            showJueces juez = new showJueces();
-            showCausasPenales cp = new showCausasPenales();
-            estatus es= new estatus();
-            usuario us=new usuario();
-            showInicial Ini=new showInicial();
-            estatusEtapaIn EtapaIn=new estatusEtapaIn();
-            ArrayList<String[]> lsCausas;
-            int Estatus=0,cInicial=0;
-            ArrayList<String> lista;
+        <%
+            //Unicamente lo utilizamos cuando recibimos el primer juez por juzgado
+            if(request.getParameter("insert") != null){
+                int integer = Integer.parseInt(request.getParameter("insert"));
+                out.println("<script>$(document).ready(function () {");
+                if(integer == 100){
+                    out.println("alertify.alert('Confirmado','El Juez fue guardado correctamente', function(){"
+                            + "alertify.success('Juez Guardado OK')});");
+                }
+                out.println("});</script>");
+            }
             
+            //Controlamos el juzgado para que tenga siempre uno seleccionado
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
                 if(request.getParameter("juzgado") != ""){
-                    juzgado=request.getParameter("juzgado");
+                    juzgado = request.getParameter("juzgado");
                     session.setAttribute("juzgadoClave", juzgado);
                 }
             }else if(session.getAttribute("juzgadoClave") != null){
                 juzgado = (String) session.getAttribute("juzgadoClave");
             }
             
-            if(juz.findTotJuzgado() == 0){
-                response.sendRedirect("capturaJuzgado.jsp");
-            }else if(session.getAttribute("juzgadoClave") != null){
+            //Vaciamos la variable para que pueda entrar una nueva causa penal
+            if(session.getAttribute("causaClave") != null){
+                session.setAttribute("causaClave", "");
+            }
+            
+            showJuzgados juz = new showJuzgados();
+            showJueces juez = new showJueces();
+            showCausasPenales cp = new showCausasPenales();
+            estatus es = new estatus();
+            usuario us = new usuario();
+            showInicial Ini=new showInicial();
+            estatusEtapaIn EtapaIn=new estatusEtapaIn();
+            ArrayList<String[]> lsCausas;
+            int Estatus = 0, cInicial = 0;
+            ArrayList<String> lista;
+            
+            //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
+            if(session.getAttribute("juzgadoClave") != null){
                 if(juez.findTotJuez((String)session.getAttribute("juzgadoClave")) == 0){
                     response.sendRedirect("capturaJuez.jsp");
                 }
             }
             
-            if(session.getAttribute("causaClave") != null){
-                session.setAttribute("causaClave", "");
-            }
-            session.setAttribute("Sistema", "JC");
-            int tCausasJuz=cp.countCausasPenales(juzgado);
+            session.setAttribute("Sistema", "JC");//Lanzamos variable de session dependiendo del sistema
+            int tCausasJuz = cp.countCausasPenales(juzgado);
         %>
     </head>
     <body>
@@ -112,28 +125,28 @@
                             juzLimpio = juzgado.replace("-", "");
                         }
                         int pos = 0;
-                            for (String[] ls : lsCausas) {
-                                String ccSimple = ls[0].replace(juzLimpio, "");
-                                cInicial = Ini.findEtapaCausaClave(ls[0]);
-                                Estatus = us.findAvanceUsuario(ls[0]);
-                                Incom=ls[2]+ls[3]+ls[4];
-                                System.out.println(Incom);
-                                Est1 = "";
-                                Est2 = "";
-                                Est3 = "";
-                                if ((Estatus != 6 || cInicial >= 1)) {
-                                    Est1 = es.finEstatus(Estatus, ls[0]);
-                                }
-                                if (Estatus == 6) {
-                                    Est2 = EtapaIn.findEstatusEtapaIn(ls[0], juzgado);
-                                }
-                                Est3 = Est1 + "---" + Est2;
-                                if (Est3.equals("---")|| (Incom.equals("-2-2-2"))) {
-                                    Est3="---";
-                                    Com = "Completo";  
-                                } else {
-                                    Com = "Incompleto";
-                                }
+                        for (String[] ls : lsCausas) {
+                            String ccSimple = ls[0].replace(juzLimpio, "");
+                            cInicial = Ini.findEtapaCausaClave(ls[0]);
+                            Estatus = us.findAvanceUsuario(ls[0]);
+                            Incom=ls[2]+ls[3]+ls[4];
+                            System.out.println(Incom);
+                            Est1 = "";
+                            Est2 = "";
+                            Est3 = "";
+                            if ((Estatus != 6 || cInicial >= 1)) {
+                                Est1 = es.finEstatus(Estatus, ls[0]);
+                            }
+                            if (Estatus == 6) {
+                                Est2 = EtapaIn.findEstatusEtapaIn(ls[0], juzgado);
+                            }
+                            Est3 = Est1 + "---" + Est2;
+                            if (Est3.equals("---")|| (Incom.equals("-2-2-2"))) {
+                                Est3="---";
+                                Com = "Completo";  
+                            } else {
+                                Com = "Incompleto";
+                            }
                             
                     %>
                         <tr>
@@ -144,7 +157,7 @@
                             <td><%=ls[3]%></td>
                             <td><%=ls[4]%></td>
                             <td><%=ls[5]%></td>
-                            <td><a  data-title="<%=Est3%>"> <%=Com%>  </a></td> 
+                            <td><a  data-title="<%=Est3%>"> <%=Com%></a></td> 
                             <td><a href="elementosPrincipales.jsp?causaClave=<%=ccSimple%>"><img src='img/editar.png' title="Editar"/></a></td>
                             <td><a href="#" class="borrar"><img src='img/delete.png' title="Eliminar" /></a></td>
                         </tr>

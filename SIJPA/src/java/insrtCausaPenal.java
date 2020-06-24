@@ -62,8 +62,8 @@ public class insrtCausaPenal extends HttpServlet {
         String particular = request.getParameter("Pparticular");
         String acomulado = request.getParameter("ExpAcomu");
         String referencia = verificaVariable(request.getParameter("ExpRefe"));
-        String competencia = request.getParameter("compe");
-        String incompetencia = verificaVariable(request.getParameter("Tincompe"));
+        int competencia = Integer.parseInt(request.getParameter("compe"));
+        String tipoIncompetencia = verificaVariable(request.getParameter("Tincompe"));
         String totalDeli = verificaVariable(request.getParameter("Tdelitos"));
         String totalAdo = verificaVariable(request.getParameter("Tadolescentes"));
         String totalVic = verificaVariable(request.getParameter("Tvictimas"));
@@ -78,13 +78,17 @@ public class insrtCausaPenal extends HttpServlet {
                 sesion.setAttribute("causaClave", causaClave + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fechaIngreso + "',"
-                        + nomJuez + "," + particular + "," + competencia + "," + incompetencia + "," + acomulado + ",'" + referencia + "',"
+                        + nomJuez + "," + particular + "," + competencia + "," + tipoIncompetencia + "," + acomulado + ",'" + referencia + "',"
                         + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     usuario usuario = new usuario();
-                    usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal
-                    usuario.insrtRegDPV(causaClave, juzgadClave, Integer.parseInt(totalDeli), Integer.parseInt(totalAdo), Integer.parseInt(totalVic));
+                    if(competencia == 1){//Incompetente
+                        usuario.insrtAvance(causaClave + jConcatenado, 0);//Insertamos el avance de la causa penal de incompetencia
+                    }else{//Competente
+                        usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal compentente
+                        usuario.insrtRegDPV(causaClave, juzgadClave, Integer.parseInt(totalDeli), Integer.parseInt(totalAdo), Integer.parseInt(totalVic));
+                    }
                     JSONArray resp = new JSONArray();
                     resp.add(competencia);//regresamos competencia
                     resp.add(jConcatenado);//regresamos juzgado concatenado
@@ -99,7 +103,7 @@ public class insrtCausaPenal extends HttpServlet {
             }else{//Si hay causa entonces es actulizacion
                 sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJC SET CARPETA_INVESTIGA = '" + carpInvestiga + "',FECHA_INGRESO = '" + fechaIngreso + "',"
                         + "JUEZ_CLAVE = " + nomJuez + ",DERIVA_ACCION_PENAL = " + particular + ",COMPETENCIA = " + competencia + ","
-                        + "TIPO_INCOMPETENCIA = " + incompetencia + ",EXPEDIENTE_ACUMULADO = " + acomulado + ",EXPEDIENTE_REFERENCIA = '" + referencia + "',"
+                        + "TIPO_INCOMPETENCIA = " + tipoIncompetencia + ",EXPEDIENTE_ACUMULADO = " + acomulado + ",EXPEDIENTE_REFERENCIA = '" + referencia + "',"
                         + "TOTAL_DELITOS = " + totalDeli + ",TOTAL_PROCESADOS = " + totalAdo + ",TOTAL_VICTIMAS = " + totalVic + ","
                         + "COMENTARIOS = '" + comentario + "' "
                         + "WHERE JUZGADO_CLAVE = '" + juzgadClave + "' "

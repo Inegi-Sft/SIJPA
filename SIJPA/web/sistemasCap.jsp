@@ -4,6 +4,8 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="clasesAuxiliar.showJueces"%>
+<%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="clasesAuxiliar.usuario"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -12,6 +14,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>SIJPA::Sistemas de Captura</title>
         <%@include file="librerias.jsp" %>
+        <%
+            //Verifica el numero de viita que es del ususario para saber a donde mandarlo
+            usuario usuario = new usuario();
+            int visita = usuario.findVisitaUsu((String) session.getAttribute("usuActivo"));
+            showJuzgados juz = new showJuzgados();
+            if(visita == 0){
+                //Si es la primera vez lo mandamos a aceptar los terminos
+                response.sendRedirect("bienvenida.jsp");
+            }else if(juz.findTotJuzgado() == 0){
+                //Si llegara a fallar la captura del primer juzgado aqui lo controlamos y lo mandamos de nuevo
+                response.sendRedirect("capturaJuzgado.jsp");
+            }
+        %>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>
@@ -23,6 +38,7 @@
             <button class="btnSisCap" id="btnJuzga" name="btnJuzga">Juzgados</button>
             <button class="btnSisCap" id="btnJuez" name="btnJuez">Jueces</button>
             <%
+                //Control de usuarios si es administrador entonces mostramos la opcion de Usuarios
                 if(session.getAttribute("tipoUsuario") != null){
                     if((Integer)session.getAttribute("tipoUsuario") == 1){
                         out.print("<button class='btnSisCap' id='btnUsuario' name='btnUsuario'>Usuarios</button>");

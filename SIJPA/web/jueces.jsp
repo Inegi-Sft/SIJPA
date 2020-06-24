@@ -15,9 +15,30 @@
         <title>SIJPA::Jueces</title>
         <%@include file="librerias.jsp" %>
         <% 
+            //Control de Acertados o errores al insertar o actualizar registros
+            if(request.getParameter("insert") != null){
+                int integer = Integer.parseInt(request.getParameter("insert"));
+                out.println("<script>$(document).ready(function () {");
+                if(integer == 100){
+                    out.println("alertify.alert('Confirmado','El Juez fue guardado correctamente', function(){"
+                            + "alertify.success('Juez Guardado OK')});");
+                }else if(integer == 101){
+                    out.println("alertify.alert('Confirmado','El Juez fue actualizado correctamente', function(){"
+                            + "alertify.success('Juez Actualizado OK')});");
+                }else if(integer == 200){
+                    out.println("alertify.alert('Error','El Juez no se pudo guardar', function(){"
+                            + "alertify.error('Juez Sin Guardar')});");
+                }else if(integer == 201){
+                    out.println("alertify.alert('Error','El Juez no se pudo actualizar', function(){"
+                            + "alertify.error('Juez Sin Actualizar')});");
+                }
+                out.println("});</script>");
+            }
+            
+            //Controlamos el juzgado para que tenga siempre uno seleccionado
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
-                juzgado=request.getParameter("juzgado");
+                juzgado = request.getParameter("juzgado");
                 session.setAttribute("juzgadoClave", juzgado);
             }else if(session.getAttribute("juzgadoClave") != null){
                 juzgado = (String) session.getAttribute("juzgadoClave");

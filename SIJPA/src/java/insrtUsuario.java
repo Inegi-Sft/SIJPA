@@ -66,23 +66,19 @@ public class insrtUsuario extends HttpServlet {
                     System.out.println(sql);
                     if(conn.escribir(sql)){
                         if(tipoUsuario == 1){
-                            request.setAttribute("insert", 100);
-                            request.getRequestDispatcher("index.jsp").forward(request, response);
                             conn.close();
+                            response.sendRedirect("index.jsp?insert=100");
                         }else{
-                            request.setAttribute("insert", 100);
-                            request.getRequestDispatcher("usuario.jsp").forward(request, response);
                             conn.close();
+                            response.sendRedirect("usuario.jsp?insert=100");
                         }
                     }else{//Errores en la conexion de BD o en las consultas
                         if(tipoUsuario == 1){
-                            request.setAttribute("insert", 200);
-                            request.getRequestDispatcher("index.jsp").forward(request, response);
                             conn.close();
+                            response.sendRedirect("index.jsp?insert=200");
                         }else{
-                            request.setAttribute("insert", 200);
-                            request.getRequestDispatcher("usuario.jsp").forward(request, response);
                             conn.close();
+                            response.sendRedirect("usuario.jsp?insert=200");
                         }
                         conn.close();
                     }
@@ -93,13 +89,11 @@ public class insrtUsuario extends HttpServlet {
                             + "WHERE USUARIO_ID = " + usuarioId + ";";
                     System.out.println(sql);
                     if(conn.escribir(sql)){
-                        request.setAttribute("insert", 101);
-                        request.getRequestDispatcher("usuario.jsp").forward(request, response);
                         conn.close();
+                        response.sendRedirect("usuario.jsp?insert=101");
                     }else{
-                        request.setAttribute("insert", 201);
-                        request.getRequestDispatcher("usuario.jsp").forward(request, response);
                         conn.close();
+                        response.sendRedirect("usuario.jsp?insert=201");
                     }
                 }
             } catch (SQLException ex) {
@@ -107,23 +101,21 @@ public class insrtUsuario extends HttpServlet {
             }
         }
         
-        //Validacion si aceptan el acuerdo en la pagina de bienvenida se actualiza para que no se vuelva a mostrar
+        //Validacion si aceptan el acuerdo en la pagina de bienvenida se actualiza la visita del ususario para que no se vuelva a mostrar
         if(request.getParameter("aceptarAcuerdo") != null){
             HttpSession sesion = request.getSession();
             String usuario = (String) sesion.getAttribute("usuActivo");
-            
             try {
                 conn.Conectar();
                 sql = "UPDATE USUARIOS SET VISITA = 1 WHERE CORREO = '" + usuario + "';";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                    int visita = 1;
-                    sesion.setAttribute("visitaUsuario", visita);
-                    sesion.setMaxInactiveInterval(-1);
-                    response.sendRedirect("causasPenales.jsp");
+                    //Aceptando el accuerdo lo mandamos directo a capturar el primer juzgado
+                    response.sendRedirect("capturaJuzgado.jsp?insert=103");
                     conn.close();
                 }else{
-                    response.sendRedirect("index.jsp?errorbd=si");
+                    request.setAttribute("insert", 300);
+                    request.getRequestDispatcher("bienvenida.jsp").forward(request, response);
                     conn.close();
                 }
             } catch (SQLException ex) {

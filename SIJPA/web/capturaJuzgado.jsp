@@ -16,20 +16,20 @@
         <script type="text/javascript" src="js/fnJuzgados.js"></script>
         <%@include file="librerias.jsp"%>
         <% 
-            if(request.getParameter("errorJuzgado") != null){
-                int error = Integer.parseInt(request.getParameter("errorJuzgado"));
-                switch(error){
-                    case 100:
-                        out.println("<script>alert('Lo datos del Informe no se puede insertar verificar la base')</script>");
-                        break;
-                    case 200:
-                        out.println("<script>alert('El Juzgado no se pudo insertar, tal vez este duplicado')</script>");
-                        break;
+            //Unicamente lo utilizamos cuando recibimos la variable de Binevenida
+            if(request.getParameter("insert") != null){
+                int integer = Integer.parseInt(request.getParameter("insert"));
+                out.println("<script>$(document).ready(function () {");
+                if(integer == 103){
+                    out.println("alertify.alert('Confirmado','El Acuerdo fue Aceptado Correctamente', function(){"
+                            + "alertify.success('Acuerdo Aceptado OK')});");
                 }
+                out.println("});</script>");
             }
             
             catalogos cat = new catalogos();
             ArrayList<String[]> lista, listaDatJuz, informeJuz;
+            
             
             showJuzgados sJuzgado = new showJuzgados();
             int totJuzgado = sJuzgado.findTotJuzgado();
@@ -71,8 +71,8 @@
             String causaTram = "";
             String causaBaja = "";
             String ejercicio = "";
-            if(request.getParameter("claveJuz") != null){
-                juzClave = request.getParameter("claveJuz");
+            if(request.getParameter("claveJuzgado") != null){
+                juzClave = request.getParameter("claveJuzgado");
                 listaDatJuz = sJuzgado.findJuzgadoDato(juzClave);
                 informeJuz  = sJuzgado.findInformeJuz(juzClave);
                 if(listaDatJuz.size() > 0){

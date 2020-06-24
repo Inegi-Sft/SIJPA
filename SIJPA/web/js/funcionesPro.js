@@ -55,6 +55,7 @@ $(document).ready(function() {
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#grupoDelictivo').val() === '1'){
         $('#gruDeli').show();
+        $('#delictivo').prop('required', true);
     }
     
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
@@ -98,7 +99,7 @@ $(document).ready(function() {
             $('#chkdelictivo').prop("checked", false);
         } else {
             $('#gruDeli').fadeOut('slow');
-            $('#delictivo').val('-2').prop('required', true);
+            $('#delictivo').val('-2').prop('required', false);
             $('#chkdelictivo').prop("checked", false);
         }
     });

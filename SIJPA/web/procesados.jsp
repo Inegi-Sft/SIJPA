@@ -761,7 +761,7 @@
                     <fieldset class="subField colsA">
                         <div class="colsx">
                             <label for="presentAdo">¿Forma parte o pertenece a algún grupo delictivo?</label>
-                            <select  name="grupoDelictivo" id="grupoDelictivo" onchange="respuestaSimpleSelect('#grupoDelictivo', '#gruDeli', '#delictivo');" required>
+                            <select  name="grupoDelictivo" id="grupoDelictivo" required>
                                 <option value="">--Seleccione--</option>
                                 <%
                                     lista = cat.findRespuestaSimple();
@@ -776,7 +776,7 @@
                             </select>
                         </div>
                         <div class="colsx oculto" id="gruDeli">
-                            <label for="presentAdo">Grupo delictivo del que forma parte</label>
+                            <label for="delictivo">Grupo delictivo del que forma parte</label>
                             <input type="text" class="txtLong"  name="delictivo" id="delictivo" value="<%=nomGpoDeli%>">
                             <div class="noIdentificada">
                                 <input type="checkbox" id="chkdelictivo">

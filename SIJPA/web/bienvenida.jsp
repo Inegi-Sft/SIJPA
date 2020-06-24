@@ -6,23 +6,23 @@
 
 <%@page import="clasesAuxiliar.usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    usuario usuario = new usuario();
-    int visita = usuario.findVisitaUsu((String) session.getAttribute("usuActivo"));
-    if(visita == 1){
-        response.sendRedirect("sistemasCap.jsp");
-    }
-    
-    if(request.getParameter("errorbd") != null){
-        out.println("<script>alert('Error con la Base de Datos, favor de checarlo')</script>");
-    }
-%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Bienvenida</title>
         <%@include file="librerias.jsp" %>
+        <%
+            if(request.getParameter("insert") != null){
+                int integer = Integer.parseInt(request.getParameter("insert"));
+                out.println("<script>$(document).ready(function () {");
+                if(integer == 200){
+                    out.println("alertify.alert('Error !!','Acuerdo no guardado correctamente', function(){"
+                            + "alertify.error('Error al Aceptar Acuerdo')});");
+                    out.println("});</script>");
+                }
+            }
+        %>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>

@@ -14,21 +14,22 @@
         <title>SIJPA::Usuarios</title>
         <%@include file="librerias.jsp"%>
         <%
-            if(request.getAttribute("insert") != null){
-                int integer = (Integer)request.getAttribute("insert");
+            //Control de Acertados o errores al insertar o actualizar registros
+            if(request.getParameter("insert") != null){
+                int integer = Integer.parseInt(request.getParameter("insert"));
                 out.println("<script>$(document).ready(function () {");
                 if(integer == 100){
                     out.println("alertify.alert('Confirmado','El Usuario fue guardado correctamente', function(){"
-                            + "alertify.success('Guardado OK')});");
-                }else if(integer == 100){
+                            + "alertify.success('Usuario Guardado OK')});");
+                }else if(integer == 101){
                     out.println("alertify.alert('Confirmado','El Usuario fue actualizado correctamente', function(){"
-                            + "alertify.success('Actualizado OK')});");
+                            + "alertify.success('Usuario Actualizado OK')});");
                 }else if(integer == 200){
                     out.println("alertify.alert('Error','El Usuario no se pudo guardar', function(){"
-                            + "alertify.error('Sin Guardar')});");
+                            + "alertify.error('Usuario Sin Guardar')});");
                 }else if(integer == 201){
                     out.println("alertify.alert('Error','El Usuario no se pudo actualizar', function(){"
-                            + "alertify.error('Sin Actualizar')});");
+                            + "alertify.error('Usuario Sin Actualizar')});");
                 }
                 out.println("});</script>");
             }

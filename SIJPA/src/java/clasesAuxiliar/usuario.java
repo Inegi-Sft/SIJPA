@@ -216,10 +216,19 @@ public class usuario {
     public void insrtAvance(String causaClave, int avance){
         try{
             conn.Conectar();
-            if(avance == 2){
-                sql = "INSERT INTO USUARIOS_CONTROL(CAUSA_CLAVE,AVANCE) VALUES('" + causaClave + "'," + avance + ");";
-            }else{
-                sql = "UPDATE USUARIOS_CONTROL SET AVANCE = " + avance + " WHERE CAUSA_CLAVE = '" + causaClave + "';";
+            switch (avance) {
+                case 0:
+                    //Recibimos usuario incompetente
+                    sql = "INSERT INTO USUARIOS_CONTROL(CAUSA_CLAVE,AVANCE) VALUES('" + causaClave + "'," + avance + ");";
+                    break;
+                case 2:
+                    //Recibimos usaurio competente, entonces comienza con el avance
+                    sql = "INSERT INTO USUARIOS_CONTROL(CAUSA_CLAVE,AVANCE) VALUES('" + causaClave + "'," + avance + ");";
+                    break;
+                default:
+                    //Vamos actualizando el avance del usuario
+                    sql = "UPDATE USUARIOS_CONTROL SET AVANCE = " + avance + " WHERE CAUSA_CLAVE = '" + causaClave + "';";
+                    break;
             }
             System.out.println(sql);
             conn.escribir(sql);

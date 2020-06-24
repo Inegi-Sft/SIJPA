@@ -109,7 +109,7 @@ public class insrtProcesados extends HttpServlet {
 
         //VARIABLES PDELITOS
         String[] arrayDelito = request.getParameterValues("arrayDelito");
-//        String[] arrayNumVic = request.getParameterValues("arrayNumVic");
+        //String[] arrayNumVic = request.getParameterValues("arrayNumVic");
 
         //***********************************INSERT*************************************************
         try {
@@ -147,10 +147,9 @@ public class insrtProcesados extends HttpServlet {
                         }
                     }
 
-                    for (int i = 0; i < arrayDelito.length; i++) {
+                    for (String arrayDelito1 : arrayDelito) {
                         sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
-                                    + 0 + ",(select YEAR(NOW())) )";
+                                + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito1 + "'," + 0 + ",(select YEAR(NOW())) )";
                         System.out.println(sql);
                         insertPD = conn.escribir(sql);
                     }
@@ -212,10 +211,9 @@ public class insrtProcesados extends HttpServlet {
                             conn.escribir(sql);
                         }
                     }
-                    for (int i = 0; i < arrayDelito.length; i++) {
+                    for (String arrayDelito1 : arrayDelito) {
                         sql = "INSERT INTO DATOS_PDELITOS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
-                                    + 0 + ",(select YEAR(NOW())) )";
+                                + causaClave + "','" + proceClave + jConcatenado + "','" + arrayDelito1 + "'," + 0 + ",(select YEAR(NOW())) )";
                         System.out.println(sql);
                         insertPD = conn.escribir(sql);
                     }

@@ -44,7 +44,7 @@ $(document).ready(function () {
             success: function (response) {
                 console.log("Respuesta del servidor", response);
                 if (response === 1) {
-                    window.location.href = "bienvenida.jsp";
+                    window.location.href = "sistemasCap.jsp";
                 } else {
                     alertify.alert('Mensaje Importante', 'Usuario no Encontrado\n Intente de nuevo', function(){
                         alertify.error('Verifique las credenciales de acceso'); 
@@ -560,7 +560,7 @@ function buscaYremplaza(proceClave, etapaProce){
             dato = $(this).html();
             console.log('dato intermedia: ' + dato + ' proceClave: ' + proceClave);
             if(proceClave === dato){
-                if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
+                //if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
                     if($(this).parent().find('td:eq(2)').html() !== ''){
                         //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
                         console.log('Esta insertado en BD');
@@ -572,7 +572,7 @@ function buscaYremplaza(proceClave, etapaProce){
                     if(parent.$('#tablaIntermedia tbody tr').length === 0){
                         parent.$('#btn6').prop('disabled', true);
                     }
-                }
+                //}
             }
         });
     }
@@ -582,7 +582,7 @@ function buscaYremplaza(proceClave, etapaProce){
                 dato = $(this).html();
                 console.log('dato conclusion: ' + dato + ' proceClave: ' + proceClave);
                 if(proceClave === dato){
-                    if(etapaProce !== 2 || etapaProce !== 6){//Quiere decir que cambio de etapa en la actualizacion
+                    //if(etapaProce !== 2 || etapaProce !== 6){//Quiere decir que cambio de etapa en la actualizacion
                         if($(this).parent().find('td:eq(2)').html() !== ''){
                             //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
                             console.log('Esta insertado en BD');
@@ -596,7 +596,7 @@ function buscaYremplaza(proceClave, etapaProce){
                                 parent.$('#btn7').prop('disabled', true);
                             }
                         }
-                    }
+                    //}
                 }
             });
         }
@@ -607,7 +607,7 @@ function buscaYremplaza(proceClave, etapaProce){
                 dato = $(this).html();
                 console.log('dato tramite: ' + dato + ' proceClave: ' + proceClave);
                 if(proceClave === dato){
-                    if(etapaProce !== 3 || etapaProce !== 7){//Quiere decir que cambio de etapa en la actualizacion
+                    //if(etapaProce !== 3 || etapaProce !== 7){//Quiere decir que cambio de etapa en la actualizacion
                         if($(this).parent().find('td:eq(2)').html() !== ''){
                             //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
                             console.log('Esta insertado en BD');
@@ -621,7 +621,7 @@ function buscaYremplaza(proceClave, etapaProce){
                                 parent.$('#btn8').prop('disabled', true);
                             }
                         }
-                    }
+                    //}
                 }
             });
         }
@@ -632,7 +632,7 @@ function buscaYremplaza(proceClave, etapaProce){
                 dato = $(this).html();
                 console.log('dato volando: ' + dato + ' proceClave: ' + proceClave);
                 if(proceClave === dato){
-                    if(etapaProce !== 5){//Quiere decir que cambio de etapa en la actualizacion
+                    //if(etapaProce !== 5){//Quiere decir que cambio de etapa en la actualizacion
                         $(this).parent().remove();
                         var numReg = parent.$('#tablaVolando tbody tr').length;
                         if (numReg === 0) {
@@ -642,7 +642,7 @@ function buscaYremplaza(proceClave, etapaProce){
                         } else {
                             parent.$('.indicador2 span').text(numReg);//Lo mostramos con la cantidad actualizada
                         }
-                    }
+                    //}
                 }
             });
         }
@@ -683,7 +683,7 @@ function buscaYremplazaJO(proceClaveJO, etapaProce){
             dato = $(this).html();
             console.log('dato conclusion JO: ' + dato + ' proceClave: ' + proceClaveJO);
             if(proceClaveJO === dato){
-                if(etapaProce !== 2){//Quiere decir que cambio de etapa en la actualizacion
+                //if(etapaProce !== 2){//Quiere decir que cambio de etapa en la actualizacion
                     if($(this).parent().find('td:eq(2)').html() !== ''){
                         //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
                         console.log('Esta insertado en BD');
@@ -695,7 +695,7 @@ function buscaYremplazaJO(proceClaveJO, etapaProce){
                     if(parent.$('#tablaConcluJO tbody tr').length === 0){
                         parent.$('#btn6').prop('disabled', true);
                     }
-                }
+                //}
             }
         });
     }
@@ -705,7 +705,7 @@ function buscaYremplazaJO(proceClaveJO, etapaProce){
                 dato = $(this).html();
                 console.log('dato tramite JO: ' + dato + ' proceClave: ' + proceClaveJO);
                 if(proceClaveJO === dato){
-                    if(etapaProce !== 3 || etapaProce !== 7){//Quiere decir que cambio de etapa en la actualizacion
+                    //if(etapaProce !== 3 || etapaProce !== 7){//Quiere decir que cambio de etapa en la actualizacion
                         if($(this).parent().find('td:eq(2)').html() !== ''){
                             //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
                             console.log('Esta insertado en BD');
@@ -717,7 +717,7 @@ function buscaYremplazaJO(proceClaveJO, etapaProce){
                         if(parent.$('#tablaTramiteJO tbody tr').length === 0){
                             parent.$('#btn7').prop('disabled', true);
                         }
-                    }
+                    //}
                 }
             });
         }

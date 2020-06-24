@@ -20,7 +20,7 @@
             ArrayList<String[]> lista, sUsuario;
 
             usuario usuario = new usuario();
-            int tot = usuario.findTotUsu();
+            int totUsuarios = usuario.findTotUsu();
             
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
             int usuarioClave = 0;
@@ -51,14 +51,14 @@
         %>
     </head>
     <body>
-        <% if(tot != 0){ %>
+        <% if(totUsuarios != 0){ %>
             <%@include file="cabecera.jsp"%>
             <%@include file="menu.jsp"%>
         <% } %>
         <section class="contenedor">
             <a class="btnCerrar" title="Cerrar" href="usuario.jsp" >X</a>
             <% 
-                if(tot != 0){
+                if(totUsuarios != 0){
                     out.println("<div class='toggle-nav'>");
                     out.println("<div class='toggle-nav-inner'></div>");
                     out.println("</div>");
@@ -85,7 +85,7 @@
                                 <label for="nom">Nombre(s)</label>
                                 <input type="text" name="nom" id="nom" value="<%=nombreUsu%>" required>
                                 <% //Si no tenemos usuarios insertados en BD entonces el primero es el admin, posterior seran captura
-                                    if(tot == 0){
+                                    if(totUsuarios == 0){
                                         out.println("<input type='hidden' name='tipoUsuario' id='tipoUsuario' value='1'/>");
                                     }else{
                                         out.println("<input type='hidden' name='tipoUsuario' id='tipoUsuario' value='2'/>");
@@ -113,7 +113,7 @@
                             <td>
                                 <label for="entidad">Entidad Federativa</label>
                                 <%
-                                    if(tot == 0){
+                                    if(totUsuarios == 0){
                                         out.println("<select name='entidad' id='entidad' required>");
                                         out.println("<option value=''>--Seleccione--</option>");
                                         lista = cat.findEntidades();
@@ -154,7 +154,7 @@
                 <br/>
                 <input type="submit" name="guardar" id="guardar" value="Guardar" hidden>
             </form>
-            <% if(tot == 0){ %>
+            <% if(totUsuarios == 0){ %>
             <div id="mensajeAdmin">
                 <p>
                     Bienvenido a la captura del Usuario Administrador del sistema SIJPA. Siendo que es la primera vez que se utiliza el sistema, se necesita capturar

@@ -14,7 +14,27 @@
         <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
         <title>SIJPA::Juzgados</title>
         <%@include file="librerias.jsp" %>
-        <% 
+        <%  
+            //Control de Acertados o errores al insertar o actualizar registros
+            if(request.getParameter("insert") != null){
+                int integer = Integer.parseInt(request.getParameter("insert"));
+                out.println("<script>$(document).ready(function () {");
+                if(integer == 100){
+                    out.println("alertify.alert('Confirmado','El Juzgado fue guardado correctamente', function(){"
+                            + "alertify.success('Juzgado Guardado OK')});");
+                }else if(integer == 101){
+                    out.println("alertify.alert('Confirmado','El Juzgado fue actualizado correctamente', function(){"
+                            + "alertify.success('Juzgado Actualizado OK')});");
+                }else if(integer == 200){
+                    out.println("alertify.alert('Error','El Juzgado no se pudo guardar', function(){"
+                            + "alertify.error('Juzgado Sin Guardar')});");
+                }else if(integer == 201){
+                    out.println("alertify.alert('Error','El Juzgado no se pudo actualizar', function(){"
+                            + "alertify.error('Juzgado Sin Actualizar')});");
+                }
+                out.println("});</script>");
+            }
+            
             showJuzgados sj = new showJuzgados();
             ArrayList<String[]> lista;
         %>
@@ -57,7 +77,7 @@
                         out.println("<td>" + lsj[4] + "</td>");
                         out.println("<td>" + lsj[5] + "</td>");
                         out.println("<td>" + lsj[6] + "</td>");
-                        out.println("<td><a href='capturaJuzgado.jsp?claveJuz=" + lsj[0] + "' class='popJ'><img src='img/editar.png' title='Editar'/></a></td>");
+                        out.println("<td><a href='capturaJuzgado.jsp?claveJuzgado=" + lsj[0] + "'><img src='img/editar.png' title='Editar'/></a></td>");
                         out.println("<td><a href='#' class='estatus'><img src='img/update.png' title='Cambiar Estatus'/></a></td>");
                         out.println("</tr>");
                     }

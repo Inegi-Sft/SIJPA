@@ -73,11 +73,18 @@ public class insrtJuez extends HttpServlet {
                         + ")";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                    conn.close();
-                    response.sendRedirect("jueces.jsp");
+                    //Si es el primer juez actualizamos la visita del ususario y lo mandamos al capturar el juez
+                    if(juezID == 1){
+                        conn.close();
+                        //Si se inserta correctamente lo mandamos a causas penales JC ya que es el primer juez
+                        response.sendRedirect("capturaCausaPenal.jsp?insert=100");
+                    }else{
+                        conn.close();
+                        response.sendRedirect("jueces.jsp?insert=100");
+                    }
                 }else{
                     conn.close();
-                    response.sendRedirect("jueces.jsp?error=100");
+                    response.sendRedirect("jueces.jsp?insert=200");
                 }
             }else{//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_JUECES_ADOJC SET NOMBRE_JUEZ = '" + nombre + "',APELLIDOP_JUEZ = '" + apaterno + "',"
@@ -88,10 +95,10 @@ public class insrtJuez extends HttpServlet {
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                     conn.close();
-                    response.sendRedirect("jueces.jsp");
+                    response.sendRedirect("jueces.jsp?insert=101");
                 }else{
                     conn.close();
-                    response.sendRedirect("jueces.jsp?error=100");
+                    response.sendRedirect("jueces.jsp?insert=201");
                 }
             }
         } catch (SQLException ex) {

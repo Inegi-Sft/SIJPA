@@ -7,7 +7,6 @@ package clasesAuxiliar;
 
 import ConexionDB.Conexion_Mysql;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 /**
  *

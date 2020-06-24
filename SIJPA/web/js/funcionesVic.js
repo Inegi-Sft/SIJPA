@@ -142,36 +142,6 @@ $(document).ready(function() {
         }
     });
 
-    $('#formVictimas').submit(function (e) {
-        if ($('#deliCometido:checked').length === 0) {
-            e.preventDefault();
-            alert('Selecciona al menos una opcion de Delitos cometidos a la Victima');
-            $('#deliCometido').focus();
-        }
-
-        if ($('.RelaProceChk:checked').length === 0) {
-            e.preventDefault();
-            alert('Selecciona al menos una opcion de Relacion de la Victima con el Procesado');
-            $('#chkRelaProce').focus();
-        }
-
-        if ($('#mProtect').val() === '1') {
-            if ($('input[name="aplicaMedida"]:checked').length === 0) {
-                e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Protección');
-                $('#mProtect').focus();
-            }
-        }
-
-        if ($('#mujProtect').val() === '1') {
-            if ($('input[name="aplicaMedidaMuj"]:checked').length === 0) {
-                e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Protección contra Mujeres');
-                $('#mujProtect').focus();
-            }
-        }
-    });
-
     $('#ingresos').change(function (e) {
         if ($(this).val() === '1') {
             $('#rangoInge, #fuenteIngre').fadeIn('slow');
@@ -285,6 +255,23 @@ $(document).ready(function() {
                 return false;
             }
         }
+        
+        if ($('#mProtect').val() === '1') {
+            if ($('input[name="aplicaMedida"]:checked').length === 0) {
+                e.preventDefault();
+                alert('Selecciona al menos una opcion de Medidas de Protección');
+                $('#mProtect').focus();
+            }
+        }
+
+        if ($('#mujProtect').val() === '1') {
+            if ($('input[name="aplicaMedidaMuj"]:checked').length === 0) {
+                e.preventDefault();
+                alert('Selecciona al menos una opcion de Medidas de Protección contra Mujeres');
+                $('#mujProtect').focus();
+            }
+        }
+        
         $.ajax({
             type: 'post',
             url: 'insrtVictimas',

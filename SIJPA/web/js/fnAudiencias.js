@@ -36,7 +36,7 @@ $(document).ready(function () {
             data: $('#formAudiencias').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Audiencias guardar: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 window.location='audiencias.jsp';
             },
             error: function (response) {

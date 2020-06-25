@@ -159,7 +159,7 @@ $(document).ready(function() {
             data: $('#formProcesados').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Procesados: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#Tadolescentes').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 5; i++) {

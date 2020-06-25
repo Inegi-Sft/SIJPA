@@ -237,39 +237,25 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopImmediatePropagation();
         if ($('#deliCometido:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Delitos cometidos a la Victima');
+            alert('Selecciona al menos una opcion de Delitos cometidos a la V\u00EDctima');
             $('#deliCometido').focus();
             return false;
-        }
-        
-        if ($('.RelaProceChk:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Relacion de la Victima con el Procesado');
+        }else if ($('.RelaProceChk:checked').length === 0) {
+            alert('Selecciona al menos una opcion de Relacion de la V\u00EDctima con el Procesado');
             $('#chkRelaProce').focus();
             return false;
-        }
-        
-        if($('#ingresos').val() === '1'){
-            if ($('input[name="chkIngresos"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de Fuente de Ingresos');
-                $('input[name="chkIngresos"]').focus();
-                return false;
-            }
-        }
-        
-        if ($('#mProtect').val() === '1') {
-            if ($('input[name="aplicaMedida"]:checked').length === 0) {
-                e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Protección');
-                $('#mProtect').focus();
-            }
-        }
-
-        if ($('#mujProtect').val() === '1') {
-            if ($('input[name="aplicaMedidaMuj"]:checked').length === 0) {
-                e.preventDefault();
-                alert('Selecciona al menos una opcion de Medidas de Protección contra Mujeres');
-                $('#mujProtect').focus();
-            }
+        }else if($('#ingresos').val() === '1' && $('input[name="chkIngresos"]:checked').length === 0){
+            alert('Selecciona al menos una opcion de Fuente de Ingresos');
+            $('input[name="chkIngresos"]').focus();
+            return false;
+        }else if ($('#mProtect').val() === '1' && $('input[name="aplicaMedida"]:checked').length === 0) {
+            alert('Selecciona al menos una opcion de Medidas de Protecci\u00F3n');
+            $('#mProtect').focus();
+            return false;
+        }else if ($('#mujProtect').val() === '1' && $('input[name="aplicaMedidaMuj"]:checked').length === 0) {
+            alert('Selecciona al menos una opcion de Medidas de Protecci\u00F3n contra Mujeres');
+            $('#mujProtect').focus();
+            return false;
         }
         
         $.ajax({
@@ -278,7 +264,7 @@ $(document).ready(function() {
             data: $('#formVictimas').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Victimas: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#Tvictimas').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 5; i++) {
@@ -317,7 +303,7 @@ function victimaDelito(obj){
     }else{
         if(tipoVic !=='1'){
             if((norma>=1 && norma<=28) || (norma>=60 && norma<=62)){
-                alert("Este delito no puede aplicarse al tipo de victima seleccionada. Es unicamente para Personas Fisicas");
+                alert("Este delito no puede aplicarse al tipo de victima seleccionada. Es unicamente para Personas F\u00EDsicas");
                 $(obj).prop("checked", false);
             }
         }else{

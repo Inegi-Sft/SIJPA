@@ -118,7 +118,7 @@ $(document).ready(function () {
             data: $('#fromJuicioO').serialize(),
             success: function (response) { 
                 console.log("Respuesta del servidor Etapa Oral: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#TadolescentesJO').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i < 8; i++) {

@@ -365,20 +365,43 @@ $(document).ready(function() {
     $('#fromInicial').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if ($('#drecretaMC').val() === '1') {
-            if ($('input[name="chkSoliMedi"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de quien solicita las Medidas Cautelares');
-                $('#drecretaMC').focus();
-                return false;
-            }
+        if ($('#drecretaMC').val() === '1' && $('input[name="chkSoliMedi"]:checked').length === 0) {
+            alert('Selecciona al menos una opcion de quien solicita las Medidas Cautelares');
+            $('#drecretaMC').focus();
+            return false;
+        }else if($('#chkSoliMedi1').is(':checked') && $('input[name="chkMediCau1"]:checked').length === 0){
+            alert('Selecciona al menos una Medida Cautelar del solicitante Ministerio P\u00FAblico');
+            $('#chkSoliMedi1').focus();
+            return false;
+        }else if($('#chkSoliMedi2').is(':checked') && $('input[name="chkMediCau2"]:checked').length === 0){
+            alert('Selecciona al menos una Medida Cautelar del solicitante Ofendido');
+            $('#chkSoliMedi2').focus();
+            return false;
+        }else if($('#chkSoliMedi3').is(':checked') && $('input[name="chkMediCau3"]:checked').length === 0){
+            alert('Selecciona al menos una Medida Cautelar del solicitante V\u00EDctima');
+            $('#chkSoliMedi3').focus();
+            return false;
+        }else if($('#chkSoliMedi4').is(':checked') && $('input[name="chkMediCau4"]:checked').length === 0){
+            alert('Selecciona al menos una Medida Cautelar del solicitante Asesor Jur\u00EDdico');
+            $('#chkSoliMedi4').focus();
+            return false;
+        }else if($('#chkSoliMedi5').is(':checked') && $('input[name="chkMediCau5"]:checked').length === 0){
+            alert('Selecciona al menos una Medida Cautelar del solicitante Defensor del Adolescente');
+            $('#chkSoliMedi5').focus();
+            return false;
+        }else if($('#chkSoliMedi9').is(':checked') && $('input[name="chkMediCau9"]:checked').length === 0){
+            alert('Selecciona al menos una Medida Cautelar del solicitante No Identificado');
+            $('#chkSoliMedi9').focus();
+            return false;
         }
+        
         $.ajax({
             type: 'post',
             url: 'insrtInicial',
             data: $('#fromInicial').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Inicial: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#Tadolescentes').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i <= 6; i++) {//pone filas correspondientes en la tabla de inicial
@@ -414,7 +437,7 @@ $(document).ready(function() {
                         parent.$('.agregar').show();//Mosramos el boton de agregar
                         var totProceVola = parseInt(parent.$('#indicaVolando').text()) + 1;//Obtenemos el valor de procesados volando
                         parent.$('.indicador2 span').text(totProceVola);//Lo mostramos con la cantidad actualizada
-                        alert('procesado volando con: ' + totProceVola);
+//                        alert('procesado volando con: ' + totProceVola);
                         parent.$('#btn7').addClass(' activar');
                         parent.$('#btn8').addClass(' activar');
                     }

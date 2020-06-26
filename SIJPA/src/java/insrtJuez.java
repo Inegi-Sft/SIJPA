@@ -77,7 +77,7 @@ public class insrtJuez extends HttpServlet {
                     if(juezID == 1){
                         conn.close();
                         //Si se inserta correctamente lo mandamos a causas penales JC ya que es el primer juez
-                        response.sendRedirect("capturaCausaPenal.jsp?insert=100");
+                        response.sendRedirect("causasPenales.jsp?insert=100");
                     }else{
                         conn.close();
                         response.sendRedirect("jueces.jsp?insert=100");

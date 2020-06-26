@@ -141,7 +141,7 @@
                             <td>
                                 <label for="edadJuez">Edad</label>                               
                                 <select class="txtSmall" name="edadJuez" id="edadJuez" required>
-                                    <option value="">--Seleccione--</option>
+                                    <option value="">--</option>
                                     <%
                                         lista = cat.findEstudioProfesional();
                                         for (int i = 18; i <= 99; i++) {

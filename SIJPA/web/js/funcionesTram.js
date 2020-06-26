@@ -63,7 +63,7 @@ $(document).ready(function() {
             data: $('#formTramite').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Tramite: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 if (response !== null && $.isArray(response)) {
                     if(response[0] === "null"){//No traemos posicion entonces agregamos la fila a la tabla
                         //Si no tare posicion significa que esta volando y se resta de adol por asignar estatus

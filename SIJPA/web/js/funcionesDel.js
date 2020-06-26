@@ -113,9 +113,9 @@ $(document).ready(function () {
                 return false;
             }
         }else if($('#delitoNT').val() === '31'){//Robo a casa abitacón
-            if ($('input[name="dCosaRobada"]:checked').length === 0) {
+            if ($('input[name="cosaRobada"]:checked').length === 0) {
                 alert('Selecciona al menos una opcion de Caracteristicas Adicionales');
-                $('input[name="dCosaRobada"]').focus();
+                $('input[name="cosaRobada"]').focus();
                 return false;
             }
         }
@@ -125,7 +125,7 @@ $(document).ready(function () {
             data: $('#formDelitos').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Delitos: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numDeli = parseInt(parent.$('#Tdelitos').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 6; i++) {

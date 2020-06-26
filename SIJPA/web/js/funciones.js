@@ -239,23 +239,23 @@ $(document).ready(function () {
                     success: function (response) {
                         console.log("Respuesta del servidor al borrar de BD: ", response);
                         if (response === 'tablaJuzgados') {
-                            alert('El Juzgado ' + clave + ' se borro con exito');
+                            alert('El Juzgado ' + clave + ' se borro correctamente');
                         }else if(response === 'tablaJuez'){
-                            alert('El Juez ' + clave + ' se borro con exito');
+                            alert('El Juez ' + clave + ' se borro correctamente');
                         }else if (response === 'causas') {
-                            alert('La causa penal ' + clave + ' se borro con exito');
+                            alert('La causa penal ' + clave + ' se borro correctamente');
                         } else if (response === 'tablaDeli') {
                             $('#Tdelitos').val(numReg);
-                            alert('El Delito ' + clave + ' se borro con exito');
+                            alert('El Delito ' + clave + ' se borro correctamente');
                         } else if (response === 'tablaProcesa') {
                             $('#Tadolescentes').val(numReg);
                             //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
                             $('#tablaInicial tbody tr').eq(pos).remove();
-                            alert('El Procesado ' + clave + ' se borro con exito');
+                            alert('El Procesado ' + clave + ' se borro correctamente');
                             buscaYremplaza(clave, 0);
                         } else if (response === 'tablaVictimas') {
                             $('#Tvictimas').val(numReg);
-                            alert('La Victima ' + clave + ' se borro con exito');
+                            alert('La Victima ' + clave + ' se borro correctamente');
                         }
                     },
                     error: function (response) {

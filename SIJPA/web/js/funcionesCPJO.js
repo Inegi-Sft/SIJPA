@@ -111,7 +111,7 @@ $(document).ready(function () {
                 data: $('#formCausaPenalJO').serialize(),
                 success: function (response) {
                     console.log("Respuesta del servidor Causa Penal JO: ", response);
-                    alert("Guardado con éxito!!!");
+                    alert("Guardado correctamente!!!");
                     $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
                     $("#guardarExpJO").prop("hidden", true);
                     var ccJO = $('#expClaveJO').val().toUpperCase();

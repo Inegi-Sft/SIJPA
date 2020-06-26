@@ -83,11 +83,11 @@ public class insrtCausaPenal extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     usuario usuario = new usuario();
-                    if(competencia == 1){//Incompetente
-                        usuario.insrtAvance(causaClave + jConcatenado, 0);//Insertamos el avance de la causa penal de incompetencia
-                    }else{//Competente
-                        usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal compentente
+                    if(competencia == 1){//Competente
+                        usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal de incompetencia
                         usuario.insrtRegDPV(causaClave, juzgadClave, Integer.parseInt(totalDeli), Integer.parseInt(totalAdo), Integer.parseInt(totalVic));
+                    }else{//Incompetente
+                        usuario.insrtAvance(causaClave + jConcatenado, 0);//Insertamos el avance de la causa penal compentente
                     }
                     JSONArray resp = new JSONArray();
                     resp.add(competencia);//regresamos competencia

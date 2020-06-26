@@ -165,13 +165,13 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopImmediatePropagation();
         if ($('#deliCometido:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Delitos cometidos a la Victima');
+            alert('Selecciona al menos una opcion de Delitos cometidos a la V\u00EDctima');
             $('#deliCometido').focus();
             return false;
         }
         
         if ($('.RelaProceChk:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Relacion de la Victima con el Procesado');
+            alert('Selecciona al menos una opcion de Relacion de la V\u00EDctima con el Procesado');
             $('#chkRelaProce').focus();
             return false;
         }
@@ -189,7 +189,7 @@ $(document).ready(function() {
             data: $('#formVictimasJO').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Victimas: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#TvictimasJO').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 6; i++) {
@@ -203,7 +203,7 @@ $(document).ready(function() {
                     if (response[6] === numProce) {
                         parent.openPestana('btn5', 'p5');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[6]) + ' victimas');
+                        alert('Falta por capturar ' + (numProce - response[6]) + ' v\u00EDctimas');
                     }
                 }
                 parent.$.fancybox.close();

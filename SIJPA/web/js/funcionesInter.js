@@ -154,7 +154,7 @@ $(document).ready(function() {
 
     $('#aperturaJO').change(function () {
         if ($(this).val() === '1') {
-            alert("Causa Penal Concluida. Registre la informacion complementaria en el apartado de resoluciones");
+            alert("Causa Penal Concluida. Registre la informaci\u00F3n complementaria en el apartado de resoluciones");
         }else{
             alert("Esta Causa Penal debe ser registrada en Resoluciones o Tramite segun corresponda");
         }
@@ -166,14 +166,14 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         if ($('#pruebaMP').val() === '1') {
             if ($('input[name="chkpruebaMP"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio público');
+                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio p\u00FAblico');
                 $('#pruebaMP').focus();
                 return false;
             }
         }
         if ($('#pruebaAJ').val() === '1') {
             if ($('input[name="chkpruebaAJ"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por el asesor jurúdico');
+                alert('Selecciona al menos una opcion de prueba presentadas por el asesor jur\u00EDdico');
                 $('#pruebaAJ').focus();
                 return false;
             }
@@ -197,7 +197,7 @@ $(document).ready(function() {
             data: $('#formuMedia').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Intermedia: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#tablaIntermedia tbody tr').length);//Tomamos el total de la tabla de Intermedia
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i <= 5; i++) {

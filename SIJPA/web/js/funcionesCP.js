@@ -125,11 +125,11 @@ $(document).ready(function () {
                 data: $('#formCausaPenal').serialize(),
                 success: function (response) {
                     console.log("Respuesta del servidor Causa Penal: ", response);
-                    alert("Guardado con éxito!!!");
+                    alert("Guardado correctamente!!!");
                     $('#formCausaPenal').find('input, textarea, button, select').attr('disabled', true);
                     $("#guardarExp").prop("hidden", true);
                     if (response !== null && $.isArray(response)) {
-                        if(response[0] === '1'){//organo competente
+                        if(response[0] === 1){//organo competente
                             var expe = $('#expClave').val().toUpperCase();
                             console.log('Entramos  organo competente: ' , response[0]);
                             for(var x = 1; x <= response[2]; x++){

@@ -122,6 +122,7 @@ public class showJueces {
             sql = "SELECT MAX(JUEZ_CLAVE) "
                     + "FROM DATOS_JUECES_ADOJC "
                     + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "AND JUEZ_CLAVE <> -2 "
                     + "ORDER BY JUEZ_CLAVE";
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -141,6 +142,7 @@ public class showJueces {
             sql = "SELECT COUNT(*) "
                     + "FROM DATOS_JUECES_ADOJC "
                     + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "AND JUEZ_CLAVE <> -2 "
                     + "ORDER BY JUEZ_CLAVE";
             rs = conn.consultar(sql);
             while (rs.next()) {

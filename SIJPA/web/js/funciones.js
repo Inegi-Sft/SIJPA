@@ -635,11 +635,19 @@ function buscaYremplaza(proceClave, etapaProce){
                     //if(etapaProce !== 5){//Quiere decir que cambio de etapa en la actualizacion
                         $(this).parent().remove();
                         var numReg = parent.$('#tablaVolando tbody tr').length;
-                        if (numReg === 0) {
+                        if (numReg === 0) {//Si ya no tenemos procesados volando
                             parent.$('.indicador2').css('color', '#00BD25');//Cambiamos el color a verde
                             parent.$('.agregar').hide();//Escondemos el boton de agregar
                             parent.$('.indicador2 span').text(numReg);//Lo mostramos con la cantidad actualizada
-                        } else {
+                            //Si no hay procesados volando ni en conclusiones entonces desactivamos conclusiones
+                            if(parent.$('#tablaConclu tbody tr').length === 0){
+                                parent.$('#btn7').prop('disabled', true);
+                            }
+                            //Si no hay procesados volando ni en tramite entonces desactivamos tramite
+                            if(parent.$('#tablaTramite tbody tr').length === 0){
+                                parent.$('#btn8').prop('disabled', true);
+                            }
+                        } else {//Aun tenemos procesados volando
                             parent.$('.indicador2 span').text(numReg);//Lo mostramos con la cantidad actualizada
                         }
                     //}

@@ -372,13 +372,14 @@ $(document).ready(function() {
                 return false;
             }
         }
+        
         $.ajax({
             type: 'post',
             url: 'insrtInicial',
             data: $('#fromInicial').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Inicial: ", response);
-                alert("Guardado con éxito!!!");
+                alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#Tadolescentes').val());
                 if (response !== null && $.isArray(response)) {
                     for (var i = 2; i <= 6; i++) {//pone filas correspondientes en la tabla de inicial

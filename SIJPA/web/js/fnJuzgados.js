@@ -1,44 +1,44 @@
 
 function valida(){
     if ($('#nomOrgano').val() === '') {
-        alert('Seccion Datos Principales: \n\n Llena el campo Nombre Organo Jurisdiccional');
+        alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Nombre Organo Jur\u00EDsdiccional');
     }else if ($('#numOrgano').val() ==='') {
-        alert('Seccion Datos Principales: \n\n Llena el campo Numero Organo Jurisdiccional');
+        alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Numero Organo Jur\u00EDsdiccional');
     }else if ($('#jurisdiccion').val() ==='') {
-        alert('Seccion Datos Principales: \n\n Llena el campo Jurisdiccion');
+        alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Jurisdicci\u00F3n');
     }else if ($('#correo').val() ==='') {
-        alert('Seccion Datos Principales: \n\n Llena el campo Correo Organo Jurisdiccional o intruduce un correo de forma valida');
+        alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Correo Organo Jur\u00EDsdiccional o intruduce un correo de forma valida');
     }else if ($('#funcionJuz').val() ==='') {
-        alert('Seccion Datos Principales: \n\n Llena el campo Funcion del organo Jurisdiccional');
+        alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Funci\u00F3n del organo Jur\u00EDsdiccional');
     }else if ($('#entidadJ').val() ==='') {
-        alert('Seccion Ubicacion: \n\n Llena el campo Entidad Federativa');
+        alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Entidad Federativa');
     }else if ($('#municipioJ').val() ==='') {
-        alert('Seccion Ubicacion: \n\n Llena el campo Municipio o Demarcacion Territorial de la CDMX');
+        alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Municipio o Demarcaci\u00F3n Territorial de la CDMX');
     }else if ($('#fDivision').val() ==='') {
-        alert('Seccion Ubicacion: \n\n Llena el campo Forma de Division');
+        alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Forma de Divisi\u00F3n');
     }else if($('#regJudicial').val() ===''){
-        alert('Seccion Ubicacion: \n\n Llena el campo Nombre de la Region Judicial'); 
+        alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Nombre de la Regi\u00F3n Judicial'); 
     }else if($('#distJudicial').val() ===''){
-        alert('Seccion Ubicacion: \n\n Llena el campo Nombre del Distrito Judicial');
+        alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Nombre del Distrito Judicial');
     }else if($('#partJudicial').val() ===''){
-        alert('Seccion Ubicacion: \n\n Llena el campo Nombre del Nombre del Partido Judicial');
+        alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Nombre del Nombre del Partido Judicial');
     }else if ($('#vialidad').val() ==='') {
-        alert('Seccion Domicilio: \n\n Llena el campo Vialidad');
+        alert('Secci\u00F3n Domicilio: \n\n Llena el campo Vialidad');
     }else if ($('#nomVialidad').val() ==='') {
-        alert('Seccion Domicilio: \n\n Llena el campo Nombre de la Vialidad');
+        alert('Secci\u00F3n Domicilio: \n\n Llena el campo Nombre de la Vialidad');
     }else if ($('#asentamiento').val() ==='') {
-        alert('Seccion Domicilio: \n\n Asentamiento Humano');
+        alert('Secci\u00F3n Domicilio: \n\n Asentamiento Humano');
     }else if ($('#nomAsentamiento').val() ==='') {
-        alert('Seccion Domicilio: \n\n Llena el campo Nombre del Asentamiento Humano');
+        alert('Secci\u00F3n Domicilio: \n\n Llena el campo Nombre del Asentamiento Humano');
     }else if ($('#nombreCap').val() ==='') {
-        alert('Seccion Datos del Capturador: \n\n Llena el campo Nombre(s)');
+        alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Nombre(s)');
     }else if ($('#apaternoCap').val() ==='') {
-        alert('Seccion Datos del Capturador: \n\n Llena el campo Apellido Paterno');
+        alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Apellido Paterno');
     }else if ($('#amaternoCap').val() ==='') {
-        alert('Seccion Datos del Capturador: \n\n Llena el campo Apellido Materno');
+        alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Apellido Materno');
     }else if ($('#cargo').val() ==='') {
-        alert('Seccion Datos del Capturador: \n\n Llena el campo Cargo');
+        alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Cargo');
     }else if ($('#ejercicio').val() ==='') {
-        alert('Seccion Informacion General: \n\n Llena el campo Ejercicio');
+        alert('Secci\u00F3n Informaci\u00F3n General: \n\n Llena el campo Ejercicio');
     }
 }

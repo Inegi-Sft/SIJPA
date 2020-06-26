@@ -119,12 +119,14 @@ $(document).ready(function() {
     $('#formProcesadosJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if ($('#ingresosPro').val() === '1') {
-            if ($('input[name="chkIngresosPro"]:checked').length === 0) {
-                alert('Selecciona al menos una fuente de ingreso del procesado');
-                $('input[name="chkIngresosPro"]').focus();
-                return false;
-            }
+        if ($('#ingresosPro').val() === '1' && $('input[name="chkIngresosPro"]:checked').length === 0) {
+            alert('Selecciona al menos una fuente de ingreso del procesado');
+            $('input[name="chkIngresosPro"]').focus();
+            return false;
+        }else if ($('input[name="arrayDelito"]:checked').length === 0) {
+            alert('Selecciona al menos un Delito Atribuido al Adolescente');
+            $('input[name="arrayDelito"]').focus();
+            return false;
         }
         $.ajax({
             type: 'post',

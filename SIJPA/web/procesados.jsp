@@ -138,14 +138,14 @@
     <body style="zoom: .9;">
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
-            <h1>Procesados</h1>
+            <h1>Imputados</h1>
             <form method="post" name="formProcesados" id="formProcesados">
                 <fieldset>
                     <legend>Características Sociodemográficas </legend>
                     <table class="tablaFormu">
                         <tr>
                             <td colspan="4">
-                                <label>Procesado Clave</label>
+                                <label>Imputado Clave</label>
                                 <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
                                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">

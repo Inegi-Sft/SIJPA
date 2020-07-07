@@ -12,7 +12,9 @@ $(document).ready(function () {
         1500);
     });
     
-    if($('#usuarioId').val() === '1'){
+    if($('#usuarioId').val() === '1' && $('#opera').val() === ''){
+        $('input').prop('disabled', false);
+    }else if($('#usuarioId').val() === '1' && $('#opera').val() === 'actualizar'){
         $('input').prop('disabled', true);
         alertify.alert('Mensaje Importante','¡¡ El Usuario ID 1-Administrador no puede ser editado !!');
     }

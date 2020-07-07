@@ -44,9 +44,9 @@ public class obtenCarpeInves extends HttpServlet {
         HttpSession sesion = request.getSession();
         PrintWriter out = response.getWriter();
         Sistema = (String) sesion.getAttribute("Sistema");
-       
+        
         try {
-            response.setContentType("text/html;charset=UTF-8");            
+            response.setContentType("text/html;charset=UTF-8");  
             if ((request.getParameter("CarpInvestiga") != null) && (Sistema.equals("JC"))){
                 juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
                 causaClave = request.getParameter("CarpInvestiga") + juzgadoClave.replace("-", "");

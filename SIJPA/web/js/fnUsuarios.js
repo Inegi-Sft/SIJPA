@@ -7,12 +7,12 @@
 $(document).ready(function () {
     $('#buttonAdmin').click(function () {
         $('#mensajeAdmin').animate({
-            top: "-600"
+            top: "-800"
         },
-        1500);
+        1300);
     });
     
-    if($('#usuarioId').val() === '1'){
+    if($('#usuarioId').val() === '1' && $('#opera').val() !== ''){
         $('input').prop('disabled', true);
         alertify.alert('Mensaje Importante','¡¡ El Usuario ID 1-Administrador no puede ser editado !!');
     }

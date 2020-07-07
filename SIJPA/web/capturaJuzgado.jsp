@@ -143,12 +143,12 @@
                     <table  class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="nomOrgano">Nombre Órgano Jurisdiccional</label>
+                                <label for="nomOrgano">Nombre del órgano jurisdiccional</label>
                                 <input type="text" name="nomOrgano" id="nomOrgano" value="<%=juzNom%>" required/>
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                             </td>
                             <td>
-                                <label for="numJuzgado">Número Órgano Jurisdiccional</label>
+                                <label for="numJuzgado">Número del órgano jurisdiccional</label>
                                 <input type="text" class="soloNum" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" maxlength="3" required/>
                                 <input type="hidden" name="jClaveR" id="jClaveR" value="<%=juzClave%>">
                             </td>
@@ -176,11 +176,11 @@
                                 <input type="text" class="txtMedia soloNum" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="8"/>
                             </td>
                             <td>
-                                <label for="correo">Correo Órgano Jurisdiccional</label>
+                                <label for="correo">Correo del órgano jurisdiccional</label>
                                 <input type="email" name="correo" id="correo" placeholder="nombre@dominio.com" value="<%=correo%>" />
                             </td>
                             <td>
-                                <label for="funcionJuz">Funcion del organo Jurisdiccional</label>
+                                <label for="funcionJuz">Funcion del órgano jurisdiccional</label>
                                 <select name="funcionJuz" id="funcionJuz" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -203,7 +203,7 @@
                     <table  class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="entidadJ">Entidad Federativa</label>
+                                <label for="entidadJ">Entidad federativa</label>
                                 <select name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -241,7 +241,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="fDivision">Forma de División</label>
+                                <label for="fDivision">Forma de división</label>
                                 <select name="fDivision" id="fDivision" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -258,15 +258,15 @@
                             </td>
                             <td>
                                 <div id="dRegJudicial" class="oculto">
-                                    <label for="regJudicial">Nombre de la Región Judicial</label>
+                                    <label for="regJudicial">Nombre de la región judicial</label>
                                     <input type="text" name="regJudicial" id="regJudicial" value="<%=nomReg%>"/>
                                 </div>
                                 <div id="dDistJudicial" class="oculto">
-                                    <label for="distJudicial">Nombre del Distrito Judicial</label>
+                                    <label for="distJudicial">Nombre del distrito judicial</label>
                                     <input type="text" name="distJudicial" id="distJudicial" value="<%=nomDis%>"/>
                                 </div>
                                 <div id="dPartJudicial" class="oculto">
-                                    <label for="partJudicial">Nombre del Partido Judicial</label>
+                                    <label for="partJudicial">Nombre del partido judicial</label>
                                     <input type="text" name="partJudicial" id="partJudicial" value="<%=nomPart%>"/>
                                 </div>
                             </td>
@@ -294,7 +294,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="asentamiento">Asentamiento Humano</label>
+                                <label for="asentamiento">Asentamiento humano</label>
                                 <select name="asentamiento" id="asentamiento" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -310,22 +310,22 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="cp">Codigo Postal</label>
+                                <label for="cp">Codigo postal</label>
                                 <input type="text" class="soloNum" name="cp" id="cp" value="<%=codPost%>" maxlength="5"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="nomVialidad">Nombre de la Vialidad</label>
+                                <label for="nomVialidad">Nombre de la vialidad</label>
                                 <input type="text" name="nomVialidad" id="nomVialidad" value="<%=nomViali%>" required/>
                             </td>
                             <td>
-                                <label for="nomAsentamiento">Nombre del Asentamiento Humano</label>
+                                <label for="nomAsentamiento">Nombre del asentamiento humano</label>
                                 <input type="text" name="nomAsentamiento" id="nomAsentamiento" value="<%=nomAsenta%>" required/>
 
                             </td>
                             <td>
-                                <label for="">No. Exterior / No. Interior</label>
+                                <label for="">No. exterior / No. interior</label>
                                 <input type="text" class="txtSmall soloNum" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
                                 <input type="text" class="txtSmall soloNum" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
                             </td>
@@ -341,11 +341,11 @@
                                 <input type="text" name="nombreCap" id="nombreCap" value="<%=nomCap%>" required/>
                             </td>
                             <td>
-                                <label for="apaternoCap">Apellido Paterno</label>
+                                <label for="apaternoCap">Apellido paterno</label>
                                 <input type="text" name="apaternoCap" id="apaternoCap" value="<%=apeCap%>" required/>
                             </td>
                             <td>
-                                <label for="amaternoCap">Apellido Materno</label>
+                                <label for="amaternoCap">Apellido materno</label>
                                 <input type="text" name="amaternoCap" id="amaternoCap" value="<%=apeMCap%>" required/>
                             </td>
                         </tr>
@@ -380,55 +380,55 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="causasIngresa">Causas Penales Ingresadas</label>
+                                <label for="causasIngresa">Causas penales ingresadas (solicitudes)</label>
                                 <input type="number" name="causasIngresa" id="causasIngresa" value="<%=causaPenaIn%>" min="0">
                             </td>
                             <td>
-                                <label for="mediProteccion">Medidas de Protección</label>
+                                <label for="mediProteccion">Medidas de protección (solicitudes)</label>
                                 <input type="number" name="mediProteccion" id="mediProteccion" value="<%=medidasPro%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="providenPrecauto">Providencias Precautorias</label>
+                                <label for="providenPrecauto">Providencias precautorias (solicitudes)</label>
                                 <input type="number" name="providenPrecauto" id="providenPrecauto" value="<%=proviPre%>" min="0">
                             </td>
                             <td>
-                                <label for="actosInvestiga">Pruebas Anticipadas</label>
+                                <label for="actosInvestiga">Pruebas anticipadas (solicitudes)</label>
                                 <input type="number" name="pruebaAnti" id="pruebaAnti" value="<%=pruAnticipa%>" min="0">
                             </td>
                             <td>
-                                <label for="ordenesJudi">Órdenes Judiciales</label>
+                                <label for="ordenesJudi">Órdenes judiciales (solicitudes)</label>
                                 <input type="number" name="ordenesJudi" id="ordenesJudi" value="<%=ordenJudici%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="actosInvestiga">Actos investigación con Control Judicial</label>
+                                <label for="actosInvestiga">Actos de investigación que requieren control judicial</label>
                                 <input type="number" name="actosInvestiga" id="actosInvestiga" value="<%=actosInves%>" min="0">
                             </td>
                             <td>
-                                <label for="impugnaMp">Impugnaciones al Ministerio Publico</label>
+                                <label for="impugnaMp">Impugnaciones a las determinaciones del ministerio público</label>
                                 <input type="number" name="impugnaMp" id="impugnaMp" value="<%=impugnaMp%>" min="0">
                             </td>
                             <td>
-                                <label for="otros">Otros Asuntos</label>
+                                <label for="otros">Otros asuntos (solicitudes distintas a las anteriores)</label>
                                 <input type="number" name="otros" id="otros" value="<%=otros%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="causasTram">Causas Penales en Trámite</label>
+                                <label for="causasTram">Causas penales en trámite</label>
                                 <input type="number" name="causasTram" id="causasTram" value="<%=causaTram%>" min="0">
                             </td>
                             <td>
-                                <label for="causasBaja">Causas Penales dadas de baja</label>
+                                <label for="causasBaja">Causas penales dadas de baja</label>
                                 <input type="number" name="causasBaja" id="causasBaja" value="<%=causaBaja%>" min="0">
                             </td>
                             <td></td>
                         </tr>
                     </table>
-                </div>
+                </div> 
                 <br>
                 <input type="submit" name="guardar" id="guardar" value="Guardar" onclick="valida();"/>
             </form>

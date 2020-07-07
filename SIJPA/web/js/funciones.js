@@ -877,7 +877,7 @@ function ValidaCarpeInvest(InputCarpInves) {
     // \w Coincide con cualquier carácter alfanumérico, incluyendo el guión bajo. Equivalente a [A-Za-z0-9_]. No permite caracteres raros
     // \/ La diagonal invertida escapa a la diagonal simple indicando que debe de llevar /
     // [0-9] Solo debe haber numeros enteros. {4} De esos numeros deben de haber exclusivamente 4 
-    var CarpInvestiga = $(InputCarpInves).val();
+    var CarpInvestiga = $(InputCarpInves).val().toUpperCase();
     if (CarpInvestiga !== '') {
         var mascara= /^\w{1,10}\/[0-9]{4}$/;
         if(mascara.test(CarpInvestiga)){
@@ -889,7 +889,6 @@ function ValidaCarpeInvest(InputCarpInves) {
                 },
                 success: function (response) {
                     console.log("Respuesta del servidor", response);
-                    // alert("respuesta del servidor= "+response);
                     if (response === '1') {
                         alert('La Causa Penal Ya Existe');
                         $(InputCarpInves).val("");

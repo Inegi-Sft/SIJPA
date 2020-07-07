@@ -5,6 +5,9 @@
  */
 
 $(document).ready(function () {
+    //muestra el no aplica exclusivamente par aestos catalogos
+    $('#concurso > option[value=-2]').show();
+    $('#instrumentos > option[value=-2]').show();
     /*---------------------------- FUNCIONES DELITOS JC----------------------------*/
     //Se usa para la recuperacion de datos de DB
     if($('#reclasificaDel').val() === '1'){

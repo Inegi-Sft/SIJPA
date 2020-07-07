@@ -14,7 +14,7 @@ $(document).ready(function () {
     
     if($('#usuarioId').val() === '1' && $('#opera').val() !== ''){
         $('input').prop('disabled', true);
-        alertify.alert('Mensaje Importante','¡¡ El Usuario ID 1-Administrador no puede ser editado !!');
+        alertify.alert('Mensaje Importante','Â¡Â¡ El Usuario ID 1-Administrador no puede ser editado !!');
     }
 
     $('#pass').focusout(function () {

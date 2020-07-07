@@ -512,6 +512,9 @@
                     <textarea name="comentarios" id="comentarios"><%=comen%></textarea>
                 </div>
                 <br/>
+                <%
+                System.out.println("Si está pasando por botón");
+                        %>
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>

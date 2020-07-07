@@ -60,6 +60,11 @@ public String findEstatus(int Est, String causaClave){
            }
           
              break;
+             
+             default: 
+                 Conc="";
+                 break;
+             
         }
  
         return Conc;

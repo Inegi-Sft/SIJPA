@@ -116,10 +116,10 @@
                                 Est2 = "";
                                 Est3 = "";
                                 System.out.println("El Estatus essss "+Estatus+" cinicial "+cInicial);
-                                if ((Estatus != 5 || cInicial > 0)) {
+                                if ((Estatus == 5) || (cInicial == 0)) { 
                                     Est1 = esJO.findEstatus(Estatus, lisCausaJO.get(0)[1]);
                                 }
-                                if (Estatus == 5) {
+                                if (cInicial > 0) {
                                     Est2 = EtapaJO.findEstatusOral(lisCausaJO.get(0)[1], juzgado);
                                 }
                                 Est3 = Est1 + "---" + Est2;

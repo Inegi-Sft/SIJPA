@@ -10,7 +10,7 @@ $(document).ready(function () {
         "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "Todo"]],
         "language": {
             "decimal": "",
-            "emptyTable": "No hay información",
+            "emptyTable": "No hay registros",
             "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
             "infoEmpty": "Mostrando 0 to 0 of 0 registros",
             "infoFiltered": "(Filtrado de _MAX_ total entradas)",

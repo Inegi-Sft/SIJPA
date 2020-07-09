@@ -261,7 +261,7 @@ public class showJuicio {
        int CEcausa=0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) FROM datos_etapa_oral_adojo "
+            sql = "SELECT COUNT(*) FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClave + "'"
                     + "ORDER BY 1";
             System.out.println(sql);

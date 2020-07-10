@@ -203,7 +203,7 @@
                                 <select name="edad" id="edad" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        for (int i = 12; i <= 17; i++) {
+                                        for (int i = 12; i <= 99; i++) {
                                             out.println("<option value='" + i + "'");
                                             if(Integer.toString(i).equals(edad)){
                                                 out.println(" selected ");

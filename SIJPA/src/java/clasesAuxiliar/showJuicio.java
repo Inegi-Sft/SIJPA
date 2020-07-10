@@ -240,7 +240,7 @@ public class showJuicio {
         proceEtapa = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT PROCESADO_CLAVE,ETAPA FROM datos_etapa_oral_adojo "
+            sql = "SELECT PROCESADO_CLAVE,ETAPA FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClave + "'"
                     + "ORDER BY 1";
             System.out.println(sql);

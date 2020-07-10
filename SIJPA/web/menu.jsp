@@ -12,10 +12,10 @@
             </p>
             <h4>Menú Usuario</h4>
         </li>
-        <li><a href="causasPenales.jsp">JC</a></li>
-        <li><a href="causasPenalesJO.jsp">JO</a></li>
         <li><a href="juzgados.jsp">Juzgados</a></li>
         <li><a href="jueces.jsp">Jueces</a></li>
+        <li><a href="causasPenales.jsp">JC</a></li>
+        <li><a href="causasPenalesJO.jsp">JO</a></li>
         <li><a href="">Audiencias</a>
             <ul>
                 <li><a href="audiencias.jsp">Audiencias JC</a></li>

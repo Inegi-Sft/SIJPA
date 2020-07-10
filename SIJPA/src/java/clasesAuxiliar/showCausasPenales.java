@@ -176,7 +176,7 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) FROM datos_delitos_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+            sql = "SELECT COUNT(*) FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
                   + " AND COMENTARIOS<>'REGNUEVO'";
             System.out.println(sql);
             rs = conn.consultar(sql);
@@ -194,7 +194,7 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) FROM datos_procesados_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+            sql = "SELECT COUNT(*) FROM DATOS_PROCESADOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
                     + " AND COMENTARIOS<>'REGNUEVO'";
             System.out.println(sql);
             rs = conn.consultar(sql);
@@ -212,7 +212,7 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) FROM datos_victimas_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+            sql = "SELECT COUNT(*) FROM DATOS_VICTIMAS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
                     + " AND COMENTARIOS<>'REGNUEVO'";
 
             rs = conn.consultar(sql);
@@ -230,7 +230,7 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) FROM datos_etapa_inicial_adojc WHERE CAUSA_CLAVE = '" + causaClave + "'"
+            sql = "SELECT COUNT(*) FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
                     + " AND COMENTARIOS<>'REGNUEVO'";
 
             rs = conn.consultar(sql);

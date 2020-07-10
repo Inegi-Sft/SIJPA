@@ -4,7 +4,6 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
-<%@page import="com.sun.xml.internal.ws.api.message.saaj.SAAJFactory"%>
 <%@page import="clasesAuxiliar.estatusEtapaJO"%>
 <%@page import="clasesAuxiliar.showJuicio"%>
 <%@page import="clasesAuxiliar.usuario"%>

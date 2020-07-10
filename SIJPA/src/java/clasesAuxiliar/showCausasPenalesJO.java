@@ -325,7 +325,7 @@ public class showCausasPenalesJO {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT COUNT(*) FROM datos_etapa_oral_adojo WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
+            sql = "SELECT COUNT(*) FROM DATOS_ETAPA_ORAL_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
 
             rs = conn.consultar(sql);
             while (rs.next()) {

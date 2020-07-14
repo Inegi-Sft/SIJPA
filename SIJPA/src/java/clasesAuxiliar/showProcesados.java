@@ -34,7 +34,7 @@ public class showProcesados {
             while(resul.next()){
                 proce.add(new String[]{
                     resul.getString("P.NOMBRE"), resul.getString("P.A_PATERNO"), resul.getString("P.A_MATERNO"), resul.getString("P.ALIAS"),
-                    resul.getString("P.CURP"), resul.getString("P.FECHA_NACIMIENTO"), resul.getString("P.SEXO"), resul.getString("P.EDAD"),
+                    resul.getString("P.CURP"), resul.getString("P.FECHA_NACIMIENTO"), resul.getString("P.SEXO"), resul.getString("P.EDAD_DELITO"),
                     resul.getString("P.NACIMIENTO_PAIS"), resul.getString("P.NACIMIENTO_ENTIDAD"), resul.getString("P.NACIMIENTO_MUNICIPIO"),
                     resul.getString("P.NACIONALIDAD"), resul.getString("P.RESIDENCIA_PAIS"), resul.getString("P.RESIDENCIA_ENTIDAD"),
                     resul.getString("P.RESIDENCIA_MUNICIPIO"), resul.getString("P.ESTADO_CIVIL"), resul.getString("P.DISCAPACIDAD"),
@@ -46,7 +46,7 @@ public class showProcesados {
                     resul.getString("P.TIPO_DETENCION"), resul.getString("P.FORMA_CONDUCCION"), resul.getString("P.GRADO_PARTICIPACION"),
                     resul.getString("P.REINCIDENCIA"), resul.getString("P.ESTADO_PSICOFISICO"), resul.getString("P.DELICTIVO"),
                     resul.getString("P.GRUPO_DELICTIVO"), resul.getString("P.TIPO_DEFENSOR"), resul.getString("P.PERSONA_RESPONSABLE"),
-                    resul.getString("P.COMENTARIOS")
+                    resul.getString("P.COMENTARIOS"),resul.getString("P.EDAD_INGRESO")
                 });
             }
             conn.close();

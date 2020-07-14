@@ -46,6 +46,7 @@
             String fechaNaci = "";
             String sexo = "";
             String edad = "";
+            String edadJuzgado="";
             String naciPais = "";
             String naciEnti = "";
             String naciMuni = "";
@@ -122,6 +123,7 @@
                         defensor = procesado.get(0)[36];
                         personaRes = procesado.get(0)[37];
                         comen = procesado.get(0)[38];
+                        edadJuzgado=procesado.get(0)[39];
                     }else{
                         out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
@@ -161,7 +163,7 @@
                     rangoIngre = procesado.get(0)[28];
                     ocupacion = procesado.get(0)[29];
                     condiActi = procesado.get(0)[30];
-                    gradoParti = procesado.get(0)[34];
+                    gradoParti = procesado.get(0)[34]; 
                     reinciden = procesado.get(0)[35];
                     edoPsicofi = procesado.get(0)[36];
                     gpoDeli = procesado.get(0)[37];
@@ -169,6 +171,7 @@
                     defensor = procesado.get(0)[39];
                     personaRes = procesado.get(0)[40];
                     comen = procesado.get(0)[41];
+                    edadJuzgado=procesado.get(0)[42];
                 }else{
                     out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                             + "parent.$.fancybox.close();</script>");
@@ -217,7 +220,7 @@
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
-                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" max="<%=fechas%>" onchange="ValFechaNacPRO('#fNacimiento','#edad')" onkeydown="return false" required>
+                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" max="<%=fechas%>" onchange="ValFechaNacPRO('#fNacimiento','#edadJuzgado')" onkeydown="return false" required>
                                 <div class='noIdentificada'>
                                     <input type='checkbox' id='chkFechaNac' onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento')">
                                     <label>No identificada</label>
@@ -240,8 +243,8 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="edad">Edad</label>
-                                <select name="edad" id="edad" required>
+                                <label for="edad">Edad en la que cometio el delito</label>
+                                <select name="edad" id="edad" onchange="ValEdadDelito('#edad','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
                                         for (int i = 12; i <= 17; i++) {
@@ -257,6 +260,24 @@
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                           <td>
+                                <label for="edad">Edad en la que se presento al juzgado</label>
+                                <select name="edadJuzgado" id="edadJuzgado" onchange="ValEdadJuzgado('#edadJuzgado','#fNacimiento')" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        for (int i = 12; i <= 99; i++) {
+                                            out.println("<option value='" + i + "'");
+                                            if(Integer.toString(i).equals(edadJuzgado)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + i + "</option>");
+                                                    
+                                        }
+                                    %>
+                                    <option value="-9">No identificado</option>
+                                </select>
+                            </td>
                         <tr>
                             <td colspan="3">
                                 <fieldset>

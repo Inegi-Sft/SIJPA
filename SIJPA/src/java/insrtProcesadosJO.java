@@ -69,6 +69,7 @@ public class insrtProcesadosJO extends HttpServlet {
         String fNacimiento = request.getParameter("fNacimiento");
         String sexo = request.getParameter("sexo");
         String edad = request.getParameter("edad");
+        String edad_Juzgado = request.getParameter("edadJuzgado");
         String nPais = request.getParameter("nPais");
         String nEntidad = request.getParameter("nEntidad");
         String nMunicipio = verificaVariable(request.getParameter("nMunicipio"));
@@ -128,9 +129,9 @@ public class insrtProcesadosJO extends HttpServlet {
                         + poblaIndigena + "," + puebloIndigena + "," + hablaIndigena + "," + lenguaIndigena + "," + lenExtranjera + ","
                         + traductorPro + "," + ingresosPro + "," + rangoIngresosPro + "," + ocupacion + "," + condicionActi + ","
                         + participacion + "," + reincidencia + "," + psicofisico + "," + grupoDelictivo + ",'" + delictivo + "',"
-                        + defensor + "," + representante + ",'" + comentarios + "', (select YEAR(NOW())));";
+                        + defensor + "," + representante + ",'" + comentarios + "', (select YEAR(NOW())));, '" + edad_Juzgado +"' ";
                 System.out.println(sql);
-                if (conn.escribir(sql)) {
+                if (conn.escribir(sql)) { 
                     if (ingresosPro == 1) {
                         for (String chkIngresosPro1 : chkIngresosPro) {
                             sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
@@ -175,7 +176,7 @@ public class insrtProcesadosJO extends HttpServlet {
             }else{//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_PROCESADOS_ADOJO SET NOMBRE = '" + nombre + "',A_PATERNO = '"+ apaterno + "',A_MATERNO ='" + amaterno + "',"
                         + "ALIAS = '" + alias + "',CURP = '" + curp + "',FECHA_NACIMIENTO = '" + fNacimiento + "',SEXO = " + sexo + ","
-                        + "EDAD = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
+                        + "EDAD_DELITO = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
                         + "NACIONALIDAD = " + nacionalidad + ",RESIDENCIA_PAIS = " + residencia + ",RESIDENCIA_ENTIDAD = " + rEntidad + ","
                         + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
                         + "CONDICION_ALFABETISMO = " + alfabet + ",ULTIMO_GRADO_ESTUDIOS = " + estudios + ",CONDICION_ESTUDIANTE = " + condiEstudiante + ","
@@ -185,7 +186,7 @@ public class insrtProcesadosJO extends HttpServlet {
                         + "OCUPACION = " + ocupacion + ",CONDICION_ACTIVIDAD = " + condicionActi + "," + "GRADO_PARTICIPACION = " + participacion + ","
                         + "REINCIDENCIA = " + reincidencia + ",ESTADO_PSICOFISICO = " + psicofisico + ",DELICTIVO = " + grupoDelictivo + ","
                         + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
-                        + "COMENTARIOS = '" + comentarios + "' "
+                        + "COMENTARIOS = '" + comentarios + "', EDAD_INGRESO='"+ edad_Juzgado +"' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                         + "AND PROCESADO_CLAVEJO = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);

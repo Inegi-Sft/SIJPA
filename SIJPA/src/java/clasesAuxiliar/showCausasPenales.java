@@ -155,6 +155,24 @@ public class showCausasPenales {
         return FechaIngreso;
     }
     
+//    public String FechaOcurr(String causaClave) {
+//        String Fecha_Ocurrencia = "";
+//        try {
+//            conn.Conectar();
+//            sql = "SELECT FECHA_OCURRENCIA FROM DATOS_DELITOS_ADOJC WHERE  "
+//                    + "CAUSA_CLAVE = '" + causaClave + "'";
+//            System.out.println(sql);
+//            rs = conn.consultar(sql);
+//            if (rs.next()) {
+//                Fecha_Ocurrencia = rs.getString("FECHA_OCURRENCIA");
+//            }
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return Fecha_Ocurrencia;
+//    }
+    
     public boolean CarpetaInves(String juzgadoClave, String numcarpeta) {
         boolean Exis = false;
         try {

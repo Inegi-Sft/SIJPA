@@ -790,32 +790,58 @@ function ValFechaNacPRO(FechaNac, Edad) {
             },
             success: function (response) {
                 var edadc = parseInt(response);
-                // console.log("Respuesta del servidor", response);
-                if (response !== '0') {
-                    if ((edadc > 11) && (edadc < 18)) {
-                        var resp = confirm("Desea agregar la edad. Edad=" + response);
-                        if (resp) {
-                            $(Edad).val(edadc);
-                        }
-                    } else {
-                        if (edadc>0){
-                         alert('Favor de Verificar la fecha de nacimiento. Edad=' + edadc);
-                        $(FechaNac).val("");
-                        $(Edad).val("");   
-                        }else{
-                         alert('LA FECHA DE NACIMIENTO NO DEBE SER MAYOR A LA FECHA DE INGRESO');
-                        $(FechaNac).val("");
-                        $(Edad).val("");  
-                        }
-                        
+                // console.log("Respuesta del servidor", response+Fnac);
+                 
+               if(response !=='3'){  
+                if ((edadc > 11) && (edadc < 99)) {
+                      var resp = confirm("Desea agregar la Edad en la que se presento al juzgado. Edad=" + response);
+                      if (resp) {
+                           $(Edad).val(edadc);                      
+                       }
+                    }else{
+                        alert('La fecha de nacimiento no debe ser menor a 12 anos. edad='+ response);
+                        $(FechaNac).val(""); 
                     }
-                }
+                    if(response==='2'){
+                         alert('La fecha de nacimiento no debe ser mayor a la fecha de ingreso'); 
+                         $(FechaNac).val("");  
+                       }
+                   }else{
+                         alert('No se a podido calcular la edad en la que se presento al juzgado'); 
+                   }
             },
             error: function (response) {
-                console.log("Respuesta del servidor", response);
+                console.log("Respuesta del servidores", response);
             }
         });
     }
+}
+
+function ValEdadDelito(EdadDel,fnacimiento){
+ var FedadD=document.getElementById('edad').value;
+ var FedadJ=document.getElementById('edadJuzgado').value;
+  console.log("Respuesta: ",FedadD,FedadJ);
+  if (FedadJ !== ''){
+      if(FedadD>FedadJ){
+          alert('La edad en la que cometio el delito debe de ser menor o igual a la edad en que se presento al juzgado');
+          $(EdadDel).val("");
+          $(fnacimiento).val("");
+          
+        }
+  }  
+}
+
+function ValEdadJuzgado(EdadJuz,fnacimiento){
+ var FedadD=document.getElementById('edad').value;
+ var FedadJ=document.getElementById('edadJuzgado').value;
+  console.log("Respuesta: ",FedadJ,FedadD);
+   if ((FedadJ !== '') && (FedadJ !=='-9')){
+      if(FedadJ<FedadD){
+          alert('La edad en que se presento al juzgado debe ser mayor o igual a la edad en la que cometio el delito');
+         $(EdadJuz).val("");
+         $(fnacimiento).val("");
+        }
+  }  
 }
 
   function ValFechaNacVic(dFechaNac,SEdad){

@@ -69,6 +69,7 @@ public class insrtProcesados extends HttpServlet {
         String fNacimiento = request.getParameter("fNacimiento");
         String sexo = request.getParameter("sexo");
         String edad = request.getParameter("edad");
+        String edadJuzgado=request.getParameter("edadJuzgado");
         String nPais = request.getParameter("nPais");
         String nEntidad = request.getParameter("nEntidad");
         String nMunicipio = verificaVariable(request.getParameter("nMunicipio"));
@@ -121,7 +122,7 @@ public class insrtProcesados extends HttpServlet {
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "UPDATE DATOS_PROCESADOS_ADOJC SET NOMBRE = '" + nombre + "',A_PATERNO = '"+ apaterno + "',A_MATERNO ='" + amaterno + "',"
                         + "ALIAS = '" + alias + "',CURP = '" + curp + "',FECHA_NACIMIENTO = '" + fNacimiento + "',SEXO = " + sexo + ","
-                        + "EDAD = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
+                        + "EDAD_DELITO = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
                         + "NACIONALIDAD = " + nacionalidad + ",RESIDENCIA_PAIS = " + residencia + ",RESIDENCIA_ENTIDAD = " + rEntidad + ","
                         + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
                         + "CONDICION_ALFABETISMO = " + alfabet + ",ULTIMO_GRADO_ESTUDIOS = " + estudios + ",CONDICION_ESTUDIANTE = " + condiEstudiante + ","
@@ -132,7 +133,7 @@ public class insrtProcesados extends HttpServlet {
                         + "TIPO_DETENCION = " + tipoDetencion + ",FORMA_CONDUCCION = " + formaConduc + ",GRADO_PARTICIPACION = " + participacion + ","
                         + "REINCIDENCIA = " + reincidencia + ",ESTADO_PSICOFISICO = " + psicofisico + ",DELICTIVO = " + grupoDelictivo + ","
                         + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
-                        + "COMENTARIOS = '" + comentarios + "' "
+                        + "COMENTARIOS = '" + comentarios + "', EDAD_INGRESO='"+ edadJuzgado +"' "
                         + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                         + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);
@@ -178,7 +179,7 @@ public class insrtProcesados extends HttpServlet {
             }else{//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_PROCESADOS_ADOJC SET NOMBRE = '" + nombre + "',A_PATERNO = '"+ apaterno + "',A_MATERNO ='" + amaterno + "',"
                         + "ALIAS = '" + alias + "',CURP = '" + curp + "',FECHA_NACIMIENTO = '" + fNacimiento + "',SEXO = " + sexo + ","
-                        + "EDAD = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
+                        + "EDAD_DELITO = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
                         + "NACIONALIDAD = " + nacionalidad + ",RESIDENCIA_PAIS = " + residencia + ",RESIDENCIA_ENTIDAD = " + rEntidad + ","
                         + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
                         + "CONDICION_ALFABETISMO = " + alfabet + ",ULTIMO_GRADO_ESTUDIOS = " + estudios + ",CONDICION_ESTUDIANTE = " + condiEstudiante + ","
@@ -189,7 +190,7 @@ public class insrtProcesados extends HttpServlet {
                         + "TIPO_DETENCION = " + tipoDetencion + ",FORMA_CONDUCCION = " + formaConduc + ",GRADO_PARTICIPACION = " + participacion + ","
                         + "REINCIDENCIA = " + reincidencia + ",ESTADO_PSICOFISICO = " + psicofisico + ",DELICTIVO = " + grupoDelictivo + ","
                         + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
-                        + "COMENTARIOS = '" + comentarios + "' "
+                        + "COMENTARIOS = '" + comentarios + "' , EDAD_INGRESO='"+ edadJuzgado +"' "
                         + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                         + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                 System.out.println(sql);

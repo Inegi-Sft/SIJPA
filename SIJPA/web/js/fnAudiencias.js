@@ -1,4 +1,29 @@
 $(document).ready(function () {
+    //****************** Audiencias Iniciales desplegables **********************************
+    var iniciales='<tr class="inicio"><td><img id="imgIni" class="btnOpen" /></td>\n\
+                        <td>Audiencias Iniciales</td>\n\
+                        <td></td><td></td><td></td></tr>'; 
+    $('#tblAudiInves > tbody > tr').eq(10).after(iniciales);// Agrega una nueva fila en la tabla, sera el encabezado de audiencias iniciales
+    $('#tblAudiInves > tbody > tr').eq(17).addClass("fin");//establece una clase para delimitar donde terminan las Audi iniciales
+    
+    $('.inicio').click(function(){//crea el evento click
+        $(this).nextUntil('tr.fin').css('background-color', 'rgba(165, 255, 159, 0.6)');// ponen un color de fondo a las audi iniciales
+        $(this).nextUntil('tr.fin').toggle();//despliega las audi iniciales hasata donde tiene la clase fin
+        $('#imgIni').toggleClass('btnClosed');// cambia la imagen de despliegue
+    });
+    
+    //se usa en recuperacion de datos para mostrar u ocultar las audi iniciales
+    if($('#chkInves11').prop('checked') || $('#chkInves12').prop('checked') || $('#chkInves13').prop('checked') ||
+        $('#chkInves14').prop('checked') || $('#chkInves15').prop('checked')){
+    
+        $('.inicio').nextUntil('tr.fin').css('background-color', 'rgba(165, 255, 159, 0.6)');
+        $('.inicio').nextUntil('tr.fin').show();
+        $('#imgIni').addClass('btnClosed');
+    }else{
+        $('.inicio').nextUntil('tr.fin').hide();
+    }
+  
+    
  //Establece am pata input time y no marque error en el submit
     $('input[name="hrsInves"]').prop({'min': '0', 'max': '30', 'maxlength':'2'});
     $('input[name="minInves"]').prop({'min': '0', 'max': '59', 'maxlength':'2'});

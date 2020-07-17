@@ -826,6 +826,7 @@ function ValEdadDelito(EdadDel,fnacimiento){
          // console.log("fecha de nacimiento="+FechNac);
           if (FechNac !=='1899-09-09'){
               $(fnacimiento).val("");
+              
           }      
         }
   }  
@@ -843,6 +844,7 @@ function ValEdadJuzgado(EdadJuz,fnacimiento){
         // console.log("fecha de nacimiento="+FechNac);
           if (FechNac !=='1899-09-09'){
               $(fnacimiento).val("");
+              
           }  
         }
   }  

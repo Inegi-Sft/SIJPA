@@ -74,17 +74,17 @@
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="jClave">Juzgado Clave</label>
+                                <label for="jClave">Juzgado clave</label>
                                 <input type="text" name="jClave" id="jClave" value="${sessionScope.juzgadoClave}" disabled>
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                             </td>
                             <td>
-                                <label for="carpInves">No. Carpeta Investigación</label>
-                                <input type="text" name="carpInves" id="carpInves" value="<%=carpInves%>" required>
+                                <label for="carpInves">No. Carpeta investigación</label>
+                                <input type="text" name="carpInves" id="carpInves" value="<%=carpInves%>" title="Número de carpeta de investigación vinculada con la causa penal" required>
                             </td>
                             <td>
-                                <label for="expClave">No. Asunto Asignado</label>
-                                <input type="text" name="expClave" id="expClave" maxlength="15" onkeypress="return validaMascara(event)" onblur="ValidaCarpeInvest('#expClave')" value="<%=causaClave%>"  placeholder="Ej: 00001/2020" required>
+                                <label for="expClave">No. Asunto asignado</label>
+                                <input type="text" name="expClave" id="expClave" maxlength="15" title="Número de asunto asignado a la causa penal" onkeypress="return validaMascara(event)" onblur="ValidaCarpeInvest('#expClave')" value="<%=causaClave%>"  placeholder="Ej: 00001/2020" required>
                             </td>
                         </tr>
                         <tr>
@@ -160,8 +160,8 @@
                             <td colspan="3">
                                 <fieldset>
                                     <div class="cols">
-                                        <label for="compe">Organo Competente</label>
-                                        <select name="compe" id="compe" required>
+                                        <label for="compe">Organo competente</label>
+                                        <select name="compe" id="compe" title="¿El órgano jurisdiccional es competente para conocer y resolver de esta causa penal?" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findRespuestaSimple();

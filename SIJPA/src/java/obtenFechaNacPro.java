@@ -8,10 +8,7 @@ import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showCausasPenalesJO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -88,7 +85,7 @@ public class obtenFechaNacPro extends HttpServlet {
                     }
 
                 } else {
-                    System.out.println("2"+fechaIngreso);
+                    //System.out.println("2"+fechaIngreso);
                     out.write("3");
                 }
             }

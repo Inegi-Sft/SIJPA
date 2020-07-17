@@ -790,8 +790,7 @@ function ValFechaNacPRO(FechaNac, Edad) {
             },
             success: function (response) {
                 var edadc = parseInt(response);
-                // console.log("Respuesta del servidor", response+Fnac);
-                 
+                // console.log("Respuesta del servidor", response+Fnac);                
                if(response !=='3'){  
                 if ((edadc > 11) && (edadc < 99)) {
                       var resp = confirm("Desea agregar la Edad en la que se presento al juzgado. Edad=" + response);
@@ -804,7 +803,6 @@ function ValFechaNacPRO(FechaNac, Edad) {
                     }
                     if(response==='2'){
                          alert('La fecha de nacimiento no debe ser mayor a la fecha de ingreso'); 
-                         $(FechaNac).val("");  
                        }
                    }else{
                          alert('No se a podido calcular la edad en la que se presento al juzgado'); 
@@ -820,13 +818,16 @@ function ValFechaNacPRO(FechaNac, Edad) {
 function ValEdadDelito(EdadDel,fnacimiento){
  var FedadD=document.getElementById('edad').value;
  var FedadJ=document.getElementById('edadJuzgado').value;
-  console.log("Respuesta: ",FedadD,FedadJ);
+ var FechNac=$(fnacimiento).val();
+ // console.log("Respuesta: ",FedadD,FedadJ);
   if (FedadJ !== ''){
       if(FedadD>FedadJ){
           alert('La edad en la que cometio el delito debe de ser menor o igual a la edad en que se presento al juzgado');
           $(EdadDel).val("");
-          $(fnacimiento).val("");
-          
+         // console.log("fecha de nacimiento="+FechNac);
+          if (FechNac !=='1899-09-09'){
+              $(fnacimiento).val("");
+          }      
         }
   }  
 }
@@ -834,12 +835,16 @@ function ValEdadDelito(EdadDel,fnacimiento){
 function ValEdadJuzgado(EdadJuz,fnacimiento){
  var FedadD=document.getElementById('edad').value;
  var FedadJ=document.getElementById('edadJuzgado').value;
-  console.log("Respuesta: ",FedadJ,FedadD);
+ var FechNac=$(fnacimiento).val();
+ // console.log("Respuesta: ",FedadJ,FedadD);
    if ((FedadJ !== '') && (FedadJ !=='-9')){
       if(FedadJ<FedadD){
           alert('La edad en que se presento al juzgado debe ser mayor o igual a la edad en la que cometio el delito');
          $(EdadJuz).val("");
-         $(fnacimiento).val("");
+        // console.log("fecha de nacimiento="+FechNac);
+          if (FechNac !=='1899-09-09'){
+              $(fnacimiento).val("");
+          }  
         }
   }  
 }

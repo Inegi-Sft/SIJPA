@@ -159,11 +159,11 @@
                                 <input type="text" name="nombre" id="nombre" value="<%=nomProce%>" required>
                             </td>
                             <td>
-                                <label for="apaterno">Apellido Paterno</label>
+                                <label for="apaterno">Apellido paterno</label>
                                 <input type="text" name="apaterno" id="apaterno" value="<%=aPaterno%>" required>
                             </td>
                             <td>
-                                <label for="amaterno">Apellido Materno</label>
+                                <label for="amaterno">Apellido materno</label>
                                 <input type="text" name="amaterno" id="amaterno" value="<%=aMaterno%>" required>
                             </td>
                             <td>
@@ -173,12 +173,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="curp">Curp</label>
+                                <label for="curp">CURP</label>
                                 <input type="text" name="curp" id="curp" value="<%=curp%>" maxlength="18" minlength="18" required>
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
-                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" max="<%=fechas%>" onchange="ValFechaNacPRO('#fNacimiento','#edadJuzgado')" onkeydown="return false" required>
+                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" max="<%=fechas%>" title="Fecha de nacimiento del procesado" onchange="ValFechaNacPRO('#fNacimiento','#edadJuzgado')" onkeydown="return false" required>
                                 <div class='noIdentificada'>
                                     <input type='checkbox' id='chkFechaNac' onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento')">
                                     <label>No identificada</label>
@@ -243,7 +243,7 @@
                                 <fieldset>
                                     <legend>Lugar de nacimiento</legend>
                                     <div class="colsx">
-                                        <label for="nPais">Pais</label>
+                                        <label for="nPais">País</label>
                                         <select name="nPais" id="nPais" onchange="lugarNacimiento('#nPais', '#dNEntidad', '#dNMunicipio', '#nEntidad', '#nMunicipio');" required>
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -259,7 +259,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dNEntidad">
-                                        <label for="nEntidad">Entidad</label>
+                                        <label for="nEntidad">Entidad federativa</label>
                                         <select name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')">
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -275,7 +275,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dNMunicipio">
-                                        <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
+                                        <label for="nMunicipio" class="lblExBig">Municipio o demarcación territorial</label>
                                         <select name="nMunicipio" id="nMunicipio">
                                             <%
                                                 if(!naciPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -318,7 +318,7 @@
                                 <fieldset>
                                     <legend>Lugar habitual de residencia</legend>
                                     <div class="colsx">
-                                        <label for="residencia">Lugar de residencia</label>
+                                        <label for="residencia">Lugar habitual de residencia</label>
                                         <select name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#rEntidad', '#rMunicipio');" required >
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -334,7 +334,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dREntidad">
-                                        <label for="rEntidad">Entidad</label>
+                                        <label for="rEntidad">Entidad federativa</label>
                                         <select name="rEntidad" id="rEntidad" onchange="llenaMun('#rEntidad', '#rMunicipio')">
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -350,7 +350,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dRMunicipio">
-                                        <label for="rMunicipio">Municipio</label>
+                                        <label for="rMunicipio">Municipio o demarcación territorial</label>
                                         <select name="rMunicipio" id="rMunicipio">
                                             <%
                                                 if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -406,7 +406,7 @@
                                 </select> 
                             </td>
                             <td>
-                                <label for="alfabet">Condicion alfabetismo</label>
+                                <label for="alfabet">Condición de alfabetismo</label>
                                 <select name="alfabet" id="alfabet" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -422,7 +422,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="estudios">Grado de Estudios Concluido</label>
+                                <label for="estudios">Grado de estudios concluido</label>
                                 <select name="estudiosPro" id="estudiosPro" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -456,7 +456,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="hablaEsp">Dominio del español</label>
+                                <label for="hablaEsp">Condición de dominio del español</label>
                                 <select name="hablaEsp" id="hablaEsp" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -513,7 +513,7 @@
                             <td colspan="2">
                                 <fieldset>
                                     <div class="cols">
-                                        <label for="hablaIndigena" class="lblExBig">¿Habla lengua indígena o dialecto?</label>
+                                        <label for="hablaIndigena" class="lblExBig">¿Habla alguna lengua indígena o dialecto?</label>
                                         <select name="hablaIndigena" id="hablaIndigena" onchange="respuestaSimpleSelect('#hablaIndigena', '#dLenguaIndigena', '#lenguaIndigena');" required>
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -529,7 +529,7 @@
                                         </select>
                                     </div>
                                     <div class="cols lblExBig oculto" id="dLenguaIndigena">
-                                        <label for="lenguaIndigena">Familia lingüística</label>
+                                        <label for="lenguaIndigena">Familia lingüísticas</label>
                                         <select name="lenguaIndigena" id="lenguaIndigena">
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -659,7 +659,7 @@
                                         </select>
                                     </div>
                                     <div class="cols lblExBig oculto" id="dCondicionActi">
-                                        <label for="condicionActi">Condicion de Actividad</label>
+                                        <label for="condicionActi">Condición de actividad</label>
                                         <select name="condicionActi" id="condicionActi">
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -683,8 +683,8 @@
                     <legend>Características Procesales</legend>
                     <fieldset class="subField colsA">
                         <div class="colsx">
-                            <label for="presentAdo">Forma en la que inicio el Proceso</label>
-                            <select  name="presentAdo" id="presentAdo" required>
+                            <label for="presentAdo">Forma en la que inició el proceso</label>
+                            <select  name="presentAdo" id="presentAdo" title="Forma en la que inició el imputado el proceso" required>
                                 <option value="">--Seleccione--</option>
                                 <%
                                     lista = cat.findTipoConsignacion();
@@ -699,7 +699,7 @@
                             </select>
                         </div>
                         <div class="colsx oculto" id="dTipoDetencion">
-                            <label for="tipoDetencion">Tipo de detencion</label>
+                            <label for="tipoDetencion">Tipo de detención</label>
                             <select name="tipoDetencion" id="tipoDetencion" required>
                                 <option value="">--Seleccione--</option>
                                 <%
@@ -732,7 +732,7 @@
                         </div>
                     </fieldset>
                     <div class="colsx"> 
-                        <label for="participacion">Grado de participacion</label>
+                        <label for="participacion">Grado de participación</label>
                         <select name="participacion" id="participacion" required>
                             <option value="">--Seleccione--</option>
                             <%
@@ -748,7 +748,7 @@
                         </select>
                     </div>
                     <div class="colsx">
-                        <label for="reincidencia">Condicion de reincidencia</label>
+                        <label for="reincidencia">Condición de reincidencia</label>
                         <select name="reincidencia" id="reincidencia" required>
                             <option value="">--Seleccione--</option>
                             <%
@@ -765,7 +765,7 @@
                     </div>
                     <br>
                     <div class="colsx">
-                        <label for="psicofisico">Estado psicofisico al momento de cometer la conducta</label>
+                        <label for="psicofisico">Estado psicofísico al momento de cometer la conducta</label>
                         <select name="psicofisico" id="psicofisico" required>
                             <option value="">--Seleccione--</option>
                             <%

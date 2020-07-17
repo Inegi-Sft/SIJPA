@@ -160,7 +160,7 @@
                             <td colspan="3">
                                 <fieldset>
                                     <div class="cols">
-                                        <label for="compe">Organo Competente</label>
+                                        <label for="compe">Órgano Competente</label>
                                         <select name="compe" id="compe" required>
                                             <option value="">--Seleccione--</option>
                                             <%

@@ -107,10 +107,10 @@
                             <!--<th>Posi</th>-->
                             <th>No. Asunto</th>
                             <th>Fecha Ingreso</th>
-                            <th>Conductas Antisociales</th>
+                            <th>Delitos</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
-                            <th>Organo Competente</th>
+                            <th>Órgano Competente</th>
                             <th>Inconsistencias</th>
                             <th>Editar</th>
                             <th>Eliminar</th>

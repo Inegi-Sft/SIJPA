@@ -39,7 +39,7 @@ public class showDelitos {
                 deli.add(new String[]{
                     resul.getString("D.DELITO_CODIGO_PENAL"), resul.getString("D.TIPO_FUERO"), resul.getString("D.ART_CODIGO_PENAL"),
                     resul.getString("D.DELITO_RECLASIFICADO"), resul.getString("D.FECHA_RECLASIFICACION"), resul.getString("D.DELITO_NORMA_TECNICA"),
-                    resul.getString("CD.DELITO"), resul.getString("D.FECHA_OCURRENCIA"), resul.getString("D.SITIO_OCURRENCIA"),
+                    resul.getString("CD.DELITO"), resul.getString("D.FECHA_OCURRENCIA"), resul.getString("D.SITIO_OCURRENCIA"), resul.getString("D.ESPECIFIQUE_SITIO"),
                     resul.getString("D.GRADO_CONSUMACION"), resul.getString("D.CALIFICACION"), resul.getString("D.CLASIFICACION"),
                     resul.getString("D.CONCURSO"), resul.getString("D.FORMA_COMISION"), resul.getString("D.FORMA_ACCION"), resul.getString("D.MODALIDAD"),
                     resul.getString("D.INSTRUMENTO_COMISION"), resul.getString("D.OCURRIO_ENTIDAD"), resul.getString("D.OCURRIO_MUNICIPIO"),

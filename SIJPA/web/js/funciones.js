@@ -521,7 +521,6 @@ function respuestaSimpleFecha(idSelSimple, idDiv, idDateOculta, idChk) {
     }
 }
 
-
 /*---------------------------- FIN FUNCIONES DELITOS --------------------------*/
 
 //Funcion para Causas Penales: comprueba que primero se haya seleccionado un juzgado clave antes de agregar una causa penal

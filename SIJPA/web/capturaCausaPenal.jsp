@@ -160,7 +160,7 @@
                             <td colspan="3">
                                 <fieldset>
                                     <div class="cols">
-                                        <label for="compe">Organo competente</label>
+                                        <label for="compe">Órgano competente</label>
                                         <select name="compe" id="compe" title="¿El órgano jurisdiccional es competente para conocer y resolver de esta causa penal?" required>
                                             <option value="">--Seleccione--</option>
                                             <%

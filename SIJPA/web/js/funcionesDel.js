@@ -63,6 +63,10 @@ $(document).ready(function () {
             $('#contextoSitua' + i).prop("checked", false).prop("disabled", true);
         }
     }
+    //Se utiliza para recuperación de datos
+    if($('#sitioO').val() === '12'){
+       $('#EspecifiqueSO').show(); 
+    };
     
     //Si mediante la captura sufre cambios el check, entonces se valida
     $('#contextoSitua99').change(function () {
@@ -102,6 +106,16 @@ $(document).ready(function () {
         },
         onBlur: function () {
             this.clearCache();
+        }
+    });
+    
+    $('#sitioO').change(function (){
+        if($('#sitioO').val()==='12'){
+            $('#EspecifiqueSO').fadeIn();
+            $('#EspecifiqueSO').val('').prop('requiered',true);
+        }else{
+            $('#EspecifiqueSO').fadeOut();
+            $('#EspecifiqueSO').val('-2').prop('requiered',false);
         }
     });
     

@@ -45,6 +45,7 @@
             String desDelitoNT = "";
             String fechaOcurre = "";
             String sitioOcurre = "";
+            String sitioOE ="";
             String gradoConsuma = "";
             String calificacion = "";
             String clasificacion = "";
@@ -71,17 +72,18 @@
                         desDelitoNT = delito.get(0)[6];
                         fechaOcurre = delito.get(0)[7];
                         sitioOcurre = delito.get(0)[8];
-                        gradoConsuma = delito.get(0)[9];
-                        calificacion = delito.get(0)[10];
-                        clasificacion = delito.get(0)[11];
-                        concurso = delito.get(0)[12];
-                        formaComi = delito.get(0)[13];
-                        formaAccion = delito.get(0)[14];
-                        modalidad = delito.get(0)[15];
-                        instruComision = delito.get(0)[16];
-                        ocurreEnti = delito.get(0)[17];
-                        ocurreMuni = delito.get(0)[18];
-                        comen = delito.get(0)[19];
+                        sitioOE = delito.get(0)[9];
+                        gradoConsuma = delito.get(0)[10];
+                        calificacion = delito.get(0)[11];
+                        clasificacion = delito.get(0)[12];
+                        concurso = delito.get(0)[13];
+                        formaComi = delito.get(0)[14];
+                        formaAccion = delito.get(0)[15];
+                        modalidad = delito.get(0)[16];
+                        instruComision = delito.get(0)[17];
+                        ocurreEnti = delito.get(0)[18];
+                        ocurreMuni = delito.get(0)[19];
+                        comen = delito.get(0)[20];
                     }else{
                         out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClave + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
@@ -200,21 +202,30 @@
                                     <label>No identificada</label>
                                 </div>
                             </td>
-                            <td>
-                                <label for="sitioO">Sitio de ocurrencia</label>
-                                <select name="sitioO" id="sitioO" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findSitioOcurrencia();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'");
-                                            if(ls[0].equals(sitioOcurre)){
-                                                out.println(" selected ");
-                                            }
+                            <td colspan="2">
+                                <fieldset>
+                                    <legend>Sitio de ocurrencia</legend>
+                                    <div class="colsx lblExBig">
+                                        <label for="sitioO">Sitio de ocurrencia</label>
+                                        <select name="sitioO" id="sitioO" requiered>
+                                            <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findSitioOcurrencia();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'");
+                                                if(ls[0].equals(sitioOcurre)){
+                                                    out.println(" selected ");
+                                                }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
-                                </select>
+                                            }
+                                        %>
+                                        </select>
+                                    </div>
+                                    <div class="colsx oculto" id="EspecifiqueSO">
+                                        <label for="sitioOE">Especifique sitio</label>
+                                        <input class="txtMedia" type="text"  name="sitioOE" id="sitioOE" value="<%=sitioOE%>">
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
                                 <label for="consumacion">Grado de consumación</label>
@@ -232,6 +243,9 @@
                                     %>
                                 </select>
                             </td>
+                            
+                        </tr>
+                        <tr>
                             <td>
                                 <label for="calificacion">Calificación del delito</label>
                                 <select name="calificacion" id="calificacion" required>
@@ -248,8 +262,6 @@
                                     %>
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <label for="clasificacion">Clasificación en orden al resultado</label>
                                 <select name="clasificacion" id="clasificacion" required>
@@ -298,7 +310,10 @@
                                     %>
                                 </select>
                             </td>
-                            <td>
+                           
+                        </tr>
+                        <tr>
+                             <td>
                                 <label for="accion">Forma de acción</label>
                                 <select name="accion" id="accion" required>
                                     <option value="">--Seleccione--</option>
@@ -314,8 +329,6 @@
                                     %>
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <label for="modalidad">Modalidad</label>
                                 <select name="modalidad" id="modalidad" required>

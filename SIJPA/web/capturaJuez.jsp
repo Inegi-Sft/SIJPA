@@ -4,6 +4,7 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="clasesAuxiliar.showJueces"%>
 <%@page import="clasesAuxiliar.catalogos"%>
 <%@page import="java.util.ArrayList"%>
@@ -26,9 +27,8 @@
                 out.println("});</script>");
             }
             
+            showJuzgados juz = new showJuzgados();
             showJueces sJuez = new showJueces();
-            int totJuez = sJuez.findTotJuez((String) session.getAttribute("juzgadoClave"));
-            
             catalogos cat = new catalogos();
             ArrayList<String[]> lista, juez;
             
@@ -62,9 +62,16 @@
                 }
             }else{
                 //Si es captura entonces obtenemos el maximo juez para sumarle uno y sea la nueva clave
-                juezClave = sJuez.findMaxJuez((String) session.getAttribute("juzgadoClave")) + 1;
+                juezClave = sJuez.findMaxJuez(juzgadoClave) + 1;
             }
             
+            int totJuez = sJuez.findTotJuez(juzgadoClave);
+            
+            boolean fun = false;
+            funcionDese = juz.findFuncionJuz(juzgadoClave);
+            if(funcionDese.equals("1") || funcionDese.equals("2")){
+                fun = true; 
+            }
         %>
     </head>
     <body>
@@ -193,5 +200,12 @@
                 <input type="submit" name="guardar" id="guardar" value="Guardar">
             </form>
         </section>
+        <% if(fun){ %>
+            <script type="text/javascript"> 
+                $(document).ready(function(){ 
+                    $("#funcionJuez option:not(:selected)").attr("disabled", "disabled");
+                });
+            </script>
+        <%  } %>
     </body>
 </html>

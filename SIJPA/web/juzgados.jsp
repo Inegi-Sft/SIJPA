@@ -58,7 +58,7 @@
                         <th>Nombre</th>
                         <th>Número</th>
                         <th>Jurisdicción</th>
-                        <th>Entidad</th>
+                        <th>Función Juzgado</th>
                         <th>Municipio</th>
                         <th>Estatus</th>
                         <th>Editar</th>

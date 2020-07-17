@@ -35,19 +35,20 @@
                 out.println("});</script>");
             }
             
+            showJuzgados juz = new showJuzgados();
+            showJueces sj = new showJueces();
+            ArrayList<String> juzClave;
+            ArrayList<String[]> lista;
+            
             //Controlamos el juzgado para que tenga siempre uno seleccionado
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
                 juzgado = request.getParameter("juzgado");
                 session.setAttribute("juzgadoClave", juzgado);
+                session.setAttribute("juzgadoFuncion", juz.findFuncionJuz(juzgado));//traemos la funcion del juzgado
             }else if(session.getAttribute("juzgadoClave") != null){
                 juzgado = (String) session.getAttribute("juzgadoClave");
             }
-            
-            showJuzgados juz = new showJuzgados();
-            showJueces sj = new showJueces();
-            ArrayList<String> juzClave;
-            ArrayList<String[]> lista;
         %>
     </head>
 

@@ -521,7 +521,6 @@
         <% if(!tipoResIn.equals("")){ %>
             <script type="text/javascript"> 
                 $(document).ready(function(){ 
-                    //tipoResolucion(); 
                     $("#resolucion option:not(:selected)").attr("disabled", "disabled");
                 });
             </script>

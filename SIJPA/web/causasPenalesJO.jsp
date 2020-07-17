@@ -20,24 +20,8 @@
         <title>SIJPA::Causas Penales JO</title>
         <%@include file="librerias.jsp" %>
         <%
-            //Controlamos el juzgado para que tenga siempre uno seleccionado
-            String juzgado = "";
-            if(request.getParameter("juzgado") != null){
-                if(request.getParameter("juzgado") != ""){
-                    juzgado = request.getParameter("juzgado");
-                    session.setAttribute("juzgadoClave", juzgado);
-                }
-            }else if(session.getAttribute("juzgadoClave") != null){
-                juzgado = (String) session.getAttribute("juzgadoClave");
-            }
-            
-            //Vaciamos la variable para que pueda entrar una nueva causa penal
-            if(session.getAttribute("causaClave") != null){
-                session.setAttribute("causaClave", "");
-                session.setAttribute("causaClaveJO", "");
-            }
-            
             showJuzgados juz = new showJuzgados();
+            showJueces juez = new showJueces();
             showCausasPenalesJO cp = new showCausasPenalesJO();
             estatusJO esJO = new estatusJO();
             usuario us = new usuario();
@@ -47,6 +31,33 @@
             ArrayList<String[]> lsCausasJC, lisCausaJO;
             ArrayList<String> lista;
             int Estatus = 0, cInicial = 0;
+            
+            //Controlamos el juzgado para que tenga siempre uno seleccionado
+            String juzgado = "";
+            if(request.getParameter("juzgado") != null){
+                if(request.getParameter("juzgado") != ""){
+                    juzgado = request.getParameter("juzgado");
+                    session.setAttribute("juzgadoClave", juzgado);
+                }
+            }else if(session.getAttribute("juzgadoClave") != null){
+                juzgado = (String) session.getAttribute("juzgadoClave");
+                //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
+                if(juez.findTotJuez(juzgado) == 0){
+                    response.sendRedirect("capturaJuez.jsp");
+                }
+            }
+            
+            //Verificamos la funcion del juzgado para que sa de Enjuiciamineto
+            if(juz.findFuncionJuz(juzgado).equals("1")){
+                out.println("<script>alert('El Juzgado activo es de Control y este es el apartado de Enjuiciamiento');"
+                        + "window.location.href = 'sistemasCap.jsp';</script>");
+            }
+            
+            //Vaciamos la variable para que pueda entrar una nueva causa penal
+            if(session.getAttribute("causaClave") != null){
+                session.setAttribute("causaClave", "");
+                session.setAttribute("causaClaveJO", "");
+            }
             
             session.setAttribute("Sistema", "JO");//Lanzamos variable de session dependiendo del sistema
             int tCausasJuz = cp.countCausasPenalesJO(juzgado);

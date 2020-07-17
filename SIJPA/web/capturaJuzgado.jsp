@@ -13,8 +13,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Juzgados</title>
-        <script type="text/javascript" src="js/fnJuzgados.js"></script>
         <%@include file="librerias.jsp"%>
+        <script type="text/javascript" src="js/fnJuzgados.js"></script>
         <% 
             //Unicamente lo utilizamos cuando recibimos la variable de Binevenida
             if(request.getParameter("insert") != null){
@@ -135,7 +135,8 @@
                 <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2">Ubicación</button>
                 <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3">Domicilio</button>
                 <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4">Datos del Capturador</button>
-                <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5">Información General</button>
+                <button class="pestanaLinks oculto" onclick="openPestana('btn5', 'p5')" id="btn5">Información General JC</button>
+                <button class="pestanaLinks oculto" onclick="openPestana('btn6', 'p6')" id="btn6">Información General JO</button>
             </div>
             <form action="insrtJuzgados" method="post" name="formJuzgados">
                 <div id="p1" class="pestanaContent" style="display: block">
@@ -311,7 +312,7 @@
                             </td>
                             <td>
                                 <label for="cp">Codigo postal</label>
-                                <input type="text" class="soloNum" name="cp" id="cp" value="<%=codPost%>" maxlength="5"/>
+                                <input type="text" class="soloNum txtSmall" name="cp" id="cp" value="<%=codPost%>" maxlength="5"/>
                             </td>
                         </tr>
                         <tr>
@@ -322,7 +323,6 @@
                             <td>
                                 <label for="nomAsentamiento">Nombre del asentamiento humano</label>
                                 <input type="text" name="nomAsentamiento" id="nomAsentamiento" value="<%=nomAsenta%>" required/>
-
                             </td>
                             <td>
                                 <label for="">No. exterior / No. interior</label>
@@ -360,12 +360,12 @@
                     </table>
                 </div>
                 <div id="p5" class="pestanaContent">
-                    <h2>Información General</h2>
+                    <h2>Información General JC</h2>
                     <table class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="ejercicio">Ejercicio:</label>
-                                <select name="ejercicio" id="ejercicio" required>
+                                <label for="ejercicioJC">Ejercicio:</label>
+                                <select name="ejercicioJC" id="ejercicioJC">
                                     <option value="">--Seleccionar--</option>
                                     <%
                                         lista = cat.findEjercicios();
@@ -380,50 +380,130 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="causasIngresa">Causas penales ingresadas (solicitudes)</label>
-                                <input type="number" name="causasIngresa" id="causasIngresa" value="<%=causaPenaIn%>" min="0">
+                                <div class="divInfo" id="divInfoJC">
+                                    Causas penales ingresadas en Juzgado de Control(derivadas de carpetas "judicializadas" o de acción penal por particulares independientemente de 
+                                    que sean o no competentes, así como de incompetencias de otros órganos jurisdiccionales, 
+                                    materias o fueros)
+                                </div>
+                                <label for="causasIngresaJC" id="causasPinfoJC">Causas penales ingresadas (solicitudes)</label>
+                                <input type="number" name="causasIngresaJC" id="causasIngresaJC" value="<%=causaPenaIn%>" min="0">
                             </td>
                             <td>
-                                <label for="mediProteccion">Medidas de protección (solicitudes)</label>
-                                <input type="number" name="mediProteccion" id="mediProteccion" value="<%=medidasPro%>" min="0">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="providenPrecauto">Providencias precautorias (solicitudes)</label>
-                                <input type="number" name="providenPrecauto" id="providenPrecauto" value="<%=proviPre%>" min="0">
-                            </td>
-                            <td>
-                                <label for="actosInvestiga">Pruebas anticipadas (solicitudes)</label>
-                                <input type="number" name="pruebaAnti" id="pruebaAnti" value="<%=pruAnticipa%>" min="0">
-                            </td>
-                            <td>
-                                <label for="ordenesJudi">Órdenes judiciales (solicitudes)</label>
-                                <input type="number" name="ordenesJudi" id="ordenesJudi" value="<%=ordenJudici%>" min="0">
+                                <label for="mediProteccionJC">Medidas de protección (solicitudes)</label>
+                                <input type="number" name="mediProteccionJC" id="mediProteccionJC" value="<%=medidasPro%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="actosInvestiga">Actos de investigación que requieren control judicial</label>
-                                <input type="number" name="actosInvestiga" id="actosInvestiga" value="<%=actosInves%>" min="0">
+                                <label for="providenPrecautoJC">Providencias precautorias (solicitudes)</label>
+                                <input type="number" name="providenPrecautoJC" id="providenPrecautoJC" value="<%=proviPre%>" min="0">
                             </td>
                             <td>
-                                <label for="impugnaMp">Impugnaciones a las determinaciones del ministerio público</label>
-                                <input type="number" name="impugnaMp" id="impugnaMp" value="<%=impugnaMp%>" min="0">
+                                <label for="pruebaAntiJC">Pruebas anticipadas <br>(solicitudes)</label>
+                                <input type="number" name="pruebaAntiJC" id="pruebaAntiJC" value="<%=pruAnticipa%>" min="0">
                             </td>
                             <td>
-                                <label for="otros">Otros asuntos (solicitudes distintas a las anteriores)</label>
-                                <input type="number" name="otros" id="otros" value="<%=otros%>" min="0">
+                                <label for="ordenesJudiJC">Órdenes judiciales <br>(solicitudes)</label>
+                                <input type="number" name="ordenesJudiJC" id="ordenesJudiJC" value="<%=ordenJudici%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="causasTram">Causas penales en trámite</label>
-                                <input type="number" name="causasTram" id="causasTram" value="<%=causaTram%>" min="0">
+                                <label for="actosInvestigaJC">Actos de investigación que requieren control judicial <br>(solicitudes)</label>
+                                <input type="number" name="actosInvestigaJC" id="actosInvestigaJC" value="<%=actosInves%>" min="0">
                             </td>
                             <td>
-                                <label for="causasBaja">Causas penales dadas de baja</label>
-                                <input type="number" name="causasBaja" id="causasBaja" value="<%=causaBaja%>" min="0">
+                                <label for="impugnaMpJC">Impugnaciones a las determinaciones del MP <br>(solicitudes)</label>
+                                <input type="number" name="impugnaMpJC" id="impugnaMpJC" value="<%=impugnaMp%>" min="0">
+                            </td>
+                            <td>
+                                <label for="otrosJC">Otros asuntos <br>(solicitudes distintas a las anteriores)</label>
+                                <input type="number" name="otrosJC" id="otrosJC" value="<%=otros%>" min="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="causasTramJC">Causas penales pendientes de conclusión y/o terminación</label>
+                                <input type="number" name="causasTramJC" id="causasTramJC" value="<%=causaTram%>" min="0">
+                            </td>
+                            <td>
+                                <label for="causasBajaJC">Causas penales que causaron baja en el sistema</label>
+                                <input type="number" name="causasBajaJC" id="causasBajaJC" value="<%=causaBaja%>" min="0">
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="p6" class="pestanaContent">
+                    <h2>Información General JO</h2>
+                    <table class="tablaFormu">
+                        <tr>
+                            <td>
+                                <label for="ejercicioJO">Ejercicio:</label>
+                                <select name="ejercicioJO" id="ejercicioJO">
+                                    <option value="">--Seleccionar--</option>
+                                    <%
+                                        lista = cat.findEjercicios();
+                                        for (String[] ls : lista) {
+                                            out.println("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(ejercicio)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + ls[1] + "</option>");
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="divInfo" id="divInfoJO">
+                                    Causas penales ingresadas en Juicio Oral (derivadas de carpetas "judicializadas" o de acción penal por particulares independientemente de 
+                                    que sean o no competentes, así como de incompetencias de otros órganos jurisdiccionales, 
+                                    materias o fueros)
+                                </div>
+                                <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas (solicitudes)</label>
+                                <input type="number" name="causasIngresaJO" id="causasIngresaJO" value="<%=causaPenaIn%>" min="0">
+                            </td>
+                            <td>
+                                <label for="mediProteccionJO">Medidas de protección (solicitudes)</label>
+                                <input type="number" name="mediProteccionJO" id="mediProteccionJO" value="<%=medidasPro%>" min="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="providenPrecautoJO">Providencias precautorias (solicitudes)</label>
+                                <input type="number" name="providenPrecautoJO" id="providenPrecautoJO" value="<%=proviPre%>" min="0">
+                            </td>
+                            <td>
+                                <label for="pruebaAntiJO">Pruebas anticipadas <br>(solicitudes)</label>
+                                <input type="number" name="pruebaAntiJO" id="pruebaAntiJO" value="<%=pruAnticipa%>" min="0">
+                            </td>
+                            <td>
+                                <label for="ordenesJudiJO">Órdenes judiciales <br>(solicitudes)</label>
+                                <input type="number" name="ordenesJudiJO" id="ordenesJudiJO" value="<%=ordenJudici%>" min="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="actosInvestigaJO">Actos de investigación que requieren control judicial <br>(solicitudes)</label>
+                                <input type="number" name="actosInvestigaJO" id="actosInvestigaJO" value="<%=actosInves%>" min="0">
+                            </td>
+                            <td>
+                                <label for="impugnaMpJO">Impugnaciones a las determinaciones del MP <br>(solicitudes)</label>
+                                <input type="number" name="impugnaMpJO" id="impugnaMpJO" value="<%=impugnaMp%>" min="0">
+                            </td>
+                            <td>
+                                <label for="otrosJO">Otros asuntos <br>(solicitudes distintas a las anteriores)</label>
+                                <input type="number" name="otrosJO" id="otrosJO" value="<%=otros%>" min="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="causasTramJO">Causas penales pendientes de conclusión y/o terminación</label>
+                                <input type="number" name="causasTramJO" id="causasTramJO" value="<%=causaTram%>" min="0">
+                            </td>
+                            <td>
+                                <label for="causasBajaJO">Causas penales que causaron baja en el sistema</label>
+                                <input type="number" name="causasBajaJO" id="causasBajaJO" value="<%=causaBaja%>" min="0">
                             </td>
                             <td></td>
                         </tr>

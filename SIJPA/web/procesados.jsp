@@ -205,7 +205,7 @@
                                 <select name="edad" id="edad" onchange="ValEdadDelito('#edad','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        for (int i = 12; i <= 99; i++) {
+                                        for (int i = 12; i <= 17; i++) {
                                             out.println("<option value='" + i + "'");
                                             if(Integer.toString(i).equals(edad)){
                                                 out.println(" selected ");

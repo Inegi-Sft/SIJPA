@@ -1,3 +1,48 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+$(document).ready(function() {
+    
+    $('#causasPinfoJC').hover(function(){
+        $('#divInfoJC').fadeIn();
+    }, function(){
+        $('#divInfoJC').fadeOut();
+    });
+    
+    $('#causasPinfoJO').hover(function(){
+        $('#divInfoJO').fadeIn();
+    }, function(){
+        $('#divInfoJO').fadeOut();
+    });
+    
+    $('#funcionJuz').change(function(){
+        var numFunc = $(this).val();
+        if(numFunc === '1'){
+            $('#btn5').fadeIn();
+            $('#ejercicioJC').prop('required',true);
+            $('#btn6').fadeOut();
+            $('#ejercicioJO').prop('required',false);
+        }else if(numFunc === '2'){
+            $('#btn6').fadeIn();
+            $('#ejercicioJO').prop('required',true);
+            $('#btn5').fadeOut();
+            $('#ejercicioJC').prop('required',false);
+        }else if(numFunc === '3'){
+            $('#btn5').fadeIn();
+            $('#btn6').fadeIn();
+            $('#ejercicioJC').prop('required',true);
+            $('#ejercicioJO').prop('required',true);
+        }else{
+            $('#btn5').fadeOut();
+            $('#btn6').fadeOut();
+             $('#ejercicioJC').prop('required',false);
+            $('#ejercicioJO').prop('required',false);
+        }
+    });
+});
 
 function valida(){
     if ($('#nomOrgano').val() === '') {
@@ -38,7 +83,21 @@ function valida(){
         alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Apellido Materno');
     }else if ($('#cargo').val() ==='') {
         alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Cargo');
-    }else if ($('#ejercicio').val() ==='') {
-        alert('Secci\u00F3n Informaci\u00F3n General: \n\n Llena el campo Ejercicio');
+    }else if ($('#funcionJuz').val() ==='1'){
+        if($('#ejercicioJC').val() === ''){
+            alert('Secci\u00F3n Informaci\u00F3n General JC: \n\n Llena el campo Ejercicio');
+        }
+    }else if ($('#funcionJuz').val() ==='2'){
+        if($('#ejercicioJO').val() === ''){
+            alert('Secci\u00F3n Informaci\u00F3n General JO: \n\n Llena el campo Ejercicio');
+        }
+    }
+    else if ($('#funcionJuz').val() ==='3'){
+        if($('#ejercicioJC').val() === ''){
+            alert('Secci\u00F3n Informaci\u00F3n General JC: \n\n Llena el campo Ejercicio');
+        }
+        if($('#ejercicioJO').val() === ''){
+            alert('Secci\u00F3n Informaci\u00F3n General JO: \n\n Llena el campo Ejercicio');
+        }
     }
 }

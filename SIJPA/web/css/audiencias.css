@@ -110,3 +110,15 @@ a.addJuez{
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
+.inicio{
+    cursor: pointer
+}
+.contenedor .btnOpen {
+    width: 23px;
+}
+img.btnOpen{
+    content:url('../img/add.png');
+}
+img.btnClosed{
+    content:url('../img/menos.png');
+}

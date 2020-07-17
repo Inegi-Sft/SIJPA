@@ -46,6 +46,7 @@
             String fechaNaci = "";
             String sexo = "";
             String edad = "";
+            String edadJuzgado="";
             String naciPais = "";
             String naciEnti = "";
             String naciMuni = "";
@@ -122,6 +123,7 @@
                         defensor = procesado.get(0)[36];
                         personaRes = procesado.get(0)[37];
                         comen = procesado.get(0)[38];
+                        edadJuzgado=procesado.get(0)[39];
                     }else{
                         out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
@@ -161,7 +163,7 @@
                     rangoIngre = procesado.get(0)[28];
                     ocupacion = procesado.get(0)[29];
                     condiActi = procesado.get(0)[30];
-                    gradoParti = procesado.get(0)[34];
+                    gradoParti = procesado.get(0)[34]; 
                     reinciden = procesado.get(0)[35];
                     edoPsicofi = procesado.get(0)[36];
                     gpoDeli = procesado.get(0)[37];
@@ -169,6 +171,7 @@
                     defensor = procesado.get(0)[39];
                     personaRes = procesado.get(0)[40];
                     comen = procesado.get(0)[41];
+                    edadJuzgado=procesado.get(0)[42];
                 }else{
                     out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                             + "parent.$.fancybox.close();</script>");
@@ -179,14 +182,14 @@
     <body style="zoom: .9;">
         <%--<%@include file="cabecera.jsp" %>--%>
         <section class="contenedor">
-            <h1>Procesados</h1>
+            <h1>Imputados</h1>
             <form method="post" name="formProcesadosJO" id="formProcesadosJO">
                 <fieldset>
                     <legend>Características Sociodemográficas </legend>
                     <table class="tablaFormu">
                         <tr>
                             <td colspan="4">
-                                <label>Procesado Clave</label>
+                                <label>Imputado Clave</label>
                                 <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
                                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
@@ -198,11 +201,11 @@
                                 <input type="text" name="nombre" id="nombre" value="<%=nomProce%>" required>
                             </td>
                             <td>
-                                <label for="apaterno">Apellido Paterno</label>
+                                <label for="apaterno">Apellido paterno</label>
                                 <input type="text" name="apaterno" id="apaterno" value="<%=aPaterno%>" required>
                             </td>
                             <td>
-                                <label for="amaterno">Apellido Materno</label>
+                                <label for="amaterno">Apellido materno</label>
                                 <input type="text" name="amaterno" id="amaterno" value="<%=aMaterno%>" required>
                             </td>
                             <td>
@@ -212,12 +215,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="curp">Curp</label>
+                                <label for="curp">CURP</label>
                                 <input type="text" name="curp" id="curp" value="<%=curp%>" maxlength="18" minlength="18" required>
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
-                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" max="<%=fechas%>" onchange="ValFechaNacPRO('#fNacimiento','#edad')" onkeydown="return false" required>
+                                <input type="date" name="fNacimiento" id="fNacimiento"  value="<%=fechaNaci%>" max="<%=fechas%>" title="Fecha de nacimiento del procesado" onchange="ValFechaNacPRO('#fNacimiento','#edadJuzgado')" onkeydown="return false" required>
                                 <div class='noIdentificada'>
                                     <input type='checkbox' id='chkFechaNac' onclick="fechaNoIdent('#chkFechaNac', '#fNacimiento')">
                                     <label>No identificada</label>
@@ -240,11 +243,11 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="edad">Edad</label>
-                                <select name="edad" id="edad" required>
+                                <label for="edad">Edad en la que cometio el delito</label>
+                                <select name="edad" id="edad" onchange="ValEdadDelito('#edad','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        for (int i = 12; i <= 17; i++) {
+                                        for (int i = 12; i <= 99; i++) {
                                             out.println("<option value='" + i + "'");
                                             if(Integer.toString(i).equals(edad)){
                                                 out.println(" selected ");
@@ -258,11 +261,29 @@
                             </td>
                         </tr>
                         <tr>
+                           <td>
+                                <label for="edad">Edad en la que se presento al juzgado</label>
+                                <select name="edadJuzgado" id="edadJuzgado" onchange="ValEdadJuzgado('#edadJuzgado','#fNacimiento')" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        for (int i = 12; i <= 99; i++) {
+                                            out.println("<option value='" + i + "'");
+                                            if(Integer.toString(i).equals(edadJuzgado)){
+                                                out.println(" selected ");
+                                            }
+                                            out.println(">" + i + "</option>");
+                                                    
+                                        }
+                                    %>
+                                    <option value="-9">No identificado</option>
+                                </select>
+                            </td>
+                        <tr>
                             <td colspan="3">
                                 <fieldset>
                                     <legend>Lugar de nacimiento</legend>
                                     <div class="colsx">
-                                        <label for="nPais">Pais</label>
+                                        <label for="nPais">País</label>
                                         <select name="nPais" id="nPais" onchange="lugarNacimiento('#nPais', '#dNEntidad', '#dNMunicipio', '#nEntidad', '#nMunicipio');" required>
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -278,7 +299,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dNEntidad">
-                                        <label for="nEntidad">Entidad</label>
+                                        <label for="nEntidad">Entidad federativa</label>
                                         <select name="nEntidad" id="nEntidad" onchange="llenaMun('#nEntidad', '#nMunicipio')">
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -294,7 +315,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dNMunicipio">
-                                        <label for="nMunicipio" class="lblExBig">Municipio o Demarcacion Territorial</label>
+                                        <label for="nMunicipio" class="lblExBig">Municipio o demarcación territorial</label>
                                         <select name="nMunicipio" id="nMunicipio">
                                             <%
                                                 if(!naciPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -353,7 +374,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dREntidad">
-                                        <label for="rEntidad">Entidad</label>
+                                        <label for="rEntidad">Entidad federativa</label>
                                         <select name="rEntidad" id="rEntidad" onchange="llenaMun('#rEntidad', '#rMunicipio')">
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -369,7 +390,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dRMunicipio">
-                                        <label for="rMunicipio">Municipio</label>
+                                        <label for="rMunicipio" title="Municipio o demarcación territorial">Municipio</label>
                                         <select name="rMunicipio" id="rMunicipio">
                                             <%
                                                 if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -425,7 +446,7 @@
                                 </select> 
                             </td>
                             <td>
-                                <label for="alfabet">Condicion alfabetismo</label>
+                                <label for="alfabet">Condición de alfabetismo</label>
                                 <select name="alfabet" id="alfabet" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -441,7 +462,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="estudios">Grado de Estudios Concluido</label>
+                                <label for="estudios">Grado de estudios concluido</label>
                                 <select name="estudiosPro" id="estudiosPro" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -475,7 +496,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="hablaEsp">Dominio del español</label>
+                                <label for="hablaEsp">Condición de Dominio del español</label>
                                 <select name="hablaEsp" id="hablaEsp" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -532,7 +553,7 @@
                             <td colspan="2">
                                 <fieldset>
                                     <div class="cols">
-                                        <label for="hablaIndigena" class="lblExBig">¿Habla lengua indígena o dialecto?</label>
+                                        <label for="hablaIndigena" class="lblExBig">¿Habla alguna lengua indígena o dialecto?</label>
                                         <select name="hablaIndigena" id="hablaIndigena" onchange="respuestaSimpleSelect('#hablaIndigena', '#dLenguaIndigena', '#lenguaIndigena');" required>
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -687,7 +708,7 @@
                                         </select>
                                     </div>
                                     <div class="cols lblExBig oculto" id="dCondicionActi">
-                                        <label for="condicionActi">Condicion de Actividad</label>
+                                        <label for="condicionActi">Condición de actividad</label>
                                         <select name="condicionActi" id="condicionActi">
                                             <option value="">--Seleccione--</option>
                                             <%
@@ -726,7 +747,7 @@
                         </select>
                     </div>
                     <div class="colsx">
-                        <label for="reincidencia">Condicion de reincidencia</label>
+                        <label for="reincidencia">Condición de reincidencia</label>
                         <select name="reincidencia" id="reincidencia" required>
                             <option value="">--Seleccione--</option>
                             <%
@@ -742,7 +763,7 @@
                         </select>
                     </div>
                     <div class="colsx">
-                        <label for="psicofisico">Estado psicofisico al momento de cometer la conducta</label>
+                        <label for="psicofisico">Estado psicofísico al momento de cometer la conducta</label>
                         <select name="psicofisico" id="psicofisico" required>
                             <option value="">--Seleccione--</option>
                             <%

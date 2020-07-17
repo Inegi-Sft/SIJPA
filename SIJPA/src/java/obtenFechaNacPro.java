@@ -4,14 +4,17 @@
  * and open the template in the editor.
  */
 
-import clasesAuxiliar.FechaMax;
 import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showCausasPenalesJO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +29,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(urlPatterns = {"/obtenFechaNacPro"})
 public class obtenFechaNacPro extends HttpServlet {
 
-    String FechExpe=null;
+    String FechExpe=null,FechOcurr=null;
+    LocalDate  fechaIngreso=null,fechaNacimiento=null,LDONI=null;
     int edad=0;
     Boolean Numeric;
     /**
@@ -39,7 +43,7 @@ public class obtenFechaNacPro extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession();
@@ -48,83 +52,49 @@ public class obtenFechaNacPro extends HttpServlet {
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
         showCausasPenales penales = new showCausasPenales();
         showCausasPenalesJO penalesJO = new showCausasPenalesJO();
-        FechaMax Fech = new FechaMax();
-        Calendar fecha = new GregorianCalendar();
-        int ano = fecha.get(Calendar.YEAR);
         
-        try {
-            if (request.getParameter("Fnac") != null) {
-                String FechNac = request.getParameter("Fnac");
-                String AnoNac = FechNac.substring(0, 4);
-                String Sistema = (String) sesion.getAttribute("Sistema");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd",Locale.ENGLISH);
 
-                if (Sistema.equals("JC")) {
-                    FechExpe = penales.FechaIng(juzgadoClave, causaClave);
-                } else if (Sistema.equals("JO")) {
-                    FechExpe = penalesJO.FechaIngJO(juzgadoClave, causaClaveJO);
-                }
-                String AnoIngreso = FechExpe.substring(0, 4);
-                System.out.println("año de ingreso=" + FechExpe);
-                if (FechExpe.equals("1899-09-09")) {
-                    System.out.print("entro con año de ingreso 1899 " + FechExpe);
-                    char numca[] = causaClave.toCharArray();
-                    int m = 0;
-                    for (int i = 0; i < causaClave.length(); i++) {
-                        if (numca[i] == '/') {
-                            m++;
-                        }
+        try {
+            
+            if (request.getParameter("Fnac") != null) {
+                String Sistema = (String) sesion.getAttribute("Sistema");
+                   if (Sistema.equals("JC")) {
+                    //queda pendiente fecha de ocurrencia para la version 2.0 ya que no se puede saber la relacion de procesado-delito cometido
+                    //fechaOcurrencia=(Date) new SimpleDateFormat("yyyy-MM-dd").parse(penales.fechaOcurr(juzgadoClave,causaClave)); 
+                    fechaIngreso = LocalDate.parse(penales.FechaIng(juzgadoClave, causaClave), formatter);
+                    //System.out.println("Fecha de ingresoooo:"+fechaIngreso);
+                    } else if (Sistema.equals("JO")) {
+                     fechaIngreso = LocalDate.parse(penalesJO.FechaIngJO(juzgadoClave, causaClaveJO), formatter);
                     }
-                    System.out.println("numero de / " + m);
-                    if (m == 0) {
-                        System.out.println("esta en validacion 0");
-                        out.write("0");
-                    } else if (m == 1) {
-                        System.out.println("esta en validacion 1 yesssssss");
-                        String[] parts = causaClave.split("/");
-                        String part1 = parts[0];
-                        String part2 = parts[1];
-                        Numeric = Fech.isNumeric(part2.substring(0, 4));
-                        if (Numeric == true) {
-                            int ValAño = Integer.parseInt(part2.substring(0, 4));
-                            if ((ValAño > 1915) && (ValAño < ano + 1)) {
-                                edad = Integer.parseInt(part2.substring(0, 4)) - Integer.parseInt(AnoNac);
-                                System.out.println("la causa Clave=" + causaClave + " " + part1 + " " + part2);
-                                out.println(edad);
-                            } else {
-                                out.write("0");       
-                            }
-                        } else {
-                            out.write("0");
-                        }
-                    } else if (m == 2) {
-                        System.out.println("esta en validacion 2");
-                        String[] parts = causaClave.split("/");
-                        String part1 = parts[0];
-                        String part2 = parts[1];
-                        String part3 = parts[2];
-                        Numeric = Fech.isNumeric(part2.substring(0, 4));
-                        if (Numeric == true) {
-                            int ValAño = Integer.parseInt(part2.substring(0, 4));
-                            if ((ValAño > 1915) && (ValAño < ano + 1)) {
-                                edad = Integer.parseInt(part3.substring(0, 4)) - Integer.parseInt(AnoNac);
-                                out.println(edad);
-                            } else {
-                                out.write("0");
-                            }
-                        } else {
-                            out.write("0");
-                        }
+                    LDONI = LocalDate.parse("1899-09-09", formatter);         
+                if (!fechaIngreso.isEqual(LDONI)==true) {                    
+                    fechaNacimiento = LocalDate.parse(request.getParameter("Fnac"), formatter);
+                    // System.out.println("Fecha de Nacimiento:"+fechaNacimiento); 
+                    LocalDate LDOJuz = LocalDate.of(fechaIngreso.getYear(), fechaIngreso.getMonth(), fechaIngreso.getDayOfMonth());
+                    LocalDate LDOFechaNac = LocalDate.of(fechaNacimiento.getYear(), fechaNacimiento.getMonth(), fechaNacimiento.getDayOfMonth());
+                    Period diff = Period.between(LDOFechaNac, LDOJuz);
+                    System.out.println("Difference is %d years, %d months and %d days old " + diff.getYears() + " " + diff.getMonths() + " " + diff.getDays());
+
+                    if (diff.getYears() < 0) {
+                        //System.out.println("Es menor a 0");
+                        out.write("2");
+                    } else {
+                        out.println(diff.getYears());
+                        //System.out.println("Es mayor a 0");
                     }
+
                 } else {
-                    edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
-                    System.out.println("la edad es mira" + edad);
-                    out.println(edad);
+                    //System.out.println("2"+fechaIngreso);
+                    out.write("3");
                 }
             }
         } finally {
             out.close();
         }
     }
+
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -138,7 +108,11 @@ public class obtenFechaNacPro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(obtenFechaNacPro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -152,7 +126,11 @@ public class obtenFechaNacPro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(obtenFechaNacPro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

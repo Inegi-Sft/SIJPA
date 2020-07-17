@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class showJuzgados {
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String> lista;
-    ArrayList<String[]> listaTabla,ListaDatosJuz;
+    ArrayList<String[]> listaTabla, listaDatosJuz;
     String sql;
     ResultSet rs;
     
@@ -92,7 +92,8 @@ public class showJuzgados {
             sql = "SELECT DJ.JUZGADO_CLAVE, DJ.JUZGADO_NOMBRE, DJ.JUZGADO_NUMERO, CJ.DESCRIPCION, CEN.DESCRIPCION, CM.DESCRIPCION, CE.DESCRIPCION "
                     + "FROM DATOS_JUZGADOS_ADOJC DJ "
                     + "JOIN CATALOGOS_JURISDICCION CJ ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "
-                    + "JOIN CATALOGOS_ENTIDADES CEN ON DJ.ENTIDAD = CEN.ENTIDAD_ID "
+                    //+ "JOIN CATALOGOS_ENTIDADES CEN ON DJ.ENTIDAD = CEN.ENTIDAD_ID "
+                    + "JOIN CATALOGOS_FUNCION_JUZGADO CEN ON DJ.JUZGADO_FUNCION = CEN.FUNCION_JUZ_ID "
                     + "JOIN CATALOGOS_MUNICIPIOS CM ON DJ.MUNICIPIO = CM.MUNICIPIO_ID "
                     + "JOIN CATALOGOS_ESTATUS CE ON DJ.ESTATUS = CE.ESTATUS_ID "
                     + "ORDER BY 1";
@@ -113,14 +114,14 @@ public class showJuzgados {
     public ArrayList findJuzgadoDato(String juzgadoClave){
         try {
             conn.Conectar();
-            ListaDatosJuz = new ArrayList<>();
+            listaDatosJuz = new ArrayList<>();
             sql = "SELECT *  "
                     + "FROM DATOS_JUZGADOS_ADOJC WHERE JUZGADO_CLAVE = '"+ juzgadoClave +"' "
                     + "ORDER BY 1";
             System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
-                ListaDatosJuz.add(new String[]{
+                listaDatosJuz.add(new String[]{
                     rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),
                     rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),
                     rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),rs.getString(18),
@@ -131,21 +132,21 @@ public class showJuzgados {
         } catch (SQLException ex) {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ListaDatosJuz;
+        return listaDatosJuz;
     }
     
     public ArrayList findInformeJuz(String juzgadoClave){
         try {
             conn.Conectar();
-            ListaDatosJuz = new ArrayList<>();
+            listaDatosJuz = new ArrayList<>();
             sql = "SELECT CAUSAS_PENALES_INGRESADAS, MEDIDAS_PROTECCION_ASIG, PROVIDENCIAS_PRECAUTORIAS, PRUEBA_ANTICIPADA,"
                     + "ORDENES_JUDICIALES, ACTOS_INVESTIGA, IMPUGNACION_MP, OTROS, CAUSAS_TRAMITE, CAUSAS_BAJAS, ANIO "
                     + "FROM DATOS_INFORME_ADOJC "
-                    + "WHERE JUZGADO_CLAVE = '"+ juzgadoClave +"' "
+                    + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
                     + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {
-                ListaDatosJuz.add(new String[]{
+                listaDatosJuz.add(new String[]{
                     rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),
                     rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),
                     rs.getString(11)
@@ -155,7 +156,27 @@ public class showJuzgados {
         } catch (SQLException ex) {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ListaDatosJuz;
+        return listaDatosJuz;
+    }
+    
+    public String findFuncionJuz(String juzgadoClave){
+        String funcion = "";
+        try {
+            conn.Conectar();
+            sql = "SELECT JUZGADO_FUNCION "
+                    + "FROM DATOS_JUZGADOS_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
+                    + "ORDER BY 1;";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                funcion = rs.getString(1);
+                
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return funcion;
     }
     
 }

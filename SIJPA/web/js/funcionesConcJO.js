@@ -11,6 +11,12 @@ $(document).ready(function() {
         $('#chkFechaReso').prop("checked", true);
     }
     
+    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    if($('#fechaSenten').val() === '1899-09-09'){
+        $('#fechaSenten').prop("readonly", true);
+        $('#chkFechaSenten').prop("checked", true);
+    }
+    
     //Se usa para la recuperacion de BD
     switch ($('#resolucion').val()){
         case '1':
@@ -23,7 +29,7 @@ $(document).ready(function() {
             $('#fechaExtinAR').val('1799-09-09');
             break;
         case '3':
-            $('#flsImpugnacion').show();
+            $('#flsImpugnacion,#dFechaSenten').show();
             $('#flsReparaDanio').hide();
             $('#flsSobreseimto select, #flsSentencia select, #flsReparaDanio select').val('-2');
             $('#fechaExtinAR').val('1799-09-09');
@@ -106,8 +112,9 @@ $(document).ready(function() {
             $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
             $('#chkFechaImpugnacion').prop("checked", false);
 
-            $('#flsSentencia,#dExcluAccion,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna,#dTipoRepara,#dMontoRepara').hide();
+            $('#flsSentencia,#dExcluAccion,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna,#dTipoRepara,#dMontoRepara,#dFechaSenten').hide();
             $('#flsSentencia select').val('-2').prop("required", false);
+            $('#fechaSenten').val('1799-09-09').prop("required", false);
 
         } else if ($('#resolucion').val() === '2') {
             $('#flsSentencia,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
@@ -117,23 +124,24 @@ $(document).ready(function() {
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
 
             $('#flsSobreseimto,#dTipoMedidaPL,#dTipoMedidaNPL,#dInternamiento,#dTipoRepara,#dMontoRepara,\n\
-            #dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
+            #dTipoImpugna,#dFechaImpugna,#dQuienImpugna,#dFechaSenten').hide();
             $('#flsSobreseimto select').val('-2').prop("required", false);
+            $('#fechaSenten').val('1799-09-09').prop("required", false);
 
         } else if ($('#resolucion').val() === '3') {
-            $('#flsImpugnacion').fadeIn("slow");
+            $('#flsImpugnacion,#dFechaSenten').fadeIn("slow");
             $('#flsImpugnacion select').val('').prop("required", true);
-            $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
-            $('#chkFechaImpugnacion').prop("checked", false);
+            $('#fechaImpugnacion,#fechaSenten').val('').prop({"required": true, "readonly": false});
+            $('#chkFechaImpugnacion,#chkFechaSenten').prop("checked", false);
 
             $('#flsSobreseimto,#flsSentencia,#flsReparaDanio,#dTipoMedidaPL,#dTipoMedidaNPL,#dInternamiento,#dTipoRepara,#dMontoRepara,\n\
             #dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
             $('#flsSobreseimto select,#flsSentencia select, #flsReparaDanio select').val('-2').prop("required", false);
 
         } else {
-            $('#flsSobreseimto,#flsSentencia,#flsReparaDanio,#flsImpugnacion').fadeOut("slow");
+            $('#flsSobreseimto,#flsSentencia,#flsReparaDanio,#flsImpugnacion,#dFechaSenten').fadeOut("slow");
             $('#flsSobreseimto select,#flsSentencia select,#flsReparaDanio select,#flsImpugnacion select').val('-2').prop("required", false);
-            $('#fechaImpugnacion').val('1799-09-09').prop("required", false);
+            $('#fechaImpugnacion,#fechaSenten').val('1799-09-09').prop("required", false);
         }
     });
     

@@ -38,6 +38,7 @@ public class insrtJuzgados extends HttpServlet {
     String sql;
     ResultSet rs;
     String juzgadoClave;
+    boolean resul;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,20 +75,39 @@ public class insrtJuzgados extends HttpServlet {
         String apaternoCap = request.getParameter("apaternoCap").toUpperCase();
         String amaternoCap = request.getParameter("amaternoCap").toUpperCase();
         String cargo = request.getParameter("cargo").toUpperCase();
-        //Datos Generales
-        String ejercicio = request.getParameter("ejercicio");
-        String causasIngresa = verificaVariable(request.getParameter("causasIngresa"));
-        String mediProteccion = verificaVariable(request.getParameter("mediProteccion"));
-        String providenPrecauto = verificaVariable(request.getParameter("providenPrecauto"));
-        String pruebaAnti = verificaVariable(request.getParameter("pruebaAnti"));
-        String ordenesJudi = verificaVariable(request.getParameter("ordenesJudi"));
-        String actosInvestiga = verificaVariable(request.getParameter("actosInvestiga"));
-        String impugnaMp = verificaVariable(request.getParameter("impugnaMp"));
-        String otros = verificaVariable(request.getParameter("otros"));
-        String causasTram = verificaVariable(request.getParameter("causasTram"));
-        String causasBaja = verificaVariable(request.getParameter("causasBaja"));
+        //Informción General Juzgado de Control
+        String ejercicioJC = request.getParameter("ejercicioJC");
+        String causasIngresaJC = verificaVariable(request.getParameter("causasIngresaJC"));
+        String mediProteccionJC = verificaVariable(request.getParameter("mediProteccionJC"));
+        String providenPrecautoJC = verificaVariable(request.getParameter("providenPrecautoJC"));
+        String pruebaAntiJC = verificaVariable(request.getParameter("pruebaAntiJC"));
+        String ordenesJudiJC = verificaVariable(request.getParameter("ordenesJudiJC"));
+        String actosInvestigaJC = verificaVariable(request.getParameter("actosInvestigaJC"));
+        String impugnaMpJC = verificaVariable(request.getParameter("impugnaMpJC"));
+        String otrosJC = verificaVariable(request.getParameter("otrosJC"));
+        String causasTramJC = verificaVariable(request.getParameter("causasTramJC"));
+        String causasBajaJC = verificaVariable(request.getParameter("causasBajaJC"));
+        //Informción General Juicio Oral
+        String ejercicioJO = request.getParameter("ejercicioJO");
+        String causasIngresaJO = verificaVariable(request.getParameter("causasIngresaJO"));
+        String mediProteccionJO = verificaVariable(request.getParameter("mediProteccionJO"));
+        String providenPrecautoJO = verificaVariable(request.getParameter("providenPrecautoJO"));
+        String pruebaAntiJO = verificaVariable(request.getParameter("pruebaAntiJO"));
+        String ordenesJudiJO = verificaVariable(request.getParameter("ordenesJudiJO"));
+        String actosInvestigaJO = verificaVariable(request.getParameter("actosInvestigaJO"));
+        String impugnaMpJO = verificaVariable(request.getParameter("impugnaMpJO"));
+        String otrosJO = verificaVariable(request.getParameter("otrosJO"));
+        String causasTramJO = verificaVariable(request.getParameter("causasTramJO"));
+        String causasBajaJO = verificaVariable(request.getParameter("causasBajaJO"));
         
         juzgadoClave = entidadJ + "-" + municipioJ + "-" + numOrgano;
+        
+        String ejercicio = "";
+        if(!ejercicioJC.equals("")){//Control o Mixto
+            ejercicio = ejercicioJC;
+        }else if(ejercicioJO.equals("")){
+            ejercicio = ejercicioJO;
+        }
           
         try {
             conn.Conectar();
@@ -99,12 +119,24 @@ public class insrtJuzgados extends HttpServlet {
                         + "1," + ejercicio + ")";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                    sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
-                            + causasIngresa + "," + mediProteccion + "," + providenPrecauto + "," + pruebaAnti + "," + ordenesJudi + ","
-                            + actosInvestiga + "," + impugnaMp + "," + otros + "," + causasTram + ","+ causasBaja + ",(select YEAR(NOW()))"
-                            + ")";
-                    System.out.println(sql);
-                    if(conn.escribir(sql)){
+                    //Validamos la funcion del organo para saber en donde insertarlo
+                    if(funcionJuz.equals("1") || funcionJuz.equals("3")){//Control o Mixto
+                        sql = "INSERT INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                                + causasIngresaJC + "," + mediProteccionJC + "," + providenPrecautoJC + "," + pruebaAntiJC + "," + ordenesJudiJC + ","
+                                + actosInvestigaJC + "," + impugnaMpJC + "," + otrosJC + "," + causasTramJC + ","+ causasBajaJC + ",(select YEAR(NOW()))"
+                                + ")";
+                        System.out.println(sql);
+                        resul = conn.escribir(sql);
+                    }
+                    if(funcionJuz.equals("2") || funcionJuz.equals("3")){//Enjuiciamiento o Mixto
+                        sql = "INSERT INTO DATOS_INFORME_ADOJO VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                                + causasIngresaJO + "," + mediProteccionJO + "," + providenPrecautoJO + "," + pruebaAntiJO + "," + ordenesJudiJO + ","
+                                + actosInvestigaJO + "," + impugnaMpJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
+                                + ")";
+                        System.out.println(sql);
+                        resul = conn.escribir(sql);
+                    }
+                    if(resul){
                         //inserta un juez no aplica de acuerdo a el juzgado necesario para que funcionen los no identificados
                         sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES (" + entidadJ + "," + municipioJ + ","
                                 + numOrgano + ",'" + juzgadoClave + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, 1, (select YEAR(NOW())))";
@@ -139,13 +171,25 @@ public class insrtJuzgados extends HttpServlet {
                         + "WHERE JUZGADO_CLAVE = '" + jClaveR + "'; ";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                    sql = "UPDATE DATOS_INFORME_ADOJC SET CAUSAS_PENALES_INGRESADAS = " + causasIngresa + ","
-                            + "MEDIDAS_PROTECCION_ASIG = " + mediProteccion + ",PROVIDENCIAS_PRECAUTORIAS = " + providenPrecauto + ","
-                            + "PRUEBA_ANTICIPADA = " + pruebaAnti + ",ORDENES_JUDICIALES = " + ordenesJudi + ","
-                            + "ACTOS_INVESTIGA = " + actosInvestiga + ",IMPUGNACION_MP = " + impugnaMp + ",OTROS = " + otros + ","
-                            + "CAUSAS_TRAMITE = " + causasTram + ",CAUSAS_BAJAS = " + causasBaja + " "
-                            + "WHERE JUZGADO_CLAVE = '" + jClaveR + "';";
-                    System.out.println(sql);
+                    //Validamos la funcion del organo para saber en donde actualizarlo
+                    if(funcionJuz.equals("1") || funcionJuz.equals("3")){//Control o Mixto
+                        sql = "UPDATE DATOS_INFORME_ADOJC SET CAUSAS_PENALES_INGRESADAS = " + causasIngresaJC + ","
+                                + "MEDIDAS_PROTECCION_ASIG = " + mediProteccionJC + ",PROVIDENCIAS_PRECAUTORIAS = " + providenPrecautoJC + ","
+                                + "PRUEBA_ANTICIPADA = " + pruebaAntiJC + ",ORDENES_JUDICIALES = " + ordenesJudiJC + ","
+                                + "ACTOS_INVESTIGA = " + actosInvestigaJC + ",IMPUGNACION_MP = " + impugnaMpJC + ",OTROS = " + otrosJC + ","
+                                + "CAUSAS_TRAMITE = " + causasTramJC + ",CAUSAS_BAJAS = " + causasBajaJC + " "
+                                + "WHERE JUZGADO_CLAVE = '" + jClaveR + "';";
+                        System.out.println(sql);
+                    }
+                    if(funcionJuz.equals("2") || funcionJuz.equals("3")){//Enjuiciamiento o Mixto
+                        sql = "UPDATE DATOS_INFORME_ADOJC SET CAUSAS_PENALES_INGRESADAS = " + causasIngresaJO + ","
+                                + "MEDIDAS_PROTECCION_ASIG = " + mediProteccionJO + ",PROVIDENCIAS_PRECAUTORIAS = " + providenPrecautoJO + ","
+                                + "PRUEBA_ANTICIPADA = " + pruebaAntiJO + ",ORDENES_JUDICIALES = " + ordenesJudiJO + ","
+                                + "ACTOS_INVESTIGA = " + actosInvestigaJO + ",IMPUGNACION_MP = " + impugnaMpJO + ",OTROS = " + otrosJO + ","
+                                + "CAUSAS_TRAMITE = " + causasTramJO + ",CAUSAS_BAJAS = " + causasBajaJO + " "
+                                + "WHERE JUZGADO_CLAVE = '" + jClaveR + "';";
+                        System.out.println(sql);
+                    }
                     if(conn.escribir(sql)){
                         conn.close();
                         response.sendRedirect("juzgados.jsp?insert=101");
@@ -164,7 +208,7 @@ public class insrtJuzgados extends HttpServlet {
     }
     
     public String verificaVariable(String variable){
-        String verificada = "";
+        String verificada;
         if(variable == null){
             verificada = "0";
         }else if(variable.equals("")){

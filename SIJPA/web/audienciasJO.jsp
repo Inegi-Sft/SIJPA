@@ -4,6 +4,7 @@
     Author     : FERMIN.GOMEZ
 --%>
 
+<%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.showAudiencias"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,6 +16,7 @@
         <%@include file="librerias.jsp" %>
         <script type="text/javascript" src="js/fnAudienciasJO.js"></script>
         <%  
+            showJuzgados juz = new showJuzgados();
             showAudiencias sa = new showAudiencias();
             ArrayList<String[]> lista;
             
@@ -26,6 +28,12 @@
                 }
             }else if(session.getAttribute("juzgadoClaveAudi") != null){
                 juzgado = (String) session.getAttribute("juzgadoClaveAudi");
+            }
+            
+            //Verificamos la funcion del juzgado para que sa de Enjuiciamineto
+            if(juz.findFuncionJuz(juzgado).equals("1")){
+                out.println("<script>alert('El Juzgado activo es de Control y este es el apartado de Enjuiciamiento');"
+                        + "window.location.href = 'sistemasCap.jsp';</script>");
             }
         %>
     </head>

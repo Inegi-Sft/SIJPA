@@ -651,11 +651,24 @@ input[type=text]:read-only, input[type=date]:read-only{
     border-radius: 10px;
 }
 
+.divInfo{
+    position: absolute;
+    display: none;
+    color: #FFFFFF;
+    width: auto;
+    height: auto;
+    background-color: rgba(0,0,0,0.7);
+    padding: 10px;
+    border-radius: 10px;
+    margin: -59px 200px 0px -200px;
+}
+
 [data-title]:hover:after {
     opacity: 1;
     transition: all 0.1s ease 0.5s;
     visibility: visible;
 }
+
 [data-title]:after {
     content: attr(data-title);
     position: absolute;
@@ -680,6 +693,7 @@ input[type=text]:read-only, input[type=date]:read-only{
     z-index: 99999;
     visibility: hidden;
 }
+
 [data-title] {
     position: relative;
 }

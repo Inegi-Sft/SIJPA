@@ -599,11 +599,12 @@ a.addJuz img{
     vertical-align: text-bottom;
 }
 
-input[type=text]:read-only, input[type=date]:read-only{
+input[type=text]:read-only,input[type=number]:read-only, input[type=date]:read-only{
     cursor: default;
     background-color: rgba(239, 239, 239, 0.3);
     border-color: rgba(118, 118, 118, 0.3);
 }
+
 
 .lista{
     display: inline-table;

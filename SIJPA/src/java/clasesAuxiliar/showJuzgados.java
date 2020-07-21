@@ -54,6 +54,26 @@ public class showJuzgados {
         return lista;
     }
     
+    public int countCausasPenIn(String juzgado, int funJuzgado){
+        int conteo = 0;
+        try {
+            conn.Conectar();
+            if(funJuzgado == 1){
+                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '"+juzgado+"'";
+            }else{
+                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '"+juzgado+"'";
+            }
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                conteo = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        return conteo;
+    }
+    
     public ArrayList findJuzgadosJO(String juzgadoOld){
         try {
             conn.Conectar();

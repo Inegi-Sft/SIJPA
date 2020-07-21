@@ -179,11 +179,18 @@ $(document).ready(function() {
                 $('#tblDConclusiones tr > *:nth-child(3) input').prop("checked", true);
                 break;
             case '3':
-                $('#dTipoMedidaPL,#dTipoMedidaNPL,#dInternamiento').fadeOut("slow");
-                $('#tipoMedidaPL,#tipoMedidaNPL,#internamiento').val('-2').prop("required", false);
-                $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');
-                $('#tblDConclusiones tr > *:nth-child(4)').hide();
-                $('#tblDConclusiones input').prop({"checked": false, "required": true});
+                if($('#tblDConclusiones tbody tr').length >2){ //se pone <=2 por el encabezado que tambien se cuenta, sino seria 1
+                    $('#dTipoMedidaPL,#dTipoMedidaNPL,#dInternamiento').fadeOut("slow");
+                    $('#tipoMedidaPL,#tipoMedidaNPL,#internamiento').val('-2').prop("required", false);
+                    $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');
+                    $('#tblDConclusiones tr > *:nth-child(4)').hide();
+                    $('#tblDConclusiones input').prop({"checked": false, "required": true});
+                }else{
+                    alertify.alert('Mensaje Importante', 'Para el tipo de resoluci\u00F3n Mixta debe de haber por lo menos 2 delitos atribuidos al adolescente');
+                    $('#tipoSentencia').val('');
+                    $('#dTipoMedidaPL,#dTipoMedidaNPL,#Dinternamiento').fadeOut("slow");
+                    $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
+                }
                 break;
             default:
                 $('#dTipoMedidaPL,#dTipoMedidaNPL,#dInternamiento').fadeOut("slow");

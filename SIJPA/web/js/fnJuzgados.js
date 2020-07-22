@@ -18,6 +18,27 @@ $(document).ready(function() {
     }else if($('#fDivision').val() === '3'){
         $('#dPartJudicial').show();
     }
+  
+    //para recuperacion de datos condicionales para mostrar las opciones Informacion General JC o JO, según sea el caso
+    if($('#funcionJuz').val() === '1'){
+        $('#btn5').fadeIn();
+        $('#ejercicioJC').prop('required',true);
+    }
+    else if($('#funcionJuz').val() === '2'){
+        $('#btn6').fadeIn();
+        $('#ejercicioJO').prop('required',true);
+    }
+    else if($('#funcionJuz').val() === '3'){
+        $('#btn5').fadeIn();
+        $('#btn6').fadeIn();
+        $('#ejercicioJC').prop('required',true);
+        $('#ejercicioJO').prop('required',true);
+    }else{
+        $('#btn5').fadeOut();
+        $('#btn6').fadeOut();
+        $('#ejercicioJC').prop('required',false);
+        $('#ejercicioJO').prop('required',false);
+    }
     
     $('#causasPinfoJC').hover(function(){
         $('#divInfoJC').fadeIn();
@@ -74,7 +95,7 @@ $(document).ready(function() {
         }else{
             $('#btn5').fadeOut();
             $('#btn6').fadeOut();
-             $('#ejercicioJC').prop('required',false);
+            $('#ejercicioJC').prop('required',false);
             $('#ejercicioJO').prop('required',false);
         }
     });

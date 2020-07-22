@@ -362,7 +362,7 @@
                 <div id="p5" class="pestanaContent">
                     <h2>Información General JC</h2>
                     <table class="tablaFormu">
-                        <tr>
+                        
                             <td>
                                 <label for="ejercicioJC">Ejercicio:</label>
                                 <select name="ejercicioJC" id="ejercicioJC">
@@ -385,14 +385,18 @@
                                     que sean o no competentes, así como de incompetencias de otros órganos jurisdiccionales, 
                                     materias o fueros)
                                 </div>
-                                <label for="causasIngresaJC" id="causasPinfoJC">Causas penales ingresadas (solicitudes)</label>
-                                <input type="number" name="causasIngresaJC" id="causasIngresaJC" value="<%=causaPenaIn%>" min="0">
+                                <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas (solicitudes)</label>
+                                <%
+                                    int conteoCausaPenaInJC;
+                                    conteoCausaPenaInJC = sJuzgado.countCausasPenIn(juzClave, 1);
+                                %>
+                                <input type="number" name="causasIngresaJO" id="causasIngresaJO" value="<%=conteoCausaPenaInJC%>" min="0" readonly> 
                             </td>
                             <td>
                                 <label for="mediProteccionJC">Medidas de protección (solicitudes)</label>
                                 <input type="number" name="mediProteccionJC" id="mediProteccionJC" value="<%=medidasPro%>" min="0">
                             </td>
-                        </tr>
+                        
                         <tr>
                             <td>
                                 <label for="providenPrecautoJC">Providencias precautorias (solicitudes)</label>
@@ -461,7 +465,15 @@
                                     materias o fueros)
                                 </div>
                                 <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas (solicitudes)</label>
-                                <input type="number" name="causasIngresaJO" id="causasIngresaJO" value="<%=causaPenaIn%>" min="0">
+                                <%
+                                    int conteoCausaPenaInJO;
+                                    if(request.getParameter("insert") != null){
+                                        conteoCausaPenaInJO = sJuzgado.countCausasPenIn(juzClave, 2);
+                                    }else{
+                                        conteoCausaPenaInJO = 0;
+                                    }
+                                %>
+                                <input type="number" name="causasIngresaJO" id="causasIngresaJO" value="<%=conteoCausaPenaInJO%>" min="0" readonly>
                             </td>
                             <td>
                                 <label for="mediProteccionJO">Medidas de protección (solicitudes)</label>

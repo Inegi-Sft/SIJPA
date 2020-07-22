@@ -201,7 +201,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="edad">Edad en la que cometio el delito</label>
+                                <label for="edad">Edad al momento de cometer los hechos</label>
                                 <select name="edad" id="edad" onchange="ValEdadDelito('#edad','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -220,7 +220,7 @@
                        </tr>
                        <tr>
                            <td>
-                                <label for="edad">Edad en la que se presento al juzgado</label>
+                                <label for="edad">Edad al momento de iniciar el proceso</label>
                                 <select name="edadJuzgado" id="edadJuzgado" onchange="ValEdadJuzgado('#edadJuzgado','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%

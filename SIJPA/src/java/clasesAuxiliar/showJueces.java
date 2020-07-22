@@ -74,7 +74,7 @@ public class showJueces {
             sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                 + "FROM DATOS_JUECES_ADOJC "
                 + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
-                + "AND NOT JUEZ_CLAVE= (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='"+causa+"') "
+                + "AND NOT JUEZ_CLAVE= (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + causa + "') "
                 + "AND ESTATUS = 1 "
                 + "ORDER BY 1";
             rs = conn.consultar(sql);

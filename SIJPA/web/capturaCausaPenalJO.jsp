@@ -223,7 +223,7 @@
                                         <option value="">--Seleccione--</option>
                                         <option value="-2">-2</option>
                                         <%
-                                            lis = juzgados.findJuzgadosJO(juzgadoClave);
+                                            lis = juzgados.findJuzgadosDifJO(juzgadoClave);
                                             for (String ls : lis) {
                                                 out.println("<option value='" + ls + "'");
                                                 if(ls.equals(juzgaDif)){

@@ -21,25 +21,6 @@ public class showAudiencias {
 
     String sql;
     ResultSet resul;
-    
-     public ArrayList findJuzgados() {
-        conn.Conectar();
-        lista = new ArrayList<>();
-        sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
-                + "WHERE ESTATUS = 1 ORDER BY 1;";
-        resul = conn.consultar(sql);
-        try {
-            while (resul.next()) {
-                lista.add(new String[]{
-                    resul.getString(1)
-                });
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
      
     public ArrayList findCausasJC(String juzgado) {
         conn.Conectar();
@@ -76,7 +57,6 @@ public class showAudiencias {
             + " INNER JOIN DATOS_JUECES_ADOJC J2 ON A.JUZGADO_CLAVE=J2.JUZGADO_CLAVE AND A.JUEZ_CLAVE2=J2.JUEZ_CLAVE"
             + " INNER JOIN DATOS_JUECES_ADOJC J3 ON A.JUZGADO_CLAVE=J3.JUZGADO_CLAVE AND A.JUEZ_CLAVE3=J3.JUEZ_CLAVE"
             + " WHERE A.JUZGADO_CLAVE='"+juzgado+"' GROUP BY A.CAUSA_CLAVE ORDER BY CAUSA_CLAVE";
-        System.out.println(sql);
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -116,7 +96,8 @@ public class showAudiencias {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString("JUEZ_CLAVE"), resul.getString("APELLIDOP_JUEZ"),resul.getString("APELLIDOM_JUEZ"),resul.getString("NOMBRE_JUEZ")
+                    resul.getString("JUEZ_CLAVE"), resul.getString("APELLIDOP_JUEZ"),
+                    resul.getString("APELLIDOM_JUEZ"),resul.getString("NOMBRE_JUEZ")
                 });
             }
             conn.close();

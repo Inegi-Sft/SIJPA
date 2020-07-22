@@ -32,11 +32,11 @@
         <%@include file="cabecera.jsp"%>
         <section class="contenedor">
             <h1>SISTEMAS CAPTURA SIJPA</h1>
+            <button class="btnSisCap" id="btnJuzga" name="btnJuzga">Juzgados</button>
+            <button class="btnSisCap" id="btnJuez" name="btnJuez">Jueces</button>
             <button class="btnSisCap" id="btnJc" name="btnJc">Juzgado de Control</button>
             <button class="btnSisCap" id="btnJo" name="btnJo">Juicio Oral</button>
             <button class="btnSisCap" id="btnAudi" name="btnAudi">Audiencias</button>
-            <button class="btnSisCap" id="btnJuzga" name="btnJuzga">Juzgados</button>
-            <button class="btnSisCap" id="btnJuez" name="btnJuez">Jueces</button>
             <%
                 //Control de usuarios si es administrador entonces mostramos la opcion de Usuarios
                 if(session.getAttribute("tipoUsuario") != null){

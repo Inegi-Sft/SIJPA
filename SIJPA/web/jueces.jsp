@@ -45,13 +45,11 @@
             if(request.getParameter("juzgado") != null){
                 juzgado = request.getParameter("juzgado");
                 session.setAttribute("juzgadoClave", juzgado);
-                session.setAttribute("juzgadoFuncion", juz.findFuncionJuz(juzgado));//traemos la funcion del juzgado
             }else if(session.getAttribute("juzgadoClave") != null){
                 juzgado = (String) session.getAttribute("juzgadoClave");
             }
         %>
     </head>
-
     <body >
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
@@ -63,7 +61,7 @@
             <form action="jueces.jsp" name="formJuez" method="post">
                 <div id="jjc">
                     <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" class="txtLong" onchange="formJuez.submit();">
+                    <select name="juzgado" id="juzgado" onchange="formJuez.submit();">
                         <option value="">--Seleccione--</option>
                         <%
                             juzClave = juz.findJuzgados();
@@ -76,8 +74,9 @@
                             }
                         %>
                     </select>
-                    <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
-                    <a href="#" onclick="validaAddJuez();"><img src="img/add.png" title="Agregar Juez"> Agregar Juez</a>
+                    <a href="#" onclick="validaAdd('capturaJuez');">
+                        <img src="img/add.png" title="Agregar Juez"> Agregar Juez
+                    </a>
                 </div>
             </form>
             <table class="tablasRegis" id="tablaJuez" data-nomTabla="Jueces">

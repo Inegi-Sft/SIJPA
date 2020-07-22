@@ -46,22 +46,27 @@
             //Controlamos el juzgado para que tenga siempre uno seleccionado
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
-                if(request.getParameter("juzgado") != ""){
-                    juzgado = request.getParameter("juzgado");
-                    session.setAttribute("juzgadoClave", juzgado);
-                }
+                juzgado = request.getParameter("juzgado");
+                session.setAttribute("juzgadoClave", juzgado);
             }else if(session.getAttribute("juzgadoClave") != null){
-                juzgado = (String) session.getAttribute("juzgadoClave");
-                //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
-                if(juez.findTotJuez(juzgado) == 0){
-                    response.sendRedirect("capturaJuez.jsp");
+                if(session.getAttribute("juzgadoClave") != ""){
+                    juzgado = (String) session.getAttribute("juzgadoClave");
+                    //Verificamos la funcion del juzgado para que sea de control
+                    if(juz.findFuncionJuz(juzgado).equals("2")){
+                        out.println("<script>$(document).ready(function () {"
+                                + "alertify.alert('Error de Juzgado',"
+                                + "'El juzgado seleccionado(activo) es de Enjuiciamiento y este es el apartado de Control."
+                                + "Por favor seleccione otro Juzgado Clave o capture un nuevo Juzgado en el apartado de Juzgados'"
+                                + ").set('closable', false);"
+                                + "$('#juzgado').val('');"
+                                + "});</script>");
+                        juzgado = "";//Vaciamos la variable para que no halla busqueda
+                        session.setAttribute("juzgadoClave", "");//Vaciamos la variable de session para evitar la busqueda
+                    }else if(juez.findTotJuez(juzgado) == 0){
+                        //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
+                        response.sendRedirect("capturaJuez.jsp");
+                    }
                 }
-            }
-            
-            //Verificamos la funcion del juzgado para que sa de control
-            if(juz.findFuncionJuz(juzgado).equals("2")){
-                out.println("<script>alert('El Juzgado activo es de Enjuiciamineto y este es el apartado de Control');"
-                        + "window.location.href = 'sistemasCap.jsp';</script>");
             }
             
             //Vaciamos la variable para que pueda entrar una nueva causa penal
@@ -85,10 +90,10 @@
             <form action="causasPenales.jsp" name="formCP" method="post">
                 <div id="juzClave">
                     <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" class="txtLong" onchange="formCP.submit();">
+                    <select name="juzgado" id="juzgado" onchange="formCP.submit();">
                         <option value="">--Seleccione--</option>
                         <%
-                            lista = juz.findJuzgados();
+                            lista = juz.findJuzgadosJC();
                             for (String ls : lista) {
                                 out.println("<option value='" + ls + "'");
                                 if(ls.equals(juzgado)){
@@ -100,8 +105,7 @@
                     </select>
                 </div>
                 <span class="totExp">Total: <%=tCausasJuz%></span>
-                <span class="msjAviso" hidden>Selecciona el Juzgado al cual se le agregarán las Causas Penales</span>
-                <a class="add" href="#" onclick="validaAddCausa();">
+                <a class="add" href="#" onclick="validaAdd('elementosPrincipales');">
                     <img src="img/add3.png" width="20" height="20"/> Agregar
                 </a>
                 <table id="causas" class="myTable">
@@ -133,7 +137,6 @@
                             cInicial = Ini.findEtapaCausaClave(ls[0]);
                             Estatus = us.findAvanceUsuario(ls[0]);
                             Incom=ls[2]+ls[3]+ls[4];
-                            System.out.println(Incom);
                             Est1 = "";
                             Est2 = "";
                             Est3 = "";
@@ -150,7 +153,6 @@
                             } else {
                                 Com = "Incompleto";
                             }
-                            
                     %>
                         <tr>
                             <!--<td><--%=pos%></td>-->

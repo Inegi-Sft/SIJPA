@@ -205,7 +205,6 @@ public class showInicial {
                     + "WHERE EI.CAUSA_CLAVE = '" + causaClave + "' "
                     + "AND EI.PROCESADO_CLAVE = '" + proceClave + "' "
                     + "ORDER BY 1;";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proceEtapa.add(new String[]{
@@ -386,7 +385,6 @@ public class showInicial {
             sql = "SELECT PROCESADO_CLAVE,ETAPA FROM DATOS_ETAPA_INICIAL_ADOJC "
                     + "WHERE CAUSA_CLAVE = '" + causaClave + "' AND ETAPA<>0 "
                     + "ORDER BY 1";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                  listEp.add(new String[]{
@@ -407,7 +405,6 @@ public class showInicial {
             sql = "SELECT COUNT(*) FROM DATOS_ETAPA_INICIAL_ADOJC "
                     + "WHERE CAUSA_CLAVE = '" + causaClave + "' AND ETAPA=0 "
                     + "ORDER BY 1";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 CEcausa = resul.getInt("COUNT(*)");

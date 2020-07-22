@@ -42,7 +42,8 @@ public class showJuzgados {
             conn.Conectar();
             lista = new ArrayList();
             sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
-                    + "WHERE ESTATUS = 1 ORDER BY 1;";
+                    + "WHERE ESTATUS = 1 "
+                    + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 lista.add(rs.getString(1));
@@ -54,13 +55,51 @@ public class showJuzgados {
         return lista;
     }
     
-    public ArrayList findJuzgadosJO(String juzgadoOld){
+    public ArrayList findJuzgadosJC(){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                    + "WHERE JUZGADO_FUNCION IN(1,3) "
+                    + "AND ESTATUS = 1 "
+                    + "ORDER BY 1;";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+    public ArrayList findJuzgadosJO(){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                    + "WHERE JUZGADO_FUNCION IN(2,3) "
+                    + "AND ESTATUS = 1 "
+                    + "ORDER BY 1;";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+    public ArrayList findJuzgadosDifJO(String juzgadoOld){
         try {
             conn.Conectar();
             lista = new ArrayList();
             sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
                 + "WHERE ESTATUS = 1 "
-                + "AND NOT JUZGADO_CLAVE='"+juzgadoOld+"' "
+                + "AND NOT JUZGADO_CLAVE='" + juzgadoOld + "' "
                 + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -76,7 +115,8 @@ public class showJuzgados {
     public boolean findJuzgadoExist(String juzgadoClave){
         try{
             conn.Conectar();
-            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC WHERE JUZGADO_CLAVE = '" + juzgadoClave + "';";
+            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "';";
             rs = conn.consultar(sql);
             return rs.next();
         }catch(SQLException ex){

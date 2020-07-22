@@ -101,14 +101,6 @@ function duracionNI(obj, hrs, min) {
         $(min).prop("readonly", false).val("");
     }
 }
-//Comprueba que primero se haya seleccionado un juzgado clave antes de agregar audiencias
-function validaAddAudienciasJO() {
-    if ($("#juzgado").val() !== "") {
-        window.location.href = "capturaAudienciasJO.jsp";
-    } else {
-        $(".msjAviso").fadeIn("slow");
-    }
-}
 
 //Elimina Audiencias
 function deleteAudienciasJO(causa) {

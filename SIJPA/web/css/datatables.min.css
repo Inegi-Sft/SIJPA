@@ -70,7 +70,7 @@ table.dataTable tbody th,table.dataTable tbody td{
     text-align: left;
 }
 
-#causas_filter{
+#causas_filter, #causasJO_filter{
     position: relative;
     right: 15%;
 }

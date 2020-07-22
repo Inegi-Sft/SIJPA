@@ -35,22 +35,27 @@
             //Controlamos el juzgado para que tenga siempre uno seleccionado
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
-                if(request.getParameter("juzgado") != ""){
-                    juzgado = request.getParameter("juzgado");
-                    session.setAttribute("juzgadoClave", juzgado);
-                }
+                juzgado = request.getParameter("juzgado");
+                session.setAttribute("juzgadoClave", juzgado);
             }else if(session.getAttribute("juzgadoClave") != null){
-                juzgado = (String) session.getAttribute("juzgadoClave");
-                //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
-                if(juez.findTotJuez(juzgado) == 0){
-                    response.sendRedirect("capturaJuez.jsp");
+                if(session.getAttribute("juzgadoClave") != ""){
+                    juzgado = (String) session.getAttribute("juzgadoClave");
+                    //Verificamos la funcion del juzgado para que sea de control
+                    if(juz.findFuncionJuz(juzgado).equals("1")){
+                        out.println("<script>$(document).ready(function () {"
+                                + "alertify.alert('Error de Juzgado',"
+                                + "'El juzgado seleccionado(activo) es de Control y este es el apartado de Enjuiciamiento."
+                                + "Por favor seleccione otro Juzgado Clave o capture un nuevo Juzgado en el apartado de Juzgados'"
+                                + ").set('closable', false);"
+                                + "$('#juzgado').val('');"
+                                + "});</script>");
+                        juzgado = "";//Vaciamos la variable para que no realice busqueda
+                        session.setAttribute("juzgadoClave", "");//Vaciamos la variable de session para evitar la busqueda
+                    }else if(juez.findTotJuez(juzgado) == 0){
+                        //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
+                        response.sendRedirect("capturaJuez.jsp");
+                    }
                 }
-            }
-            
-            //Verificamos la funcion del juzgado para que sa de Enjuiciamineto
-            if(juz.findFuncionJuz(juzgado).equals("1")){
-                out.println("<script>alert('El Juzgado activo es de Control y este es el apartado de Enjuiciamiento');"
-                        + "window.location.href = 'sistemasCap.jsp';</script>");
             }
             
             //Vaciamos la variable para que pueda entrar una nueva causa penal
@@ -75,10 +80,10 @@
             <form action="causasPenalesJO.jsp" name="formCPJO" method="post">
                 <div id="juzClave">
                     <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" class="txtLong" onchange="formCPJO.submit();">
+                    <select name="juzgado" id="juzgado" onchange="formCPJO.submit();">
                         <option value="">--Seleccione--</option>
                         <%
-                            lista = juz.findJuzgados();
+                            lista = juz.findJuzgadosJO();
                             for (String ls : lista) {
                                 out.println("<option value='" + ls + "'");
                                 if(ls.equals(juzgado)){
@@ -90,6 +95,9 @@
                     </select>
                 </div>
                 <span class="totExp">Total: <%=tCausasJuz%></span>
+                <a class="add" href="#" onclick="validaAdd('elementosPrincipalesJO');">
+                    <img src="img/add3.png" width="20" height="20"/> Agregar
+                </a>
                 <table id="causasJO" class="myTable">
                     <thead>
                         <tr>

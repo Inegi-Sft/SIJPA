@@ -5,6 +5,19 @@
  */
 
 $(document).ready(function() {
+    //para recuperacion de bd
+    if($('#numOrgano').val() !== ''){
+        $('#numOrgano, #entidadJ, #municipioJ').prop('disabled', true);
+    }
+    
+    //para recuperacion de bd
+    if($('#fDivision').val() === '1'){
+        $('#dRegJudicial').show();
+    }else if($('#fDivision').val() === '2'){
+        $('#dDistJudicial').show();
+    }else if($('#fDivision').val() === '3'){
+        $('#dPartJudicial').show();
+    }
     
     $('#causasPinfoJC').hover(function(){
         $('#divInfoJC').fadeIn();
@@ -16,6 +29,29 @@ $(document).ready(function() {
         $('#divInfoJO').fadeIn();
     }, function(){
         $('#divInfoJO').fadeOut();
+    });
+    
+    $('#municipioJ').change(function () {
+        var entidad = $('#entidadJ').val();
+        var muni = $('#municipioJ').val();
+        var num = $('#numOrgano').val();
+        var juzgado = entidad + '-' + muni + '-' + num;
+        $.ajax({
+            url: 'obtenJuzgado',
+            type: 'post',
+            data: {juzgado: juzgado},
+            succes: function (data) {
+                console.log('Juzgado ' + data);
+            }
+        }).done(function (d) {
+            console.log('Juzgado Resul ' + d);
+            if (d === 1) {
+                alert('Juzgado ya registrado, verificar');
+                $('#numOrgano').val('');
+                $('#entidadJ, #municipioJ').val('');
+                openPestana('btn1', 'p1');
+            }
+        });
     });
     
     $('#funcionJuz').change(function(){
@@ -40,6 +76,33 @@ $(document).ready(function() {
             $('#btn6').fadeOut();
              $('#ejercicioJC').prop('required',false);
             $('#ejercicioJO').prop('required',false);
+        }
+    });
+    
+    $("#fDivision").change(function () {
+        switch ($("#fDivision").val()) {
+            case '1':
+                $("#dRegJudicial").fadeIn("slow");
+                $("#regJudicial").val("").prop("required", true);
+                $("#dDistJudicial,#dPartJudicial").hide();
+                $("#distJudicial,#partJudicial").val("-2").prop("required", false);
+                break;
+            case '2':
+                $("#dDistJudicial").fadeIn("slow");
+                $("#distJudicial").val("").prop("required", true);
+                $("#dRegJudicial,#dPartJudicial").hide();
+                $("#regJudicial,#partJudicial").val("-2").prop("required", false);
+                break;
+            case '3':
+                $("#dPartJudicial").fadeIn("slow");
+                $("#partJudicial").val("").prop("required", true);
+                $("#dRegJudicial,#dDistJudicial").hide();
+                $("#regJudicial,#distJudicial").val("-2").prop("required", false);
+                break;
+            default:
+                $("#dRegJudicial,#dDistJudicial,#dPartJudicial").fadeOut("slow");
+                $("#regJudicial,#distJudicial,#partJudicial").val("-2").prop("required", false);
+                break;
         }
     });
 });

@@ -480,26 +480,28 @@ function buscaYremplaza(proceClave, etapaProce){
     var nomTabla = "";
     var dato = "";
     console.log('etapa: ' + etapaProce);
-    if(parent.$('#tablaIntermedia tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
-        parent.$('#tablaIntermedia tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
-            dato = $(this).html();
-            console.log('dato intermedia: ' + dato + ' proceClave: ' + proceClave);
-            if(proceClave === dato){
-                //if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
-                    if($(this).parent().find('td:eq(2)').html() !== ''){
-                        //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
-                        console.log('Esta insertado en BD');
-                        eliminaBD = true;
-                        nomTabla = "inter";
-                    }
-                    encontrado = true;
-                    $(this).parent().remove();
-                    if(parent.$('#tablaIntermedia tbody tr').length === 0){
-                        parent.$('#btn6').prop('disabled', true);
-                    }
-                //}
-            }
-        });
+    if(etapaProce!==8){
+        if(parent.$('#tablaIntermedia tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
+            parent.$('#tablaIntermedia tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
+                dato = $(this).html();
+                console.log('dato intermedia: ' + dato + ' proceClave: ' + proceClave);
+                if(proceClave === dato){
+                    //if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
+                        if($(this).parent().find('td:eq(2)').html() !== ''){
+                            //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                            console.log('Esta insertado en BD');
+                            eliminaBD = true;
+                            nomTabla = "inter";
+                        }
+                        encontrado = true;
+                        $(this).parent().remove();
+                        if(parent.$('#tablaIntermedia tbody tr').length === 0){
+                            parent.$('#btn6').prop('disabled', true);
+                        }
+                    //}
+                }
+            });
+        }
     }
     if(!encontrado){
         if(parent.$('#tablaConclu tbody tr').length > 0){

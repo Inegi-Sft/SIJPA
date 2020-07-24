@@ -68,6 +68,7 @@ public class insrtCausaPenal extends HttpServlet {
         String totalAdo = verificaVariable(request.getParameter("Tadolescentes"));
         String totalVic = verificaVariable(request.getParameter("Tvictimas"));
         String comentario = request.getParameter("ComentaExpe");
+        String InCausa= request.getParameter("Incausa");
 
         try {
             response.setContentType("text/json;charset=UTF-8");
@@ -79,7 +80,7 @@ public class insrtCausaPenal extends HttpServlet {
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fechaIngreso + "',"
                         + nomJuez + "," + particular + "," + competencia + "," + tipoIncompetencia + "," + acomulado + ",'" + referencia + "',"
-                        + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
+                        + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())),"+ InCausa +")";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     usuario usuario = new usuario();
@@ -105,7 +106,7 @@ public class insrtCausaPenal extends HttpServlet {
                         + "JUEZ_CLAVE = " + nomJuez + ",DERIVA_ACCION_PENAL = " + particular + ",COMPETENCIA = " + competencia + ","
                         + "TIPO_INCOMPETENCIA = " + tipoIncompetencia + ",EXPEDIENTE_ACUMULADO = " + acomulado + ",EXPEDIENTE_REFERENCIA = '" + referencia + "',"
                         + "TOTAL_DELITOS = " + totalDeli + ",TOTAL_PROCESADOS = " + totalAdo + ",TOTAL_VICTIMAS = " + totalVic + ","
-                        + "COMENTARIOS = '" + comentario + "' "
+                        + "COMENTARIOS = '" + comentario + "',INTEGRACION_CAUSA="+ InCausa +" "
                         + "WHERE JUZGADO_CLAVE = '" + juzgadClave + "' "
                         + "AND CAUSA_CLAVE = '" + sesion.getAttribute("causaClave") + "';";
                 System.out.println(sql);

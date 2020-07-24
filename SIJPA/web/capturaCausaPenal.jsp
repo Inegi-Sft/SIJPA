@@ -32,6 +32,7 @@
             String expAcomula = "";
             String expReferencia = "";
             String competencia = "";
+            String InCausa="";
             String tipoCompe = "";
             String totDelitos = "";
             String totProce = "";
@@ -56,6 +57,7 @@
                     totProce = causa.get(0)[9];
                     totVictimas = causa.get(0)[10];
                     comen = causa.get(0)[11];
+                    InCausa=causa.get(0)[12];
                 }else{
                     out.println("<script>alert('Causa Penal " + causaClave + " no encontrada dentro del Juzgado "  + juzgadoClave + "'); "
                             + "window.location.href = 'causasPenales.jsp'</script>");
@@ -159,6 +161,22 @@
                         <tr>
                             <td colspan="3">
                                 <fieldset>
+                                    <div>
+                                          <label for="Incausa">Integración de la causa penal</label>  
+                                          <select name="Incausa" id="Incausa" class="txtMedia" required>
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findICausa();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(InCausa)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %>  
+                                        </select>        
+                                        </div>
                                     <div class="cols">
                                         <label for="compe">Órgano competente</label>
                                         <select name="compe" id="compe" title="¿El órgano jurisdiccional es competente para conocer y resolver de esta causa penal?" required>

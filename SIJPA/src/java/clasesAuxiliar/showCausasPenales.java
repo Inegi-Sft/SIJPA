@@ -37,7 +37,8 @@ public class showCausasPenales {
                     rs.getString("CARPETA_INVESTIGA"), rs.getString("FECHA_INGRESO"), rs.getString("JUEZ_CLAVE"),
                     rs.getString("DERIVA_ACCION_PENAL"), rs.getString("EXPEDIENTE_ACUMULADO"), rs.getString("EXPEDIENTE_REFERENCIA"),
                     rs.getString("COMPETENCIA"), rs.getString("TIPO_INCOMPETENCIA"), rs.getString("TOTAL_DELITOS"),
-                    rs.getString("TOTAL_PROCESADOS"), rs.getString("TOTAL_VICTIMAS"), rs.getString("COMENTARIOS")
+                    rs.getString("TOTAL_PROCESADOS"), rs.getString("TOTAL_VICTIMAS"), rs.getString("COMENTARIOS"),
+                    rs.getString("INTEGRACION_CAUSA")
                 });
             }
             conn.close();

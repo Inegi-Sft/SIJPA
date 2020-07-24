@@ -715,7 +715,7 @@
                             </select>
                         </div>
                         <div class="colsx oculto" id="formCondu">
-                            <label for="tipoDetencion">Forma de conducción</label>
+                            <label for="tipoDetencion">Forma de conducción del adolescente imputado al proceso</label>
                             <select name="formaConduc" id="formaConduc">
                                 <option value="">--Seleccione--</option>
                                 <%

@@ -21,21 +21,19 @@ $(document).ready(function() {
   
     //para recuperacion de datos condicionales para mostrar las opciones Informacion General JC o JO, según sea el caso
     if($('#funcionJuz').val() === '1'){
-        $('#btn5').fadeIn();
+        $('#btn5').show();
         $('#ejercicioJC').prop('required',true);
-    }
-    else if($('#funcionJuz').val() === '2'){
-        $('#btn6').fadeIn();
+    }else if($('#funcionJuz').val() === '2'){
+        $('#btn6').show();
         $('#ejercicioJO').prop('required',true);
-    }
-    else if($('#funcionJuz').val() === '3'){
-        $('#btn5').fadeIn();
-        $('#btn6').fadeIn();
+    }else if($('#funcionJuz').val() === '3'){
+        $('#btn5').show();
+        $('#btn6').show();
         $('#ejercicioJC').prop('required',true);
         $('#ejercicioJO').prop('required',true);
     }else{
-        $('#btn5').fadeOut();
-        $('#btn6').fadeOut();
+        $('#btn5').hide();
+        $('#btn6').hide();
         $('#ejercicioJC').prop('required',false);
         $('#ejercicioJO').prop('required',false);
     }

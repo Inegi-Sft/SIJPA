@@ -494,10 +494,9 @@ fieldset legend{
     text-shadow: grey 3px 3px 5px;
     color: #00BD25;
     display: inline-block;
-    /*color: #D60320;*/
 }
 
-/*.agregar{
+.agregar{
     float: right;
     text-decoration: none;
     vertical-align: middle;
@@ -517,13 +516,13 @@ fieldset legend{
 
 .agregar img{
     vertical-align: text-bottom;
-}*/
+}
 
-/*.dContenido{
+.dContenido{
     width: 90%;
     margin: auto;
     margin-bottom: -15px;
-}*/
+}
 
 a.addJuz{
     position: relative;

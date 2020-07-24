@@ -300,22 +300,22 @@
                         <table  class="tablasRegis oculto" id="tableMcau">
                             <thead>
                                 <tr>
-                                    <%
-                                        lista = cat.findMedidasSolicita();
-                                        for(String[] ls : lista){
-                                            out.println("<th>");
-                                            soliMedidas = sIni.findSolicitaMedi(causaClave, proceClave + juzgadoClave.replace("-", ""), ls[0]);
-                                            if(soliMedidas.size() != 0){
-                                                out.println("<input type='checkbox' name='chkSoliMedi' id='chkSoliMedi" + ls[0] + "' value='" + ls[0] + "' "
-                                                        + "onchange='muTablaMC(" + ls[0] + ");' checked>");
-                                            }else{
-                                                out.println("<input type='checkbox' name='chkSoliMedi' id='chkSoliMedi" + ls[0] + "' value='" + ls[0] + "' "
-                                                        + "onchange='muTablaMC(" + ls[0] + ");'>");
-                                            }
-                                            out.println("<br>" + ls[1]);
-                                            out.println("</th>");
+                                <%
+                                    lista = cat.findMedidasSolicita();
+                                    for(String[] ls : lista){
+                                        out.println("<th>");
+                                        soliMedidas = sIni.findSolicitaMedi(causaClave, proceClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        if(soliMedidas.size() != 0){
+                                            out.println("<input type='checkbox' name='chkSoliMedi' id='chkSoliMedi" + ls[0] + "' value='" + ls[0] + "' "
+                                                    + "onchange='muTablaMC(" + ls[0] + ");' checked>");
+                                        }else{
+                                            out.println("<input type='checkbox' name='chkSoliMedi' id='chkSoliMedi" + ls[0] + "' value='" + ls[0] + "' "
+                                                    + "onchange='muTablaMC(" + ls[0] + ");'>");
                                         }
-                                    %>
+                                        out.println("<br>" + ls[1]);
+                                        out.println("</th>");
+                                    }
+                                %>
                                 </tr>
                             </thead>
                             <tbody>

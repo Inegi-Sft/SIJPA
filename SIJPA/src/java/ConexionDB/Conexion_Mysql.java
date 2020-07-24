@@ -27,10 +27,10 @@ public class Conexion_Mysql {
     public boolean Conectar() { 
         try { 
             Class.forName("com.mysql.jdbc.Driver");
-            //String url = "jdbc:mysql://node55025-sijpa2020.jl.serv.net.mx:3306/sijpa_db";
+            //String url = "jdbc:mysql://node28433-sjipa2020.es-1.axarnet.cloud/sijpa_db";
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","");
-            //conexion = (Connection) DriverManager.getConnection(url,"root","IRPsep82131");
+            //conexion = (Connection) DriverManager.getConnection(url,"root","VNDfdi93217");
             return conexion != null; //System.out.println("Conexion oracle exitosa!");
             //System.out.println("Conexion oracle fallida!");
         } catch (ClassNotFoundException e) { 

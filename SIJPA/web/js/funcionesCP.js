@@ -81,7 +81,7 @@ $(document).ready(function () {
                 break;
         }
     });
-    
+     
     $('#Tdelitos, #Tadolescentes, #Tvictimas').change(function () {
         var Mnsj = "LA CANTIDAD DEBE DE SER MAYOR A 0";
         if ( $('#Tdelitos').val() === "-1" || $('#Tdelitos').val() === "0" ){

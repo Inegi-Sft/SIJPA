@@ -723,7 +723,7 @@ function ValFechaNacPRO(FechaNac, Edad) {
                            $(Edad).val(edadc);                      
                        }
                     }else{
-                        alert('La fecha de nacimiento no debe ser menor a 12 anos. edad='+ response);
+                        alert('La fecha de nacimiento debe ser de 12 a 99 años edad='+ response);
                         $(FechaNac).val(""); 
                     }
                     if(response==='2'){
@@ -747,7 +747,7 @@ function ValEdadDelito(EdadDel,fnacimiento){
  // console.log("Respuesta: ",FedadD,FedadJ);
   if (FedadJ !== ''){
       if(FedadD>FedadJ){
-          alert('La edad en la que cometio el delito debe de ser menor o igual a la edad en que se presento al juzgado');
+          alert('La edad al momento de cometer los hechos debe de ser menor o igual a la edad al momento de iniciar el proceso');
           $(EdadDel).val("");
          // console.log("fecha de nacimiento="+FechNac);
           if (FechNac !=='1899-09-09'){
@@ -765,7 +765,7 @@ function ValEdadJuzgado(EdadJuz,fnacimiento){
  // console.log("Respuesta: ",FedadJ,FedadD);
    if ((FedadJ !== '') && (FedadJ !=='-9')){
       if(FedadJ<FedadD){
-          alert('La edad en que se presento al juzgado debe ser mayor o igual a la edad en la que cometio el delito');
+          alert('La edad al momento de iniciar el proceso debe ser mayor o igual a la edad al momento de cometer los hechos');
          $(EdadJuz).val("");
         // console.log("fecha de nacimiento="+FechNac);
           if (FechNac !=='1899-09-09'){

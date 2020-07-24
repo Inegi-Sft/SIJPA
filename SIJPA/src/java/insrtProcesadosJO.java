@@ -123,13 +123,13 @@ public class insrtProcesadosJO extends HttpServlet {
                 sql = "INSERT INTO DATOS_PROCESADOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                         + causaClaveJC + "','" + proceClave + jConcatenado + "','" + causaClaveJO + "','"
                         + proceClaveJO + jConcatenado + "','" + nombre + "','"+ apaterno + "','" + amaterno + "','"
-                        + alias + "','" + curp + "','" + fNacimiento + "'," + sexo + "," + edad + "," + nPais + "," + nEntidad + ","
+                        + alias + "','" + curp + "','" + fNacimiento + "'," + sexo + "," + edad + ", '" + edad_Juzgado +"'," + nPais + "," + nEntidad + ","
                         + nMunicipio + "," + nacionalidad + "," + residencia + "," + rEntidad + "," + rMunicipio + "," + edoCivil + ","
                         + discapacidad + "," + alfabet + "," + estudios + "," + condiEstudiante + "," + hablaEsp + ","
                         + poblaIndigena + "," + puebloIndigena + "," + hablaIndigena + "," + lenguaIndigena + "," + lenExtranjera + ","
                         + traductorPro + "," + ingresosPro + "," + rangoIngresosPro + "," + ocupacion + "," + condicionActi + ","
                         + participacion + "," + reincidencia + "," + psicofisico + "," + grupoDelictivo + ",'" + delictivo + "',"
-                        + defensor + "," + representante + ",'" + comentarios + "', (select YEAR(NOW())));, '" + edad_Juzgado +"' ";
+                        + defensor + "," + representante + ",'" + comentarios + "', (select YEAR(NOW()))); ";
                 System.out.println(sql);
                 if (conn.escribir(sql)) { 
                     if (ingresosPro == 1) {

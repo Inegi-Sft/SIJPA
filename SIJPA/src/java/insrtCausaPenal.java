@@ -79,8 +79,8 @@ public class insrtCausaPenal extends HttpServlet {
                 sesion.setAttribute("causaClave", causaClave + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fechaIngreso + "',"
-                        + nomJuez + "," + particular + "," + competencia + "," + tipoIncompetencia + "," + acomulado + ",'" + referencia + "',"
-                        + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())),"+ InCausa +")";
+                        + nomJuez + "," + particular + ","+ InCausa +"," + competencia + "," + tipoIncompetencia + "," + acomulado + ",'" + referencia + "',"
+                        + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     usuario usuario = new usuario();

@@ -78,7 +78,7 @@ public class insrtTramite extends HttpServlet {
                     System.out.println(sql);
                     if(conn.escribir(sql)){
                         showTramite tram = new showTramite();
-                        ArrayList<String[]> lis = new ArrayList<String[]>();
+                        ArrayList<String[]> lis = new ArrayList<>();
                         int totTramiteInsrt = tram.countTramiteExp(causaClave);
                         lis = tram.findTramiteTabla(proceClave + jConcatenado);
                         JSONArray resp = new JSONArray();
@@ -105,7 +105,7 @@ public class insrtTramite extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showTramite tram = new showTramite();
-                    ArrayList<String[]> lis = new ArrayList<String[]>();
+                    ArrayList<String[]> lis = new ArrayList<>();
                     int totTramiteInsrt = tram.countTramiteExp(causaClave);
                     lis = tram.findTramiteTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();

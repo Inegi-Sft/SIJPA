@@ -53,7 +53,7 @@
         <div id="login" hidden="true">
             <img src="img/logo_sijpa.png"/>
             <form method="post" name="formLogin" id="formLogin">
-                <label for="nomUsu">Usuario Sijpa</label>
+                <label for="nomUsu">Usuario</label>
                 <input type="text" id="nomUsu" name="nomUsu" style="text-transform: uppercase" required/>
                 <label for="passUsu">Contraseña</label>
                 <input type="password" id="passUsu" name="passUsu" required style="letter-spacing: 2px; font-size: 22px;"/>

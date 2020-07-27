@@ -20,7 +20,8 @@
             showJuzgados juz = new showJuzgados();
             showJueces juez = new showJueces();
             showAudiencias sa = new showAudiencias();
-            ArrayList<String[]> lista;
+            ArrayList<String[]> listas;
+            ArrayList<String> lista;
             
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
@@ -64,12 +65,12 @@
                         <option value="">--Seleccione--</option>
                         <%
                             lista = juz.findJuzgadosJC();
-                            for (String[] ls : lista) {
-                                out.println("<option value='" + ls[0] + "'");
-                                if(ls[0].equals(juzgado)){
+                            for (String ls : lista) {
+                                out.println("<option value='" + ls + "'");
+                                if(ls.equals(juzgado)){
                                     out.println(" selected ");
                                 }
-                                out.println(">" + ls[0] + "</option>");
+                                out.println(">" + ls + "</option>");
                             }
                         %>
                     </select>
@@ -92,12 +93,12 @@
                     </thead>
                     <tbody>
                     <%
-                        lista = sa.findAllCausaAudiencias(juzgado);
+                        listas = sa.findAllCausaAudiencias(juzgado);
                         String juzLimpio = "";
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");
                         }
-                        for (String[] ls : lista) {
+                        for (String[] ls : listas) {
                             String causa = ls[0].replace(juzLimpio, "");
                     %>
                         <tr>

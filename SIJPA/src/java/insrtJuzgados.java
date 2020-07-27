@@ -53,7 +53,7 @@ public class insrtJuzgados extends HttpServlet {
         String numOrgano = request.getParameter("numOrgano");
         String jurisdiccion = request.getParameter("jurisdiccion");
         String funcionJuz = verificaVariable(request.getParameter("funcionJuz"));
-        String ladaTel = verificaVariable(request.getParameter("ladaJuz") + request.getParameter("telJuz"));
+        String ladaTel = verificaVariable(request.getParameter("telJuz"));
         String correo = verificaVariable(request.getParameter("correo").toUpperCase());
         //Ubicacion de Organizacion del organo
         String entidadJ = request.getParameter("entidadJ");

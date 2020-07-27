@@ -216,6 +216,17 @@ $(document).ready(function() {
                         <td><a class="pop" href="tramite.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaTramite tbody tr').length + '">\n\
                         <img src="img/editar.png" title="Modificar"/></a></td></tr>');
                         parent.$('#btn8').addClass(' activar');
+                    }else if(response[6] === 8){//Condicion para mandar al procesado a etapa volando
+                        parent.$('#tablaVolando tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td>\n\
+                        <td><a class="pop" href=""><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                        //Solo agregaremos en el texto los procesados que se necesitan capturar
+                        parent.$('.indicador2').css('color', '#D60320');//Cambiamos el color a rojo para que se note
+                        parent.$('.agregar').show();//Mosramos el boton de agregar
+                        var totProceVola = parseInt(parent.$('#indicaVolando').text()) + 1;//Obtenemos el valor de procesados volando
+                        parent.$('.indicador2 span').text(totProceVola);//Lo mostramos con la cantidad actualizada
+//                        alert('procesado volando con: ' + totProceVola);
+                        parent.$('#btn7').addClass(' activar');
+                        parent.$('#btn8').addClass(' activar');
                     }
                     if (response[7] === numProce) {
                         for(var x = 7; x <= 8; x++){

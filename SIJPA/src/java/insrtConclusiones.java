@@ -103,12 +103,10 @@ public class insrtConclusiones extends HttpServlet {
                             insrtDConclu = conn.escribir(sql);
                         }
                     }
-                    //Solo se actualizan los que estan volando (etapa 5)
                     sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 2 "
-                            + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
-                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
-                            + "AND ETAPA = 5;";
-                    System.out.println(sql);
+                        + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
+                        + "AND ETAPA = 5;";
                     if(conn.escribir(sql)){
                         showConclusiones con = new showConclusiones();
                         ArrayList<String[]> lis = new ArrayList();

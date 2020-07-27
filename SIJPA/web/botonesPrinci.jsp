@@ -31,7 +31,11 @@
         //Buscaremos los indices para intermedia, conclusion o tramite para saber cual aactivar
         if(etapas.size() != 0){
             //Si tenemos procesados en etapa inicial, entonces procedemos a validarlo
-            if(etapas.indexOf("7") > -1){//Existe en Intermedia-Tramite
+            if(etapas.indexOf("8") > -1){//Existe Intermedia-Volando
+                out.println("<button class='pestanaLinks' onclick=\"openPestana('btn6', 'p6')\" id='btn6'>" + pestanas[5] + "</button>");
+                out.println("<button class='pestanaLinks' onclick=\"openPestana('btn7', 'p7')\" id='btn7'>" + pestanas[6] + "</button>");
+                out.println("<button class='pestanaLinks' onclick=\"openPestana('btn8', 'p8')\" id='btn8'>" + pestanas[7] + "</button>");
+            }else if(etapas.indexOf("7") > -1){//Existe en Intermedia-Tramite
                 out.println("<button class='pestanaLinks' onclick=\"openPestana('btn6', 'p6')\" id='btn6'>" + pestanas[5] + "</button>");
                 if(etapas.indexOf("6") > -1 || etapas.indexOf("2") > -1){
                     out.println("<button class='pestanaLinks' onclick=\"openPestana('btn7', 'p7')\" id='btn7'>" + pestanas[6] + "</button>");

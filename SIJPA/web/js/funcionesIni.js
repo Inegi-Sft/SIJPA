@@ -322,7 +322,7 @@ $(document).ready(function() {
     });
 
     $('#dictoSobresei').change(function () {
-        if ($(this).val() === '2') {
+        if ($(this).val() === '2' || $(this).val() === '9') {
             $('#fSuspencion').fadeIn('slow');
             $('#suspenProceso').val('').prop('required', true);
         } else {

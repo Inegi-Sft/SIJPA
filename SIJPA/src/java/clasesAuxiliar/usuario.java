@@ -263,7 +263,7 @@ public class usuario {
             for(x = 1; x <= totDel; x++){
                 sql = "INSERT INTO DATOS_DELITOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-D" + x + jConcatenado + "'," 
-                        + "-2,-2,-2,-2,-2,'1899-09-09','1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,0,0,'REGNUEVO',(select YEAR(NOW())) )";
+                        + "-2,-2,-2,-2,-2,'1899-09-09','1899-09-09',-2,'-2',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,0,0,'REGNUEVO',(select YEAR(NOW())) )";
                 System.out.println(sql);
                 conn.escribir(sql);
             }

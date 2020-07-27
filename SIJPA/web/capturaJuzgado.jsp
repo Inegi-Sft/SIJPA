@@ -172,9 +172,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="ladaTel">Lada &nbsp; / &nbsp; Teléfono</label>
-                                <input type="number" class="txtSmall" name="ladaJuz" id="ladaJuz" value="55"/>
-                                <input type="text" class="txtMedia soloNum" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="8"/>
+                                <label for="ladaTel">Teléfono con lada</label>
+                                <input type="text" class="txtMedia soloNum" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="10"/>
                             </td>
                             <td>
                                 <label for="correo">Correo del órgano jurisdiccional</label>

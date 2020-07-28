@@ -44,10 +44,21 @@ $(document).ready(function() {
     });
     
     $('#estInvesti').change(function (){
-        if ($('#estInvesti').val() === '6' || $('#estIntermedia').val() === '4') {
+        if ($('#estInvesti').val() === '6') {
             $('#dEspecifique').fadeIn('slow');
             $('#especifique').val('').prop("required", true);
         } else {
+            $('#dEspecifique').fadeOut('slow');
+            $('#especifique').val('-2').prop("required", false);
+        }
+    });
+
+    $('#estIntermedia').change(function (){
+        if ($('#estIntermedia').val() === '4') {
+            $('#dEspecifique').fadeIn('slow');
+            $('#especifique').val('').prop("required", true);
+        } else {
+    
             $('#dEspecifique').fadeOut('slow');
             $('#especifique').val('-2').prop("required", false);
         }

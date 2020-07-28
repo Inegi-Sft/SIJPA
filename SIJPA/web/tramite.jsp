@@ -129,7 +129,7 @@
                         </div>
                         <div class="cols oculto" id="dEstIntermedia">
                             <label for="estIntermedia" class="lblExBig">Estatus para la etapa intermedia</label>
-                            <select name="estIntermedia" id="estIntermedia" onchange="ocultaEspecifique();">
+                            <select name="estIntermedia" id="estIntermedia">
                                 <option value="">--Seleccione--</option>
                                  <%
                                     lista = cat.findEtapaIntermedia();

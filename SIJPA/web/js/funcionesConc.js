@@ -297,7 +297,8 @@ $(document).ready(function() {
                 if (response !== null && $.isArray(response)) {
                     if(response[0] === "null"){//No traemos posicion entonces agregamos la fila a la tabla por que se encuentra volando
                         //Si no tare posicion significa que esta volando y se resta de adol por asignar estatus
-                        buscaYremplaza(response[1], 2);//mandamos el nombre de procesado y la bandera nueva
+                        
+                        buscaYremplaza(response[1], response[5]);//mandamos el nombre de procesado y la bandera nueva
                         parent.$('#tablaConclu tbody').append('<tr id="' + response[1].replace("/", "") + '"><td>' + response[1] + '</td>\n\
                             <td>' + response[2] + '</td><td>' + response[3] + '</td><td>' + response[4] + '</td>\n\
                             <td><a class="pop" href="conclusiones.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaConclu tbody tr').length +

@@ -228,7 +228,7 @@ public class showInicial {
                     + "ON EI.CAUSA_CLAVE = P.CAUSA_CLAVE "
                     + "AND EI.PROCESADO_CLAVE = P.PROCESADO_CLAVE "
                     + "WHERE EI.CAUSA_CLAVE = '" + causaClave + "' "
-                    + "AND EI.ETAPA = " + etapa + " ORDER BY 1;";
+                    + "AND EI.ETAPA IN (5,8) ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proceEtapa.add(new String[]{
@@ -252,7 +252,7 @@ public class showInicial {
                     + "ON EI.CAUSA_CLAVE = P.CAUSA_CLAVE "
                     + "AND EI.PROCESADO_CLAVE = P.PROCESADO_CLAVE "
                     + "WHERE EI.CAUSA_CLAVE = '" + causaClave + "' "
-                    + "AND EI.ETAPA REGEXP '1|6|7' "
+                    + "AND EI.ETAPA REGEXP '1|6|7|8' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {

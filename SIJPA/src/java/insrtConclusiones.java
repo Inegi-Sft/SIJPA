@@ -8,6 +8,7 @@ import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.showConclusiones;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -37,13 +38,14 @@ public class insrtConclusiones extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
-    boolean insrtDConclu=false;
+    String sql, sqlInter;
+    boolean insrtDConclu = false;
+    ResultSet res;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        HttpSession sesion= request.getSession();
+
+        HttpSession sesion = request.getSession();
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
@@ -55,8 +57,8 @@ public class insrtConclusiones extends HttpServlet {
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClave = (String) sesion.getAttribute("causaClave");
         String proceClave = request.getParameter("proceClave");
-        
-        String fechaResolu=request.getParameter("fechaReso");
+
+        String fechaResolu = request.getParameter("fechaReso");
         String tipoResolu = request.getParameter("resolucion");
         String tipoSobre = request.getParameter("tipoSobreseimto");
         String proceSobre = request.getParameter("proceSobreseimto");
@@ -74,19 +76,19 @@ public class insrtConclusiones extends HttpServlet {
         String multa = request.getParameter("montoReparaD");
         String impugnacion = request.getParameter("impugnacion");
         String tipoImpugnacion = request.getParameter("tipoImpugnacion");
-        String fechaImpugna=request.getParameter("fechaImpugnacion");
+        String fechaImpugna = request.getParameter("fechaImpugnacion");
         String personaImpugna = request.getParameter("personaImpugna");
         String comentario = request.getParameter("comentarios");
-        
+
         // variables DCONCLUSIONES
         String[] delitoClave = request.getParameterValues("delitoConclu");
-        
+
         try {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            
+
             conn.Conectar();
-            if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
+            if (!opera.equals("actualizar")) {//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                         + causaClave + "','" + proceClave + jConcatenado + "','" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre + ","
                         + excluAccion + "," + tipoCondiSCP + ",'" + fechaExtSCP + "'," + tipoMecanismoAR + ",'" + fechaExtinAR + "'," + tipoResolucionPA + ","
@@ -94,8 +96,8 @@ public class insrtConclusiones extends HttpServlet {
                         + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "', (select YEAR(NOW())) )";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
-                    if(tipoResolu.equals("4")){
-                        for (int i = 0; i < delitoClave.length; i++){
+                    if (tipoResolu.equals("4")) {
+                        for (int i = 0; i < delitoClave.length; i++) {
                             String resolDelito = request.getParameter("resolDelito" + i);
                             sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
                                     + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolucionPA + "," + resolDelito + ", (select YEAR(NOW())) )";
@@ -103,34 +105,44 @@ public class insrtConclusiones extends HttpServlet {
                             insrtDConclu = conn.escribir(sql);
                         }
                     }
-                    //Solo se actualizan los que estan volando (etapa 5)
-                    sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 2 "
+                    sqlInter = "SELECT ETAPA FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' ";
+                    res = conn.consultar(sqlInter);
+                    int etapa=0;
+                    while (res.next()) {
+                        etapa = res.getInt(1);
+                    }
+                    if(etapa==5){
+                        sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 2 "
                             + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
-                            + "AND ETAPA = 5;";
-                    System.out.println(sql);
-                    if(conn.escribir(sql)){
-                        showConclusiones con = new showConclusiones();
-                        ArrayList<String[]> lis = new ArrayList();
-                        int totConcluInsrt = con.countConclusionesExp(causaClave);
-                        lis = con.findConcluTabla(proceClave + jConcatenado);
-                        JSONArray resp = new JSONArray();
-                        resp.add(posicion);
-                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
-                        resp.add(lis.get(0)[1]);
-                        resp.add(lis.get(0)[2]);
-                        resp.add(lis.get(0)[3]);
-                        //resp.add(tipoResolu);//Tipo de resolucion
-                        resp.add(totConcluInsrt);
-                        out.write(resp.toJSONString());
-                        conn.close();
-                    } else {
-                        conn.close();
+                            + "AND ETAPA =5;";
+                        conn.escribir(sql);
+                    }else if(etapa==8){
+                        sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 6 "
+                            + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
+                            + "AND ETAPA =8;";
+                        conn.escribir(sql);
                     }
-                }else {
+                    
+                    showConclusiones con = new showConclusiones();
+                    ArrayList<String[]> lis = new ArrayList();
+                    lis = con.findConcluTabla(proceClave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    //resp.add(tipoResolu);//Tipo de resolucion
+                    resp.add(etapa);
+                    out.write(resp.toJSONString());
+                    conn.close();
+                } else {
                     conn.close();
                 }
-            }else{//Se actualiza el dato que viene de recuperacion
+            } else {//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_CONCLUSIONES_ADOJC SET FECHA_CONCLUSION = '" + fechaResolu + "',TIPO_RESOLUCION = " + tipoResolu + ","
                         + "TIPO_SOBRESEIMIENTO = " + tipoSobre + ",PROCEDENCIA_SOBRESEIMIENTO = " + proceSobre + ",EXCLUSION_ACCIONP = " + excluAccion + ","
                         + "SUSPENCION_CONDICIONAL = " + tipoCondiSCP + ",FECHA_SUSPENCION = '" + fechaExtSCP + "',"
@@ -147,18 +159,17 @@ public class insrtConclusiones extends HttpServlet {
                     sql = "DELETE FROM DATOS_DCONCLUSIONES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                     conn.escribir(sql);
-                    if(tipoResolu.equals("4")){
-                        for (int i = 0; i < delitoClave.length; i++){
+                    if (tipoResolu.equals("4")) {
+                        for (int i = 0; i < delitoClave.length; i++) {
                             String resolDelito = request.getParameter("resolDelito" + i);
                             sql = "INSERT INTO DATOS_DCONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
                                     + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolucionPA + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
-                            insrtDConclu=conn.escribir(sql);
+                            insrtDConclu = conn.escribir(sql);
                         }
                     }
                     showConclusiones con = new showConclusiones();
                     ArrayList<String[]> lis = new ArrayList<>();
-                    int totConcluInsrt = con.countConclusionesExp(causaClave);
                     lis = con.findConcluTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
@@ -166,10 +177,9 @@ public class insrtConclusiones extends HttpServlet {
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
-                    resp.add(totConcluInsrt);
                     out.write(resp.toJSONString());
                     conn.close();
-                }else {
+                } else {
                     conn.close();
                 }
             }

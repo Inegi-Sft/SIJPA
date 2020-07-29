@@ -18,7 +18,38 @@ $(document).ready(function() {
     }else if($('#fDivision').val() === '3'){
         $('#dPartJudicial').show();
     }
-  
+    
+    //para cambiar el boton de guardar o siguiente, segun se edite o inserte organo
+    if($('#nomOrgano').val() === ''){
+        $('#guardar').val("Siguiente");
+        $('#funcionJuz').change(function(){
+            var numFunc = $(this).val();
+            if(numFunc === '2' || numFunc === '3'){
+                $('#ejercicioJC').val('');
+                $('#ejercicioJO').change(function(){
+                    var numEjer = $(this).val();
+                    if(numEjer === ''){
+                        $('#guardar').val("Siguiente");
+                    }else{
+                        if($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== ''){
+                            $('#guardar').val("Guardar");
+                        }
+                    }
+                });
+            }else{
+                $('#ejercicioJO').val('');
+                $('#ejercicioJC').change(function(){
+                    var numEjer = $(this).val();
+                    if(numEjer === ''){
+                        $('#guardar').val("Siguiente");
+                    }else{
+                        if($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== ''){
+                            $('#guardar').val("Guardar");
+                        }
+                    }
+                });
+        }});
+    }
     //para recuperacion de datos condicionales para mostrar las opciones Informacion General JC o JO, según sea el caso
     if($('#funcionJuz').val() === '1'){
         $('#btn5').show();
@@ -126,60 +157,77 @@ $(document).ready(function() {
     });
 });
 
+
 function valida(){
     if ($('#nomOrgano').val() === '') {
         alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Nombre Organo Jur\u00EDsdiccional');
+        openPestana('btn1', 'p1');
     }else if ($('#numOrgano').val() ==='') {
         alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Numero Organo Jur\u00EDsdiccional');
+        openPestana('btn1', 'p1');
     }else if ($('#jurisdiccion').val() ==='') {
         alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Jurisdicci\u00F3n');
+        openPestana('btn1', 'p1');
     }else if ($('#correo').val() ==='') {
         alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Correo Organo Jur\u00EDsdiccional o intruduce un correo de forma valida');
+        openPestana('btn1', 'p1');
     }else if ($('#funcionJuz').val() ==='') {
         alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Funci\u00F3n del organo Jur\u00EDsdiccional');
+        openPestana('btn1', 'p1');
     }else if ($('#entidadJ').val() ==='') {
-        alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Entidad Federativa');
+        openPestana('btn2', 'p2');
     }else if ($('#municipioJ').val() ==='') {
         alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Municipio o Demarcaci\u00F3n Territorial de la CDMX');
+        openPestana('btn2', 'p2');
     }else if ($('#fDivision').val() ==='') {
         alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Forma de Divisi\u00F3n');
+        openPestana('btn2', 'p2');
     }else if($('#regJudicial').val() ===''){
         alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Nombre de la Regi\u00F3n Judicial'); 
+        openPestana('btn2', 'p2');
     }else if($('#distJudicial').val() ===''){
         alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Nombre del Distrito Judicial');
+        openPestana('btn2', 'p2');
     }else if($('#partJudicial').val() ===''){
         alert('Secci\u00F3n Ubicaci\u00F3n: \n\n Llena el campo Nombre del Nombre del Partido Judicial');
+        openPestana('btn2', 'p2');
     }else if ($('#vialidad').val() ==='') {
-        alert('Secci\u00F3n Domicilio: \n\n Llena el campo Vialidad');
+        openPestana('btn3', 'p3');
     }else if ($('#nomVialidad').val() ==='') {
         alert('Secci\u00F3n Domicilio: \n\n Llena el campo Nombre de la Vialidad');
+        openPestana('btn3', 'p3');
     }else if ($('#asentamiento').val() ==='') {
         alert('Secci\u00F3n Domicilio: \n\n Asentamiento Humano');
+        openPestana('btn3', 'p3');
     }else if ($('#nomAsentamiento').val() ==='') {
         alert('Secci\u00F3n Domicilio: \n\n Llena el campo Nombre del Asentamiento Humano');
+        openPestana('btn3', 'p3');
     }else if ($('#nombreCap').val() ==='') {
-        alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Nombre(s)');
+        openPestana('btn4', 'p4');
     }else if ($('#apaternoCap').val() ==='') {
         alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Apellido Paterno');
+        openPestana('btn4', 'p4');
     }else if ($('#amaternoCap').val() ==='') {
         alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Apellido Materno');
+        openPestana('btn4', 'p4');
     }else if ($('#cargo').val() ==='') {
         alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Cargo');
+        openPestana('btn4', 'p4');
     }else if ($('#funcionJuz').val() ==='1'){
         if($('#ejercicioJC').val() === ''){
-            alert('Secci\u00F3n Informaci\u00F3n General JC: \n\n Llena el campo Ejercicio');
+            openPestana('btn5', 'p5');
         }
     }else if ($('#funcionJuz').val() ==='2'){
         if($('#ejercicioJO').val() === ''){
-            alert('Secci\u00F3n Informaci\u00F3n General JO: \n\n Llena el campo Ejercicio');
+            openPestana('btn6', 'p6');
         }
     }
     else if ($('#funcionJuz').val() ==='3'){
         if($('#ejercicioJC').val() === ''){
-            alert('Secci\u00F3n Informaci\u00F3n General JC: \n\n Llena el campo Ejercicio');
+            openPestana('btn5', 'p5');
         }
         if($('#ejercicioJO').val() === ''){
-            alert('Secci\u00F3n Informaci\u00F3n General JO: \n\n Llena el campo Ejercicio');
+            openPestana('btn6', 'p6');
         }
     }
 }

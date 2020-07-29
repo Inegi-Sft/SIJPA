@@ -19,6 +19,7 @@
             //Unicamente lo utilizamos cuando recibimos la variable de Binevenida
             if(request.getParameter("insert") != null){
                 int integer = Integer.parseInt(request.getParameter("insert"));
+                out.println("<script>alert('se esta editando');</script>");
                 out.println("<script>$(document).ready(function () {");
                 if(integer == 103){
                     out.println("alertify.alert('Confirmado','El Acuerdo fue Aceptado Correctamente', function(){"

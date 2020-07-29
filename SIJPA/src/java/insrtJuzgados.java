@@ -105,7 +105,7 @@ public class insrtJuzgados extends HttpServlet {
         String ejercicio = "";
         if(!ejercicioJC.equals("")){//Control o Mixto
             ejercicio = ejercicioJC;
-        }else if(ejercicioJO.equals("")){
+        }else if(!ejercicioJO.equals("")){
             ejercicio = ejercicioJO;
         }
           

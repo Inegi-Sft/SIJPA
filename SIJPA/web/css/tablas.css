@@ -74,8 +74,8 @@ and open the template in the editor.
 }
 
 #tableMcau td{
-    border: none;
-    vertical-align: top;
+    border: 1px solid #ddd;
+    /*vertical-align: top;*/
 }
 
 .tablemediCauCom{

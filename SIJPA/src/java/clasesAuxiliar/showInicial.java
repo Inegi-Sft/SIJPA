@@ -317,36 +317,14 @@ public class showInicial {
         return proceEtapa;
     }
     
-    public ArrayList findSolicitaMedi(String causaClave, String proceClave, String solicita){
+    public ArrayList findDecretaMedi(String causaClave, String proceClave, String cautelar){
         mediCau = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT SOLICITA_MEDIDA FROM DATOS_PMEDIDAS_ADOJC "
+            sql = "SELECT CAUTELARES, SOLICITA_MEDIDA, DURACION_MEDIDA FROM DATOS_PMEDIDAS_ADOJC "
                     + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
-                    + "AND SOLICITA_MEDIDA = " + solicita + ";";
-            resul = conn.consultar(sql);
-            while (resul.next()) {
-                mediCau.add(new String[]{
-                    resul.getString(1)
-                });
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(showInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return mediCau;
-    }
-    
-    public ArrayList findMedidaDura(String causaClave, String proceClave, String solicita, String mediCautelar){
-        mediCau = new ArrayList();
-        try {
-            conn.Conectar();
-            sql = "SELECT CAUTELARES, DURACION_MEDIDA, ESPECIFIQUE FROM DATOS_PMEDIDAS_ADOJC "
-                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
-                    + "AND PROCESADO_CLAVE = '" + proceClave + "' "
-                    + "AND SOLICITA_MEDIDA = " + solicita + " "
-                    + "AND CAUTELARES = " + mediCautelar + " ;";
+                    + "AND CAUTELARES = " + cautelar + ";";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 mediCau.add(new String[]{
@@ -382,8 +360,8 @@ public class showInicial {
         listEp = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT PROCESADO_CLAVE,ETAPA FROM DATOS_ETAPA_INICIAL_ADOJC "
-                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' AND ETAPA<>0 "
+            sql = "SELECT PROCESADO_CLAVE, ETAPA FROM DATOS_ETAPA_INICIAL_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' AND ETAPA <> 0 "
                     + "ORDER BY 1";
             resul = conn.consultar(sql);
             while (resul.next()) {

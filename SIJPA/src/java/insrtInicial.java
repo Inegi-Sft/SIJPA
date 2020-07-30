@@ -73,7 +73,9 @@ public class insrtInicial extends HttpServlet {
         String fechavincula = request.getParameter("fechAuto");
 
         int drecretaMC = Integer.parseInt(request.getParameter("drecretaMC"));
-        String[] chkSoliMedi = request.getParameterValues("chkSoliMedi");
+        String[] chkDecretaMC = request.getParameterValues("chkDecretaMC");
+        String[] soliMedida = request.getParameterValues("soliMedida");
+        String[] duraMedida = request.getParameterValues("duraMedida");
 
         String cierreinvestiga = request.getParameter("soliPlazo");
         String fechaplazo = request.getParameter("fechSoliPlazo");
@@ -128,32 +130,27 @@ public class insrtInicial extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     if (drecretaMC == 1) {
-                        for (String soliMedi : chkSoliMedi) {
-                            //Recibimos la variables de medidas cautelares dentro del for para llamar lista por lista
-                            String[] chkMediCau = request.getParameterValues("chkMediCau" + soliMedi);
-                            String[] duraMedi = request.getParameterValues("duraMedi" + soliMedi);
-                            String especiMC = verificaVariable(request.getParameter("especiMC" + soliMedi));
-                            for (int x = 0; x < chkMediCau.length; x++) {
-                                if(chkMediCau[x].equals("13")){
-                                    sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                                            + proceClave + jConcatenado + "'," + soliMedi + "," + chkMediCau[x] + "," + duraMedi[x] + ",'"
-                                            + especiMC + "', (select YEAR(NOW())))";
-                                    System.out.println(sql);
-                                }else{
-                                    sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                                            + proceClave + jConcatenado + "'," + soliMedi + "," + chkMediCau[x] + "," + duraMedi[x] + ","
-                                            + "-2, (select YEAR(NOW())))";
-                                    System.out.println(sql);
-                                }
-                                if(!conn.escribir(sql)){//Si algun caso da false cerramos la conexion para envio de error
-                                    conn.close();
-                                }
+                        for (int x = 0; x < chkDecretaMC.length; x++) {
+                            //Recibimos la variables de medidas cautelares dentro del for para llamar la lista
+                            if(chkDecretaMC[x].equals("13")){
+                                String especiMC = verificaVariable(request.getParameter("especiMC"));
+                                sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
+                                        + proceClave + jConcatenado + "'," + chkDecretaMC[x] + "," + soliMedida[x] + "," + duraMedida[x] + ",'"
+                                        + especiMC + "', (select YEAR(NOW())))";
+                                System.out.println(sql);
+                            }else{
+                                sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
+                                        + proceClave + jConcatenado + "'," + chkDecretaMC[x] + "," + soliMedida[x] + "," + duraMedida[x] + ","
+                                        + "-2, (select YEAR(NOW())))";
+                                System.out.println(sql);
+                            }
+                            if(!conn.escribir(sql)){//Si algun caso da false cerramos la conexion para envio de error
+                                conn.close();
                             }
                         }
                     }
-                    
                     showInicial inicial = new showInicial();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     showCausasPenales causa = new showCausasPenales();
                     int totInicialInsrt = inicial.countInicial(causaClave);
                     int totInicial = causa.countTotalProcesados(causaClave);
@@ -199,32 +196,28 @@ public class insrtInicial extends HttpServlet {
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                     conn.escribir(sql);
                     if (drecretaMC == 1) {
-                        for (String soliMedi : chkSoliMedi) {
-                            //Recibimos la variables de medidas cautelares dentro del for para llamar lista por lista
-                            String[] chkMediCau = request.getParameterValues("chkMediCau" + soliMedi);
-                            String[] duraMedi = request.getParameterValues("duraMedi" + soliMedi);
-                            String especiMC = verificaVariable(request.getParameter("especiMC" + soliMedi));
-                            for (int x = 0; x < chkMediCau.length; x++) {
-                                if(chkMediCau[x].equals("13")){
-                                    sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                                            + proceClave + jConcatenado + "'," + soliMedi + "," + chkMediCau[x] + "," + duraMedi[x] + ",'"
-                                            + especiMC + "', (select YEAR(NOW())))";
-                                    System.out.println(sql);
-                                }else{
-                                    sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
-                                            + proceClave + jConcatenado + "'," + soliMedi + "," + chkMediCau[x] + "," + duraMedi[x] + ","
-                                            + "-2, (select YEAR(NOW())))";
-                                    System.out.println(sql);
-                                }
-                                if(!conn.escribir(sql)){//Si algun caso da false cerramos la conexion para envio de error
-                                    conn.close();
-                                }
+                        for (int x = 0; x < chkDecretaMC.length; x++) {
+                            //Recibimos la variables de medidas cautelares dentro del for para llamar la lista
+                            if(chkDecretaMC[x].equals("13")){
+                                String especiMC = verificaVariable(request.getParameter("especiMC"));
+                                sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
+                                        + proceClave + jConcatenado + "'," + chkDecretaMC[x] + "," + soliMedida[x] + "," + duraMedida[x] + ",'"
+                                        + especiMC + "', (select YEAR(NOW())))";
+                                System.out.println(sql);
+                            }else{
+                                sql = "INSERT INTO DATOS_PMEDIDAS_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + causaClave + "','"
+                                        + proceClave + jConcatenado + "'," + chkDecretaMC[x] + "," + soliMedida[x] + "," + duraMedida[x] + ","
+                                        + "-2, (select YEAR(NOW())))";
+                                System.out.println(sql);
+                            }
+                            if(!conn.escribir(sql)){//Si algun caso da false cerramos la conexion para envio de error
+                                conn.close();
                             }
                         }
                     }
 
                     showInicial inicial = new showInicial();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     int totInicialInsrt = inicial.countInicial(causaClave);
                     lis = inicial.findInicialTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
@@ -249,7 +242,7 @@ public class insrtInicial extends HttpServlet {
     }
     
     public String verificaVariable(String variable) {
-        String verificada = "";
+        String verificada;
         if (variable == null) {
             verificada = "-2";
         } else if (variable.equals("")) {

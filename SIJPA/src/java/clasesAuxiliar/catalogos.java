@@ -715,7 +715,7 @@ public class catalogos {
     public ArrayList findMedidasCautelares() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES WHERE CAUTELARES_ID <> -2  ORDER BY 1;";
+        sql = "SELECT * FROM CATALOGOS_MEDIDAS_CAUTELARES WHERE CAUTELARES_ID <> -2  ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

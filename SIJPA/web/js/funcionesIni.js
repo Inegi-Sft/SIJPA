@@ -75,25 +75,11 @@ $(document).ready(function() {
     //Se usa para la recuperacion de BD
     if($('#drecretaMC').val() === '1'){
         $('#tableMcau').show();
-        $('input[name="chkSoliMedi"]').each(function(){
-            var col = $(this).val();
+        $('input[name="chkDecretaMC"]').each(function(){
+            var indi = $(this).val();
             if($(this).is(':checked')){
-                $('#tablaMC' + col).show();
-                $('input[name="chkMediCau' + col + '"]').each(function(){
-                    var fila = $(this).val();
-                    if(fila === '13'){
-                        if($(this).is(':checked')){
-                            $('#duraMedi' + col + fila).prop({disabled: false, required: true});
-                            $('#duraMedi' + col + fila).css('background-color', '#27251F');
-                            $('#tdEspeciMC'+ col).fadeIn();
-                        }
-                    }else{
-                        if($(this).is(':checked')){
-                            $('#duraMedi' + col + fila).prop({disabled: false, required: true});
-                            $('#duraMedi' + col + fila).css('background-color', '#27251F');
-                        }
-                    }
-                });
+                $('#soliMedida' + indi).prop({'disabled': false, 'required' : true});
+                $('#duraMedida' + indi).prop({'disabled': false, 'required' : true});
             }
         });
     }
@@ -253,6 +239,16 @@ $(document).ready(function() {
         }
     });
     
+    $('#drecretaMC').change(function () {
+        if ($(this).val() === '1') {
+            $('#tableMcau').fadeIn('slow');
+        } else {
+            $('#tableMcau').fadeOut('slow');
+            $('input[name="chkDecretoMC"]').prop('checked',false);
+            $('.duraMedi').val('').prop({disabled: true, required: false});
+        }
+    });
+    
     //Para cada td que tenga esta clase validamos el tamaño de texto y le agregamos imagen de info
     $('.descMedi').each(function(){
         var text = $(this).text();//Obtenemos el texto del td para validarlo
@@ -260,7 +256,7 @@ $(document).ready(function() {
         if(text.length > 55){
             //Si es mayor a 55 el texto del catalogo, entonces lo cortamos y mostramos la imagen de info para mostrar el texto completo
             //en un div 
-            $(this).html(text.substring(0,'50') + ' ... <img src="img/info.png" class="infoMC" id="' + coord + '">');
+            $(this).html(text.substring(0,'50') + ' ... <img src="img/info.png" class="infoMC" id="' + coord + '"/>');
         }
     });
     
@@ -272,15 +268,28 @@ $(document).ready(function() {
         var id = $(this).attr('id');//obtenemos el id de la imagen donde se encuentra el mouse
         $('#divMC' + id).fadeOut();
     });
-
-    $('#drecretaMC').change(function () {
-        if ($(this).val() === '1') {
-            $('#tableMcau').fadeIn('slow');
-        } else {
-            $('#tableMcau').fadeOut('slow');
-            $('input[name="chkSoliMedi"]').prop('checked',false);
-            $('.tableMediCauCom').hide();
-            $('.duraMedi').val('').prop({disabled: true, required: false});
+    
+    $('input[name="chkDecretaMC"]').change(function(){
+        var indi = $(this).val();
+        if($(this).is(':checked')){
+            $('#soliMedida' + indi).prop({'disabled': false, 'required': true});
+            $('#duraMedida' + indi).prop({'disabled': false, 'required': true});
+        }else{
+            $('#soliMedida' + indi).val('');
+            $('#duraMedida' + indi).val('');
+            $('#soliMedida' + indi).prop({'disabled': true, 'required': false});
+            $('#duraMedida' + indi).prop({'disabled': true, 'required': false});
+        }
+        
+        //validamos el indice de Otra para mostrar el campo especifique
+        if(indi === '13'){
+            if($(this).is(':checked')){
+                $('#especiMC').fadeIn();
+                $('#especiMC').val('').prop('required', true);
+            }else{
+                $('#especiMC').fadeOut();
+                $('#especiMC').val('').prop('required', false);
+            }
         }
     });
 
@@ -360,41 +369,10 @@ $(document).ready(function() {
     });
     
     $("#formulaAcusacion > option[value=9]").hide();
-    
     //Guarda Inicial
     $('#fromInicial').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if ($('#drecretaMC').val() === '1' && $('input[name="chkSoliMedi"]:checked').length === 0) {
-            alert('Selecciona al menos una opcion de quien solicita las Medidas Cautelares');
-            $('#drecretaMC').focus();
-            return false;
-        }else if($('#chkSoliMedi1').is(':checked') && $('input[name="chkMediCau1"]:checked').length === 0){
-            alert('Selecciona al menos una Medida Cautelar del solicitante Ministerio P\u00FAblico');
-            $('#chkSoliMedi1').focus();
-            return false;
-        }else if($('#chkSoliMedi2').is(':checked') && $('input[name="chkMediCau2"]:checked').length === 0){
-            alert('Selecciona al menos una Medida Cautelar del solicitante Ofendido');
-            $('#chkSoliMedi2').focus();
-            return false;
-        }else if($('#chkSoliMedi3').is(':checked') && $('input[name="chkMediCau3"]:checked').length === 0){
-            alert('Selecciona al menos una Medida Cautelar del solicitante V\u00EDctima');
-            $('#chkSoliMedi3').focus();
-            return false;
-        }else if($('#chkSoliMedi4').is(':checked') && $('input[name="chkMediCau4"]:checked').length === 0){
-            alert('Selecciona al menos una Medida Cautelar del solicitante Asesor Jur\u00EDdico');
-            $('#chkSoliMedi4').focus();
-            return false;
-        }else if($('#chkSoliMedi5').is(':checked') && $('input[name="chkMediCau5"]:checked').length === 0){
-            alert('Selecciona al menos una Medida Cautelar del solicitante Defensor del Adolescente');
-            $('#chkSoliMedi5').focus();
-            return false;
-        }else if($('#chkSoliMedi9').is(':checked') && $('input[name="chkMediCau9"]:checked').length === 0){
-            alert('Selecciona al menos una Medida Cautelar del solicitante No Identificado');
-            $('#chkSoliMedi9').focus();
-            return false;
-        }
-        
         $.ajax({
             type: 'post',
             url: 'insrtInicial',
@@ -464,28 +442,3 @@ $(document).ready(function() {
     });
     /*---------------------------- FIN FUNCIONES INICIAL JC----------------------------*/
 });
-
-function muTablaMC(num){
-    $('.chkMediCau').prop('checked', false);
-    $('.duraMedi').val('').prop({disabled: true, required: false});
-    $('#tablaMC' + num).slideToggle();
-}
-
-function activaDuraMC(numCol, numFila){
-    //Controla el td de especifique
-    if($('#chkMediCau' + numCol + '13').is(':checked')){
-        $('#tdEspeciMC'+ numCol).fadeIn();
-        $('#especiMC'+ numCol).val('').prop('required', true);
-    }else{
-        $('#tdEspeciMC'+ numCol).fadeOut();
-        $('#especiMC'+ numCol).val('').prop('required', false);
-    }
-    //Controla los campos de captura de duracion de medida cautelar
-    if($('#chkMediCau' + numCol + numFila).is(':checked')){
-        $('#duraMedi' + numCol + numFila).val('').prop({disabled: false, required: true});
-        $('#duraMedi' + numCol + numFila).css('background-color', '#27251F');
-    }else{
-        $('#duraMedi' + numCol + numFila).val('').prop({disabled: true, required: false});
-        $('#duraMedi' + numCol + numFila).css('background-color', '#CCC');
-    }
-}

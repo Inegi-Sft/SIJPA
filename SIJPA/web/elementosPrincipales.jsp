@@ -249,7 +249,7 @@
                                     }else{
                                         out.println("<tr>");
                                         out.println("<td>" + in[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td></td>");//Traemos el nombre de procesados en la reccuperación de BD
+                                        out.println("<td>" + in[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");

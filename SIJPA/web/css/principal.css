@@ -461,10 +461,6 @@ fieldset legend{
     margin: 0 auto;
 }
 
-.contenedor .duraMedi{
-    width: 50px !important;
-}
-
 #juzClave{
     float: left;
     margin: 0;
@@ -629,8 +625,9 @@ input[type=text]:read-only, input[type=date]:read-only, input[type=number]:read-
     position: absolute;
     display: none;
     color: #FFFFFF;
-    width: 250px;
+    width: 550px;
     height: auto;
+    margin-left: 5%;
     background-color: rgba(0,0,0,0.7);
     padding: 10px;
     border-radius: 10px;

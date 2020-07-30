@@ -8,6 +8,7 @@ import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.showTramite;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -35,7 +36,9 @@ public class insrtTramite extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
+    String sql, sqlInter;
+    boolean insrtDConclu = false;
+    ResultSet res;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,29 +73,39 @@ public class insrtTramite extends HttpServlet {
                         + especifique + "','" + fechaActo + "', (select YEAR(NOW())) )";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
-                    //Solo se actualizan los que estan volando (etapa 5)
-                    sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 3 "
+                    sqlInter = "SELECT ETAPA FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' ";
+                    res = conn.consultar(sqlInter);
+                    int etapa=0;
+                    while (res.next()) {
+                        etapa = res.getInt(1);
+                    }
+                    //Solo se actualizan los que estan volando (etapa 5, 8)
+                    if(etapa==5){
+                        sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 3 "
                             + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
-                            + "AND ETAPA = 5;";
-                    System.out.println(sql);
-                    if(conn.escribir(sql)){
-                        showTramite tram = new showTramite();
-                        ArrayList<String[]> lis = new ArrayList<>();
-                        int totTramiteInsrt = tram.countTramiteExp(causaClave);
-                        lis = tram.findTramiteTabla(proceClave + jConcatenado);
-                        JSONArray resp = new JSONArray();
-                        resp.add(posicion);
-                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
-                        resp.add(lis.get(0)[1]);
-                        resp.add(lis.get(0)[2]);
-                        resp.add(lis.get(0)[3]);
-                        resp.add(totTramiteInsrt);
-                        out.write(resp.toJSONString());
-                        conn.close();
-                    }else{
-                        conn.close();
+                            + "AND ETAPA =5;";
+                        conn.escribir(sql);
+                    }else if(etapa==8){
+                        sql = "UPDATE DATOS_ETAPA_INICIAL_ADOJC SET ETAPA = 7 "
+                            + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "' "
+                            + "AND ETAPA =8;";
+                        conn.escribir(sql);
                     }
+                    showTramite tram = new showTramite();
+                    ArrayList<String[]> lis = new ArrayList<>();
+                    lis = tram.findTramiteTabla(proceClave + jConcatenado);
+                    JSONArray resp = new JSONArray();
+                    resp.add(posicion);
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                    resp.add(lis.get(0)[1]);
+                    resp.add(lis.get(0)[2]);
+                    resp.add(lis.get(0)[3]);
+                    resp.add(etapa);
+                    out.write(resp.toJSONString());
+                    conn.close();
                 } else {
                     conn.close();
                 }
@@ -106,7 +119,6 @@ public class insrtTramite extends HttpServlet {
                 if (conn.escribir(sql)) {
                     showTramite tram = new showTramite();
                     ArrayList<String[]> lis = new ArrayList<>();
-                    int totTramiteInsrt = tram.countTramiteExp(causaClave);
                     lis = tram.findTramiteTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
@@ -114,7 +126,6 @@ public class insrtTramite extends HttpServlet {
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
-                    resp.add(totTramiteInsrt);
                     out.write(resp.toJSONString());
                     conn.close();
                 } else {

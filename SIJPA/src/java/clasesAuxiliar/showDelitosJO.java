@@ -141,7 +141,7 @@ public class showDelitosJO {
     public ArrayList findDelitosVictiJC(String causaClaveJC){
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT DISTINCT DE.DELITO_CLAVE, CN.CODIGO "
+        sql = "SELECT DISTINCT DE.DELITO_CLAVE, CN.CODIGO, D.DELITO_NORMA_TECNICA "
                 + "FROM DATOS_DELITOS_ADOJC DE, DATOS_PDELITOS_ADOJC PD, DATOS_CONCLUSIONES_ADOJC CO, CATALOGOS_CODIGO_NORMA CN "
                 + "WHERE DE.CAUSA_CLAVE = CO.CAUSA_CLAVE "
                 + "AND PD.CAUSA_CLAVE = CO.CAUSA_CLAVE "
@@ -155,7 +155,7 @@ public class showDelitosJO {
         try {
             while (resul.next()) {
                 deli.add(new String[]{
-                    resul.getString(1), resul.getString(2)
+                    resul.getString(1), resul.getString(2), resul.getString(3)
                 });
             }
             conn.close();
@@ -168,7 +168,7 @@ public class showDelitosJO {
     public ArrayList findDelitosVictiJO(String causaClaveJO){
         conn.Conectar();
         deli = new ArrayList();
-        sql = "SELECT D.DELITO_CLAVEJO, CN.CODIGO "
+        sql = "SELECT D.DELITO_CLAVEJO, CN.CODIGO, D.DELITO_NORMA_TECNICA "
                 + "FROM DATOS_DELITOS_ADOJO D, CATALOGOS_CODIGO_NORMA CN "
                 + "WHERE D.DELITO_CODIGO_PENAL = CN.ID_CODIGO "
                 + "AND D.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
@@ -177,7 +177,7 @@ public class showDelitosJO {
         try {
             while (resul.next()) {
                 deli.add(new String[]{
-                    resul.getString(1), resul.getString(2)
+                    resul.getString(1), resul.getString(2), resul.getString(3)
                 });
             }
             conn.close();

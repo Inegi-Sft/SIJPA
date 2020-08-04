@@ -17,6 +17,7 @@
         <title>SIJPA::Víctimas</title>
         <%@include file="librerias.jsp" %>
         <script type="text/javascript" src="js/funcionesVic.js"></script>
+        <script type="text/javascript" src="js/fnVictimaDelito.js"></script>
         <%
             catalogos cat = new catalogos();
             showDelitos sDelitos = new showDelitos();
@@ -66,6 +67,7 @@
             String rangoIngre = "";
             String medidaProte = "";
             String medidaMujer = "";
+            String justificacion = "";
             String comen = "";
             if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
                 edicion = request.getParameter("edita");
@@ -101,7 +103,8 @@
                         rangoIngre = victima.get(0)[25];
                         medidaProte = victima.get(0)[26];
                         medidaMujer = victima.get(0)[27];
-                        comen = victima.get(0)[28];
+                        justificacion = victima.get(0)[28];
+                        comen = victima.get(0)[29];
                     }else{
                         out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClave + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
@@ -200,6 +203,10 @@
                             }
                         %>
                     </table>
+                    <div class="comentarios oculto" id="divJustificacion">
+                        <h3>Justificacón de los delitos cometidos a la víctima</h3>
+                        <textarea name="justificaDeli" id="justificaDeli" maxlength="500"><%=justificacion%></textarea>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>Defensa</legend>

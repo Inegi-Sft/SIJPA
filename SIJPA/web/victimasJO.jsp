@@ -18,6 +18,7 @@
         <title>SIJPA::VíctimasJO</title>
         <%@include file="librerias.jsp" %>
         <script type="text/javascript" src="js/funcionesVicJO.js"></script>
+        <script type="text/javascript" src="js/fnVictimaDelito.js"></script>
         <%
             catalogos cat = new catalogos();
             showDelitosJO sDelitos = new showDelitosJO();
@@ -68,6 +69,7 @@
             String ocupa = "";
             String ingresos = "";
             String rangoIngre = "";
+            String justificacion = "";
             String comen = "";
             if(request.getParameter("edita") != null){//Si es diferente de null entonces le mostramos los datos de JO
                 edicion = request.getParameter("edita");
@@ -101,7 +103,8 @@
                         ocupa = victiJO.get(0)[23];
                         ingresos = victiJO.get(0)[24];
                         rangoIngre = victiJO.get(0)[25];
-                        comen = victiJO.get(0)[26];
+                        justificacion = victiJO.get(0)[26];
+                        comen = victiJO.get(0)[27];
                     }else{
                         out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
@@ -136,7 +139,8 @@
                     ocupa = victiJC.get(0)[23];
                     ingresos = victiJC.get(0)[24];
                     rangoIngre = victiJC.get(0)[25];
-                    comen = victiJC.get(0)[28];
+                    justificacion = victiJC.get(0)[28];
+                    comen = victiJC.get(0)[29];
                 }else{
                     out.println("<script>alert('Victima " + victiClave + " no encontrada dentro de la Causa Penal "  + causaClaveJC + "'); "
                             + "parent.$.fancybox.close();</script>");
@@ -211,36 +215,6 @@
                         </thead>
                         <tbody>
                         <%
-//                            if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
-//                                vic = sDelitos.findDelitosVictiJO(causaClaveJO);
-//                            }else{
-//                                vic = sDelitos.findDelitosVictiJC(causaClaveJC);
-//                            }
-//                            for (String[] vi : vic) {
-//                                out.println("<tr>");
-//                                out.println("<td>" + vi[0].replace(jConcatenado, "") + "</td>");
-//                                out.println("<td>" + vi[1] + "</td>");
-//                                out.println("<td>");
-//                                if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
-//                                    viDel = sVictima.findVDelitoJO(causaClaveJO, victiClave + jConcatenado, vi[0]);
-//                                    if(viDel.size() != 0){
-//                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + viDel.get(0) + "' checked>");
-//                                    }else{
-//                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + vi[0] + "'/>");
-//                                    }
-//                                }else{//SI edicion viene vacio entonces traemos JC
-//                                    String delitoClaveJO = causaClaveJOSimple + vi[0].substring(vi[0].indexOf("-D"));//crea nueva clave de delito jo
-//                                    viDel = sVictima.findVDelitoJC(causaClaveJC, victiClave + jConcatenado, vi[0]);
-//                                    if(viDel.size() != 0){
-//                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "' checked>");
-//                                    }else{
-//                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + delitoClaveJO + "'/>");
-//                                    }
-//                                }
-//                                out.println("</td>");
-//                                out.println("</tr>");
-//                            }
-                            
                             if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
                                 vic = sVictima.findProcesadosJO(causaClaveJO);
                             }else{
@@ -266,18 +240,18 @@
                                     if(!edicion.equals("")){//Si edicion viene diferente de vacio traemos JO
                                         viDel = sVictima.findVDelitoJO(causaClaveJO, pro[0], victiClave + jConcatenado, vi[0]);
                                         if(viDel.size() != 0){
-                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[0] +"@@@"+ viDel.get(0) + "' checked>");
+                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[0] +"@@@"+ viDel.get(0) + "' normaT="+vi[2]+" onclick='victimaDelito(this)' checked>");
                                         }else{
-                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[0] +"@@@"+ vi[0] + "'/>");
+                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[0] +"@@@"+ vi[0] + "' normaT="+vi[2]+" onclick='victimaDelito(this)' />");
                                         }
                                     }else{//SI edicion viene vacio entonces traemos JC
                                         String delitoClaveJO = causaClaveJOSimple + vi[0].substring(vi[0].indexOf("-D"));//crea nueva clave de delito jo
                                         String proceClaveJO = causaClaveJOSimple + pro[0].substring(pro[0].indexOf("-P"));//crea nueva clave de delito jo
                                         viDel = sVictima.findVDelitoJC(causaClaveJC, pro[0], victiClave + jConcatenado, vi[0]);
                                         if(viDel.size() != 0){
-                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + proceClaveJO + "@@@" + delitoClaveJO + "' checked>");
+                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + proceClaveJO + "@@@" + delitoClaveJO + "' normaT="+vi[2]+" onclick='victimaDelito(this)' checked>");
                                         }else{
-                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + proceClaveJO + "@@@" + delitoClaveJO + "'/>");
+                                            out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + proceClaveJO + "@@@" + delitoClaveJO + "' normaT="+vi[2]+" onclick='victimaDelito(this)' />");
                                         }
                                     }
                                     out.println("</td>");
@@ -288,6 +262,10 @@
                         %>
                         </tbody>
                     </table>
+                    <div class="comentarios oculto" id="divJustificacion">
+                        <h3>Justificacón de los delitos cometidos a la víctima</h3>
+                        <textarea name="justificaDeli" id="justificaDeli" maxlength="500"><%=justificacion%></textarea>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>Defensa</legend>

@@ -285,7 +285,7 @@ public class usuario {
                 sql = "INSERT INTO DATOS_VICTIMAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-V" + x + jConcatenado + "'," 
                         + "-2,-2,-2,-2,-2,'1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,"
-                        + "-2,-2,-2,-2,-2,'REGNUEVO',(select YEAR(NOW())) )";
+                        + "-2,-2,-2,-2,-2,'','REGNUEVO',(select YEAR(NOW())) )";
                 System.out.println(sql);
                 conn.escribir(sql);
             }

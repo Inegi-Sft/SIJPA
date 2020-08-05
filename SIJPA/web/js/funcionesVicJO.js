@@ -75,7 +75,16 @@ $(document).ready(function() {
         $('#fuenteIngre').show();
     }
     
+    //Se usa para la recuperacion de BD
+    if($('#justificaDeli').val() !== ''){
+        $('#divJustificacion').show();
+    }
+    
     $('#tipoVictima').change(function () {
+        $('input[name="deliCometido"]').prop("checked", false);
+        $('#justificaDeli').val('');
+        $('#divJustificacion').hide();
+        
         switch ($(this).val()) {
             case '1':
                 $('#victiFisicas').fadeIn('slow');

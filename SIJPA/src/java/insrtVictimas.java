@@ -92,6 +92,7 @@ public class insrtVictimas extends HttpServlet {
         String interprete = request.getParameter("interprete");
         int ingresos = Integer.parseInt(request.getParameter("ingresos"));
         String rangoingresos = verificaVariable(request.getParameter("rangoIngresos"));
+        String justificacion = request.getParameter("justificaDeli");
         String comentarios = request.getParameter("Comentavic");
         String[] chkDeliCom = request.getParameterValues("deliCometido");
         String[] procesadoRela = request.getParameterValues("proRela");
@@ -116,7 +117,7 @@ public class insrtVictimas extends HttpServlet {
                         + "HABLA_ESPANOL = " + espanol + ",HABLA_INDIGENA = " + indigena + ",LENGUA_INDIGENA = " + familia + ","
                         + "LENGUA_EXTRANJERA = " + extrangera + ",INTERPRETE = " + interprete + ",INGRESOS = " + ingresos + ","
                         + "RANGO_INGRESOS = " + rangoingresos + ",OCUPACION = " + ocupacion + ",MEDIDAS_MUJER = " + vmedidaMujer + ","
-                        + "MEDIDAS_PROTECCION = " + vmedidas + ",COMENTARIOS = '" + comentarios + "' "
+                        + "MEDIDAS_PROTECCION = " + vmedidas + ",JUSTIFICA_DELITOS='"+ justificacion+ "', COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                         + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                 System.out.println(sql);
@@ -205,7 +206,7 @@ public class insrtVictimas extends HttpServlet {
                         + "HABLA_ESPANOL = " + espanol + ",HABLA_INDIGENA = " + indigena + ",LENGUA_INDIGENA = " + familia + ","
                         + "LENGUA_EXTRANJERA = " + extrangera + ",INTERPRETE = " + interprete + ",INGRESOS = " + ingresos + ","
                         + "RANGO_INGRESOS = " + rangoingresos + ",OCUPACION = " + ocupacion + ",MEDIDAS_MUJER = " + vmedidaMujer + ","
-                        + "MEDIDAS_PROTECCION = " + vmedidas + ",COMENTARIOS = '" + comentarios + "' "
+                        + "MEDIDAS_PROTECCION = " + vmedidas + ",JUSTIFICA_DELITOS='"+ justificacion+ "', COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                         + "AND VICTIMA_CLAVE = '" + victiClave + jConcatenado + "';";
                 System.out.println(sql);

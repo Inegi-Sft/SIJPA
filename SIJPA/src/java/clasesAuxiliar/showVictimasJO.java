@@ -104,7 +104,7 @@ public class showVictimasJO {
                     resul.getString("CONDICION_ALFABETISMO"), resul.getString("GRADO_ESTUDIOS"), resul.getString("HABLA_ESPANOL"),
                     resul.getString("LENGUA_EXTRANJERA"), resul.getString("HABLA_INDIGENA"), resul.getString("LENGUA_INDIGENA"),
                     resul.getString("INTERPRETE"), resul.getString("OCUPACION"), resul.getString("INGRESOS"), resul.getString("RANGO_INGRESOS"),
-                    resul.getString("MEDIDAS_PROTECCION"), resul.getString("MEDIDAS_MUJER"), resul.getString("COMENTARIOS")
+                    resul.getString("MEDIDAS_PROTECCION"), resul.getString("MEDIDAS_MUJER"), resul.getString("JUSTIFICA_DELITOS"),resul.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -133,7 +133,7 @@ public class showVictimasJO {
                     resul.getString("CONDICION_ALFABETISMO"), resul.getString("GRADO_ESTUDIOS"), resul.getString("HABLA_ESPANOL"),
                     resul.getString("LENGUA_EXTRANJERA"), resul.getString("HABLA_INDIGENA"), resul.getString("LENGUA_INDIGENA"),
                     resul.getString("INTERPRETE"), resul.getString("OCUPACION"), resul.getString("INGRESOS"), resul.getString("RANGO_INGRESOS"),
-                    resul.getString("COMENTARIOS")
+                    resul.getString("JUSTIFICA_DELITOS"), resul.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -261,7 +261,7 @@ public class showVictimasJO {
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                     + "AND RELACION = " + relacion + " "
                     + "ORDER BY 1;";
-            System.out.println(sql);
+            
             resul = conn.consultar(sql);
             while (resul.next()) {
                 vP.add(resul.getString("RELACION"));

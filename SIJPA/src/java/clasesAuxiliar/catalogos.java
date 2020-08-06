@@ -115,7 +115,7 @@ public class catalogos {
     public ArrayList findCausaSuspencion() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM CATALOGOS_CAUSA_SUSPENCION ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_CAUSA_SUSPENCION ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -357,7 +357,7 @@ public class catalogos {
     public ArrayList findEstudioProfesional() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM CATALOGOS_ESTUDIO_PROFESIONAL ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_ESTUDIO_PROFESIONAL ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1155,7 +1155,7 @@ public class catalogos {
     public ArrayList findMedidasDisciplinarias() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM catalogos_medidas_disciplinarias ORDER BY 1";
+        sql = " SELECT * FROM CATALOGOS_MEDIDAS_DISCIPLINARIAS ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

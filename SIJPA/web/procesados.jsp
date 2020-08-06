@@ -802,7 +802,7 @@
                             <input type="text" class="txtLong"  name="delictivo" id="delictivo" value="<%=nomGpoDeli%>">
                             <div class="noIdentificada">
                                 <input type="checkbox" id="chkdelictivo">
-                                <label>No identificada</label>
+                                <label>No identificado</label>
                             </div>
                         </div>
                     </fieldset>

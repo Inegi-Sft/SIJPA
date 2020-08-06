@@ -321,14 +321,14 @@ public class showInicial {
         mediCau = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT CAUTELARES, SOLICITA_MEDIDA, DURACION_MEDIDA FROM DATOS_PMEDIDAS_ADOJC "
+            sql = "SELECT CAUTELARES, SOLICITA_MEDIDA, DURACION_MEDIDA, ESPECIFIQUE FROM DATOS_PMEDIDAS_ADOJC "
                     + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                     + "AND CAUTELARES = " + cautelar + ";";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 mediCau.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3)
+                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4)
                 });
             }
             conn.close();

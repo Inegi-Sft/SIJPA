@@ -19,8 +19,7 @@ import java.util.logging.Logger;
 public class showIntermedia {
 
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> ini;
-    ArrayList<String> lisPruebas;
+    ArrayList<String[]> ini, medioPru;
     String sql;
     ResultSet resul;
     int conteoInter;
@@ -157,26 +156,29 @@ public class showIntermedia {
         return valor;
     }
     
-    public ArrayList findMediosPrueba(String causaClave, String proceClave, String figuraPru, String medioPru){
-        lisPruebas = new ArrayList();
+    public ArrayList findMediosPrueba(String causaClave, String proceClave, String figuraPru, String medioPrueba){
+        medioPru = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT MEDIO_PRUEBA_ID FROM DATOS_PRESENTA_MP_ADOJC "
+            sql = "SELECT MEDIO_PRUEBA, RESOLUCION_PRUEBA FROM DATOS_PRESENTA_MP_ADOJC "
                     + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                     + "AND FIGURA_MPRUEBA = " + figuraPru + " "
-                    + "AND MEDIO_PRUEBA_ID = " + medioPru + " "
+                    + "AND MEDIO_PRUEBA = " + medioPrueba + " "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             if(resul.next()) {
-               lisPruebas.add(resul.getString("MEDIO_PRUEBA_ID"));
+               medioPru.add(new String[]{
+                   resul.getString(1), resul.getString(2)
+               });
             }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lisPruebas;
+        return medioPru;
     }
+    
     public int countIntermediaProc(String causaClave,String ProcesadoClave) {
         try{
             conn.Conectar();

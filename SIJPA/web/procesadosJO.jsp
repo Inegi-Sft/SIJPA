@@ -799,7 +799,7 @@
                         <div class="colsx oculto" id="gruDeli">
                             <label for="presentAdo">Grupo delictivo del que forma parte</label>
                             <input type="text" class="txtLong"  name="delictivo" id="delictivo" value="<%=nomGpoDeli%>">
-                            <div class="noIdentificada">
+                            <div class="noIdentificado">
                                 <input type="checkbox" id="chkdelictivo">
                                 <label>No identificada</label>
                             </div>

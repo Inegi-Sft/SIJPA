@@ -151,7 +151,7 @@
                                     <option value="">--</option>
                                     <%
                                         lista = cat.findEstudioProfesional();
-                                        for (int i = 18; i <= 99; i++) {
+                                        for (int i = 30; i <= 99; i++) {
                                             out.println("<option value='" + i + "'");
                                             if(Integer.toString(i).equals(edadJuez)){
                                                 out.println(" selected ");

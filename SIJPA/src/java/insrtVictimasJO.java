@@ -87,6 +87,7 @@ public class insrtVictimasJO extends HttpServlet {
         int ingresos = Integer.parseInt(request.getParameter("ingresos"));
         String rangoingresos = request.getParameter("rangoIngresos");
         String ocupacion = request.getParameter("ocupa");
+        String justificacion = request.getParameter("justificaDeli");
         String comentarios = request.getParameter("Comentavic");
         
         String[] chkDeliCom = request.getParameterValues("deliCometido");
@@ -108,7 +109,7 @@ public class insrtVictimasJO extends HttpServlet {
                         + fecha_nacimiento + "'," + edad + "," + vulnerabilidad + "," + paisNacimiento + "," + entidadNacimiento + ","
                         + muniNacimiento + "," + nacionalidad + "," + paisResi + "," + entidadResi + "," + municipioResi + ","
                         + conyugal + "," + alfabetismo + "," + estudios + "," + espanol + "," + indigena + "," + familia + ","
-                        + extrangera + "," + interprete + "," + ingresos + ","+ rangoingresos + "," + ocupacion + ",'"
+                        + extrangera + "," + interprete + "," + ingresos + ","+ rangoingresos + "," + ocupacion + ",'"+ justificacion +"','"
                         + comentarios + "', (select YEAR(NOW())))";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
@@ -178,7 +179,7 @@ public class insrtVictimasJO extends HttpServlet {
                         + "ESTADO_CIVIL = " + conyugal + ",CONDICION_ALFABETISMO = " + alfabetismo + ",GRADO_ESTUDIOS = " + estudios + ","
                         + "HABLA_ESPANOL = " + espanol + ",HABLA_INDIGENA = " + indigena + ",LENGUA_INDIGENA = " + familia + ","
                         + "LENGUA_EXTRANJERA = " + extrangera + ",INTERPRETE = " + interprete + ",INGRESOS = " + ingresos + ","
-                        + "RANGO_INGRESOS = " + rangoingresos + ",OCUPACION = " + ocupacion + ",COMENTARIOS = '" + comentarios + "' "
+                        + "RANGO_INGRESOS = " + rangoingresos + ",OCUPACION = " + ocupacion + ", JUSTIFICA_DELITOS='"+justificacion+"', COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                         + "AND VICTIMA_CLAVEJO = '" + victiClave + jConcatenado + "';";
                 System.out.println(sql);

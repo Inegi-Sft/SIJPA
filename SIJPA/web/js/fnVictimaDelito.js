@@ -91,7 +91,6 @@ function victimaDelito(obj){
             $('input[name="deliCometido"]:checked').each(function () {
                 norma = $(this).attr("normaT");
                 aplica=arrVicDel[norma][tipoVic];
-                alert(norma+" "+aplica);
                 if(aplica==='-'){
                     existen = true;
                 }

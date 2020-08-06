@@ -116,7 +116,7 @@
                 </table>
             </div>
             <div id="p3" class="pestanaContent">
-                <h2>Adolescentes</h2>
+                <h2>Imputados</h2>
                 <table class="tablasRegis" id="tablaProcesa" data-nomTabla="Adolescentes">
                     <thead> 
                         <tr>

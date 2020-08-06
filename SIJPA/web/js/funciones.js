@@ -54,9 +54,10 @@ $(document).ready(function () {
                     $('#passUsu').val('');
                 }
             },
-            error: function (response) {
-                console.log("Respuesta del servidor", response);
-                alert('Usuario no encontrado, verificar datos');
+            error: function (xhr, ajaxOptions, thrownError){
+                if(xhr.status === 404) {
+                    alert(thrownError);
+                }
             }
         });
     });

@@ -37,22 +37,40 @@ $(document).ready(function() {
     if($('#mediosPrueba').val() === '1'){
         $('#dpruebaMP').show();
         $('#dpruebaAJ').show();
-        $('#dpruebaDefensa').show();
+        $('#dpruebaDF').show();
     }
     
     //Se usa para la recuperacion de BD
     if($('#pruebaMP').val() === '1'){
         $('#tblpruebaMP').show();
+        $('input[name="chkpruebaMP"]').each(function(){
+            var indi = $(this).val();
+            if($(this).is(':checked')){
+                $('#tipoPruebaMP' + indi).prop({'disabled': false, 'required' : true});
+            }
+        });
     }
     
     //Se usa para la recuperacion de BD
     if($('#pruebaAJ').val() === '1'){
-        $('#tblmediospruebaAJ').show();
+        $('#tblpruebaAJ').show();
+        $('input[name="chkpruebaAJ"]').each(function(){
+            var indi = $(this).val();
+            if($(this).is(':checked')){
+                $('#tipoPruebaAJ' + indi).prop({'disabled': false, 'required' : true});
+            }
+        });
     }
     
     //Se usa para la recuperacion de BD
-    if($('#pruebaDefensa').val() === '1'){
-        $('#tblmediospruebaDefen').show();
+    if($('#pruebaDF').val() === '1'){
+        $('#tblpruebaDF').show();
+        $('input[name="chkpruebaDF"]').each(function(){
+            var indi = $(this).val();
+            if($(this).is(':checked')){
+                $('#tipoPruebaDF' + indi).prop({'disabled': false, 'required' : true});
+            }
+        });
     }
     
     $("#aperturaJO > option[value=9]").hide();
@@ -62,59 +80,89 @@ $(document).ready(function() {
             $('#divfechaAudiinter,#dseparaAcusa,#fmediosPrueba, #dmediosPrueba,#dacuerdosProba,#daperturaJO').fadeIn('slow');
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("").prop("disabled", false).prop("required", true);
-            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO').val('').prop("required", true);
-            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#tblpruebaMP,#tblmediospruebaAJ,#tblmediospruebaDefen').fadeOut('slow');
-            $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('-2').prop('required', false);
-            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDF,#acuerdosProba,#aperturaJO').val('').prop("required", true);
+            $('#dpruebaMP, #dpruebaAJ, #dpruebaDF,#tblpruebaMP,#tblpruebaAJ,#tblpruebaDF').fadeOut('slow');
+            $('#pruebaMP, #pruebaAJ, #pruebaDF').val('-2').prop('required', false);
+            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDF"]').prop("checked", false).prop("disabled", false);
 
         } else {
             $('#divfechaAudiinter,#dseparaAcusa,#fmediosPrueba, #dmediosPrueba,#dacuerdosProba,#daperturaJO').fadeOut('slow');
             $('#chkAudiinter').prop("checked", false);
             $('#fechaAudiinter').val("1899-09-09").prop("disabled", false).prop("required", false);
-            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDefensa,#acuerdosProba,#aperturaJO').val('-2').prop("required", true);
-            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+            $('#separaAcusa,#mediosPrueba,#pruebaMP,#pruebaAJ,#pruebaDF,#acuerdosProba,#aperturaJO').val('-2').prop("required", true);
+            $('input[name="chkpruebaMP"],input[name="chkpruebaAJ"],input[name="chkpruebaDF"]').prop("checked", false).prop("disabled", false);
         }
     });
 
     $('#mediosPrueba').change(function () {
         if ($(this).val() === '1') {
-            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa').fadeIn('slow');
-            $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('').prop('required', true);
+            $('#dpruebaMP, #dpruebaAJ, #dpruebaDF').fadeIn('slow');
+            $('#pruebaMP, #pruebaAJ, #pruebaDF').val('').prop('required', true);
         } else {
-            $('#dpruebaMP, #dpruebaAJ, #dpruebaDefensa,#tblpruebaMP, #tblmediospruebaAJ, #tblmediospruebaDefen').fadeOut('slow');
-            $('#pruebaMP, #pruebaAJ, #pruebaDefensa').val('-2').prop('required', false);
+            $('#dpruebaMP, #dpruebaAJ, #dpruebaDF,#tblpruebaMP, #tblpruebaAJ, #tblpruebaDF').fadeOut('slow');
+            $('#pruebaMP, #pruebaAJ, #pruebaDF').val('-2').prop('required', false);
         }
     });
 
     $('#pruebaMP').change(function () {
         if ($(this).val() === '1') {
             $('#tblpruebaMP').fadeIn('slow');
-            $('input[name="chkpruebaMP"]').prop("checked", false).prop("disabled", false);
+            $('input[name="chkpruebaMP"]').prop("checked", false).prop("required", true);
         } else {
             $('#tblpruebaMP').fadeOut('slow');
-            $('input[name="chkpruebaMP"]').prop("checked", false).prop("disabled", false);
+            $('input[name="chkpruebaMP"]').prop("checked", false).prop("required", false);
+        }
+    });
+    
+    $('input[name="chkpruebaMP"]').change(function(){
+        var indi = $(this).val();
+        if($(this).is(':checked')){
+            $('#tipoPruebaMP' + indi).prop({'disabled': false, 'required': true});
+        }else{
+            $('#tipoPruebaMP' + indi).val('');
+            $('#tipoPruebaMP' + indi).prop({'disabled': true, 'required': false});
         }
     });
 
     $('#pruebaAJ').change(function () {
         if ($(this).val() === '1') {
-            $('#tblmediospruebaAJ').fadeIn('slow');
-            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("disabled", false);
+            $('#tblpruebaAJ').fadeIn('slow');
+            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("required", true);
         } else {
-            $('#tblmediospruebaAJ').fadeOut('slow');
-            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("disabled", false);
+            $('#tblpruebaAJ').fadeOut('slow');
+            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("required", false);
             ;
         }
     });
+    
+    $('input[name="chkpruebaAJ"]').change(function(){
+        var indi = $(this).val();
+        if($(this).is(':checked')){
+            $('#tipoPruebaAJ' + indi).prop({'disabled': false, 'required': true});
+        }else{
+            $('#tipoPruebaAJ' + indi).val('');
+            $('#tipoPruebaAJ' + indi).prop({'disabled': true, 'required': false});
+        }
+    });
 
-    $('#pruebaDefensa').change(function () {
+    $('#pruebaDF').change(function () {
         if ($(this).val() === '1') {
-            $('#tblmediospruebaDefen').fadeIn('slow');
-            $('input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+            $('#tblpruebaDF').fadeIn('slow');
+            $('input[name="chkpruebaDF"]').prop("checked", false).prop("required", true);
         } else {
-            $('#tblmediospruebaDefen').fadeOut('slow');
-            $('input[name="chkpruebaDefen"]').prop("checked", false).prop("disabled", false);
+            $('#tblpruebaDF').fadeOut('slow');
+            $('input[name="chkpruebaDF"]').prop("checked", false).prop("required", false);
             ;
+        }
+    });
+    
+    $('input[name="chkpruebaDF"]').change(function(){
+        var indi = $(this).val();
+        if($(this).is(':checked')){
+            $('#tipoPruebaDF' + indi).prop({'disabled': false, 'required': true});
+        }else{
+            $('#tipoPruebaDF' + indi).val('');
+            $('#tipoPruebaDF' + indi).prop({'disabled': true, 'required': false});
         }
     });
 
@@ -140,14 +188,14 @@ $(document).ready(function() {
             }
         }
     });
-    $('#chkpruebaDefen9').change(function () {
+    $('#chkpruebaDF9').change(function () {
         if ($(this).is(":checked")) {
             for (var i = 1; i < 6; i++) {
-                $('#chkpruebaDefen' + i).prop("checked", false).prop("disabled", true);
+                $('#chkpruebaDF' + i).prop("checked", false).prop("disabled", true);
             }
         } else {
             for (var i = 1; i < 6; i++) {
-                $('#chkpruebaDefen' + i).prop("checked", false).prop("disabled", false);
+                $('#chkpruebaDF' + i).prop("checked", false).prop("disabled", false);
             }
         }
     });
@@ -178,15 +226,15 @@ $(document).ready(function() {
                 return false;
             }
         }
-        if ($('#pruebaDefensa').val() === '1') {
-            if ($('input[name="chkpruebaDefen"]:checked').length === 0) {
+        if ($('#pruebaDF').val() === '1') {
+            if ($('input[name="chkpruebaDF"]:checked').length === 0) {
                 alert('Selecciona al menos una opcion de prueba presentadas por la defensa');
-                $('#pruebaDefensa').focus();
+                $('#pruebaDF').focus();
                 return false;
             }
         }
 
-        if($('#mediosPrueba').val() === '1' && ($('#pruebaMP').val() !== '1' && $('#pruebaAJ').val() !== '1' && $('#pruebaDefensa').val() !== '1')) {
+        if($('#mediosPrueba').val() === '1' && ($('#pruebaMP').val() !== '1' && $('#pruebaAJ').val() !== '1' && $('#pruebaDF').val() !== '1')) {
             alert('Revisar los medios de prueba');
             $('#mediosPrueba').focus();
             return false;

@@ -150,7 +150,6 @@
                                 <select class="txtSmall" name="edadJuez" id="edadJuez" required>
                                     <option value="">--</option>
                                     <%
-                                        lista = cat.findEstudioProfesional();
                                         for (int i = 18; i <= 99; i++) {
                                             out.println("<option value='" + i + "'");
                                             if(Integer.toString(i).equals(edadJuez)){
@@ -162,7 +161,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="estudioJuez">Grado de Estudios</label>
+                                <label for="estudioJuez">Grado de Estudios Concluidos</label>
                                 <select name="estudioJuez" id="estudioJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%

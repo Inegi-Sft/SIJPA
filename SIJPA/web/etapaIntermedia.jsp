@@ -17,8 +17,7 @@
         <%
             catalogos cat = new catalogos();
             showIntermedia sInter = new showIntermedia();
-            ArrayList<String[]> lista, intermedia = new ArrayList();
-            ArrayList<String> lisPruebas = new ArrayList();
+            ArrayList<String[]> lista, intermedia, lisResolPru, medioPru = new ArrayList();
             
             String proceClave = "", posicion = "", edicion = "";
             if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
@@ -194,7 +193,7 @@
                                         <tr>
                                             <td>
                                                 <div class="oculto" id="dpruebaMP">
-                                                    <label for="pruebaMP">Medios de prueba presentados por el ministerio público</label>
+                                                    <label for="pruebaMP">Medios de prueba presentados por el Ministerio Público</label>
                                                     <select name="pruebaMP" id="pruebaMP">
                                                         <option value="">--Seleccione--</option>
                                                         <%
@@ -229,9 +228,9 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="oculto" id="dpruebaDefensa">
-                                                    <label for="pruebaDefensa">Medios de prueba presentados por la defensa</label>
-                                                    <select name="pruebaDefensa" id="pruebaDefensa">
+                                                <div class="oculto" id="dpruebaDF">
+                                                    <label for="pruebaDF">Medios de prueba presentados por la defensa</label>
+                                                    <select name="pruebaDF" id="pruebaDF">
                                                         <option value="">--Seleccione--</option>
                                                         <%
                                                             lista = cat.findRespuestaSimple();
@@ -249,10 +248,11 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <table id="tblpruebaMP" border="1" class="tablasRegis oculto">
+                                                <table id="tblpruebaMP" class="tablasRegis oculto">
                                                     <tr>
-                                                        <th>Id</th>
-                                                        <th>Tipos</th>
+                                                        <th>ID</th>
+                                                        <th>Tipos de Medios</th>
+                                                        <th>Presentado</th>
                                                         <th>Resolución</th>
                                                     </tr>
                                                     <%
@@ -262,12 +262,27 @@
                                                             out.println("<td>" + ls[0] + "</td>");
                                                             out.println("<td>" + ls[1] + "</td>");
                                                             out.println("<td>");
-                                                            lisPruebas = sInter.findMediosPrueba(causaClave, proceClave + juzgadoClave.replace("-", ""), "1", ls[0]);
-                                                            if(lisPruebas.size() != 0){
-                                                                out.println("<input type='checkbox' name='chkpruebaMP' id='chkpruebaMP" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                                            medioPru = sInter.findMediosPrueba(causaClave, proceClave + juzgadoClave.replace("-", ""), "1", ls[0]);
+                                                            if(medioPru.size() != 0){
+                                                                out.println("<input type='checkbox' name='chkpruebaMP' id='chkpruebaMP' value='" + ls[0] + "' checked>");
                                                             }else{
-                                                                out.println("<input type='checkbox' name='chkpruebaMP' id='chkpruebaMP" + ls[0] + "' value='" + ls[0] + "'>");
+                                                                out.println("<input type='checkbox' name='chkpruebaMP' id='chkpruebaMP' value='" + ls[0] + "'>");
                                                             }
+                                                            out.println("</td>");
+                                                            out.println("<td>");
+                                                            out.println("<select class='txtMedia' name='tipoPruebaMP' id='tipoPruebaMP" + ls[0] + "' disabled>");
+                                                            out.println("<option value=''>--Seleccione--</option>");
+                                                            lisResolPru = cat.findResolucionMprueba();
+                                                            for(String[] lisResol : lisResolPru){
+                                                                out.println("<option value='" + lisResol[0] + "'");
+                                                                if(medioPru.size() > 0){
+                                                                    if(lisResol[0].equals(medioPru.get(0)[1])){
+                                                                        out.println(" selected ");
+                                                                    }
+                                                                }
+                                                                out.println(">" + lisResol[0] + ".- " + lisResol[1] + "</option>");
+                                                            }
+                                                            out.println("</select>");
                                                             out.println("</td>");
                                                             out.println("</tr>");
                                                         }
@@ -275,10 +290,11 @@
                                                 </table>
                                             </td>
                                             <td>
-                                                <table id="tblmediospruebaAJ" border="1" class="tablasRegis oculto">
+                                                <table id="tblpruebaAJ" class="tablasRegis oculto">
                                                     <tr>
-                                                        <th>Id</th>
-                                                        <th>Tipos</th>
+                                                        <th>ID</th>
+                                                        <th>Tipos de Medios</th>
+                                                        <th>Presentado</th>
                                                         <th>Resolución</th>
                                                     </tr>
                                                     <%
@@ -288,12 +304,27 @@
                                                             out.println("<td>" + ls[0] + "</td>");
                                                             out.println("<td>" + ls[1] + "</td>");
                                                             out.println("<td>");
-                                                            lisPruebas = sInter.findMediosPrueba(causaClave, proceClave + juzgadoClave.replace("-", ""), "2", ls[0]);
-                                                            if(lisPruebas.size() != 0){
-                                                                out.println("<input type='checkbox' name='chkpruebaAJ' id='chkpruebaAJ" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                                            medioPru = sInter.findMediosPrueba(causaClave, proceClave + juzgadoClave.replace("-", ""), "2", ls[0]);
+                                                            if(medioPru.size() != 0){
+                                                                out.println("<input type='checkbox' name='chkpruebaAJ' id='chkpruebaAJ' value='" + ls[0] + "' checked>");
                                                             }else{
-                                                                out.println("<input type='checkbox' name='chkpruebaAJ' id='chkpruebaAJ" + ls[0] + "' value='" + ls[0] + "'>");
+                                                                out.println("<input type='checkbox' name='chkpruebaAJ' id='chkpruebaAJ' value='" + ls[0] + "'>");
                                                             }
+                                                            out.println("</td>");
+                                                            out.println("<td>");
+                                                            out.println("<select class='txtMedia' name='tipoPruebaAJ' id='tipoPruebaAJ" + ls[0] + "' disabled>");
+                                                            out.println("<option value=''>--Seleccione--</option>");
+                                                            lisResolPru = cat.findResolucionMprueba();
+                                                            for(String[] lisResol : lisResolPru){
+                                                                out.println("<option value='" + lisResol[0] + "'");
+                                                                if(medioPru.size() > 0){
+                                                                    if(lisResol[0].equals(medioPru.get(0)[1])){
+                                                                        out.println(" selected ");
+                                                                    }
+                                                                }
+                                                                out.println(">" + lisResol[0] + ".- " + lisResol[1] + "</option>");
+                                                            }
+                                                            out.println("</select>");
                                                             out.println("</td>");
                                                             out.println("</tr>");
                                                         }
@@ -301,10 +332,11 @@
                                                 </table>
                                             </td>
                                             <td>
-                                                <table id="tblmediospruebaDefen" border="1" class="tablasRegis oculto">
+                                                <table id="tblpruebaDF" class="tablasRegis oculto">
                                                     <tr>
-                                                        <th>Id</th>
-                                                        <th>Tipos</th>
+                                                        <th>ID</th>
+                                                        <th>Tipos de Medios</th>
+                                                        <th>Presentado</th>
                                                         <th>Resolución</th>
                                                     </tr>
                                                     <%
@@ -314,12 +346,27 @@
                                                             out.println("<td>" + ls[0] + "</td>");
                                                             out.println("<td>" + ls[1] + "</td>");
                                                             out.println("<td>");
-                                                            lisPruebas = sInter.findMediosPrueba(causaClave, proceClave + juzgadoClave.replace("-", ""), "3", ls[0]);
-                                                            if(lisPruebas.size() != 0){
-                                                                out.println("<input type='checkbox' name='chkpruebaDefen' id='chkpruebaDefen" + ls[0] + "' value='" + ls[0] + "' checked>");
+                                                            medioPru = sInter.findMediosPrueba(causaClave, proceClave + juzgadoClave.replace("-", ""), "3", ls[0]);
+                                                            if(medioPru.size() != 0){
+                                                                out.println("<input type='checkbox' name='chkpruebaDF' id='chkpruebaDefen' value='" + ls[0] + "' checked>");
                                                             }else{
-                                                                out.println("<input type='checkbox' name='chkpruebaDefen' id='chkpruebaDefen" + ls[0] + "' value='" + ls[0] + "'>");
+                                                                out.println("<input type='checkbox' name='chkpruebaDF' id='chkpruebaDefen' value='" + ls[0] + "'>");
                                                             }
+                                                            out.println("</td>");
+                                                            out.println("<td>");
+                                                            out.println("<select class='txtMedia' name='tipoPruebaDF' id='tipoPruebaDF" + ls[0] + "' disabled>");
+                                                            out.println("<option value=''>--Seleccione--</option>");
+                                                            lisResolPru = cat.findResolucionMprueba();
+                                                            for(String[] lisResol : lisResolPru){
+                                                                out.println("<option value='" + lisResol[0] + "'");
+                                                                if(medioPru.size() > 0){
+                                                                    if(lisResol[0].equals(medioPru.get(0)[1])){
+                                                                        out.println(" selected ");
+                                                                    }
+                                                                }
+                                                                out.println(">" + lisResol[0] + ".- " + lisResol[1] + "</option>");
+                                                            }
+                                                            out.println("</select>");
                                                             out.println("</td>");
                                                             out.println("</tr>");
                                                         }

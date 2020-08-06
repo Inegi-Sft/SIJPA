@@ -385,7 +385,7 @@
                                     que sean o no competentes, así como de incompetencias de otros órganos jurisdiccionales, 
                                     materias o fueros)
                                 </div>
-                                <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas (solicitudes)</label>
+                                <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas</label>
                                 <%
                                     int conteoCausaPenaInJC;
                                     conteoCausaPenaInJC = sJuzgado.countCausasPenIn(juzClave, 1);
@@ -464,7 +464,7 @@
                                     que sean o no competentes, así como de incompetencias de otros órganos jurisdiccionales, 
                                     materias o fueros)
                                 </div>
-                                <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas (solicitudes)</label>
+                                <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas</label>
                                 <%
                                     int conteoCausaPenaInJO;
                                     if(request.getParameter("insert") != null){

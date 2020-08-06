@@ -318,19 +318,23 @@
                                     out.println("</div>");
                                     out.println("</td>");
                                     out.println("<td class='descMedi' data-coord='" + ls[0] + "' style='text-align: left;'>" + ls[1]);
+                                    decreMC = sIni.findDecretaMedi(causaClave, proceClave + juzgadoClave.replace("-", ""), ls[0]);
                                     if(ls[0].equals("13")){//Agregamos el campo especifique al indice 13.-Otra
-                                        out.println("<input type='text' id='especiMC' name='especiMC' class='oculto'>");
+                                        if(decreMC.size() > 0){
+                                            out.println("<input type='text' id='especiMC' name='especiMC' value='" + decreMC.get(0)[3] + "'>");
+                                        }else{
+                                            out.println("<input type='text' id='especiMC' name='especiMC' class='oculto' value=''>");
+                                        }
                                     }
                                     out.println("</td>");
-                                    decreMC = sIni.findDecretaMedi(causaClave, proceClave + juzgadoClave.replace("-", ""), ls[0]);
                                     if(decreMC.size() > 0){//Se consulta para la recuperacion de datos
                                         out.println("<td><input type='checkbox' name='chkDecretaMC' id='chkDecretaMC' value='" + ls[0] + "' checked></td>");
                                     }else{
                                         out.println("<td><input type='checkbox' name='chkDecretaMC' id='chkDecretaMC' value='" + ls[0] + "'></td>");
                                     }
-                                    lista = cat.findMedidasSolicita();
                                     out.println("<td><select class='txtMedia' id='soliMedida"+ ls[0] +"' name='soliMedida' disabled>");
                                     out.println("<option value=''>--Seleccione--</option>");
+                                    lista = cat.findMedidasSolicita();
                                     for (String[] lis : lista) {
                                         out.println("<option value='" + lis[0] + "'");
                                         if(decreMC.size() > 0){//Solo entramos si la consulta trae datos
@@ -341,9 +345,9 @@
                                         out.println(">" + lis[0] + ".- " + lis[1] + "</option>");
                                     }
                                     out.println("</select></td>");
-                                    lista = cat.findMedidasDuracion();
                                     out.println("<td><select class='duraMedi txtMedia' id='duraMedida"+ ls[0] +"' name='duraMedida' disabled>");
                                     out.println("<option value=''>--Seleccione--</option>");
+                                    lista = cat.findMedidasDuracion();
                                     for (String[] lis : lista) {
                                         out.println("<option value='" + lis[0] + "'");
                                         if(decreMC.size() > 0){//Solo entramos si la consulta trae datos

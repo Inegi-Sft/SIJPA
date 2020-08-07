@@ -31,7 +31,6 @@
             catalogos cat = new catalogos();
             ArrayList<String[]> lista, listaDatJuz, informeJuz;
             
-            
             showJuzgados sJuzgado = new showJuzgados();
             int totJuzgado = sJuzgado.findTotJuzgado();
             

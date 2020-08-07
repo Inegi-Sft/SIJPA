@@ -75,8 +75,8 @@ public class insrtJuzgados extends HttpServlet {
         String apaternoCap = request.getParameter("apaternoCap").toUpperCase();
         String amaternoCap = request.getParameter("amaternoCap").toUpperCase();
         String cargo = request.getParameter("cargo").toUpperCase();
+        String ejercicio = request.getParameter("ejercicio");
         //Informción General Juzgado de Control
-        String ejercicioJC = request.getParameter("ejercicioJC");
         String causasIngresaJC = verificaVariable(request.getParameter("causasIngresaJC"));
         String mediProteccionJC = verificaVariable(request.getParameter("mediProteccionJC"));
         String providenPrecautoJC = verificaVariable(request.getParameter("providenPrecautoJC"));
@@ -88,7 +88,6 @@ public class insrtJuzgados extends HttpServlet {
         String causasTramJC = verificaVariable(request.getParameter("causasTramJC"));
         String causasBajaJC = verificaVariable(request.getParameter("causasBajaJC"));
         //Informción General Juicio Oral
-        String ejercicioJO = request.getParameter("ejercicioJO");
         String causasIngresaJO = verificaVariable(request.getParameter("causasIngresaJO"));
         String mediProteccionJO = verificaVariable(request.getParameter("mediProteccionJO"));
         String providenPrecautoJO = verificaVariable(request.getParameter("providenPrecautoJO"));
@@ -101,13 +100,6 @@ public class insrtJuzgados extends HttpServlet {
         String causasBajaJO = verificaVariable(request.getParameter("causasBajaJO"));
         
         juzgadoClave = entidadJ + "-" + municipioJ + "-" + numOrgano;
-        
-        String ejercicio = "";
-        if(!ejercicioJC.equals("")){//Control o Mixto
-            ejercicio = ejercicioJC;
-        }else if(!ejercicioJO.equals("")){
-            ejercicio = ejercicioJO;
-        }
           
         try {
             conn.Conectar();

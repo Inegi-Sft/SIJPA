@@ -198,15 +198,15 @@
                         <tr>
                             <td>
                                 <label for="nombre">Nombre(s)</label>
-                                <input type="text" name="nombre" id="nombre" value="<%=nomProce%>" required>
+                                <input type="text" name="nombre" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" id="nombre" value="<%=nomProce%>" required>
                             </td>
                             <td>
                                 <label for="apaterno">Apellido paterno</label>
-                                <input type="text" name="apaterno" id="apaterno" value="<%=aPaterno%>" required>
+                                <input type="text" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" name="apaterno" id="apaterno" value="<%=aPaterno%>" required>
                             </td>
                             <td>
                                 <label for="amaterno">Apellido materno</label>
-                                <input type="text" name="amaterno" id="amaterno" value="<%=aMaterno%>" required>
+                                <input type="text" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" name="amaterno" id="amaterno" value="<%=aMaterno%>" required>
                             </td>
                             <td>
                                 <label for="alias">Alias</label>

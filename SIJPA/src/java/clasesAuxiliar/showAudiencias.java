@@ -85,19 +85,34 @@ public class showAudiencias {
         return lista;
     }
     
-    public ArrayList findJueces(String juzgado) {
+    public ArrayList findJueces(String juzgado, String causa, String operacion) {
         conn.Conectar();
         lista = new ArrayList<>();
-        sql = "SELECT * FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' "
-                + "AND JUEZ_CLAVE <> -2 "
-                + "AND ESTATUS = 1 "
-                + "ORDER BY APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ";	
+        if(operacion!="actualizar"){
+            sql = "SELECT JUEZ_CLAVE, APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' "
+            + "AND JUEZ_CLAVE <> -2 "
+            + "AND ESTATUS = 1 "
+            + "ORDER BY APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ";
+        }else{
+            sql="SELECT DISTINCT JZ, B.APELLIDOP_JUEZ, B.APELLIDOM_JUEZ, B.NOMBRE_JUEZ FROM( "
+            + "SELECT DISTINCT A.JUEZ_CLAVE1 JZ, J.APELLIDOP_JUEZ, J.APELLIDOM_JUEZ, J.NOMBRE_JUEZ FROM DATOS_AUDIENCIAS_ADOJC A "
+            + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=A.JUZGADO_CLAVE AND A.JUEZ_CLAVE1=J.JUEZ_CLAVE WHERE A.JUZGADO_CLAVE='"+juzgado+"' AND A.CAUSA_CLAVE='"+causa+"' "
+            + "UNION ALL "
+            + "SELECT DISTINCT A.JUEZ_CLAVE2 JZ, J.APELLIDOP_JUEZ, J.APELLIDOM_JUEZ, J.NOMBRE_JUEZ FROM DATOS_AUDIENCIAS_ADOJC A "
+            + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=A.JUZGADO_CLAVE AND A.JUEZ_CLAVE2=J.JUEZ_CLAVE WHERE A.JUZGADO_CLAVE='"+juzgado+"' AND A.CAUSA_CLAVE='"+causa+"' AND JUEZ_CLAVE2 <> -2 "
+            + "UNION ALL "
+            + "SELECT DISTINCT A.JUEZ_CLAVE3 JZ, J.APELLIDOP_JUEZ, J.APELLIDOM_JUEZ, J.NOMBRE_JUEZ FROM DATOS_AUDIENCIAS_ADOJC A "
+            + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=A.JUZGADO_CLAVE AND A.JUEZ_CLAVE3=J.JUEZ_CLAVE WHERE A.JUZGADO_CLAVE='"+juzgado+"' AND A.CAUSA_CLAVE='"+causa+"' AND JUEZ_CLAVE3 <> -2 "
+            + "UNION ALL "
+            + "SELECT JUEZ_CLAVE JZ, APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '"+juzgado+"' AND JUEZ_CLAVE <> -2 AND ESTATUS = 1) B "
+            + "ORDER BY B.APELLIDOP_JUEZ, B.APELLIDOM_JUEZ, B.NOMBRE_JUEZ";
+        }
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString("JUEZ_CLAVE"), resul.getString("APELLIDOP_JUEZ"),
-                    resul.getString("APELLIDOM_JUEZ"),resul.getString("NOMBRE_JUEZ")
+                    resul.getString(1), resul.getString(2),
+                    resul.getString(3),resul.getString(4)
                 });
             }
             conn.close();
@@ -272,5 +287,43 @@ public class showAudiencias {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return audiencias;
+    }
+    
+    public ArrayList findJuecesJO(String juzgado, String causa, String operacion) {
+        conn.Conectar();
+        lista = new ArrayList<>();
+        if(operacion!="actualizar"){
+            sql = "SELECT JUEZ_CLAVE, APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' "
+            + "AND JUEZ_CLAVE <> -2 "
+            + "AND ESTATUS = 1 "
+            + "ORDER BY APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ";
+        }else{
+            sql="SELECT DISTINCT JZ, B.APELLIDOP_JUEZ, B.APELLIDOM_JUEZ, B.NOMBRE_JUEZ FROM( "
+            + "SELECT DISTINCT A.JUEZ_CLAVE1 JZ, J.APELLIDOP_JUEZ, J.APELLIDOM_JUEZ, J.NOMBRE_JUEZ FROM DATOS_AUDIENCIAS_ADOJO A "
+            + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=A.JUZGADO_CLAVE AND A.JUEZ_CLAVE1=J.JUEZ_CLAVE WHERE A.JUZGADO_CLAVE='"+juzgado+"' AND A.CAUSA_CLAVEJO='"+causa+"' "
+            + "UNION ALL "
+            + "SELECT DISTINCT A.JUEZ_CLAVE2 JZ, J.APELLIDOP_JUEZ, J.APELLIDOM_JUEZ, J.NOMBRE_JUEZ FROM DATOS_AUDIENCIAS_ADOJO A "
+            + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=A.JUZGADO_CLAVE AND A.JUEZ_CLAVE2=J.JUEZ_CLAVE WHERE A.JUZGADO_CLAVE='"+juzgado+"' AND A.CAUSA_CLAVEJO='"+causa+"' AND JUEZ_CLAVE2 <> -2 "
+            + "UNION ALL "
+            + "SELECT DISTINCT A.JUEZ_CLAVE3 JZ, J.APELLIDOP_JUEZ, J.APELLIDOM_JUEZ, J.NOMBRE_JUEZ FROM DATOS_AUDIENCIAS_ADOJO A "
+            + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=A.JUZGADO_CLAVE AND A.JUEZ_CLAVE3=J.JUEZ_CLAVE WHERE A.JUZGADO_CLAVE='"+juzgado+"' AND A.CAUSA_CLAVEJO='"+causa+"' AND JUEZ_CLAVE3 <> -2 "
+            + "UNION ALL "
+            + "SELECT JUEZ_CLAVE JZ, APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '"+juzgado+"' AND JUEZ_CLAVE <> -2 AND ESTATUS = 1) B "
+            + "ORDER BY B.APELLIDOP_JUEZ, B.APELLIDOM_JUEZ, B.NOMBRE_JUEZ";
+        }
+        
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{
+                    resul.getString(1), resul.getString(2),
+                    resul.getString(3),resul.getString(4)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 }

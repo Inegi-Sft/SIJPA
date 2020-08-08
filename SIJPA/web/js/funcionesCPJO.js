@@ -37,6 +37,25 @@ $(document).ready(function () {
         }
     }
     
+    //se usa para la recuperacion de BD
+        var valor1 = $('#juezJO1').val(); 
+        var valor2 = $('#juezJO2').val(); 
+        var valor3 = $('#juezJO3').val(); 
+        
+        if(valor1!==""){
+            $("#juezJO2 option[value=" + valor1 + "]").attr("disabled", true);
+            $("#juezJO3 option[value=" + valor1 + "]").attr("disabled", true);
+        }
+        if(valor2!==""){
+            $("#juezJO1 option[value=" + valor2 + "]").attr("disabled", true);
+            $("#juezJO3 option[value=" + valor2 + "]").attr("disabled", true);
+        }
+        if(valor3!==""){
+           $("#juezJO1 option[value=" + valor3 + "]").attr("disabled", true);
+           $("#juezJO2 option[value=" + valor3 + "]").attr("disabled", true);
+       }
+       
+    
     $('#difeOrgano').change(function(){
         if($(this).val() === '2'){
             $('#regCantJuez').fadeIn();
@@ -55,6 +74,7 @@ $(document).ready(function () {
     });
     
     $('#cantJuez').change(function(){
+        $("#juezJO1 option:not(:selected), #juezJO2 option:not(:selected),#juezJO3 option:not(:selected)").attr("disabled", false);
         switch ($('#cantJuez').val()){
             case '1':
                 $('#divJuezJO1').fadeIn();
@@ -96,6 +116,53 @@ $(document).ready(function () {
 //                }
 //            });
         }
+    });
+    
+    //valida que el juez seleccionado de un select, no se repita en los otros 2 select
+    $('#juezJO1').change(function (){
+        var valor1 = $(this).val(); 
+        var valor2 = $('#juezJO2').val(); 
+        var valor3 = $('#juezJO3').val(); 
+        
+        $("#juezJO2 option:not(:selected)").attr("disabled", false);
+        $("#juezJO2 option[value=" + valor1 + "]").attr("disabled", true);
+        if(valor3!=="")
+        $("#juezJO2 option[value=" + valor3 + "]").attr("disabled", true);
+        
+        $("#juezJO3 option:not(:selected)").attr("disabled", false);
+        $("#juezJO3 option[value=" + valor1 + "]").attr("disabled", true);
+        if(valor2!=="")
+        $("#juezJO3 option[value=" + valor2 + "]").attr("disabled", true);
+    });
+    $('#juezJO2').change(function (){
+        var valor2 = $(this).val(); 
+        var valor1 = $('#juezJO1').val(); 
+        var valor3 = $('#juezJO3').val(); 
+        
+        $("#juezJO1 option:not(:selected)").attr("disabled", false);
+        $("#juezJO1 option[value=" + valor2 + "]").attr("disabled", true);
+        if(valor3!=="")
+        $("#juezJO1 option[value=" + valor3 + "]").attr("disabled", true);
+        
+        $("#juezJO3 option:not(:selected)").attr("disabled", false);
+        $("#juezJO3 option[value=" + valor2 + "]").attr("disabled", true);
+        if(valor1!=="")
+        $("#juezJO3 option[value=" + valor1 + "]").attr("disabled", true);
+    });
+    $('#juezJO3').change(function (){
+        var valor3 = $(this).val(); 
+        var valor2 = $('#juezJO2').val(); 
+        var valor1 = $('#juezJO1').val(); 
+        
+        $("#juezJO1 option:not(:selected)").attr("disabled", false);
+        $("#juezJO1 option[value=" + valor3 + "]").attr("disabled", true);
+        if(valor2!=="")
+        $("#juezJO1 option[value=" + valor2 + "]").attr("disabled", true);
+        
+        $("#juezJO2 option:not(:selected)").attr("disabled", false);
+        $("#juezJO2 option[value=" + valor3 + "]").attr("disabled", true);
+        if(valor1!=="")
+        $("#juezJO2 option[value=" + valor1 + "]").attr("disabled", true);
     });
     
     //Guarda Causa Penal

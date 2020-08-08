@@ -171,7 +171,7 @@
                                     <select name="juezJO1" id="juezJO1">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
+                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""),causaClaveJO + juzgadoClave.replace("-", ""),operacion);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez1)){
@@ -188,7 +188,7 @@
                                     <select name="juezJO2" id="juezJO2">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClave,causaClaveJC + juzgadoClave.replace("-", ""));
+                                            lista = juez.findJuezJO(juzgadoClave,causaClaveJC + juzgadoClave.replace("-", ""),causaClaveJO + juzgadoClave.replace("-", ""),operacion);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez2)){
@@ -205,7 +205,9 @@
                                     <select name="juezJO3" id="juezJO3">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
+                                            // CausaclaveJC es para no mostrar los jueces que ya habian atendido la causa en JC
+                                            // y el parametro operacion es para mostrar los jueces inactivos cuando es edicion, y no mostrarlos cuando es nuevo el registro
+                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""),causaClaveJO + juzgadoClave.replace("-", ""),operacion);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez3)){

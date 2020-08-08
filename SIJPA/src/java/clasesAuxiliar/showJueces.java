@@ -67,16 +67,83 @@ public class showJueces {
         }
         return lista;
     }
+    public ArrayList findJuez(String juzClave, String operacion){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            if(operacion!="actualizar"){
+                sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
+                    + "FROM DATOS_JUECES_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "AND ESTATUS = 1 "
+                    + "ORDER BY 1";
+            }else{
+                sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
+                    + "FROM DATOS_JUECES_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "ORDER BY 1";
+            }
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(new String[]{
+                    rs.getString(1), rs.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJueces.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
     public ArrayList findJuezJO(String juzClave, String causa){
         try {
             conn.Conectar();
             lista = new ArrayList();
-            sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
+                sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                 + "FROM DATOS_JUECES_ADOJC "
                 + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
                 + "AND NOT JUEZ_CLAVE= (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + causa + "') "
                 + "AND ESTATUS = 1 "
                 + "ORDER BY 1";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(new String[]{
+                    rs.getString(1), rs.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJueces.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    public ArrayList findJuezJO(String juzClave, String causa, String causaJO, String operacion){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            if(operacion!="actualizar"){
+                sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
+                + "FROM DATOS_JUECES_ADOJC "
+                + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                + "AND NOT JUEZ_CLAVE= (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + causa + "') "
+                + "AND ESTATUS = 1 "
+                + "ORDER BY 1";
+            }else{
+                sql = "SELECT DISTINCT A.JUEZ, A.NOMBRE_JUEZ FROM ( "
+                + "SELECT CP.JUEZ_CLAVE_1 JUEZ, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ FROM DATOS_CAUSAS_PENALES_ADOJO CP "
+                + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=CP.JUZGADO_CLAVE AND J.JUEZ_CLAVE=CP.JUEZ_CLAVE_1 WHERE CP.JUZGADO_CLAVE='"+juzClave+"' AND CP.CAUSA_CLAVEJO='"+causaJO+"' AND CP.JUEZ_CLAVE_1 <> -2 "
+                + "UNION ALL "
+                + "SELECT CP.JUEZ_CLAVE_2 JUEZ, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ  FROM DATOS_CAUSAS_PENALES_ADOJO CP "
+                + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=CP.JUZGADO_CLAVE AND J.JUEZ_CLAVE=CP.JUEZ_CLAVE_2 WHERE CP.JUZGADO_CLAVE='"+juzClave+"' AND CP.CAUSA_CLAVEJO='"+causaJO+"' AND CP.JUEZ_CLAVE_2 <> -2 "
+                + "UNION ALL "
+                + "SELECT CP.JUEZ_CLAVE_3 JUEZ, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ  FROM DATOS_CAUSAS_PENALES_ADOJO CP "
+                + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUZGADO_CLAVE=CP.JUZGADO_CLAVE AND J.JUEZ_CLAVE=CP.JUEZ_CLAVE_3 WHERE CP.JUZGADO_CLAVE='"+juzClave+"' AND CP.CAUSA_CLAVEJO='"+causaJO+"' AND CP.JUEZ_CLAVE_3 <> -2 "
+                + "UNION ALL "
+                + "SELECT JUEZ_CLAVE JUEZ, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '9-9007-125' "
+                + "AND NOT JUEZ_CLAVE= (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='JUZMIXTO/202099007125') AND ESTATUS = 1"
+                + ") A ORDER BY 1";
+            }
+            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 lista.add(new String[]{

@@ -61,6 +61,12 @@ public class insrtCausaPenalJO extends HttpServlet {
         String juezJO2 = request.getParameter("juezJO2");
         String juezJO3 = request.getParameter("juezJO3");
         String comentario = request.getParameter("ComentaExpeJO");
+        if(juezJO1==null)
+            juezJO1="-2";
+        if(juezJO2==null)
+            juezJO2="-2";
+        if(juezJO3==null)
+            juezJO3="-2";
         
         try {         
             response.setContentType("text/html;charset=UTF-8");

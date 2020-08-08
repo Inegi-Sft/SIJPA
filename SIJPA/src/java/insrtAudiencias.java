@@ -96,7 +96,7 @@ public class insrtAudiencias extends HttpServlet {
                 if(audiInter != null){
                     for(int i=0; i<audiInter.length; i++){
                         sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"
-                            + causaClave+ "', "+ juez1 +", "+ juez2 +", "+ juez3 +", -2, "+ audiInter[i] +", '"+ fechaAInter[i] +"', "+ hrsAInter[i] +","+ minAInves[i] +", (select YEAR(NOW())) );";
+                            + causaClave+ "', "+ juez1 +", "+ juez2 +", "+ juez3 +", -2, "+ audiInter[i] +", '"+ fechaAInter[i] +"', "+ hrsAInter[i] +","+ minAInter[i] +", (select YEAR(NOW())) );";
                         System.out.println(sql);
                         conn.escribir(sql);
                     }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 $(document).ready(function() {
     //para recuperacion de bd
     if($('#numOrgano').val() !== ''){
@@ -168,7 +167,7 @@ function valida(){
     }else if ($('#jurisdiccion').val() ==='') {
         alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Jurisdicci\u00F3n');
         openPestana('btn1', 'p1');
-    }else if ($('#correo').val() ==='') {
+    }else if ($('#correo').val() ==='' || $("#correo").is(":invalid")){
         alert('Secci\u00F3n Datos Principales: \n\n Llena el campo Correo Organo Jur\u00EDsdiccional o intruduce un correo de forma valida');
         openPestana('btn1', 'p1');
     }else if ($('#funcionJuz').val() ==='') {
@@ -231,3 +230,8 @@ function valida(){
         }
     }
 }
+
+function quitaCeros(elemento){
+    var valor = elemento.value.replace(/^0*/, '');
+    elemento.value = valor;
+} 

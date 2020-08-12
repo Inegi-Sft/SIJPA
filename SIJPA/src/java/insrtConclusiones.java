@@ -38,7 +38,7 @@ public class insrtConclusiones extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql, sqlInter;
+    String sql, sql_suspension, sqlInter;
     boolean insrtDConclu = false;
     ResultSet res;
 
@@ -63,7 +63,7 @@ public class insrtConclusiones extends HttpServlet {
         String tipoSobre = request.getParameter("tipoSobreseimto");
         String proceSobre = request.getParameter("proceSobreseimto");
         String excluAccion = request.getParameter("excluAccion");
-        String tipoCondiSCP = request.getParameter("tipoCondiSCP");
+        String tipo_suspension[] = request.getParameterValues("tipoSuspension");
         String fechaExtSCP = request.getParameter("fechaExtSCP");
         String tipoMecanismoAR = request.getParameter("tipoMecanismoAR");
         String fechaExtinAR = request.getParameter("fechaExtinAR");
@@ -91,7 +91,7 @@ public class insrtConclusiones extends HttpServlet {
             if (!opera.equals("actualizar")) {//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                         + causaClave + "','" + proceClave + jConcatenado + "','" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre + ","
-                        + excluAccion + "," + tipoCondiSCP + ",'" + fechaExtSCP + "'," + tipoMecanismoAR + ",'" + fechaExtinAR + "'," + tipoResolucionPA + ","
+                        + excluAccion + ",'" + fechaExtSCP + "'," + tipoMecanismoAR + ",'" + fechaExtinAR + "'," + tipoResolucionPA + ","
                         + privativa + "," + noprivativa + "," + internamiento + "," + reparacion + "," + tipoRepara + "," + multa + "," + impugnacion + ","
                         + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "', (select YEAR(NOW())) )";
                 System.out.println(sql);
@@ -103,6 +103,12 @@ public class insrtConclusiones extends HttpServlet {
                                     + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolucionPA + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu = conn.escribir(sql);
+                        }
+                    }
+                    else if(tipoResolu.equals("2")){
+                        for(int i=0; i<tipo_suspension.length; i++){
+                            sql_suspension = "INSERT INTO DATOS_CSUSPENSION_ADOJC VALUES('"+causaClave+"','"+proceClave+ jConcatenado +"',"+tipo_suspension[i]+jEntidad+","+jMunicipio+","+jNumero+")";
+                            conn.escribir(sql_suspension);
                         }
                     }
                     sqlInter = "SELECT ETAPA FROM DATOS_ETAPA_INICIAL_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
@@ -145,8 +151,7 @@ public class insrtConclusiones extends HttpServlet {
             } else {//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_CONCLUSIONES_ADOJC SET FECHA_CONCLUSION = '" + fechaResolu + "',TIPO_RESOLUCION = " + tipoResolu + ","
                         + "TIPO_SOBRESEIMIENTO = " + tipoSobre + ",PROCEDENCIA_SOBRESEIMIENTO = " + proceSobre + ",EXCLUSION_ACCIONP = " + excluAccion + ","
-                        + "SUSPENCION_CONDICIONAL = " + tipoCondiSCP + ",FECHA_SUSPENCION = '" + fechaExtSCP + "',"
-                        + "MECANISMO_ACUERDO = " + tipoMecanismoAR + ",FECHA_ACUERDO = '" + fechaExtinAR + "',TIPO_CONCLUSION_PA = " + tipoResolucionPA + ","
+                        +"FECHA_SUSPENSION = '"+ fechaExtSCP +"',MECANISMO_ACUERDO = " + tipoMecanismoAR + ",FECHA_ACUERDO = '" + fechaExtinAR + "',TIPO_CONCLUSION_PA = " + tipoResolucionPA + ","
                         + "MEDIDA_PRIVATIVA = " + privativa + ",MEDIDA_NOPRIVATIVA = " + noprivativa + ",TIEMPO_INTERNAMIENTO = " + internamiento + ","
                         + "REPARACION_DANIO = " + reparacion + ",TIPO_REPARACION_DANIO = " + tipoRepara + ",MONTO_REPARA = " + multa + ","
                         + "IMPUGNACION = " + impugnacion + ",TIPO_IMPUGNACION = " + tipoImpugnacion + ",FECHA_IMPUGNACION = '" + fechaImpugna + "',"
@@ -159,6 +164,9 @@ public class insrtConclusiones extends HttpServlet {
                     sql = "DELETE FROM DATOS_DCONCLUSIONES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                     conn.escribir(sql);
+                    sql = "DELETE FROM DATOS_CSUSPENSION_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                    conn.escribir(sql);
                     if (tipoResolu.equals("4")) {
                         for (int i = 0; i < delitoClave.length; i++) {
                             String resolDelito = request.getParameter("resolDelito" + i);
@@ -166,6 +174,12 @@ public class insrtConclusiones extends HttpServlet {
                                     + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolucionPA + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu = conn.escribir(sql);
+                        }
+                    }
+                    else if(tipoResolu.equals("2")){
+                        for(int i=0; i<tipo_suspension.length; i++){
+                            sql_suspension = "INSERT INTO DATOS_CSUSPENSION_ADOJC VALUES('"+causaClave+"','"+proceClave+ jConcatenado +"',"+tipo_suspension[i]+","+jEntidad+","+jMunicipio+","+jNumero+")";
+                            conn.escribir(sql_suspension);
                         }
                     }
                     showConclusiones con = new showConclusiones();

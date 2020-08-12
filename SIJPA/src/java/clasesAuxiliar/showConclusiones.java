@@ -36,8 +36,8 @@ public class showConclusiones {
             while(resul.next()){
                 conc.add(new String[]{
                     resul.getString("FECHA_CONCLUSION"), resul.getString("TIPO_RESOLUCION"),resul.getString("TIPO_SOBRESEIMIENTO"),
-                    resul.getString("PROCEDENCIA_SOBRESEIMIENTO"),resul.getString("EXCLUSION_ACCIONP"),resul.getString("SUSPENCION_CONDICIONAL"),
-                    resul.getString("FECHA_SUSPENCION"), resul.getString("MECANISMO_ACUERDO"), resul.getString("FECHA_ACUERDO"),
+                    resul.getString("PROCEDENCIA_SOBRESEIMIENTO"),resul.getString("EXCLUSION_ACCIONP"),
+                    resul.getString("FECHA_SUSPENSION"), resul.getString("MECANISMO_ACUERDO"), resul.getString("FECHA_ACUERDO"),
                     resul.getString("TIPO_CONCLUSION_PA"), resul.getString("MEDIDA_PRIVATIVA"), resul.getString("MEDIDA_NOPRIVATIVA"),
                     resul.getString("TIEMPO_INTERNAMIENTO"), resul.getString("REPARACION_DANIO"), resul.getString("TIPO_REPARACION_DANIO"),
                     resul.getString("MONTO_REPARA"), resul.getString("IMPUGNACION"), resul.getString("TIPO_IMPUGNACION"),
@@ -175,6 +175,21 @@ public class showConclusiones {
             Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
         }
         return conteoConclu;
+    }
+    public boolean tipoSuspensionSeleccionada(String causaClave, String procesadoClave, String tipoSuspension){
+        Boolean seleccionado = false;
+        try{
+            conn.Conectar();
+            sql = "SELECT * FROM DATOS_CSUSPENSION_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
+                        + "AND PROCESADO_CLAVE='"+ procesadoClave +"' AND SUSPENSION = " +tipoSuspension;
+            resul = conn.consultar(sql);
+            if(resul.isBeforeFirst()){
+                seleccionado = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return seleccionado;
     }
     
 }

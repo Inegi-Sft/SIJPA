@@ -3,6 +3,7 @@
     Created on : 3/10/2019, 02:16:37 PM
     Author     : FERMIN.GOMEZ
 --%>
+<%@page import="java.util.Arrays"%>
 <%@page import="clasesAuxiliar.showConclusiones"%>
 <%@page import="clasesAuxiliar.showInicial"%>
 <%@page import="clasesAuxiliar.showProcesados"%>
@@ -45,7 +46,6 @@
             String sobreseimto = "";
             String proceSobre = "";
             String excluAccion = "";
-            String susCondicional = "";
             String fechaSuspen = "";
             String mecanisAcuer = "";
             String fechaAcuerdo = "";
@@ -67,27 +67,27 @@
                     conclusiones = sConclu.findConclusion(causaClave, proceClave + jConcatenado);
                     if(conclusiones.size() > 0){
                         operacion = "actualizar";
+                        System.out.println("conclusiones: "+Arrays.toString(conclusiones.get(0)));
                         fechaResol = conclusiones.get(0)[0];
                         tipoResol = conclusiones.get(0)[1];
                         sobreseimto = conclusiones.get(0)[2];
                         proceSobre = conclusiones.get(0)[3];
                         excluAccion = conclusiones.get(0)[4];
-                        susCondicional = conclusiones.get(0)[5];
-                        fechaSuspen = conclusiones.get(0)[6];
-                        mecanisAcuer = conclusiones.get(0)[7];
-                        fechaAcuerdo = conclusiones.get(0)[8];
-                        tipoProceAb = conclusiones.get(0)[9];
-                        medidaPriva = conclusiones.get(0)[10];
-                        medidaNoPriva = conclusiones.get(0)[11];
-                        tiempoInter = conclusiones.get(0)[12];
-                        reparaDanio = conclusiones.get(0)[13];
-                        tipoRepara = conclusiones.get(0)[14];
-                        montoRepara = conclusiones.get(0)[15];
-                        impugna = conclusiones.get(0)[16];
-                        tipoImpugna = conclusiones.get(0)[17];
-                        fechaImpugna = conclusiones.get(0)[18];
-                        persoImpugna = conclusiones.get(0)[19];
-                        comen = conclusiones.get(0)[20];
+                        fechaSuspen = conclusiones.get(0)[5];
+                        mecanisAcuer = conclusiones.get(0)[6];
+                        fechaAcuerdo = conclusiones.get(0)[7];
+                        tipoProceAb = conclusiones.get(0)[8];
+                        medidaPriva = conclusiones.get(0)[9];
+                        medidaNoPriva = conclusiones.get(0)[10];
+                        tiempoInter = conclusiones.get(0)[11];
+                        reparaDanio = conclusiones.get(0)[12];
+                        tipoRepara = conclusiones.get(0)[13];
+                        montoRepara = conclusiones.get(0)[14];
+                        impugna = conclusiones.get(0)[15];
+                        tipoImpugna = conclusiones.get(0)[16];
+                        fechaImpugna = conclusiones.get(0)[17];
+                        persoImpugna = conclusiones.get(0)[18];
+                        comen = conclusiones.get(0)[19];
                     }
                 }
             }
@@ -206,21 +206,30 @@
                         <legend>Suspensión condicional del proceso</legend>
                         <div class="colsA">
                             <label for="tipoCondiSCP">Tipo de condiciones impuestas durante la suspensión condicional del proceso</label>
-                            <select name="tipoCondiSCP" id="tipoCondiSCP">
-                                <option value="">--Seleccione--</option>
-                                <%
+                            <table class="tablasRegis">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Tipo de condiciones impuestas</th>
+                                    <th>Selección</th>
+                                </tr>
+                                <% 
                                     lista = cat.findSuspensionCondicional();
                                     for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(susCondicional)){
-                                            out.println(" selected ");
+                                        if(!ls[0].equalsIgnoreCase("-2")){
+                                            out.println("<tr>");
+                                            out.println("<td> "+ls[0]+" </t>");
+                                            out.println("<td> " + ls[1] + " </td>");
+                                            if(sConclu.tipoSuspensionSeleccionada(causaClave, proceClave + jConcatenado, ls[0]) == true){
+                                                out.println("<td> <input type='checkbox' name='tipoSuspension' id='tipoSuspension' class='chkAplica' value='" +ls[0] + "' checked> </td>");
+                                            }else{
+                                                out.println("<td> <input type='checkbox' name='tipoSuspension' id='tipoSuspension' class='chkAplica' value='" +ls[0] + "'> </td>");
+                                            }
+                                            out.println("</tr>");
                                         }
-                                        out.println( ">" + ls[0]+ ".- " + ls[1] + "</option>");
                                     }
-                                %> 
-                            </select>
+                                %>
+                            </table>
                         </div>
-                        <div class="colsA">
                             <label for="fechaExtAP" style="width:500px;">Fecha en que se decretó la extinción de la acción penal por cumplimiento
                                 de las condiciones establecidas en la suspensión condicional del proceso</label>
                             <input type="date" name="fechaExtSCP" id="fechaExtSCP" value="<%=fechaSuspen%>">
@@ -228,7 +237,6 @@
                                 <input type="checkbox" id="chkFechaExtSCP" onclick="fechaNoIdent('#chkFechaExtSCP', '#fechaExtSCP')">
                                 <label>No identificada</label>
                             </div>
-                        </div>
                     </fieldset>
                     <fieldset class="oculto subField" id="flsAcuerdoR">
                         <legend>Acuerdo reparatorio</legend>

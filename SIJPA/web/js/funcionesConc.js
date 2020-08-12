@@ -287,6 +287,11 @@ $(document).ready(function() {
     $('#formConclusiones').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        if ($('#resolucion').val() === '2' && $('input[name="tipoSuspension"]:checked').length === 0) {
+            alert('Selecciona al menos una condici\u00F3n impuesta durante la suspensi\u00F3n condicional del proceso');
+            $('#tipoSuspension').focus();
+            return false;
+        }
         $.ajax({
             type: 'post',
             url: 'insrtConclusiones',

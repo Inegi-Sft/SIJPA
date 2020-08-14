@@ -83,7 +83,7 @@
                                 y = 0;
                                 deli = delito.findDeliCausas(ccJuz);//Obtenemos delitos por causa
                                 for(String[] del : deli){//For para recorrer todos los delitos en la causa penal
-                                    if(!del[1].equals("No aplica")){//Si el delito esta en lleno BD lo ponemos
+                                    if(!del[1].equals("No aplica")){//Si el delito esta lleno en BD lo ponemos
                                         out.println("<tr>");
                                         out.println("<td>" + del[0].replace(jc.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + del[1] + "</td>");

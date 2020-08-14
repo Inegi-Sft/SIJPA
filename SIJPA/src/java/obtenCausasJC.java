@@ -4,23 +4,23 @@
  * and open the template in the editor.
  */
 
-import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showCausasPenalesJO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 
 /**
  *
- * @author ANTONIO.CORIA
+ * @author CARLOS.SANCHEZG
  */
-@WebServlet(urlPatterns = {"/obtenCarpeInves"})
-public class obtenCarpeInves extends HttpServlet {
+@WebServlet(urlPatterns = {"/obtenCausasJC"})
+public class obtenCausasJC extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,43 +31,33 @@ public class obtenCarpeInves extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    showCausasPenales penales = new showCausasPenales();
-    showCausasPenalesJO penalesJO = new showCausasPenalesJO();
-    String causaClave = null;
-    String causaClaveJO = null;
-    String Sistema = null;
-    String juzgadoClave = null;
-    Boolean Existe;
+    
+    showCausasPenalesJO sCausasJC = new showCausasPenalesJO();
+    ArrayList<String[]> lista;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sesion = request.getSession();
-        PrintWriter out = response.getWriter();
-        Sistema = (String) sesion.getAttribute("Sistema");
-        
-        try {
-            response.setContentType("text/html;charset=UTF-8");  
-            if ((request.getParameter("CarpInvestiga") != null) && (Sistema.equals("JC"))){
-                juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
-                causaClave = request.getParameter("CarpInvestiga") + juzgadoClave.replace("-", "");
-                Existe = penales.carpetaInves(juzgadoClave, causaClave);
-                if (Existe) {
-                    out.write("1");
-                } else {
-                    out.write("0");
-                }
-            }else if ((request.getParameter("CarpInvestiga") != null) && (Sistema.equals("JO"))){
-                juzgadoClave = (String) sesion.getAttribute("juzgadoClave"); 
-                causaClaveJO = request.getParameter("CarpInvestiga") + juzgadoClave.replace("-", "");
-                Existe = penalesJO.carpetaInvesJO(juzgadoClave, causaClaveJO);
-                if (Existe) {
-                    out.write("1");
-                } else {
-                    out.write("0");
+        try (PrintWriter out = response.getWriter()) {
+            if(request.getParameter("expClaveJC") != null){
+                response.setContentType("text/json;charset=UTF-8");
+                String jCalveJC = request.getParameter("jClaveJC");
+                String expClaveJC = request.getParameter("expClaveJC");
+                lista = sCausasJC.findCausaPenalJC(jCalveJC, expClaveJC);
+                JSONArray resp = new JSONArray();
+                resp.add(lista.get(0)[0]);
+                resp.add(lista.get(0)[1]);
+                resp.add(lista.get(0)[2]);
+                resp.add(lista.get(0)[3]);
+                out.write(resp.toJSONString());
+            }else if(request.getParameter("jClaveJC") != null){//Vamos por las causas penales del juzgado
+                response.setContentType("text/html;charset=UTF-8");
+                String jCalveJC = request.getParameter("jClaveJC");
+                out.println("<option value=''>--Seleccione--</option>");
+                lista = sCausasJC.findCausasJOenJC(jCalveJC);
+                for (String[] ls : lista) {
+                    out.println("<option value='" + ls[0] + "'>" + ls[0].replace(jCalveJC.replace("-", ""), "") + "</option>");
                 }
             }
-        } finally {
-            out.close();
         }
     }
 

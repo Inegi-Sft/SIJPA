@@ -40,30 +40,30 @@ public class obtenCatalogo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             catalogo = request.getParameter("cat");
             out.println("<option value=''>--Seleccione--</option>");
 
             System.out.println("Variable recibida: " + catalogo);
-            if (catalogo.equals("medidaSoli")) {
-                lista = cat.findMedidasSolicita();
-                for (String[] ls : lista) {
-                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                }
-            }else if (catalogo.equals("medidaCaute")) {
-                lista = cat.findMedidasCautelares();
-                for (String[] ls : lista) {
-                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                }
-            }else if (catalogo.equals("medidaDura")) {
-                lista = cat.findMedidasDuracion();
-                for (String[] ls : lista) {
-                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                }
+            switch (catalogo) {
+                case "medidaSoli":
+                    lista = cat.findMedidasSolicita();
+                    for (String[] ls : lista) {
+                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                    }   break;
+                case "medidaCaute":
+                    lista = cat.findMedidasCautelares();
+                    for (String[] ls : lista) {
+                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                    }   break;
+                case "medidaDura":
+                    lista = cat.findMedidasDuracion();
+                    for (String[] ls : lista) {
+                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                    }   break;
+                default:
+                    break;
             }
-        } finally {
-            out.close();
         }
     }
 

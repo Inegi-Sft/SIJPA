@@ -26,8 +26,8 @@
             String juzgado = "";
             if(request.getParameter("juzgado") != null){
                 juzgado=request.getParameter("juzgado");
-                session.setAttribute("juzgadoClaveAudi", juzgado);
-            }else if(session.getAttribute("juzgadoClaveAudi") != null){
+                session.setAttribute("juzgadoClave", juzgado);
+            }else if(session.getAttribute("juzgadoClave") != null){
                 if(session.getAttribute("juzgadoClave") != ""){
                     juzgado = (String) session.getAttribute("juzgadoClave");
                     //Verificamos la funcion del juzgado para que sea de control

@@ -481,7 +481,7 @@ function buscaYremplaza(proceClave, etapaProce){
     var nomTabla = "";
     var dato = "";
     console.log('etapa: ' + etapaProce);
-    if(etapaProce!==8){
+    if(etapaProce !== 8){
         if(parent.$('#tablaIntermedia tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
             parent.$('#tablaIntermedia tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
                 dato = $(this).html();
@@ -861,7 +861,7 @@ function ValidaCarpeInvest(InputCarpInves) {
                 }
             });
         }else {
-            alert("El numero de asunto debe contener de 1 a 10 caracteres seguido de una diagonal ( / ) y del a\361o de ingreso \n\nEjemplo:  00001/2020,     REF_001/2020");
+            alert("El numero de asunto debe contener de 1 a 10 caracteres seguido de una diagonal ( / ) y del a\361o de ingreso \n\nEjemplo: 00001/2020, REF_001/2020");
             $(InputCarpInves).val('').focus();
         } 
     }

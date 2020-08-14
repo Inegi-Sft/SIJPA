@@ -104,11 +104,11 @@
                             <th>Posi</th>
                             <th>No. Asunto JC</th>
                             <th>No. Asunto JO</th>
-                            <th>Fecha Ingreso</th>
+                            <th>Fecha Ingreso JC</th>
                             <th>Conductas Antisociales</th>
                             <th>Adolescentes</th>
                             <th>Victimas</th>
-                            <th>Organo Diferente</th>
+                            <!--<th>Organo Diferente</th>-->
                             <th>Inconsistencias</th>
                             <th>Editar</th>
                             <!--<th>Eliminar</th>-->
@@ -116,13 +116,13 @@
                     </thead>
                     <tbody>
                     <%
-                        lsCausasJC = cp.findCausasJOenJC(juzgado);
                         String juzLimpio = "";
                         String Est1="",Est2="",Est3="",EI,Com="";
                         if(juzgado != null){
                             juzLimpio = juzgado.replace("-", "");
                         }
                         int pos = 0;
+                        lsCausasJC = cp.findCausasJOenJC(juzgado);
                         for (String[] lsJC : lsCausasJC) {
                             String ccJCSimple = lsJC[0].replace(juzLimpio, "");
                             //Validamos si ya esiste en JO o aun sigue en JC
@@ -157,7 +157,7 @@
                                 out.println("<td>" + lisCausaJO.get(0)[3] + "</td>");
                                 out.println("<td>" + lisCausaJO.get(0)[4] + "</td>");
                                 out.println("<td>" + lisCausaJO.get(0)[5] + "</td>");
-                                out.println("<td>" + lisCausaJO.get(0)[6] + "</td>");
+//                                out.println("<td>" + lisCausaJO.get(0)[6] + "</td>");
                                 out.println("<td><a data-title='"+ Est3 +"'> "+ Com +"</a></td>");
                                 out.println("<td><a href='elementosPrincipalesJO.jsp?causaClaveJC=" + ccJCSimple + "&causaClaveJO=" + ccJOSimple + "'><img src='img/editar.png' title='Editar'/></a></td>");
                                 //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' onclick=\"borraRegistro(" + ls[0] + "," + pos + ",'causasJO')\"/></a></td>");
@@ -172,7 +172,7 @@
                                 out.println("<td>" + lsJC[3] + "</td>");
                                 out.println("<td>" + lsJC[4] + "</td>");
                                 out.println("<td>--</td>");
-                                out.println("<td>--</td>");
+//                                out.println("<td>--</td>");
                                 out.println("<td><a href='elementosPrincipalesJO.jsp?causaClaveJC=" + ccJCSimple + "'><img src='img/editar.png' title='Editar'/></a></td>");
                                 //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' onclick=\"borraRegistro(" + ls[0] + "," + pos + ",'causasJO')\"/></a></td>");
                                 out.println("</tr>");

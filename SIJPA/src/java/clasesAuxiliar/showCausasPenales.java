@@ -174,12 +174,13 @@ public class showCausasPenales {
 //        return Fecha_Ocurrencia;
 //    }
     
-    public boolean CarpetaInves(String juzgadoClave, String numcarpeta) {
+    public boolean carpetaInves(String juzgadoClave, String numcarpeta) {
         boolean Exis = false;
         try {
             conn.Conectar();
-            sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + numcarpeta + "' AND "
-                    + " JUZGADO_CLAVE = '" + juzgadoClave + "'";
+            sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJC "
+                    + "WHERE CAUSA_CLAVE = '" + numcarpeta + "' "
+                    + "AND JUZGADO_CLAVE = '" + juzgadoClave + "'";
             rs = conn.consultar(sql);
             if (rs.next()) {
                 Exis = true;

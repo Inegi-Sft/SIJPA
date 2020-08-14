@@ -85,7 +85,7 @@
                             </a>
                         <%
                             jueces = sA.recuperaJuez(juzgadoClave, causa);//para recuperar datos de jueces
-                            lista = sA.findJueces(juzgadoClave);
+                            lista = sA.findJueces(juzgadoClave, causa, operacion);
                             for (String[] ls : lista){ 
                                 if(jueces.size() != 0){
                                     if(ls[0].equals(jueces.get(0)[0]) || ls[0].equals(jueces.get(0)[1]) || ls[0].equals(jueces.get(0)[2])){

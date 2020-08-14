@@ -103,7 +103,8 @@
                                 <select name="nomJuez" id="nomJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%
-                                        lista = juez.findJuez(juzgadoClave);
+                                        // el parametro operacion es para mostrar los jueces inactivos cuando es edicion, y no mostrarlos cuando es nuevo el registro
+                                        lista = juez.findJuez(juzgadoClave, operacion); 
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
                                             if(ls[0].equals(nomJuez)){

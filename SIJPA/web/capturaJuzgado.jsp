@@ -201,7 +201,7 @@
                             </td>
                             <td>
                                 <label for="numJuzgado">Número del órgano jurisdiccional</label>
-                                <input type="text" class="soloNum" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" maxlength="3" required/>
+                                <input type="text" class="soloNum" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" maxlength="3" onkeyup="quitaCeros(this)" required/>
                                 <input type="hidden" name="jClaveR" id="jClaveR" value="<%=juzClave%>">
                             </td>
                             <td>

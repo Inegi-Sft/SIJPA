@@ -88,18 +88,14 @@ function victimaDelito(obj){
         // Al deseleccionar algun delito, verifica si aun hay mas  con justificacion para que muestre el textarea, si no hay ninguno desaparece 
         // Al deseleccionar algun delito, verifica si aun hay mas  con justificacion para que muestre el textarea, si no hay ninguno desaparece
         if(!$(obj).is(':checked')){
-           
             var justifi = $('#justificaDeli').val();
             if(justifi.includes(norma + '.-')){//verifica que el delito deseleccionado tenga alguna justificacion
-               
-                var iniTxt = justifi.indexOf(norma + '.-');//obtiene el indice de inicio de ese delto dentro del texto
                 var finTxt = justifi.indexOf('-@', iniTxt);//obtiene el indice de fin de ese delito dentro del texto
                 finTxt=finTxt+2;
                 var linea = justifi.slice(iniTxt, finTxt);//hace un substring para
                 var newTexto = justifi.replace(linea+'\n','');
                 $('#justificaDeli').val(newTexto);
             }
-           
             // si la justificacion esta vacia, ocultamos el campo
             if($('#justificaDeli').val()===''){
                 $('#divJustificacion').fadeOut('slow');

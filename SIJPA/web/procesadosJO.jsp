@@ -28,16 +28,19 @@
             ArrayList<String[]> lista, procesado;
             ArrayList<String> pIngre, pDelito = new ArrayList();
             
-            String proceClave = "", posicion = "", edicion = "";
-            if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
-                proceClave = request.getParameter("proceClave");
+            String proceClaveJC = "", proceClaveJO = "", posicion = "", edicion = "";
+            if (request.getParameter("proceClaveJO") != null || request.getParameter("posicion") != null) {
+                proceClaveJC = request.getParameter("proceClaveJC");
+                proceClaveJO = request.getParameter("proceClaveJO");
                 posicion = request.getParameter("posicion");
             }
             
-            String juzgadoClave = (String) session.getAttribute("juzgadoClave");
+            String juzgadoClaveJC = (String) session.getAttribute("juzgadoClaveJC");
+            String juzgadoClaveJO = (String)session.getAttribute("juzgadoClave");
             String causaClaveJC = (String)session.getAttribute("causaClave");//Obtenemos la causa clave de JC
             String causaClaveJO = (String)session.getAttribute("causaClaveJO");//Obtenemos la causa clave de JO
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
+            String datoSis = "";//Variable que se llena dependiendo de que datos se muestran
             String nomProce = "";
             String aPaterno = "";
             String aMaterno = "";
@@ -81,9 +84,10 @@
             if(request.getParameter("edita") != null){//Si la variable edita es diferente de null recuperamos los datos de JO
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
-                    procesado = sProcesa.findProcesadosJO(causaClaveJO, proceClave + juzgadoClave.replace("-", ""));
+                    procesado = sProcesa.findProcesadosJO(causaClaveJO, proceClaveJO + juzgadoClaveJO.replace("-", ""));
                     if(procesado.size() > 0){
                         operacion = "actualizar";
+                        datoSis = "Se muestran datos de Juicio Oral";
                         nomProce = procesado.get(0)[0];
                         aPaterno = procesado.get(0)[1];
                         aMaterno = procesado.get(0)[2];
@@ -125,13 +129,14 @@
                         comen = procesado.get(0)[38];
                         edadJuzgado=procesado.get(0)[39];
                     }else{
-                        out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
+                        out.println("<script>alert('Procesado " + proceClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
                     }
                 }
-            }else{//Si la variable edita viene null entonces recuperamos datos de JC
-                procesado = sProcesa.findProcesadosJC(causaClaveJC, proceClave + juzgadoClave.replace("-", ""));
+            }else if(!proceClaveJC.equals("--")){//Si no trae variable edita, entonces le determinamos si trae JC
+                procesado = sProcesa.findProcesadosJC(causaClaveJC, proceClaveJC + juzgadoClaveJC.replace("-", ""));
                 if(procesado.size() > 0){
+                    datoSis = "Se muestran datos de Juzgado de Control";
                     nomProce = procesado.get(0)[0];
                     aPaterno = procesado.get(0)[1];
                     aMaterno = procesado.get(0)[2];
@@ -173,9 +178,11 @@
                     comen = procesado.get(0)[41];
                     edadJuzgado=procesado.get(0)[42];
                 }else{
-                    out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
+                    out.println("<script>alert('Procesado " + proceClaveJC + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                             + "parent.$.fancybox.close();</script>");
                 }
+            }else{
+                datoSis = "Registro nuevo en Juicio Oral";
             }
         %>
     </head>
@@ -189,10 +196,20 @@
                     <table class="tablaFormu">
                         <tr>
                             <td colspan="4">
-                                <label>Imputado Clave</label>
-                                <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
-                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
-                                <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
+                                <h5><%=datoSis%></h5>
+                                <% if(!proceClaveJC.equals("--")){ %>
+                                    <div class="cols">
+                                        <label>Imputado Clave Juzgado Control</label>
+                                        <input type="text" name="proceClaveJC" id="proceClaveJC" value="<%=proceClaveJC%>" readonly>
+                                    </div>
+                                    <img src="img/flechaIz.png" id="flechaRela">
+                                <% } %>
+                                <div class="cols">
+                                    <label>Imputado Clave Juicio Oral</label>
+                                    <input type="text" name="proceClaveJO" id="proceClaveJO" value="<%=proceClaveJO%>" readonly>
+                                    <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
+                                    <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -668,14 +685,14 @@
                                                 out.println("<td>" + ls[1] + "</td>");
                                                 out.println("<td>");
                                                 if(!edicion.equals("")){
-                                                    pIngre = sProcesa.findPIngresosJO(causaClaveJO, proceClave + juzgadoClave.replace("-", ""), ls[0]);
+                                                    pIngre = sProcesa.findPIngresosJO(causaClaveJO, proceClaveJO + juzgadoClaveJO.replace("-", ""), ls[0]);
                                                     if(pIngre.size() != 0){
                                                         out.println("<input type='checkbox' name='chkIngresosPro' id='chkIngresosPro"+ls[0]+"' value=" + ls[0] + " checked>");
                                                     }else{
                                                         out.println("<input type='checkbox' name='chkIngresosPro' id='chkIngresosPro"+ls[0]+"' value=" + ls[0] + ">");
                                                     }
                                                 }else{
-                                                    pIngre = sProcesa.findPIngresosJC(causaClaveJC, proceClave + juzgadoClave.replace("-", ""), ls[0]);
+                                                    pIngre = sProcesa.findPIngresosJC(causaClaveJC, proceClaveJC + juzgadoClaveJC.replace("-", ""), ls[0]);
                                                     if(pIngre.size() != 0){
                                                         out.println("<input type='checkbox' name='chkIngresosPro' id='chkIngresosPro"+ls[0]+"' value=" + ls[0] + " checked>");
                                                     }else{
@@ -799,7 +816,7 @@
                         <div class="colsx oculto" id="gruDeli">
                             <label for="presentAdo">Grupo delictivo del que forma parte</label>
                             <input type="text" class="txtLong"  name="delictivo" id="delictivo" value="<%=nomGpoDeli%>">
-                            <div class="noIdentificado">
+                            <div class="noIdentificada">
                                 <input type="checkbox" id="chkdelictivo">
                                 <label>No identificada</label>
                             </div>
@@ -846,30 +863,27 @@
                             <th>Delito</th>
                             <th>Delito cometido</th>
                         </tr>
-                    <%
-                        if(!edicion.equals("")){
+                        <%
                             lista = sDeli.findDelitosVictiJO(causaClaveJO);
-                        }else{
-                            lista = sDeli.findDelitosVictiJC(causaClaveJC);
-                        }
-                        for (String[] ls : lista) {
-                            out.println("<tr>");
-                            out.println("<td>" + ls[0].replace(juzgadoClave.replace("-", ""), "") + "</td>");
-                            out.println("<td>" + ls[1] + "</td>");
-                            if(!edicion.equals("")){
-                                pDelito = sProcesa.findPDelitosJO(causaClaveJO, proceClave + juzgadoClave.replace("-", ""), ls[0]);
-                            }else{
-                                pDelito = sProcesa.findPDelitosJC(causaClaveJC, proceClave + juzgadoClave.replace("-", ""), ls[0]);
+                            for (String[] ls : lista) {
+                                out.println("<tr>");
+                                out.println("<td>" + ls[1].replace(juzgadoClaveJO.replace("-", ""), "") + "</td>");
+                                out.println("<td>" + ls[2] + "</td>");
+                                if(!edicion.equals("")){
+                                    pDelito = sProcesa.findPDelitosJO(causaClaveJO, proceClaveJO + juzgadoClaveJO.replace("-", ""), ls[1]);
+                                }else{
+                                    pDelito = sProcesa.findPDelitosJC(causaClaveJC, proceClaveJC + juzgadoClaveJC.replace("-", ""), ls[0]);
+                                }
+                                out.println("<td>");
+                                if(pDelito.size() != 0){
+                                    out.println("<input type='checkbox' name='arrayDelito' value='" + ls[1] + "' checked/> ");
+                                }else{
+                                    out.println("<input type='checkbox' name='arrayDelito' value='" + ls[1] + "'/> ");
+                                }
+                                out.println("</td>");
+                                out.println("</tr>");
                             }
-                            out.println("<td>");
-                            if(pDelito.size() != 0){
-                                out.println("<input type='checkbox' name='arrayDelito' value='" + ls[0] + "' checked/> ");
-                            }else{
-                                out.println("<input type='checkbox' name='arrayDelito' value='" + ls[0] + "'/> ");
-                            }
-                            out.println("</td>");
-                        }
-                    %>
+                        %>
                     </table>
                 </fieldset>
                 <div class="comentarios">

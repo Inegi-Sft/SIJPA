@@ -110,7 +110,7 @@ table.dataTable tbody th,table.dataTable tbody td{
 .totExp{
     position: relative;
     float: left;
-    left: 10%;
+    left: -10%;
     top: 80px;
     height: 30px;
     padding: 5px;

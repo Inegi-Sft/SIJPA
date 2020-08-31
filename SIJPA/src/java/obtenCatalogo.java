@@ -43,8 +43,7 @@ public class obtenCatalogo extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             catalogo = request.getParameter("cat");
             out.println("<option value=''>--Seleccione--</option>");
-
-            System.out.println("Variable recibida: " + catalogo);
+            
             switch (catalogo) {
                 case "medidaSoli":
                     lista = cat.findMedidasSolicita();

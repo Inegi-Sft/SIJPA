@@ -5,7 +5,10 @@
  */
 
 $(document).ready(function() {
-    /*---------------------------- FUNCIONES PROCESADOS JC----------------------------*/
+    if($('#opera').val() !== ''){
+        $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#fNacimiento').val() === '1899-09-09'){
         $('#fNacimiento').prop("readonly", true);

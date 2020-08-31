@@ -139,7 +139,6 @@ public class showIntermedia {
             conn.Conectar();
             sql = "SELECT COUNT(*) AS EXISTE FROM DATOS_ETAPA_INTERMEDIA_ADOJC "
                     + "WHERE CAUSA_CLAVE='" + causaClave + "' AND PROCESADO_CLAVE='" + proceClave + "'";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             if (resul.next()) {
                 existe = resul.getInt("EXISTE");

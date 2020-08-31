@@ -24,16 +24,13 @@ public class showJuicio {
     ResultSet resul;
     int totProcesa;
     
-    public ArrayList findProceJuicioJC(String causaClaveJC){
+    public ArrayList findProceJuicio(String causaClaveJO){
         try {
             conn.Conectar();
             juicio = new ArrayList();
-            sql = "SELECT PR.PROCESADO_CLAVE, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO) "
-                    + "FROM DATOS_PROCESADOS_ADOJC PR, DATOS_CONCLUSIONES_ADOJC CO "
-                    + "WHERE PR.CAUSA_CLAVE = CO.CAUSA_CLAVE "
-                    + "AND PR.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
-                    + "AND CO.TIPO_RESOLUCION = 5 "
-                    + "AND PR.CAUSA_CLAVE = '" + causaClaveJC + "' "
+            sql = "SELECT PROCESADO_CLAVEJO, CONCAT(NOMBRE,' ',A_PATERNO,' ',A_MATERNO) "
+                    + "FROM DATOS_PROCESADOS_ADOJO "
+                    + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
             while (resul.next()) {
@@ -52,13 +49,11 @@ public class showJuicio {
         try {
             conn.Conectar();
             juicio = new ArrayList();
-            sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSM.DESCRIPCION, RSI.DESCRIPCION, RSS.DESCRIPCION, RSF.DESCRIPCION, CE.DESCRIPCION "
+            sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSM.DESCRIPCION, RSF.DESCRIPCION, CE.DESCRIPCION "
                     + "FROM DATOS_ETAPA_ORAL_ADOJO EO, DATOS_PROCESADOS_ADOJO P, CATALOGOS_RESPUESTA_SIMPLE RSM, CATALOGOS_RESPUESTA_SIMPLE RSI, "
                     + "CATALOGOS_RESPUESTA_SIMPLE RSS, CATALOGOS_RESPUESTA_SIMPLE RSF, CATALOGOS_ETAPAS CE "
                     + "WHERE EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                     + "AND EO.MEDIDAS_DISCIPLINARIAS = RSM.RESPUESTA_ID "
-                    + "AND EO.INCIDENTES_AUDIENCIA = RSI.RESPUESTA_ID "
-                    + "AND EO.SUSPENCION_AUDIENCIA = RSS.RESPUESTA_ID "
                     + "AND EO.DELIBERACION = RSF.RESPUESTA_ID "
                     + "AND EO.ETAPA = CE.ETAPA_ID "
                     + "AND EO.PROCESADO_CLAVE = '" + proceClave + "' "
@@ -66,8 +61,8 @@ public class showJuicio {
             resul = conn.consultar(sql);
             while (resul.next()) {
                 juicio.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4),
-                    resul.getString(5), resul.getString(6), resul.getString(7)
+                    resul.getString(1), resul.getString(2), resul.getString(3),
+                    resul.getString(4), resul.getString(5)
                 });
             }
             conn.close();
@@ -93,24 +88,22 @@ public class showJuicio {
         return totProcesa;
     }
     
-    public ArrayList findOralTabla(String proceClave) {
+    public ArrayList findOralTabla(String proceClaveJO) {
         conn.Conectar();
         juicio = new ArrayList();
-        sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSM.DESCRIPCION, RSI.DESCRIPCION, RSS.DESCRIPCION, RSF.DESCRIPCION "
+        sql = "SELECT EO.PROCESADO_CLAVE, CONCAT(P.NOMBRE,' ',P.A_PATERNO,' ',P.A_MATERNO), RSM.DESCRIPCION, RSF.DESCRIPCION "
                 + "FROM DATOS_ETAPA_ORAL_ADOJO EO, DATOS_PROCESADOS_ADOJO P, CATALOGOS_RESPUESTA_SIMPLE RSM, CATALOGOS_RESPUESTA_SIMPLE RSI, CATALOGOS_RESPUESTA_SIMPLE RSS, CATALOGOS_RESPUESTA_SIMPLE RSF "
                 + "WHERE EO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                 + "AND EO.MEDIDAS_DISCIPLINARIAS = RSM.RESPUESTA_ID "
-                + "AND EO.INCIDENTES_AUDIENCIA = RSI.RESPUESTA_ID "
-                + "AND EO.SUSPENCION_AUDIENCIA = RSS.RESPUESTA_ID "
                 + "AND EO.DELIBERACION = RSF.RESPUESTA_ID "
-                + "AND EO.PROCESADO_CLAVE = '" + proceClave + "' "
+                + "AND EO.PROCESADO_CLAVE = '" + proceClaveJO + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 juicio.add(new String[]{
                     resul.getString(1), resul.getString(2), resul.getString(3),
-                    resul.getString(4), resul.getString(5), resul.getString(6)
+                    resul.getString(4)
                 });
             }
             conn.close();
@@ -243,7 +236,6 @@ public class showJuicio {
             sql = "SELECT PROCESADO_CLAVE,ETAPA FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClave + "'"
                     + "ORDER BY 1";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                  proceEtapa.add(new String[]{
@@ -264,7 +256,6 @@ public class showJuicio {
             sql = "SELECT COUNT(*) FROM DATOS_ETAPA_ORAL_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + causaClave + "'"
                     + "ORDER BY 1";
-            System.out.println(sql);
             resul = conn.consultar(sql);
             while (resul.next()) {
                 CEcausa = resul.getInt("COUNT(*)");

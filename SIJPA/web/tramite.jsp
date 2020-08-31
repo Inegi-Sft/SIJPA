@@ -65,7 +65,6 @@
                 if(!etapaInter.equals("")){
                     etapaProcesal = etapaInter;
                 }
-                System.out.println("Etapa resul: " + etapaProcesal);
             }
         %>
     </head>

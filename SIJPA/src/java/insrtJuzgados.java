@@ -105,7 +105,7 @@ public class insrtJuzgados extends HttpServlet {
             conn.Conectar();
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_JUZGADOS_ADOJC VALUES('" + juzgadoClave + "','" + nomOrgano + "'," + numOrgano + "," + jurisdiccion + ","
-                        + funcionJuz + "," + ladaTel + ",'" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
+                        + funcionJuz + ",'" + ladaTel + "','" + correo + "'," + entidadJ + "," + municipioJ + "," + fDivision + ",'" + regJudicial + "','"
                         + distJudicial + "','" + partJudicial + "'," + vialidad + ",'" + nomVialidad + "'," + asentamiento + ",'" + nomAsentamiento + "','"
                         + noExterior + "','" + noInterior + "'," + cp + ",'" + nombreCap + "','" + apaternoCap + "','" + amaternoCap + "','" + cargo + "'," 
                         + "1," + ejercicio + ")";

@@ -23,18 +23,13 @@
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();
             
-            String proceClave = "", posicion = "", edicion = "";
-            if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
-                proceClave = request.getParameter("proceClave");
+            String proceClaveJO = "", posicion = "", edicion = "";
+            if (request.getParameter("proceClaveJO") != null || request.getParameter("posicion") != null) {
+                proceClaveJO = request.getParameter("proceClaveJO");
                 posicion = request.getParameter("posicion");
             }
             
-            String juzgadClave = (String) session.getAttribute("juzgadoClave");
-            String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
-            String jEntidadJO = jDividido[0];
-            String jMunicipioJO = jDividido[1];
-            String jNumeroJO = jDividido[2];
-            String jConcatenado = jEntidadJO + jMunicipioJO + jNumeroJO;
+            String juzgadClaveJO = (String) session.getAttribute("juzgadoClave");
             String causaClaveJO = (String) session.getAttribute("causaClaveJO");
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
             String estatusJO="";
@@ -43,14 +38,14 @@
             if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
-                    tramite = sTramite.findTramiteJO(causaClaveJO, proceClave + jConcatenado);
+                    tramite = sTramite.findTramiteJO(causaClaveJO, proceClaveJO + juzgadClaveJO.replace("-", ""));
                     if(tramite.size() > 0){
                         operacion = "actualizar";
                         estatusJO=tramite.get(0)[0];
                         especifiJO = tramite.get(0)[1];
                         fechaActoJO = tramite.get(0)[2];
                     }else{
-                        out.println("<script>alert('Tramite " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
+                        out.println("<script>alert('Tramite " + proceClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
                     }
                 }
@@ -64,8 +59,8 @@
             <form action="tramiteJO.jsp" method="post" id="formTramiteJO" name="formTramiteJO">
                 <fieldset>
                     <legend>Estatus</legend>
-                    <label for="idProcesado">Id Adolescente</label>
-                    <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
+                    <label for="idProcesado">Procesado Clave Juicio Oral</label>
+                    <input type="text" name="proceClave" id="proceClave" value="<%=proceClaveJO%>" readonly>
                     <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
                     <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                     <fieldset class="subField">

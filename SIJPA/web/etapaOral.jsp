@@ -20,13 +20,13 @@
             showJuicio eO = new showJuicio();
             ArrayList<String[]> lista, oral;
             
-            String proceClave = "", posicion = "", edicion = "";
-            if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
-                proceClave = request.getParameter("proceClave");
+            String proceClaveJO = "", posicion = "", edicion = "";
+            if (request.getParameter("proceClaveJO") != null || request.getParameter("posicion") != null) {
+                proceClaveJO = request.getParameter("proceClaveJO");
                 posicion = request.getParameter("posicion");
             }
             
-            String juzgadoClave = (String) session.getAttribute("juzgadoClave");
+            String juzgadoClaveJO = (String) session.getAttribute("juzgadoClave");
             String causaClaveJO = (String) session.getAttribute("causaClaveJO");
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
             String autoApertura = "";
@@ -51,7 +51,7 @@
             if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
-                    oral = eO.findAllEtapaOral(causaClaveJO, proceClave + juzgadoClave.replace("-", ""));
+                    oral = eO.findAllEtapaOral(causaClaveJO, proceClaveJO + juzgadoClaveJO.replace("-", ""));
                     if(oral.size() > 0){
                         operacion = "actualizar";
                         autoApertura = oral.get(0)[0];
@@ -74,13 +74,10 @@
                         sentidoFallo = oral.get(0)[17];
                         comen = oral.get(0)[18];
                     }else{
-                        out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
+                        out.println("<script>alert('Procesado " + proceClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
                     }
                 }
-            }else{
-                String causaClaveJOSimple = causaClaveJO.replace(juzgadoClave.replace("-", ""), "");
-                proceClave= causaClaveJOSimple + proceClave.substring(proceClave.indexOf("-P"));
             }
         %>
     </head>
@@ -88,14 +85,14 @@
         <section class="contenedor">
             <h1>Etapa Juicio Oral</h1>
             <form method="post" name="formJuicioO" id="fromJuicioO">
-                <label for="idProcesado">Id Adolescente</label>
-                <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
+                <label for="idProcesado">Procesado Clave Juicio Oral</label>
+                <input type="text" name="proceClave" id="proceClave" value="<%=proceClaveJO%>" readonly>
                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                 <fieldset>
-                    <legend>Características de la de juicio oral</legend>
+                    <legend>Características de Juicio Oral</legend>
                     <div class="colsA" id="dApertura">
-                        <label for="autoApertura">Fecha del auto de apertura a juicio oral</label>
+                        <label for="autoApertura">Fecha del auto de apertura a Juicio Oral</label>
                         <input type="date" name="autoApertura" id="autoApertura" value="<%=autoApertura%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkAutoApertura" onclick="fechaNoIdent('#chkAutoApertura', '#autoApertura')">
@@ -103,7 +100,7 @@
                         </div> 
                     </div>
                     <div class="colsA" id="dCelebracionA">
-                        <label for="celebracionA">Fecha de la celebración de la audiencia de juicio</label>
+                        <label for="celebracionA">Fecha de la celebración de la Audiencia de Juicio</label>
                         <input type="date" name="celebracionA" id="celebracionA" value="<%=celebracionA%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkCelebracionA" onclick="fechaNoIdent('#chkCelebracionA', '#celebracionA')">
@@ -112,7 +109,7 @@
                     </div>
                     <fieldset class="subField colsA">
                         <div class="colsA" id="dMedidasDis">
-                            <label for="medidasDis">¿Se aplicaron medidas disciplinarias en la audiencia?</label>
+                            <label for="medidasDis">¿Se aplicaron medidas disciplinarias en la Audiencia?</label>
                             <select name="medidasDis" id="medidasDis" required>
                                 <option value="">--Seleccione--</option>
                                 <%
@@ -147,7 +144,7 @@
                     <br/>
                     <fieldset class="subField colsA">
                         <div class="colsA">
-                            <label for="incidentes">¿Se promovieron incidentes dentro de la audiencia?</label>
+                            <label for="incidentes">¿Se promovieron incidentes dentro de la Audiencia?</label>
                             <select name="incidentes" id="incidentes" required>
                                 <option value="">--Seleccione--</option>
                                 <%
@@ -188,7 +185,7 @@
                         </div>
                     </fieldset>
                     <fieldset class="subField">
-                        <legend>Tipos de pruebas desahogadas durante la audiencia</legend>
+                        <legend>Tipos de pruebas desahogadas durante la Audiencia</legend>
                         <div class="colsA">
                             <label for="testimonial">Testimonial</label>
                             <select name="testimonial" id="testimonial" required>
@@ -272,7 +269,7 @@
                     </fieldset>
                     <fieldset class="subField colsA">        
                         <div class="colsA">
-                            <label for="suspencionA">¿Hubo suspensión de audiencia de juicio?</label>
+                            <label for="suspencionA">¿Hubo suspensión de Audiencia de Juicio?</label>
                             <select name="suspencionA" id="suspencionA" required>
                                 <option value="">--Seleccione--</option>
                                 <%
@@ -288,7 +285,7 @@
                             </select>
                         </div>
                         <div class="colsA oculto" id="dFechaSuspencion">
-                            <label for="fechaSuspencion">Fecha en que se dictó suspensión de audiencia de juicio </label>
+                            <label for="fechaSuspencion">Fecha en que se dictó suspensión de Audiencia de Juicio </label>
                             <input type="date" name="fechaSuspencion" id="fechaSuspencion" value="<%=fechaSuspencion%>">
                             <div class="noIdentificada">
                                 <input type="checkbox" id="chkFechaSuspencion" onclick="fechaNoIdent('#chkFechaSuspencion', '#fechaSuspencion')">
@@ -296,7 +293,7 @@
                             </div> 
                         </div>    
                         <div class="colsA oculto" id="dFechaReanudacion">
-                            <label for="fechaReanudacion">Fecha en que se reanudo  la audiencia de juicio</label>
+                            <label for="fechaReanudacion">Fecha en que se reanudo  la Audiencia de Juicio</label>
                             <input type="date" name="fechaReanudacion" id="fechaReanudacion" value="<%=fechaReanudacion %>">
                             <div class="noIdentificada">
                                 <input type="checkbox" id="chkFechaReanudacion" onclick="fechaNoIdent('#chkFechaReanudacion', '#fechaReanudacion')">

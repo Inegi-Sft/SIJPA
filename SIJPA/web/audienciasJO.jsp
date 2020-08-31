@@ -31,7 +31,7 @@
                 if(session.getAttribute("juzgadoClave") != ""){
                     juzgado = (String) session.getAttribute("juzgadoClave");
                     //Verificamos la funcion del juzgado para que sea de control
-                    if(juz.findFuncionJuz(juzgado).equals("1")){
+                    if(juz.findFuncionJuz(juzgado) == 1){
                         out.println("<script>$(document).ready(function () {"
                                 + "alertify.alert('Error de Juzgado',"
                                 + "'El juzgado seleccionado(activo) es de Control y este es el apartado de Enjuiciamiento."
@@ -47,6 +47,8 @@
                     }
                 }
             }
+            
+            String funJuz = juz.findFuncionDes(juzgado);
         %>
     </head>
     <body>
@@ -60,20 +62,25 @@
             <h1>Audiencias JO</h1>
             <form action="audienciasJO.jsp" name="formAudienciasJO" method="post">
                 <div id="juzClave">
-                    <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" onchange="formAudienciasJO.submit();">
-                        <option value="">--Seleccione--</option>
-                        <%
-                            lista = juz.findJuzgadosJO();
-                            for (String ls : lista) {
-                                out.println("<option value='" + ls + "'");
-                                if(ls.equals(juzgado)){
-                                    out.println(" selected ");
+                    <div>
+                        <label for="juzgado">Juzgado Clave:</label>
+                        <select name="juzgado" id="juzgado" onchange="formAudienciasJO.submit();">
+                            <option value="">--Seleccione--</option>
+                            <%
+                                lista = juz.findJuzgadosJO();
+                                for (String ls : lista) {
+                                    out.println("<option value='" + ls + "'");
+                                    if(ls.equals(juzgado)){
+                                        out.println(" selected ");
+                                    }
+                                    out.println(">" + ls + "</option>");
                                 }
-                                out.println(">" + ls + "</option>");
-                            }
-                        %>
-                    </select>
+                            %>
+                        </select>
+                    </div>
+                    <div>
+                        <label id="funcionJu">Función: <%=funJuz%></label>
+                    </div>
                 </div>
                 <a class="add" href="#" onclick="validaAdd('capturaAudienciasJO');">
                     <img src="img/add3.png" width="20" height="20"/> Agregar 

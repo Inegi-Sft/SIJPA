@@ -26,18 +26,13 @@
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();
             
-            String proceClave = "", posicion = "", edicion = "";
-            if (request.getParameter("proceClave") != null || request.getParameter("posicion") != null) {
-                proceClave = request.getParameter("proceClave");
+            String proceClaveJO = "", posicion = "", edicion = "";
+            if (request.getParameter("proceClaveJO") != null || request.getParameter("posicion") != null) {
+                proceClaveJO = request.getParameter("proceClaveJO");
                 posicion = request.getParameter("posicion");
             }
             
-            String juzgadClave = (String) session.getAttribute("juzgadoClave");
-            String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
-            String jEntidad = jDividido[0];
-            String jMunicipio = jDividido[1];
-            String jNumero = jDividido[2];
-            String jConcatenado = jEntidad + jMunicipio + jNumero;
+            String juzgadClaveJO = (String) session.getAttribute("juzgadoClave");
             String causaClaveJC = (String)session.getAttribute("causaClave");//Obtenemos la causa clave de JC
             String causaClaveJO = (String)session.getAttribute("causaClaveJO");//Obtenemos la causa clave de JO
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
@@ -62,7 +57,7 @@
             if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
-                    conclusiones = sConclu.findConclusionJO(causaClaveJO, proceClave + jConcatenado);
+                    conclusiones = sConclu.findConclusionJO(causaClaveJO, proceClaveJO + juzgadClaveJO.replace("-", ""));
                     if(conclusiones.size() > 0){
                         operacion = "actualizar";
                         fechaResol = conclusiones.get(0)[0];
@@ -84,19 +79,16 @@
                         persoImpugna = conclusiones.get(0)[16];
                         comen = conclusiones.get(0)[17];
                     }else{
-                        out.println("<script>alert('Delito " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
+                        out.println("<script>alert('Delito " + proceClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                                 + "parent.$.fancybox.close();</script>");
                     }
                 }
             }
-            
             //Control verifica cual es tu tipo de resolucion en etapa oral
-            String fallo = sEtaOral.verificFalloJO(causaClaveJO, proceClave + jConcatenado);
+            String fallo = sEtaOral.verificFalloJO(causaClaveJO, proceClaveJO + juzgadClaveJO.replace("-", ""));
             if(!fallo.equals("9")){
                 tipoResol = fallo;
             }
-            System.out.println("Tipo res: " + tipoResol);
-            
         %>
           
     </head>
@@ -105,8 +97,8 @@
         <section class="contenedor">
             <h1>Resoluciones dictadas por el tribunal de enjuiciamiento</h1>
             <form method="post" name="formConclusionesJO" id="formConclusionesJO">
-                <label for="procesado">Id Adolescente</label>
-                <input type="text" name="proceClave" id="proceClave" value="<%=proceClave%>" readonly>
+                <label for="procesado">Procesado Clave Juicio Oral</label>
+                <input type="text" name="proceClave" id="proceClave" value="<%=proceClaveJO%>" readonly>
                 <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                 <fieldset>
@@ -137,7 +129,7 @@
                     </div>
                     <div class="cols oculto" id="dFechaSenten">
                         <label for="fechaSenten">Fecha de lectura y explicación de la sentencia</label>
-                        <input type="date" name="fechaSenten" id="fechaSenten" value="<%=fechaSentencia%>" required>
+                        <input type="date" name="fechaSenten" id="fechaSenten" value="<%=fechaSentencia%>">
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaSenten" onclick="fechaNoIdent('#chkFechaSenten', '#fechaSenten')">
                             <label>No identificada</label>
@@ -274,13 +266,13 @@
                                 <th>No identificado</th>
                             </tr>
                             <%
-                                lista = sProce.findProcesadoDelitosJO(causaClaveJO, proceClave + jConcatenado);
+                                lista = sProce.findProcesadoDelitosJO(causaClaveJO, proceClaveJO + juzgadClaveJO.replace("-", ""));
                                 for(int i = 0; i < lista.size(); i++){
                                     out.println("<tr>");
                                     out.println("<td>");
                                     out.println(lista.get(i)[1] + "<input type='hidden' name='delitoConclu' value='" + lista.get(i)[0] + "'>");
                                     out.println("</td>");
-                                    concluPA = sConclu.findConcluAJO(causaClaveJO, proceClave + jConcatenado, lista.get(i)[0]);
+                                    concluPA = sConclu.findConcluAJO(causaClaveJO, proceClaveJO + juzgadClaveJO.replace("-", ""), lista.get(i)[0]);
                                     if(concluPA.size() != 0){
                                         int sentencia = Integer.parseInt(concluPA.get(0)[0]);
                                         String conclu = concluPA.get(0)[1];

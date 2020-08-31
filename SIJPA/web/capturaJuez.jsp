@@ -42,7 +42,7 @@
             String sexoJuez = "";
             String edadJuez = "";
             String gradoEstudi = "";
-            String funcionDese = "";
+            int funcionDese = 0;
             if(request.getParameter("juezClave") != null){//Si viene el juez clave, recuperamos datos
                 juezClave = Integer.parseInt(request.getParameter("juezClave"));
                 juez = sJuez.findJuezDatos(juezClave, juzgadoClave);
@@ -55,7 +55,7 @@
                     sexoJuez = juez.get(0)[4];
                     edadJuez = juez.get(0)[5];
                     gradoEstudi = juez.get(0)[6];
-                    funcionDese = juez.get(0)[7];
+                    funcionDese = Integer.parseInt(juez.get(0)[7]);
                 }else{
                     out.println("<script>alert('El juez clave " + juezClave + " no se encontro dentro del Juzgado "  + juzgadoClave + "'); "
                         + "window.location.href = 'jueces.jsp'</script>");
@@ -69,7 +69,7 @@
             
             boolean fun = false;
             funcionDese = juz.findFuncionJuz(juzgadoClave);
-            if(funcionDese.equals("1") || funcionDese.equals("2")){
+            if(funcionDese == 1 || funcionDese == 2){
                 fun = true; 
             }
         %>
@@ -184,7 +184,7 @@
                                         lista = cat.findFuncionJuzgado();
                                         for (String[] ls : lista) {
                                             out.println("<option value='" + ls[0] + "'");
-                                            if(ls[0].equals(funcionDese)){
+                                            if(Integer.parseInt(ls[0]) == funcionDese){
                                                 out.println(" selected ");
                                             }
                                             out.println(">" + ls[1] + "</option>");

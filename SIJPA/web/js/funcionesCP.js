@@ -136,17 +136,15 @@ $(document).ready(function () {
                                 $('#tablaDeli tbody').append('<tr><td>' + expe + '-D' + x + '</td><td></td><td></td><td></td><td></td>\n\
                                 <td></td><td><a class="pop" href="delitos.jsp?delitoClave=' + expe + '-D' + x + '&posicion=' + (x-1) + '">\n\
                                 <img src="img/editar.png" title="Modificar"/></a></td>\n\
-                                <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
-                                    onclick="borraRegistro(\'' + expe + '-D' + x + response[1] + '\',' + (x-1) + ',\'tablaDeli\',\'#Tdelitos\')"/>\n\
-                                </td></a></tr>');
+                                <td><img src="img/delete.png" class="borrar" title="Eliminar" onclick="borraR(this)"/>\n\
+                                </td></tr>');
                             }
                             for(var x = 1; x <= response[3]; x++){
                                 $('#tablaProcesa tbody').append('<tr><td>' + expe + '-P' + x + '</td><td></td><td></td><td></td>\n\
                                 <td></td><td><a class="pop" href="procesados.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
                                 <img src="img/editar.png" title="Modificar"/></a></td>\n\
-                                <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
-                                    onclick="borraRegistro(\'' + expe + '-P' + x + response[1] + '\',' + (x-1) + ',\'tablaProcesa\',\'#Tadolescentes\')"/>\n\
-                                </td></a></tr>');
+                                <td><img src="img/delete.png" class="borrar" title="Eliminar" onclick="borraR(this)"/>\n\
+                                </td></tr>');
 
                                 $('#tablaInicial tbody').append('<tr><td>' + expe + '-P' + x + '</td><td></td><td></td><td></td><td></td>\n\
                                 <td></td><td><a class="pop" href="etapaInicial.jsp?proceClave=' + expe + '-P' + x + '&posicion=' + (x-1) + '">\n\
@@ -156,9 +154,8 @@ $(document).ready(function () {
                                 $('#tablaVictimas tbody').append('<tr><td>' + expe + '-V' + x + '</td><td></td><td></td><td></td>\n\
                                 <td></td><td><a class="pop" href="victimas.jsp?victiClave=' + expe + '-V' + x + '&posicion=' + (x-1) + '">\n\
                                 <img src="img/editar.png" title="Modificar"/></a></td>\n\
-                                <td><a href="#"><img src="img/delete.png" title="Eliminar" \n\
-                                    onclick="borraRegistro(\'' + expe + '-V' + x + response[1] + '\',' + (x-1) + ',\'tablaVictimas\',\'#Tvictimas\')"/>\n\
-                                </td></a></tr>');
+                                <td><img src="img/delete.png" class="borrar" title="Eliminar" onclick="borraR(this)"/>\n\
+                                </td></tr>');
                             }
                             console.log('Abrimos la segunda pestaña: ' , response[0]);
                             openPestana('btn2', 'p2');
@@ -171,7 +168,6 @@ $(document).ready(function () {
                 }
             });
         }
-        
     });
     /*---------------------------- FIN FUNCIONES CAUSA PENAL JC----------------------------*/
 });

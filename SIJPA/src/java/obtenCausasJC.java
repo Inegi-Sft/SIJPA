@@ -5,6 +5,9 @@
  */
 
 import clasesAuxiliar.showCausasPenalesJO;
+import clasesAuxiliar.showDelitosJO;
+import clasesAuxiliar.showProcesadosJO;
+import clasesAuxiliar.showVictimasJO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -33,29 +37,66 @@ public class obtenCausasJC extends HttpServlet {
      */
     
     showCausasPenalesJO sCausasJC = new showCausasPenalesJO();
-    ArrayList<String[]> lista;
+    showDelitosJO sDelJC = new showDelitosJO();
+    showProcesadosJO sProJC = new showProcesadosJO();
+    showVictimasJO sVicJC = new showVictimasJO();
+    ArrayList<String[]> lista, lisDel, lisPro, lisVic;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
             if(request.getParameter("expClaveJC") != null){
                 response.setContentType("text/json;charset=UTF-8");
-                String jCalveJC = request.getParameter("jClaveJC");
+                String jClaveJC = request.getParameter("jClaveJC");
+                String juzSimple = jClaveJC.replace("-", "");
                 String expClaveJC = request.getParameter("expClaveJC");
-                lista = sCausasJC.findCausaPenalJC(jCalveJC, expClaveJC);
-                JSONArray resp = new JSONArray();
-                resp.add(lista.get(0)[0]);
-                resp.add(lista.get(0)[1]);
-                resp.add(lista.get(0)[2]);
-                resp.add(lista.get(0)[3]);
+                lista = sCausasJC.findCausaPenalJC(jClaveJC, expClaveJC + juzSimple);
+                JSONObject resp = new JSONObject();
+                resp.put("fechaJC", lista.get(0)[0]);
+                resp.put("totDelJC", lista.get(0)[1]);
+                resp.put("totProJC", lista.get(0)[2]);
+                resp.put("totVicJC", lista.get(0)[3]);
+                
+                //Delitos JC
+                lisDel = sDelJC.findDeliCausasJCyJO(expClaveJC + juzSimple);
+                JSONArray del = new JSONArray();
+                for (String[] lisD : lisDel) {
+                    del.add("<tr><td>" + lisD[0].replace(juzSimple, "") + "</td><td></td><td></td><td></td><td></td><td></td>"
+                            + "<td><a class='pop' href=''><img src='img/editar.png' title='Modificar'/></a></td>"
+                            + "</tr>");
+                }
+                resp.put("del", del);
+                
+                //Procesados JC y Etapa Oral
+                lisPro = sProJC.findProcesasdosCausaJCyJO(expClaveJC + juzSimple);
+                JSONArray pro = new JSONArray();
+                for (String[] lisP : lisPro) {
+                    pro.add("<tr><td>" + lisP[0].replace(juzSimple, "") + "</td><td>" + lisP[1] + "</td><td></td><td></td><td></td>"
+                            + "<td><a class='pop' href=''><img src='img/editar.png' title='Modificar'/></a></td>"
+                            + "</tr>");
+                }
+                resp.put("pro", pro);
+                
+                //Victimas
+                lisVic = sVicJC.findVictimasCausaJCyJO(expClaveJC + jClaveJC.replace("-", ""));
+                JSONArray vic = new JSONArray();
+                for (String[] lisV : lisVic) {
+                    vic.add("<tr><td>" + lisV[0].replace(juzSimple, "") + "</td><td></td><td></td><td></td><td></td>"
+                            + "<td><a class='pop' href=''><img src='img/editar.png' title='Modificar'/></a></td>"
+                            + "</tr>");
+                }
+                resp.put("vic", vic);
+                
                 out.write(resp.toJSONString());
-            }else if(request.getParameter("jClaveJC") != null){//Vamos por las causas penales del juzgado
+            }else 
+                if(request.getParameter("jClaveJC") != null){//Vamos por las causas penales del juzgado
                 response.setContentType("text/html;charset=UTF-8");
-                String jCalveJC = request.getParameter("jClaveJC");
+                String jClaveJC = request.getParameter("jClaveJC");
                 out.println("<option value=''>--Seleccione--</option>");
-                lista = sCausasJC.findCausasJOenJC(jCalveJC);
+                lista = sCausasJC.findCausasPenalesJC(jClaveJC);
                 for (String[] ls : lista) {
-                    out.println("<option value='" + ls[0] + "'>" + ls[0].replace(jCalveJC.replace("-", ""), "") + "</option>");
+                    out.println("<option value='" + ls[0].replace(jClaveJC.replace("-", ""), "") + "'>"
+                            + ls[0].replace(jClaveJC.replace("-", ""), "") + "</option>");
                 }
             }
         }

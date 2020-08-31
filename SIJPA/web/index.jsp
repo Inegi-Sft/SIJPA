@@ -27,7 +27,6 @@
 
             //Verificamos si no hay ususarios entonces tenemos que capturar el Admin
             usuario usuario = new usuario();
-            System.out.println(usuario.findTotUsu());
             if(usuario.findTotUsu() == 0){
                 response.sendRedirect("capturaUsuario.jsp");
             }

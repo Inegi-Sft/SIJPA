@@ -115,7 +115,6 @@ public class insrtProcesados extends HttpServlet {
         //***********************************INSERT*************************************************
         try {
             response.setContentType("text/json;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
             conn.Conectar();
             
@@ -156,7 +155,7 @@ public class insrtProcesados extends HttpServlet {
                     }
                     if(insertPD){
                         showProcesados pro = new showProcesados();
-                        ArrayList<String[]> lis = new ArrayList<>();
+                        ArrayList<String[]> lis;
                         showCausasPenales causa = new showCausasPenales();
                         int totProceInsrt = pro.countProcesados(causaClave);
                         int totProce = causa.countTotalProcesados(causaClave);
@@ -220,7 +219,7 @@ public class insrtProcesados extends HttpServlet {
                     }
                     if(insertPD){
                         showProcesados pro = new showProcesados();
-                        ArrayList<String[]> lis = new ArrayList<>();
+                        ArrayList<String[]> lis;
                         int totProceInsrt = pro.countProcesados(causaClave);
                         lis = pro.findProcesasdosTabla(proceClave + jConcatenado);
                         JSONArray resp = new JSONArray();
@@ -241,7 +240,7 @@ public class insrtProcesados extends HttpServlet {
     }
 
     public String verificaVariable(String variable) {
-        String verificada = "";
+        String verificada;
         if (variable == null) {
             verificada = "-2";
         } else if (variable.equals("")) {

@@ -93,7 +93,7 @@
                                         out.println("<td>" + del[5] + "</td>");
                                         out.println("<td><a class='pop' href='delitos.jsp?delitoClave=" + del[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("<td><a href='#' class='borrar'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                        out.println("<td><img src='img/delete.png' class='borrar' title='Eliminar' onclick='borraR(this)'/></td>");
                                         out.println("</tr>");
                                     }else{//Si el delito no esta en la BD lo agregamos vacio
                                         out.println("<tr>");
@@ -105,7 +105,7 @@
                                         out.println("<td></td>");
                                         out.println("<td><a class='pop' href='delitos.jsp?delitoClave=" + del[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("<td><a href='#' class='borrar'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                        out.println("<td><img src='img/delete.png' class='borrar' title='Eliminar' onclick='borraR(this)'/></td>");
                                         out.println("</tr>");
                                     }
                                     y++;
@@ -144,7 +144,7 @@
                                         out.println("<td>" + proc[4] + "</td>");
                                         out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + proc[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("<td><a href='#' class='borrar'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                        out.println("<td><img src='img/delete.png' class='borrar' title='Eliminar' onclick='borraR(this)'/></td>");
                                         out.println("</tr>");
                                     }else{//Si el procesado no esta en BD se agrega vacio
                                         out.println("<tr>");
@@ -155,7 +155,7 @@
                                         out.println("<td></td>");
                                         out.println("<td><a class='pop' href='procesados.jsp?proceClave=" + proc[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("<td><a href='#' class='borrar'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                        out.println("<td><img src='img/delete.png' class='borrar' title='Eliminar' onclick='borraR(this)'/></td>");
                                         out.println("</tr>");
                                     }
                                     y++;
@@ -194,7 +194,7 @@
                                         out.println("<td>" + vi[4] + "</td>");
                                         out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + vi[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("<td><a href='#' class='borrar'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                        out.println("<td><img src='img/delete.png' class='borrar' title='Eliminar' onclick='borraR(this)'/></td>");
                                         out.println("</tr>");
                                     }else{//Si la victima no esta en BD se agrega vacia
                                         out.println("<tr>");
@@ -205,7 +205,7 @@
                                         out.println("<td></td>");
                                         out.println("<td><a class='pop' href='victimas.jsp?victiClave=" + vi[0].replace(jc.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
-                                        out.println("<td><a href='#' class='borrar'><img src='img/delete.png' title='Eliminar'/></a></td>");
+                                        out.println("<td><img src='img/delete.png' class='borrar' title='Eliminar' onclick='borraR(this)'/></td>");
                                         out.println("</tr>");
                                     }
                                     y++;

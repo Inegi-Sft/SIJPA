@@ -35,16 +35,14 @@ public class obtenJuzgado extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
+            
             String juzgadoClave = request.getParameter("juzgado");
             if(sJuz.findJuzgadoExist(juzgadoClave)){
                 out.write("1");
             }else{
                 out.write("0");
             }
-        } finally {
-            out.close();
         }
     }
 

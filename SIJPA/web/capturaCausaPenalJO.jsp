@@ -20,7 +20,6 @@
         <%
             catalogos cat = new catalogos();
             showJueces juez = new showJueces();
-            showJuzgados juzgados = new showJuzgados();
             showCausasPenalesJO causaPenalJO = new showCausasPenalesJO();
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();
@@ -28,17 +27,16 @@
             ArrayList<String[]> lista, lisCausaJC, lisCausaJO;
             ArrayList<String> lis;
             
-            String juzgadoClave = (String)session.getAttribute("juzgadoClave");
+            String juzgadoClaveJO = (String)session.getAttribute("juzgadoClave");
+            String juzgadoClaveJC = "";
             String operacion = "";//Variable de control para saber si se inserta o se 
             String causaClaveJC = "";
-            String fechaIngresoJC = "";
             String causaClaveJO = "";
+            String fechaIngresoJC = "";
             String fechaIngresoJO = "";
             String totDelitos = "";
             String totProce = "";
             String totVicti = "";
-            String orgDiferen = "";
-            String juzgaDif = "";
             String cantJueces = "";
             String juez1 = "";
             String juez2 = "";
@@ -46,35 +44,34 @@
             String comen = "";
             if(request.getParameter("causaClaveJO") != null){//Ya esta guardada la causa penal
                 //Si viene la variable causa penales JO entonces recuperamos los datos
-                causaClaveJO = request.getParameter("causaClaveJO");//Creamos variable de sesion de JO
-                causaClaveJC = request.getParameter("causaClaveJC");//Actualizamos la viariable de sesion de JC
-                lisCausaJO = causaPenalJO.findCausaPenalJO(juzgadoClave, causaClaveJO + juzgadoClave.replace("-", ""));
+                juzgadoClaveJC = request.getParameter("juzClaveJC");
+                causaClaveJO = request.getParameter("causaClaveJO");
+                causaClaveJC = request.getParameter("causaClaveJC");
+                lisCausaJO = causaPenalJO.findCausaPenalJO(juzgadoClaveJO, causaClaveJO + juzgadoClaveJO.replace("-", ""));
                 if(lisCausaJO.size() > 0){
-                    session.setAttribute("causaClaveJO", causaClaveJO + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave JO
-                    session.setAttribute("causaClave", causaClaveJC + juzgadoClave.replace("-", ""));//Iniciamos variable de sesion con causa clave JO
+                    session.setAttribute("juzgadoClaveJC", juzgadoClaveJC);
+                    session.setAttribute("causaClaveJO", causaClaveJO + juzgadoClaveJO.replace("-", ""));//Iniciamos variable de sesion con causa clave JO
+                    session.setAttribute("causaClave", causaClaveJC + juzgadoClaveJC.replace("-", ""));//Iniciamos variable de sesion con causa clave JC
                     operacion = "actualizar";
                     //Recuperamos todo los datos de JO
-                    juzgadoClave = lisCausaJO.get(0)[0];//Se cambia la variable por la recuperacion de BD
-                    causaClaveJC = request.getParameter("causaClaveJC");
-                    fechaIngresoJC = lisCausaJO.get(0)[1];
-                    fechaIngresoJO = lisCausaJO.get(0)[2];
-                    totDelitos = lisCausaJO.get(0)[3];
-                    totProce = lisCausaJO.get(0)[4];
-                    totVicti = lisCausaJO.get(0)[5];
-                    orgDiferen = lisCausaJO.get(0)[6];
-                    juzgaDif = lisCausaJO.get(0)[7];
-                    cantJueces = lisCausaJO.get(0)[8];
-                    juez1 = lisCausaJO.get(0)[9];
-                    juez2 = lisCausaJO.get(0)[10];
-                    juez3 = lisCausaJO.get(0)[11];
-                    comen = lisCausaJO.get(0)[12];
+                    fechaIngresoJC = lisCausaJO.get(0)[0];
+                    fechaIngresoJO = lisCausaJO.get(0)[1];
+                    totDelitos = lisCausaJO.get(0)[2];
+                    totProce = lisCausaJO.get(0)[3];
+                    totVicti = lisCausaJO.get(0)[4];
+                    cantJueces = lisCausaJO.get(0)[5];
+                    juez1 = lisCausaJO.get(0)[6];
+                    juez2 = lisCausaJO.get(0)[7];
+                    juez3 = lisCausaJO.get(0)[8];
+                    comen = lisCausaJO.get(0)[9];
                 }
             }else if(request.getParameter("causaClaveJC") != null){//Es nueva con recuperacion de JC del mismo juxgado
                 //Si no trae JO entonces trae JC solamente y recuperamos datos de JC
+                juzgadoClaveJC = request.getParameter("juzClaveJC");
                 causaClaveJC = request.getParameter("causaClaveJC");
-                lisCausaJC = causaPenalJO.findCausaPenalJC(juzgadoClave, causaClaveJC + juzgadoClave.replace("-", ""));
+                lisCausaJC = causaPenalJO.findCausaPenalJC(juzgadoClaveJC, causaClaveJC + juzgadoClaveJC.replace("-", ""));
                 if(lisCausaJC.size() > 0){
-                    session.setAttribute("causaClave", causaClaveJC + juzgadoClave.replace("-", ""));//Actualizamos variable de sesion con causa clave JC
+                    session.setAttribute("causaClave", causaClaveJC + juzgadoClaveJC.replace("-", ""));//Actualizamos variable de sesion con causa clave JC
                     //Solo recuperamos las necesarias que se comparten JC y JO
                     fechaIngresoJC = lisCausaJC.get(0)[0];
                     totDelitos = lisCausaJC.get(0)[1];
@@ -96,27 +93,23 @@
                                 <fieldset class="subField">
                                     <legend>Datos Juzgado de Control</legend>
                                     <div class="cols">
-                                        <label for="jClaveJC">Juzgado Clave JC</label>
+                                        <label for="jClaveJC">Juzgado Clave Juzgado Control</label>
                                         <%
                                             if(causaClaveJC != ""){
-                                                out.println("<input type='text' name='jClaveJC' id='jClaveJC' value='" + juzgadoClave + "' disabled>");
+                                                out.println("<input type='text' name='jClaveJC' id='jClaveJC' value='" + juzgadoClaveJC + "' readonly>");
                                             }else{
                                                 out.println("<select name='jClaveJC' id='jClaveJC'>");
                                                 out.println("<option value=''>--Seleccione--</option>");
-                                                lis = causaPenalJO.findJuzgadosEnJO(juzgadoClave);
+                                                lis = causaPenalJO.findJuzgadosEnJO(juzgadoClaveJO);
                                                 for(String ls : lis) {
-                                                    out.println("<option value='" + ls + "'");
-                                                    if(ls.equals(orgDiferen)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls + "</option>");
+                                                    out.println("<option value='" + ls + "'>" + ls + "</option>");
                                                 }
                                                 out.println("</select>");
                                             }
                                         %>
                                     </div>
                                     <div class="cols">
-                                        <label for="expClaveJC">No. Asunto Asignado JC</label>
+                                        <label for="expClaveJC">No. Asunto Asignado Juzgado Control</label>
                                         <%
                                             if(causaClaveJC != ""){
                                                 out.println("<input type='text' name='expClaveJC' id='expClaveJC' value='" + causaClaveJC + "' readonly>");
@@ -128,7 +121,7 @@
                                         %>
                                     </div>
                                     <div class="cols">
-                                        <label for="fIngresoJC">Fecha de ingreso JC</label>
+                                        <label for="fIngresoJC">Fecha de ingreso Juzgado Control</label>
                                         <input type="date" name="fIngresoJC" id="fIngresoJC" value="<%=fechaIngresoJC%>" max="<%=fechas%>" required readonly>
                                         <div class="noIdentificada">
                                             <input type="checkbox" id="chkFechaIngreJC" onclick="fechaNoIdent('#chkFechaIngreJC', '#fIngresoJC')" disabled>
@@ -143,16 +136,16 @@
                                 <fieldset class="subField">
                                     <legend>Datos Juiocio Oral</legend>
                                     <div class="cols">
-                                        <label for="jClaveJO">Juzgado Clave JO</label>
+                                        <label for="jClaveJO">Juzgado Clave Juicio Oral</label>
                                         <input type="text" name="jClaveJO" id="jClaveJO" value="${sessionScope.juzgadoClave}" readonly>
                                         <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
                                     </div>
                                     <div class="cols">
-                                        <label for="expClaveJO">No. Asunto Asignado JO</label>
+                                        <label for="expClaveJO">No. Asunto Asignado Juicio Oral</label>
                                         <input type="text" name="expClaveJO" id="expClaveJO" value="<%=causaClaveJO%>" maxlength="15" onkeypress="return validaMascara(event)" onblur="ValidaCarpeInvest('#expClaveJO')" placeholder="Ej: 00001/2020" required/>
                                     </div>
                                     <div class="cols">
-                                        <label for="fIngresoJO">Fecha de ingreso JO</label>
+                                        <label for="fIngresoJO">Fecha de ingreso Juicio Oral</label>
                                         <input type="date" name="fIngresoJO" id="fIngresoJO" value="<%=fechaIngresoJO%>" max="<%=fechas%>" required>
                                         <div class="noIdentificada">
                                             <input type="checkbox" id="chkFechaIngreJO" onclick="fechaNoIdent('#chkFechaIngreJO', '#fIngresoJO')">
@@ -166,14 +159,17 @@
                             <td>
                                 <label for="TdelitosJO">Total de delitos</label>
                                 <input type="number" name="TdelitosJO" id="TdelitosJO" value="<%=totDelitos%>" min="<%=totDelitos%>">
+                                <input type="hidden" name="TdelitosJC" id="TdelitosJC" value="<%=totDelitos%>">
                             </td>
                             <td>
                                 <label for="TadolescentesJO">Total de imputados</label>
                                 <input type="number" name="TadolescentesJO" id="TadolescentesJO" value="<%=totProce%>" min="<%=totProce%>">
+                                <input type="hidden" name="TadolescentesJC" id="TadolescentesJC" value="<%=totProce%>">
                             </td>
                             <td>
                                 <label for="TvictimasJO">Total de víctimas</label>
                                 <input type="number" name="TvictimasJO" id="TvictimasJO" value="<%=totVicti%>" min="<%=totVicti%>">
+                                <input type="hidden" name="TvictimasJC" id="TvictimasJC" value="<%=totVicti%>">
                             </td>
                         </tr>
                     </table>
@@ -220,7 +216,7 @@
                                     <select name="juezJO1" id="juezJO1">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez1)){
@@ -237,7 +233,7 @@
                                     <select name="juezJO2" id="juezJO2">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClave,causaClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez2)){
@@ -254,7 +250,7 @@
                                     <select name="juezJO3" id="juezJO3">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClave, causaClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez3)){

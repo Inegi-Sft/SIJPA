@@ -37,7 +37,7 @@ public class showConclusiones {
                 conc.add(new String[]{
                     resul.getString("FECHA_CONCLUSION"), resul.getString("TIPO_RESOLUCION"),resul.getString("TIPO_SOBRESEIMIENTO"),
                     resul.getString("PROCEDENCIA_SOBRESEIMIENTO"),resul.getString("EXCLUSION_ACCIONP"),
-                    resul.getString("FECHA_SUSPENSION"), resul.getString("MECANISMO_ACUERDO"), resul.getString("FECHA_ACUERDO"),
+                    resul.getString("FECHA_SUSPENCION"), resul.getString("MECANISMO_ACUERDO"), resul.getString("FECHA_ACUERDO"),
                     resul.getString("TIPO_CONCLUSION_PA"), resul.getString("MEDIDA_PRIVATIVA"), resul.getString("MEDIDA_NOPRIVATIVA"),
                     resul.getString("TIEMPO_INTERNAMIENTO"), resul.getString("REPARACION_DANIO"), resul.getString("TIPO_REPARACION_DANIO"),
                     resul.getString("MONTO_REPARA"), resul.getString("IMPUGNACION"), resul.getString("TIPO_IMPUGNACION"),

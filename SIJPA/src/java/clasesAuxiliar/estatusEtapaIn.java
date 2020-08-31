@@ -36,7 +36,6 @@ public class estatusEtapaIn {
         Texto6="";
         for (String[] ET : Etapa) {
             if (ET[1].equals("5")){//CONCLUSION Y/O TRAMITE
-                System.out.println("Entro a etapa 5");
                 CPT = Tram.countTramiteProc(causaClave, ET[0]);
                 CPC = Conclu.countConclusionesProc(causaClave, ET[0]);
                 if ((CPT == 0 && CPC == 0)) {
@@ -45,7 +44,6 @@ public class estatusEtapaIn {
                     Texto1="";  
                 }
             } else if (ET[1].equals("3") ) {
-                System.out.println("ENTRO A ETAPA 3");
                 CPT = Tram.countTramiteProc(causaClave, ET[0]);
                 if (CPT == 0) {
                     Texto2 ="---*Por Capturar Procesado " + ET[0].replace(JuzClave, "") + " En Tramite --";
@@ -53,7 +51,6 @@ public class estatusEtapaIn {
                     Texto2=""; 
                 }
             }else if (ET[1].equals("2") ) {
-                System.out.println("ENTRO A ETAPA 2");
                 CPC = Conclu.countConclusionesProc(causaClave, ET[0]);
                 if (CPC == 0) {
                     Texto3 ="---*Por Capturar Procesado " + ET[0].replace(JuzClave, "") + " En Conclusion --";
@@ -61,7 +58,6 @@ public class estatusEtapaIn {
                     Texto3="";  
                 }
             }else if (ET[1].equals("1") ) {
-                System.out.println("ENTRO A ETAPA 1");
                 CPI = Inte.countIntermediaProc(causaClave, ET[0]);
                 if (CPI == 0) {
                     Texto4 ="---*Por Capturar Procesado " + ET[0].replace(JuzClave, "") + " En Etapa Intermedia --";
@@ -69,7 +65,6 @@ public class estatusEtapaIn {
                     Texto4=""; 
                 }
             }else if (ET[1].equals("6") ) {
-                System.out.println("ENTRO A ETAPA 6");
                 CPI = Inte.countIntermediaProc(causaClave, ET[0]);
                 CPC = Conclu.countConclusionesProc(causaClave, ET[0]);
             if (CPI == 0 && CPC == 0) {
@@ -78,7 +73,6 @@ public class estatusEtapaIn {
                 Texto5="";
                }
             }else if (ET[1].equals("7") ) {
-                System.out.println("ENTRO A ETAPA 7");
                 CPI = Inte.countIntermediaProc(causaClave, ET[0]);
                 CPT = Tram.countTramiteProc(causaClave, ET[0]);
                 if ((CPI == 0 && CPT == 0)) {

@@ -25,8 +25,8 @@ public class estatusEtapaJO {
     
     
     public String findEstatusOral( String causaClaveJO,String JuzgadoClave){
-  Etapa=Inicial.findEtapaCausaProClaveJO(causaClaveJO);
-  String JuzClave=JuzgadoClave.replace("-","");
+        Etapa=Inicial.findEtapaCausaProClaveJO(causaClaveJO);
+        String JuzClave = JuzgadoClave.replace("-","");
         int CPT=0,CPC=0,CPI=0; 
         Texto1="";
         Texto2="";
@@ -35,9 +35,7 @@ public class estatusEtapaJO {
         Texto5="";
         Texto6="";
         for (String[] ET : Etapa) {
-            if (ET[1].equals("5"))//CONCLUSION Y/O TRAMITE
-            {
-                System.out.println("Entro a etapa 5");
+            if (ET[1].equals("5")){//CONCLUSION Y/O TRAMITE
                 CPT = Tram.countTramiteProcJO(causaClaveJO, ET[0]);
                 CPC = Conclu.countConclusionesProcJO(causaClaveJO, ET[0]);
                 if ((CPT == 0 && CPC == 0)) {
@@ -46,30 +44,22 @@ public class estatusEtapaJO {
                   Texto1="";  
                   }
             } else if (ET[1].equals("3") ) {
-                System.out.println("ENTRO A ETAPA 3");
                 CPT = Tram.countTramiteProcJO(causaClaveJO, ET[0]);
-            if (CPT == 0) {
-                Texto2 ="---*Por Capturar Procesado " + ET[0].replace(JuzClave, "") + " En Tramite --";
-            }else{
-                Texto2=""; 
-               }
+                if (CPT == 0) {
+                    Texto2 ="---*Por Capturar Procesado " + ET[0].replace(JuzClave, "") + " En Tramite --";
+                }else{
+                    Texto2=""; 
+                }
             }else if (ET[1].equals("2") ) {
-                System.out.println("ENTRO A ETAPA 2");
                 CPC = Conclu.countConclusionesProcJO(causaClaveJO, ET[0]);
-            if (CPC == 0) {
-                Texto3 ="---*Por Capturar Procesado " + ET[0].replace(JuzClave, "") + " En Conclusion --";
-            }else{
-                Texto3="";  
-               }
+                if (CPC == 0) {
+                    Texto3 ="---*Por Capturar Procesado " + ET[0].replace(JuzClave, "") + " En Conclusion --";
+                }else{
+                    Texto3="";  
+                }
             }
-            System.out.println("PROCESADO_CLAVE: " + ET[0]);
-            System.out.println("ETAPA: " + ET[1]);
         }
-        System.out.println(JuzgadoClave);
-        return Texto1+Texto2+Texto3;
-           
- } 
-    
-    
+        return Texto1 + Texto2 + Texto3;  
+ }
     
 }

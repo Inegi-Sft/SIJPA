@@ -67,7 +67,6 @@
                     conclusiones = sConclu.findConclusion(causaClave, proceClave + jConcatenado);
                     if(conclusiones.size() > 0){
                         operacion = "actualizar";
-                        System.out.println("conclusiones: "+Arrays.toString(conclusiones.get(0)));
                         fechaResol = conclusiones.get(0)[0];
                         tipoResol = conclusiones.get(0)[1];
                         sobreseimto = conclusiones.get(0)[2];
@@ -99,7 +98,6 @@
                 if(!tipoResIn.equals("")){
                     tipoResol = tipoResIn;
                 }
-                System.out.println("Tipo res: " + tipoResol);
             }
         %>
     </head>
@@ -520,9 +518,6 @@
                     <textarea name="comentarios" id="comentarios"><%=comen%></textarea>
                 </div>
                 <br/>
-                <%
-                System.out.println("Si está pasando por botón");
-                        %>
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>

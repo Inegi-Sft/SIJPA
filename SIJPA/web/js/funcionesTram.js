@@ -5,7 +5,10 @@
  */
 
 $(document).ready(function() {
-    /*---------------------------- FUNCIONES TRAMITE JC----------------------------*/
+    if($('#opera').val() !== ''){
+        $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //Se usa para la recuperacion de BD
     if($('#eProcesal').val() === '1'){
         $('#dEstInvesti').show();

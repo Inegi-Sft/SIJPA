@@ -15,7 +15,7 @@
         usuario usu = new usuario();
         int avance = usu.findAvanceUsuario(request.getParameter("causaClave") + juzgadoClave.replace("-", ""));
         etapas = sIni.findEtapaCausa(request.getParameter("causaClave") + juzgadoClave.replace("-", ""));
-        String [] pestanas = {"Causa Penal","Delitos","Adolescentes","Victimas","Inicial","Intermedia",
+        String [] pestanas = {"Causa Penal","Delitos","Imputados","Victimas","Inicial","Intermedia",
             "Conclusión y/o Terminación","Tramite"};
         
         out.println("<button class='pestanaLinks active' onclick=\"openPestana('btn1', 'p1')\" id='btn1'>" + pestanas[0] + "</button>");

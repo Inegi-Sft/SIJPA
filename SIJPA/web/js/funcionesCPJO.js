@@ -6,9 +6,23 @@
 
 $(document).ready(function () {
     
+    //Se usa para la recuperacion de datos de DB
+    if($('#expClaveJC').val() === ''){
+        $('#TdelitosJO').prop('disabled', true);
+        $('#TadolescentesJO').prop('disabled', true);
+        $('#TvictimasJO').prop('disabled', true);
+    }
+    
+    //Se usa para la recuperacion de datos de DB
     if($('#expClaveJO').val() !== ''){
         $('#formCausaPenalJO').find('input, textarea, button, select').attr('disabled', true);
         $("#guardarExpJO").prop("hidden", true);
+    }
+    
+    //Se usa para la recuperacion de datos de DB
+    if($('#fIngresoJC').val() === '1899-09-09'){
+        $('#fIngresoJC').prop('readonly', true);
+        $('#chkFechaIngreJC').prop('checked', true);
     }
     
     //Se usa para la recuperacion de datos de DB
@@ -16,62 +30,117 @@ $(document).ready(function () {
         $('#fIngresoJO').prop('readonly', true);
         $('#chkFechaIngreJO').prop('checked', true);
     }
+  
+    //se usa para la recuperacion de BD
+    var valor1 = $('#juezJO1').val(); 
+    var valor2 = $('#juezJO2').val(); 
+    var valor3 = $('#juezJO3').val(); 
+
+    if(valor1!==""){
+        $("#juezJO2 option[value=" + valor1 + "]").attr("disabled", true);
+        $("#juezJO3 option[value=" + valor1 + "]").attr("disabled", true);
+    }
+    if(valor2!==""){
+        $("#juezJO1 option[value=" + valor2 + "]").attr("disabled", true);
+        $("#juezJO3 option[value=" + valor2 + "]").attr("disabled", true);
+    }
+    if(valor3!==""){
+       $("#juezJO1 option[value=" + valor3 + "]").attr("disabled", true);
+       $("#juezJO2 option[value=" + valor3 + "]").attr("disabled", true);
+   }
     
     //Se usa para la recuperacion de BD
-    if($('#difeOrgano').val() === '1'){
-        $('#divOrgDif').show();
-        $('#cantJuez,#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
-    }else if($('#difeOrgano').val() === '2'){
-            $('#regCantJuez').show();
-        //Si dice que NO en otro organo entonces le mostramos la cantidad de jueces y jueces
-        if($('#cantJuezHi').val() !== ''){
-            var cantiJuez = $('#cantJuezHi').val();
-            if(cantiJuez === '1'){
-                $('#divJuezJO1').show();
-            }else if(cantiJuez === '2'){
-                $('#divJuezJO1,#divJuezJO2').show();
-            }else{
-                $('#divJuezJO1,#divJuezJO2,#divJuezJO3').show();
+//    if($('#difeOrgano').val() === '1'){
+//        $('#divOrgDif').show();
+//        $('#cantJuez,#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
+//    }else if($('#difeOrgano').val() === '2'){
+//            $('#regCantJuez').show();
+//        //Si dice que NO en otro organo entonces le mostramos la cantidad de jueces y jueces
+//        if($('#cantJuezHi').val() !== ''){
+//            var cantiJuez = $('#cantJuezHi').val();
+//            if(cantiJuez === '1'){
+//                $('#divJuezJO1').show();
+//            }else if(cantiJuez === '2'){
+//                $('#divJuezJO1,#divJuezJO2').show();
+//            }else{
+//                $('#divJuezJO1,#divJuezJO2,#divJuezJO3').show();
+//            }
+//            $("#cantJuez option[value='" + cantiJuez + "']").prop('selected', true);
+//        }
+//    }
+    
+    //Solo entra si la causa penal JC se atendio en otro organo para llenar las causas
+    $('#jClaveJC').change(function(){
+        //Vaciamos las variables para que no exista confucion
+        $('#fIngresoJC').val('');
+        $('#chkFechaIngreJC').prop('checked', false);
+        $('#TdelitosJO').val('');
+        $('#TadolescentesJO').val('');
+        $('#TvictimasJO').val('');
+        var jClaveJC = $(this).val();//Recuperamos el valor de juzgado clave
+        $.ajax({
+            type: 'post',
+            url: 'obtenCausasJC',
+            data:{jClaveJC: jClaveJC},
+            success: function (response) {
+                console.log("Respuesta del obten Causas JC", response);
+                $('#expClaveJC').html(response);
+                $('#expClaveJC').prop('disabled', false);
+            },
+            error: function (response) {
+                console.log("Respuesta del obten Causas JC", response);
             }
-            $("#cantJuez option[value='" + cantiJuez + "']").prop('selected', true);
-        }
-    }
-    
-    //se usa para la recuperacion de BD
-        var valor1 = $('#juezJO1').val(); 
-        var valor2 = $('#juezJO2').val(); 
-        var valor3 = $('#juezJO3').val(); 
-        
-        if(valor1!==""){
-            $("#juezJO2 option[value=" + valor1 + "]").attr("disabled", true);
-            $("#juezJO3 option[value=" + valor1 + "]").attr("disabled", true);
-        }
-        if(valor2!==""){
-            $("#juezJO1 option[value=" + valor2 + "]").attr("disabled", true);
-            $("#juezJO3 option[value=" + valor2 + "]").attr("disabled", true);
-        }
-        if(valor3!==""){
-           $("#juezJO1 option[value=" + valor3 + "]").attr("disabled", true);
-           $("#juezJO2 option[value=" + valor3 + "]").attr("disabled", true);
-       }
-       
-    
-    $('#difeOrgano').change(function(){
-        if($(this).val() === '2'){
-            $('#regCantJuez').fadeIn();
-            $('#cantJuez').val('').prop('required', true);
-            
-            $('#divOrgDif').fadeOut();
-            $('#orgDif').val('-2').prop('required', false);
-        }else{
-            $('#divOrgDif').fadeIn();
-            $('#orgDif').val('').prop('required', true);
-            
-            $('#regCantJuez').fadeOut();
-            $('#divJuezJO1,#divJuezJO2,#divJuezJO3').fadeOut();
-            $('#cantJuez,#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
-        }
+        });
     });
+    
+    //Solo entra si la causa penal JC se atendio en otro organo para llenar la fecha y totales ingreso de jc
+    $('#expClaveJC').change(function(){
+        var expClaveJC = $(this).val();
+        var jClaveJC = $('#jClaveJC').val();
+        $.ajax({
+            type: 'post',
+            url: 'obtenCausasJC',
+            data:{
+                expClaveJC: expClaveJC,
+                jClaveJC: jClaveJC
+            },
+            success: function (response) {
+                console.log("Respuesta del obten datos Causas JC", response[0]);
+                if(response[0] === '1899-09-09'){
+                    $('#chkFechaIngreJC').prop('checked', true);
+                }else{
+                    $('#chkFechaIngreJC').prop('checked', false);
+                }
+                $('#fIngresoJC').val(response[0]);
+                $('#TdelitosJO').val(response[1]);
+                $('#TdelitosJO').attr({'disabled': false, 'min': response[1]});
+                $('#TadolescentesJO').val(response[2]);
+                $('#TadolescentesJO').attr({'disabled': false, 'min': response[2]});
+                $('#TvictimasJO').val(response[3]);
+                $('#TvictimasJO').attr({'disabled': false, 'min': response[3]});
+            },
+            error: function (response) {
+                console.log("Respuesta del obten Causas JC", response);
+            }
+        });
+    });
+    
+//    $('#difeOrgano').change(function(){
+//        if($(this).val() === '2'){
+//            $('#regCantJuez').fadeIn();
+//            $('#cantJuez').val('').prop('required', true);
+//            
+//            $('#divOrgDif').fadeOut();
+//            $('#orgDif').val('-2').prop('required', false);
+//        }else{
+//            $('#divOrgDif').fadeIn();
+//            $('#orgDif').val('').prop('required', true);
+//            
+//            $('#regCantJuez').fadeOut();
+//            $('#divJuezJO1,#divJuezJO2,#divJuezJO3').fadeOut();
+//            $('#cantJuez,#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
+//        }
+//    });
     
     $('#cantJuez').change(function(){
         $("#juezJO1 option:not(:selected), #juezJO2 option:not(:selected),#juezJO3 option:not(:selected)").attr("disabled", false);
@@ -101,10 +170,10 @@ $(document).ready(function () {
         }
     });
     
-    $('#orgDif').change(function(){
+    $('#juezJO1, #juezJO2, #juezJO3').change(function(){
         if($(this).val() === '100'){
             alert('Favor de capturar el Juez y regresar a capturar el expediente');
-            window.location.href = 'capturaJuzgado.jsp';
+            window.location.href = 'capturaJuez.jsp';
             //hacer la funcion en un futuro para capturar desde fancybox
 //            $.fancybox.open({
 //                src  : 'capturaJuzgado.jsp',

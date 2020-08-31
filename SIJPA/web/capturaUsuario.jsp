@@ -83,7 +83,7 @@
                         <tr>
                             <td>
                                 <label for="nom">Nombre(s)</label>
-                                <input type="text" name="nom" id="nom" value="<%=nombreUsu%>" required>
+                                <input type="text" name="nom" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" id="nom" value="<%=nombreUsu%>" required>
                                 <% //Si no tenemos usuarios insertados en BD entonces el primero es el admin, posterior seran captura
                                     if(totUsuarios == 0){
                                         out.println("<input type='hidden' name='tipoUsuario' id='tipoUsuario' value='1'/>");
@@ -94,11 +94,11 @@
                             </td>
                             <td>
                                 <label for="paterno">Apellido Paterno</label>
-                                <input type="text" name="paterno" id="paterno" value="<%=aPaterno%>" required>
+                                <input type="text" name="paterno" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" id="paterno" value="<%=aPaterno%>" required>
                             </td>
                             <td>
                                 <label for="materno">Apellido Materno</label>
-                                <input type="text" name="materno" id="materno" value="<%=aMaterno%>" required>
+                                <input type="text" name="materno" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" id="materno" value="<%=aMaterno%>" required>
                             </td>
                         </tr>
                         <tr>

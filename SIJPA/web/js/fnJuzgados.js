@@ -18,36 +18,15 @@ $(document).ready(function() {
         $('#dPartJudicial').show();
     }
     
-    //para cambiar el boton de guardar o siguiente, segun se edite o inserte organo
+    //para cambiar el boton a siguiente al insertar nuevo organo y se establece el año de ejercicio
     if($('#nomOrgano').val() === ''){
+        $('#banderaJC').val('');
+        $('#banderaJO').val('');
+        $('#banderaJOGuardar').prop('required',true);
         $('#guardar').val("Siguiente");
-        $('#funcionJuz').change(function(){
-            var numFunc = $(this).val();
-            if(numFunc === '2' || numFunc === '3'){
-                $('#ejercicioJC').val('');
-                $('#ejercicioJO').change(function(){
-                    var numEjer = $(this).val();
-                    if(numEjer === ''){
-                        $('#guardar').val("Siguiente");
-                    }else{
-                        if($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== ''){
-                            $('#guardar').val("Guardar");
-                        }
-                    }
-                });
-            }else{
-                $('#ejercicioJO').val('');
-                $('#ejercicioJC').change(function(){
-                    var numEjer = $(this).val();
-                    if(numEjer === ''){
-                        $('#guardar').val("Siguiente");
-                    }else{
-                        if($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== ''){
-                            $('#guardar').val("Guardar");
-                        }
-                    }
-                });
-        }});
+        var anio = new Date().getFullYear();
+        $('#ejercicio').append(new Option(anio, anio));
+        $('#ejercicio').val(anio);
     }
     //para recuperacion de datos condicionales para mostrar las opciones Informacion General JC o JO, segÃºn sea el caso
     if($('#funcionJuz').val() === '1'){
@@ -212,21 +191,28 @@ function valida(){
     }else if ($('#cargo').val() ==='') {
         alert('Secci\u00F3n Datos del Capturador: \n\n Llena el campo Cargo');
         openPestana('btn4', 'p4');
-    }else if ($('#funcionJuz').val() ==='1'){
-        if($('#ejercicioJC').val() === ''){
-            openPestana('btn5', 'p5');
-        }
-    }else if ($('#funcionJuz').val() ==='2'){
-        if($('#ejercicioJO').val() === ''){
-            openPestana('btn6', 'p6');
-        }
-    }
-    else if ($('#funcionJuz').val() ==='3'){
-        if($('#ejercicioJC').val() === ''){
-            openPestana('btn5', 'p5');
-        }
-        if($('#ejercicioJO').val() === ''){
-            openPestana('btn6', 'p6');
+    }else if ($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== '' && $('#funcionJuz').val() ==='1' && $('#banderaJC').val() !=='-2'){
+        $('#banderaJC').val('-2');
+        $('#guardar').val("Guardar");
+        openPestana('btn5','p5');
+    }else if($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== '' && $('#funcionJuz').val() ==='1' && $('#banderaJC').val() ==='-2'){
+        $('#banderaJOGuardar').prop('required',false);
+    }else if ($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== '' && $('#funcionJuz').val() ==='2' && $('#banderaJO').val() !=='-2'){
+        $('#banderaJO').val('-2');
+        $('#guardar').val("Guardar");
+        openPestana('btn5','p5');
+    }else if($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== '' && $('#funcionJuz').val() ==='2' && $('#banderaJO').val() ==='-2'){
+        $('#banderaJOGuardar').prop('required',false);
+    }else if ($('#nomOrgano').val() !== '' && $('#numOrgano').val() !== '' && $('#jurisdiccion').val() !== '' && $('#telJuz').val() !== '' && $('#correo').val() !== '' && $('#funcionJuz').val() !== '' && $('#entidadJ').val() !== '' && $('#municipioJ').val() !== '' && $('#fDivision').val() !== '' && ($('#regJudicial').val() !== '' || $('#distJudicial').val() !== '' || $('#partJudicial').val() !== '') && $('#vialidad').val() !== '' && $('#asentamiento').val() !== '' && $('#cp').val() !== '' && $('#nomVialidad').val() !== '' && $('#nomAsentamiento').val() !== '' && $('#nombreCap').val() !== '' && $('#apaternoCap').val() !== '' && $('#amaternoCap').val() !== '' && $('#cargo').val() !== '' && $('#funcionJuz').val() ==='3'){
+        if($('#banderaJC').val() !=='-2' && $('#banderaJO').val() ===''){
+            $('#banderaJC').val('-2');
+            openPestana('btn5','p5');
+        }else if($('#banderaJC').val() ==='-2' && $('#banderaJO').val() !=='-2'){
+            $('#banderaJO').val('-2');
+            $('#guardar').val("Guardar");
+            openPestana('btn6','p6');
+        }else{
+            $('#banderaJOGuardar').prop('required',false);
         }
     }
 }

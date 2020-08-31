@@ -109,15 +109,15 @@
                         <tr>
                             <td>
                                 <label for="nombre">Nombre(s)</label>
-                                <input type="text" name="nombre" id="nombre" value="<%=nombreJuez%>" required/>
+                                <input type="text" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" name="nombre" id="nombre" value="<%=nombreJuez%>" required/>
                             </td>
                             <td>
                                 <label for="apaterno">Apellido Paterno</label>
-                                <input type="text" name="apaterno" id="apaterno" value="<%=apePateJuez%>" required/>
+                                <input type="text" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" name="apaterno" id="apaterno" value="<%=apePateJuez%>" required/>
                             </td>
                             <td>
                                 <label for="amaterno">Apellido Materno</label>
-                                <input type="text" name="amaterno" id="amaterno" value="<%=apeMateJuez%>" required/>
+                                <input type="text" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" name="amaterno" id="amaterno" value="<%=apeMateJuez%>" required/>
                             </td>
                             <td>
                                 <label for="fGestion">Fecha inicio gestion:</label>
@@ -150,8 +150,7 @@
                                 <select class="txtSmall" name="edadJuez" id="edadJuez" required>
                                     <option value="">--</option>
                                     <%
-                                        lista = cat.findEstudioProfesional();
-                                        for (int i = 30; i <= 99; i++) {
+                                        for (int i = 18; i <= 99; i++){
                                             out.println("<option value='" + i + "'");
                                             if(Integer.toString(i).equals(edadJuez)){
                                                 out.println(" selected ");
@@ -162,7 +161,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="estudioJuez">Grado de Estudios</label>
+                                <label for="estudioJuez">Grado de Estudios Concluidos</label>
                                 <select name="estudioJuez" id="estudioJuez" required>
                                     <option value="">--Seleccione--</option>
                                     <%

@@ -42,20 +42,22 @@ public class insrtCausaPenalJO extends HttpServlet {
             throws ServletException, IOException, SQLException {
         HttpSession sesion = request.getSession();
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
-        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String juzgadClaveJC = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadClaveJC.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
+        String juzgadClaveJO = request.getParameter("jClaveJO").toUpperCase();
         String causaClaveJC = request.getParameter("expClaveJC").toUpperCase();
         String causaClaveJO = request.getParameter("expClaveJO").toUpperCase();
-        String fecha_ingreso = request.getParameter("fIngresoJO");
+        String fechaIngresoJC = request.getParameter("fIngresoJC");
+        String fechaIngresoJO = request.getParameter("fIngresoJO");
         String totalDeli = request.getParameter("TdelitosJO");
         String totalAdo = request.getParameter("TadolescentesJO");
         String totalVic = request.getParameter("TvictimasJO");
-        String organoDiferente = request.getParameter("difeOrgano");
-        String juzgadoDiferente = request.getParameter("orgDif");
+        //String organoDiferente = request.getParameter("difeOrgano");
+        //String juzgadoDiferente = request.getParameter("orgDif");
         String cantJuez = request.getParameter("cantJuez");
         String juezJO1 = request.getParameter("juezJO1");
         String juezJO2 = request.getParameter("juezJO2");
@@ -76,9 +78,10 @@ public class insrtCausaPenalJO extends HttpServlet {
             if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
                 sesion.setAttribute("causaClaveJO", causaClaveJO + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
-                        + juzgadClave + "','" + causaClaveJC + jConcatenado +"','" + causaClaveJO + jConcatenado + "','" + fecha_ingreso + "',"
-                        + totalDeli + "," + totalAdo + "," + totalVic + ","+ organoDiferente +",'"+ juzgadoDiferente +"',"+cantJuez+"," 
-                        + juezJO1 +","+ juezJO2 +","+ juezJO3 +",'"+ comentario + "', (select YEAR(NOW())));";
+                        + juzgadClaveJC + "','" + juzgadClaveJO + "','" + causaClaveJC + jConcatenado + "','" 
+                        + causaClaveJO + jConcatenado + "','" + fechaIngresoJC + "','" + fechaIngresoJO + "',"
+                        + totalDeli + "," + totalAdo + "," + totalVic + "," +cantJuez+ "," 
+                        + juezJO1 + "," + juezJO2 + "," + juezJO3 + ",'" + comentario + "', (select YEAR(NOW())));";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     usuario usuario = new usuario();
@@ -89,12 +92,12 @@ public class insrtCausaPenalJO extends HttpServlet {
                     conn.close();
                 }
             }else{//Existe causa entonces es actualizacion
-                sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJO SET FECHA_INGRESO = '"+ fecha_ingreso +"', TOTAL_DELITOS = "+ totalDeli +","
-                    + " TOTAL_PROCESADOS = "+ totalAdo +", TOTAL_VICTIMAS = "+ totalVic +", ATENDIDA_ORGDIFERENTE = "+ organoDiferente +","
-                    + " JUZGADO_DIFERENTE = '"+ juzgadoDiferente +"', CANTIDAD_JUECES = "+ cantJuez +", JUEZ_CLAVE_1 = "+ juezJO1 +","
-                    + " JUEZ_CLAVE_2 = "+ juezJO2 +", JUEZ_CLAVE_3 = "+ juezJO3 +", COMENTARIOS = '" + comentario + "'"
-                    + " WHERE JUZGADO_CLAVE = '" + juzgadClave + "'"
-                    + " AND CAUSA_CLAVEJO = '" + sesion.getAttribute("causaClaveJO") + "';";
+                sql = "UPDATE DATOS_CAUSAS_PENALES_ADOJO SET FECHA_INGRESOJO = '" + fechaIngresoJO + "', TOTAL_DELITOS = " + totalDeli + ", "
+                        + "TOTAL_PROCESADOS = " + totalAdo + ", TOTAL_VICTIMAS = " + totalVic + ",CANTIDAD_JUECES = " + cantJuez + ", "
+                        + "JUEZ_CLAVE_1 = "+ juezJO1 +"," + "JUEZ_CLAVE_2 = " + juezJO2 + ", JUEZ_CLAVE_3 = " + juezJO3 + ", "
+                        + "COMENTARIOS = '" + comentario + "' "
+                        + "WHERE JUZGADO_CLAVE = '" + juzgadClaveJC + "' "
+                        + "AND CAUSA_CLAVEJO = '" + sesion.getAttribute("causaClaveJO") + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     out.write("0");

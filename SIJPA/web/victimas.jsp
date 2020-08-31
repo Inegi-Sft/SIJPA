@@ -205,7 +205,7 @@
                     </table>
                     <div class="comentarios oculto" id="divJustificacion">
                         <h3>Justificacón de los delitos cometidos a la víctima</h3>
-                        <textarea name="justificaDeli" id="justificaDeli" maxlength="500"><%=justificacion%></textarea>
+                        <textarea name="justificaDeli" id="justificaDeli" maxlength="500" readonly><%=justificacion%></textarea>
                     </div>
                 </fieldset>
                 <fieldset>

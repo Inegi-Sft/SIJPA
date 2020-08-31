@@ -25,16 +25,19 @@
             ArrayList<String[]> lista, delitoJC, delitoJO;
             ArrayList<String> deliAdi;
             
-            String delitoClave = "", posicion = "", edicion = "";
-            if (request.getParameter("delitoClave") != null || request.getParameter("posicion") != null) {
-                delitoClave = request.getParameter("delitoClave");
+            String delitoClaveJC = "", delitoClaveJO = "", posicion = "", edicion = "";
+            if (request.getParameter("delitoClaveJO") != null || request.getParameter("posicion") != null) {
+                delitoClaveJC = request.getParameter("delitoClaveJC");
+                delitoClaveJO = request.getParameter("delitoClaveJO");
                 posicion = request.getParameter("posicion");//Variable de control para saber la fila de la tabla que pertenece
             }
             
-            String juzgadoClave = (String)session.getAttribute("juzgadoClave");
+            String juzgadoClaveJC = (String)session.getAttribute("juzgadoClaveJC");
+            String juzgadoClaveJO = (String)session.getAttribute("juzgadoClave");
             String causaClaveJC = (String)session.getAttribute("causaClave");//Obtenemos la causa clave de JC
             String causaClaveJO = (String)session.getAttribute("causaClaveJO");//Obtenemos la causa clave de JO
             String operacion = "";//Variable de control para saber si se inserta o se actualiza
+            String datoSis = "";//Variable que se llena dependiendo de que datos se muestran
             String delitoCP = "";
             String fuero = "";
             String articuloCP = "";
@@ -58,9 +61,10 @@
             if(request.getParameter("edita") != null){//Si es diferente de null entonces le mostramos los datos de JO
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
-                    delitoJO = delitos.findDelitosJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""));
+                    delitoJO = delitos.findDelitosJO(causaClaveJO, delitoClaveJO + juzgadoClaveJO.replace("-", ""));
                     if(delitoJO.size() > 0){
                         operacion = "actualizar";
+                        datoSis = "Se muestran datos de Juicio Oral";
                         delitoCP = delitoJO.get(0)[0];
                         fuero = delitoJO.get(0)[1];
                         articuloCP = delitoJO.get(0)[2];
@@ -82,13 +86,14 @@
                         ocurreMuni = delitoJO.get(0)[18];
                         comen = delitoJO.get(0)[19]; 
                     }else{
-                        out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
+                        out.println("<script>alert('Delito " + delitoClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
                     }
                 }
-            }else{//Si no trae variable edita, entonces le motramos los datos de JC
-                delitoJC = delitos.findDelitosJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""));
+            }else if(!delitoClaveJC.equals("--")){//Si no trae variable edita, entonces le determinamos si trae JC
+                delitoJC = delitos.findDelitosJC(causaClaveJC, delitoClaveJC + juzgadoClaveJC.replace("-", ""));
                 if(delitoJC.size() > 0){
+                    datoSis = "Se muestran datos de Juzgado de Control";
                     delitoCP = delitoJC.get(0)[0];  
                     fuero = delitoJC.get(0)[1];
                     articuloCP = delitoJC.get(0)[2];
@@ -110,9 +115,11 @@
                     ocurreMuni = delitoJC.get(0)[18];
                     comen = delitoJC.get(0)[19];
                 }else{
-                    out.println("<script>alert('Delito " + delitoClave + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
+                    out.println("<script>alert('Delito " + delitoClaveJC + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                             + "parent.$.fancybox.close();</script>");
                 }
+            }else{//Si viene JC vacio entonces es un registro nuevo
+                datoSis = "Registro nuevo en Juicio Oral";
             }
         %>
     </head>
@@ -126,10 +133,20 @@
                     <table class="tablaFormu" >
                         <tr>
                             <td colspan="3">
-                                <label>Delito Clave</label>
-                                <input type="text" name="delitoClave" id="delitoClave" value="<%=delitoClave%>" readonly>
-                                <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
-                                <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
+                                <h5><%=datoSis%></h5>
+                                <% if(!delitoClaveJC.equals("--")){ %>
+                                    <div class="cols">
+                                        <label>Delito Clave Juzgado Control</label>
+                                        <input type="text" name="delitoClaveJC" id="delitoClaveJC" value="<%=delitoClaveJC%>" readonly>
+                                    </div>
+                                    <img src="img/flechaIz.png" id="flechaRela">
+                                <% } %>
+                                <div class="cols">
+                                    <label>Delito Clave Juicio Oral</label>
+                                    <input type="text" name="delitoClaveJO" id="delitoClaveJO" value="<%=delitoClaveJO%>" readonly>
+                                    <input type="hidden" name="posicion" id="posicion" value="<%=posicion%>">
+                                    <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -436,14 +453,14 @@
                                     out.println("<td>" + ls[1] + "</td>");
                                     out.println("<td>");
                                     if(!edicion.equals("")){//Diferente de vacio traemos JO
-                                        deliAdi = delitos.findDRoboJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        deliAdi = delitos.findDRoboJO(causaClaveJO, delitoClaveJO + juzgadoClaveJO.replace("-", ""), ls[0]);
                                         if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{
                                             out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "'>"); 
                                         }
                                     }else{//Traemos JC 
-                                        deliAdi = delitos.findDRoboJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        deliAdi = delitos.findDRoboJC(causaClaveJC, delitoClaveJC + juzgadoClaveJC.replace("-", ""), ls[0]);
                                         if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='cosaRobada' id='cosaRobada" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{
@@ -471,14 +488,14 @@
                                     out.println("<td>" + ls[1] + "</td>");
                                     out.println("<td>");
                                     if(!edicion.equals("")){
-                                        deliAdi = delitos.findDHomicidiosJO(causaClaveJO, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        deliAdi = delitos.findDHomicidiosJO(causaClaveJO, delitoClaveJO + juzgadoClaveJO.replace("-", ""), ls[0]);
                                         if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{
                                             out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "'>"); 
                                         }
                                     }else{
-                                        deliAdi = delitos.findDHomicidiosJC(causaClaveJC, delitoClave + juzgadoClave.replace("-", ""), ls[0]);
+                                        deliAdi = delitos.findDHomicidiosJC(causaClaveJC, delitoClaveJC + juzgadoClaveJC.replace("-", ""), ls[0]);
                                         if(deliAdi.size() != 0){
                                             out.println("<input type='checkbox' name='contextoSitua' id='contextoSitua" + ls[0] + "' value='" + ls[0] + "' checked>");
                                         }else{

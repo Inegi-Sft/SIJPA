@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -42,13 +43,13 @@ public class insrtCausaPenalJO extends HttpServlet {
             throws ServletException, IOException, SQLException {
         HttpSession sesion = request.getSession();
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
-        String juzgadClaveJC = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzgadClaveJC.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String juzgadoClaveJC = request.getParameter("jClaveJC");
+        String juzgadoClaveJO = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadoClaveJO.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
-        String juzgadClaveJO = request.getParameter("jClaveJO").toUpperCase();
         String causaClaveJC = request.getParameter("expClaveJC").toUpperCase();
         String causaClaveJO = request.getParameter("expClaveJO").toUpperCase();
         String fechaIngresoJC = request.getParameter("fIngresoJC");
@@ -71,22 +72,29 @@ public class insrtCausaPenalJO extends HttpServlet {
             juezJO3="-2";
         
         try {         
-            response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
   
             conn.Conectar();
             if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
-                sesion.setAttribute("causaClaveJO", causaClaveJO + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
-                        + juzgadClaveJC + "','" + juzgadClaveJO + "','" + causaClaveJC + jConcatenado + "','" 
+                        + juzgadoClaveJC + "','" + juzgadoClaveJO + "','" + causaClaveJC + juzgadoClaveJC.replace("-", "") + "','" 
                         + causaClaveJO + jConcatenado + "','" + fechaIngresoJC + "','" + fechaIngresoJO + "',"
                         + totalDeli + "," + totalAdo + "," + totalVic + "," +cantJuez+ "," 
                         + juezJO1 + "," + juezJO2 + "," + juezJO3 + ",'" + comentario + "', (select YEAR(NOW())));";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
+                    sesion.setAttribute("juzgadoClaveJC", juzgadoClaveJC);
+                    sesion.setAttribute("causaClaveJO", causaClaveJO + jConcatenado);
+                    sesion.setAttribute("causaClave", causaClaveJC + juzgadoClaveJC.replace("-", ""));
                     usuario usuario = new usuario();
-                    usuario.insrtAvanceJO(causaClaveJC + jConcatenado, causaClaveJO + jConcatenado, 2);//Insertamos el avance de la causa penal
-                    out.write("1");
+                    usuario.insrtAvanceJO(causaClaveJC + juzgadoClaveJC.replace("-", ""), causaClaveJO + jConcatenado, 2);//Insertamos el avance de la causa penal
+                    JSONArray resp = new JSONArray();
+                    resp.add(jConcatenado);//regresamos juzgadoJO concatenado
+                    resp.add(totalDeli);//regresamos total de delitos JO
+                    resp.add(totalAdo);//regresamos total de adolescenetes JO
+                    resp.add(totalVic);//regresamos total de victimas JO
+                    out.write(resp.toJSONString());
                     conn.close();
                 } else {
                     conn.close();
@@ -96,7 +104,7 @@ public class insrtCausaPenalJO extends HttpServlet {
                         + "TOTAL_PROCESADOS = " + totalAdo + ", TOTAL_VICTIMAS = " + totalVic + ",CANTIDAD_JUECES = " + cantJuez + ", "
                         + "JUEZ_CLAVE_1 = "+ juezJO1 +"," + "JUEZ_CLAVE_2 = " + juezJO2 + ", JUEZ_CLAVE_3 = " + juezJO3 + ", "
                         + "COMENTARIOS = '" + comentario + "' "
-                        + "WHERE JUZGADO_CLAVE = '" + juzgadClaveJC + "' "
+                        + "WHERE JUZGADO_CLAVE = '" + juzgadoClaveJO + "' "
                         + "AND CAUSA_CLAVEJO = '" + sesion.getAttribute("causaClaveJO") + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {

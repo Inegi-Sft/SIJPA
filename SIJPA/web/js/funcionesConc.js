@@ -5,7 +5,10 @@
  */
 
 $(document).ready(function() {
-    /*---------------------------- FUNCIONES CONCLUSIONES JC----------------------------*/
+    if($('#opera').val() !== ''){
+        $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#fechaReso').val() === '1899-09-09'){
         $('#fechaReso').prop("readonly", true);

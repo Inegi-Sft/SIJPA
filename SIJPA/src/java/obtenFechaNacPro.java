@@ -41,6 +41,7 @@ public class obtenFechaNacPro extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
@@ -59,33 +60,27 @@ public class obtenFechaNacPro extends HttpServlet {
             
             if (request.getParameter("Fnac") != null) {
                 String Sistema = (String) sesion.getAttribute("Sistema");
-                   if (Sistema.equals("JC")) {
-                    //queda pendiente fecha de ocurrencia para la version 2.0 ya que no se puede saber la relacion de procesado-delito cometido
-                    //fechaOcurrencia=(Date) new SimpleDateFormat("yyyy-MM-dd").parse(penales.fechaOcurr(juzgadoClave,causaClave)); 
-                    fechaIngreso = LocalDate.parse(penales.FechaIng(juzgadoClave, causaClave), formatter);
-                    //System.out.println("Fecha de ingresoooo:"+fechaIngreso);
-                    } else if (Sistema.equals("JO")) {
-                     fechaIngreso = LocalDate.parse(penalesJO.FechaIngJO(juzgadoClave, causaClaveJO), formatter);
+                    if (Sistema.equals("JC")) {
+                        //queda pendiente fecha de ocurrencia para la version 2.0 ya que no se puede saber la relacion de procesado-delito cometido
+                        //fechaOcurrencia=(Date) new SimpleDateFormat("yyyy-MM-dd").parse(penales.fechaOcurr(juzgadoClave,causaClave)); 
+                        fechaIngreso = LocalDate.parse(penales.FechaIng(juzgadoClave, causaClave), formatter);
+                    }else if (Sistema.equals("JO")) {
+                        fechaIngreso = LocalDate.parse(penalesJO.FechaIngJO(juzgadoClave, causaClaveJO), formatter);
                     }
                     LDONI = LocalDate.parse("1899-09-09", formatter);         
                 if (!fechaIngreso.isEqual(LDONI)==true) {                    
                     fechaNacimiento = LocalDate.parse(request.getParameter("Fnac"), formatter);
-                    // System.out.println("Fecha de Nacimiento:"+fechaNacimiento); 
                     LocalDate LDOJuz = LocalDate.of(fechaIngreso.getYear(), fechaIngreso.getMonth(), fechaIngreso.getDayOfMonth());
                     LocalDate LDOFechaNac = LocalDate.of(fechaNacimiento.getYear(), fechaNacimiento.getMonth(), fechaNacimiento.getDayOfMonth());
                     Period diff = Period.between(LDOFechaNac, LDOJuz);
-                    System.out.println("Difference is %d years, %d months and %d days old " + diff.getYears() + " " + diff.getMonths() + " " + diff.getDays());
 
                     if (diff.getYears() < 0) {
-                        //System.out.println("Es menor a 0");
                         out.write("2");
                     } else {
                         out.println(diff.getYears());
-                        //System.out.println("Es mayor a 0");
                     }
 
                 } else {
-                    //System.out.println("2"+fechaIngreso);
                     out.write("3");
                 }
             }

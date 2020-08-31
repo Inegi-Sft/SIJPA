@@ -5,7 +5,14 @@
  */
 
 $(document).ready(function () {
-    //muestra el no aplica exclusivamente par aestos catalogos
+    //Cambiamos del color dependiendo de que informacion se muestre
+    if($('#opera').val() === ''){
+        $('#delitoClaveJC').css('background-color', 'rgba(80,255,120,.6)');
+    }else{
+        $('#delitoClaveJO').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
+    //muestra el no aplica exclusivamente par estos catalogos
     $('#concurso > option[value=-2]').show();
     $('#instrumentos > option[value=-2]').show();
     /*---------------------------- FUNCIONES DELITOS JC----------------------------*/
@@ -134,8 +141,7 @@ $(document).ready(function () {
                         parent.$('#tablaDeliJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
-                    //var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
-                    var enlace = 'delitosJO.jsp?delitoClave=' + response[1] + '&posicion='+ response[0] +'&edita=Si';
+                    var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                     parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     console.log('Captu: ' + response[7] + ' Existen: ' + numDeli);
                     if (response[7] === numDeli) {

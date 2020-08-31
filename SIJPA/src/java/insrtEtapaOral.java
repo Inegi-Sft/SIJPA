@@ -51,8 +51,8 @@ public class insrtEtapaOral extends HttpServlet {
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
-        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String juzgadClaveJO = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadClaveJO.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
@@ -103,7 +103,7 @@ public class insrtEtapaOral extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showJuicio sEO = new showJuicio();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     showCausasPenalesJO causa = new showCausasPenalesJO();
                     int totProceInsrt = sEO.countProcesadosOral(causaClaveJO);
                     int totProce = causa.countTotalProcesadosJO(causaClaveJO);
@@ -118,8 +118,6 @@ public class insrtEtapaOral extends HttpServlet {
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
-                    resp.add(lis.get(0)[4]);
-                    resp.add(lis.get(0)[5]);
                     resp.add(banderaDesc);//Descripcion de la bandera para la tabla
                     resp.add(banderaEtapa);//dato para saber a que etapa se agrega el procesado
                     resp.add(totProceInsrt);
@@ -139,7 +137,7 @@ public class insrtEtapaOral extends HttpServlet {
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showJuicio sEO = new showJuicio();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     int totProcInsrt = sEO.countProcesadosOral(causaClaveJO);
                     lis = sEO.findOralTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
@@ -148,8 +146,6 @@ public class insrtEtapaOral extends HttpServlet {
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
-                    resp.add(lis.get(0)[4]);
-                    resp.add(lis.get(0)[5]);
                     resp.add(banderaDesc);//Descripcion de la bandera para la tabla
                     resp.add(banderaEtapa);//dato para saber a que etapa se agrega el procesado
                     resp.add(totProcInsrt);

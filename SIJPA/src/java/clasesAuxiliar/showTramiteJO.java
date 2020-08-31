@@ -33,7 +33,6 @@ public class showTramiteJO {
                     + "AND PR.CAUSA_CLAVE = '" + causaClaveJC + "' "
                     + "ORDER BY 1;";
         resul = conn.consultar(sql);
-        System.out.println("findTramiteCausaJC :"+sql);
         try {
             while(resul.next()){
                 tramite.add(new String[]{
@@ -60,7 +59,6 @@ public class showTramiteJO {
                 + "AND TR.PROCESADO_CLAVE = PO.PROCESADO_CLAVEJO "
                 + "AND CP.CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                 + "ORDER BY 1;"; 
-        System.out.println("findtramitecausajo:"  +sql);   
         resul = conn.consultar(sql);
         try {
             while(resul.next()){
@@ -106,7 +104,6 @@ public class showTramiteJO {
                 + "AND PROCESADO_CLAVE = '" + proceClave + "' "
                 + "ORDER BY 1;";
         resul = conn.consultar(sql);
-        System.out.println(sql);
         try {
             while(resul.next()){
                 tramite.add(new String[]{
@@ -130,7 +127,6 @@ public class showTramiteJO {
             resul = conn.consultar(sql);
             while (resul.next()) {
                 conteoTram = resul.getInt("TOTAL");
-                System.out.println("conteo tramitesjo: "+conteoTram);
             }
             conn.close();
         } catch (SQLException ex) {

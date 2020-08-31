@@ -6,9 +6,12 @@
  
 
 $(document).ready(function() {
+    if($('#opera').val() !== ''){
+        $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
    
-//Se usa para la recuperacion de BD
- // alert('Entro a balabla');
+    //Se usa para la recuperacion de BD
+    // alert('Entro a balabla');
     if($('#estInvestiJO').val() === '4'){
         $('#dEspecifiqueJO').show();
     }

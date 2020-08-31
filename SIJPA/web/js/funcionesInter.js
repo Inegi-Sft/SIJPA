@@ -107,10 +107,10 @@ $(document).ready(function() {
     $('#pruebaMP').change(function () {
         if ($(this).val() === '1') {
             $('#tblpruebaMP').fadeIn('slow');
-            $('input[name="chkpruebaMP"]').prop("checked", false).prop("required", true);
+            $('input[name="chkpruebaMP"]').prop("checked", false);
         } else {
             $('#tblpruebaMP').fadeOut('slow');
-            $('input[name="chkpruebaMP"]').prop("checked", false).prop("required", false);
+            $('input[name="chkpruebaMP"]').prop("checked", false);
         }
     });
     
@@ -127,10 +127,10 @@ $(document).ready(function() {
     $('#pruebaAJ').change(function () {
         if ($(this).val() === '1') {
             $('#tblpruebaAJ').fadeIn('slow');
-            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("required", true);
+            $('input[name="chkpruebaAJ"]').prop("checked", false);
         } else {
             $('#tblpruebaAJ').fadeOut('slow');
-            $('input[name="chkpruebaAJ"]').prop("checked", false).prop("required", false);
+            $('input[name="chkpruebaAJ"]').prop("checked", false);
             ;
         }
     });
@@ -148,10 +148,10 @@ $(document).ready(function() {
     $('#pruebaDF').change(function () {
         if ($(this).val() === '1') {
             $('#tblpruebaDF').fadeIn('slow');
-            $('input[name="chkpruebaDF"]').prop("checked", false).prop("required", true);
+            $('input[name="chkpruebaDF"]').prop("checked", false);
         } else {
             $('#tblpruebaDF').fadeOut('slow');
-            $('input[name="chkpruebaDF"]').prop("checked", false).prop("required", false);
+            $('input[name="chkpruebaDF"]').prop("checked", false);
             ;
         }
     });
@@ -166,39 +166,39 @@ $(document).ready(function() {
         }
     });
 
-    $('#chkpruebaAJ9').change(function () {
-        if ($(this).is(":checked")) {
-            for (var i = 1; i < 6; i++) {
-                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", true);
-            }
-        } else {
-            for (var i = 1; i < 6; i++) {
-                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", false);
-            }
-        }
-    });
-    $('#chkpruebaMP9').change(function () {
-        if ($(this).is(":checked")) {
-            for (var i = 1; i < 6; i++) {
-                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", true);
-            }
-        } else {
-            for (var i = 1; i < 6; i++) {
-                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", false);
-            }
-        }
-    });
-    $('#chkpruebaDF9').change(function () {
-        if ($(this).is(":checked")) {
-            for (var i = 1; i < 6; i++) {
-                $('#chkpruebaDF' + i).prop("checked", false).prop("disabled", true);
-            }
-        } else {
-            for (var i = 1; i < 6; i++) {
-                $('#chkpruebaDF' + i).prop("checked", false).prop("disabled", false);
-            }
-        }
-    });
+//    $('#chkpruebaAJ9').change(function () {
+//        if ($(this).is(":checked")) {
+//            for (var i = 1; i < 6; i++) {
+//                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", true);
+//            }
+//        } else {
+//            for (var i = 1; i < 6; i++) {
+//                $('#chkpruebaAJ' + i).prop("checked", false).prop("disabled", false);
+//            }
+//        }
+//    });
+//    $('#chkpruebaMP9').change(function () {
+//        if ($(this).is(":checked")) {
+//            for (var i = 1; i < 6; i++) {
+//                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", true);
+//            }
+//        } else {
+//            for (var i = 1; i < 6; i++) {
+//                $('#chkpruebaMP' + i).prop("checked", false).prop("disabled", false);
+//            }
+//        }
+//    });
+//    $('#chkpruebaDF9').change(function () {
+//        if ($(this).is(":checked")) {
+//            for (var i = 1; i < 6; i++) {
+//                $('#chkpruebaDF' + i).prop("checked", false).prop("disabled", true);
+//            }
+//        } else {
+//            for (var i = 1; i < 6; i++) {
+//                $('#chkpruebaDF' + i).prop("checked", false).prop("disabled", false);
+//            }
+//        }
+//    });
 
     $('#aperturaJO').change(function () {
         if ($(this).val() === '1') {
@@ -214,7 +214,7 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         if ($('#pruebaMP').val() === '1') {
             if ($('input[name="chkpruebaMP"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio p\u00FAblico');
+                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio público');
                 $('#pruebaMP').focus();
                 return false;
             }
@@ -254,6 +254,9 @@ $(document).ready(function() {
                     //editamos enlance para que pueda ser actualizado ya estando lleno
                     var enlace = parent.$('#tablaIntermedia tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                     parent.$('#tablaIntermedia tbody tr').eq(response[0]).find('a').attr('href',enlace);
+                    //Control de banderas para saber a que etapa se manda el procesado
+                    //Funcion para determinar si esta en otra tabla
+                    //buscaYremplaza(response[1], response[6]);//mandamos el nombre de procesado y la bandera nueva
                     if(response[6] === 6){//Condicion para mandar al procesado a su etapa correspondiente
                         parent.$('#tablaConclu tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
                         <td><a class="pop" href="conclusiones.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaConclu tbody tr').length + '">\n\

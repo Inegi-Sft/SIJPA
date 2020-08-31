@@ -9,7 +9,6 @@ import clasesAuxiliar.showCausasPenales;
 import clasesAuxiliar.showCausasPenalesJO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
@@ -64,9 +63,7 @@ public class obtenFechaNacVic extends HttpServlet {
                     FechExpe = penalesJO.FechaIngJO(juzgadoClave, causaClaveJO);
                 }
                 String AnoIngreso = FechExpe.substring(0, 4);
-                System.out.println("año de ingreso=" + FechExpe);
                 if (FechExpe.equals("1899-09-09")) {
-                    System.out.print("entro con año de ingreso 1899 " + FechExpe);
                     char numca[] = causaClave.toCharArray();
                     int m = 0;
                     for (int i = 0; i < causaClave.length(); i++) {
@@ -74,12 +71,9 @@ public class obtenFechaNacVic extends HttpServlet {
                             m++;
                         }
                     }
-                    System.out.println("numero de / " + m);
                     if (m == 0) {
-                        System.out.println("esta en validacion 0");
                         out.write("0");
                     } else if (m == 1) {
-                        System.out.println("esta en validacion 1 yesssssss");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];
@@ -97,7 +91,6 @@ public class obtenFechaNacVic extends HttpServlet {
                             out.write("0");
                         }
                     } else if (m == 2) {
-                        System.out.println("esta en validacion 2");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];
@@ -117,7 +110,6 @@ public class obtenFechaNacVic extends HttpServlet {
                     }
                 } else {
                     edad = Integer.parseInt(AnoIngreso) - Integer.parseInt(AnoNac);
-                    System.out.println("la edad es mira" + edad);
                     out.println(edad);
                 }
             }

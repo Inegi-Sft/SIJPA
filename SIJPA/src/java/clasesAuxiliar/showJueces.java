@@ -71,17 +71,17 @@ public class showJueces {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(operacion!="actualizar"){
+            if(operacion.equals("actualizar")){
                 sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
-                    + "FROM DATOS_JUECES_ADOJC "
-                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
-                    + "AND ESTATUS = 1 "
-                    + "ORDER BY 1";
+                        + "FROM DATOS_JUECES_ADOJC "
+                        + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                        + "ORDER BY 1";
             }else{
                 sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
-                    + "FROM DATOS_JUECES_ADOJC "
-                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
-                    + "ORDER BY 1";
+                        + "FROM DATOS_JUECES_ADOJC "
+                        + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                        + "AND ESTATUS = 1 "
+                        + "ORDER BY 1";
             }
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -95,21 +95,22 @@ public class showJueces {
         }
         return lista;
     }
-    public ArrayList findJuezJO(String juzClave, String causa){
+    
+    public ArrayList findJuezJO(String juzClaveJO, String causaJC, String juzClaveJC){
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(!causa.equals("")){//Si tenemos causa entonces quitamos el juez de JC
+            if(!causaJC.equals("") && juzClaveJC.equals("")){//Si tenemos causa entonces quitamos el juez de JC
                 sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                     + "FROM DATOS_JUECES_ADOJC "
-                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
-                    + "AND NOT JUEZ_CLAVE = (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + causa + juzClave.replace("-", "") + "') "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClaveJO + "' "
+                    + "AND NOT JUEZ_CLAVE = (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + causaJC + juzClaveJO.replace("-", "") + "') "
                     + "AND ESTATUS = 1 "
                     + "ORDER BY 1";
             }else{//Si no hay causa entonces traemos todos los jueces
                 sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                     + "FROM DATOS_JUECES_ADOJC "
-                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClaveJO + "' "
                     + "AND ESTATUS = 1 "
                     + "ORDER BY 1";
             }

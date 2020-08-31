@@ -51,15 +51,18 @@ public class insrtProcesadosJO extends HttpServlet {
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
-        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        
+        String juzgadoClaveJC = (String) sesion.getAttribute("juzgadoClaveJC");
+        String juzgadoClaveJO = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadoClaveJO.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
         String causaClaveJC = (String) sesion.getAttribute("causaClave");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
-        String proceClave = request.getParameter("proceClave");
+        String proceClaveJC = request.getParameter("proceClaveJC");
+        String proceClaveJO = request.getParameter("proceClaveJO");
         
         String nombre = request.getParameter("nombre").toUpperCase();
         String apaterno = request.getParameter("apaterno").toUpperCase();
@@ -107,7 +110,7 @@ public class insrtProcesadosJO extends HttpServlet {
 
         //VARIABLES PDELITOS
         String[] arrayDelito = request.getParameterValues("arrayDelito");
-        String[] arrayNumVic = request.getParameterValues("arrayNumVic");
+        //String[] arrayNumVic = request.getParameterValues("arrayNumVic");
 
         //***********************************INSERT*************************************************
         try {
@@ -117,11 +120,10 @@ public class insrtProcesadosJO extends HttpServlet {
             conn.Conectar();
             
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
-                //Al ser la primera vez que se guarda JO se crea la clave de procesado JO para ser insertada
-                String causaClaveJOSimple = causaClaveJO.replace(jConcatenado, "");// causa clave simple sin concatenar
-                String proceClaveJO = causaClaveJOSimple + proceClave.substring(proceClave.indexOf("-P"));
+                //Validamos que proce JC es null entonces es nuevo registro de JO y se utiliza un operador ternario
+                String proClavJC = (proceClaveJC != null)? "'" + proceClaveJC + juzgadoClaveJC.replace("-", "") + "'" : null;
                 sql = "INSERT INTO DATOS_PROCESADOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                        + causaClaveJC + "','" + proceClave + jConcatenado + "','" + causaClaveJO + "','"
+                        + causaClaveJC + "','" + causaClaveJO + "'," + proClavJC + ",'"
                         + proceClaveJO + jConcatenado + "','" + nombre + "','"+ apaterno + "','" + amaterno + "','"
                         + alias + "','" + curp + "','" + fNacimiento + "'," + sexo + "," + edad + ", '" + edad_Juzgado +"'," + nPais + "," + nEntidad + ","
                         + nMunicipio + "," + nacionalidad + "," + residencia + "," + rEntidad + "," + rMunicipio + "," + edoCivil + ","
@@ -141,18 +143,18 @@ public class insrtProcesadosJO extends HttpServlet {
                             conn.escribir(sql);
                         }
                     }
-                    for (int i = 0; i < arrayDelito.length; i++) {
-                        String []arrayDelSepara =  arrayDelito[i].split("-");
+                    for (String arrayDelito1 : arrayDelito) {
+                        String[] arrayDelSepara = arrayDelito1.split("-");
                         String delitoJO = causaClaveJO.replace(jConcatenado, "") + "-" + arrayDelSepara[1];
                         sql = "INSERT INTO DATOS_PDELITOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClaveJO + "','" + proceClaveJO + jConcatenado + "','" + delitoJO + "',"
-                                    + 0 + ",(select YEAR(NOW())) )";
+                                + causaClaveJO + "','" + proceClaveJO + jConcatenado + "','" + delitoJO + "',"
+                                + 0 + ",(select YEAR(NOW())) )";
                         System.out.println(sql);
                         insertPD = conn.escribir(sql);
                     }
                     if(insertPD){
                         showProcesadosJO pro = new showProcesadosJO();
-                        ArrayList<String[]> lis = new ArrayList<>();
+                        ArrayList<String[]> lis;
                         showCausasPenalesJO causa = new showCausasPenalesJO();
                         int totProceInsrt = pro.countProcesadosJO(causaClaveJO);
                         int totProce = causa.countTotalProcesadosJO(causaClaveJO);
@@ -188,38 +190,37 @@ public class insrtProcesadosJO extends HttpServlet {
                         + "GRUPO_DELICTIVO = '" + delictivo + "',TIPO_DEFENSOR = " + defensor + ",PERSONA_RESPONSABLE = " + representante + ","
                         + "COMENTARIOS = '" + comentarios + "', EDAD_INGRESO='"+ edad_Juzgado +"' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                        + "AND PROCESADO_CLAVEJO = '" + proceClave + jConcatenado + "';";
+                        + "AND PROCESADO_CLAVEJO = '" + proceClaveJO + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     //Borramos los Pingresos por si sufren de acutliazcion o bien se cambie que no tuve ingresos
                     sql = "DELETE FROM DATOS_PFUENTE_INGRESOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                            + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
                     conn.escribir(sql);
                     //Borramos pdelitos por si sufre actualizacion se inserten los nuevos o bien cambie de opcion
                     sql = "DELETE FROM DATOS_PDELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
-                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                            + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
                     conn.escribir(sql);
                     if (ingresosPro == 1) {
                         for (String chkIngresosPro1 : chkIngresosPro) {
                             sql = "INSERT INTO DATOS_PFUENTE_INGRESOS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClaveJO + "','" + proceClave + jConcatenado + "'," + chkIngresosPro1 + ","
+                                    + causaClaveJO + "','" + proceClaveJO + jConcatenado + "'," + chkIngresosPro1 + ","
                                     + "(select YEAR(NOW())) )";
                             System.out.println(sql);
                             conn.escribir(sql);
                         }
                     }
-                    for (int i = 0; i < arrayDelito.length; i++) {
+                    for (String arrayDelito1 : arrayDelito) {
                         sql = "INSERT INTO DATOS_PDELITOS_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClaveJO + "','" + proceClave + jConcatenado + "','" + arrayDelito[i] + "',"
-                                    + 0 + ",(select YEAR(NOW())) )";
+                                + causaClaveJO + "','" + proceClaveJO + jConcatenado + "','" + arrayDelito1 + "'," + 0 + ",(select YEAR(NOW())) )";
                         System.out.println(sql);
                         insertPD = conn.escribir(sql);
                     }
                     if(insertPD){
                         showProcesadosJO pro = new showProcesadosJO();
-                        ArrayList<String[]> lis = new ArrayList<>();
+                        ArrayList<String[]> lis;
                         int totProceInsrt = pro.countProcesadosJO(causaClaveJO);
-                        lis = pro.findProcesasdosTablaJO(proceClave + jConcatenado);
+                        lis = pro.findProcesasdosTablaJO(proceClaveJO + jConcatenado);
                         JSONArray resp = new JSONArray();
                         resp.add(posicion);
                         resp.add(lis.get(0)[0].replace(jConcatenado, ""));
@@ -239,7 +240,7 @@ public class insrtProcesadosJO extends HttpServlet {
     }
     
     public String verificaVariable(String variable) {
-        String verificada = "";
+        String verificada;
         if (variable == null) {
             verificada = "-2";
         } else if (variable.equals("")) {

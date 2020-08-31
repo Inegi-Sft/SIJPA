@@ -92,8 +92,7 @@ public class showCausasPenales {
         total = 0;
         try {
             conn.Conectar();
-            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";      
-            System.out.println(sql);
+            sql = "SELECT TOTAL_DELITOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("TOTAL");
@@ -110,7 +109,6 @@ public class showCausasPenales {
         try {
             conn.Conectar();
             sql = "SELECT TOTAL_PROCESADOS AS TOTAL FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("TOTAL");
@@ -156,24 +154,6 @@ public class showCausasPenales {
         return FechaIngreso;
     }
     
-//    public String FechaOcurr(String causaClave) {
-//        String Fecha_Ocurrencia = "";
-//        try {
-//            conn.Conectar();
-//            sql = "SELECT FECHA_OCURRENCIA FROM DATOS_DELITOS_ADOJC WHERE  "
-//                    + "CAUSA_CLAVE = '" + causaClave + "'";
-//            System.out.println(sql);
-//            rs = conn.consultar(sql);
-//            if (rs.next()) {
-//                Fecha_Ocurrencia = rs.getString("FECHA_OCURRENCIA");
-//            }
-//            conn.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return Fecha_Ocurrencia;
-//    }
-    
     public boolean carpetaInves(String juzgadoClave, String numcarpeta) {
         boolean Exis = false;
         try {
@@ -198,7 +178,6 @@ public class showCausasPenales {
             conn.Conectar();
             sql = "SELECT COUNT(*) FROM DATOS_DELITOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
                   + " AND COMENTARIOS<>'REGNUEVO'";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("COUNT(*)");
@@ -216,7 +195,6 @@ public class showCausasPenales {
             conn.Conectar();
             sql = "SELECT COUNT(*) FROM DATOS_PROCESADOS_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
                     + " AND COMENTARIOS<>'REGNUEVO'";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("COUNT(*)");

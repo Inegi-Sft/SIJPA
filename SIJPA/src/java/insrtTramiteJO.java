@@ -46,15 +46,14 @@ public class insrtTramiteJO extends HttpServlet {
         //posicion de la fila de la tabla.vista donde se inserta el dato
         String posicion = request.getParameter("posicion");
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
-        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String juzgadClaveJO = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgadClaveJO.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
         String jConcatenado = jEntidad + jMunicipio + jNumero;
-        String causaClave = (String) sesion.getAttribute("causaClave");
         String causaClaveJO = (String) sesion.getAttribute("causaClaveJO");
-        String proceClave = request.getParameter("proceClave");
+        String proceClaveJO = request.getParameter("proceClave");
         String estInvesti = request.getParameter("estInvestiJO");
         String especifique = request.getParameter("especifiqueJO");
         String fechaActo=request.getParameter("uActoJO");
@@ -66,13 +65,14 @@ public class insrtTramiteJO extends HttpServlet {
             conn.Conectar();
             if(!opera.equals("actualizar")){//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_TRAMITES_ADOJO  VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                        + causaClaveJO + "','" + proceClave + jConcatenado + "'," + estInvesti + ",'" 
+                        + causaClaveJO + "','" + proceClaveJO + jConcatenado + "'," + estInvesti + ",'" 
                         + especifique + "','" + fechaActo + "', (select YEAR(NOW())) );";
+                System.out.println(sql);
                 if(conn.escribir(sql)){
                     showTramiteJO tram = new showTramiteJO();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     //int totTramiteInsrt = tram.countTramiteExp(causaClave);
-                    lis = tram.findTramiteTablaJO(proceClave + jConcatenado); 
+                    lis = tram.findTramiteTablaJO(proceClaveJO + jConcatenado); 
                     JSONArray resp = new JSONArray();
 
                     resp.add(posicion);
@@ -91,13 +91,13 @@ public class insrtTramiteJO extends HttpServlet {
                         + "ESPECIFIQUE = '" + especifique + "',"
                         + "FECHA_ACTO_PROCESAL = '" + fechaActo + "' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' " 
-                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                        + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showTramiteJO tram = new showTramiteJO();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     //int totTramiteInsrt = tram.countTramiteExp(causaClave);
-                    lis = tram.findTramiteTablaJO(proceClave + jConcatenado); 
+                    lis = tram.findTramiteTablaJO(proceClaveJO + jConcatenado); 
                         JSONArray resp = new JSONArray();                   
                         resp.add(posicion);
                         resp.add(lis.get(0)[0].replace(jConcatenado, ""));  

@@ -5,6 +5,10 @@
  */
 
 $(document).ready(function() {
+    if($('#opera').val() !== ''){
+        $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#fechaReso').val() === '1899-09-09'){
         $('#fechaReso').prop("readonly", true);
@@ -21,29 +25,22 @@ $(document).ready(function() {
     switch ($('#resolucion').val()){
         case '1':
             $('#flsSobreseimto,#flsImpugnacion,#flsReparaDanio').show();
-            $('#fechaExtinAR').val('1799-09-09');
+            $('#fechaSenten').val('1799-09-09');
             break;
         case '2':
             $('#flsSentencia,#flsImpugnacion,#flsReparaDanio').show();
             $('#flsSobreseimto select').val('-2');
-            $('#fechaExtinAR').val('1799-09-09');
+            $('#fechaSenten').val('1799-09-09');
             break;
         case '3':
             $('#flsImpugnacion,#dFechaSenten').show();
             $('#flsReparaDanio').hide();
             $('#flsSobreseimto select, #flsSentencia select, #flsReparaDanio select').val('-2');
-            $('#fechaExtinAR').val('1799-09-09');
             break;
         default:
             $('#flsReparaDanio,#flsImpugnacion').hide();
             break;
             
-    }
-    
-    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
-    if($('#fechaSenten').val() === '1899-09-09'){
-        $('#fechaSenten').prop("readonly", true);
-        $('#chkFechaSenten').prop("checked", true);
     }
     
     //Se usa para la recuperacion de BD

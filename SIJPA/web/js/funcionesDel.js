@@ -5,6 +5,10 @@
  */
 
 $(document).ready(function () {
+    if($('#opera').val() !== ''){
+        $('#delitoClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //muestra el no aplica exclusivamente par aestos catalogos
     $('#concurso > option[value=-2]').show();
     $('#instrumentos > option[value=-2]').show();

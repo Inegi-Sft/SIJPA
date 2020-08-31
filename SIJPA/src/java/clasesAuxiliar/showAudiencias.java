@@ -88,7 +88,7 @@ public class showAudiencias {
     public ArrayList findJueces(String juzgado, String causa, String operacion) {
         conn.Conectar();
         lista = new ArrayList<>();
-        if(operacion!="actualizar"){
+        if(!"actualizar".equals(operacion)){
             sql = "SELECT JUEZ_CLAVE, APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' "
             + "AND JUEZ_CLAVE <> -2 "
             + "AND ESTATUS = 1 "
@@ -134,9 +134,8 @@ public class showAudiencias {
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
-                existe=resul.getInt("EXISTE");
+                existe = resul.getInt("EXISTE");
             }
-            System.out.println(existe);
             if(existe==0){
                 sql = "INSERT INTO DATOS_JUECES_ADOJC  VALUES (" 
                         + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgado + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, -2)";
@@ -292,7 +291,7 @@ public class showAudiencias {
     public ArrayList findJuecesJO(String juzgado, String causa, String operacion) {
         conn.Conectar();
         lista = new ArrayList<>();
-        if(operacion!="actualizar"){
+        if(!"actualizar".equals(operacion)){
             sql = "SELECT JUEZ_CLAVE, APELLIDOP_JUEZ, APELLIDOM_JUEZ, NOMBRE_JUEZ FROM DATOS_JUECES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgado + "' "
             + "AND JUEZ_CLAVE <> -2 "
             + "AND ESTATUS = 1 "

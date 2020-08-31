@@ -5,6 +5,13 @@
  */
 
 $(document).ready(function() {
+    //Cambiamos del color dependiendo de que informacion se muestre
+    if($('#opera').val() === ''){
+        $('#victiClaveJC').css('background-color', 'rgba(80,255,120,.6)');
+    }else{
+        $('#victiClaveJO').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //Se usa para la recuperacion de BD
     if($('#tipoVictiHi').val() !== ''){
         var tipoVi = $('#tipoVictiHi').val();
@@ -174,15 +181,17 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopImmediatePropagation();
         if ($('#deliCometido:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Delitos cometidos a la V\u00EDctima');
+            alert('Selecciona al menos una opcion de Delitos cometidos a la Víctima');
             $('#deliCometido').focus();
             return false;
         }
         
-        if ($('.RelaProceChk:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Relacion de la V\u00EDctima con el Procesado');
-            $('#chkRelaProce').focus();
-            return false;
+        for(var x = 0; x < $('input[name=proRela]').length; x++){
+            if($('input[name=chkRelaProce' + x + ']:checked').length === 0){
+                alert('Seleccione una opcion de la Relación de la Víctima con el Procesado');
+                $('input[name=chkRelaProce' + x + ']').focus();
+                return false;
+            }
         }
         
         if($('#ingresos').val() === '1'){
@@ -206,7 +215,7 @@ $(document).ready(function() {
                         parent.$('#tablaVictimasJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado con la nueva clav jo ya estando lleno
-                    var enlace = 'victimasJO.jsp?victiClave='+ response[1] +'&posicion='+ response[0] +'&edita=Si';
+                    var enlace = parent.$('#tablaVictimasJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                     parent.$('#tablaVictimasJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
                     console.log('Captu: ' + response[6] + ' Existen: ' + numProce);
                     if (response[6] === numProce) {

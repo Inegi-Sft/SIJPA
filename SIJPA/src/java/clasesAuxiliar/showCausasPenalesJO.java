@@ -25,11 +25,11 @@ public class showCausasPenalesJO {
     ResultSet rs, resul;
     int total;
     
-    public ArrayList findCausaPenalJC(String juzgadoClave, String causaClaveJC){
+    public ArrayList findCausaPenalJC(String juzgadoClaveJC, String causaClaveJC){
         try {
             conn.Conectar();
             causas = new ArrayList();
-            sql = "SELECT CO.CAUSA_CLAVE, CP.FECHA_INGRESO, COUNT(DISTINCT PD.DELITO_CLAVE) AS TOT_DELI, COUNT(DISTINCT CO.PROCESADO_CLAVE) AS TOT_PROCE, COUNT(DISTINCT VD.VICTIMA_CLAVE) AS TOT_VICT "
+            sql = "SELECT CP.FECHA_INGRESO, COUNT(DISTINCT PD.DELITO_CLAVE) AS TOT_DELI, COUNT(DISTINCT CO.PROCESADO_CLAVE) AS TOT_PROCE, COUNT(DISTINCT VD.VICTIMA_CLAVE) AS TOT_VICT "
                     + "FROM DATOS_CAUSAS_PENALES_ADOJC CP, DATOS_PDELITOS_ADOJC PD, DATOS_VDELITOS_ADOJC VD, DATOS_CONCLUSIONES_ADOJC CO "
                     + "WHERE CP.CAUSA_CLAVE = PD.CAUSA_CLAVE "
                     + "AND CP.CAUSA_CLAVE = VD.CAUSA_CLAVE "
@@ -40,7 +40,7 @@ public class showCausasPenalesJO {
                     + "AND PD.DELITO_CLAVE = VD.DELITO_CLAVE "
                     + "AND PD.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
                     + "AND CO.TIPO_RESOLUCION = 5 "
-                    + "AND CP.JUZGADO_CLAVE = '" + juzgadoClave + "' "
+                    + "AND CP.JUZGADO_CLAVE = '" + juzgadoClaveJC + "' "
                     + "AND CP.CAUSA_CLAVE = '" + causaClaveJC + "' "
                     + "ORDER BY 1;";
             rs = conn.consultar(sql);
@@ -64,15 +64,13 @@ public class showCausasPenalesJO {
             sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJO "
                     + "WHERE JUZGADO_CLAVEJO = '" + juzgadoClave + "' "
                     + "AND CAUSA_CLAVEJO = '" + causaClaveJO + "';";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while(rs.next()){
                 causas.add(new String[]{
-                    rs.getString("JUZGADO_CLAVEJC"), rs.getString("FECHA_INGRESOJC"), rs.getString("FECHA_INGRESOJO"), 
+                    rs.getString("FECHA_INGRESOJC"), rs.getString("FECHA_INGRESOJO"), 
                     rs.getString("TOTAL_DELITOS"), rs.getString("TOTAL_PROCESADOS"), rs.getString("TOTAL_VICTIMAS"), 
-                    rs.getString("ATENDIDA_ORGDIFERENTE"), rs.getString("JUZGADO_DIFERENTE"), rs.getString("CANTIDAD_JUECES"), 
-                    rs.getString("JUEZ_CLAVE_1"), rs.getString("JUEZ_CLAVE_2"), rs.getString("JUEZ_CLAVE_3"), 
-                    rs.getString("COMENTARIOS")
+                    rs.getString("CANTIDAD_JUECES"), rs.getString("JUEZ_CLAVE_1"), rs.getString("JUEZ_CLAVE_2"),
+                    rs.getString("JUEZ_CLAVE_3"), rs.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -82,11 +80,11 @@ public class showCausasPenalesJO {
         return causas;
     }
     
-    public ArrayList findCausasJOenJC(String juzgadoClave) {
+    public ArrayList findCausasJOyJC(String juzgadoClave) {
         try {
             conn.Conectar();
             causas = new ArrayList();
-            sql = "SELECT CO.CAUSA_CLAVE, CP.FECHA_INGRESO, COUNT(DISTINCT PD.DELITO_CLAVE) AS TOT_DELI, COUNT(DISTINCT CO.PROCESADO_CLAVE) AS TOT_PROCE, COUNT(DISTINCT VD.VICTIMA_CLAVE) AS TOT_VICT "
+            sql = "SELECT CP.JUZGADO_CLAVE, CO.CAUSA_CLAVE, '--', CP.FECHA_INGRESO, COUNT(DISTINCT PD.DELITO_CLAVE) AS TOT_DELI, COUNT(DISTINCT CO.PROCESADO_CLAVE) AS TOT_PROCE, COUNT(DISTINCT VD.VICTIMA_CLAVE) AS TOT_VICT "
                     + "FROM DATOS_CONCLUSIONES_ADOJC CO, DATOS_PDELITOS_ADOJC PD, DATOS_VDELITOS_ADOJC VD, DATOS_CAUSAS_PENALES_ADOJC CP "
                     + "WHERE CO.CAUSA_CLAVE = PD.CAUSA_CLAVE "
                     + "AND CO.CAUSA_CLAVE = VD.CAUSA_CLAVE "
@@ -97,14 +95,19 @@ public class showCausasPenalesJO {
                     + "AND CO.PROCESADO_CLAVE = PD.PROCESADO_CLAVE "
                     + "AND PD.DELITO_CLAVE = VD.DELITO_CLAVE "
                     + "AND CO.TIPO_RESOLUCION = 5 "
+                    + "AND CO.CAUSA_CLAVE NOT IN(SELECT CAUSA_CLAVEJC FROM DATOS_CAUSAS_PENALES_ADOJO) "
                     + "AND CP.JUZGADO_CLAVE = '" + juzgadoClave + "' "
                     + "GROUP BY CO.CAUSA_CLAVE "
+                    + "UNION ALL "
+                    + "SELECT JUZGADO_CLAVEJC, CAUSA_CLAVEJC, CAUSA_CLAVEJO, FECHA_INGRESOJC, TOTAL_DELITOS, TOTAL_PROCESADOS, TOTAL_VICTIMAS "
+                    + "FROM DATOS_CAUSAS_PENALES_ADOJO "
+                    + "WHERE JUZGADO_CLAVEJO = '" + juzgadoClave + "' "
                     + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 causas.add(new String[]{
-                    rs.getString("CO.CAUSA_CLAVE"), rs.getString("CP.FECHA_INGRESO"), rs.getString("TOT_DELI"), 
-                    rs.getString("TOT_PROCE"), rs.getString("TOT_VICT")
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                    rs.getString(5), rs.getString(6), rs.getString(7)
                 });
             }
             conn.close();
@@ -124,6 +127,7 @@ public class showCausasPenalesJO {
                     + "JOIN DATOS_JUZGADOS_ADOJC JU ON CP.JUZGADO_CLAVE = JU.JUZGADO_CLAVE "
                     + "WHERE CO.TIPO_RESOLUCION = 5 "
                     + "AND JU.JUZGADO_CLAVE <> '" + juzClave + "' "
+                    + "AND JU.JUZGADO_CLAVE NOT IN (SELECT JUZGADO_CLAVEJC FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJO = '" + juzClave + "') "
                     + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {
@@ -136,20 +140,29 @@ public class showCausasPenalesJO {
         return lis;
     }
     
-    public ArrayList findCausasPenalesJO(String juzgadoClave, String causaClaveJC) {
+    public ArrayList findCausasPenalesJC(String juzgadoClaveJC) {
         try {
             conn.Conectar();
             causas = new ArrayList();
-            sql = "SELECT CAUSA_CLAVEJC, CAUSA_CLAVEJO, FECHA_INGRESOJC, TOTAL_DELITOS, TOTAL_PROCESADOS, TOTAL_VICTIMAS "
-                    + "FROM DATOS_CAUSAS_PENALES_ADOJO "
-                    + "WHERE JUZGADO_CLAVEJO = '" + juzgadoClave + "' "
-                    + "AND CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+            sql = "SELECT CO.CAUSA_CLAVE "
+                    + "FROM DATOS_CONCLUSIONES_ADOJC CO, DATOS_PDELITOS_ADOJC PD, DATOS_VDELITOS_ADOJC VD, DATOS_CAUSAS_PENALES_ADOJC CP "
+                    + "WHERE CO.CAUSA_CLAVE = PD.CAUSA_CLAVE "
+                    + "AND CO.CAUSA_CLAVE = VD.CAUSA_CLAVE "
+                    + "AND PD.CAUSA_CLAVE = VD.CAUSA_CLAVE "
+                    + "AND CO.CAUSA_CLAVE = CP.CAUSA_CLAVE "
+                    + "AND PD.CAUSA_CLAVE = CP.CAUSA_CLAVE "
+                    + "AND VD.CAUSA_CLAVE = CP.CAUSA_CLAVE "
+                    + "AND CO.PROCESADO_CLAVE = PD.PROCESADO_CLAVE "
+                    + "AND PD.DELITO_CLAVE = VD.DELITO_CLAVE "
+                    + "AND CO.TIPO_RESOLUCION = 5 "
+                    + "AND CO.CAUSA_CLAVE NOT IN(SELECT CAUSA_CLAVEJC FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJC = '" + juzgadoClaveJC + "') "
+                    + "AND CP.JUZGADO_CLAVE = '" + juzgadoClaveJC + "' "
+                    + "GROUP BY CO.CAUSA_CLAVE "
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
                 causas.add(new String[]{
-                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                    rs.getString(5), rs.getString(6)
+                    rs.getString(1)
                 });
             }
             conn.close();
@@ -157,6 +170,28 @@ public class showCausasPenalesJO {
             Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
         }
         return causas;
+    }
+    
+    public ArrayList totalesCausaJC(String juzgadoClaveJC, String causaClaveJC){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            sql = "SELECT TOTAL_DELITOS, TOTAL_PROCESADOS, TOTAL_VICTIMAS "
+                    + "FROM DATOS_CAUSAS_PENALES_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzgadoClaveJC + "' "
+                    + "AND CAUSA_CLAVE = '" + causaClaveJC + "' "
+                    + "ORDER BY 1";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(new String[]{
+                    rs.getString(1), rs.getString(2), rs.getString(3)
+                });
+            }
+            conn.close();
+        }catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
     
     public int countCausasPenalesJO(String juzgadoClave) {
@@ -266,7 +301,7 @@ public class showCausasPenalesJO {
             conn.Conectar();
             sql = "SELECT * FROM DATOS_CAUSAS_PENALES_ADOJO "
                     + "WHERE CAUSA_CLAVEJO = '" + numcarpetaJO + "' "
-                    + "AND JUZGADO_CLAVE = '" + juzgadoClave + "'";
+                    + "AND JUZGADO_CLAVEJO = '" + juzgadoClave + "'";
             rs = conn.consultar(sql);
             if (rs.next()) {
                 Exis = true;
@@ -279,7 +314,7 @@ public class showCausasPenalesJO {
         return Exis;
     }
         
-        public String FechaIngJO(String juzgadoClave, String causaClaveJO) {
+    public String FechaIngJO(String juzgadoClave, String causaClaveJO) {
         String FechaIngreso = "";
         try {
             conn.Conectar();
@@ -301,7 +336,6 @@ public class showCausasPenalesJO {
         try {
             conn.Conectar();
             sql = "SELECT COUNT(*) FROM DATOS_DELITOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("COUNT(*)");
@@ -318,7 +352,6 @@ public class showCausasPenalesJO {
         try {
             conn.Conectar();
             sql = "SELECT COUNT(*) FROM DATOS_PROCESADOS_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 total = rs.getInt("COUNT(*)");

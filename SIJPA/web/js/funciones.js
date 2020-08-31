@@ -5,7 +5,6 @@
  */
 
 $(document).ready(function () {
-
     /*----------------Index------------------------*/
     //Temporizador para que aparesca el logo en primera instancia
     setTimeout(function () {
@@ -93,15 +92,22 @@ $(document).ready(function () {
         }, 800);
     });
     /*----------------Fin de Cabecera------------------------*/
-
+    
+    /*----------------General CP------------------------*/
+    //Obtenemos el total de las cusas penales en JC
+    $('#totCPJC').append('Total: ' + $('#causas tbody tr').length);
+    
+    //Obtenemos el total de las cusas penales en JO
+    $('#totCPJO').append('Total: ' + $('#causasJO tbody tr').length);
+    
     $('select > option[value=-2]').hide();
     $('#estudiosPro > option[value=7],#estudiosPro > option[value=8]').hide();//oculta el grado de estudios maestria y doctorado en procesados
     $(".load").fadeOut("slow");//proceso de carga para causas penales
     //oculta los divs con clase oculto
     $('.oculto').hide();
 
-    //despliega ventana modal
-    $('#tablaDeli, #tablaProcesa, #tablaVictimas, #tablaInicial, #tablaIntermedia, #tablaConclu, #tablaTramite, .agregar,\n\
+    //despliega ventana modal en codigo en vivo
+    $('#tablaDeli, #tablaProcesa, #tablaVictimas, #tablaInicial, #tablaIntermedia, #tablaConclu, #tablaTramite,\n\
         #tablaDeliJO, #tablaProcesaJO, #tablaVictimasJO, #tablaJuicioJO, #tablaConcluJO, #tablaTramiteJO').on('focusin', function () {
         $('a.pop').fancybox({
             'type': 'iframe',
@@ -127,6 +133,7 @@ $(document).ready(function () {
         if (ex.charCode < 48 || ex.charCode > 57)
             return false;
     });
+    /*----------------Fin General CP------------------------*/
     
     /***************************** FUNCIONES JUEZ *******************************/
     //Se usa para la recuperacion de datos de DB
@@ -135,73 +142,6 @@ $(document).ready(function () {
         $('#chkFechaInicioG').prop('checked', true);
     }
     /***************************** FIN FUNCIONES JUEZ *******************************/
-    
-    /************************* Funcion de borrado general *****************************/
-    /***
-    * @param {type} e
-    * @returns {undefined}
-    */
-    $('.borrar').click(function(e){
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        var pos = $(this).closest('tr').index();//Obtenemos el indice(posicion) del registro a borrar
-        var tabla = $(this).parents('table').attr('id');//Obtenemos el nombre de la tabla
-        var clave = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();//Obtenemos la clave del registro
-        var numReg = $('#' + tabla + ' tbody tr').length - 1;//Obtenemos el numero de registro despues de borrar el registro
-        if(tabla !== 'causas'){
-            if(numReg === 0){
-                var nomTabla = $(this).parents('table').attr('data-nomTabla');
-                alert('La tabla "' + nomTabla + '" no se puede quedar con 0 registros\n' +
-                    'Se necesita al menos 1 registro para que las Causas Penales funcionen');
-                return false;
-            }
-        }
-        var resp = confirm("Realmente deseas eliminar este registro con clave: " + clave + "?");
-        if(resp){
-            $(this).closest('tr').remove();//Removemos el registro de su tabla
-            //alert(pos + ', ' + tabla + ', ' + clave + ', ' + numReg);
-            var datoLLeno = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(2)').html();
-            console.log("Se remuve: ", clave, ' de la tabla: ', tabla);
-            if(datoLLeno !== ''){//Si la columna 3 de la fial seleccionada esta vacio quiere decir que no existe en BD
-                $.ajax({
-                    type: 'post',
-                    url: 'deleteDatos',
-                    data: {
-                        clave: clave,
-                        tabla: tabla,
-                        num: numReg
-                    },
-                    success: function (response) {
-                        console.log("Respuesta del servidor al borrar de BD: ", response);
-                        if (response === 'tablaJuzgados') {
-                            alert('El Juzgado ' + clave + ' se borro correctamente');
-                        }else if(response === 'tablaJuez'){
-                            alert('El Juez ' + clave + ' se borro correctamente');
-                        }else if (response === 'causas') {
-                            alert('La causa penal ' + clave + ' se borro correctamente');
-                        } else if (response === 'tablaDeli') {
-                            $('#Tdelitos').val(numReg);
-                            alert('El Delito ' + clave + ' se borro correctamente');
-                        } else if (response === 'tablaProcesa') {
-                            $('#Tadolescentes').val(numReg);
-                            //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
-                            $('#tablaInicial tbody tr').eq(pos).remove();
-                            alert('El Procesado ' + clave + ' se borro correctamente');
-                            buscaYremplaza(clave, 0);
-                        } else if (response === 'tablaVictimas') {
-                            $('#Tvictimas').val(numReg);
-                            alert('La Victima ' + clave + ' se borro correctamente');
-                        }
-                    },
-                    error: function (response) {
-                        console.log("Respuesta del servidor al borrar: ", response);
-                        alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
-                    }
-                });
-            }
-        }
-    });
-    /************************* Fin Funcion de borrado general *****************************/
     
     /************************* Funcion de Actualizado *****************************/
     
@@ -866,3 +806,67 @@ function ValidaCarpeInvest(InputCarpInves) {
         } 
     }
 }
+
+/************************* Funcion de borrado general *****************************/
+function borraR(elemento){
+    var pos = $(elemento).closest('tr').index();//Obtenemos el indice(posicion) del registro a borrar
+    var tabla = $(elemento).parents('table').attr('id');//Obtenemos el nombre de la tabla
+    var clave = $(elemento).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();//Obtenemos la clave del registro
+    var numReg = $('#' + tabla + ' tbody tr').length - 1;//Obtenemos el numero de registro despues de borrar el registro
+    console.log('de la tabla se borra: ' + tabla);
+    if(tabla !== 'causas'){
+        if(numReg === 0){
+            var nomTabla = $(elemento).parents('table').attr('data-nomTabla');
+            alert('La tabla "' + nomTabla + '" no se puede quedar con 0 registros\n' +
+                'Se necesita al menos 1 registro para que las Causas Penales funcionen');
+            return false;
+        }
+    }
+    var resp = confirm("Realmente deseas eliminar este registro con clave: " + clave + "?");
+    if(resp){
+        $(elemento).closest('tr').remove();//Removemos el registro de su tabla
+        //alert(pos + ', ' + tabla + ', ' + clave + ', ' + numReg);
+        var datoLLeno = $(elemento).parents('table tbody').find('tr').eq(pos).children('td:eq(2)').html();
+        console.log("Se remueve: ", clave, ' de la tabla: ', tabla);
+        if(datoLLeno !== ''){//Si la columna 3 de la fial seleccionada esta vacio quiere decir que no existe en BD
+            $.ajax({
+                type: 'post',
+                url: 'deleteDatos',
+                data: {
+                    clave: clave,
+                    tabla: tabla,
+                    num: numReg
+                },
+                success: function (response) {
+                    console.log("Respuesta del servidor al borrar de BD: ", response);
+                    if (response === 'tablaJuzgados') {
+                        alert('El Juzgado ' + clave + ' se borro correctamente');
+                    }else if(response === 'tablaJuez'){
+                        alert('El Juez ' + clave + ' se borro correctamente');
+                    }else if (response === 'causas') {
+                        $('#totCPJC').empty();//Vaciamos el numero de registros para poderlo actualizar
+                        $('#totCPJC').append('Total: ' + numReg);//Actualizamos el numero de registros
+                        alert('La causa penal ' + clave + ' se borro correctamente');
+                    } else if (response === 'tablaDeli') {
+                        $('#Tdelitos').val(numReg);
+                        alert('El Delito ' + clave + ' se borro correctamente');
+                    } else if (response === 'tablaProcesa') {
+                        $('#Tadolescentes').val(numReg);
+                        //cuando se borre un procesado de su tabla tambien lo eliminamos de inicial
+                        $('#tablaInicial tbody tr').eq(pos).remove();
+                        alert('El Procesado ' + clave + ' se borro correctamente');
+                        buscaYremplaza(clave, 0);//Se envia cero para que busque en tpdas las tablas
+                    } else if (response === 'tablaVictimas') {
+                        $('#Tvictimas').val(numReg);
+                        alert('La Victima ' + clave + ' se borro correctamente');
+                    }
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor al borrar: ", response);
+                    alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
+                }
+            });
+        }
+    }
+}
+/************************* Fin Funcion de borrado general *****************************/

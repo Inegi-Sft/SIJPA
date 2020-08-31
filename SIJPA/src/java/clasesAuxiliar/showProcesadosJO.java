@@ -23,22 +23,29 @@ public class showProcesadosJO {
     String sql;
     ResultSet resul;
     
-    public ArrayList findProcesasdosCausaJC(String causaClaveJC){
+    public ArrayList findProcesasdosCausaJCyJO(String causaClaveJC){
         try {
             conn.Conectar();
             proce = new ArrayList();
-            sql = "SELECT PR.PROCESADO_CLAVE, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), PR.REINCIDENCIA, PR.SEXO, PR.FECHA_NACIMIENTO "
+            sql = "SELECT PR.PROCESADO_CLAVE, '--' AS PROCESADO_CLAVEJO, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), PR.REINCIDENCIA, PR.SEXO, PR.FECHA_NACIMIENTO "
                     + "FROM DATOS_PROCESADOS_ADOJC PR, DATOS_CONCLUSIONES_ADOJC CO "
                     + "WHERE PR.CAUSA_CLAVE = CO.CAUSA_CLAVE "
                     + "AND PR.PROCESADO_CLAVE = CO.PROCESADO_CLAVE "
                     + "AND CO.TIPO_RESOLUCION = 5 "
+                    + "AND PR.PROCESADO_CLAVE NOT IN(SELECT PROCESADO_CLAVEJC FROM DATOS_PROCESADOS_ADOJO WHERE CAUSA_CLAVEJC = '" + causaClaveJC + "') "
                     + "AND PR.CAUSA_CLAVE = '" + causaClaveJC + "' "
-                    + "ORDER BY 1;";
+                    + "UNION ALL "
+                    + "SELECT PR.PROCESADO_CLAVEJC, PR.PROCESADO_CLAVEJO, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
+                    + "FROM DATOS_PROCESADOS_ADOJO PR, CATALOGOS_REINCIDENCIA RE, CATALOGOS_SEXO S "
+                    + "WHERE PR.REINCIDENCIA = RE.REINCIDENCIA_ID "
+                    + "AND PR.SEXO = S.SEXO_ID "
+                    + "AND PR.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+                    + "ORDER BY 1, 2;";
             resul = conn.consultar(sql);
             while (resul.next()) {
                 proce.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4),
-                    resul.getString(5)
+                    resul.getString(1), resul.getString(2), resul.getString(3), 
+                    resul.getString(4), resul.getString(5), resul.getString(6)
                 });
             }
             conn.close();
@@ -48,30 +55,30 @@ public class showProcesadosJO {
         return proce;
     }
     
-    public ArrayList findProcesasdosCausaJO(String causaClaveJC, String proceClave){
-        try {
-            conn.Conectar();
-            proce = new ArrayList();
-            sql = "SELECT PR.PROCESADO_CLAVEJO, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
-                    + "FROM DATOS_PROCESADOS_ADOJO PR, CATALOGOS_REINCIDENCIA RE, CATALOGOS_SEXO S "
-                    + "WHERE PR.REINCIDENCIA = RE.REINCIDENCIA_ID "
-                    + "AND PR.SEXO = S.SEXO_ID "
-                    + "AND PR.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
-                    + "AND PR.PROCESADO_CLAVEJC = '" + proceClave + "' "
-                    + "ORDER BY 1;";
-            resul = conn.consultar(sql);
-            while (resul.next()) {
-                proce.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4),
-                    resul.getString(5)
-                });
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return proce;
-    }
+//    public ArrayList findProcesasdosCausaJO(String causaClaveJC, String proceClave){
+//        try {
+//            conn.Conectar();
+//            proce = new ArrayList();
+//            sql = "SELECT PR.PROCESADO_CLAVEJO, CONCAT(PR.NOMBRE,' ',PR.A_PATERNO,' ',PR.A_MATERNO), RE.DESCRIPCION, S.DESCRIPCION, PR.FECHA_NACIMIENTO "
+//                    + "FROM DATOS_PROCESADOS_ADOJO PR, CATALOGOS_REINCIDENCIA RE, CATALOGOS_SEXO S "
+//                    + "WHERE PR.REINCIDENCIA = RE.REINCIDENCIA_ID "
+//                    + "AND PR.SEXO = S.SEXO_ID "
+//                    + "AND PR.CAUSA_CLAVEJC = '" + causaClaveJC + "' "
+//                    + "AND PR.PROCESADO_CLAVEJC = '" + proceClave + "' "
+//                    + "ORDER BY 1;";
+//            resul = conn.consultar(sql);
+//            while (resul.next()) {
+//                proce.add(new String[]{
+//                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4),
+//                    resul.getString(5)
+//                });
+//            }
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return proce;
+//    }
     
     public ArrayList findProcesasdosTablaJO(String proceClave){
         try {

@@ -51,8 +51,6 @@ public class obtenFechaOcurr extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession();
         try {
-            System.out.println("Entrando al servlet");
-
             if (request.getParameter("fechaOcurren") != null) {
                 juzgadoClave = (String) sesion.getAttribute("juzgadoClave");
                 causaClave = (String) sesion.getAttribute("causaClave");
@@ -70,7 +68,6 @@ public class obtenFechaOcurr extends HttpServlet {
                 FechaIngreso = fechaing.toString();
                 ver = fechaing.after(fechaOcurr);
                 if (FechaIngreso.equals("1899-09-09")) {
-                     System.out.print("entro con año de ingreso 1899 ");
                     char numca[] = causaClave.toCharArray();
                     int m = 0;
                     for (int i = 0; i < causaClave.length(); i++) {
@@ -78,18 +75,13 @@ public class obtenFechaOcurr extends HttpServlet {
                             m++;
                         }
                     }
-                    System.out.println("numero de / " + m);
                     if (m == 0) {
-                        System.out.println("esta en validacion 0");
                         out.write("0");
                     } else if (m == 1) {
-                        System.out.println("esta en validacion 1 yea");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];
                         int ValAño = Integer.parseInt(part2.substring(0, 4));
-                        System.out.println("AÑO DE INGRESOS= " + ValAño);
-                        System.out.println("AÑO DE OCURRENCIA= " + ExtrAño);
                         if ((ValAño > 1915) && (ValAño < 2020)) {
                             if (ValAño < AñoOcurr) {
                                 out.write("1");
@@ -98,7 +90,6 @@ public class obtenFechaOcurr extends HttpServlet {
                             out.write("0");
                         }
                     } else if (m == 2) {
-                        System.out.println("esta en validacion 2");
                         String[] parts = causaClave.split("/");
                         String part1 = parts[0];
                         String part2 = parts[1];
@@ -115,7 +106,6 @@ public class obtenFechaOcurr extends HttpServlet {
                 } else {
                     if ((fechaing.after(fechaOcurr) == false) && (!fechaing.equals(fechaOcurr))) {
                         out.write("1");
-                        System.out.println(ver + " FECHA OCURENCIA:" + fechaOcurr + " FECHA INGRESO:" + fechaing);
                     } else {
                         out.write("0");
                     }

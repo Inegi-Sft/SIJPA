@@ -5,7 +5,10 @@
  */
 
 $(document).ready(function() {
-    /*---------------------------- FUNCIONES INICIAL JC----------------------------*/
+    if($('#opera').val() !== ''){
+        $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //Se usa para la recuperacion de BD
     if($('#audiInicial').val() === '1'){
         $('#dCtrlDetencion').show();

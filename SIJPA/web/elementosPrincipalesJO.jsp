@@ -20,32 +20,34 @@
         <%@include file="librerias.jsp" %>
         <%  
             showDelitosJO delito = new showDelitosJO();
-            ArrayList<String[]> deliJC, deliJO;
+            ArrayList<String[]> deli, deliJO;
 
             showProcesadosJO procesa = new showProcesadosJO();
-            ArrayList<String[]> proceJC, proceJO;
+            ArrayList<String[]> proce, proceJO;
 
             showVictimasJO victi = new showVictimasJO();
-            ArrayList<String[]> vicJC, vicJO;
+            ArrayList<String[]> vic, vicJO;
             
             showJuicio juicio = new showJuicio();
-            ArrayList<String[]> juiciJC, juiciJO , etapaProce;
+            ArrayList<String[]> juiciJO , etapaProce;
 
             showConclusionesJO conclusion = new showConclusionesJO();
-            ArrayList<String[]> concJC, concJO;
+            ArrayList<String[]> concJO;
 
             showTramiteJO tramite = new showTramiteJO();
-            ArrayList<String[]> tramJC, tramJO;
+            ArrayList<String[]> tramJO;
             
-            String jc = (String)session.getAttribute("juzgadoClave");
+            String juzClaJO = (String)session.getAttribute("juzgadoClave");
+            String juzClaJC = "";
             int y = 0;
             String ccJC = "";
             String ccJO = "";
             String ccJuz = "";
             String extraeClave = "";
             if(request.getParameter("causaClaveJC") != null){//Si viene la causa penal, recuperamos datos
+                juzClaJC = request.getParameter("juzClaveJC");
                 ccJC = request.getParameter("causaClaveJC");
-                ccJuz = ccJC + jc.replace("-", "");
+                ccJuz = ccJC + juzClaJC.replace("-", "");
             }
             if(request.getParameter("causaClaveJO") != null){//Si viene la causa penal, recuperamos datos
                 ccJO = request.getParameter("causaClaveJO");
@@ -82,18 +84,20 @@
                         <%
                             if(!ccJC.equals("")){
                                 y = 0;
-                                deliJC = delito.findDeliCausasJC(ccJuz);//Obtenemos delitos por causa
-                                for(String[] delJC : deliJC){//For para recorrer todos los delitos en la causa penal JC
-                                    deliJO = delito.findDeliCausasJO(ccJuz, delJC[0]);
-                                    if(deliJO.size() > 0){//Si el delito esta en BD de JO se muestra
+                                deli = delito.findDeliCausasJCyJO(ccJuz);//Obtenemos delitos por causa
+                                for(String[] del : deli){//For para recorrer todos los delitos en la causa penal JC
+                                    //deliJO = delito.findDeliCausasJO(ccJuz, delJC[0]);
+                                    if(!del[1].equals("--")){//Si el delito esta en BD de JO se muestra
                                         out.println("<tr>");
-                                        out.println("<td>" + deliJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[1] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[2] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[3] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[4] + "</td>");
-                                        out.println("<td>" + deliJO.get(0)[5] + "</td>");
-                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + deliJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td>" + del[1].replace(juzClaJO.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + del[2] + "</td>");
+                                        out.println("<td>" + del[3] + "</td>");
+                                        out.println("<td>" + del[4] + "</td>");
+                                        out.println("<td>" + del[5] + "</td>");
+                                        out.println("<td>" + del[6] + "</td>");
+                                        String deliClavJC = (del[0] == null)? "--": del[0].replace(juzClaJC.replace("-", ""), "");
+                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClaveJC=" + deliClavJC
+                                                + "&delitoClaveJO=" + del[1].replace(juzClaJO.replace("-", ""), "") 
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Editar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"/></a></td>");
@@ -101,19 +105,38 @@
                                     }
                                     else{//Si el delito no esta en la BD de JO lo recuperamos de JC y se muestra
                                         out.println("<tr>");
-                                        extraeClave = delJC[0].substring(delJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
-                                        out.println("<td>" + ccJO + extraeClave + "</td>");
+                                        out.println("<td>" + ccJO + "-D" + (y+1) + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClave=" + delJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='delitosJO.jsp?delitoClaveJC=" + del[0].replace(juzClaJC.replace("-", ""), "")
+                                                + "&delitoClaveJO=" + ccJO + "-D" + (y+1)
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
                                         out.println("</tr>");
                                     }
+                                    y++;
+                                }
+                                //Agregamos los nuevos delitos que se especificaron en JO (los nuevos)
+                                while(y < Integer.parseInt(totDelitos)){
+                                    /*la variable totDelitos se toma de la pagina capturaCausaPenal.jsp es posible por que agrega
+                                    a esta pagina en unas lineas de codigo mas arriba*/
+                                    out.println("<tr>");
+                                    out.println("<td>" + ccJO + "-D" + (y+1) + "</td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td><a class='pop' href='delitosJO.jsp?delitoClaveJC=--"
+                                            + "&delitoClaveJO=" + ccJO + "-D" + (y+1)
+                                            + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                    //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                    //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
+                                    out.println("</tr>");
                                     y++;
                                 }
                             }
@@ -139,35 +162,55 @@
                         <%
                             if(!ccJC.equals("")){
                                 y = 0;
-                                proceJC = procesa.findProcesasdosCausaJC(ccJuz);
-                                for(String[] proJC : proceJC){//For para recorrer los procesados en de la cuasa penal de JC
-                                    proceJO = procesa.findProcesasdosCausaJO(ccJuz, proJC[0]);
-                                    if(proceJO.size() > 0){//Si el procesado esta lleno en BD de JO lo mostramos
+                                proce = procesa.findProcesasdosCausaJCyJO(ccJuz);
+                                for(String[] pro : proce){//For para recorrer los procesados en de la cuasa penal de JC
+                                    //proceJO = procesa.findProcesasdosCausaJO(ccJuz, proJC[0]);
+                                    if(!pro[1].equals("--")){//Si el procesado esta lleno en BD de JO lo mostramos
                                         out.println("<tr>");
-                                        out.println("<td>" + proceJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + proceJO.get(0)[1] + "</td>");
-                                        out.println("<td>" + proceJO.get(0)[2] + "</td>");
-                                        out.println("<td>" + proceJO.get(0)[3] + "</td>");
-                                        out.println("<td>" + proceJO.get(0)[4] + "</td>");
-                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + proceJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td>" + pro[1].replace(juzClaJO.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + pro[2] + "</td>");
+                                        out.println("<td>" + pro[3] + "</td>");
+                                        out.println("<td>" + pro[4] + "</td>");
+                                        out.println("<td>" + pro[5] + "</td>");
+                                        String proClavJC = (pro[0] == null)? "--": pro[0].replace(juzClaJC.replace("-", ""), "");
+                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClaveJC=" + proClavJC
+                                                + "&proceClaveJO=" + pro[1].replace(juzClaJO.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
                                         out.println("</tr>");
                                     }else{//Si el procesado no esta en BD de JO se recupera de JC
                                         out.println("<tr>");
-                                        extraeClave = proJC[0].substring(proJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
-                                        out.println("<td>" + ccJO + extraeClave + "</td>");
-                                        out.println("<td>" + proJC[1] + "</td>");
+                                        out.println("<td>" + ccJO + "-P" + (y+1) + "</td>");
+                                        out.println("<td>" + pro[2] + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClave=" + proJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='procesadosJO.jsp?proceClaveJC=" + pro[0].replace(juzClaJC.replace("-", ""), "")
+                                                + "&proceClaveJO=" + ccJO + "-P" + (y+1)
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + proc[0] + "'," + y + ",'tablaProcesa','#Tadolescentes')\"/></a></td>");
                                         out.println("</tr>");
                                     }
+                                    y++;
+                                }
+                                //Agregamos los nuevos procesados que se especificaron en JO (los nuevos)
+                                while(y < Integer.parseInt(totProce)){
+                                    /*la variable totProce se toma de la pagina capturaCausaPenal.jsp es posible por que agrega
+                                    a esta pagina en unas lineas de codigo mas arriba*/
+                                    out.println("<tr>");
+                                    out.println("<td>" + ccJO + "-P" + (y+1) + "</td>");
+                                    out.println("<td>--</td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td><a class='pop' href='procesadosJO.jsp?proceClaveJC=--"
+                                            + "&proceClaveJO=" + ccJO + "-P" + (y+1)
+                                            + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                    //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                    //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
+                                    out.println("</tr>");
                                     y++;
                                 }
                             }
@@ -193,35 +236,55 @@
                         <%
                             if(!ccJC.equals("")){
                                 y = 0;
-                                vicJC = victi.findVictimasCausaJC(ccJuz);
-                                for(String[] viJC : vicJC){//For para recorrer todas las victimas registradas en BD de JC
-                                    vicJO = victi.findVictimasCausaJO(ccJuz, viJC[0]);
-                                    if(vicJO.size() > 0){//Si tenemos victimas registradas en la BD de JO las mostramos
+                                vic = victi.findVictimasCausaJCyJO(ccJuz);
+                                for(String[] vi : vic){//For para recorrer todas las victimas registradas en BD de JC
+                                    //vicJO = victi.findVictimasCausaJO(ccJuz, viJC[0]);
+                                    if(!vi[1].equals("--")){//Si tenemos victimas registradas en la BD de JO las mostramos
                                         out.println("<tr>");
-                                        out.println("<td>" + vicJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
-                                        out.println("<td>" + vicJO.get(0)[1] + "</td>");
-                                        out.println("<td>" + vicJO.get(0)[2] + "</td>");
-                                        out.println("<td>" + vicJO.get(0)[3] + "</td>");
-                                        out.println("<td>" + vicJO.get(0)[4] + "</td>");
-                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + vicJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td>" + vi[1].replace(juzClaJO.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + vi[2] + "</td>");
+                                        out.println("<td>" + vi[3] + "</td>");
+                                        out.println("<td>" + vi[4] + "</td>");
+                                        out.println("<td>" + vi[5] + "</td>");
+                                        String vicClavJC = (vi[0] == null)? "--": vi[0].replace(juzClaJC.replace("-", ""), "");
+                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClaveJC=" + vicClavJC
+                                                + "&victiClaveJO=" + vi[1].replace(juzClaJO.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");
                                         out.println("</tr>");
                                     }else{//Si la victima no esta en BD se agrega vacia
                                         out.println("<tr>");
-                                        extraeClave = viJC[0].substring(viJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
-                                        out.println("<td>" + ccJO + extraeClave + "</td>");
+                                        out.println("<td>" + ccJO + "-V" + (y+1) + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClave=" + viJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='victimasJO.jsp?victiClaveJC=" + vi[0].replace(juzClaJC.replace("-", ""), "")
+                                                + "&victiClaveJO=" + ccJO + "-V" + (y+1)
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
                                         //        + "onclick=\"borraRegistro('" + vi[0] + "'," + y + ",'tablaVictimas','#Tvictimas')\"/></a></td>");
                                         out.println("</tr>");
                                     }
+                                    y++;
+                                }
+                                //Agregamos las nuevas victimas que se especificaron en JO (los nuevos)
+                                while(y < Integer.parseInt(totVicti)){
+                                    /*la variable totVicti se toma de la pagina capturaCausaPenal.jsp es posible por que agrega
+                                    a esta pagina en unas lineas de codigo mas arriba*/
+                                    out.println("<tr>");
+                                    out.println("<td>" + ccJO + "-V" + (y+1) + "</td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td></td>");
+                                    out.println("<td><a class='pop' href='victimasJO.jsp?victiClaveJC=--"
+                                            + "&victiClaveJO=" + ccJO + "-V" + (y+1)
+                                            + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
+                                    //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' "
+                                    //        + "onclick=\"borraRegistro('" + del[0] + "'," + y + ",'tablaDeli','#Tdelitos')\"'/></a></td>");
+                                    out.println("</tr>");
                                     y++;
                                 }
                             }
@@ -237,8 +300,6 @@
                             <th>Adolescente clave</th>
                             <th>Nombre</th>
                             <th>Medidas diciplinarias</th>
-                            <th>Incidentes en audiencia</th>
-                            <th>Suspencion de audiencia</th>
                             <th>Emision de Fallo</th>
                             <th>Etapa D.</th>
                             <th>Editar</th>
@@ -249,33 +310,27 @@
                             if(!ccJC.equals("")){
                                 y = 0;
                                 String proClaveJO="";
-                                juiciJC = juicio.findProceJuicioJC(ccJuz);
-                                for(String[] juiJC : juiciJC){//For para recorrer todos los procesados que pasan a JO en JC
-                                    proClaveJO = ccJO + juiJC[0].substring(juiJC[0].indexOf("-P"));//variable de procesado JO
-                                    juiciJO = juicio.findProceJuicioJO(proClaveJO);
+                                proce = juicio.findProceJuicio(ccJO + juzClaJO.replace("-", ""));
+                                for(String[] pro : proce){//For para recorrer todos los procesados que pasan a JO en JC
+                                    juiciJO = juicio.findProceJuicioJO(pro[0]);
                                     if(juiciJO.size() > 0){//Si el procesado esta en oral de la BD lo agregamos
                                         out.println("<tr>");
-                                        out.println("<td>" + juiciJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + juiciJO.get(0)[0].replace(juzClaJO.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[1] + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[2] + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[3] + "</td>");
                                         out.println("<td>" + juiciJO.get(0)[4] + "</td>");
-                                        out.println("<td>" + juiciJO.get(0)[5] + "</td>");
-                                        out.println("<td>" + juiciJO.get(0)[6] + "</td>");
-                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClave=" + juiciJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClaveJO=" + juiciJO.get(0)[0].replace(juzClaJO.replace("-", ""), "")
                                                 + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }else{
                                         out.println("<tr>");
-                                        extraeClave = juiJC[0].substring(juiJC[0].indexOf("-")).replace(jc.replace("-", ""), "");
-                                        out.println("<td>" + ccJO + extraeClave + "</td>");
-                                        out.println("<td>" + juiJC[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
+                                        out.println("<td>" + pro[0].replace(juzClaJO.replace("-", ""), "") + "</td>");
+                                        out.println("<td>" + pro[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
                                         out.println("<td></td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td></td>");
-                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClave=" + juiJC[0].replace(jc.replace("-", ""), "")
+                                        out.println("<td><a class='pop' href='etapaOral.jsp?proceClaveJO=" + pro[0].replace(juzClaJO.replace("-", ""), "")
                                                 + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                         out.println("</tr>");
                                     }
@@ -326,26 +381,26 @@
                     <tbody>
                         <%
                             if(!ccJC.equals("")){
-                                etapaProce = juicio.findCausaConcluJO(ccJO + jc.replace("-", ""));//Buscamos cuales procesados se encuentran en conclusion en etapa oral
+                                etapaProce = juicio.findCausaConcluJO(ccJO + juzClaJO.replace("-", ""));//Buscamos cuales procesados se encuentran en conclusion en etapa oral
                                 if(etapaProce.size() != 0){//Si existen entramos a mostrarlos en la tabla
                                     for(y = 0; y < etapaProce.size(); y++){//For para recorrer todos los procesados registrados en etapa oral en BD
                                         concJO = conclusion.findConcluTablaJO(etapaProce.get(y)[0]);//Le enviamos el procesado
                                         if(concJO.size() > 0){//Si tel procesado esta en conclusion lo ponemos
                                             out.println("<tr>");
-                                            out.println("<td>" + concJO.get(0)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + concJO.get(0)[0].replace(juzClaJO.replace("-", ""), "") + "</td>");
                                             out.println("<td>" + concJO.get(0)[1] + "</td>");
                                             out.println("<td>" + concJO.get(0)[2] + "</td>");
                                             out.println("<td>" + concJO.get(0)[3] + "</td>");
-                                            out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClave=" + concJO.get(0)[0].replace(jc.replace("-", ""), "")
+                                            out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClaveJO=" + concJO.get(0)[0].replace(juzClaJO.replace("-", ""), "")
                                                     + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                             out.println("</tr>");
                                         }else{
                                             out.println("<tr>");
-                                            out.println("<td>" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + etapaProce.get(y)[0].replace(juzClaJO.replace("-", ""), "") + "</td>");
                                             out.println("<td>" + etapaProce.get(y)[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
                                             out.println("<td></td>");
                                             out.println("<td></td>");
-                                            out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClave=" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "")
+                                            out.println("<td><a class='pop' href='conclusionesJO.jsp?proceClaveJO=" + etapaProce.get(y)[0].replace(juzClaJO.replace("-", ""), "")
                                                     + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                             out.println("</tr>");
                                         }
@@ -396,26 +451,26 @@
                     <tbody>
                         <%
                             if(!ccJC.equals("")){
-                                etapaProce = juicio.findCausaTramJO(ccJO + jc.replace("-", ""));//Buscamos cuales procesados se encuentran en tramite en etapa inicial
+                                etapaProce = juicio.findCausaTramJO(ccJO + juzClaJO.replace("-", ""));//Buscamos cuales procesados se encuentran en tramite en etapa inicial
                                 if(etapaProce.size() != 0){//Si existen entramos a mostrarlos en la tabla
                                     for(y = 0; y < etapaProce.size(); y++){//For para recorrer todos los procesados registrados en etapa oral en BD
                                         tramJO = tramite.findTramiteTablaJO(etapaProce.get(y)[0]);//Le enviamos el procesado
                                         if(tramJO.size() != 0){//Si tel procesado esta en tramite lo ponemos
                                             out.println("<tr>");
-                                            out.println("<td>" + tramJO.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + tramJO.get(y)[0].replace(juzClaJO.replace("-", ""), "") + "</td>");
                                             out.println("<td>" + tramJO.get(y)[1] + "</td>");
                                             out.println("<td>JUICIO ORAL</td>");
                                             out.println("<td>" + tramJO.get(y)[3] + "</td>");
-                                            out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + tramJO.get(y)[0].replace(jc.replace("-", ""), "")
+                                            out.println("<td><a class='pop' href='tramiteJO.jsp?proceClaveJO=" + tramJO.get(y)[0].replace(juzClaJO.replace("-", ""), "")
                                                     + "&posicion=" + y + "&edita=Si'><img src='img/editar.png' title='Modificar'/></a></td>");
                                             out.println("</tr>");
                                         }else{
                                             out.println("<tr>");
-                                            out.println("<td>" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "") + "</td>");
+                                            out.println("<td>" + etapaProce.get(y)[0].replace(juzClaJO.replace("-", ""), "") + "</td>");
                                             out.println("<td>" + etapaProce.get(y)[1] + "</td>");//Traemos el nombre de procesados en la reccuperación de BD
                                             out.println("<td>JUICIO ORAL</td>");
                                             out.println("<td></td>");
-                                            out.println("<td><a class='pop' href='tramiteJO.jsp?proceClave=" + etapaProce.get(y)[0].replace(jc.replace("-", ""), "")
+                                            out.println("<td><a class='pop' href='tramiteJO.jsp?proceClaveJO=" + etapaProce.get(y)[0].replace(juzClaJO.replace("-", ""), "")
                                                     + "&posicion=" + y + "'><img src='img/editar.png' title='Modificar'/></a></td>");
                                             out.println("</tr>");
                                         }

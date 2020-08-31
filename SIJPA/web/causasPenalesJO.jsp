@@ -27,8 +27,7 @@
             usuario us = new usuario();
             showJuicio Juicio = new showJuicio();
             estatusEtapaJO EtapaJO = new estatusEtapaJO();
-            int ExisEJO = 0;
-            ArrayList<String[]> lsCausasJC, lisCausaJO;
+            ArrayList<String[]> lsCausasJC;
             ArrayList<String> lista;
             int Estatus = 0, cInicial = 0;
             
@@ -41,7 +40,7 @@
                 if(session.getAttribute("juzgadoClave") != ""){
                     juzgado = (String) session.getAttribute("juzgadoClave");
                     //Verificamos la funcion del juzgado para que sea de control
-                    if(juz.findFuncionJuz(juzgado).equals("1")){
+                    if(juz.findFuncionJuz(juzgado) == 1){
                         out.println("<script>$(document).ready(function () {"
                                 + "alertify.alert('Error de Juzgado',"
                                 + "'El juzgado seleccionado(activo) es de Control y este es el apartado de Enjuiciamiento."
@@ -65,7 +64,7 @@
             }
             
             session.setAttribute("Sistema", "JO");//Lanzamos variable de session dependiendo del sistema
-            int tCausasJuz = cp.countCausasPenalesJO(juzgado);
+            String funJuz = juz.findFuncionDes(juzgado);
         %>
     </head>
     <body>
@@ -79,29 +78,34 @@
             <h1>Causas Penales JO</h1>
             <form action="causasPenalesJO.jsp" name="formCPJO" method="post">
                 <div id="juzClave">
-                    <label for="juzgado">Juzgado Clave:</label>
-                    <select name="juzgado" id="juzgado" onchange="formCPJO.submit();">
-                        <option value="">--Seleccione--</option>
-                        <%
-                            lista = juz.findJuzgadosJO();
-                            for (String ls : lista) {
-                                out.println("<option value='" + ls + "'");
-                                if(ls.equals(juzgado)){
-                                    out.println(" selected ");
+                    <div>
+                        <label for="juzgado">Juzgado Clave:</label>
+                        <select name="juzgado" id="juzgado" onchange="formCPJO.submit();">
+                            <option value="">--Seleccione--</option>
+                            <%
+                                lista = juz.findJuzgadosJO();
+                                for (String ls : lista) {
+                                    out.println("<option value='" + ls + "'");
+                                    if(ls.equals(juzgado)){
+                                        out.println(" selected ");
+                                    }
+                                    out.println(">" + ls + "</option>");
                                 }
-                                out.println(">" + ls + "</option>");
-                            }
-                        %>
-                    </select>
+                            %>
+                        </select>
+                    </div>
+                    <div>
+                        <label id="funcionJu">Función: <%=funJuz%></label>
+                    </div>
                 </div>
-                <span class="totExp">Total: <%=tCausasJuz%></span>
+                <span class="totExp" id="totCPJO"></span><!--Se llena dinamico con jquery -->
                 <a class="add" href="#" onclick="validaAdd('elementosPrincipalesJO');">
                     <img src="img/add3.png" width="20" height="20"/> Agregar
                 </a>
                 <table id="causasJO" class="myTable">
                     <thead>
                         <tr>
-                            <th>Posi</th>
+                            <th>Juzgado JC</th>
                             <th>No. Asunto JC</th>
                             <th>No. Asunto JO</th>
                             <th>Fecha Ingreso JC</th>
@@ -122,23 +126,22 @@
                             juzLimpio = juzgado.replace("-", "");
                         }
                         int pos = 0;
-                        lsCausasJC = cp.findCausasJOenJC(juzgado);
+                        lsCausasJC = cp.findCausasJOyJC(juzgado);
                         for (String[] lsJC : lsCausasJC) {
-                            String ccJCSimple = lsJC[0].replace(juzLimpio, "");
+                            //String ccJCSimple = lsJC[0].replace(juzLimpio, "");
                             //Validamos si ya esiste en JO o aun sigue en JC
-                            lisCausaJO = cp.findCausasPenalesJO(juzgado, lsJC[0]);
-                            if(lisCausaJO.size() > 0){//Si se encuentra en JO recuperamos los datos
-                                cInicial = Juicio.findEtapaCausaClaveJO(lisCausaJO.get(0)[1]);
-                                Estatus = us.findAvanceUsuarioJO(lisCausaJO.get(0)[1]);
+                            //lisCausaJO = cp.findCausasPenalesJO(juzgado, lsJC[0]);
+                            if(!lsJC[2].equals("--")){//Si se encuentra en JO recuperamos los datos
+                                cInicial = Juicio.findEtapaCausaClaveJO(lsJC[2]);
+                                Estatus = us.findAvanceUsuarioJO(lsJC[2]);
                                 Est1 = "";
                                 Est2 = "";
                                 Est3 = "";
-                                System.out.println("El Estatus essss "+Estatus+" cinicial "+cInicial);
                                 if ((Estatus == 5) || (cInicial == 0)) { 
-                                    Est1 = esJO.findEstatus(Estatus, lisCausaJO.get(0)[1]);
+                                    Est1 = esJO.findEstatus(Estatus, lsJC[2]);
                                 }
                                 if (cInicial > 0) {
-                                    Est2 = EtapaJO.findEstatusOral(lisCausaJO.get(0)[1], juzgado);
+                                    Est2 = EtapaJO.findEstatusOral(lsJC[2], juzgado);
                                 }
                                 Est3 = Est1 + "---" + Est2;
                                 if (Est3.equals("---")) {
@@ -146,34 +149,32 @@
                                 } else {
                                     Com = "Incompleto";
                                 }
-                                System.out.println(Est1+Com+"fin validacion");
                                 
                                 out.println("<tr>");
-                                out.println("<td>" + pos + "</td>");
-                                out.println("<td>" + ccJCSimple + "</td>");
-                                String ccJOSimple = lisCausaJO.get(0)[1].replace(juzLimpio, "");
-                                out.println("<td>" + ccJOSimple + "</td>");
-                                out.println("<td>" + lisCausaJO.get(0)[2] + "</td>");
-                                out.println("<td>" + lisCausaJO.get(0)[3] + "</td>");
-                                out.println("<td>" + lisCausaJO.get(0)[4] + "</td>");
-                                out.println("<td>" + lisCausaJO.get(0)[5] + "</td>");
-//                                out.println("<td>" + lisCausaJO.get(0)[6] + "</td>");
-                                out.println("<td><a data-title='"+ Est3 +"'> "+ Com +"</a></td>");
-                                out.println("<td><a href='elementosPrincipalesJO.jsp?causaClaveJC=" + ccJCSimple + "&causaClaveJO=" + ccJOSimple + "'><img src='img/editar.png' title='Editar'/></a></td>");
+                                out.println("<td>" + lsJC[0] + "</td>");
+                                out.println("<td>" + lsJC[1].replace(lsJC[0].replace("-", ""), "") + "</td>");
+                                out.println("<td>" + lsJC[2].replace(juzLimpio, "") + "</td>");
+                                out.println("<td>" + lsJC[3] + "</td>");
+                                out.println("<td>" + lsJC[4] + "</td>");
+                                out.println("<td>" + lsJC[5] + "</td>");
+                                out.println("<td>" + lsJC[6] + "</td>");
+                                out.println("<td><a data-title='" + Est3 + "'> " + Com + "</a></td>");
+                                out.println("<td><a href='elementosPrincipalesJO.jsp?juzClaveJC=" + lsJC[0] + "&causaClaveJC=" + lsJC[1].replace(lsJC[0].replace("-", ""), "") 
+                                        + "&causaClaveJO=" + lsJC[2].replace(juzLimpio, "") + "'><img src='img/editar.png' title='Editar'/></a></td>");
                                 //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' onclick=\"borraRegistro(" + ls[0] + "," + pos + ",'causasJO')\"/></a></td>");
                                 out.println("</tr>");
                             }else{//Si no esta en JO los recuperamos de JC
                                 out.println("<tr>");
-                                out.println("<td>" + pos + "</td>");
-                                out.println("<td>" + ccJCSimple + "</td>");
+                                out.println("<td>" + lsJC[0] + "</td>");
+                                out.println("<td>" + lsJC[1].replace(lsJC[0].replace("-", ""), "") + "</td>");
                                 out.println("<td>--</td>");
-                                out.println("<td>" + lsJC[1] + "</td>");
-                                out.println("<td>" + lsJC[2] + "</td>");
                                 out.println("<td>" + lsJC[3] + "</td>");
                                 out.println("<td>" + lsJC[4] + "</td>");
-                                out.println("<td>--</td>");
-//                                out.println("<td>--</td>");
-                                out.println("<td><a href='elementosPrincipalesJO.jsp?causaClaveJC=" + ccJCSimple + "'><img src='img/editar.png' title='Editar'/></a></td>");
+                                out.println("<td>" + lsJC[5] + "</td>");
+                                out.println("<td>" + lsJC[6] + "</td>");
+                                out.println("<td>Incompleto</td>");
+                                out.println("<td><a href='elementosPrincipalesJO.jsp?juzClaveJC=" + lsJC[0] + "&causaClaveJC=" + lsJC[1].replace(lsJC[0].replace("-", ""), "")
+                                        + "'><img src='img/editar.png' title='Editar'/></a></td>");
                                 //out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' onclick=\"borraRegistro(" + ls[0] + "," + pos + ",'causasJO')\"/></a></td>");
                                 out.println("</tr>");
                             }

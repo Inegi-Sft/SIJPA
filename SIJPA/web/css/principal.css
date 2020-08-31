@@ -467,12 +467,16 @@ fieldset legend{
     text-align: left;
 }
 
+#juzClave div{
+    display: inline-block;
+}
+
 #juzClave label, #juzClave select{
     margin: 0;
 }
 
 #juzClave label{
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 }
 
 .load {
@@ -678,4 +682,13 @@ input[type=text]:read-only, input[type=date]:read-only, input[type=number]:read-
 
 [data-title] {
     position: relative;
+}
+
+#flechaRela{
+    width: 50px;
+    margin-top: 3%;
+}
+
+.borrar{
+    cursor: pointer;
 }

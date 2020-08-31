@@ -178,7 +178,6 @@ public class showJuzgados {
             sql = "SELECT *  "
                     + "FROM DATOS_JUZGADOS_ADOJC WHERE JUZGADO_CLAVE = '"+ juzgadoClave +"' "
                     + "ORDER BY 1";
-            System.out.println(sql);
             rs = conn.consultar(sql);
             while (rs.next()) {
                 listaDatosJuz.add(new String[]{
@@ -199,7 +198,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             listaDatosJuz = new ArrayList<>();
-            String tabla = "";
+            String tabla;
             if(funJuz.equalsIgnoreCase("2")){
                 tabla = "DATOS_INFORME_ADOJO"; 
             }else{
@@ -225,8 +224,8 @@ public class showJuzgados {
         return listaDatosJuz;
     }
     
-    public String findFuncionJuz(String juzgadoClave){
-        String funcion = "";
+    public int findFuncionJuz(String juzgadoClave){
+        int funcion = 0;
         try {
             conn.Conectar();
             sql = "SELECT JUZGADO_FUNCION "
@@ -235,8 +234,27 @@ public class showJuzgados {
                     + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {
+                funcion = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return funcion;
+    }
+    
+    public String findFuncionDes(String juzgadoClave){
+        String funcion = "";
+        try {
+            conn.Conectar();
+            sql = "SELECT CF.DESCRIPCION "
+                    + "FROM DATOS_JUZGADOS_ADOJC JU "
+                    + "JOIN CATALOGOS_FUNCION_JUZGADO CF ON JU.JUZGADO_FUNCION = CF.FUNCION_JUZ_ID "
+                    + "WHERE JU.JUZGADO_CLAVE = '" + juzgadoClave + "' "
+                    + "ORDER BY 1;";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
                 funcion = rs.getString(1);
-                
             }
             conn.close();
         } catch (SQLException ex) {

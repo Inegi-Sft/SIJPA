@@ -71,13 +71,13 @@ public class insrtCausaPenal extends HttpServlet {
             conn.Conectar();
             
             if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
-                sesion.setAttribute("causaClave", causaClave + jConcatenado);
                 sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fechaIngreso + "',"
                         + nomJuez + "," + particular + ","+ InCausa +"," + competencia + "," + tipoIncompetencia + "," + acomulado + ",'" + referencia + "',"
                         + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
+                    sesion.setAttribute("causaClave", causaClave + jConcatenado);
                     usuario usuario = new usuario();
                     if(competencia == 1){//Competente
                         usuario.insrtAvance(causaClave + jConcatenado, 2);//Insertamos el avance de la causa penal de incompetencia

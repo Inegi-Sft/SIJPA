@@ -5,7 +5,10 @@
  */
 
 $(document).ready(function() {
-    /*---------------------------- FUNCIONES VICTIMAS JC----------------------------*/
+    if($('#opera').val() !== ''){
+        $('#victiClave').css('background-color', 'rgba(80,255,120,.6)');
+    }
+    
     //Se usa para la recuperacion de BD
     if($('#tipoVictiHi').val() !== ''){
         var tipoVi = $('#tipoVictiHi').val();
@@ -297,6 +300,5 @@ $(document).ready(function() {
             }
         });
     });
-    /*---------------------------- FIN VICTIMAS DELITOS JC----------------------------*/
 });
 

@@ -106,8 +106,8 @@ public class insrtConclusiones extends HttpServlet {
                         }
                     }
                     else if(tipoResolu.equals("2")){
-                        for(int i=0; i<tipo_suspension.length; i++){
-                            sql_suspension = "INSERT INTO DATOS_CSUSPENSION_ADOJC VALUES('"+causaClave+"','"+proceClave+ jConcatenado +"',"+tipo_suspension[i]+jEntidad+","+jMunicipio+","+jNumero+")";
+                        for (String tipo_suspension1 : tipo_suspension) {
+                            sql_suspension = "INSERT INTO DATOS_CSUSPENSION_ADOJC VALUES('"+causaClave+"','"+proceClave+ jConcatenado +"'," + tipo_suspension1 + jEntidad + "," + jMunicipio + "," + jNumero + ")";
                             conn.escribir(sql_suspension);
                         }
                     }
@@ -133,7 +133,7 @@ public class insrtConclusiones extends HttpServlet {
                     }
                     
                     showConclusiones con = new showConclusiones();
-                    ArrayList<String[]> lis = new ArrayList();
+                    ArrayList<String[]> lis;
                     lis = con.findConcluTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
@@ -177,13 +177,13 @@ public class insrtConclusiones extends HttpServlet {
                         }
                     }
                     else if(tipoResolu.equals("2")){
-                        for(int i=0; i<tipo_suspension.length; i++){
-                            sql_suspension = "INSERT INTO DATOS_CSUSPENSION_ADOJC VALUES('"+causaClave+"','"+proceClave+ jConcatenado +"',"+tipo_suspension[i]+","+jEntidad+","+jMunicipio+","+jNumero+")";
+                        for (String tipo_suspension1 : tipo_suspension) {
+                            sql_suspension = "INSERT INTO DATOS_CSUSPENSION_ADOJC VALUES('"+causaClave+"','"+proceClave+ jConcatenado +"'," + tipo_suspension1 + "," + jEntidad + "," + jMunicipio + "," + jNumero + ")";
                             conn.escribir(sql_suspension);
                         }
                     }
                     showConclusiones con = new showConclusiones();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     lis = con.findConcluTabla(proceClave + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);

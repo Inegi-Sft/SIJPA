@@ -47,6 +47,7 @@
             String desDelitoNT = "";
             String fechaOcurre = "";
             String sitioOcurre = "";
+            String sitioOE ="";
             String gradoConsuma = "";
             String calificacion = "";
             String clasificacion = "";
@@ -245,20 +246,29 @@
                                 </div>
                             </td>
                             <td>
-                                <label for="sitioO">Sitio de ocurrencia</label>
-                                <select name="sitioO" id="sitioO" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findSitioOcurrencia();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'");
-                                            if(ls[0].equals(sitioOcurre)){
-                                                out.println(" selected ");
-                                            }
+                                <fieldset>
+                                    <legend>Sitio de ocurrencia</legend>
+                                    <div class="colsx lblExBig">
+                                        <label for="sitioO">Sitio de ocurrencia</label>
+                                        <select name="sitioO" id="sitioO" requiered>
+                                            <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findSitioOcurrencia();
+                                            for (String[] ls : lista) {
+                                                out.println("<option value='" + ls[0] + "'");
+                                                if(ls[0].equals(sitioOcurre)){
+                                                    out.println(" selected ");
+                                                }
                                             out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
-                                </select>
+                                            }
+                                        %>
+                                        </select>
+                                    </div>
+                                    <div class="colsx oculto" id="EspecifiqueSO">
+                                        <label for="sitioOE">Especifique sitio</label>
+                                        <input class="txtMedia" type="text"  name="sitioOE" id="sitioOE" value="<%=sitioOE%>">
+                                    </div>
+                                </fieldset>
                             </td>
                             <td>
                                 <label for="consumacion">Grado de consumación</label>

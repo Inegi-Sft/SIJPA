@@ -207,7 +207,7 @@
                                     <legend>Sitio de ocurrencia</legend>
                                     <div class="colsx lblExBig">
                                         <label for="sitioO">Sitio de ocurrencia</label>
-                                        <select name="sitioO" id="sitioO" requiered>
+                                        <select name="sitioO" id="sitioO" required>
                                             <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findSitioOcurrencia();

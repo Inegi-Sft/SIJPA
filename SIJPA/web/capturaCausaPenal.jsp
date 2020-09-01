@@ -164,7 +164,7 @@
                                 <fieldset>
                                     <div>
                                           <label for="Incausa">Integración de la causa penal</label>  
-                                          <select name="Incausa" id="Incausa" class="txtMedia" required>
+                                          <select name="Incausa" id="Incausa" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findICausa();
@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="cols oculto" id="tipoIncopetencia">
                                         <label for="Tincompe">Tipo de incompetencia</label>
-                                        <select name="Tincompe" id="Tincompe" class="txtMedia" >
+                                        <select name="Tincompe" id="Tincompe">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findIncompetencia();

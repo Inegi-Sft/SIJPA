@@ -110,6 +110,16 @@ $(document).ready(function () {
         }
     });
     
+    $('#sitioO').change(function (){
+        if($('#sitioO').val()==='12'){
+            $('#EspecifiqueSO').fadeIn();
+            $('#EspecifiqueSO').val('').prop('requiered',true);
+        }else{
+            $('#EspecifiqueSO').fadeOut();
+            $('#EspecifiqueSO').val('-2').prop('requiered',false);
+        }
+    });
+    
   //Guarda DelitosJO
     $('#formDelitosJO').submit(function (e) {
         e.preventDefault();

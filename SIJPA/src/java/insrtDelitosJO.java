@@ -70,7 +70,8 @@ public class insrtDelitosJO extends HttpServlet {
         String fechaReclaDel = verificaVariable(request.getParameter("fechaReclaDel"));
         int delitoNT = Integer.parseInt(request.getParameter("delitoNT"));
         String ocurrencia = verificaVariable(request.getParameter("ocurrencia"));
-        String sitioO = verificaVariable(request.getParameter("sitioO")); 
+        String sitioO = verificaVariable(request.getParameter("sitioO"));
+        String especifiqueO = verificaSitio(request.getParameter("sitioOE"), sitioO);
         String consumacion = request.getParameter("consumacion");
         String calificacion = request.getParameter("calificacion");
         String clasificacion = request.getParameter("clasificacion");
@@ -97,7 +98,7 @@ public class insrtDelitosJO extends HttpServlet {
                         + causaClaveJC + "','" + causaClaveJO + "'," + deliClavJC + ",'"
                         + delitoClaveJO + jConcatenado + "'," + delitoCP + ",'" + articuloCP + "',"
                         + delitoNT + "," + fuero + "," + reclasificaDel + ",'" + fechaReclaDel + "','" + ocurrencia + "',"
-                        + sitioO + "," + consumacion + "," + calificacion + "," + clasificacion + "," + concurso + ","
+                        + sitioO + ",'" + especifiqueO+ "'," + consumacion + "," + calificacion + "," + clasificacion + "," + concurso + ","
                         + comision + "," + accion + "," + modalidad + "," + instrumentos + "," + entidadD + ","
                         + municipioD + ",0,0,'" + comentarios + "',(select YEAR(NOW())) );";                
                 System.out.println(sql);
@@ -146,7 +147,7 @@ public class insrtDelitosJO extends HttpServlet {
                 sql = "UPDATE DATOS_DELITOS_ADOJO SET DELITO_CODIGO_PENAL = " + delitoCP + ",ART_CODIGO_PENAL = '" + articuloCP + "',"
                         + "DELITO_NORMA_TECNICA = " + delitoNT + ",TIPO_FUERO = " + fuero + ",DELITO_RECLASIFICADO = " + reclasificaDel + ","
                         + "FECHA_RECLASIFICACION = '" +fechaReclaDel + "',FECHA_OCURRENCIA = '" + ocurrencia + "',SITIO_OCURRENCIA = " + sitioO + ","
-                        + "GRADO_CONSUMACION = " + consumacion + ",CALIFICACION = " + calificacion + ",CLASIFICACION = " + clasificacion + ","
+                        + "ESPECIFIQUE_SITIO= '"+especifiqueO + "',GRADO_CONSUMACION = " + consumacion + ",CALIFICACION = " + calificacion + ",CLASIFICACION = " + clasificacion + ","
                         + "CONCURSO = " +concurso + ",FORMA_COMISION = " + comision + ",FORMA_ACCION = " + accion + ",MODALIDAD = " + modalidad + ","
                         + "INSTRUMENTO_COMISION = " + instrumentos + ",OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
                         + "COMENTARIOS = '" + comentarios + "' "
@@ -211,7 +212,19 @@ public class insrtDelitosJO extends HttpServlet {
         }
         return verificada;
     }
-
+    
+    public String verificaSitio(String variable, String variable2) {
+        String verificada = "";
+        if ((variable == null) || (variable2.compareTo("12") > 0)) {
+            verificada = "-2";
+        } else if (variable.equals("") || (variable2.compareTo("12") > 0)) {
+            verificada = "-2";
+        } else {
+            verificada = variable;
+        }
+        return verificada;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

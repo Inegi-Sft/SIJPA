@@ -232,7 +232,7 @@ public class showAudiencias {
     public ArrayList findCausasJO(String juzgado) {
         conn.Conectar();
         lista = new ArrayList<>();
-        sql = "SELECT CAUSA_CLAVEJO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgado + "' "
+        sql = "SELECT CAUSA_CLAVEJO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJO = '" + juzgado + "' "
             + " AND CAUSA_CLAVEJO NOT IN (SELECT DISTINCT CAUSA_CLAVEJO FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE = '" + juzgado + "')"
             + " ORDER BY 1";
         resul = conn.consultar(sql);

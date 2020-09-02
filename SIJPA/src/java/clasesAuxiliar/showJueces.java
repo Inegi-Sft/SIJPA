@@ -100,7 +100,7 @@ public class showJueces {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(!causaJC.equals("") && juzClaveJC.equals("")){//Si tenemos causa entonces quitamos el juez de JC
+            if(!causaJC.equals("") && !juzClaveJC.equals("")){//Si tenemos causa entonces quitamos el juez de JC
                 sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                     + "FROM DATOS_JUECES_ADOJC "
                     + "WHERE JUZGADO_CLAVE = '" + juzClaveJO + "' "

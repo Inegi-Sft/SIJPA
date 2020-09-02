@@ -247,9 +247,9 @@
                                     }
                                     out.println("<td>");
                                     if(viDel.size() != 0){
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[2]+ " onclick='victimaDelito(this)' checked>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[3]+ " onclick='victimaDelito(this)' checked>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[2]+ " onclick='victimaDelito(this)' />");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[3]+ " onclick='victimaDelito(this)' />");
                                     }
                                     out.println("</td>");
                                     out.println("</tr>");

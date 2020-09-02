@@ -402,7 +402,7 @@
                         <tr>
                             <td>
                                 <label for="Cargo">Cargo del capturador</label>
-                                <input type="text" name="cargo" id="cargo" value="<%=cargoCap%>" required/>
+                                <input type="text" name="cargo" id="cargo" value="<%=cargoCap%>" maxlength="100" required/>
                             </td>
                             <td>
                                 <label for="ejercicio">Ejercicio:</label>

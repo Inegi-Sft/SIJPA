@@ -207,8 +207,8 @@ public class showJuzgados {
             }
             sql = "SELECT CAUSAS_PENALES_INGRESADAS, MEDIDAS_PROTECCION_ASIG, PROVIDENCIAS_PRECAUTORIAS, PRUEBA_ANTICIPADA,"
                     + "ORDENES_JUDICIALES, ACTOS_INVESTIGA, IMPUGNACION_MP, OTROS, CAUSAS_TRAMITE, CAUSAS_BAJAS, ANIO "
-                    + "FROM " + tabla
-                    + " WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
+                    + "FROM " + tabla + " "
+                    + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
                     + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {

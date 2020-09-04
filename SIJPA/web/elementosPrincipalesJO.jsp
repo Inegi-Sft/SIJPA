@@ -105,6 +105,8 @@
                                     }
                                     else{//Si el delito no esta en la BD de JO lo recuperamos de JC y se muestra
                                         out.println("<tr>");
+                                        //Columna de control para cuando se agregan de un juzgado Mixto por eso no se muestra
+                                        out.println("<td style='display: none'>" + del[0].replace(juzClaJC.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + ccJO + "-D" + (y+1) + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
@@ -181,6 +183,8 @@
                                         out.println("</tr>");
                                     }else{//Si el procesado no esta en BD de JO se recupera de JC
                                         out.println("<tr>");
+                                        //Columna de control para cuando se agregan de un juzgado Mixto por eso no se muestra
+                                        out.println("<td style='display: none'>" + pro[0].replace(juzClaJC.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + ccJO + "-P" + (y+1) + "</td>");
                                         out.println("<td>" + pro[2] + "</td>");
                                         out.println("<td></td>");
@@ -255,6 +259,8 @@
                                         out.println("</tr>");
                                     }else{//Si la victima no esta en BD se agrega vacia
                                         out.println("<tr>");
+                                        //Columna de control para cuando se agregan de un juzgado Mixto por eso no se muestra
+                                        out.println("<td style='display: none'>" + vi[0].replace(juzClaJC.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + ccJO + "-V" + (y+1) + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");

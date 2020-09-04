@@ -175,7 +175,7 @@ public class insrtVictimas extends HttpServlet {
                         conn.close();
                     }
                     showVictimas vic = new showVictimas();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     showCausasPenales causa = new showCausasPenales();
                     int totVictiInsrt = vic.countVictimas(causaClave);
                     int totVicti = causa.countTotalVictimas(causaClave);
@@ -286,7 +286,7 @@ public class insrtVictimas extends HttpServlet {
                         conn.close();
                     }
                     showVictimas vic = new showVictimas();
-                    ArrayList<String[]> lis = new ArrayList<>();
+                    ArrayList<String[]> lis;
                     int totVictiInsrt = vic.countVictimas(causaClave);
                     lis = vic.findVictimasTabla(victiClave + jConcatenado);
                     JSONArray resp = new JSONArray();

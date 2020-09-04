@@ -156,7 +156,7 @@
                         <tr>
                             <td>
                                 <label for="nombre">Nombre(s)</label>
-                                <input type="text" name="nombre" id="nombre" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" value="<%=nomProce%>" required>
+                                <input type="text" name="nombre" id="nombre" onkeypress="return /[A-Za-zÑñ ]/i.test(event.key)" value="<%=nomProce%>" required>
                             </td>
                             <td>
                                 <label for="apaterno">Apellido paterno</label>
@@ -211,7 +211,6 @@
                                                 out.println(" selected ");
                                             }
                                             out.println(">" + i + "</option>");
-                                                    
                                         }
                                     %>
                                     <option value="-9">No identificado</option>
@@ -220,7 +219,7 @@
                        </tr>
                        <tr>
                            <td>
-                                <label for="edad">Edad al momento de iniciar el proceso</label>
+                                <label for="edadJuzgado">Edad al momento de iniciar el proceso</label>
                                 <select name="edadJuzgado" id="edadJuzgado" onchange="ValEdadJuzgado('#edadJuzgado','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%

@@ -151,7 +151,7 @@ public class insrtConclusiones extends HttpServlet {
             } else {//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_CONCLUSIONES_ADOJC SET FECHA_CONCLUSION = '" + fechaResolu + "',TIPO_RESOLUCION = " + tipoResolu + ","
                         + "TIPO_SOBRESEIMIENTO = " + tipoSobre + ",PROCEDENCIA_SOBRESEIMIENTO = " + proceSobre + ",EXCLUSION_ACCIONP = " + excluAccion + ","
-                        +"FECHA_SUSPENSION = '"+ fechaExtSCP +"',MECANISMO_ACUERDO = " + tipoMecanismoAR + ",FECHA_ACUERDO = '" + fechaExtinAR + "',TIPO_CONCLUSION_PA = " + tipoResolucionPA + ","
+                        +"FECHA_SUSPENCION = '"+ fechaExtSCP +"',MECANISMO_ACUERDO = " + tipoMecanismoAR + ",FECHA_ACUERDO = '" + fechaExtinAR + "',TIPO_CONCLUSION_PA = " + tipoResolucionPA + ","
                         + "MEDIDA_PRIVATIVA = " + privativa + ",MEDIDA_NOPRIVATIVA = " + noprivativa + ",TIEMPO_INTERNAMIENTO = " + internamiento + ","
                         + "REPARACION_DANIO = " + reparacion + ",TIPO_REPARACION_DANIO = " + tipoRepara + ",MONTO_REPARA = " + multa + ","
                         + "IMPUGNACION = " + impugnacion + ",TIPO_IMPUGNACION = " + tipoImpugnacion + ",FECHA_IMPUGNACION = '" + fechaImpugna + "',"

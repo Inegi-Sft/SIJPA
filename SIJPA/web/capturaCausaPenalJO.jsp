@@ -216,7 +216,7 @@
                                     <select name="juezJO1" id="juezJO1">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC , juzgadoClaveJC, causaClaveJO);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez1)){
@@ -233,7 +233,7 @@
                                     <select name="juezJO2" id="juezJO2">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC, causaClaveJO);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez2)){
@@ -250,7 +250,7 @@
                                     <select name="juezJO3" id="juezJO3">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC, causaClaveJO);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez3)){

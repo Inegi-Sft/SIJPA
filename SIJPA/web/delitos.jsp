@@ -45,7 +45,7 @@
             String desDelitoNT = "";
             String fechaOcurre = "";
             String sitioOcurre = "";
-            String sitioOE ="";
+            String sitioOE = "";
             String gradoConsuma = "";
             String calificacion = "";
             String clasificacion = "";

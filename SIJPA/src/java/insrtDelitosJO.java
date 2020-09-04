@@ -147,9 +147,10 @@ public class insrtDelitosJO extends HttpServlet {
                 sql = "UPDATE DATOS_DELITOS_ADOJO SET DELITO_CODIGO_PENAL = " + delitoCP + ",ART_CODIGO_PENAL = '" + articuloCP + "',"
                         + "DELITO_NORMA_TECNICA = " + delitoNT + ",TIPO_FUERO = " + fuero + ",DELITO_RECLASIFICADO = " + reclasificaDel + ","
                         + "FECHA_RECLASIFICACION = '" +fechaReclaDel + "',FECHA_OCURRENCIA = '" + ocurrencia + "',SITIO_OCURRENCIA = " + sitioO + ","
-                        + "ESPECIFIQUE_SITIO= '"+especifiqueO + "',GRADO_CONSUMACION = " + consumacion + ",CALIFICACION = " + calificacion + ",CLASIFICACION = " + clasificacion + ","
-                        + "CONCURSO = " +concurso + ",FORMA_COMISION = " + comision + ",FORMA_ACCION = " + accion + ",MODALIDAD = " + modalidad + ","
-                        + "INSTRUMENTO_COMISION = " + instrumentos + ",OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
+                        + "ESPECIFIQUE_SITIO= '"+especifiqueO + "',GRADO_CONSUMACION = " + consumacion + ",CALIFICACION = " + calificacion + ","
+                        + "CLASIFICACION = " + clasificacion + "," + "CONCURSO = " +concurso + ",FORMA_COMISION = " + comision + ","
+                        + "FORMA_ACCION = " + accion + ",MODALIDAD = " + modalidad + "," + "INSTRUMENTO_COMISION = " + instrumentos + ","
+                        + "OCURRIO_ENTIDAD = " + entidadD + ",OCURRIO_MUNICIPIO = " + municipioD + ","
                         + "COMENTARIOS = '" + comentarios + "' "
                         + "WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
                         + "AND DELITO_CLAVEJO = '" + delitoClaveJO + jConcatenado + "';";

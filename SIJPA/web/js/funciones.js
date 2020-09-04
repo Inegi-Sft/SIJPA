@@ -428,17 +428,17 @@ function buscaYremplaza(proceClave, etapaProce){
                 console.log('dato intermedia: ' + dato + ' proceClave: ' + proceClave);
                 if(proceClave === dato){
                     //if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
-                        if($(this).parent().find('td:eq(2)').html() !== ''){
-                            //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
-                            console.log('Esta insertado en BD');
-                            eliminaBD = true;
-                            nomTabla = "inter";
-                        }
-                        encontrado = true;
-                        $(this).parent().remove();
-                        if(parent.$('#tablaIntermedia tbody tr').length === 0){
-                            parent.$('#btn6').prop('disabled', true);
-                        }
+                    if($(this).parent().find('td:eq(2)').html() !== ''){
+                        //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                        console.log('Esta insertado en BD');
+                        eliminaBD = true;
+                        nomTabla = "inter";
+                    }
+                    encontrado = true;
+                    $(this).parent().remove();
+                    if(parent.$('#tablaIntermedia tbody tr').length === 0){
+                        parent.$('#btn6').prop('disabled', true);
+                    }
                     //}
                 }
             });
@@ -684,39 +684,38 @@ function ValFechaNacPRO(FechaNac, Edad) {
 }
 
 function ValEdadDelito(EdadDel,fnacimiento){
- var FedadD=document.getElementById('edad').value;
- var FedadJ=document.getElementById('edadJuzgado').value;
- var FechNac=$(fnacimiento).val();
- // console.log("Respuesta: ",FedadD,FedadJ);
-  if (FedadJ !== ''){
-      if(FedadD>FedadJ){
-          alert('La edad al momento de cometer los hechos debe de ser menor o igual a la edad al momento de iniciar el proceso');
-          $(EdadDel).val("");
-         // console.log("fecha de nacimiento="+FechNac);
-          if (FechNac !=='1899-09-09'){
-              $(fnacimiento).val("");
-              
-          }      
+    var FedadD = $(EdadDel).val();
+    var FedadJ = $('#edadJuzgado').val();
+    var FechNac = $(fnacimiento).val();
+    // console.log("Respuesta: ",FedadD,FedadJ);
+    if (FedadJ !== '' && FedadJ !=='-9'){
+        if(FedadD > FedadJ){
+            alert('La edad al momento de cometer los hechos debe de ser menor o igual a la edad al momento de iniciar el proceso');
+            $(EdadDel).val('');
+            // console.log("fecha de nacimiento="+FechNac);
+            if (FechNac !=='1899-09-09'){
+                $(fnacimiento).val('');
+            }      
         }
-  }  
+    }  
 }
 
 function ValEdadJuzgado(EdadJuz,fnacimiento){
- var FedadD=document.getElementById('edad').value;
- var FedadJ=document.getElementById('edadJuzgado').value;
- var FechNac=$(fnacimiento).val();
- // console.log("Respuesta: ",FedadJ,FedadD);
-   if ((FedadJ !== '') && (FedadJ !=='-9')){
-      if(FedadJ<FedadD){
-          alert('La edad al momento de iniciar el proceso debe ser mayor o igual a la edad al momento de cometer los hechos');
-         $(EdadJuz).val("");
-        // console.log("fecha de nacimiento="+FechNac);
-          if (FechNac !=='1899-09-09'){
-              $(fnacimiento).val("");
-              
-          }  
+    var FedadD = $('#edad').val();
+    var FedadJ = $(EdadJuz).val();
+    var FechNac=$(fnacimiento).val();
+    // console.log("Respuesta: ",FedadJ,FedadD);
+    if (FedadJ !== '' && FedadJ !=='-9'){
+        if(FedadJ < FedadD){
+            alert('La edad al momento de iniciar el proceso debe ser mayor o igual a la edad al momento de cometer los hechos');
+            $(EdadJuz).val("");
+            // console.log("fecha de nacimiento="+FechNac);
+            if (FechNac !=='1899-09-09'){
+                $(fnacimiento).val("");
+
+            }  
         }
-  }  
+    }
 }
 
   function ValFechaNacVic(dFechaNac,SEdad){
@@ -730,22 +729,20 @@ function ValEdadJuzgado(EdadJuz,fnacimiento){
             },
             success: function (response) {
                 var edadVic = parseInt(response);
-               alert('Respuesta servidores'+response);
+                alert('Respuesta servidores' + response);
                 if (response !== '0'){
-                if (edadVic >= 0){  
-                    var resp = confirm("Desea agregar la edad. Edad=" + response);
-                    if (resp) {
-                        $(SEdad).val(edadVic);
+                    if (edadVic >= 0){  
+                        var resp = confirm("Desea agregar la edad. Edad=" + response);
+                        if (resp) {
+                            $(SEdad).val(edadVic);
+                        }
                     }
-            }
-        }
-                if (edadVic < 0)
-                {
+                }
+                if (edadVic < 0){
                     alert('LA FECHA DE NACIMIENTO NO DEBE SER MAYOR A LA FECHA DE INGRESO');
                     $(SEdad).val("");
                     $(dFechaNac).val("");
                 }
-
             },
             error: function (response) {
                 console.log("Respuesta del servidor", response);
@@ -815,6 +812,13 @@ function borraR(elemento){
     var numReg = $('#' + tabla + ' tbody tr').length - 1;//Obtenemos el numero de registro despues de borrar el registro
     console.log('de la tabla se borra: ' + tabla);
     if(tabla !== 'causas'){
+        //Validamos que si es integracion mixta deben de existir 2 procesados
+        if(tabla === 'tablaProcesa'){
+            if(numReg < 2 && $('#Incausa').val() === '3'){
+                alert('Al tener una "Integracion Mixta" se necesitan tener al menos dos procesados en la Causa Penal');
+                return false;
+            }
+        }
         if(numReg === 0){
             var nomTabla = $(elemento).parents('table').attr('data-nomTabla');
             alert('La tabla "' + nomTabla + '" no se puede quedar con 0 registros\n' +

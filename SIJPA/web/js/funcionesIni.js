@@ -372,10 +372,16 @@ $(document).ready(function() {
     });
     
     $("#formulaAcusacion > option[value=9]").hide();
+    
     //Guarda Inicial
     $('#fromInicial').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        if($('#drecretaMC').val() === '1' && $('input[name="chkDecretaMC"]:checked').length === 0){
+            alert('Selecciona al menos una Medida Cautelar');
+            $('#drecretaMC').focus();
+            return false;
+        }
         $.ajax({
             type: 'post',
             url: 'insrtInicial',

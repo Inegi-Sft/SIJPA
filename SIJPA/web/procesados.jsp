@@ -211,7 +211,6 @@
                                                 out.println(" selected ");
                                             }
                                             out.println(">" + i + "</option>");
-                                                    
                                         }
                                     %>
                                     <option value="-9">No identificado</option>
@@ -220,7 +219,7 @@
                        </tr>
                        <tr>
                            <td>
-                                <label for="edad">Edad al momento de iniciar el proceso</label>
+                                <label for="edadJuzgado">Edad al momento de iniciar el proceso</label>
                                 <select name="edadJuzgado" id="edadJuzgado" onchange="ValEdadJuzgado('#edadJuzgado','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%

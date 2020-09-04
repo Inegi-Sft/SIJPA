@@ -98,10 +98,10 @@ public class insrtIntermedia extends HttpServlet {
             //Control para saber la etapa donde sera enviado si llega a esta etapa
             if (aperturaJO == 1) {
                 banderaEtapa = 6;//pasa a Conclusiones
-            } else if (aperturaJO == 2) {
-                banderaEtapa = 8;//intermedia volando
-            } else if (intermedia == 2 || intermedia == 9) {
+            }else if (intermedia == 2 || intermedia == 9) {
                 banderaEtapa = 7;//pasa a Tramite
+            }else if (aperturaJO == 2){
+                banderaEtapa = 8;//intermedia volando
             }
 
             conn.Conectar();

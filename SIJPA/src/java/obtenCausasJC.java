@@ -61,7 +61,7 @@ public class obtenCausasJC extends HttpServlet {
                 lisDel = sDelJC.findDeliCausasJCyJO(expClaveJC + juzSimple);
                 JSONArray del = new JSONArray();
                 for (String[] lisD : lisDel) {
-                    del.add("<tr><td>" + lisD[0].replace(juzSimple, "") + "</td><td></td><td></td><td></td><td></td><td></td>"
+                    del.add("<tr><td style='display: none'>" + lisD[0].replace(juzSimple, "") + "</td><td></td><td></td><td></td><td></td><td></td><td></td>"
                             + "<td><a class='pop' href=''><img src='img/editar.png' title='Modificar'/></a></td>"
                             + "</tr>");
                 }
@@ -71,7 +71,7 @@ public class obtenCausasJC extends HttpServlet {
                 lisPro = sProJC.findProcesasdosCausaJCyJO(expClaveJC + juzSimple);
                 JSONArray pro = new JSONArray();
                 for (String[] lisP : lisPro) {
-                    pro.add("<tr><td>" + lisP[0].replace(juzSimple, "") + "</td><td>" + lisP[1] + "</td><td></td><td></td><td></td>"
+                    pro.add("<tr><td style='display: none'>" + lisP[0].replace(juzSimple, "") + "</td><td>" + lisP[1] + "</td><td></td><td></td><td></td><td></td>"
                             + "<td><a class='pop' href=''><img src='img/editar.png' title='Modificar'/></a></td>"
                             + "</tr>");
                 }
@@ -81,7 +81,7 @@ public class obtenCausasJC extends HttpServlet {
                 lisVic = sVicJC.findVictimasCausaJCyJO(expClaveJC + jClaveJC.replace("-", ""));
                 JSONArray vic = new JSONArray();
                 for (String[] lisV : lisVic) {
-                    vic.add("<tr><td>" + lisV[0].replace(juzSimple, "") + "</td><td></td><td></td><td></td><td></td>"
+                    vic.add("<tr><td style='display: none'>" + lisV[0].replace(juzSimple, "") + "</td><td></td><td></td><td></td><td></td><td></td>"
                             + "<td><a class='pop' href=''><img src='img/editar.png' title='Modificar'/></a></td>"
                             + "</tr>");
                 }

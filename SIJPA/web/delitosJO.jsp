@@ -47,7 +47,7 @@
             String desDelitoNT = "";
             String fechaOcurre = "";
             String sitioOcurre = "";
-            String sitioOE ="";
+            String sitioOE = "";
             String gradoConsuma = "";
             String calificacion = "";
             String clasificacion = "";
@@ -75,17 +75,18 @@
                         desDelitoNT = delitoJO.get(0)[6];
                         fechaOcurre = delitoJO.get(0)[7];
                         sitioOcurre = delitoJO.get(0)[8];
-                        gradoConsuma = delitoJO.get(0)[9];
-                        calificacion = delitoJO.get(0)[10];
-                        clasificacion = delitoJO.get(0)[11];
-                        concurso = delitoJO.get(0)[12];
-                        formaComi = delitoJO.get(0)[13];
-                        formaAccion = delitoJO.get(0)[14];
-                        modalidad = delitoJO.get(0)[15];
-                        instruComision = delitoJO.get(0)[16];
-                        ocurreEnti = delitoJO.get(0)[17];
-                        ocurreMuni = delitoJO.get(0)[18];
-                        comen = delitoJO.get(0)[19]; 
+                        sitioOE = delitoJO.get(0)[9];
+                        gradoConsuma = delitoJO.get(0)[10];
+                        calificacion = delitoJO.get(0)[11];
+                        clasificacion = delitoJO.get(0)[12];
+                        concurso = delitoJO.get(0)[13];
+                        formaComi = delitoJO.get(0)[14];
+                        formaAccion = delitoJO.get(0)[15];
+                        modalidad = delitoJO.get(0)[16];
+                        instruComision = delitoJO.get(0)[17];
+                        ocurreEnti = delitoJO.get(0)[18];
+                        ocurreMuni = delitoJO.get(0)[19];
+                        comen = delitoJO.get(0)[20]; 
                     }else{
                         out.println("<script>alert('Delito " + delitoClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
@@ -104,17 +105,18 @@
                     desDelitoNT = delitoJC.get(0)[6];
                     fechaOcurre = delitoJC.get(0)[7];
                     sitioOcurre = delitoJC.get(0)[8];
-                    gradoConsuma = delitoJC.get(0)[9];
-                    calificacion = delitoJC.get(0)[10];
-                    clasificacion = delitoJC.get(0)[11];
-                    concurso = delitoJC.get(0)[12];
-                    formaComi = delitoJC.get(0)[13];
-                    formaAccion = delitoJC.get(0)[14];
-                    modalidad = delitoJC.get(0)[15];
-                    instruComision = delitoJC.get(0)[16];
-                    ocurreEnti = delitoJC.get(0)[17];
-                    ocurreMuni = delitoJC.get(0)[18];
-                    comen = delitoJC.get(0)[19];
+                    sitioOE = delitoJC.get(0)[9];
+                    gradoConsuma = delitoJC.get(0)[10];
+                    calificacion = delitoJC.get(0)[11];
+                    clasificacion = delitoJC.get(0)[12];
+                    concurso = delitoJC.get(0)[13];
+                    formaComi = delitoJC.get(0)[14];
+                    formaAccion = delitoJC.get(0)[15];
+                    modalidad = delitoJC.get(0)[16];
+                    instruComision = delitoJC.get(0)[17];
+                    ocurreEnti = delitoJC.get(0)[18];
+                    ocurreMuni = delitoJC.get(0)[19];
+                    comen = delitoJC.get(0)[20];
                 }else{
                     out.println("<script>alert('Delito " + delitoClaveJC + " no encontrado dentro de la Causa Penal "  + causaClaveJC + "'); "
                             + "parent.$.fancybox.close();</script>");
@@ -266,7 +268,7 @@
                                     </div>
                                     <div class="colsx oculto" id="EspecifiqueSO">
                                         <label for="sitioOE">Especifique sitio</label>
-                                        <input class="txtMedia" type="text"  name="sitioOE" id="sitioOE" value="<%=sitioOE%>">
+                                        <input type="text"  name="sitioOE" id="sitioOE" value="<%=sitioOE%>">
                                     </div>
                                 </fieldset>
                             </td>

@@ -35,7 +35,7 @@ function victimaDelito(obj){
                     
                 }else{// para los demas bienes se les da la opcion de chequear y justificar el delito de acuerdo al tipo de vicitma
                     msj+='<br/><br/>En caso querer seleccionar este delito para este tipo de v\u00EDctima, se debera justificar su inclusi\u00F3n en el siguiente cuadro de texto para su valoraci\u00F3n conducente';
-                    msj+='<br/><br/>Justificacion:';
+                    msj+='<br/><br/>Justificaci\u00F3n:';
                     //alertify.dialog.buttonFocus = "ok"; // "none", "ok", "cancel"
                     
                     alertify.prompt('Mensaje Importante', msj,'', 
@@ -46,14 +46,14 @@ function victimaDelito(obj){
                                 var justifi = $('#justificaDeli').val();
                                 $('#justificaDeli').val(justifi + norma + '.- ' + respuesta + '-@' + '\n');
                                 $('#divJustificacion').fadeIn('slow');
-                                alertify.success('Justificacion agregada');
+                                alertify.success('Justificaci\u00F3n agregada');
                             }
                         },
                         function(){
                             $(obj).prop("checked", false);
                             alertify.error('Cancelado');
-                    });
-                    $('.ajs-input').attr('placeholder', 'Delito: Justificacion.'); 
+                    }).set('labels', {ok:'Aceptar', cancel:'Cancelar'});;
+                    $('.ajs-input').attr('placeholder', 'Delito: Justificaci\u00F3n.'); 
                 }
             }else if(norma===2 && sexo!=='2'){//validacion para feminicidio
                 

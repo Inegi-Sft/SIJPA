@@ -421,7 +421,7 @@ function buscaYremplaza(proceClave, etapaProce){
     var nomTabla = "";
     var dato = "";
     console.log('etapa: ' + etapaProce);
-    if(etapaProce !== 8){
+    if(etapaProce !== 8 || etapaProce !== 7 || etapaProce !== 6){//Evitamos las etapas que vienen de Intermedia
         if(parent.$('#tablaIntermedia tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
             parent.$('#tablaIntermedia tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
                 dato = $(this).html();

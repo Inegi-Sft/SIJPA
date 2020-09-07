@@ -33,6 +33,9 @@ public class Conexion_Mysql {
             //Administradores
 //            String url = "jdbc:mysql://node56244-sijpa2020admin.jl.serv.net.mx/sijpa_db";
 //            conexion = (Connection) DriverManager.getConnection(url,"root","VHYyyb87899");
+            //Colima
+//            String url = "jdbc:mysql://node28694-sijpacol.es-1.axarnet.cloud/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","DHXgdd16979");
             //Localhost
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","");

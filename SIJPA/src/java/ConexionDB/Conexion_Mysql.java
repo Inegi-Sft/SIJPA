@@ -28,11 +28,11 @@ public class Conexion_Mysql {
         try { 
             Class.forName("com.mysql.jdbc.Driver");
             //Conceptuales
-//            String url = "jdbc:mysql://node56241-sijpa2020.jl.serv.net.mx/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","BTCavy91841");
+//            String url = "jdbc:mysql://node56376-sijpa.jl.serv.net.mx/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","RLIroa53124");
             //Administradores
-//            String url = "jdbc:mysql://node56244-sijpa2020admin.jl.serv.net.mx/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","VHYyyb87899");
+//            String url = "jdbc:mysql://node56373-sijpaadmin.jl.serv.net.mx/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","HEOldt87852");
             //Colima
 //            String url = "jdbc:mysql://node28694-sijpacol.es-1.axarnet.cloud/sijpa_db";
 //            conexion = (Connection) DriverManager.getConnection(url,"root","DHXgdd16979");

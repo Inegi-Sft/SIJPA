@@ -134,7 +134,7 @@
                         <tr>
                             <td colspan="3">
                                 <fieldset class="subField">
-                                    <legend>Datos Juiocio Oral</legend>
+                                    <legend>Datos Juicio Oral</legend>
                                     <div class="cols">
                                         <label for="jClaveJO">Juzgado Clave Juicio Oral</label>
                                         <input type="text" name="jClaveJO" id="jClaveJO" value="${sessionScope.juzgadoClave}" readonly>

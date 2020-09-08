@@ -41,6 +41,9 @@
                 }else if(integer == 200){
                     out.println("alertify.alert('Error','El Usuario no se pudo guardar', function(){"
                             + "alertify.error('Usuario Sin Guardar')});");
+                }else if(integer == 600){
+                    out.println("alertify.alert('Importante','La sesión sufrio algun defecto, inicie sesión de nuevo', function(){"
+                            + "alertify.error('Sesión Finalizada')});");
                 }
                 out.println("});</script>");
             }

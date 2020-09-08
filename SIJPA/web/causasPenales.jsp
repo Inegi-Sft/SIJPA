@@ -62,10 +62,11 @@
                                 + "});</script>");
                         juzgado = "";//Vaciamos la variable para que no halla busqueda
                         session.setAttribute("juzgadoClave", "");//Vaciamos la variable de session para evitar la busqueda
-                    }else if(juez.findTotJuez(juzgado) == 0){
-                        //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
-                        response.sendRedirect("capturaJuez.jsp");
                     }
+//                    else if(juez.findTotJuez(juzgado) == 0){
+//                        //Si el Juzgado seleccionado no tiene jueces entonces lo mandamos a capturar un Juez
+//                        response.sendRedirect("capturaJuez.jsp");
+//                    }
                 }
             }
             

@@ -239,65 +239,72 @@ $(document).ready(function() {
             $('#mediosPrueba').focus();
             return false;
         }
-        $.ajax({
-            type: 'post',
-            url: 'insrtIntermedia',
-            data: $('#formuMedia').serialize(),
-            success: function (response) {
-                console.log("Respuesta del servidor Intermedia: ", response);
-                alert("Guardado correctamente!!!");
-                var numProce = parseInt(parent.$('#tablaIntermedia tbody tr').length);//Tomamos el total de la tabla de Intermedia
-                if (response !== null && $.isArray(response)) {
-                    for (var i = 2; i <= 5; i++) {
-                        parent.$('#tablaIntermedia tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
-                    }
-                    //editamos enlance para que pueda ser actualizado ya estando lleno
-                    var enlace = parent.$('#tablaIntermedia tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
-                    parent.$('#tablaIntermedia tbody tr').eq(response[0]).find('a').attr('href',enlace);
-                    //Control de banderas para saber a que etapa se manda el procesado
-                    //Funcion para determinar si esta en otra tabla
-                    buscaYremplaza(response[1], response[6]);//mandamos el nombre de procesado y la bandera nueva
-                    if(response[6] === 6){//Condicion para mandar al procesado a su etapa correspondiente
-                        parent.$('#tablaConclu tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
-                        <td><a class="pop" href="conclusiones.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaConclu tbody tr').length + '">\n\
-                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        parent.$('#btn7').addClass(' activar');
-                    }else if(response[6] === 7){
-                        parent.$('#tablaTramite tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
-                        <td><a class="pop" href="tramite.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaTramite tbody tr').length + '">\n\
-                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        parent.$('#btn8').addClass(' activar');
-                    }else if(response[6] === 8){//Condicion para mandar al procesado a etapa volando
-                        parent.$('#tablaVolando tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td>\n\
-                        <td><a class="pop" href=""><img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        //Solo agregaremos en el texto los procesados que se necesitan capturar
-                        parent.$('.indicador2').css('color', '#D60320');//Cambiamos el color a rojo para que se note
-                        parent.$('.agregar').show();//Mosramos el boton de agregar
-                        var totProceVola = parseInt(parent.$('#indicaVolando').text()) + 1;//Obtenemos el valor de procesados volando
-                        parent.$('.indicador2 span').text(totProceVola);//Lo mostramos con la cantidad actualizada
-//                        alert('procesado volando con: ' + totProceVola);
-                        parent.$('#btn7').addClass(' activar');
-                        parent.$('#btn8').addClass(' activar');
-                    }
-                    if (response[7] === numProce) {
-                        for(var x = 7; x <= 8; x++){
-                            //Validamos que pestañas activamos
-                            if(parent.$('#btn' + x).hasClass('activar')){
-                                parent.openPestana('btn' + x, 'p' + x);
-                                parent.$('#btn' + x).removeClass('activar');
-                            }
+        
+        if($('#opera').val() !== ''){
+            var actual = confirm("Al actualizar datos en Etapa Intermedia, se perderan los datos que se tengan guardados \n\
+                        en posteriores etapas.\n seguro que desea continuar?");    
+        }
+        if(actual){
+            $.ajax({
+                type: 'post',
+                url: 'insrtIntermedia',
+                data: $('#formuMedia').serialize(),
+                success: function (response) {
+                    console.log("Respuesta del servidor Intermedia: ", response);
+                    alert("Guardado correctamente!!!");
+                    var numProce = parseInt(parent.$('#tablaIntermedia tbody tr').length);//Tomamos el total de la tabla de Intermedia
+                    if (response !== null && $.isArray(response)) {
+                        for (var i = 2; i <= 5; i++) {
+                            parent.$('#tablaIntermedia tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                         }
-                    } else {
-                        alert('Falta por capturar ' + (numProce - response[7]) + ' procesados');
+                        //editamos enlance para que pueda ser actualizado ya estando lleno
+                        var enlace = parent.$('#tablaIntermedia tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
+                        parent.$('#tablaIntermedia tbody tr').eq(response[0]).find('a').attr('href',enlace);
+                        //Control de banderas para saber a que etapa se manda el procesado
+                        //Funcion para determinar si esta en otra tabla
+                        buscaYremplaza(response[1], response[6]);//mandamos el nombre de procesado y la bandera nueva
+                        if(response[6] === 6){//Condicion para mandar al procesado a su etapa correspondiente
+                            parent.$('#tablaConclu tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
+                            <td><a class="pop" href="conclusiones.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaConclu tbody tr').length + '">\n\
+                            <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                            parent.$('#btn7').addClass(' activar');
+                        }else if(response[6] === 7){
+                            parent.$('#tablaTramite tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
+                            <td><a class="pop" href="tramite.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaTramite tbody tr').length + '">\n\
+                            <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                            parent.$('#btn8').addClass(' activar');
+                        }else if(response[6] === 8){//Condicion para mandar al procesado a etapa volando
+                            parent.$('#tablaVolando tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td>\n\
+                            <td><a class="pop" href=""><img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                            //Solo agregaremos en el texto los procesados que se necesitan capturar
+                            parent.$('.indicador2').css('color', '#D60320');//Cambiamos el color a rojo para que se note
+                            parent.$('.agregar').show();//Mosramos el boton de agregar
+                            var totProceVola = parseInt(parent.$('#indicaVolando').text()) + 1;//Obtenemos el valor de procesados volando
+                            parent.$('.indicador2 span').text(totProceVola);//Lo mostramos con la cantidad actualizada
+                            //alert('procesado volando con: ' + totProceVola);
+                            parent.$('#btn7').addClass(' activar');
+                            parent.$('#btn8').addClass(' activar');
+                        }
+                        if (response[7] === numProce) {
+                            for(var x = 7; x <= 8; x++){
+                                //Validamos que pestañas activamos
+                                if(parent.$('#btn' + x).hasClass('activar')){
+                                    parent.openPestana('btn' + x, 'p' + x);
+                                    parent.$('#btn' + x).removeClass('activar');
+                                }
+                            }
+                        } else {
+                            alert('Falta por capturar ' + (numProce - response[7]) + ' procesados');
+                        }
                     }
+                    parent.$.fancybox.close();
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor Intermedia: ", response);
+                    alert('Error al guardar, cunsulte al administrador!');
                 }
-                parent.$.fancybox.close();
-            },
-            error: function (response) {
-                console.log("Respuesta del servidor Intermedia: ", response);
-                alert('Error al guardar, cunsulte al administrador!');
-            }
-        });
+            });
+        }
     });
     /*---------------------------- FIN FUNCIONES INTERMEDIA JC----------------------------*/
 });

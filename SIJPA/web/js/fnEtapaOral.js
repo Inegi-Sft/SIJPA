@@ -115,58 +115,64 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopImmediatePropagation();
         
-        $.ajax({
-            type: 'post',
-            url: 'insrtEtapaOral',
-            data: $('#fromJuicioO').serialize(),
-            success: function (response) { 
-                console.log("Respuesta del servidor Etapa Oral: ", response);
-                alert("Guardado correctamente!!!");
-                var numProce = parseInt(parent.$('#TadolescentesJO').val());
-                if (response !== null && $.isArray(response)) {
-                    for (var i = 2; i < 6; i++) {
-                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
-                    }
-                    //editamos enlance para que pueda ser actualizado ya estando lleno
-                    var enlace = parent.$('#tablaJuicioJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
-                    parent.$('#tablaJuicioJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
-                    //Control de banderas para saber a que etapa se manda el procesado
-                    //Funcion para determinar si esta en otra tabla
-                    buscaYremplazaJO(response[1], response[6]);//mandamos el nombre de procesado y la bandera nueva
-                    console.log('Bandera Etapa Oral: ' + response[6]);
-                    if(response[6] === 2){//Condicion para mandar al procesado a etapa conclusiones JO
-                        parent.$('#tablaConcluJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
-                        <td><a class="pop" href="conclusionesJO.jsp?proceClaveJO=' + response[1] + '&posicion=' + parent.$('#conclusionesJO tbody tr').length + '">\n\
-                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        parent.$('#btn6').addClass(' activar');
-                    }else if(response[6] === 3){//Condicion para mandar al procesado a etapa tramite JO
-                        console.log('Entramos a insertar tramite');
-                        parent.$('#tablaTramiteJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
-                        <td><a class="pop" href="tramiteJO.jsp?proceClaveJO=' + response[1] + '&posicion=' + parent.$('#tablaTramiteJO tbody tr').length + '">\n\
-                        <img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        parent.$('#btn7').addClass(' activar');
-                    }
-                    console.log('Captu: ' + response[7] + ' Existen: ' + numProce);
-                    if (response[7] === numProce) {
-                        for(var x = 6; x <= 7; x++){
-                            //Validamos que pestañas activamos en JO
-                            if(parent.$('#btn' + x).hasClass('activar')){
-                                parent.openPestana('btn' + x, 'p' + x);
-                                parent.$('#btn' + x).removeClass('activar');
-                            }
+        if($('#opera').val() !== ''){
+            var actual = confirm("Al actualizar datos en Etapa Oral, se perderan los datos que se tengan guardados \n\
+                        en posteriores etapas.\n seguro que desea continuar?");    
+        }
+        if(actual){
+            $.ajax({
+                type: 'post',
+                url: 'insrtEtapaOral',
+                data: $('#fromJuicioO').serialize(),
+                success: function (response) { 
+                    console.log("Respuesta del servidor Etapa Oral: ", response);
+                    alert("Guardado correctamente!!!");
+                    var numProce = parseInt(parent.$('#TadolescentesJO').val());
+                    if (response !== null && $.isArray(response)) {
+                        for (var i = 2; i < 6; i++) {
+                            console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
+                            parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                         }
-                    } else {
-                        alert('Falta por capturar ' + (numProce - response[7]) + ' adolescentes');
+                        //editamos enlance para que pueda ser actualizado ya estando lleno
+                        var enlace = parent.$('#tablaJuicioJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
+                        parent.$('#tablaJuicioJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
+                        //Control de banderas para saber a que etapa se manda el procesado
+                        //Funcion para determinar si esta en otra tabla
+                        buscaYremplazaJO(response[1], response[6]);//mandamos el nombre de procesado y la bandera nueva
+                        console.log('Bandera Etapa Oral: ' + response[6]);
+                        if(response[6] === 2){//Condicion para mandar al procesado a etapa conclusiones JO
+                            parent.$('#tablaConcluJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
+                            <td><a class="pop" href="conclusionesJO.jsp?proceClaveJO=' + response[1] + '&posicion=' + parent.$('#conclusionesJO tbody tr').length + '">\n\
+                            <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                            parent.$('#btn6').addClass(' activar');
+                        }else if(response[6] === 3){//Condicion para mandar al procesado a etapa tramite JO
+                            console.log('Entramos a insertar tramite');
+                            parent.$('#tablaTramiteJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
+                            <td><a class="pop" href="tramiteJO.jsp?proceClaveJO=' + response[1] + '&posicion=' + parent.$('#tablaTramiteJO tbody tr').length + '">\n\
+                            <img src="img/editar.png" title="Modificar"/></a></td></tr>');
+                            parent.$('#btn7').addClass(' activar');
+                        }
+                        console.log('Captu: ' + response[7] + ' Existen: ' + numProce);
+                        if (response[7] === numProce) {
+                            for(var x = 6; x <= 7; x++){
+                                //Validamos que pestañas activamos en JO
+                                if(parent.$('#btn' + x).hasClass('activar')){
+                                    parent.openPestana('btn' + x, 'p' + x);
+                                    parent.$('#btn' + x).removeClass('activar');
+                                }
+                            }
+                        } else {
+                            alert('Falta por capturar ' + (numProce - response[7]) + ' adolescentes');
+                        }
                     }
+                    parent.$.fancybox.close();
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor Etapa Oral: ", response);
+                    alert('Error al guardar, cunsulte al administrador!');
                 }
-                parent.$.fancybox.close();
-            },
-            error: function (response) {
-                console.log("Respuesta del servidor Etapa Oral: ", response);
-                alert('Error al guardar, cunsulte al administrador!');
-            }
-        });
+            });
+        }
     });
     
 });

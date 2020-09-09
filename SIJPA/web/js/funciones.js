@@ -5,6 +5,13 @@
  */
 
 $(document).ready(function () {
+    /*----------------Validamos el Navegador------------------------*/
+    var es_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+    if(!es_chrome){
+        window.location.href = "navegador.jsp";
+    }
+    /*----------------Fin Validamos el Navegador------------------------*/
+    
     /*----------------Index------------------------*/
     //Temporizador para que aparesca el logo en primera instancia
     setTimeout(function () {

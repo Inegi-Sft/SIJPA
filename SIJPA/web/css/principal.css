@@ -187,6 +187,10 @@ body{
     text-align: center;
 }
 
+.contenedor p{
+    margin: 50px;
+}
+
 .contenedor form{
     margin: 0 20px;
 }

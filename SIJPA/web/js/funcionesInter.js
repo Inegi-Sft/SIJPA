@@ -240,8 +240,9 @@ $(document).ready(function() {
             return false;
         }
         
+        var actual = true;
         if($('#opera').val() !== ''){
-            var actual = confirm("Al actualizar datos en Etapa Intermedia, se perderan los datos que se tengan guardados \n\
+            actual = confirm("Al actualizar datos en Etapa Intermedia, se perderan los datos que se tengan guardados \n\
                         en posteriores etapas.\n seguro que desea continuar?");    
         }
         if(actual){

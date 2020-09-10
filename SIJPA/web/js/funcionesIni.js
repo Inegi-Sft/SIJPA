@@ -376,7 +376,7 @@ $(document).ready(function() {
     //Guarda Inicial
     $('#fromInicial').submit(function (e) {
         e.preventDefault();
-        e.stopImmediatePropagation
+        e.stopImmediatePropagation;
         
         if($('#drecretaMC').val() === '1' && $('input[name="chkDecretaMC"]:checked').length === 0){
             alert('Selecciona al menos una Medida Cautelar');
@@ -384,8 +384,9 @@ $(document).ready(function() {
             return false;
         }
         
+        var actual = true;
         if($('#opera').val() !== ''){
-            var actual = confirm("Al actualizar datos en Etapa Inicial, se perderan los datos que se tengan guardados \n\
+            actual = confirm("Al actualizar datos en Etapa Inicial, se perderan los datos que se tengan guardados \n\
                         en posteriores etapas.\n seguro que desea continuar?");    
         }
         if(actual){

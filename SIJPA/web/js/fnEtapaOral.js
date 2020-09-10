@@ -115,8 +115,9 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopImmediatePropagation();
         
+        var actual = true;
         if($('#opera').val() !== ''){
-            var actual = confirm("Al actualizar datos en Etapa Oral, se perderan los datos que se tengan guardados \n\
+            actual = confirm("Al actualizar datos en Etapa Oral, se perderan los datos que se tengan guardados \n\
                         en posteriores etapas.\n seguro que desea continuar?");    
         }
         if(actual){

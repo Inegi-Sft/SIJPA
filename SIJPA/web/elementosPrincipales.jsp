@@ -41,7 +41,14 @@
             showTramite tram = new showTramite();
             ArrayList<String[]> trami = new ArrayList();
             
-            String jc = (String)session.getAttribute("juzgadoClave");
+            //Si la variable de sesion esta vacia entonces lo regresamos a Index para generarlas de nuevo
+            String jc = "";
+            if(session.getAttribute("juzgadoClave") != null){
+                jc = (String)session.getAttribute("juzgadoClave");
+            }else{
+                response.sendRedirect("index.jsp?insert=600");
+            }
+            
             int y = 0;
             String cc = "";
             String ccJuz = "";

@@ -37,7 +37,14 @@
             showTramiteJO tramite = new showTramiteJO();
             ArrayList<String[]> tramJO;
             
-            String juzClaJO = (String)session.getAttribute("juzgadoClave");
+            //Si la variable de sesion esta vacia entonces lo regresamos a Index para generarlas de nuevo
+            String juzClaJO = "";
+            if(session.getAttribute("juzgadoClave") != null){
+                juzClaJO = (String)session.getAttribute("juzgadoClave");
+            }else{
+                response.sendRedirect("index.jsp?insert=600");
+            }
+            
             String juzClaJC = "";
             int y = 0;
             String ccJC = "";

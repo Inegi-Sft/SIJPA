@@ -15,7 +15,7 @@
     <body>
         <div class="contenedor">
             <h1>Google Chrome</h1>
-            <p>
+            <p class="soloNavegador">
                 Para una mejor experiencia de SIJPA, le recomendamos que use el navegador Google Chrome, 
                 <br>
                 ya que algunas de las validaciones solo funcionan en ese navegador.
@@ -25,7 +25,7 @@
                 <a href="https://www.google.com.mx/chrome/?brand=CHBD&gclid=EAIaIQobChMI6uey-oPi6QIVQb7ACh2__A6XEAAYASAAEgJrsvD_BwE&gclsrc=aw.ds" target="_blank">DESCARGAR GOOGLE CHROME</a>
             </p>
             <img src="img/logo_sijpa.png" style="width: 100px;">
-            <p>
+            <p class="soloNavegador>
                 Agradece tu comprensión.
             </p>
         </div>

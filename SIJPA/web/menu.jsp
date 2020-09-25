@@ -10,7 +10,7 @@
             <p class="fUsuario">
                 <img src="img/usuario.png" class="img-circle" width="80">
             </p>
-            <h4>Menú Usuario</h4>
+            <h4>MenÃº Usuario</h4>
         </li>
         <li><a href="juzgados.jsp">Juzgados</a></li>
         <li><a href="jueces.jsp">Jueces</a></li>
@@ -22,13 +22,12 @@
                 <li><a href="audienciasJO.jsp">Audiencias JO</a></li>
             </ul>
         </li>
+        <li><a href="reportes.jsp">Reportes</a></li>
         <li><a href="validaciones.jsp">Validar Datos</a></li>
         <% 
             //Si es un administrador entonces le mostramos el boton para agregar usuarios
-            if(session.getAttribute("tipoUsuario") != null){
-                if((Integer)session.getAttribute("tipoUsuario") == 1){
-                    out.println("<li><a href='usuario.jsp'>Usuarios</a></li>"); 
-                }
+            if((Integer)session.getAttribute("tipoUsuario") == 1){
+                out.println("<li><a href='usuario.jsp'>Usuarios</a></li>"); 
             }
         %>
     </ul>

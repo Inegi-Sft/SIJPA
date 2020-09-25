@@ -17,8 +17,8 @@
         <%
             //Verifica el numero de viita que es del ususario para saber a donde mandarlo
             usuario usuario = new usuario();
-            int visita = usuario.findVisitaUsu((String) session.getAttribute("usuActivo"));
             showJuzgados juz = new showJuzgados();
+            int visita = usuario.findVisitaUsu((String) session.getAttribute("usuActivo"));
             if(visita == 0){
                 //Si es la primera vez lo mandamos a aceptar los terminos
                 response.sendRedirect("bienvenida.jsp");
@@ -37,6 +37,7 @@
             <button class="btnSisCap" id="btnJc" name="btnJc">Juzgado de Control</button>
             <button class="btnSisCap" id="btnJo" name="btnJo">Juicio Oral</button>
             <button class="btnSisCap" id="btnAudi" name="btnAudi">Audiencias</button>
+            <button class="btnSisCap" id="btnRepor" name="btnRepor">Reportes</button>
             <button class="btnSisCap" id="btnValidar" name="btnValidar">Validar Datos</button>
             <%
                 //Control de usuarios si es administrador entonces mostramos la opcion de Usuarios

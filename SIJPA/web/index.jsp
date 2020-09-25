@@ -12,13 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Ingreso</title>
         <%@include file="librerias.jsp"%>
-        <script>
-            //Solo se puede abrir en google chrome, validamos con cual inicializa el sistema
-            var es_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-            if(!es_chrome){
-                window.location.href = "navegador.jsp";
-            }
-        </script>
+        <script type="text/javascript" src="js/fnIndex.js"></script>
         <%
             //Si cierran sesion borramos las Variables de Session
             if(session.getAttribute("usuActivo") != null){
@@ -54,7 +48,7 @@
             <img src="img/logo_sijpa.png">
         </div>
         <div id="login" hidden="true">
-            <img src="img/logo_sijpa.png"/>
+            <img src="img/logo_sijpa.png" id="imgLogo"/>
             <form method="post" name="formLogin" id="formLogin">
                 <label for="nomUsu">Usuario</label>
                 <input type="text" id="nomUsu" name="nomUsu" style="text-transform: uppercase" required/>

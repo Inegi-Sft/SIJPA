@@ -37,7 +37,16 @@ public class obtenUsuario extends HttpServlet {
         response.setContentType("text/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String usuario  = request.getParameter("usuario").toUpperCase();
-            if(usu.findUsuarioExist(usuario)){
+            //Si trae variables para actualizar contraseña de administrador
+            if(usuario.equals("%//RECUPER.ADMIN//%")){
+                if(usu.finActuPasAdmin(request.getParameter("pass").toUpperCase())){
+                    out.write("1");
+                    System.out.println(usuario + " El pass de admin se actualizo correctamente");
+                }else{
+                    out.write("0");
+                    System.out.println(usuario + " El pass de admin sno se actualizo");
+                }
+            }else if(usu.findUsuarioExist(usuario)){//Buscamos el usuario para que no se repita en la BD
                 out.write("1");
                 System.out.println(usuario + " Ya existe");
             }else{

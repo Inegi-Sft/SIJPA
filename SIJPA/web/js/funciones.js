@@ -11,63 +11,6 @@ $(document).ready(function () {
         window.location.href = "navegador.jsp";
     }
     /*----------------Fin Validamos el Navegador------------------------*/
-    
-    /*----------------Index------------------------*/
-    //Temporizador para que aparesca el logo en primera instancia
-    setTimeout(function () {
-        $('#splash').slideDown('slow');
-    }, 500);
-
-    //Temporizador para que desaparesca logo y aparesca login
-    setTimeout(function () {
-        $('#splash').animate({
-            left: "100%",
-            //width: "toggle",
-            opacity: "toggle"
-        }, {
-            duration: 2000, // duration
-            queue: false
-        });
-
-        $('#login').animate({
-            left: "40%",
-            //width: "toggle",
-            opacity: "toggle"
-        }, {
-            duration: 2000,
-            queue: false
-        });
-    }, 3000);
-
-    //Acceso al sistema mediante ajax
-    $('#formLogin').submit(function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        $.ajax({
-            type: 'post',
-            url: 'accesoSistema',
-            data: $('#formLogin').serialize(),
-            success: function (response) {
-                console.log("Respuesta del servidor", response);
-                if (response === 1) {
-                    window.location.href = "sistemasCap.jsp";
-                } else {
-                    alertify.alert('Mensaje Importante', 'Usuario no Encontrado\n Intente de nuevo', function(){
-                        alertify.error('Verifique las credenciales de acceso'); 
-                    });
-                    //alert('Usuario no encontrado, favor de revisar usuario o contraseña');
-                    $('#nomUsu').val('');
-                    $('#passUsu').val('');
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError){
-                if(xhr.status === 404) {
-                    alert(thrownError);
-                }
-            }
-        });
-    });
-    /*----------------Fin Index------------------------*/
 
     /*----------------Sistemas Captura------------------------*/
     $('#btnJc').click(function () {
@@ -84,6 +27,9 @@ $(document).ready(function () {
     });
     $('#btnJuez').click(function(){
         window.location.href = "jueces.jsp";
+    });
+    $('#btnRepor').click(function(){
+        window.location.href = "reportes.jsp";
     });
     $('#btnUsuario').click(function(){
         window.location.href = "usuario.jsp";
@@ -431,7 +377,7 @@ function buscaYremplaza(proceClave, etapaProce){
     var nomTabla = "";
     var dato = "";
     console.log('etapa: ' + etapaProce);
-    if(etapaProce !== 8 || etapaProce !== 7 || etapaProce !== 6){//Evitamos las etapas que vienen de Intermedia
+    if(etapaProce < 6){//Evitamos las etapas que vienen de Intermedia
         if(parent.$('#tablaIntermedia tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
             parent.$('#tablaIntermedia tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
                 dato = $(this).html();

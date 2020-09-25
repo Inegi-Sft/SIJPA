@@ -84,7 +84,7 @@ public class insrtEtapaOral extends HttpServlet {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             //Control para saber la etapa donde sera enviado
-            if (deliberacion == 2) {
+            if (deliberacion == 2 || deliberacion == 9) {
                 banderaEtapa = 3;//pasa a Tramite JO
                 banderaDesc = "Tramite";
             } else{

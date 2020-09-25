@@ -245,6 +245,33 @@ body{
     color: #FFFFFF;
     width: 15%;
 }
+.contenedor input[type=button]{
+    background-color: #0077CB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.contenedor input[type=button]:hover{
+    background-color: #00CBCB;
+    color: #FFFFFF;
+    transform: scale(1.1);
+}
+
+.contenedor input[type=button]:disabled {
+    background: rgba(204,204,204,0.6);
+    color: rgba(255,255,255,0.6);
+    transform: none;
+    cursor: default;
+}
 
 .contenedor input[type=text]{
     text-transform: uppercase;
@@ -695,4 +722,38 @@ input[type=text]:read-only, input[type=date]:read-only, input[type=number]:read-
 
 .borrar{
     cursor: pointer;
+}
+
+div.pValidacion {
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    text-align: center;
+    padding: 25px;
+}
+
+div.pValidacion .tablasRegis {
+    display: block;
+    width: auto;
+}
+
+div.pValidacion .tablasRegis td, div.pValidacion .tablasRegis th{
+    width: 200px;
+}
+div.pValidacion table.tablasRegis tr td:first-child, div.pValidacion table.tablasRegis tr th:first-child{
+    width: 100px;
+}
+
+div.pValidacion .tablasRegis tbody{
+    display: block;
+    overflow-y: auto;
+    height: 350px;
+}
+
+#validacionOK{
+    color: #00771e;
+    border-radius: 15px;
+    border: 1px solid #7cff6c;;
+    display: inline-block;
+    width: 500px;
+    background-color: rgba(183, 255, 170, 0.6);
 }

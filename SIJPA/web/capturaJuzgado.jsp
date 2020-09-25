@@ -376,8 +376,8 @@
                             </td>
                             <td>
                                 <label for="">No. exterior / No. interior</label>
-                                <input type="text" class="txtSmall soloNum" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
-                                <input type="text" class="txtSmall soloNum" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
+                                <input type="text" class="txtSmall" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
+                                <input type="text" class="txtSmall" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
                             </td>
                         </tr>
                     </table>

@@ -37,6 +37,7 @@
             <button class="btnSisCap" id="btnJc" name="btnJc">Juzgado de Control</button>
             <button class="btnSisCap" id="btnJo" name="btnJo">Juicio Oral</button>
             <button class="btnSisCap" id="btnAudi" name="btnAudi">Audiencias</button>
+            <button class="btnSisCap" id="btnValidar" name="btnValidar">Validar Datos</button>
             <%
                 //Control de usuarios si es administrador entonces mostramos la opcion de Usuarios
                 if(session.getAttribute("tipoUsuario") != null){

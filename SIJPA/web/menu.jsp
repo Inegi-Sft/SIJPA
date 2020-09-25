@@ -22,6 +22,7 @@
                 <li><a href="audienciasJO.jsp">Audiencias JO</a></li>
             </ul>
         </li>
+        <li><a href="validaciones.jsp">Validar Datos</a></li>
         <% 
             //Si es un administrador entonces le mostramos el boton para agregar usuarios
             if(session.getAttribute("tipoUsuario") != null){

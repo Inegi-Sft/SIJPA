@@ -81,6 +81,9 @@ $(document).ready(function () {
     $('#btnUsuario').click(function(){
         window.location.href = "usuario.jsp";
     });
+    $('#btnValidar').click(function(){
+        window.location.href = "validaciones.jsp";
+    });
     /*----------------Fin Sistemas Captura------------------------*/
 
     /*----------------Cabecera------------------------*/

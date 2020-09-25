@@ -22,12 +22,11 @@
                 <li><a href="audienciasJO.jsp">Audiencias JO</a></li>
             </ul>
         </li>
+        <li><a href="reportes.jsp">Reportes</a></li>
         <% 
             //Si es un administrador entonces le mostramos el boton para agregar usuarios
-            if(session.getAttribute("tipoUsuario") != null){
-                if((Integer)session.getAttribute("tipoUsuario") == 1){
-                    out.println("<li><a href='usuario.jsp'>Usuarios</a></li>"); 
-                }
+            if((Integer)session.getAttribute("tipoUsuario") == 1){
+                out.println("<li><a href='usuario.jsp'>Usuarios</a></li>"); 
             }
         %>
     </ul>

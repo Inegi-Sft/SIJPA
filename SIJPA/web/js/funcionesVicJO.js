@@ -24,6 +24,11 @@ $(document).ready(function() {
                 #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
             $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
             $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
+        }else{
+            $('#tvic_moral, #sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #rangoIngresos, #extrangera').val('-2').prop('required', false);
+            $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
+            $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
         }
         $("#tipoVictima option[value='" + tipoVi + "']").prop('selected', true);
     }
@@ -186,7 +191,7 @@ $(document).ready(function() {
             return false;
         }
         
-        for(var x = 0; x < $('input[name=proRela]').length; x++){
+        for(var x = 0; x < $('#tblVictiProceJO tbody tr').length; x++){
             if($('input[name=chkRelaProce' + x + ']:checked').length === 0){
                 alert('Seleccione una opcion de la Relación de la Víctima con el Procesado');
                 $('input[name=chkRelaProce' + x + ']').focus();

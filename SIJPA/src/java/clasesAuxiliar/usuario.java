@@ -76,6 +76,12 @@ public class usuario {
         return max;
     }
     
+    public boolean finActuPasAdmin(String pass){
+        conn.Conectar();
+        sql = "UPDATE USUARIOS SET CONTRASENIA = SHA1('" + pass + "') WHERE TIPO_USUARIO = 1;";
+        return conn.escribir(sql);
+    }
+    
     public boolean findUsuarioExist(String usuario){
         try{
             conn.Conectar();

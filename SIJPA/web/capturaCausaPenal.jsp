@@ -70,7 +70,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h2>Causa Penal</h2>
-            <form  method="post" name="formCausaPenal" id="formCausaPenal">
+            <form method="post" name="formCausaPenal" id="formCausaPenal">
                 <fieldset>
                     <legend>Características de la Causa Penal</legend>
                     <table class="tablaFormu">
@@ -240,7 +240,7 @@
                     <textarea name="ComentaExpe" id="ComentaExpe"><%=comen%></textarea>
                 </div>
                 <br>
-                <input type="submit" name="guardarExp" id="guardarExp" value="Guardar"> 
+                <input type="submit" name="guardarExp" id="guardarExp" value="Guardar">
             </form>
         </section>
     </body>

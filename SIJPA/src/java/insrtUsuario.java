@@ -54,7 +54,7 @@ public class insrtUsuario extends HttpServlet {
             String edad = request.getParameter("edad");
             String correo = request.getParameter("correo").toUpperCase();
             String entidad = request.getParameter("entidad");
-            String pass = request.getParameter("pass");
+            String pass = request.getParameter("pass").toUpperCase();
             
             try {
                 //Validacion para que se inserte el Administrador por primera vez

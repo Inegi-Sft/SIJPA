@@ -76,8 +76,10 @@ $(document).ready(function () {
                 $('#totalElementos').fadeIn("slow");
                 if($($('#Incausa')).val() === '3'){
                     $('#Tadolescentes').val('2').attr({'required': true, 'min': 2});
+                }else{
+                    $('#Tdelitos, #Tvictimas').val('').prop("required", true);
                 }
-                $('#Tdelitos, #Tvictimas').val('').prop("required", true);
+                $('#Tadolescentes').val('').prop("required", true);
                 $('#tipoIncopetencia').fadeOut("slow");
                 $('#Tincompe').val('-2').prop('required', false);
                 break;
@@ -125,7 +127,7 @@ $(document).ready(function () {
     });
     
     //Guarda Causa Penal
-    $('#formCausaPenal').submit(function (e) {
+    $('#formCausaPenal').submit(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var resp = confirm("Una vez guardada la Causa Penal no se podra editar,\n"

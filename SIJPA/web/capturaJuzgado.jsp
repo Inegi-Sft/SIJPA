@@ -224,7 +224,7 @@
                         <tr>
                             <td>
                                 <label for="ladaTel">Teléfono con lada</label>
-                                <input type="text" class="txtMedia soloNum" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="10"/>
+                                <input type="text" class="txtMedia" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="10"/>
                             </td>
                             <td>
                                 <label for="correo">Correo del órgano jurisdiccional</label>

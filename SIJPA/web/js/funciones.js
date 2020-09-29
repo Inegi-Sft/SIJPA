@@ -34,6 +34,12 @@ $(document).ready(function () {
     $('#btnUsuario').click(function(){
         window.location.href = "usuario.jsp";
     });
+    $('#btnExport').click(function(){
+        window.location.href = "exportarBD.jsp";
+    });
+    $('#btnImport').click(function(){
+        window.location.href = "importarBD.jsp";
+    });
     $('#btnValidar').click(function(){
         window.location.href = "validaciones.jsp";
     });
@@ -622,7 +628,7 @@ function ValFechaNacPRO(FechaNac, Edad) {
                            $(Edad).val(edadc);                      
                        }
                     }else{
-                        alert('La fecha de nacimiento debe ser de 12 a 99 aÒos edad='+ response);
+                        alert('La fecha de nacimiento debe ser de 12 a 99 a√±os edad='+ response);
                         $(FechaNac).val(""); 
                     }
                     if(response==='2'){
@@ -728,7 +734,7 @@ function validaMascara(e) {
 
 function ValidaCarpeInvest(InputCarpInves) {
     // ^ No debe de haber nada antes
-    // \w Coincide con cualquier car·cter alfanumÈrico, incluyendo el guiÛn bajo. Equivalente a [A-Za-z0-9_]. No permite caracteres raros
+    // \w Coincide con cualquier car√°cter alfanum√©rico, incluyendo el gui√≥n bajo. Equivalente a [A-Za-z0-9_]. No permite caracteres raros
     // \/ La diagonal invertida escapa a la diagonal simple indicando que debe de llevar /
     // [0-9] Solo debe haber numeros enteros. {4} De esos numeros deben de haber exclusivamente 4 
     var CarpInvestiga = $(InputCarpInves).val().toUpperCase();

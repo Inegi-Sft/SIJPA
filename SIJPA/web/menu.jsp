@@ -22,6 +22,8 @@
                 <li><a href="audienciasJO.jsp">Audiencias JO</a></li>
             </ul>
         </li>
+        <li><a href="exportarBD.jsp">Exportar BD</a></li>
+        <li><a href="importarBD.jsp">Importar BD</a></li>
         <!--<li><a href="sistemasCap.jsp">Sistemas de Captura</a></li>-->
         <% 
             if(session.getAttribute("tipoUsuario") != null){

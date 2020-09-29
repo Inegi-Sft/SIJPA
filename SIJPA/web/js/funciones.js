@@ -81,6 +81,12 @@ $(document).ready(function () {
     $('#btnUsuario').click(function(){
         window.location.href = "usuario.jsp";
     });
+    $('#btnExport').click(function(){
+        window.location.href = "exportarBD.jsp";
+    });
+    $('#btnImport').click(function(){
+        window.location.href = "importarBD.jsp";
+    });
     /*----------------Fin Sistemas Captura------------------------*/
 
     /*----------------Cabecera------------------------*/

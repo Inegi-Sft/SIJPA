@@ -96,22 +96,27 @@ public class showJueces {
         return lista;
     }
     
-    public ArrayList findJuezJO(String juzClaveJO, String causaJC, String juzClaveJC){
+    public ArrayList findJuezJO(String juzClaveJO, String causaJC, String juzClaveJC, String causaJO){
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(!causaJC.equals("") && juzClaveJC.equals("")){//Si tenemos causa entonces quitamos el juez de JC
+            if(!causaJC.equals("") && causaJO.equals("")){//Si tenemos causa quitamos el juez de JC (Insercion: proviene juzgado mixto)
                 sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                     + "FROM DATOS_JUECES_ADOJC "
                     + "WHERE JUZGADO_CLAVE = '" + juzClaveJO + "' "
-                    + "AND NOT JUEZ_CLAVE = (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + causaJC + juzClaveJO.replace("-", "") + "') "
+                    + "AND NOT JUEZ_CLAVE = (SELECT JUEZ_CLAVE FROM DATOS_CAUSAS_PENALES_ADOJC WHERE CAUSA_CLAVE='" + causaJC + juzClaveJC.replace("-", "") + "') "
                     + "AND ESTATUS = 1 "
                     + "ORDER BY 1";
-            }else{//Si no hay causa entonces traemos todos los jueces
+            }else if(causaJC.equals("") && causaJO.equals("")){//Si no hay causa traemos todos los jueces activos (Insercion: proviene juzgado de enjuiciamiento)
                 sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
                     + "FROM DATOS_JUECES_ADOJC "
                     + "WHERE JUZGADO_CLAVE = '" + juzClaveJO + "' "
                     + "AND ESTATUS = 1 "
+                    + "ORDER BY 1";
+            }else{//Si hay causa jc y jo traemos todos los jueces activos e inactivos (Actualizacion)
+                sql = "SELECT JUEZ_CLAVE, CONCAT(NOMBRE_JUEZ,' ',APELLIDOP_JUEZ,' ',APELLIDOM_JUEZ) AS NOMBRE_JUEZ "
+                    + "FROM DATOS_JUECES_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClaveJO + "' "
                     + "ORDER BY 1";
             }
             rs = conn.consultar(sql);

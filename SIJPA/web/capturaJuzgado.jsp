@@ -224,7 +224,7 @@
                         <tr>
                             <td>
                                 <label for="ladaTel">Teléfono con lada</label>
-                                <input type="text" class="txtMedia soloNum" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="10"/>
+                                <input type="text" class="txtMedia" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="10"/>
                             </td>
                             <td>
                                 <label for="correo">Correo del órgano jurisdiccional</label>
@@ -376,8 +376,8 @@
                             </td>
                             <td>
                                 <label for="">No. exterior / No. interior</label>
-                                <input type="text" class="txtSmall soloNum" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
-                                <input type="text" class="txtSmall soloNum" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
+                                <input type="text" class="txtSmall" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
+                                <input type="text" class="txtSmall" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
                             </td>
                         </tr>
                     </table>
@@ -402,7 +402,7 @@
                         <tr>
                             <td>
                                 <label for="Cargo">Cargo del capturador</label>
-                                <input type="text" name="cargo" id="cargo" value="<%=cargoCap%>" required/>
+                                <input type="text" name="cargo" id="cargo" value="<%=cargoCap%>" maxlength="100" required/>
                             </td>
                             <td>
                                 <label for="ejercicio">Ejercicio:</label>

@@ -18,16 +18,19 @@ $(document).ready(function() {
         $('#dPartJudicial').show();
     }
     
+    //obligamos a que el sistema siempre muestre el año aunque sea recuperacion de datos
+    var anio = new Date().getFullYear();
+    $('#ejercicio').append(new Option(anio, anio));
+    $('#ejercicio').val(anio);
+    
     //para cambiar el boton a siguiente al insertar nuevo organo y se establece el año de ejercicio
     if($('#nomOrgano').val() === ''){
         $('#banderaJC').val('');
         $('#banderaJO').val('');
         $('#banderaJOGuardar').prop('required',true);
         $('#guardar').val("Siguiente");
-        var anio = new Date().getFullYear();
-        $('#ejercicio').append(new Option(anio, anio));
-        $('#ejercicio').val(anio);
     }
+    
     //para recuperacion de datos condicionales para mostrar las opciones Informacion General JC o JO, segÃºn sea el caso
     if($('#funcionJuz').val() === '1'){
         $('#btn5').show();

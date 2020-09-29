@@ -84,7 +84,7 @@ public class insrtEtapaOral extends HttpServlet {
             response.setContentType("text/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             //Control para saber la etapa donde sera enviado
-            if (deliberacion == 2) {
+            if (deliberacion == 2 || deliberacion == 9) {
                 banderaEtapa = 3;//pasa a Tramite JO
                 banderaDesc = "Tramite";
             } else{
@@ -133,7 +133,9 @@ public class insrtEtapaOral extends HttpServlet {
                         + "PD_PERICIAL = " + pericial + ", PD_DECLARACION_ACUSADO = "+ declaracion + ", PD_DOCUMENTAL_MATERIAL = " + documental + ","
                         + "PD_OTRA_PRUEBA = " + otro + ", SUSPENCION_AUDIENCIA = "+ suspencionA + ", FECHA_SUSPENCION = '" + fechaSuspencion + "',"
                         + "FECHA_REANUDACION = '" + fechaReanudacion + "', DELIBERACION = " + deliberacion + ", FECHA_DELIBERACION = '" + fechaDeliberacion + "',"
-                        + "SENTIDO_FALLO = " + sentidoFallo + ", COMENTARIOS = '" + comentarios + "', ETAPA = " + banderaEtapa;
+                        + "SENTIDO_FALLO = " + sentidoFallo + ", COMENTARIOS = '" + comentarios + "', ETAPA = " + banderaEtapa
+                        + " WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                        + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";;
                 System.out.println(sql);
                 if (conn.escribir(sql)) {
                     showJuicio sEO = new showJuicio();

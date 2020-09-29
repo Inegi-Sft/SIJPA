@@ -45,7 +45,7 @@
             String asesor = "";
             String sexoVic = "";
             String fechaNaciV = "";
-            String edadV = "";
+            int edadV = 0;
             String vulnera = "";
             String paisNaci = "";
             String entiNaci = "";
@@ -81,7 +81,7 @@
                         asesor = victima.get(0)[3];
                         sexoVic = victima.get(0)[4];
                         fechaNaciV = victima.get(0)[5];
-                        edadV = victima.get(0)[6];
+                        edadV = Integer.parseInt(victima.get(0)[6]);
                         vulnera = victima.get(0)[7];
                         paisNaci = victima.get(0)[8];
                         entiNaci = victima.get(0)[9];
@@ -320,17 +320,21 @@
                                     <%
                                         for (int m = 0; m <= 99; m++) {
                                             out.println("<option value='" + m + "'");
-                                            if(Integer.toString(m).equals(edadV)){
+                                            if(m == edadV){
                                                 out.println(" selected ");
                                             }
                                             out.println(">" + m + "</option>");        
                                         }
+                                        if(edadV == -9){//validamos si el dato es No identificado -9
+                                            out.println("<option value='-9' selected>No identificado</option>");
+                                        }else{
+                                            out.println("<option value='-9'>No identificado</option>");
+                                        }
                                     %>
-                                    <option value="-9">No identificado</option>
                                 </select>
                             </td>
                             <td>
-                                <label for="tvic_moral">Condición de vulnerabilidad</label>
+                                <label for="vulnera">Condición de vulnerabilidad</label>
                                 <select name="vulnera" id="vulnera">
                                     <option value="">--Seleccione--</option>
                                     <%

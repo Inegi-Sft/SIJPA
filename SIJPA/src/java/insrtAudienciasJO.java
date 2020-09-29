@@ -46,7 +46,7 @@ public class insrtAudienciasJO extends HttpServlet {
         HttpSession sesion = request.getSession();
         
         String operacion = request.getParameter("operacion");//Control para saber si se inserta o se actualiza
-        String juzgadClave = (String) sesion.getAttribute("juzgadoClaveAudi");
+        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
         String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];

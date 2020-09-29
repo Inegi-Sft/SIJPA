@@ -45,7 +45,9 @@ public class accesoSistema extends HttpServlet {
         String nomUsu = request.getParameter("nomUsu").toUpperCase();
         String passUsu = request.getParameter("passUsu").toUpperCase();
         
-        MessageDigest md = null;
+        System.out.println(passUsu);
+        
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-1");
             md.reset();

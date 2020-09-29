@@ -35,7 +35,7 @@ $(document).ready(function () {
         }).done(function (d) {
             console.log(d);
             if (d === 1) {
-                alert('Usuario ya registrado, verificar');
+                alert('Usuario ya registrado, favor de verificar');
                 $('#correo').val('');
             }
         });

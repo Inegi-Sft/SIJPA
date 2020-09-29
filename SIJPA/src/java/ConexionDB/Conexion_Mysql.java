@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author CARLOS.SANCHEZG
  */
 public class Conexion_Mysql {
-    private Connection conexion; 
+    private Connection conexion;
      
     public Connection getConexion() { 
         return conexion; 
@@ -27,12 +27,7 @@ public class Conexion_Mysql {
     public boolean Conectar() { 
         try { 
             Class.forName("com.mysql.jdbc.Driver");
-            //Conceptuales
-//            String url = "jdbc:mysql://node56241-sijpa2020.jl.serv.net.mx/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","BTCavy91841");
-            //Administradores
-//            String url = "jdbc:mysql://node56244-sijpa2020admin.jl.serv.net.mx/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","VHYyyb87899");
+            
             //Localhost
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");

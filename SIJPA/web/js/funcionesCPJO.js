@@ -297,12 +297,11 @@ $(document).ready(function () {
                             + '&posicion=' + x;
                             $('#tablaDeliJO tbody tr').eq(x).find('a').attr('href', enlace);
                             //le ponemos el nuevo texto con la nueva causaClave JO
-                            $('#tablaDeliJO tbody tr').eq(x).find('td:eq(0)').html(expeJO + '-D' + (x+1));
+                            $('#tablaDeliJO tbody tr').eq(x).find('td:eq(1)').html(expeJO + '-D' + (x+1));
                         }
                         //obtenemos el numero nuevo de delitos para agregar los nuevos registros a la tabla
                         var totDelJO = parseInt(response[1]);
                         for(x = parseInt($('#TdelitosJC').val()); x < totDelJO; x++){
-                            console.log('Entramos a delitos: ', $('#TdelitosJC').val());
                             $('#tablaDeliJO').append('<tr><td>' + expeJO + '-D' + (x+1) + '</td><td></td><td></td><td></td><td></td><td></td>\n\
                                     <td><a class="pop" href="delitosJO.jsp?delitoClaveJC=--&delitoClaveJO=' + expeJO + '-D' + (x+1) + '&posicion=' + x + '">\n\
                                     <img src="img/editar.png" title="Modificar"/></a></td>\n\
@@ -317,7 +316,7 @@ $(document).ready(function () {
                             + '&posicion=' + x;
                             $('#tablaProcesaJO tbody tr').eq(x).find('a').attr('href', enlace);
                             //le ponemos el nuevo texto con la nueva causaClave JO
-                            $('#tablaProcesaJO tbody tr').eq(x).find('td:eq(0)').html(expeJO + '-P' + (x+1));
+                            $('#tablaProcesaJO tbody tr').eq(x).find('td:eq(1)').html(expeJO + '-P' + (x+1));
                         }
                         //obtenemos el numero nuevo de procesados para agregar los nuevos registros a la tabla
                         var totProJO = parseInt(response[2]);
@@ -326,7 +325,7 @@ $(document).ready(function () {
                                     <td><a class="pop" href="procesadosJO.jsp?proceClaveJC=--&proceClaveJO=' + expeJO + '-P' + (x+1) + '&posicion=' + x + '">\n\
                                     <img src="img/editar.png" title="Modificar"/></a></td>\n\
                                     </tr>');
-                            $('#tablaJuicioJO').append('<tr><td>' + expeJO + '-P' + (x+1) + '</td><td></td><td></td><td></td><td></td><td></td><td></td>\n\
+                            $('#tablaJuicioJO').append('<tr><td>' + expeJO + '-P' + (x+1) + '</td><td></td><td></td><td></td><td></td>\n\
                                     <td><a class="pop" href="etapaOral.jsp?proceClaveJC=--&proceClaveJO=' + expeJO + '-P' + (x+1) + '&posicion=' + x + '">\n\
                                     <img src="img/editar.png" title="Modificar"/></a></td>\n\
                                     </tr>');
@@ -340,7 +339,7 @@ $(document).ready(function () {
                             + '&posicion=' + x;
                             $('#tablaVictimasJO tbody tr').eq(x).find('a').attr('href', enlace);
                             //le ponemos el nuevo texto con la nueva causaClave JO
-                            $('#tablaVictimasJO tbody tr').eq(x).find('td:eq(0)').html(expeJO + '-V' + (x+1));
+                            $('#tablaVictimasJO tbody tr').eq(x).find('td:eq(1)').html(expeJO + '-V' + (x+1));
                         }
                         //obtenemos el numero nuevo de victimas para agregar los nuevos registros a la tabla
                         var totVicJO = parseInt(response[3]);

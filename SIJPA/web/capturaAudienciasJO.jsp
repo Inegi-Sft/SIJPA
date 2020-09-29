@@ -27,7 +27,7 @@
             showAudiencias sA = new showAudiencias();
             ArrayList<String[]> lista;
             
-            String juzgadoClave = (String)session.getAttribute("juzgadoClaveAudi");
+            String juzgadoClave = (String)session.getAttribute("juzgadoClave");
             
             //variables para recuperar datos
             ArrayList<String[]> jueces, audi;

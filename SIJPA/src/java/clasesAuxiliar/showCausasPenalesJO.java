@@ -127,7 +127,7 @@ public class showCausasPenalesJO {
                     + "JOIN DATOS_JUZGADOS_ADOJC JU ON CP.JUZGADO_CLAVE = JU.JUZGADO_CLAVE "
                     + "WHERE CO.TIPO_RESOLUCION = 5 "
                     + "AND JU.JUZGADO_CLAVE <> '" + juzClave + "' "
-                    + "AND JU.JUZGADO_CLAVE NOT IN (SELECT JUZGADO_CLAVEJC FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJO = '" + juzClave + "') "
+                    //+ "AND JU.JUZGADO_CLAVE NOT IN (SELECT JUZGADO_CLAVEJC FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJO = '" + juzClave + "') "
                     + "ORDER BY 1;";
             rs = conn.consultar(sql);
             while (rs.next()) {

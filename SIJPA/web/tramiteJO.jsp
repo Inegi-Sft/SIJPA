@@ -72,7 +72,7 @@
                         </div>
                         <div class="cols" id="dEstInvestiJO">
                             <label for="estInvestiJO" class="lblExBig">Estatus para la etapa de investigación</label>
-                            <select name="estInvestiJO" id="estInvestiJO">
+                            <select name="estInvestiJO" id="estInvestiJO" required>
                                  <option value="">--Seleccione--</option>
                                  <%
                                     lista = cat.findEstatus();

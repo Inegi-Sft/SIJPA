@@ -75,7 +75,7 @@ public class exportaBD extends HttpServlet {
                 op.close();
                 is.close();
             
-                //Paths.get(RUTA+mi_archivo).toFile().delete();
+                Paths.get(RUTA+mi_archivo).toFile().delete();
                 File mi_archivo_borrar_1 = new File(RUTA + nombre_archivo+".sijpa");
                 mi_archivo_borrar_1.delete(); 
             }

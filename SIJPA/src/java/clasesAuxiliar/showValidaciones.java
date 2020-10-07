@@ -45,7 +45,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1),resul.getString(2),resul.getString(3),resul.getString("FALTAN"),
+                    resul.getString(1), resul.getString(2).replace(resul.getString(1).replace("-", ""), ""),
+                    resul.getString(3), resul.getString("FALTAN"),
                 });
             }
             conn.close();
@@ -75,7 +76,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString("FALTAN")
+                    resul.getString(1), resul.getString(2).replace(resul.getString(1).replace("-", ""), ""), 
+                    resul.getString(3), resul.getString("FALTAN")
                 });
             }
             conn.close();
@@ -106,7 +108,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString("FALTAN")
+                    resul.getString(1), resul.getString(2).replace(resul.getString(1).replace("-", ""), ""), 
+                    resul.getString(3), resul.getString("FALTAN")
                 });
             }
             conn.close();
@@ -135,7 +138,9 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3)
+                    resul.getString(1), 
+                    resul.getString(2).replace(resul.getString(1).replace("-", ""), ""), 
+                    resul.getString(3).replace(resul.getString(1).replace("-", ""), ""), 
                 });
             }
             conn.close();
@@ -162,7 +167,9 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3)
+                    resul.getString(1), 
+                    resul.getString(2).replace(resul.getString(1).replace("-", ""), ""), 
+                    resul.getString(3).replace(resul.getString(1).replace("-", ""), ""), 
                 });
             }
             conn.close();
@@ -189,7 +196,9 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3)
+                    resul.getString(1), 
+                    resul.getString(2).replace(resul.getString(1).replace("-", ""), ""),
+                    resul.getString(3).replace(resul.getString(1).replace("-", ""), ""), 
                 });
             }
             conn.close();
@@ -214,7 +223,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(2), resul.getString(3)
+                    resul.getString(1), resul.getString(2).replace(resul.getString(1).replace("-", ""), ""), 
+                    resul.getString(3)
                 });
             }
             conn.close();
@@ -242,7 +252,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(3), resul.getString(4), resul.getString(5)
+                    resul.getString(1), resul.getString(3).replace(resul.getString(1).replace("-", ""), ""),
+                    resul.getString(4), resul.getString(5)
                 });
             }
             conn.close();
@@ -271,7 +282,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(3), resul.getString(4), resul.getString(5)
+                    resul.getString(1), resul.getString(3).replace(resul.getString(1).replace("-", ""), ""), 
+                    resul.getString(4), resul.getString(5)
                 });
             }
             conn.close();
@@ -299,7 +311,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(3), resul.getString(4), resul.getString(5)
+                    resul.getString(1), resul.getString(3).replace(resul.getString(1).replace("-", ""), ""), 
+                    resul.getString(4), resul.getString(5)
                 });
             }
             conn.close();
@@ -328,7 +341,8 @@ public class showValidaciones {
         try {
             while (resul.next()) {
                 lista.add(new String[]{
-                    resul.getString(1), resul.getString(3), resul.getString(4), resul.getString(5)
+                    resul.getString(1), resul.getString(3).replace(resul.getString(1).replace("-", ""), ""),  
+                    resul.getString(4), resul.getString(5)
                 });
             }
             conn.close();

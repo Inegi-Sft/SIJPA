@@ -71,32 +71,12 @@ $(document).ready(function () {
     }
 
     if(estatus==="SIN ERRORES"){
-        $('#tblValidacion').hide();
+        $('#tblValidacion, #btnExportExcel').hide();
         $('#validacionOK').show();
     }else{
-        $('#tblValidacion').show();
+        $('#tblValidacion, #btnExportExcel').show();
         $('#validacionOK').hide();
     }
-//    $('#formValidacion').submit(function (e) {
-//        e.preventDefault();
-//        e.stopImmediatePropagation();
-//        var sistema= $('#validaSistema').val();
-//        $.ajax({
-//            type: 'post',
-//            url: 'obtenValidacion',
-//            data: {sistema: sistema},
-//            success: function (response) {
-//                console.log("Respuesta del obten Causas Validaciones", response);
-//                $('#v1 tbody').append(response);
-//
-//            },
-//            error: function (response) {
-//                console.log("Respuesta del servidor Validaciones: ", response);
-//                alert('Error al validar, vuelva a intentarlo o cunsulte al administrador');
-//            }
-//                
-//        });    
-//    }); 
 });
 
 function openValidacion(ventana){
@@ -108,4 +88,23 @@ function openValidacion(ventana){
             <svg version="1" viewBox="0 0 24 24"><path d="M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z"></path></svg></button>');
         }
     });
+}
+
+function exportar(){
+    var sistema= $('#validaSistema').val();
+    $.ajax({
+        type: 'post',
+        url: 'exportaValidaciones',
+        data: {
+            sistema: sistema
+        },
+        success: function (response) {
+            console.log("Respuesta de Exporta Validaciones", response);
+            alertify.alert('Mensaje Importante','Exportacion generada correctamente !!');
+        },
+        error: function (response) {
+            console.log("Respuesta del servidor Exportacion: ", response);
+            alert('Error al generar Excel, vuelva a intentarlo o cunsulte al administrador');
+        }
+    }); 
 }

@@ -175,6 +175,10 @@
                             <td>
                                 <label for="curp">CURP</label>
                                 <input type="text" name="curp" id="curp" value="<%=curp%>" maxlength="18" minlength="18" required>
+                                <div class='noIdentificada'>
+                                    <input type='checkbox' id='chkCurp' onclick="curpNoIdent('#chkCurp', '#curp')">
+                                    <label>No identificado</label>
+                                </div>
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
@@ -283,7 +287,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dNMunicipio">
-                                        <label for="nMunicipio" class="lblExBig">Municipio o demarcación territorial</label>
+                                        <label for="nMunicipio" class="lblExBig">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="nMunicipio" id="nMunicipio">
                                             <%
                                                 if(!naciPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -358,7 +362,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dRMunicipio">
-                                        <label for="rMunicipio">Municipio o demarcación territorial</label>
+                                        <label for="rMunicipio">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="rMunicipio" id="rMunicipio">
                                             <%
                                                 if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery

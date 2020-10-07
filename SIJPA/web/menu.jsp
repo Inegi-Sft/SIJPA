@@ -10,7 +10,7 @@
             <p class="fUsuario">
                 <img src="img/usuario.png" class="img-circle" width="80">
             </p>
-            <h4>MenÃº Usuario</h4>
+            <h4>Menú Usuario</h4>
         </li>
         <li><a href="juzgados.jsp">Juzgados</a></li>
         <li><a href="jueces.jsp">Jueces</a></li>

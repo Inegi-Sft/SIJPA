@@ -72,7 +72,7 @@ public class exportaValidaciones extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String archivo="..\\..\\inegi_conf\\Validacion"+sistema+".xlsx";
+            String archivo="..\\..\\inegi_conf\\Validacion"+sistema+".xlsx"; 
             
             libro = new SXSSFWorkbook();
             SXSSFSheet hojaDescripcion = libro.createSheet("Descripcion");

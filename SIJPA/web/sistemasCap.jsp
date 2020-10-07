@@ -49,6 +49,7 @@
                     response.sendRedirect("index.jsp");
                 }
             %>
+            <br><br>
         </section>
     </body>
 </html>

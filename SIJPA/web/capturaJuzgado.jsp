@@ -270,7 +270,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="municipioJ">Municipio o Demarcación Territorial de la CDMX</label>
+                                <label for="municipioJ">Municipio (Para CDMX Demarcación Territorial)</label>
                                 <select name="municipioJ" id="municipioJ" required>
                                     <option value="">--Seleccione--</option>
                                     <%

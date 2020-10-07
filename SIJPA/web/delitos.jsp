@@ -381,7 +381,7 @@
                                         </select>
                                     </div>
                                     <div class="colsA lblExBig">
-                                        <label class="txtLong">Municipio o Demarcación territorial de la Ciudad de México</label>
+                                        <label class="txtLong">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="municipioD" id="municipioD" required>
                                             <%
                                                 if(ocurreEnti.equals("")){

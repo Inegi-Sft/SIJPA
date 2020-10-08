@@ -5,62 +5,12 @@
  */
 
 $(document).ready(function () {
-    /*----------------Index------------------------*/
-    //Temporizador para que aparesca el logo en primera instancia
-    setTimeout(function () {
-        $('#splash').slideDown('slow');
-    }, 500);
-
-    //Temporizador para que desaparesca logo y aparesca login
-    setTimeout(function () {
-        $('#splash').animate({
-            left: "100%",
-            //width: "toggle",
-            opacity: "toggle"
-        }, {
-            duration: 2000, // duration
-            queue: false
-        });
-
-        $('#login').animate({
-            left: "40%",
-            //width: "toggle",
-            opacity: "toggle"
-        }, {
-            duration: 2000,
-            queue: false
-        });
-    }, 3000);
-
-    //Acceso al sistema mediante ajax
-    $('#formLogin').submit(function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        $.ajax({
-            type: 'post',
-            url: 'accesoSistema',
-            data: $('#formLogin').serialize(),
-            success: function (response) {
-                console.log("Respuesta del servidor", response);
-                if (response === 1) {
-                    window.location.href = "sistemasCap.jsp";
-                } else {
-                    alertify.alert('Mensaje Importante', 'Usuario no Encontrado\n Intente de nuevo', function(){
-                        alertify.error('Verifique las credenciales de acceso'); 
-                    });
-                    //alert('Usuario no encontrado, favor de revisar usuario o contraseña');
-                    $('#nomUsu').val('');
-                    $('#passUsu').val('');
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError){
-                if(xhr.status === 404) {
-                    alert(thrownError);
-                }
-            }
-        });
-    });
-    /*----------------Fin Index------------------------*/
+    /*----------------Validamos el Navegador------------------------*/
+    var es_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+    if(!es_chrome){
+        window.location.href = "navegador.jsp";
+    }
+    /*----------------Fin Validamos el Navegador------------------------*/
 
     /*----------------Sistemas Captura------------------------*/
     $('#btnJc').click(function () {
@@ -78,6 +28,9 @@ $(document).ready(function () {
     $('#btnJuez').click(function(){
         window.location.href = "jueces.jsp";
     });
+    $('#btnRepor').click(function(){
+        window.location.href = "reportes.jsp";
+    });
     $('#btnUsuario').click(function(){
         window.location.href = "usuario.jsp";
     });
@@ -86,6 +39,9 @@ $(document).ready(function () {
     });
     $('#btnImport').click(function(){
         window.location.href = "importarBD.jsp";
+    });
+    $('#btnValidar').click(function(){
+        window.location.href = "validaciones.jsp";
     });
     /*----------------Fin Sistemas Captura------------------------*/
 
@@ -427,24 +383,24 @@ function buscaYremplaza(proceClave, etapaProce){
     var nomTabla = "";
     var dato = "";
     console.log('etapa: ' + etapaProce);
-    if(etapaProce !== 8){
+    if(etapaProce < 6){//Evitamos las etapas que vienen de Intermedia
         if(parent.$('#tablaIntermedia tbody tr').length > 0){//Si la tabla tiene mas de 1 registro
             parent.$('#tablaIntermedia tbody tr').find('td:eq(0)').each(function(){//Funcion para buscar el dato  
                 dato = $(this).html();
                 console.log('dato intermedia: ' + dato + ' proceClave: ' + proceClave);
                 if(proceClave === dato){
                     //if(etapaProce !== 1){//Quiere decir que cambio de etapa en la actualizacion
-                        if($(this).parent().find('td:eq(2)').html() !== ''){
-                            //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
-                            console.log('Esta insertado en BD');
-                            eliminaBD = true;
-                            nomTabla = "inter";
-                        }
-                        encontrado = true;
-                        $(this).parent().remove();
-                        if(parent.$('#tablaIntermedia tbody tr').length === 0){
-                            parent.$('#btn6').prop('disabled', true);
-                        }
+                    if($(this).parent().find('td:eq(2)').html() !== ''){
+                        //Si tiene dato quiere decir que ya esta insertado y lo tendremos que borrar de la BD
+                        console.log('Esta insertado en BD');
+                        eliminaBD = true;
+                        nomTabla = "inter";
+                    }
+                    encontrado = true;
+                    $(this).parent().remove();
+                    if(parent.$('#tablaIntermedia tbody tr').length === 0){
+                        parent.$('#btn6').prop('disabled', true);
+                    }
                     //}
                 }
             });
@@ -672,7 +628,7 @@ function ValFechaNacPRO(FechaNac, Edad) {
                            $(Edad).val(edadc);                      
                        }
                     }else{
-                        alert('La fecha de nacimiento debe ser de 12 a 99 años edad='+ response);
+                        alert('La fecha de nacimiento debe ser de 12 a 99 aÃ±os edad='+ response);
                         $(FechaNac).val(""); 
                     }
                     if(response==='2'){
@@ -690,39 +646,38 @@ function ValFechaNacPRO(FechaNac, Edad) {
 }
 
 function ValEdadDelito(EdadDel,fnacimiento){
- var FedadD=document.getElementById('edad').value;
- var FedadJ=document.getElementById('edadJuzgado').value;
- var FechNac=$(fnacimiento).val();
- // console.log("Respuesta: ",FedadD,FedadJ);
-  if (FedadJ !== ''){
-      if(FedadD>FedadJ){
-          alert('La edad al momento de cometer los hechos debe de ser menor o igual a la edad al momento de iniciar el proceso');
-          $(EdadDel).val("");
-         // console.log("fecha de nacimiento="+FechNac);
-          if (FechNac !=='1899-09-09'){
-              $(fnacimiento).val("");
-              
-          }      
+    var FedadD = $(EdadDel).val();
+    var FedadJ = $('#edadJuzgado').val();
+    var FechNac = $(fnacimiento).val();
+    // console.log("Respuesta: ",FedadD,FedadJ);
+    if (FedadJ !== '' && FedadJ !=='-9'){
+        if(FedadD > FedadJ){
+            alert('La edad al momento de cometer los hechos debe de ser menor o igual a la edad al momento de iniciar el proceso');
+            $(EdadDel).val('');
+            // console.log("fecha de nacimiento="+FechNac);
+            if (FechNac !=='1899-09-09'){
+                $(fnacimiento).val('');
+            }      
         }
-  }  
+    }  
 }
 
 function ValEdadJuzgado(EdadJuz,fnacimiento){
- var FedadD=document.getElementById('edad').value;
- var FedadJ=document.getElementById('edadJuzgado').value;
- var FechNac=$(fnacimiento).val();
- // console.log("Respuesta: ",FedadJ,FedadD);
-   if ((FedadJ !== '') && (FedadJ !=='-9')){
-      if(FedadJ<FedadD){
-          alert('La edad al momento de iniciar el proceso debe ser mayor o igual a la edad al momento de cometer los hechos');
-         $(EdadJuz).val("");
-        // console.log("fecha de nacimiento="+FechNac);
-          if (FechNac !=='1899-09-09'){
-              $(fnacimiento).val("");
-              
-          }  
+    var FedadD = $('#edad').val();
+    var FedadJ = $(EdadJuz).val();
+    var FechNac=$(fnacimiento).val();
+    // console.log("Respuesta: ",FedadJ,FedadD);
+    if (FedadJ !== '' && FedadJ !=='-9'){
+        if(FedadJ < FedadD){
+            alert('La edad al momento de iniciar el proceso debe ser mayor o igual a la edad al momento de cometer los hechos');
+            $(EdadJuz).val("");
+            // console.log("fecha de nacimiento="+FechNac);
+            if (FechNac !=='1899-09-09'){
+                $(fnacimiento).val("");
+
+            }  
         }
-  }  
+    }
 }
 
   function ValFechaNacVic(dFechaNac,SEdad){
@@ -736,22 +691,20 @@ function ValEdadJuzgado(EdadJuz,fnacimiento){
             },
             success: function (response) {
                 var edadVic = parseInt(response);
-               alert('Respuesta servidores'+response);
+                alert('Respuesta servidores' + response);
                 if (response !== '0'){
-                if (edadVic >= 0){  
-                    var resp = confirm("Desea agregar la edad. Edad=" + response);
-                    if (resp) {
-                        $(SEdad).val(edadVic);
+                    if (edadVic >= 0){  
+                        var resp = confirm("Desea agregar la edad. Edad=" + response);
+                        if (resp) {
+                            $(SEdad).val(edadVic);
+                        }
                     }
-            }
-        }
-                if (edadVic < 0)
-                {
+                }
+                if (edadVic < 0){
                     alert('LA FECHA DE NACIMIENTO NO DEBE SER MAYOR A LA FECHA DE INGRESO');
                     $(SEdad).val("");
                     $(dFechaNac).val("");
                 }
-
             },
             error: function (response) {
                 console.log("Respuesta del servidor", response);
@@ -781,7 +734,7 @@ function validaMascara(e) {
 
 function ValidaCarpeInvest(InputCarpInves) {
     // ^ No debe de haber nada antes
-    // \w Coincide con cualquier carácter alfanumérico, incluyendo el guión bajo. Equivalente a [A-Za-z0-9_]. No permite caracteres raros
+    // \w Coincide con cualquier carÃ¡cter alfanumÃ©rico, incluyendo el guiÃ³n bajo. Equivalente a [A-Za-z0-9_]. No permite caracteres raros
     // \/ La diagonal invertida escapa a la diagonal simple indicando que debe de llevar /
     // [0-9] Solo debe haber numeros enteros. {4} De esos numeros deben de haber exclusivamente 4 
     var CarpInvestiga = $(InputCarpInves).val().toUpperCase();
@@ -821,6 +774,13 @@ function borraR(elemento){
     var numReg = $('#' + tabla + ' tbody tr').length - 1;//Obtenemos el numero de registro despues de borrar el registro
     console.log('de la tabla se borra: ' + tabla);
     if(tabla !== 'causas'){
+        //Validamos que si es integracion mixta deben de existir 2 procesados
+        if(tabla === 'tablaProcesa'){
+            if(numReg < 2 && $('#Incausa').val() === '3'){
+                alert('Al tener una "Integracion Mixta" se necesitan tener al menos dos procesados en la Causa Penal');
+                return false;
+            }
+        }
         if(numReg === 0){
             var nomTabla = $(elemento).parents('table').attr('data-nomTabla');
             alert('La tabla "' + nomTabla + '" no se puede quedar con 0 registros\n' +

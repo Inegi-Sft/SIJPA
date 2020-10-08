@@ -37,7 +37,14 @@
             showTramiteJO tramite = new showTramiteJO();
             ArrayList<String[]> tramJO;
             
-            String juzClaJO = (String)session.getAttribute("juzgadoClave");
+            //Si la variable de sesion esta vacia entonces lo regresamos a Index para generarlas de nuevo
+            String juzClaJO = "";
+            if(session.getAttribute("juzgadoClave") != null){
+                juzClaJO = (String)session.getAttribute("juzgadoClave");
+            }else{
+                response.sendRedirect("index.jsp?insert=600");
+            }
+            
             String juzClaJC = "";
             int y = 0;
             String ccJC = "";
@@ -105,6 +112,8 @@
                                     }
                                     else{//Si el delito no esta en la BD de JO lo recuperamos de JC y se muestra
                                         out.println("<tr>");
+                                        //Columna de control para cuando se agregan de un juzgado Mixto por eso no se muestra
+                                        out.println("<td style='display: none'>" + del[0].replace(juzClaJC.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + ccJO + "-D" + (y+1) + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");
@@ -181,6 +190,8 @@
                                         out.println("</tr>");
                                     }else{//Si el procesado no esta en BD de JO se recupera de JC
                                         out.println("<tr>");
+                                        //Columna de control para cuando se agregan de un juzgado Mixto por eso no se muestra
+                                        out.println("<td style='display: none'>" + pro[0].replace(juzClaJC.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + ccJO + "-P" + (y+1) + "</td>");
                                         out.println("<td>" + pro[2] + "</td>");
                                         out.println("<td></td>");
@@ -255,6 +266,8 @@
                                         out.println("</tr>");
                                     }else{//Si la victima no esta en BD se agrega vacia
                                         out.println("<tr>");
+                                        //Columna de control para cuando se agregan de un juzgado Mixto por eso no se muestra
+                                        out.println("<td style='display: none'>" + vi[0].replace(juzClaJC.replace("-", ""), "") + "</td>");
                                         out.println("<td>" + ccJO + "-V" + (y+1) + "</td>");
                                         out.println("<td></td>");
                                         out.println("<td></td>");

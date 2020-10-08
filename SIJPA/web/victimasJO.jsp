@@ -247,9 +247,9 @@
                                     }
                                     out.println("<td>");
                                     if(viDel.size() != 0){
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[2]+ " onclick='victimaDelito(this)' checked>");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[3]+ " onclick='victimaDelito(this)' checked>");
                                     }else{
-                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[2]+ " onclick='victimaDelito(this)' />");
+                                        out.println("<input type='checkbox' name='deliCometido' id='deliCometido' class='chkAplica' value='" + pro[1] + "@@@" + vi[1] + "' normaT=" +vi[3]+ " onclick='victimaDelito(this)' />");
                                     }
                                     out.println("</td>");
                                     out.println("</tr>");
@@ -375,7 +375,7 @@
                             </td>
                             <td>
                                 <label for="edadVi">Edad</label>
-                                <select name="edadVi" id="edadVi" required>
+                                <select name="edadVi" id="edadVi">
                                     <option value="">--Seleccione--</option>
                                     <option value="-2">-2</option>
                                     <%
@@ -444,7 +444,7 @@
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="munNaci"> 
-                                        <label for="Mnacimiento">Municipio</label>
+                                        <label for="Mnacimiento">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="Mnacimiento" id="Mnacimiento">
                                             <%
                                                 if(!paisNaci.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -519,7 +519,7 @@
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="munResi"> 
-                                        <label for="Mreside">Municipio</label>
+                                        <label for="Mreside">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="Mreside" id="Mreside" name="Mreside">
                                             <%
                                                 if(!resiPaisV.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery

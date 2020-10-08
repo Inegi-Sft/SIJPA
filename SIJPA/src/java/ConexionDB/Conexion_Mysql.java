@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author CARLOS.SANCHEZG
  */
 public class Conexion_Mysql {
-    private Connection conexion; 
+    private Connection conexion;
      
     public Connection getConexion() { 
         return conexion; 
@@ -31,11 +31,17 @@ public class Conexion_Mysql {
         try { 
             Class.forName("com.mysql.jdbc.Driver");
             //Conceptuales
-//            String url = "jdbc:mysql://node56241-sijpa2020.jl.serv.net.mx/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","BTCavy91841");
+//            String url = "jdbc:mysql://node28728-sijpa.es-1.axarnet.cloud/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","PXOsva75515");
             //Administradores
-//            String url = "jdbc:mysql://node56244-sijpa2020admin.jl.serv.net.mx/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","VHYyyb87899");
+//            String url = "jdbc:mysql://node28730-sijpaadmin.es-1.axarnet.cloud/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","QVLtyq11475");
+            //Colima
+//            String url = "jdbc:mysql://node28733-sijpacolima.es-1.axarnet.cloud/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","PKRdte84636");
+            //Produccion
+//            String url = "jdbc:mysql://localhost:3306/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");
             //Localhost
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");

@@ -53,9 +53,9 @@ public class estatusDatos extends HttpServlet {
         String valorEs = request.getParameter("valorEs");
         int valorNuevo = 0;
         
-        if(valorEs.equals("Inactivo"))
+        if(valorEs.equals("Inactivo")){
             valorNuevo = 1;//No necesia llaves por que solo tiene una instruccion sin else
-        
+        }
         
         //Condicion para cambiar estatus de Juzgados
         if(tabla.equals("tablaJuzgados")){

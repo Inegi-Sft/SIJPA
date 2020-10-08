@@ -156,15 +156,15 @@
                         <tr>
                             <td>
                                 <label for="nombre">Nombre(s)</label>
-                                <input type="text" name="nombre" id="nombre" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" value="<%=nomProce%>" required>
+                                <input type="text" name="nombre" id="nombre" onkeypress="return /[[A-ZÑ ]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" value="<%=nomProce%>" required>
                             </td>
                             <td>
                                 <label for="apaterno">Apellido paterno</label>
-                                <input type="text" name="apaterno" id="apaterno" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" value="<%=aPaterno%>" required>
+                                <input type="text" name="apaterno" id="apaterno" onkeypress="return /[[A-ZÑ ]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" value="<%=aPaterno%>" required>
                             </td>
                             <td>
                                 <label for="amaterno">Apellido materno</label>
-                                <input type="text" name="amaterno" id="amaterno" onkeypress="return /[[A-Z]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" value="<%=aMaterno%>" required>
+                                <input type="text" name="amaterno" id="amaterno" onkeypress="return /[[A-ZÑ ]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" value="<%=aMaterno%>" required>
                             </td>
                             <td>
                                 <label for="alias">Alias</label>
@@ -175,6 +175,10 @@
                             <td>
                                 <label for="curp">CURP</label>
                                 <input type="text" name="curp" id="curp" value="<%=curp%>" maxlength="18" minlength="18" required>
+                                <div class='noIdentificada'>
+                                    <input type='checkbox' id='chkCurp' onclick="curpNoIdent('#chkCurp', '#curp')">
+                                    <label>No identificado</label>
+                                </div>
                             </td>
                             <td>
                                 <label for="fNacimiento">Fecha nacimiento</label>
@@ -211,16 +215,19 @@
                                                 out.println(" selected ");
                                             }
                                             out.println(">" + i + "</option>");
-                                                    
+                                        }
+                                        if(edad.equals("-9")){
+                                            out.println("<option value='-9' selected>No identificado</option>");
+                                        }else{
+                                            out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
-                                    <option value="-9">No identificado</option>
                                 </select>
                             </td>
                        </tr>
                        <tr>
                            <td>
-                                <label for="edad">Edad al momento de iniciar el proceso</label>
+                                <label for="edadJuzgado">Edad al momento de iniciar el proceso</label>
                                 <select name="edadJuzgado" id="edadJuzgado" onchange="ValEdadJuzgado('#edadJuzgado','#fNacimiento')" required>
                                     <option value="">--Seleccione--</option>
                                     <%
@@ -231,6 +238,11 @@
                                             }
                                             out.println(">" + i + "</option>");
                                                     
+                                        }
+                                        if(edadJuzgado.equals("-9")){
+                                            out.println("<option value='-9' selected>No identificado</option>");
+                                        }else{
+                                            out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
                                     <option value="-9">No identificado</option>
@@ -275,7 +287,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dNMunicipio">
-                                        <label for="nMunicipio" class="lblExBig">Municipio o demarcación territorial</label>
+                                        <label for="nMunicipio" class="lblExBig">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="nMunicipio" id="nMunicipio">
                                             <%
                                                 if(!naciPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -350,7 +362,7 @@
                                         </select>
                                     </div>
                                     <div class="colsx oculto" id="dRMunicipio">
-                                        <label for="rMunicipio">Municipio o demarcación territorial</label>
+                                        <label for="rMunicipio">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="rMunicipio" id="rMunicipio">
                                             <%
                                                 if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery

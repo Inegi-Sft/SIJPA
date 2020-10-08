@@ -24,16 +24,12 @@
         </li>
         <li><a href="exportarBD.jsp">Exportar BD</a></li>
         <li><a href="importarBD.jsp">Importar BD</a></li>
-        <!--<li><a href="sistemasCap.jsp">Sistemas de Captura</a></li>-->
+        <li><a href="reportes.jsp">Reportes</a></li>
+        <li><a href="validaciones.jsp">Validar Datos</a></li>
         <% 
-            if(session.getAttribute("tipoUsuario") != null){
-                if((Integer)session.getAttribute("tipoUsuario") == 1){ %>
-                    <li><a href="usuario.jsp">Usuarios</a></li>
-                    <!--<li><a href="BDMySQL/sijpa_db_07_06_20.sql" download="sijpa_db.sql">Base de Datos SIJPA</a></li>-->
-        <% 
-                }
-            }else{
-                response.sendRedirect("index.jsp");
+            //Si es un administrador entonces le mostramos el boton para agregar usuarios
+            if((Integer)session.getAttribute("tipoUsuario") == 1){
+                out.println("<li><a href='usuario.jsp'>Usuarios</a></li>"); 
             }
         %>
     </ul>

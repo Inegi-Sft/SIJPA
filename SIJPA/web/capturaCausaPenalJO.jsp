@@ -134,7 +134,7 @@
                         <tr>
                             <td colspan="3">
                                 <fieldset class="subField">
-                                    <legend>Datos Juiocio Oral</legend>
+                                    <legend>Datos Juicio Oral</legend>
                                     <div class="cols">
                                         <label for="jClaveJO">Juzgado Clave Juicio Oral</label>
                                         <input type="text" name="jClaveJO" id="jClaveJO" value="${sessionScope.juzgadoClave}" readonly>
@@ -216,7 +216,7 @@
                                     <select name="juezJO1" id="juezJO1">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC , juzgadoClaveJC, causaClaveJO);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez1)){
@@ -233,7 +233,7 @@
                                     <select name="juezJO2" id="juezJO2">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC, causaClaveJO);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez2)){
@@ -250,7 +250,7 @@
                                     <select name="juezJO3" id="juezJO3">
                                         <option value="">--Seleccione--</option>
                                         <%
-                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC);
+                                            lista = juez.findJuezJO(juzgadoClaveJO, causaClaveJC, juzgadoClaveJC, causaClaveJO);
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
                                                 if(ls[0].equals(juez3)){

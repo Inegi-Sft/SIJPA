@@ -21,6 +21,10 @@ $(document).ready(function() {
                 #alfabetismo, #estudios,#indigena, #familia, #interprete, #hablaesp, #extrangera, #ocupa, #ingresos, #rangoIngresos').val('-2').prop('required', false);
             $('#fnacimientoV').val("1799-09-09").prop({'required': false, 'readonly':false});
             $('#chkFechaNaciV, #fuenteIngre input').prop('checked', false);
+        }else{
+            $('#tvic_moral, #sexoV, #edadVi, #vulnera, #Pnacimiento, #Enacimiento, #Mnacimiento, #naciona, #Preside, #Ereside, #Mreside, #conyugal, #discapacidad, \n\
+                #alfabetismo, #estudios, #indigena, #familia, #interprete, #hablaesp, #ocupa, #ingresos, #extrangera, #mProtect, #mujProtect').val('-2').prop('required', false);
+            $('#fnacimientoV').val("1899-09-09").prop('required', false);
         }
         $("#tipoVictima option[value='" + tipoVi + "']").prop('selected', true);
     }
@@ -248,23 +252,33 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopImmediatePropagation();
         if ($('input[name="deliCometido"]:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Delitos cometidos a la V\u00EDctima');
+            alert('Selecciona al menos una opcion de Delitos cometidos a la Víctima');
             $('#deliCometido').focus();
             return false;
-        }else if ($('.RelaProceChk:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Relacion de la V\u00EDctima con el Procesado');
+        }
+        for(var c = 0; c < $('#tblVictiProce tbody tr').length; c++){
+            if($('input[name="chkRelaProce' + c + '"]:checked').length === 0){
+                alert('Selecciona al menos una opcion de Relacion de la Víctima con el Procesado en la fila ' + (c+1));
+                $('input[name=chkRelaProce' + c + ']').focus();
+            }
+        }
+        if ($('.RelaProceChk:checked').length === 0) {
+            alert('Selecciona al menos una opcion de Relacion de la Víctima con el Procesado');
             $('#chkRelaProce').focus();
             return false;
-        }else if($('#ingresos').val() === '1' && $('input[name="chkIngresos"]:checked').length === 0){
+        }
+        if($('#ingresos').val() === '1' && $('input[name="chkIngresos"]:checked').length === 0){
             alert('Selecciona al menos una opcion de Fuente de Ingresos');
             $('input[name="chkIngresos"]').focus();
             return false;
-        }else if ($('#mProtect').val() === '1' && $('input[name="aplicaMedida"]:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Medidas de Protecci\u00F3n');
+        }
+        if ($('#mProtect').val() === '1' && $('input[name="aplicaMedida"]:checked').length === 0) {
+            alert('Selecciona al menos una opcion de Medidas de Protección');
             $('#mProtect').focus();
             return false;
-        }else if ($('#mujProtect').val() === '1' && $('input[name="aplicaMedidaMuj"]:checked').length === 0) {
-            alert('Selecciona al menos una opcion de Medidas de Protecci\u00F3n contra Mujeres');
+        }
+        if ($('#mujProtect').val() === '1' && $('input[name="aplicaMedidaMuj"]:checked').length === 0) {
+            alert('Selecciona al menos una opcion de Medidas de Protección contra Mujeres');
             $('#mujProtect').focus();
             return false;
         }

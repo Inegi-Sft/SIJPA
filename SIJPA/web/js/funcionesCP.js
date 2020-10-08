@@ -61,22 +61,36 @@ $(document).ready(function () {
         }
     });
     
+    $('#Incausa').change(function(){
+        if($(this).val() === '3'){
+            alertify.alert('Importante', 'Al seleccionar "Mixto" se debe de tener al menos 2 Imputados registrados');
+            $('#Tadolescentes').val('2').attr({'required': true, 'min': 2});
+        }else{
+            $('#Tadolescentes').val('').attr({'required': true, 'min': 0});
+        }
+    });
+    
     $('#compe').change(function (){
         switch ($('#compe').val()) {
             case '1':
-                $('#totalElementos, #totalAudiencias').fadeIn("slow");
-                $('#Tdelitos, #Tadolescentes, #Tvictimas').val('').prop("required", true);
+                $('#totalElementos').fadeIn("slow");
+                if($($('#Incausa')).val() === '3'){
+                    $('#Tadolescentes').val('2').attr({'required': true, 'min': 2});
+                }else{
+                    $('#Tdelitos, #Tvictimas').val('').prop("required", true);
+                }
+                $('#Tadolescentes').val('').prop("required", true);
                 $('#tipoIncopetencia').fadeOut("slow");
                 $('#Tincompe').val('-2').prop('required', false);
                 break;
             case '2':
                 $('#tipoIncopetencia').fadeIn("slow");
                 $('#Tincompe').val('').prop("required", true);
-                $('#totalElementos, #totalAudiencias').fadeOut("slow");
+                $('#totalElementos').fadeOut("slow");
                 $('#Tdelitos, #Tadolescentes, #Tvictimas').val('-2').prop("required", false);
                 break;
             default:
-                $('#totalElementos, #totalAudiencias, #tipoIncopetencia').fadeOut("slow");
+                $('#totalElementos, #tipoIncopetencia').fadeOut("slow");
                 $('#Tdelitos, #Tadolescentes, #Tvictimas, #Tincompe').val('-2').prop("required", false);
                 break;
         }
@@ -113,7 +127,7 @@ $(document).ready(function () {
     });
     
     //Guarda Causa Penal
-    $('#formCausaPenal').submit(function (e) {
+    $('#formCausaPenal').submit(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var resp = confirm("Una vez guardada la Causa Penal no se podra editar,\n"

@@ -70,7 +70,7 @@
         <%--<%@include file="cabecera.jsp"%>--%>
         <section class="contenedor">
             <h2>Causa Penal</h2>
-            <form  method="post" name="formCausaPenal" id="formCausaPenal">
+            <form method="post" name="formCausaPenal" id="formCausaPenal">
                 <fieldset>
                     <legend>Características de la Causa Penal</legend>
                     <table class="tablaFormu">
@@ -164,7 +164,7 @@
                                 <fieldset>
                                     <div>
                                           <label for="Incausa">Integración de la causa penal</label>  
-                                          <select name="Incausa" id="Incausa" class="txtMedia" required>
+                                          <select name="Incausa" id="Incausa" required>
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findICausa();
@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="cols oculto" id="tipoIncopetencia">
                                         <label for="Tincompe">Tipo de incompetencia</label>
-                                        <select name="Tincompe" id="Tincompe" class="txtMedia" >
+                                        <select name="Tincompe" id="Tincompe">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findIncompetencia();
@@ -240,7 +240,7 @@
                     <textarea name="ComentaExpe" id="ComentaExpe"><%=comen%></textarea>
                 </div>
                 <br>
-                <input type="submit" name="guardarExp" id="guardarExp" value="Guardar"> 
+                <input type="submit" name="guardarExp" id="guardarExp" value="Guardar">
             </form>
         </section>
     </body>

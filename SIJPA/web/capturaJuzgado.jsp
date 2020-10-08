@@ -224,7 +224,7 @@
                         <tr>
                             <td>
                                 <label for="ladaTel">Teléfono con lada</label>
-                                <input type="text" class="txtMedia soloNum" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="10"/>
+                                <input type="text" class="txtMedia" name="telJuz" id="telJuz" value="<%=lada%>"  maxlength="10"/>
                             </td>
                             <td>
                                 <label for="correo">Correo del órgano jurisdiccional</label>
@@ -266,6 +266,24 @@
                                                     out.println(" selected ");
                                                 }
                                                 out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                            }
+                                        %>
+                                    </select>
+                                    <label for="municipioJ">Municipio (Para CDMX Demarcación Territorial)</label>
+                                    <select name="municipioJ" id="municipioJ" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            if(entidad.equals("")){
+                                                out.println("<option value = ''>--Seleccione--</option>");
+                                            }else{
+                                                lista = cat.findMunicipios(Integer.parseInt(entidad));
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(entidad)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
                                             }
                                         %>
                                     </select>
@@ -380,8 +398,8 @@
                             </td>
                             <td>
                                 <label for="">No. exterior / No. interior</label>
-                                <input type="text" class="txtSmall soloNum" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
-                                <input type="text" class="txtSmall soloNum" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
+                                <input type="text" class="txtSmall" name="noExterior" id="noExterior" value="<%=numExt%>" maxlength="4"/>
+                                <input type="text" class="txtSmall" name="noInterior" id="noInterior" value="<%=numInt%>" maxlength="4"/>
                             </td>
                         </tr>
                     </table>
@@ -406,7 +424,7 @@
                         <tr>
                             <td>
                                 <label for="Cargo">Cargo del capturador</label>
-                                <input type="text" name="cargo" id="cargo" value="<%=cargoCap%>" required/>
+                                <input type="text" name="cargo" id="cargo" value="<%=cargoCap%>" maxlength="100" required/>
                             </td>
                             <td>
                                 <label for="ejercicio">Ejercicio:</label>

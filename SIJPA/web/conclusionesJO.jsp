@@ -129,7 +129,7 @@
                     </div>
                     <div class="cols oculto" id="dFechaSenten">
                         <label for="fechaSenten">Fecha de lectura y explicación de la sentencia</label>
-                        <input type="date" name="fechaSenten" id="fechaSenten" value="<%=fechaSentencia%>">
+                        <input type="date" name="fechaSenten" id="fechaSenten" value="<%=fechaSentencia%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaSenten" onclick="fechaNoIdent('#chkFechaSenten', '#fechaSenten')">
                             <label>No identificada</label>

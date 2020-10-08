@@ -45,7 +45,7 @@
             String desDelitoNT = "";
             String fechaOcurre = "";
             String sitioOcurre = "";
-            String sitioOE ="";
+            String sitioOE = "";
             String gradoConsuma = "";
             String calificacion = "";
             String clasificacion = "";
@@ -207,7 +207,7 @@
                                     <legend>Sitio de ocurrencia</legend>
                                     <div class="colsx lblExBig">
                                         <label for="sitioO">Sitio de ocurrencia</label>
-                                        <select name="sitioO" id="sitioO" requiered>
+                                        <select name="sitioO" id="sitioO" required>
                                             <option value="">--Seleccione--</option>
                                         <%
                                             lista = cat.findSitioOcurrencia();
@@ -381,7 +381,7 @@
                                         </select>
                                     </div>
                                     <div class="colsA lblExBig">
-                                        <label class="txtLong">Municipio o Demarcación territorial de la Ciudad de México</label>
+                                        <label class="txtLong">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="municipioD" id="municipioD" required>
                                             <%
                                                 if(ocurreEnti.equals("")){

@@ -35,7 +35,7 @@ public class insrtJuzgados extends HttpServlet {
      */
     
     Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
+    String sql,sql2;
     ResultSet rs;
     String juzgadoClave;
     boolean resul;
@@ -100,6 +100,7 @@ public class insrtJuzgados extends HttpServlet {
         String causasBajaJO = verificaVariable(request.getParameter("causasBajaJO"));
         
         juzgadoClave = entidadJ + "-" + municipioJ + "-" + numOrgano;
+        System.out.println("La entidad es: "+juzgadoClave);
           
         try {
             conn.Conectar();
@@ -164,25 +165,33 @@ public class insrtJuzgados extends HttpServlet {
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                     //Validamos la funcion del organo para saber en donde actualizarlo
-                    if(funcionJuz.equals("1") || funcionJuz.equals("3")){//Control o Mixto
-                        sql = "UPDATE DATOS_INFORME_ADOJC SET CAUSAS_PENALES_INGRESADAS = " + causasIngresaJC + ","
-                                + "MEDIDAS_PROTECCION_ASIG = " + mediProteccionJC + ",PROVIDENCIAS_PRECAUTORIAS = " + providenPrecautoJC + ","
-                                + "PRUEBA_ANTICIPADA = " + pruebaAntiJC + ",ORDENES_JUDICIALES = " + ordenesJudiJC + ","
-                                + "ACTOS_INVESTIGA = " + actosInvestigaJC + ",IMPUGNACION_MP = " + impugnaMpJC + ",OTROS = " + otrosJC + ","
-                                + "CAUSAS_TRAMITE = " + causasTramJC + ",CAUSAS_BAJAS = " + causasBajaJC + " "
-                                + "WHERE JUZGADO_CLAVE = '" + jClaveR + "';";
+                    if(funcionJuz.equals("1")){//Control
+                        sql2 = "DELETE FROM DATOS_INFORME_ADOJO WHERE JUZGADO_CLAVE='"+jClaveR+"'";
+                        sql = "REPLACE INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                                + causasIngresaJC + "," + mediProteccionJC + "," + providenPrecautoJC + "," + pruebaAntiJC + "," + ordenesJudiJC + ","
+                                + actosInvestigaJC + "," + impugnaMpJC + "," + otrosJC + "," + causasTramJC + ","+ causasBajaJC + ",(select YEAR(NOW()))"
+                                + ")";
                         System.out.println(sql);
                     }
-                    if(funcionJuz.equals("2") || funcionJuz.equals("3")){//Enjuiciamiento o Mixto
-                        sql = "UPDATE DATOS_INFORME_ADOJC SET CAUSAS_PENALES_INGRESADAS = " + causasIngresaJO + ","
-                                + "MEDIDAS_PROTECCION_ASIG = " + mediProteccionJO + ",PROVIDENCIAS_PRECAUTORIAS = " + providenPrecautoJO + ","
-                                + "PRUEBA_ANTICIPADA = " + pruebaAntiJO + ",ORDENES_JUDICIALES = " + ordenesJudiJO + ","
-                                + "ACTOS_INVESTIGA = " + actosInvestigaJO + ",IMPUGNACION_MP = " + impugnaMpJO + ",OTROS = " + otrosJO + ","
-                                + "CAUSAS_TRAMITE = " + causasTramJO + ",CAUSAS_BAJAS = " + causasBajaJO + " "
-                                + "WHERE JUZGADO_CLAVE = '" + jClaveR + "';";
+                    if(funcionJuz.equals("2")){//Enjuiciamiento
+                        sql2 = "DELETE FROM DATOS_INFORME_ADOJC WHERE JUZGADO_CLAVE='"+jClaveR+"'";
+                        sql =  "REPLACE INTO DATOS_INFORME_ADOJO VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                                + causasIngresaJO + "," + mediProteccionJO + "," + providenPrecautoJO + "," + pruebaAntiJO + "," + ordenesJudiJO + ","
+                                + actosInvestigaJO + "," + impugnaMpJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
+                                + ")";
                         System.out.println(sql);
                     }
-                    if(conn.escribir(sql)){
+                    if(funcionJuz.equals("3")){ //Mixto
+                        sql = "REPLACE INTO DATOS_INFORME_ADOJC VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                                + causasIngresaJC + "," + mediProteccionJC + "," + providenPrecautoJC + "," + pruebaAntiJC + "," + ordenesJudiJC + ","
+                                + actosInvestigaJC + "," + impugnaMpJC + "," + otrosJC + "," + causasTramJC + ","+ causasBajaJC + ",(select YEAR(NOW()))"
+                                + ")";
+                        sql2 = "REPLACE INTO DATOS_INFORME_ADOJO VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
+                                + causasIngresaJO + "," + mediProteccionJO + "," + providenPrecautoJO + "," + pruebaAntiJO + "," + ordenesJudiJO + ","
+                                + actosInvestigaJO + "," + impugnaMpJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
+                                + ")";
+                    }
+                    if(conn.escribir(sql) && conn.escribir(sql2)){
                         conn.close();
                         response.sendRedirect("juzgados.jsp?insert=101");
                     }else{

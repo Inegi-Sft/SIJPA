@@ -4,6 +4,8 @@
     Author     : JONATHAN.AGUIRRE
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,6 +29,9 @@
                 <!--enctype ="multipart/form-data"-->
                 <table  class="tablaFormu">
                     <%
+                        usuario tabla = new usuario();
+                        ArrayList<String[]> listaTablas;
+                        listaTablas= tabla.getTables();
                                 if((Integer)session.getAttribute("tipoUsuario") == 1){
                                     out.println("<tr>");
                                     out.println("<td>");
@@ -41,7 +46,17 @@
                                     out.println("<select name='tipoArchivo' id='tipoArchivo'>");
                                     out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
                                     out.println("</select>");
-                                    out.println("</td>");        
+                                    out.println("</td>");
+                                    out.println("<td>");
+                                    out.println("<div class='colsx oculto' id='EspecifiqueTabla'>");
+                                    out.println("<label for='tabla'>Tabla:</label>");
+                                    out.println("<select name='tabla' id='tabla'>");
+                                    out.println("<option value='' >Seleccione</option>");
+                                    for (String[] ls : listaTablas) {
+                                        out.println("<option value='" + ls[0] + "'>"+ls[0]+"</option>");
+                                    }
+                                    out.println("</select>");
+                                    out.println("</td>");
                                     out.println("</tr>");
                                 }else{
                                 out.println("<tr>");
@@ -68,7 +83,7 @@
                     <tr>
                         <%
                             if((Integer)session.getAttribute("tipoUsuario") == 1){
-                                out.println("<td colspan = '2'>");
+                                out.println("<td colspan = '3'>");
                                 out.println("<center>");
                             }else{
                                 out.println("<td>");

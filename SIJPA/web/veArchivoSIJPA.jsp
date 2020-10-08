@@ -3,6 +3,8 @@
     Created on : 7/09/2020, 05:15:00 PM
     Author     : JONATHAN.AGUIRRE
 --%>
+<%@page import="java.nio.file.FileSystems"%>
+<%@page import="java.nio.file.Path"%>
 <%@page import="org.apache.jasper.JasperException"%>
 <%@page import="java.nio.file.Paths"%>
 <%@page import="java.nio.file.Files"%>
@@ -32,8 +34,10 @@
                     String[] url_dividido;
                     url = request.getHeader("Referer").toString();
                     url_dividido = url.split("/");
-                    String ruta = "..\\..\\inegi_conf\\Archivos\\";
                     if(url_dividido[url_dividido.length - 1].equalsIgnoreCase("importarBD.jsp")){
+                        Path ruta_absoluta = FileSystems.getDefault().getPath(".").toAbsolutePath();
+                        String[] ruta_dividida = ruta_absoluta.toString().split(":");
+                        String ruta = ruta_dividida[0]+":\\xampp\\inegi_conf\\Archivos\\";
                         List<String> archivo_sql = Files.readAllLines(Paths.get(ruta+"archivo_descifrado.sijpa"));
                         for (String linea : archivo_sql){
                             out.println(linea.replace("),", "),<br/>"));
@@ -45,6 +49,7 @@
                         out.println("No tienes acceso a este apartado.");
                     }
                 }catch (Exception ex){
+                    ex.printStackTrace();
                     out.println("Consulta al administrador para ver este apartado.");
                 }
             %>

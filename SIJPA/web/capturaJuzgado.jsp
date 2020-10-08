@@ -254,40 +254,44 @@
                     <table  class="tablaFormu">
                         <tr>
                             <td>
-                                <label for="entidadJ">Entidad federativa</label>
-                                <select name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        lista = cat.findEntidades();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'");
-                                            if(ls[0].equals(entidad)){
-                                                out.println(" selected ");
-                                            }
-                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="municipioJ">Municipio o Demarcación Territorial de la CDMX</label>
-                                <select name="municipioJ" id="municipioJ" required>
-                                    <option value="">--Seleccione--</option>
-                                    <%
-                                        if(entidad.equals("")){
-                                            out.println("<option value = ''>--Seleccione--</option>");
-                                        }else{
-                                            lista = cat.findMunicipios(Integer.parseInt(entidad));
+                                <div class="colsx oculto" id="DivEntidad">
+                                    <label for="entidadJ">Entidad federativa</label>
+                                    <select name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            lista = cat.findEntidades();
                                             for (String[] ls : lista) {
                                                 out.println("<option value='" + ls[0] + "'");
-                                                if(ls[0].equals(municipio)){
+                                                if(ls[0].equals(entidad)){
                                                     out.println(" selected ");
                                                 }
-                                                out.println(">" + ls[1] + "</option>");
+                                                out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                             }
-                                        }
-                                   %>
-                                </select>
+                                        %>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="colsx oculto" id="DivMunicipio">
+                                    <label for="municipioJ">Municipio o Demarcación Territorial de la CDMX</label>
+                                    <select name="municipioJ" id="municipioJ" required>
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            if(entidad.equals("")){
+                                                out.println("<option value = ''>--Seleccione--</option>");
+                                            }else{
+                                                lista = cat.findMunicipios(Integer.parseInt(entidad));
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(municipio)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[1] + "</option>");
+                                                }
+                                            }
+                                        %>
+                                    </select>
+                                </div>
                             </td>
                         </tr>
                         <tr>

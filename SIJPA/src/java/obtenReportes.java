@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 
+import clasesAuxiliar.catalogos;
 import clasesAuxiliar.showJuzgados;
 import clasesAuxiliar.showReportes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -35,71 +37,27 @@ public class obtenReportes extends HttpServlet {
      */
     
     ArrayList<String> lista;
-    ArrayList<String[]> listas;
+    ArrayList<String[]> listas, desReporte;
             
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //Diferente de null quiere decir que envio el formulario entonces hacemos las consultas
+            //Diferente de null(vacio o con dato) quiere decir que envio el formulario entonces hacemos las consultas
             if(request.getParameter("juzReporClave") != null){
+                catalogos cat = new catalogos();
                 showReportes sRepor = new showReportes();
                 if(request.getParameter("juzReporClave").equals("")){//Si juzgado viene vacio entonces hacemos consulta general por sistema
                     listas = sRepor.findReportesGral(request.getParameter("sisRepor"));
                 }else{//Si juzgado viene lleno entonces hacemos consulta por sistema y por juzgado
                     listas = sRepor.findReportesJuz(request.getParameter("sisRepor"), request.getParameter("juzReporClave"));
                 }
-                for(String []lis : listas){
+                //Traemos las descripciones de los catalogos para los reportes
+                desReporte = cat.findReportes();
+                System.out.println("size: " + desReporte.size());
+                for(int x = 0; x < desReporte.size(); x++){
                     out.println("<tr>");
-                    out.println("<td>1</td><td>Total de Causas Penales Ingresadas atendidas</td><td>" + lis[0] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>2</td><td>Total de Delitos en las Causas Penales Ingresadas atendidas</td><td>" + lis[1] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>3</td><td>Delitos Consumados</td><td>" + lis[2] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>4</td><td>Delitos en Grado de Tentativa</td><td>" + lis[3] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>5</td><td>Delitos con Grado de Consumación No Identificado</td><td>" + lis[4] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>6</td><td>Total de Victimas en las Causas Penales Ingresadas atendidas</td><td>" + lis[5] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>7</td><td>Victimas personas fisicas Hombres</td><td>" + lis[6] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>8</td><td>Victimas personas fisicas Mujeres</td><td>" + lis[7] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>9</td><td>Victimas personas fisicas No Identificadas</td><td>" + lis[8] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>10</td><td>Victimas personas morales</td><td>" + lis[9] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>11</td><td>Victimas sociedad en</td><td>" + lis[10] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>12</td><td>Victimas estado</td><td>" + lis[11] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>13</td><td>Victimas otro</td><td>" + lis[12] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>14</td><td>Victimas No Identificadas</td><td>" + lis[13] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>15</td><td>Total de Procesados en las Causas Penales Ingresadas</td><td>" + lis[14] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>16</td><td>Procesados Concluidos en el año</td><td>" + lis[15] + "</td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>17</td><td>Procesados en Tramite en el año</td><td>" + lis[16] + "</td>");
+                    out.println("<td>" + desReporte.get(x)[0] + "</td><td>" + desReporte.get(x)[1] + "</td><td>" + listas.get(0)[x] + "</td>");
                     out.println("</tr>");
                 }
             }else if(request.getParameter("sisRepor") != null){//Si el sistema viene diferente de null entonces nada mas llenamos los juzgados

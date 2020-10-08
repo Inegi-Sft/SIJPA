@@ -12,6 +12,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Exporta BD</title>
         <%@include file="librerias.jsp" %>
+        <!--<script>
+            $.ajax({
+                    type: "POST",
+                    url: your uri,
+                    beforeSend: function(){$("#divWithLoadingGif").show();},
+                    complete: function(){$("divWithLoadingGif").hide();}
+}
+
+            
+        </script>-->
     </head>
     <body>
         <div class="load"></div>

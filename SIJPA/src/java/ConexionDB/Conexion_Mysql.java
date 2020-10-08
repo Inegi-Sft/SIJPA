@@ -6,10 +6,13 @@
 package ConexionDB;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,7 +66,7 @@ public class Conexion_Mysql {
             return false; 
         }         
         return true; 
-    } 
+    }
     
     public ResultSet consultar(String sql) {
         ResultSet rst;
@@ -81,5 +84,39 @@ public class Conexion_Mysql {
     public void close() throws SQLException{
         //System.out.println("Conexion oracle Cerrada");
         conexion.close();
+    }
+    
+    public ResultSet consultarTablas(){
+        ResultSet rst = null;
+        try {
+            DatabaseMetaData metadatos_base = getConexion().getMetaData();
+            String[] types = {"TABLE"};
+            rst = metadatos_base.getTables(null, null, "%", types);   
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion_Mysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rst;
+    }
+    
+    public ArrayList<String[]> obtenerColumnasDeTabla(String tabla){
+        Conectar();
+        ResultSet rst = null;
+         ArrayList<String[]> encabezado = new ArrayList<>();
+        try {
+            Statement sentencia; 
+            sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            rst = sentencia.executeQuery("SELECT * FROM "+tabla);
+            ResultSetMetaData metadatos = rst.getMetaData();
+            int numero_columna = metadatos.getColumnCount();
+            for (int i=1; i<=numero_columna; i++) {
+                encabezado.add(new String[]{
+                        metadatos.getColumnName(i).toUpperCase()
+                    });
+            }
+            close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion_Mysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return encabezado;
     }
 }

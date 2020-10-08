@@ -9,6 +9,9 @@ import java.io.PrintWriter;
 import java.io.*;
 import clasesAuxiliar.ArchivoSIJPA;
 import clasesAuxiliar.LeeSIJPA;
+import clasesAuxiliar.manejaCSV;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,8 +33,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(urlPatterns = {"/importaBD"})
 public class importaBD extends HttpServlet {
-
-    private final String RUTA = "..\\..\\inegi_conf\\Archivos\\";
+    Path ruta_absoluta = FileSystems.getDefault().getPath(".").toAbsolutePath();
+    private final String[] ruta_dividida = ruta_absoluta.toString().split(":");
+    private final String RUTA = ruta_dividida[0]+":\\xampp\\inegi_conf\\Archivos\\";
+    //private final String RUTA = "..\\..\\inegi_conf\\Archivos\\";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,7 +53,6 @@ public class importaBD extends HttpServlet {
             throws ServletException, IOException, Exception {
         System.out.println("funcion");
         PrintWriter out = response.getWriter();
-        ArchivoSIJPA mi_archivoSIJPA = new ArchivoSIJPA();
         response.setContentType("text/html;charset=UTF-8");
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -56,6 +60,7 @@ public class importaBD extends HttpServlet {
         Iterator iter = items.iterator();
         File file;
         String operacion = "";
+        String tabla = "";
         while (iter.hasNext()) {
             FileItem item = (FileItem) iter.next();
 
@@ -66,11 +71,13 @@ public class importaBD extends HttpServlet {
                 if (name.equalsIgnoreCase("tipo_operacion")) {
                     operacion = value;
                 }
+                if(name.equalsIgnoreCase("tabla")){
+                    tabla = value;
+                }
 
             } else {
                 String fieldName = item.getFieldName();
                 String fileName = item.getName();
-                System.out.println("el archivo es: " + fileName);
                 if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
                     if (fileName.lastIndexOf("\\") >= 0) {
                         file = new File(RUTA + fileName.substring(fileName.lastIndexOf("\\")));
@@ -80,25 +87,55 @@ public class importaBD extends HttpServlet {
                     item.write(file);
                 }
                 if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
-                    mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
-                    File archivo_borrar1 = new File(RUTA+fileName);
-                    archivo_borrar1.delete();
+                    ArchivoSIJPA mi_archivoSIJPA = new ArchivoSIJPA();
                     if (operacion.equalsIgnoreCase("importar")) {
                         if(fileName.endsWith(".sijpa") == true){
-                            LeeSIJPA leeSijpa = new LeeSIJPA();
-                            leeSijpa.ejecutaScript(RUTA + "archivo_descifrado.sijpa");
-                            File archivo_borrar2 = new File(RUTA + "archivo_descifrado.sijpa");
-                            archivo_borrar2.delete();
-                            System.out.println("acabó");
-                            out.write("1");
+                            try{
+                                mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
+                                File archivo_borrar1 = new File(RUTA+fileName);
+                                archivo_borrar1.delete();
+                                LeeSIJPA leeSijpa = new LeeSIJPA();
+                                leeSijpa.ejecutaScript(RUTA + "archivo_descifrado.sijpa");
+                                File archivo_borrar2 = new File(RUTA + "archivo_descifrado.sijpa");
+                                archivo_borrar2.delete();
+                                System.out.println("acabó");
+                                out.write("1");
+                            }catch(Exception e){
+                                File archivo_borrar1 = new File(RUTA+fileName);
+                                archivo_borrar1.delete();
+                                Logger.getLogger(manejaCSV.class.getName()).log(Level.SEVERE, null, e);
+                                out.write("6");
+                            }
                         }else{
-                            if(fileName.indexOf("ADOJC") > -1 || fileName.indexOf("ADOJC") > -1){
-                        
-                            }else{
-                                out.write("3");
+                            if(tabla.length() < 1){
+                                out.write("4");
+                            }
+                            else{
+                                if(manejaCSV.validaArchivoVacio(RUTA+fileName)){
+                                    out.write("6");
+                                }else{
+                                    manejaCSV lee_csv = new manejaCSV(RUTA+fileName, tabla);
+                                    if(lee_csv.encabezadosCorrectos()){
+                                        if(lee_csv.importaCSV() == true){
+                                            lee_csv.cerrarArchivo();
+                                            File archivo_borrar1 = new File(RUTA+fileName);
+                                            archivo_borrar1.delete();
+                                            out.write("1");
+                                        }else{
+                                            File archivo_borrar1 = new File(RUTA+fileName);
+                                            archivo_borrar1.delete();
+                                            out.write("5");
+                                        }
+                                    }else{
+                                        out.write("3");
+                                    }
+                                }
                             }
                         }
                     } else {
+                        mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
+                        File archivo_borrar1 = new File(RUTA+fileName);
+                        archivo_borrar1.delete();
                         out.write("2");
                     }
                 } else {
@@ -106,10 +143,6 @@ public class importaBD extends HttpServlet {
                 }
             }
         }
-
-        /*mi_archivoSIJPA.extraeArchivo(RUTA+"BD_aaaa.sijpa", RUTA);
-            LeeSIJPA leeSijpa = new LeeSIJPA();
-            leeSijpa.ejecutaScript("respaldo.sijpa");*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -6,8 +6,13 @@
 $(document).ready(function() {
     //para recuperacion de bd
     if($('#numOrgano').val() !== ''){
-        $('#numOrgano, #entidadJ, #municipioJ').prop('disabled', true);
+        $('#numOrgano').prop('readonly', true);
     }
+    if($('#numOrgano').val() === ''){
+        $('#DivMunicipio').show();
+        $('#DivEntidad').show();
+    }
+        
     
     //para recuperacion de bd
     if($('#fDivision').val() === '1'){

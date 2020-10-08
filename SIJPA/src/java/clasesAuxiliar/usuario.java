@@ -301,4 +301,21 @@ public class usuario {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public ArrayList<String[]> getTables(){
+        conn.Conectar();
+        listaTabla = new ArrayList<>();
+        rs = conn.consultarTablas();
+        try {
+            while(rs.next()){
+                if(rs.getString("TABLE_NAME").startsWith("datos")){
+                    listaTabla.add(new String[]{
+                        rs.getString("TABLE_NAME").toUpperCase()
+                    });
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaTabla;
+    }
 }

@@ -125,7 +125,6 @@ public class showReportes {
                         + "AND TR.PROCESADO_CLAVE NOT IN(SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC)"
                         + ") AS PRTR"
                         + ";";
-                System.out.println(sql);
             }else{//Reportes para Juicio Oral
                 sql = "SELECT CP.TCPIN, DE.TDI, DECO.DC, DET.DEGT, DENI.DECNI, VI.TVI, VIH.VH, VIM.VM, VIFNI.VFNI, VIPM.VPM, VIS.VS, "
                         + "VIE.VE, VIO.VO, VINI.VNI, PR.TPI, PRCO.PCO, PRTR.PTR FROM "

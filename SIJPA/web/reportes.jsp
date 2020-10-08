@@ -29,7 +29,7 @@
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>REPORTES</h1>
-            <form method="post" name="formReportes" id="formReportes">
+            <form action="exportaReportes" method="post" name="exportaReportes" id="exportaReportes">
                 <%--//Si es un super administrador le mostramos el campos de Entidad para poder filtrarlo
                     if((Integer)sesion.getAttribute("tipoUsuario") <= 100){
                         out.println("<div class='cols'>");
@@ -59,21 +59,22 @@
                     </select>
                 </div>
                 <br>
-                <input type="submit" name="generaRepor" id="generaRepor" value="Generar">
+                <input type="button" name="generaRepor" id="generaRepor" value="Generar">
+                <p id="descSistema" style="font-weight: bold">Sistema: </p>
+                <table class="tablasRegis" id="tblReportes">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Descripción Reporte</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <input type="submit" id="btnReporExcel" name="btnReporExcel" class="oculto" value="Excel">
             </form>
-            <p id="descSistema" style="font-weight: bold">Sistema: </p>
-            <table class="tablasRegis" id="tblReportes">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Descripción Reporte</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
         </section>
     </body>
 </html>

@@ -119,7 +119,7 @@ public class showJuzgados {
             if(funJuzgado == 1){
                 sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '"+juzgado+"'";
             }else{
-                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '"+juzgado+"'";
+                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJO = '"+juzgado+"'";
             }
             rs = conn.consultar(sql);
             while (rs.next()) {

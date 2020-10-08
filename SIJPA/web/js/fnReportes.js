@@ -5,6 +5,7 @@
  */
 
 $(document).ready(function () {
+    //llenamos el campo del juzgado dependiendo del sistema
     $('#sisRepor').change(function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -22,15 +23,23 @@ $(document).ready(function () {
     });
     
     //Generamos los reportes
-    $('#formReportes').submit(function(e){
+    $('#generaRepor').click(function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
         $('#descSistema').empty();
         $('#tblReportes tbody').empty();
+        if($('#sisRepor').val() === ""){
+            alert('Debes de seleccionar el Sistema para poder generar los reportes');
+            $('#sisRepor').focus();
+            return false;
+        }
         $.ajax({
             type: 'post',
             url: 'obtenReportes',
-            data: $('#formReportes').serialize(),
+            data: {
+                sisRepor : $('#sisRepor').val(),
+                juzReporClave : $('#juzReporClave').val()
+            },
             success: function (response) {
                 console.log("Respuesta del servidor Reportes: ", response);
                 var sistem;
@@ -41,7 +50,28 @@ $(document).ready(function () {
                 }
                 $('#descSistema').append('Sistema: ' + sistem);
                 $('#tblReportes tbody').append(response);
+                $('#btnReporExcel').show();
             }
         });
     });
+    
+//    //Exportamos los reportes a excel
+//    $('#btnReporExcel').click(function(e){
+//        e.preventDefault();
+//        e.stopImmediatePropagation();
+//        var confirma = confirm('Seguro desea exportar los datos a Excel');
+//        if(confirma){
+//            $.ajax({
+//                type: 'post',
+//                contentType: "application/vnd.ms-excel",
+//                url: 'exportaReportes',
+//                data: $('#formReportes').serialize(),
+//                success: function (response, status, xhr) {
+//                    console.log("Respuesta del servidor exporta Reportes: ", response);
+//                    console.log("type: ", xhr.getResponseHeader("Content-Type"));
+//
+//                }
+//            });
+//        }
+//    });
 });

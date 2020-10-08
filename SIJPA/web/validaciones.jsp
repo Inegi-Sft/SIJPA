@@ -15,22 +15,22 @@
         <%@include file="librerias.jsp"%>
         <script type="text/javascript" src="js/fnValidaciones.js"></script>
         <%
-            showValidaciones sV=new showValidaciones();
+            showValidaciones sV = new showValidaciones();
             ArrayList<String[]> lista;
-            int i=0;
-            String sistema="";
+            int i = 0;
+            String sistema = "";
             if (request.getParameter("validaSistema") != null) {
                 sistema = request.getParameter("validaSistema");
             }
-            
+
         %>
     </head>
     <body>
-    <%
-        if (!sistema.equals("")) {
-            out.println("<div class='load'></div>");
-        } 
-    %>
+        <%        
+            if (!sistema.equals("")) {
+                out.println("<div class='load'></div>");
+            }
+        %>
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
@@ -48,73 +48,75 @@
                 <input type="hidden" id="sistema" value="<%=sistema%>">
                 <br>
                 <input type="submit" name="validar" id="validar" value="Validar"/>
-            </form>
-    <%
-        if (!sistema.equals("")) {
-            if(sistema.equals("JC"))
-                out.print("<h3>Resultado: Validación Juzgado de Control</h3>");
-            else
-                out.print("<h3>Resultado: Validación Juicio Oral</h3>");
-    %>
-            <div id="validacionOK">
-                <h2>Datos Correctos</h2>
-                <img src="img/success.png" style="width: 100px" />
-                <h2>Información Sin Errores!</h2>
-            </div>
-            <table id="tblValidacion" class="tablasRegis">
-                <tr>
-                    <th width="25%">Sección</th>
-                    <th>Descripción</th>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnIF" value="Imputados_Faltantes" onclick="openValidacion('#v1')"/></td>
-                    <td>Se muestran los expedientes en los cuales el Total de imputados  indicado en el expediente no coincide con el número de imputados desagregados.  Se requiere registrar los imputados faltantes o bien verificar el total de  imputados registrado por expediente.</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnDF" value="Delitos_Faltantes" onclick="openValidacion('#v2')"</td>
-                    <td>Se muestran los expedientes en los cuales el Total de delitos indicado en el expediente no coincide con el número de delitos desagregados. Se requiere registrar los delitos faltantes o bien verificar el total de  delitos registrado por expediente.</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnVF" value="Victimas_Faltantes" onclick="openValidacion('#v3')"/></td>
-                    <td>Se muestran los expedientes en los cuales el Total de víctimas  indicado en el expediente no coincide con el número de víctimas desagregadas. Se requiere registrar las víctimas faltantes o bien verificar el total de  víctimas registrado por expediente.</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnIFCT" value="Imputados_Faltan_C_o_T" onclick="openValidacion('#v4')"/></td>
-                    <td>Se muestran los imputados que no fueron registrados en Conclusiones o Trámite. Se requiere registrar en  Conclusiones o Trámite a cada imputado.</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnVD" value="Victima_Delitos" onclick="openValidacion('#v5')"/></td>
-                    <td>Se muestran las víctimas que no tienen delitos asignados, es decir;indica que no se les cometió ningun delito. Se requiere verificar y en su caso asignar el delito que le fue cometido a la víctima.</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnID" value="Imputado_Delitos" onclick="openValidacion('#v6')"/></td>
-                    <td>Se muestran los imputados a los cuales no se les asigno ningun delito,es decir;indica que  el imputado no cometio ningun delito. Se requiere verificar y en su caso asignar el delito que fue cometido por el imputado.</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnFIngre" value="Fecha_Ingreso" onclick="openValidacion('#v7')"/></td>
-                    <td>La fecha de ingreso no debe  de ser mayor a la fecha actual</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnFO" value="Fecha_Ocurrencia" onclick="openValidacion('#v8')"/></td>
-                    <td>La fecha de Ocurrencia no debe de ser mayor a la fecha_ingreso</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnFC" value="Fecha_Conclusion" onclick="openValidacion('#v9')"/></td>
-                    <td>La fecha de conclusión debe de ser mayor  a la fecha de ingreso</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnFT" value="Fecha_Tramite" onclick="openValidacion('#v10')"/></td>
-                    <td>La fecha de tramite debe de ser mayor  a la fecha de ingreso</td>
-                </tr>
-                <tr>
-                    <td><input type="button" id="btnFImpug" value="Fecha_Impugnacion" onclick="openValidacion('#v11')"/></td>
-                    <td>La fecha de Impuganación debe de ser mayor o igual  a la fecha de conclusión</td>
-                </tr>
-            </table>
-            <br>
-    <%
-        }
-    %>    
+        <%
+            if (!sistema.equals("")) {
+                if (sistema.equals("JC")) {
+                    out.print("<h3>Resultado: Validación Juzgado de Control</h3>");
+                } else {
+                    out.print("<h3>Resultado: Validación Juicio Oral</h3>");
+                }
+        %>
+                <div id="validacionOK">
+                    <h2>Datos Correctos</h2>
+                    <img src="img/success.png" style="width: 100px" />
+                    <h2>Información Sin Errores!</h2>
+                </div>
+                <table id="tblValidacion" class="tablasRegis">
+                    <tr>
+                        <th width="25%">Sección</th>
+                        <th>Descripción</th>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnIF" value="Imputados_Faltantes" onclick="openValidacion('#v1')"/></td>
+                        <td>Se muestran los expedientes en los cuales el Total de imputados  indicado en el expediente no coincide con el número de imputados desagregados.  Se requiere registrar los imputados faltantes o bien verificar el total de  imputados registrado por expediente.</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnDF" value="Delitos_Faltantes" onclick="openValidacion('#v2')"</td>
+                        <td>Se muestran los expedientes en los cuales el Total de delitos indicado en el expediente no coincide con el número de delitos desagregados. Se requiere registrar los delitos faltantes o bien verificar el total de  delitos registrado por expediente.</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnVF" value="Victimas_Faltantes" onclick="openValidacion('#v3')"/></td>
+                        <td>Se muestran los expedientes en los cuales el Total de víctimas  indicado en el expediente no coincide con el número de víctimas desagregadas. Se requiere registrar las víctimas faltantes o bien verificar el total de  víctimas registrado por expediente.</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnIFCT" value="Imputados_Faltan_C_o_T" onclick="openValidacion('#v4')"/></td>
+                        <td>Se muestran los imputados que no fueron registrados en Conclusiones o Trámite. Se requiere registrar en  Conclusiones o Trámite a cada imputado.</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnVD" value="Victima_Delitos" onclick="openValidacion('#v5')"/></td>
+                        <td>Se muestran las víctimas que no tienen delitos asignados, es decir;indica que no se les cometió ningun delito. Se requiere verificar y en su caso asignar el delito que le fue cometido a la víctima.</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnID" value="Imputado_Delitos" onclick="openValidacion('#v6')"/></td>
+                        <td>Se muestran los imputados a los cuales no se les asigno ningun delito,es decir;indica que  el imputado no cometio ningun delito. Se requiere verificar y en su caso asignar el delito que fue cometido por el imputado.</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnFIngre" value="Fecha_Ingreso" onclick="openValidacion('#v7')"/></td>
+                        <td>La fecha de ingreso no debe  de ser mayor a la fecha actual</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnFO" value="Fecha_Ocurrencia" onclick="openValidacion('#v8')"/></td>
+                        <td>La fecha de Ocurrencia no debe de ser mayor a la fecha_ingreso</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnFC" value="Fecha_Conclusion" onclick="openValidacion('#v9')"/></td>
+                        <td>La fecha de conclusión debe de ser mayor  a la fecha de ingreso</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnFT" value="Fecha_Tramite" onclick="openValidacion('#v10')"/></td>
+                        <td>La fecha de tramite debe de ser mayor  a la fecha de ingreso</td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="btnFImpug" value="Fecha_Impugnacion" onclick="openValidacion('#v11')"/></td>
+                        <td>La fecha de Impuganación debe de ser mayor o igual  a la fecha de conclusión</td>
+                    </tr>
+                </table>
+                <br>
+                <input type="button" name="btnExportExcel" id="btnExportExcel" value="Exportar xlsx" onclick="exportar();"/>
+            </form>     
+        <%
+            }
+        %>    
             <div id="v1" class="pValidacion oculto">
                 <h2><%=sistema%>: Imputados Faltantes</h2>
                 <table id="impFaltantes" class="tablasRegis">
@@ -128,22 +130,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Imputados_Faltantes(sistema);
-                        i=1;
+                        lista = sV.Imputados_Faltantes(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
-                            out.println("<td>"+ls[3]+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
+                            out.println("<td>" + ls[3] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
@@ -160,22 +162,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Delitos_Faltantes(sistema);
-                        i=1;
+                        lista = sV.Delitos_Faltantes(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
-                            out.println("<td>"+ls[3]+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
+                            out.println("<td>" + ls[3] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
@@ -192,22 +194,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Victimas_Faltantes(sistema);
-                        i=1;
+                        lista = sV.Victimas_Faltantes(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
-                            out.println("<td>"+ls[3]+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
+                            out.println("<td>" + ls[3] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
@@ -223,21 +225,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Imputados_Faltan_C_o_T(sistema);
-                        i=1;
+                        lista = sV.Imputados_Faltan_C_o_T(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2].replace(ls[0].replace("-", ""),"")+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
@@ -254,21 +256,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Victima_Delito(sistema);
-                        i=1;
+                        lista = sV.Victima_Delito(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2].replace(ls[0].replace("-", ""),"")+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
@@ -285,26 +287,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Imputado_Delito(sistema);
-                        i=1;
+                        lista = sV.Imputado_Delito(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2].replace(ls[0].replace("-", ""),"")+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
             <div id="v7" class="pValidacion oculto">
-               <h2><%=sistema%>: Fecha Ingreso</h2>
+                <h2><%=sistema%>: Fecha Ingreso</h2>
                 <h5>La Fecha de Ingreso no debe  de ser mayor a la fecha actual</h5>
                 <table id="fechaIngreso" class="tablasRegis">
                     <thead>
@@ -316,21 +318,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Fecha_Ingreso(sistema);
-                        i=1;
+                        lista = sV.Fecha_Ingreso(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table> 
             </div>
@@ -348,22 +350,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Fecha_Ocurrencia(sistema);
-                        i=1;
+                        lista = sV.Fecha_Ocurrencia(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
-                            out.println("<td>"+ls[3]+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
+                            out.println("<td>" + ls[3] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table> 
             </div>
@@ -381,22 +383,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Fecha_Conclusion(sistema);
-                        i=1;
+                        lista = sV.Fecha_Conclusion(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
-                            out.println("<td>"+ls[3]+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
+                            out.println("<td>" + ls[3] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
@@ -414,59 +416,59 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                <%
                     if (!sistema.equals("")) {
-                        lista=sV.Fecha_Tramite(sistema);
-                        i=1;
+                        lista = sV.Fecha_Tramite(sistema);
+                        i = 1;
                         for (String[] ls : lista) {
                             out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
-                            out.println("<td>"+ls[3]+"</td>");
+                            out.println("<td>" + i + "</td>");
+                            out.println("<td>" + ls[0] + "</td>");
+                            out.println("<td>" + ls[1] + "</td>");
+                            out.println("<td>" + ls[2] + "</td>");
+                            out.println("<td>" + ls[3] + "</td>");
                             out.println("</tr>");
                             i++;
                         }
                     }
-                    %>
+                %>
                     </tbody>
                 </table>
             </div>
-            </div>
-            <div id="v11" class="pValidacion oculto">
-                <h2><%=sistema%>: Fecha Impugnación</h2>
-                <h5>La fecha de Impuganación debe de ser mayor o igual  a la fecha de conclusión::</h5>
-                <table id="fechaImpugnacion" class="tablasRegis">
-                    <thead>
-                        <tr>
-                            <th class="no">No.</th>
-                            <th>Juzgado Clave</th>
-                            <th>Imputado Clave</th>
-                            <th>Fecha Impuganación</th>
-                            <th>Fecha Conclusión</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <%
-                    if (!sistema.equals("")) {
-                        lista=sV.Fecha_Impugnacion(sistema);
-                        i=1;
-                        for (String[] ls : lista) {
-                            out.println("<tr>");
-                            out.println("<td>"+i+"</td>");
-                            out.println("<td>"+ls[0]+"</td>");
-                            out.println("<td>"+ls[1].replace(ls[0].replace("-", ""),"")+"</td>");
-                            out.println("<td>"+ls[2]+"</td>");
-                            out.println("<td>"+ls[3]+"</td>");
-                            out.println("</tr>");
-                            i++;
-                        }
+        </div>
+        <div id="v11" class="pValidacion oculto">
+            <h2><%=sistema%>: Fecha Impugnación</h2>
+            <h5>La fecha de Impuganación debe de ser mayor o igual  a la fecha de conclusión::</h5>
+            <table id="fechaImpugnacion" class="tablasRegis">
+                <thead>
+                    <tr>
+                        <th class="no">No.</th>
+                        <th>Juzgado Clave</th>
+                        <th>Imputado Clave</th>
+                        <th>Fecha Impuganación</th>
+                        <th>Fecha Conclusión</th>
+                    </tr>
+                </thead>
+                <tbody>
+            <%
+                if (!sistema.equals("")) {
+                    lista = sV.Fecha_Impugnacion(sistema);
+                    i = 1;
+                    for (String[] ls : lista) {
+                        out.println("<tr>");
+                        out.println("<td>" + i + "</td>");
+                        out.println("<td>" + ls[0] + "</td>");
+                        out.println("<td>" + ls[1] + "</td>");
+                        out.println("<td>" + ls[2] + "</td>");
+                        out.println("<td>" + ls[3] + "</td>");
+                        out.println("</tr>");
+                        i++;
                     }
-                    %>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </body>
+                }
+            %>
+                </tbody>
+            </table>
+        </div><br><br>
+    </section>
+</body>
 </html>

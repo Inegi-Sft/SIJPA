@@ -444,7 +444,7 @@
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="munNaci"> 
-                                        <label for="Mnacimiento">Municipio</label>
+                                        <label for="Mnacimiento">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="Mnacimiento" id="Mnacimiento">
                                             <%
                                                 if(!paisNaci.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
@@ -519,7 +519,7 @@
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="munResi"> 
-                                        <label for="Mreside">Municipio</label>
+                                        <label for="Mreside">Municipio (Para CDMX Demarcación Territorial)</label>
                                         <select name="Mreside" id="Mreside" name="Mreside">
                                             <%
                                                 if(!resiPaisV.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery

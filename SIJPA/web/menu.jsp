@@ -10,7 +10,7 @@
             <p class="fUsuario">
                 <img src="img/usuario.png" class="img-circle" width="80">
             </p>
-            <h4>MenÃº Usuario</h4>
+            <h4>Menú Usuario</h4>
         </li>
         <li><a href="juzgados.jsp">Juzgados</a></li>
         <li><a href="jueces.jsp">Jueces</a></li>
@@ -22,6 +22,8 @@
                 <li><a href="audienciasJO.jsp">Audiencias JO</a></li>
             </ul>
         </li>
+        <li><a href="exportarBD.jsp">Exportar BD</a></li>
+        <li><a href="importarBD.jsp">Importar BD</a></li>
         <li><a href="reportes.jsp">Reportes</a></li>
         <li><a href="validaciones.jsp">Validar Datos</a></li>
         <% 

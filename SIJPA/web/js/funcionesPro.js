@@ -15,6 +15,12 @@ $(document).ready(function() {
         $('#chkFechaNac').prop("checked", true);
     }
     
+    //Se usa para la recuperacion de datos mostrar el campo Curp no identificado
+    if($('#curp').val() === '-9'){
+        $('#curp').prop("readonly", true);
+        $('#chkCurp').prop("checked", true);
+    }
+    
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#nPais').val() === '1'){
         $('#dNEntidad').show();
@@ -187,3 +193,14 @@ $(document).ready(function() {
     });
     /*---------------------------- FIN FUNCIONES PROCESADOS JC----------------------------*/
 });
+
+// curp No identificado
+function curpNoIdent(idChk, idTxt) {
+    if ($(idChk).is(":checked")) {
+        $(idTxt).val("-9");
+        $(idTxt).prop("readonly", true);
+    } else {
+        $(idTxt).val("");
+        $(idTxt).prop("readonly", false);
+    }
+}

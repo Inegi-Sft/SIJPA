@@ -37,6 +37,8 @@
             <button class="btnSisCap" id="btnJc" name="btnJc">Juzgado de Control</button>
             <button class="btnSisCap" id="btnJo" name="btnJo">Juicio Oral</button>
             <button class="btnSisCap" id="btnAudi" name="btnAudi">Audiencias</button>
+            <button class="btnSisCap" id="btnExport" name="btnExport">Exportar BD</button>
+            <button class="btnSisCap" id="btnImport" name="btnExport">Importar BD</button>
             <button class="btnSisCap" id="btnRepor" name="btnRepor">Reportes</button>
             <button class="btnSisCap" id="btnValidar" name="btnValidar">Validar Datos</button>
             <%
@@ -49,6 +51,7 @@
                     response.sendRedirect("index.jsp");
                 }
             %>
+            <br><br>
         </section>
     </body>
 </html>

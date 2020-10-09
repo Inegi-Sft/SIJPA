@@ -48,6 +48,7 @@
                 <input type="hidden" id="sistema" value="<%=sistema%>">
                 <br>
                 <input type="submit" name="validar" id="validar" value="Validar"/>
+            </form> 
         <%
             if (!sistema.equals("")) {
                 if (sistema.equals("JC")) {
@@ -112,8 +113,10 @@
                     </tr>
                 </table>
                 <br>
-                <input type="button" name="btnExportExcel" id="btnExportExcel" value="Exportar xlsx" onclick="exportar();"/>
-            </form>     
+                <form name="formExportacion" id="formExportacion" method="post" action="exportaValidaciones">
+                    <input type="hidden" name="sistema" id="sistema" value="<%=sistema%>">
+                    <input type="submit" name="btnExportExcel" id="btnExportExcel" value="Exportar xlsx"/>
+                </form>
         <%
             }
         %>    

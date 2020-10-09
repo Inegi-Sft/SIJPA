@@ -7,8 +7,8 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
-import clasesAuxiliar.archivoSIJPA;
-import clasesAuxiliar.leeSIJPA;
+import clasesAuxiliar.ArchivoSIJPA;
+import clasesAuxiliar.LeeSIJPA;
 import clasesAuxiliar.manejaCSV;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -86,7 +86,7 @@ public class importaBD extends HttpServlet {
                     }
                     item.write(file);
                 }
-                archivoSIJPA mi_archivoSIJPA = new archivoSIJPA();
+                ArchivoSIJPA mi_archivoSIJPA = new ArchivoSIJPA();
                 if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
                     if (operacion.equalsIgnoreCase("importar")) {
                         if(fileName.endsWith(".sijpa") == true && tipo_archivo.equalsIgnoreCase("sijpa")){
@@ -94,7 +94,7 @@ public class importaBD extends HttpServlet {
                                 mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar1 = new File(RUTA+fileName);
                                 archivo_borrar1.delete();
-                                leeSIJPA leeSijpa = new leeSIJPA();
+                                LeeSIJPA leeSijpa = new LeeSIJPA();
                                 leeSijpa.ejecutaScript(RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar2 = new File(RUTA + "archivo_descifrado.sijpa");
                                 archivo_borrar2.delete();

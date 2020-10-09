@@ -5,23 +5,41 @@
  */
 $(document).ready(function () {
     
-    /*if($('#tipo_operacion').val() === 'importar'){
-        $('#tipoArchivo').prepend("<option value='csv'>CSV(.csv)</option>");    
+    if($('#tipo_operacion').val() === 'importar'){
+        $('#tipoArchivo').prepend("<option value='csv'>CSV(.csv)</option>");
+        $('#importaBD').val('Importar');
     }
     
     $('#tipo_operacion').change(function () {
         if($('#tipo_operacion').val() === 'importar'){
-            $('#tipoArchivo').prepend("<option value='csv'>CSV(.csv)</option>"); 
+            $('#tipoArchivo').prepend("<option value='csv'>CSV(.csv)</option>");
+            $('#importaBD').val('Importar');
           }
         else if($('#tipo_operacion').val() === 'ver'){
             $("#tipoArchivo").find("[value='csv']").remove();
+            $('#importaBD').val('Ver');
         }
           
-    });*/
+    });
+    $('#tipoArchivo').change(function () {
+        if($('#tipoArchivo').val() === 'csv'){
+            $('#EspecifiqueTabla').fadeIn(); 
+          }
+        else if($('#tipo_operacion').val() !== 'csv'){
+            $("#EspecifiqueTabla").fadeOut();
+        }
+          
+    });
+    
    
    $('#form_import').submit(function(e){
        e.preventDefault();
        e.stopImmediatePropagation();
+       if($('#tipoArchivo').val() === 'csv' && $('#tabla').val() === ''){
+           alert('Seleccione una tabla');
+           $('#tabla').focus();
+           return false;
+       }
        $('.load').show();
        $.ajax({
            type:'post',
@@ -43,7 +61,16 @@ $(document).ready(function () {
                     window.location.href = "veArchivoSIJPA.jsp";
                 }
                 if(response === '3'){
-                    alert('Error en el nombre del archivo, dicho nombre debe contener "ADOJC o ADOJO según sea el caso"');
+                    alert('Error, las columnas del archivo no coinciden con los de las tablas');
+                }
+                if(response === '4'){
+                    alert('Error, se trata de subir archivo CSV sin especificar tabla destino');
+                }
+                if(response === '5'){
+                    alert('Error,los datos del csv no corresponden con el tipo de dato de las columnas');
+                }
+                if(response === '6'){
+                    alert('Error, el archivo se encuentra estropeado o en blanco')
                 }
            },
            error: function (response) {

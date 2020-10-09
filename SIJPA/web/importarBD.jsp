@@ -4,6 +4,8 @@
     Author     : JONATHAN.AGUIRRE
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="clasesAuxiliar.usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -68,7 +70,7 @@
                     <tr>
                         <%
                             if((Integer)session.getAttribute("tipoUsuario") == 1){
-                                out.println("<td colspan = '2'>");
+                                out.println("<td colspan = '3'>");
                                 out.println("<center>");
                             }else{
                                 out.println("<td>");

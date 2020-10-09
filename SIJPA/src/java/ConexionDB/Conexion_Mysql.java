@@ -36,9 +36,6 @@ public class Conexion_Mysql {
             //Colima
 //            String url = "jdbc:mysql://node28733-sijpacolima.es-1.axarnet.cloud/sijpa_db";
 //            conexion = (Connection) DriverManager.getConnection(url,"root","PKRdte84636");
-            //Produccion
-//            String url = "jdbc:mysql://localhost:3306/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");
             //Localhost
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");

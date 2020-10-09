@@ -27,44 +27,44 @@
                 <!--enctype ="multipart/form-data"-->
                 <table  class="tablaFormu">
                     <%
-                                if((Integer)session.getAttribute("tipoUsuario") == 1){
-                                    out.println("<tr>");
-                                    out.println("<td>");
-                                    out.println("<label for='operacion'>Operación:</label>");
-                                    out.println("<select name='tipo_operacion' id='tipo_operacion'>");
-                                    out.println("<option value='importar'>Importar archivo SIJPA</option>");
-                                    out.println("<option value='ver'>Ver archivo SIJPA</option>");
-                                    out.println("</select>");
-                                    out.println("</td>");
-                                    out.println("<td>");
-                                    out.println("<label for='tipoArchivo'>Tipo de Archivo</label>");
-                                    out.println("<select name='tipoArchivo' id='tipoArchivo'>");
-                                    out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
-                                    out.println("</select>");
-                                    out.println("</td>");        
-                                    out.println("</tr>");
-                                }else{
-                                out.println("<tr>");
-                                    out.println("<td>");
-                                    out.println("<div class='colsx oculto' id='EspecifiqueOperacion'>");
-                                    out.println("<label for='operacion'>Operación:</label>");
-                                    out.println("<select name='tipo_operacion' id='tipo_operacion'>");
-                                    out.println("<option value='importar'>Importar archivo SIJPA</option>");
-                                    out.println("<option value='ver'>Ver archivo SIJPA</option>");
-                                    out.println("</select>");
-                                    out.println("</div>");
-                                    out.println("</td>");
-                                    out.println("<td>");
-                                    out.println("<div class='colsx oculto' id='EspecifiqueTipoArchivo'>");
-                                    out.println("<label for='tipoArchivo'>Tipo de Archivo</label>");
-                                    out.println("<select name='tipoArchivo' id='tipoArchivo'>");
-                                    out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
-                                    out.println("</select>");
-                                    out.println("</div>");
-                                    out.println("</td>");
-                                    out.println("</tr>");
-                                }
-                                %>
+                        if((Integer)session.getAttribute("tipoUsuario") == 1){
+                            out.println("<tr>");
+                            out.println("<td>");
+                            out.println("<label for='operacion'>Operación:</label>");
+                            out.println("<select name='tipo_operacion' id='tipo_operacion'>");
+                            out.println("<option value='importar'>Importar archivo SIJPA</option>");
+                            out.println("<option value='ver'>Ver archivo SIJPA</option>");
+                            out.println("</select>");
+                            out.println("</td>");
+                            out.println("<td>");
+                            out.println("<label for='tipoArchivo'>Tipo de Archivo</label>");
+                            out.println("<select name='tipoArchivo' id='tipoArchivo'>");
+                            out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
+                            out.println("</select>");
+                            out.println("</td>");        
+                            out.println("</tr>");
+                        }else{
+                            out.println("<tr>");
+                            out.println("<td>");
+                            out.println("<div class='colsx oculto' id='EspecifiqueOperacion'>");
+                            out.println("<label for='operacion'>Operación:</label>");
+                            out.println("<select name='tipo_operacion' id='tipo_operacion'>");
+                            out.println("<option value='importar'>Importar archivo SIJPA</option>");
+                            out.println("<option value='ver'>Ver archivo SIJPA</option>");
+                            out.println("</select>");
+                            out.println("</div>");
+                            out.println("</td>");
+                            out.println("<td>");
+                            out.println("<div class='colsx oculto' id='EspecifiqueTipoArchivo'>");
+                            out.println("<label for='tipoArchivo'>Tipo de Archivo</label>");
+                            out.println("<select name='tipoArchivo' id='tipoArchivo'>");
+                            out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
+                            out.println("</select>");
+                            out.println("</div>");
+                            out.println("</td>");
+                            out.println("</tr>");
+                        }
+                    %>
                     <tr>
                         <%
                             if((Integer)session.getAttribute("tipoUsuario") == 1){
@@ -74,8 +74,8 @@
                                 out.println("<td>");
                             } 
                         %>
-                                <label for="nombreArchivo">Seleccionar Archivos</label>
-                                <input type="file" name="archivos" id="archivos" required/>
+                            <label for="nombreArchivo">Seleccionar Archivos</label>
+                            <input type="file" name="archivos" id="archivos" required/>
                         <%
                             if((Integer)session.getAttribute("tipoUsuario") == 1){
                                 out.println("</center>");

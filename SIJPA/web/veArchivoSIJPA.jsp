@@ -35,9 +35,7 @@
                     url = request.getHeader("Referer").toString();
                     url_dividido = url.split("/");
                     if(url_dividido[url_dividido.length - 1].equalsIgnoreCase("importarBD.jsp")){
-                        Path ruta_absoluta = FileSystems.getDefault().getPath(".").toAbsolutePath();
-                        String[] ruta_dividida = ruta_absoluta.toString().split(":");
-                        String ruta = ruta_dividida[0]+":\\xampp\\inegi_conf\\Archivos\\";
+                        String ruta = ".\\";
                         List<String> archivo_sql = Files.readAllLines(Paths.get(ruta+"archivo_descifrado.sijpa"));
                         for (String linea : archivo_sql){
                             out.println(linea.replace("),", "),<br/>"));

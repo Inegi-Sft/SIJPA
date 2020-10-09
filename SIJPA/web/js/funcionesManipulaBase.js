@@ -70,7 +70,10 @@ $(document).ready(function () {
                     alert('Error,los datos del csv no corresponden con el tipo de dato de las columnas');
                 }
                 if(response === '6'){
-                    alert('Error, el archivo se encuentra estropeado o en blanco')
+                    alert('Error, el archivo se encuentra estropeado o en blanco');
+                }
+                if(response === '7'){
+                    alert('Error, el archivo subido no coincide con el tipo de archivo indicado');
                 }
            },
            error: function (response) {

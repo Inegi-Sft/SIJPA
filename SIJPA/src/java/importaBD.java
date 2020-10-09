@@ -7,8 +7,8 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
-import clasesAuxiliar.ArchivoSIJPA;
-import clasesAuxiliar.LeeSIJPA;
+import clasesAuxiliar.archivoSIJPA;
+import clasesAuxiliar.leeSIJPA;
 import clasesAuxiliar.manejaCSV;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -33,10 +33,11 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(urlPatterns = {"/importaBD"})
 public class importaBD extends HttpServlet {
-    Path ruta_absoluta = FileSystems.getDefault().getPath(".").toAbsolutePath();
-    private final String[] ruta_dividida = ruta_absoluta.toString().split(":");
-    private final String RUTA = ruta_dividida[0]+":\\xampp\\inegi_conf\\Archivos\\";
-    //private final String RUTA = "..\\..\\inegi_conf\\Archivos\\";
+    //Path ruta_absoluta = FileSystems.getDefault().getPath(".").toAbsolutePath();
+    //private final String[] ruta_dividida = ruta_absoluta.toString().split(":");
+    //private final String RUTA = ruta_dividida[0]+":\\xampp\\inegi_conf\\Archivos\\";
+    private final String RUTA = ".\\";
+    String operacion,tabla,tipo_archivo;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,14 +60,12 @@ public class importaBD extends HttpServlet {
         List<FileItem> items = upload.parseRequest(request);
         Iterator iter = items.iterator();
         File file;
-        String operacion = "";
-        String tabla = "";
         while (iter.hasNext()) {
             FileItem item = (FileItem) iter.next();
 
             if (item.isFormField()) {
 
-                String name = item.getFieldName();//text1
+                String name = item.getFieldName();
                 String value = item.getString();
                 if (name.equalsIgnoreCase("tipo_operacion")) {
                     operacion = value;
@@ -74,9 +73,11 @@ public class importaBD extends HttpServlet {
                 if(name.equalsIgnoreCase("tabla")){
                     tabla = value;
                 }
+                if(name.equalsIgnoreCase("tipoArchivo")){
+                    tipo_archivo = value;
+                }
 
             } else {
-                String fieldName = item.getFieldName();
                 String fileName = item.getName();
                 if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
                     if (fileName.lastIndexOf("\\") >= 0) {
@@ -86,15 +87,15 @@ public class importaBD extends HttpServlet {
                     }
                     item.write(file);
                 }
+                archivoSIJPA mi_archivoSIJPA = new archivoSIJPA();
                 if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
-                    ArchivoSIJPA mi_archivoSIJPA = new ArchivoSIJPA();
                     if (operacion.equalsIgnoreCase("importar")) {
-                        if(fileName.endsWith(".sijpa") == true){
+                        if(fileName.endsWith(".sijpa") == true && tipo_archivo.equalsIgnoreCase("sijpa")){
                             try{
                                 mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar1 = new File(RUTA+fileName);
                                 archivo_borrar1.delete();
-                                LeeSIJPA leeSijpa = new LeeSIJPA();
+                                leeSIJPA leeSijpa = new leeSIJPA();
                                 leeSijpa.ejecutaScript(RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar2 = new File(RUTA + "archivo_descifrado.sijpa");
                                 archivo_borrar2.delete();
@@ -106,6 +107,8 @@ public class importaBD extends HttpServlet {
                                 Logger.getLogger(manejaCSV.class.getName()).log(Level.SEVERE, null, e);
                                 out.write("6");
                             }
+                        }else if((fileName.endsWith(".sijpa") == true && tipo_archivo.equalsIgnoreCase("csv")) || (fileName.endsWith(".csv") == true && tipo_archivo.equalsIgnoreCase("sijpa"))){
+                            out.write("7");
                         }else{
                             if(tabla.length() < 1){
                                 out.write("4");

@@ -6,13 +6,7 @@
 
 import clasesAuxiliar.showValidaciones;
 import java.awt.Color;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,12 +62,8 @@ public class exportaValidaciones extends HttpServlet {
             throws ServletException, IOException {
         
         String sistema = request.getParameter("sistema");
-        
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            String archivo="..\\..\\inegi_conf\\Validacion"+sistema+".xlsx"; 
-            
+        String archivo="Validacion"+sistema; 
+        try{
             libro = new SXSSFWorkbook();
             SXSSFSheet hojaDescripcion = libro.createSheet("Descripcion");
             SXSSFSheet hojaImp_Faltan = libro.createSheet("Imputados_Faltantes");
@@ -117,28 +107,12 @@ public class exportaValidaciones extends HttpServlet {
             creaHoja_Fecha_Tramite(sistema, hojaF_Tramite, hojaDescripcion);
             creaHoja_Fecha_Impugnacion(sistema, hojaF_Impugnacion, hojaDescripcion);
             
-            Paths.get(archivo).toFile().delete();
-            try (OutputStream fileOut = new FileOutputStream(archivo)) {
-                libro.write(fileOut);
-                libro.close();
-                File file = new File(archivo);
-
-                // Abrir el archivo
-                Desktop.getDesktop().open(file);
-            }
-
-            
-//            response.setContentType("application/vnd.ms-excel");
-//            response.setHeader("Content-Disposition","attachment;filename=\"" +"Validacion"+".xlsx" + "\"");
-//            File f = new File("..\\..\\inegi_conf\\Archivos\\"+"Validacion"+".xlsx");
-//            byte[] arBytes = new byte[(int)f.length()];
-//            FileInputStream is = new FileInputStream(f);
-//            is.read(arBytes);
-//            ServletOutputStream op = response.getOutputStream();
-//            op.write(arBytes);
-//            op.flush();
-//            op.close();
-//            is.close();
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader("Content-Disposition","attachment;filename=" + archivo + ".xlsx");
+            libro.write(response.getOutputStream());
+            libro.close();
+        }catch(IOException ex){
+            System.err.println("Error al crear archivo validaciones excel " + ex);
         }
     }
     

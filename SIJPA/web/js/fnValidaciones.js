@@ -90,21 +90,3 @@ function openValidacion(ventana){
     });
 }
 
-function exportar(){
-    var sistema= $('#validaSistema').val();
-    $.ajax({
-        type: 'post',
-        url: 'exportaValidaciones',
-        data: {
-            sistema: sistema
-        },
-        success: function (response) {
-            console.log("Respuesta de Exporta Validaciones", response);
-            alertify.alert('Mensaje Importante','Exportacion generada correctamente !!');
-        },
-        error: function (response) {
-            console.log("Respuesta del servidor Exportacion: ", response);
-            alert('Error al generar Excel, vuelva a intentarlo o cunsulte al administrador');
-        }
-    }); 
-}

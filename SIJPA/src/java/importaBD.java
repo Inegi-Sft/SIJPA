@@ -7,7 +7,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
-import clasesAuxiliar.ArchivoSIJPA;
+import clasesAuxiliar.manipulaArchivoSIJPA;
 import clasesAuxiliar.LeeSIJPA;
 import clasesAuxiliar.manejaCSV;
 import java.nio.file.FileSystems;
@@ -86,7 +86,7 @@ public class importaBD extends HttpServlet {
                     }
                     item.write(file);
                 }
-                ArchivoSIJPA mi_archivoSIJPA = new ArchivoSIJPA();
+                manipulaArchivoSIJPA mi_archivoSIJPA = new manipulaArchivoSIJPA();
                 if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
                     if (operacion.equalsIgnoreCase("importar")) {
                         if(fileName.endsWith(".sijpa") == true && tipo_archivo.equalsIgnoreCase("sijpa")){

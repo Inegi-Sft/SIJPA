@@ -23,20 +23,18 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 public class LeeSIJPA {
     
     public void ejecutaScript(String script) throws SQLException, FileNotFoundException, IOException{
-        DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-        String mysqlUrl = "jdbc:mysql://localhost/sijpa_db";
-        Connection con = DriverManager.getConnection(mysqlUrl, "root", "InegiSijpa2020");
-        System.out.println("Conexión estabecida......");
-        //Conexion_Mysql conn = new Conexion_Mysql();
-        //Connection mycon = conn.getConexion();
-        //ScriptRunner sr = new ScriptRunner(mycon);
-        ScriptRunner sr = new ScriptRunner(con);
-        Reader reader = new BufferedReader(new FileReader(script));
-        sr.runScript(reader);
-        sr.closeConnection();
-        reader.close();
-        con.close();
-        //conn.close();
+//        DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+//        String mysqlUrl = "jdbc:mysql://localhost/sijpa_db";
+//        Connection con = DriverManager.getConnection(mysqlUrl, "root", "InegiSijpa2020");
+        //System.out.println("Conexión estabecida......");
+        Conexion_Mysql conn = new Conexion_Mysql();
+        Connection mycon = conn.getConexion();
+        ScriptRunner sr = new ScriptRunner(mycon);
+        try (Reader reader = new BufferedReader(new FileReader(script))) {
+            sr.runScript(reader);
+            sr.closeConnection();
+            //conn.close();
+        }
     }
     
 }

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import clasesAuxiliar.catalogos;
+import clasesAuxiliar.showReportes;
 import clasesAuxiliar.showValidaciones;
 import java.awt.Color;
 import java.io.IOException;
@@ -47,12 +49,14 @@ public class exportaValidaciones extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
+    catalogos cat = new catalogos();
     showValidaciones sV=new showValidaciones();
-    ArrayList<String[]> lista;
+    showReportes sRepor = new showReportes();
+    ArrayList<String[]> lista,desReporte;
     int i=0;
     
     Font fuenteHead, fuenteBody, fuenteIndicador;
-    CellStyle estiloHead, estiloBody, estiloError, estiloIndicador;
+    CellStyle estiloHead, estiloBody,estiloBodyBordes, estiloBodyBordesI, estiloError, estiloIndicador;
     
     SXSSFWorkbook libro;
     SXSSFRow fila = null;
@@ -66,6 +70,7 @@ public class exportaValidaciones extends HttpServlet {
         try{
             libro = new SXSSFWorkbook();
             SXSSFSheet hojaDescripcion = libro.createSheet("Descripcion");
+            SXSSFSheet hojaResumen = libro.createSheet("Resumen_General");
             SXSSFSheet hojaImp_Faltan = libro.createSheet("Imputados_Faltantes");
             SXSSFSheet hojaDel_Faltan = libro.createSheet("Delitos_Faltantes");
             SXSSFSheet hojaVic_Faltan = libro.createSheet("Victimas_Faltantes");
@@ -85,16 +90,19 @@ public class exportaValidaciones extends HttpServlet {
             //FUENTE Y ESTILO PARA EL CUERPO DE LA TABLA
             fuenteBody = creaFuente(IndexedColors.BLACK.index, false);
             estiloBody = creaEstilo(fuenteBody, "#FFFFFF", false);//sin background
+            estiloBodyBordes = creaEstilo(fuenteBody, "#FFFFFF", true);//sin background
+            estiloBodyBordesI = creaEstilo(fuenteBody, "#EEEEEE", true);//sin background
             
             //ESTILO PARA BACKGROUND DEL DATO A REVISAR
             estiloError = creaEstilo(fuenteBody, "#FFFF99", false);//background amarillo
             
             //ESTILO PARA BACKGROUND DEL DATO A REVISAR
             fuenteIndicador = creaFuente(IndexedColors.BLACK.index, true);
-            estiloIndicador = creaEstilo(fuenteHead, "#0077CB", true);//backgroun azul (fuenteHead y #0077CB)
+            estiloIndicador = creaEstilo(fuenteHead, "#0077CB", true);//backgroun azul claro (fuenteHead y #0077CB)
             
             //llamada a los metodos de creacion
             creaHoja_Descripcion(sistema, hojaDescripcion);
+            creaHoja_ReporteResumen(sistema, hojaResumen);
             creaHoja_Imputados_Faltantes(sistema, hojaImp_Faltan, hojaDescripcion);
             creaHoja_Delitos_Faltantes(sistema, hojaDel_Faltan, hojaDescripcion);
             creaHoja_Victimas_Faltantes(sistema, hojaVic_Faltan, hojaDescripcion);
@@ -175,6 +183,45 @@ public class exportaValidaciones extends HttpServlet {
                     RegionUtil.setBorderBottom(BorderStyle.THIN, new CellRangeAddress(i, i, 2, 5), hojaDescripcion);
                 }
             }
+        }
+    }
+    
+    public void creaHoja_ReporteResumen(String sistema, SXSSFSheet hojaResumen){
+        if(sistema.equals("JC"))
+            sistema="1";
+        else
+            sistema="2";
+       
+        lista = sRepor.findReportesGral(sistema); //Traemos los totales del reporte
+        desReporte = cat.findReportes();//Traemos las descripciones de los catalogos para los reportes
+           
+        fila = hojaResumen.createRow(0);
+        fila.setHeight((short)500);
+        
+        col = fila.createCell(0);
+        col.setCellValue("RESUMEN GENERAL DE DATOS SIJPA");
+        col.setCellStyle(estiloHead);
+        CellRangeAddress regionTitulo = CellRangeAddress.valueOf("A1:C1");
+        hojaResumen.addMergedRegion(regionTitulo);//Unimos las celdas del titulo
+            
+        for(int x = 0; x < desReporte.size(); x++){
+            fila = hojaResumen.createRow(x+1);
+            fila.setHeight((short)500);
+            hojaResumen.setColumnWidth(1, 20000);
+            
+            //Celda 1
+            col = fila.createCell(0);
+            col.setCellValue(desReporte.get(x)[0]);//Numeracion de los catalogos
+            col.setCellStyle(estiloBodyBordes);
+            //Celda 2
+            col = fila.createCell(1);
+            col.setCellValue(desReporte.get(x)[1]);//Descripcion de los catalogos
+            col.setCellStyle(estiloBodyBordes);
+            //Celda 3
+            col = fila.createCell(2);
+            col.setCellValue(lista.get(0)[x]);//Cantidades de Reportes
+            col.setCellStyle(estiloBodyBordesI);
+            
         }
     }
     

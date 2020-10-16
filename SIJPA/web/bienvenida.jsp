@@ -22,11 +22,19 @@
                     out.println("});</script>");
                 }
             }
+            
+            //Verifica el numero de visita para mostrar el acuerdo sin boton aceptar
+            usuario usuario = new usuario();
+            int visita = usuario.findVisitaUsu((String) session.getAttribute("usuActivo"));
         %>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>
+        <%@include file="menu.jsp"%>
         <section class="contenedor">
+            <div class="toggle-nav oculto">
+                <div class="toggle-nav-inner"></div>
+            </div>
             <h1>BIENVENIDOS A SIJPA</h1><br>
             <h2>CONFIDENCIALIDAD</h2>
             <p class="parrafo">
@@ -52,5 +60,16 @@
                 <input type="submit" name="aceptarAcuerdo" id="aceptarAcuerdo" value="Acepto">
             </form>
         </section>
+<%
+    if(visita == 1){
+        out.println("<script type='text/javascript'>");
+            out.println("$(document).ready(function () {");
+                out.println("$('form').hide();");
+                out.println("$('.toggle-nav').show();");
+                out.println("$('h1').text('ACUERDO');");
+            out.println("});");
+        out.println("</script>");
+    }
+%>
     </body>
 </html>

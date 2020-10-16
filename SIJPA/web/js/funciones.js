@@ -43,6 +43,9 @@ $(document).ready(function () {
     $('#btnValidar').click(function(){
         window.location.href = "validaciones.jsp";
     });
+    $('#btnAcuerdo').click(function(){
+        window.location.href = "bienvenida.jsp";
+    });
     /*----------------Fin Sistemas Captura------------------------*/
 
     /*----------------Cabecera------------------------*/

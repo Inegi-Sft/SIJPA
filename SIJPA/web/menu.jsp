@@ -26,6 +26,7 @@
         <li><a href="importarBD.jsp">Importar BD</a></li>
         <li><a href="reportes.jsp">Reportes</a></li>
         <li><a href="validaciones.jsp">Validar Datos</a></li>
+        <li><a href="bienvenida.jsp">Acuerdo</a></li>
         <% 
             //Si es un administrador entonces le mostramos el boton para agregar usuarios
             if((Integer)session.getAttribute("tipoUsuario") == 1){

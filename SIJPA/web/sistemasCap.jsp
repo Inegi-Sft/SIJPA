@@ -41,6 +41,7 @@
             <button class="btnSisCap" id="btnImport" name="btnExport">Importar BD</button>
             <button class="btnSisCap" id="btnRepor" name="btnRepor">Reportes</button>
             <button class="btnSisCap" id="btnValidar" name="btnValidar">Validar Datos</button>
+            <button class="btnSisCap" id="btnAcuerdo" name="btnAcuerdo">Acuerdo</button>
             <%
                 //Control de usuarios si es administrador entonces mostramos la opcion de Usuarios
                 if(session.getAttribute("tipoUsuario") != null){

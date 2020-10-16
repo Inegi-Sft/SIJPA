@@ -67,7 +67,7 @@
                 </thead>
                 <tbody>
                 <% 
-                    lista = sj.findJuzgadoTabla();
+                    lista = sj.findJuzgadoTabla((Integer)session.getAttribute("tipoUsuario"), (String)session.getAttribute("usuActivo"));
                     for (String[] lsj : lista) {
                         out.println("<tr>");
                         out.println("<td>" + lsj[0] + "</td>");

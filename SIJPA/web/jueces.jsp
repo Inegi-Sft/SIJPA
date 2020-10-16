@@ -64,7 +64,7 @@
                     <select name="juzgado" id="juzgado" onchange="formJuez.submit();">
                         <option value="">--Seleccione--</option>
                         <%
-                            juzClave = juz.findJuzgados();
+                            juzClave = juz.findJuzgados((Integer)session.getAttribute("tipoUsuario"), (String)session.getAttribute("usuActivo"));
                             for (String ls : juzClave) {
                                 out.println("<option value='" + ls + "'");
                                 if(ls.equals(juzgado)){

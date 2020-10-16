@@ -133,38 +133,43 @@ public class exportaBD extends HttpServlet {
                 exportarExcel.exportaTablaVprocesadosJC();
                 exportarExcel.exportaTablaVprocesadosJO();
                 
-                File mi_archivo;
-                mi_archivo = new File(RUTA+nombre_archivo+".xlsx");
-                try(FileOutputStream mi_archivo_salida = new FileOutputStream(mi_archivo)){
-                    if(mi_archivo.exists()){
-                        mi_archivo.delete();
-                    }
-                    POIXMLProperties propiedadesXML = mi_libro.getXSSFWorkbook().getProperties();    
-                    POIXMLProperties.CoreProperties propiedades =  propiedadesXML.getCoreProperties();
-                    propiedades.setCreator("SIJPA");
-                    mi_libro.write(mi_archivo_salida);
-                    mi_libro.close();
-                    mi_archivo_salida.flush();
-                    mi_archivo_salida.close();
-                }catch(FileNotFoundException e){
-                    e.printStackTrace();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-                
                 response.setContentType("application/vnd.ms-excel");
-                response.setHeader("Content-Disposition","attachment;filename=\"" +nombre_archivo+".xlsx" + "\"");
-                File f = new File(RUTA+nombre_archivo+".xlsx");
-                byte[] arBytes = new byte[(int)f.length()];
-                FileInputStream is = new FileInputStream(f);
-                is.read(arBytes);
-                ServletOutputStream op = response.getOutputStream();
-                op.write(arBytes);
-                op.flush();
-                op.close();
-                is.close();
+                response.addHeader("Content-Disposition","attachment;filename=" + nombre_archivo + ".xlsx");
+                mi_libro.write(response.getOutputStream());
+                mi_libro.close();
                 
-                Paths.get(RUTA+nombre_archivo+".xlsx").toFile().delete();
+//                File mi_archivo;
+//                mi_archivo = new File(RUTA+nombre_archivo+".xlsx");
+//                try(FileOutputStream mi_archivo_salida = new FileOutputStream(mi_archivo)){
+//                    if(mi_archivo.exists()){
+//                        mi_archivo.delete();
+//                    }
+//                    POIXMLProperties propiedadesXML = mi_libro.getXSSFWorkbook().getProperties();    
+//                    POIXMLProperties.CoreProperties propiedades =  propiedadesXML.getCoreProperties();
+//                    propiedades.setCreator("SIJPA");
+//                    mi_libro.write(mi_archivo_salida);
+//                    mi_libro.close();
+//                    mi_archivo_salida.flush();
+//                    mi_archivo_salida.close();
+//                }catch(FileNotFoundException e){
+//                    e.printStackTrace();
+//                }catch(IOException e){
+//                    e.printStackTrace();
+//                }
+//                
+//                response.setContentType("application/vnd.ms-excel");
+//                response.setHeader("Content-Disposition","attachment;filename=\"" +nombre_archivo+".xlsx" + "\"");
+//                File f = new File(RUTA+nombre_archivo+".xlsx");
+//                byte[] arBytes = new byte[(int)f.length()];
+//                FileInputStream is = new FileInputStream(f);
+//                is.read(arBytes);
+//                ServletOutputStream op = response.getOutputStream();
+//                op.write(arBytes);
+//                op.flush();
+//                op.close();
+//                is.close();
+                
+                //Paths.get(RUTA+nombre_archivo+".xlsx").toFile().delete();
             }
         }
     }

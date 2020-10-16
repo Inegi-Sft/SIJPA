@@ -55,6 +55,7 @@ public class insrtUsuario extends HttpServlet {
             String correo = request.getParameter("correo").toUpperCase();
             String entidad = request.getParameter("entidad");
             String pass = request.getParameter("pass").toUpperCase();
+            String[] juzAsignado = request.getParameterValues("juzAsignado");
             
             try {
                 //Validacion para que se inserte el Administrador por primera vez
@@ -65,6 +66,13 @@ public class insrtUsuario extends HttpServlet {
                             + ")";
                     System.out.println(sql);
                     if(conn.escribir(sql)){
+                        if(juzAsignado.length != 0){
+                            for(String juzAsig : juzAsignado){
+                                sql = "INSERT INTO USUARIOS_JUZGADOS VALUES('" + correo + "','" + juzAsig + "')";
+                                System.out.println(sql);
+                                conn.escribir(sql);
+                            }
+                        }
                         if(tipoUsuario == 1){
                             conn.close();
                             response.sendRedirect("index.jsp?insert=100");
@@ -84,11 +92,20 @@ public class insrtUsuario extends HttpServlet {
                     }
                 }else{//Se actualiza el dato que viene de recuperacion
                     sql = "UPDATE USUARIOS SET NOMBRE = '" + nom + "',APATERNO = '" + paterno + "',AMATERNO = '" + materno + "',"
-                            + "EDAD = " + edad + ",CORREO = '" + correo + "',ENTIDAD = " + entidad + ","
-                            + "CONTRASENIA = SHA1('" + pass + "') "
+                            + "EDAD = " + edad + ",CONTRASENIA = SHA1('" + pass + "') "
                             + "WHERE USUARIO_ID = " + usuarioId + ";";
                     System.out.println(sql);
                     if(conn.escribir(sql)){
+                        sql = "DELETE FROM USUARIOS_JUZGADOS WHERE USUARIO = '" + correo + "';";
+                        conn.escribir(sql);
+                        System.out.println("tamaño: " + juzAsignado.length);
+                        if(juzAsignado.length != 0){
+                            for(String juzAsig : juzAsignado){
+                                sql = "INSERT INTO USUARIOS_JUZGADOS VALUES('" + correo + "','" + juzAsig + "')";
+                                conn.escribir(sql);
+                                System.out.println(sql);
+                            }
+                        }
                         conn.close();
                         response.sendRedirect("usuario.jsp?insert=101");
                     }else{

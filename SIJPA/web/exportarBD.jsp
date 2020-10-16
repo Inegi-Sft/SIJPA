@@ -12,16 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Exporta BD</title>
         <%@include file="librerias.jsp" %>
-        <!--<script>
-            $.ajax({
-                    type: "POST",
-                    url: your uri,
-                    beforeSend: function(){$("#divWithLoadingGif").show();},
-                    complete: function(){$("divWithLoadingGif").hide();}
-}
-
-            
-        </script>-->
     </head>
     <body>
         <div class="load"></div>
@@ -37,32 +27,31 @@
                 <table  class="tablaFormu">
                     <tr>
                         <td>
-                                <label for="nombreArchivo">Nombre del Archivo:</label>
-                                <input type="text" name="nombreArchivo" id="nombreArchivo" maxlength="25" required/>
+                            <label for="nombreArchivo">Nombre del Archivo:</label>
+                            <input type="text" name="nombreArchivo" id="nombreArchivo" maxlength="25" required/>
                         </td>
                         <td>
-                                <label for="nombreArchivo">Entidad Federativa:</label>
-                                <%      
-                                        ArrayList<String[]> lista;
-                                        catalogos cat = new catalogos();
-                                        out.println("<select name='entidad' id='entidad' required>");
-                                        out.println("<option value=''>--Seleccione--</option>");
-                                        lista = cat.findEntidades();
-                                        for (String[] ls : lista) {
-                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
-                                        }
-                                        out.println("</select>");%>
+                            <label for="nombreArchivo">Entidad Federativa:</label>
+                            <%      
+                                ArrayList<String[]> lista;
+                                catalogos cat = new catalogos();
+                                out.println("<select name='entidad' id='entidad' required>");
+                                out.println("<option value=''>--Seleccione--</option>");
+                                lista = cat.findEntidades();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                                out.println("</select>");
+                            %>
                         </td>
                     </tr>
                     <tr>
                         <td colspan = "2">
-                    <center>
-                        <label for="tipoArchivo">Tipo de Archivo:</label>
-                        <select name="tipoArchivo" id="tipoArchivo">
-                            <option value="sijpa">Archivo SIJPA (.sijpa)</option>
-                            <option value="excel">Archivo Excel (.xlsx)</option>
-                        </select>
-                    </center>
+                            <label for="tipoArchivo">Tipo de Archivo:</label>
+                            <select name="tipoArchivo" id="tipoArchivo">
+                                <option value="sijpa">Archivo SIJPA (.sijpa)</option>
+                                <option value="excel">Archivo Excel (.xlsx)</option>
+                            </select>
                         </td>
                     </tr>
                 </table>

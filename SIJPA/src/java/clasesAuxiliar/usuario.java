@@ -168,7 +168,7 @@ public class usuario {
             sql = "SELECT U.USUARIO_ID,CONCAT(U.NOMBRE,' ',U.APATERNO,' ',U.AMATERNO),U.EDAD,U.CORREO,CE.DESCRIPCION, TU.DESCRIPCION, CA.DESCRIPCION "
                     + "FROM USUARIOS U JOIN CATALOGOS_ENTIDADES CE "
                     + "ON U.ENTIDAD = CE.ENTIDAD_ID "
-                    + "JOIN TIPO_USUARIOS TU "
+                    + "JOIN USUARIOS_TIPO TU "
                     + "ON U.TIPO_USUARIO = TU.TIPO_USUARIO_ID "
                     + "JOIN CATALOGOS_ESTATUS CA "
                     + "ON U.ESTATUS = CA.ESTATUS_ID "
@@ -301,7 +301,8 @@ public class usuario {
             Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<String[]> getTables(){
+    
+    public ArrayList getTables(){
         conn.Conectar();
         listaTabla = new ArrayList<>();
         rs = conn.consultarTablas();
@@ -317,5 +318,19 @@ public class usuario {
             Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaTabla;
+    }
+    
+    public boolean findUsuarioJuz(String usuario, String juzClave){
+        try {
+            conn.Conectar();
+            sql = "SELECT JUZGADO_CLAVE FROM USUARIOS_JUZGADOS "
+                    + "WHERE JUZGADO_CLAVE = '" + juzClave + "' "
+                    + "AND USUARIO = '" + usuario + "';";
+            rs = conn.consultar(sql);
+            return rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 }

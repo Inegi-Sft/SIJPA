@@ -97,7 +97,7 @@ public class Conexion_Mysql {
     
     public ArrayList<String[]> obtenerColumnasDeTabla(String tabla){
         Conectar();
-        ResultSet rst = null;
+        ResultSet rst;
          ArrayList<String[]> encabezado = new ArrayList<>();
         try {
             Statement sentencia; 

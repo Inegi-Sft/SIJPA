@@ -8,11 +8,11 @@ $(document).ready(function() {
     if($('#numOrgano').val() !== ''){
         $('#numOrgano').prop('readonly', true);
     }
-    if($('#numOrgano').val() === ''){
-        $('#DivMunicipio').show();
-        $('#DivEntidad').show();
+    
+    if($('#numOrgano').val() !== ''){
+        $('#divMunicipio').hide();
+        $('#divEntidad').hide();
     }
-        
     
     //para recuperacion de bd
     if($('#fDivision').val() === '1'){

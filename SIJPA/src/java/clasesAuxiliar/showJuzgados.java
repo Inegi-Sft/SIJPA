@@ -55,14 +55,20 @@ public class showJuzgados {
         return lista;
     }
     
-    public ArrayList findJuzgadosJC(){
+    public ArrayList findJuzgados(int tipoUsu, String usuActivo){
         try {
             conn.Conectar();
             lista = new ArrayList();
-            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
-                    + "WHERE JUZGADO_FUNCION IN(1,3) "
-                    + "AND ESTATUS = 1 "
-                    + "ORDER BY 1;";
+            if(tipoUsu == 1){
+                sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                        + "WHERE ESTATUS = 1 "
+                        + "ORDER BY 1;";
+            }else{
+                sql = "SELECT J.JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC J "
+                        + "JOIN USUARIOS_JUZGADOS UJ ON J.JUZGADO_CLAVE = UJ.JUZGADO_CLAVE "
+                        + "WHERE J.ESTATUS = 1 "
+                        + "ORDER BY 1;";
+            }
             rs = conn.consultar(sql);
             while (rs.next()) {
                 lista.add(rs.getString(1));
@@ -74,14 +80,51 @@ public class showJuzgados {
         return lista;
     }
     
-    public ArrayList findJuzgadosJO(){
+    public ArrayList findJuzgadosJC(int tipoUsu, String usuActivo){
         try {
             conn.Conectar();
             lista = new ArrayList();
-            sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
-                    + "WHERE JUZGADO_FUNCION IN(2,3) "
-                    + "AND ESTATUS = 1 "
-                    + "ORDER BY 1;";
+            if(tipoUsu == 1){
+                sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                        + "WHERE JUZGADO_FUNCION IN(1,3) "
+                        + "AND ESTATUS = 1 "
+                        + "ORDER BY 1;";
+            }else{
+                sql = "SELECT J.JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC J, USUARIOS_JUZGADOS UJ "
+                        + "WHERE J.JUZGADO_CLAVE = UJ.JUZGADO_CLAVE "
+                        + "AND J.JUZGADO_FUNCION IN(1,3) "
+                        + "AND J.ESTATUS = 1 "
+                        + "AND UJ.USUARIO = '" + usuActivo + "' "
+                        + "ORDER BY 1;";
+            }
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+    public ArrayList findJuzgadosJO(int tipoUsu, String usuActivo){
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            if(tipoUsu == 1){
+                sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
+                        + "WHERE JUZGADO_FUNCION IN(2,3) "
+                        + "AND ESTATUS = 1 "
+                        + "ORDER BY 1;";
+            }else{
+                sql = "SELECT J.JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC J, USUARIOS_JUZGADOS UJ "
+                        + "WHERE J.JUZGADO_CLAVE = UJ.JUZGADO_CLAVE "
+                        + "AND J.JUZGADO_FUNCION IN(2,3) "
+                        + "AND J.ESTATUS = 1 "
+                        + "AND UJ.USUARIO = '" + usuActivo + "' "
+                        + "ORDER BY 1;";
+            }
             rs = conn.consultar(sql);
             while (rs.next()) {
                 lista.add(rs.getString(1));
@@ -145,18 +188,28 @@ public class showJuzgados {
         }
     }
     
-    public ArrayList findJuzgadoTabla(){
+    public ArrayList findJuzgadoTabla(int tipoUsu, String usuActivo){
         try {
             conn.Conectar();
             listaTabla = new ArrayList<>();
-            sql = "SELECT DJ.JUZGADO_CLAVE, DJ.JUZGADO_NOMBRE, DJ.JUZGADO_NUMERO, CJ.DESCRIPCION, CEN.DESCRIPCION, CM.DESCRIPCION, CE.DESCRIPCION "
-                    + "FROM DATOS_JUZGADOS_ADOJC DJ "
-                    + "JOIN CATALOGOS_JURISDICCION CJ ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "
-                    //+ "JOIN CATALOGOS_ENTIDADES CEN ON DJ.ENTIDAD = CEN.ENTIDAD_ID "
-                    + "JOIN CATALOGOS_FUNCION_JUZGADO CEN ON DJ.JUZGADO_FUNCION = CEN.FUNCION_JUZ_ID "
-                    + "JOIN CATALOGOS_MUNICIPIOS CM ON DJ.MUNICIPIO = CM.MUNICIPIO_ID "
-                    + "JOIN CATALOGOS_ESTATUS CE ON DJ.ESTATUS = CE.ESTATUS_ID "
-                    + "ORDER BY 1";
+            if(tipoUsu == 1){
+                sql = "SELECT DJ.JUZGADO_CLAVE, DJ.JUZGADO_NOMBRE, DJ.JUZGADO_NUMERO, CJ.DESCRIPCION, CEN.DESCRIPCION, CM.DESCRIPCION, CE.DESCRIPCION "
+                        + "FROM DATOS_JUZGADOS_ADOJC DJ "
+                        + "JOIN CATALOGOS_JURISDICCION CJ ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "
+                        + "JOIN CATALOGOS_FUNCION_JUZGADO CEN ON DJ.JUZGADO_FUNCION = CEN.FUNCION_JUZ_ID "
+                        + "JOIN CATALOGOS_MUNICIPIOS CM ON DJ.MUNICIPIO = CM.MUNICIPIO_ID "
+                        + "JOIN CATALOGOS_ESTATUS CE ON DJ.ESTATUS = CE.ESTATUS_ID "
+                        + "ORDER BY 1";
+            }else{
+                sql = "SELECT DJ.JUZGADO_CLAVE, DJ.JUZGADO_NOMBRE, DJ.JUZGADO_NUMERO, CJ.DESCRIPCION, CEN.DESCRIPCION, CM.DESCRIPCION, CE.DESCRIPCION "
+                        + "FROM DATOS_JUZGADOS_ADOJC DJ "
+                        + "JOIN CATALOGOS_JURISDICCION CJ ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "
+                        + "JOIN CATALOGOS_FUNCION_JUZGADO CEN ON DJ.JUZGADO_FUNCION = CEN.FUNCION_JUZ_ID "
+                        + "JOIN CATALOGOS_MUNICIPIOS CM ON DJ.MUNICIPIO = CM.MUNICIPIO_ID "
+                        + "JOIN CATALOGOS_ESTATUS CE ON DJ.ESTATUS = CE.ESTATUS_ID "
+                        + "JOIN USUARIOS_JUZGADOS UJ ON DJ.JUZGADO_CLAVE = UJ.JUZGADO_CLAVE "
+                        + "ORDER BY 1";
+            }
             rs = conn.consultar(sql);
             while (rs.next()) {
                 listaTabla.add(new String[]{
@@ -175,8 +228,8 @@ public class showJuzgados {
         try {
             conn.Conectar();
             listaDatosJuz = new ArrayList<>();
-            sql = "SELECT *  "
-                    + "FROM DATOS_JUZGADOS_ADOJC WHERE JUZGADO_CLAVE = '"+ juzgadoClave +"' "
+            sql = "SELECT * FROM DATOS_JUZGADOS_ADOJC "
+                    + "WHERE JUZGADO_CLAVE = '"+ juzgadoClave +"' "
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {

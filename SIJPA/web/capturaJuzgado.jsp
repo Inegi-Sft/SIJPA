@@ -16,10 +16,9 @@
         <%@include file="librerias.jsp"%>
         <script type="text/javascript" src="js/fnJuzgados.js"></script>
         <% 
-            //Unicamente lo utilizamos cuando recibimos la variable de Binevenida
+            //Unicamente lo utilizamos cuando recibimos la variable de Bienvenida
             if(request.getParameter("insert") != null){
                 int integer = Integer.parseInt(request.getParameter("insert"));
-                out.println("<script>alert('se esta editando');</script>");
                 out.println("<script>$(document).ready(function () {");
                 if(integer == 103){
                     out.println("alertify.alert('Confirmado','El Acuerdo fue Aceptado Correctamente', function(){"
@@ -198,6 +197,7 @@
                                 <label for="nomOrgano">Nombre del órgano jurisdiccional</label>
                                 <input type="text" name="nomOrgano" id="nomOrgano" value="<%=juzNom%>" required/>
                                 <input type="hidden" name="opera" id="opera" value="<%=operacion%>">
+                                <input type="hidden" name="usuActivo" id="usuActivo" value="${sessionScope.usuActivo}">
                             </td>
                             <td>
                                 <label for="numJuzgado">Número del órgano jurisdiccional</label>
@@ -254,7 +254,7 @@
                     <table  class="tablaFormu">
                         <tr>
                             <td>
-                                <div class="colsx oculto" id="DivEntidad">
+                                <div id="divEntidad">
                                     <label for="entidadJ">Entidad federativa</label>
                                     <select name="entidadJ" id="entidadJ" onchange="llenaMun('#entidadJ', '#municipioJ')" required>
                                         <option value="">--Seleccione--</option>
@@ -269,7 +269,11 @@
                                             }
                                         %>
                                     </select>
-                                    <label for="municipioJ">Municipio (Para CDMX Demarcación Territorial)</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div id="divMunicipio">
+                                    <label for="municipioJ" class="lblExBig">Municipio (Para CDMX Demarcación Territorial)</label>
                                     <select name="municipioJ" id="municipioJ" required>
                                         <option value="">--Seleccione--</option>
                                         <%
@@ -283,28 +287,6 @@
                                                         out.println(" selected ");
                                                     }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                                }
-                                            }
-                                        %>
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="colsx oculto" id="DivMunicipio">
-                                    <label for="municipioJ">Municipio o Demarcación Territorial de la CDMX</label>
-                                    <select name="municipioJ" id="municipioJ" required>
-                                        <option value="">--Seleccione--</option>
-                                        <%
-                                            if(entidad.equals("")){
-                                                out.println("<option value = ''>--Seleccione--</option>");
-                                            }else{
-                                                lista = cat.findMunicipios(Integer.parseInt(entidad));
-                                                for (String[] ls : lista) {
-                                                    out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(municipio)){
-                                                        out.println(" selected ");
-                                                    }
-                                                    out.println(">" + ls[1] + "</option>");
                                                 }
                                             }
                                         %>

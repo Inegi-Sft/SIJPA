@@ -178,13 +178,13 @@
                         <%
                             vic = sVicti.findProcesados(causaClave);
                             for (String[] pro : vic) {
-                                int idx=0;
+                                int idx = 0;
                                 vic = sDelitos.findDelitosCausa(causaClave);
                                 out.println("<tr>");
                                 out.println("<td rowspan='"+ vic.size() +"'>"+ pro[0].replace(juzgadoClave.replace("-", ""), "") +"</td>");
                                 out.println("<td rowspan='"+ vic.size() +"'>"+ pro[1] +"</td>");
                                 for (String[] ls : vic) {
-                                    if(idx!=0){
+                                    if(idx != 0){
                                         out.println("<tr>");
                                     }
                                     out.println("<td>" + ls[0].replace(juzgadoClave.replace("-", ""), "") + "</td>");

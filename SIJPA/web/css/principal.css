@@ -162,7 +162,7 @@ body{
     height: 40px;
     font-size: 16px;
     cursor: pointer;
-    margin: 2.5em 30% 0 30%;
+    margin: 1em 10% 0 10%;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -211,6 +211,11 @@ body{
     font-size: 25px;
     padding: 15px 0;
     text-shadow: grey 5px 5px 5px;
+}
+
+.contenedor p{
+    clear: both;
+    padding-top: 1em;
 }
 
 .contenedor .parrafo{
@@ -296,6 +301,35 @@ body{
     box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
 }
 
+.contenedor input[type="radio"]{
+    width:19px;
+    height:19px;
+    margin: 0 4px 0 0;
+    border: none;
+}
+
+.contenedor input[type="checkbox"]{
+    width:19px;
+    height:19px;
+    margin: 0 4px 0 0;
+    border: none;
+    vertical-align: text-bottom;
+}
+
+.contenedor input[type="checkbox"].chkAplica{
+    width: 20px;
+    height: 20px;
+    margin: 5px 0 0 0;
+}
+
+.contenedor input[type="checkbox"].chkAplica:checked {
+    background: #0077CB;
+}
+
+.contenedor input[type="file"]{
+    width:450px;
+}
+
 .contenedor select{
     background-color: #27251F;
     color: #fff;
@@ -378,16 +412,6 @@ fieldset legend{
     transition: all 0.3s ease;
 }
 
-/*.nota{
-    width:460px;
-    text-align: justify;
-    font-size: 13px;
-    color: darkred;
-    position: absolute;
-    top: 10px;
-    right: 1%;
-}*/
-
 .contenedor img{
     width: 20px;
 }
@@ -445,31 +469,6 @@ fieldset legend{
     color: #0077CB;
 }
 
-.contenedor input[type="radio"]{
-    width:19px;
-    height:19px;
-    margin: 0 4px 0 0;
-    border: none;
-}
-
-.contenedor input[type="checkbox"]{
-    width:19px;
-    height:19px;
-    margin: 0 4px 0 0;
-    border: none;
-    vertical-align: text-bottom;
-}
-
-.contenedor input[type="checkbox"].chkAplica{
-    width: 20px;
-    height: 20px;
-    margin: 5px 0 0 0;
-}
-
-.contenedor input[type="checkbox"].chkAplica:checked {
-    background: #0077CB;
-}
-
 .contenedor .chkCat{
     width: 360px;
     display: inline-block;
@@ -478,15 +477,28 @@ fieldset legend{
     text-align: left;
 }
 
+.contenedor .chkCat label{
+    display: inline;
+}
+
+.contenedor .chkCat1{/*se mantienen en el centro*/
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    float: left;
+}
+
+.contenedor .chkCat1 label{
+    display: inline;
+}
+
 .contenedor .chkMedi{
     width: auto;
     display: block;
     text-align: left;
 }
 
-.contenedor .chkCat label{
-    display: inline;
-}
 .contenedor .selectize-control{
     text-align: left;
     margin: 0 auto;
@@ -619,6 +631,7 @@ input[type=text]:read-only, input[type=date]:read-only, input[type=number]:read-
     cursor: default;
     background-color: rgba(239, 239, 239, 0.3);
     border-color: rgba(118, 118, 118, 0.3);
+    color: rgb(84, 84, 84);
 }
 
 .lista{

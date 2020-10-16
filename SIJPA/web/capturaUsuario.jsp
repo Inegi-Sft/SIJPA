@@ -4,6 +4,7 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="clasesAuxiliar.usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="clasesAuxiliar.catalogos"%>
@@ -17,8 +18,10 @@
         <script type="text/javascript" src="js/fnUsuarios.js"></script>
         <%
             catalogos cat = new catalogos();
-            ArrayList<String[]> lista, sUsuario;
-
+            ArrayList<String[]> listas, sUsuario;
+            ArrayList<String> lista;
+            
+            showJuzgados sJuz = new showJuzgados();
             usuario usuario = new usuario();
             int totUsuarios = usuario.findTotUsu();
             
@@ -116,15 +119,15 @@
                                     if(totUsuarios == 0){
                                         out.println("<select name='entidad' id='entidad' required>");
                                         out.println("<option value=''>--Seleccione--</option>");
-                                        lista = cat.findEntidades();
-                                        for (String[] ls : lista) {
+                                        listas = cat.findEntidades();
+                                        for (String[] ls : listas) {
                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
                                         out.println("</select>");
                                     }else{
                                         out.println("<select name='entidad' id='entidad' required>");
-                                        lista = usuario.findEntidad();
-                                        for (String[] ls : lista) {
+                                        listas = usuario.findEntidad();
+                                        for (String[] ls : listas) {
                                             out.println("<option value='" + ls[0] + "'");
                                             if(ls[0].equals(entidad)){
                                                 out.println(" select ");
@@ -134,6 +137,34 @@
                                         out.println("</select>");
                                     }
                                 %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <label>Asignar carga de Trabajo</label>
+                                <fieldset class="subField">
+                                    <%
+                                        lista = sJuz.findJuzgados();
+                                        if(lista.size() == 0){
+                                            out.println("No hay información");
+                                        }else{
+                                            for(String ls : lista){
+                                                out.println("<div class='chkCat1'>");
+                                                if(usuario.findUsuarioJuz(correo, ls)){
+                                                    out.println("<input type='checkbox' name='juzAsignado' id='juzAsignado' class='chkAplica' value='"+ ls +"' checked>");
+                                                }else{
+                                                    out.println("<input type='checkbox' name='juzAsignado' id='juzAsignado' class='chkAplica' value='"+ ls +"'>");
+                                                }
+                                                out.println("<label>" + ls + "</label>");
+                                                out.println("</div>");
+                                            }
+                                            out.println("<br><p>");
+                                            out.println("<strong>NOTA:</strong> Al no asignarle carga de trabajo al usuario, no podra visualizar ningun juzgado, "
+                                                    + "unicamente los que comience a capturar.");
+                                            out.println("</p>");
+                                        }
+                                    %>
+                                </fieldset>
                             </td>
                         </tr>
                         <tr>

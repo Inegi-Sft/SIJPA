@@ -10,7 +10,6 @@ import clasesAuxiliar.showReportes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,6 +42,7 @@ public class obtenReportes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession sesion = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             //Diferente de null(vacio o con dato) quiere decir que envio el formulario entonces hacemos las consultas
             if(request.getParameter("juzReporClave") != null){
@@ -54,7 +55,6 @@ public class obtenReportes extends HttpServlet {
                 }
                 //Traemos las descripciones de los catalogos para los reportes
                 desReporte = cat.findReportes();
-                System.out.println("size: " + desReporte.size());
                 for(int x = 0; x < desReporte.size(); x++){
                     out.println("<tr>");
                     out.println("<td>" + desReporte.get(x)[0] + "</td><td>" + desReporte.get(x)[1] + "</td><td>" + listas.get(0)[x] + "</td>");
@@ -64,12 +64,12 @@ public class obtenReportes extends HttpServlet {
                 showJuzgados sJuz = new showJuzgados();
                 out.println("<option value=''>--Seleccione--</option>");
                 if(request.getParameter("sisRepor").equals("1")){//Juzgado de control
-                    lista = sJuz.findJuzgadosJC();
+                    lista = sJuz.findJuzgadosJC((Integer)sesion.getAttribute("tipoUsuario"), (String)sesion.getAttribute("usuActivo"));
                     for(String ls : lista){
                         out.println("<option value='" + ls + "'>" + ls + "</option>");
                     }
                 }else if(request.getParameter("sisRepor").equals("2")){//Juicio oral
-                    lista = sJuz.findJuzgadosJO();
+                    lista = sJuz.findJuzgadosJO((Integer)sesion.getAttribute("tipoUsuario"), (String)sesion.getAttribute("usuActivo"));
                     for(String ls : lista){
                         out.println("<option value='" + ls + "'>" + ls + "</option>");
                     }

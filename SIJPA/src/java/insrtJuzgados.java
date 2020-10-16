@@ -47,6 +47,7 @@ public class insrtJuzgados extends HttpServlet {
         HttpSession sesion = request.getSession();
         
         String opera = request.getParameter("opera");//Control para saber si se inserta o se actualiza
+        String usuActivo = request.getParameter("usuActivo");//Control para relacionar el juzgado reien insertado con el usuario
         String jClaveR = request.getParameter("jClaveR");//Recibimos juzgado clave para el Update
         //Datos Organo Jurisdiccional
         String nomOrgano = request.getParameter("nomOrgano").toUpperCase();
@@ -130,6 +131,11 @@ public class insrtJuzgados extends HttpServlet {
                         resul = conn.escribir(sql);
                     }
                     if(resul){
+                        //insertamos el juzgado al usuario que lo capturo para su relacion
+                        sql = "INSERT INTO USUARIOS_JUZGADOS VALUES('" + usuActivo + "','" + juzgadoClave + "')";
+                        System.out.println(sql);
+                        conn.escribir(sql);
+                        
                         //inserta un juez no aplica de acuerdo a el juzgado necesario para que funcionen los no identificados
                         sql = "INSERT INTO DATOS_JUECES_ADOJC VALUES (" + entidadJ + "," + municipioJ + ","
                                 + numOrgano + ",'" + juzgadoClave + "', -2, '-2', '-2', '-2', '1899-09-09', -2, -2, -2, -2, 1, (select YEAR(NOW())))";

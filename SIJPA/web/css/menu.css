@@ -81,6 +81,7 @@ nav ul li a {
     line-height: 60px;
     font-size: 18px;
     color: #fff;
+    cursor: pointer;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -121,6 +122,7 @@ nav ul li:hover > ul{
 nav ul li ul li{
     background-color: #666666;
     border-bottom: 1px solid #27251F;
+    cursor: pointer;
 }
 
 .toggle-nav {

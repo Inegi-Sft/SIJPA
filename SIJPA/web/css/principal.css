@@ -162,7 +162,7 @@ body{
     height: 40px;
     font-size: 16px;
     cursor: pointer;
-    margin: 1em 10% 0 10%;
+    margin: .5em 10% .5em 10%;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -175,6 +175,7 @@ body{
     width: 30%;
     font-size: 18px;
     box-shadow: 5px 5px 5px rgba(0, 119, 203, 0.3);
+    margin: 0em 5% 0em 10%;
 }
 
 .contenedor .txtSmall{width: 70px !important;}

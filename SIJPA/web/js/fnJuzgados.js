@@ -24,10 +24,6 @@ $(document).ready(function() {
         $('#numOrgano').prop('readonly', true);
 //        $("#entidadJ option:not(:selected)").attr("disabled", true);
         $("#entidadJ, #municipioJ").addClass("inactivo");
-//        $("#entidadJ, #municipioJ").css({"pointer-events":"none",
-//                            "background-color":"rgba(239, 239, 239, 0.3)",
-//                            "border-color":"rgba(118, 118, 118, 0.3)",
-//                            "color": "rgb(84, 84, 84)"});
     }
     
     //para recuperacion de bd

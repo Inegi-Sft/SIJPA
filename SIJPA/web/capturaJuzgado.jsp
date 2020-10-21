@@ -474,11 +474,7 @@
                                 <label for="causasBajaJC">Causas penales que causaron baja en el sistema</label>
                                 <input type="number" name="causasBajaJC" id="causasBajaJC" value="<%=causaBajaJC%>" min="0">
                             </td>
-                            <td>
-<!--                                <div id="divBanderaJC" class="oculto">
-                                    <input type="text" name="banderaJC" id="banderaJC" value="-2">
-                                </div>-->
-                            </td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
@@ -545,17 +541,8 @@
                                 <label for="causasBajaJO">Causas penales que causaron baja en el sistema</label>
                                 <input type="number" name="causasBajaJO" id="causasBajaJO" value="<%=causaBajaJO%>" min="0">
                             </td>
-                            <td>
-<!--                                <div id="divBanderaJO" class="oculto">
-                                    <input type="text" name="banderaJO" id="banderaJO" value="2">
-                                </div>-->
-                            </td>
-                            <td>
-<!--                                <div id="divBanderaJOGuardar" class="oculto">
-                                <label for="banderaJOGuardar">Providencias precautorias (solicitudes)</label>
-                                <input type="number" name="banderaJOGuardar" id="banderaJOGuardar" min="0">
-                                </div>-->
-                            </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </table>
                 </div> 

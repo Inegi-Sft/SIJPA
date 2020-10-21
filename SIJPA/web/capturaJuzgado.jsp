@@ -182,11 +182,11 @@
             <h1>Captura Órgano Jurisdiccional</h1>
             <div class="pestana">
                 <button class="pestanaLinks active" onclick="openPestana('btn1', 'p1')" id="btn1">Datos Principales</button>
-                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2">Ubicación</button>
-                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3">Domicilio</button>
-                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4">Datos Captura</button>
-                <button class="pestanaLinks oculto" onclick="openPestana('btn5', 'p5')" id="btn5">Información General JC</button>
-                <button class="pestanaLinks oculto" onclick="openPestana('btn6', 'p6')" id="btn6">Información General JO</button>
+                <button class="pestanaLinks" onclick="openPestana('btn2', 'p2')" id="btn2" disabled>Ubicación</button>
+                <button class="pestanaLinks" onclick="openPestana('btn3', 'p3')" id="btn3" disabled>Domicilio</button>
+                <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Datos Captura</button>
+                <button class="pestanaLinks oculto" onclick="openPestana('btn5', 'p5')" id="btn5" disabled>Información General JC</button>
+                <button class="pestanaLinks oculto" onclick="openPestana('btn6', 'p6')" id="btn6" disabled>Información General JO</button>
             </div>
             <form action="insrtJuzgados" method="post" name="formJuzgados">
                 <div id="p1" class="pestanaContent" style="display: block">
@@ -560,7 +560,7 @@
                     </table>
                 </div> 
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Guardar" onclick="valida();"/>
+                <input type="submit" name="guardar" id="guardar" value="Siguiente" onclick="valida();"/>
             </form>
         </section>
     </body>

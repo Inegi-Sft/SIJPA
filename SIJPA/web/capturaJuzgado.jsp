@@ -201,7 +201,7 @@
                             </td>
                             <td>
                                 <label for="numJuzgado">Número del órgano jurisdiccional</label>
-                                <input type="text" class="soloNum" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" maxlength="3" onkeyup="quitaCeros(this)" required/>
+                                <input type="text" class="soloNum" name="numOrgano" id="numOrgano" value="<%=juzNum%>" min="0" maxlength="3" onkeyup="quitaCeros(this);" required/>
                                 <input type="hidden" name="jClaveR" id="jClaveR" value="<%=juzClave%>">
                             </td>
                             <td>
@@ -228,7 +228,7 @@
                             </td>
                             <td>
                                 <label for="correo">Correo del órgano jurisdiccional</label>
-                                <input type="email" name="correo" id="correo" placeholder="nombre@dominio.com" value="<%=correo%>" />
+                                <input type="text" name="correo" id="correo" placeholder="nombre@dominio.com" value="<%=correo%>" />
                             </td>
                             <td>
                                 <label for="funcionJuz">Funcion del órgano jurisdiccional</label>
@@ -283,7 +283,7 @@
                                                 lista = cat.findMunicipios(Integer.parseInt(entidad));
                                                 for (String[] ls : lista) {
                                                     out.println("<option value='" + ls[0] + "'");
-                                                    if(ls[0].equals(entidad)){
+                                                    if(ls[0].equals(municipio)){
                                                         out.println(" selected ");
                                                     }
                                                     out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
@@ -426,7 +426,7 @@
                                     que sean o no competentes, así como de incompetencias de otros órganos jurisdiccionales, 
                                     materias o fueros)
                                 </div>
-                                <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas</label>
+                                <label for="causasIngresaJO" id="causasPinfoJC">Causas penales ingresadas</label>
                                 <%
                                     int conteoCausaPenaInJC;
                                     conteoCausaPenaInJC = sJuzgado.countCausasPenIn(juzClave, 1);
@@ -475,9 +475,9 @@
                                 <input type="number" name="causasBajaJC" id="causasBajaJC" value="<%=causaBajaJC%>" min="0">
                             </td>
                             <td>
-                                <div id="divBanderaJC" class="oculto">
+<!--                                <div id="divBanderaJC" class="oculto">
                                     <input type="text" name="banderaJC" id="banderaJC" value="-2">
-                                </div>
+                                </div>-->
                             </td>
                         </tr>
                     </table>
@@ -546,21 +546,21 @@
                                 <input type="number" name="causasBajaJO" id="causasBajaJO" value="<%=causaBajaJO%>" min="0">
                             </td>
                             <td>
-                                <div id="divBanderaJO" class="oculto">
+<!--                                <div id="divBanderaJO" class="oculto">
                                     <input type="text" name="banderaJO" id="banderaJO" value="2">
-                                </div>
+                                </div>-->
                             </td>
                             <td>
-                                <div id="divBanderaJOGuardar" class="oculto">
+<!--                                <div id="divBanderaJOGuardar" class="oculto">
                                 <label for="banderaJOGuardar">Providencias precautorias (solicitudes)</label>
                                 <input type="number" name="banderaJOGuardar" id="banderaJOGuardar" min="0">
-                                </div>
+                                </div>-->
                             </td>
                         </tr>
                     </table>
                 </div> 
                 <br>
-                <input type="submit" name="guardar" id="guardar" value="Siguiente" onclick="valida();"/>
+                <input type="submit" name="guardar" id="guardar" value="Siguiente" onclick="return valida();"/>
             </form>
         </section>
     </body>

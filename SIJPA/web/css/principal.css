@@ -777,3 +777,10 @@ div.pValidacion .tablasRegis tbody{
     width: 500px;
     background-color: rgba(183, 255, 170, 0.6);
 }
+
+select.inactivo{
+    pointer-events:none;
+    background-color: rgba(239, 239, 239, 0.3);
+    border: 2px solid rgba(118, 118, 118, 0.3);
+    color: rgb(84, 84, 84);
+}

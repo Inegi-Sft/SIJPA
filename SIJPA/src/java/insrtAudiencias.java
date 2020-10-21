@@ -84,7 +84,6 @@ public class insrtAudiencias extends HttpServlet {
             
             //****************************  I N S E R T A  *******************************************
             if (operacion.equals("insertar")){
-                
                 if(audiInves != null){
                     for(int i=0; i<audiInves.length; i++){
                         sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"

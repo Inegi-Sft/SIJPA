@@ -108,6 +108,12 @@ body{
     height: 45px;
 }
 
+#login h5{
+    font-size: 12px;
+    margin-top: 25px;
+    color: #7cff6c;
+}
+
 #mensajeAdmin{
     background-color: rgba(0,0,0,0.8);
     color: #FFF;

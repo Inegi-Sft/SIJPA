@@ -41,7 +41,6 @@ public class catalogos {
             Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-
     }
 
     public ArrayList findAlfabetismo() {

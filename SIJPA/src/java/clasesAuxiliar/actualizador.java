@@ -25,8 +25,8 @@ public class actualizador {
     public boolean findTablaVersion(){
         try {
             conn.Conectar();
-            lista = new ArrayList();
             sql = "SELECT * FROM INFORMATION_SCHEMA.tables WHERE TABLE_SCHEMA = 'sijpa_db' AND TABLE_NAME = 'VERSION_SISTEMA'";
+            //System.out.println(sql);
             resul = conn.consultar(sql);
             return resul.next();
         } catch (SQLException ex) {

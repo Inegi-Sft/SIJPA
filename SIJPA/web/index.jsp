@@ -25,25 +25,6 @@
                         + "$.ajax({"
                         + "type: 'post',"
                         + "url: 'actualiza',"
-                        + "data: {crear 'Si'},"
-                        + "success: function (response) {"
-                        + "console.log('Respuesta del servidor actualiza ', response);"
-                        + "$('.load').fadeOut();"
-                        + "if (response === '1') {"
-                        + "alert('Actualizado correctamente');"
-                        + "}"
-                        + "}"
-                        + "});"
-                        + "});</script>");
-            }
-            System.out.println("es la version igual: " + act.findVersion("BETA 1"));
-            //Verificacmos que version de sistema tiene para poder actualizar si es diferente
-            if(!act.findVersion("BETA 1")){
-                out.println("<script>$(document).ready(function () {"
-                        + "$('.load').show();"
-                        + "$.ajax({"
-                        + "type: 'post',"
-                        + "url: 'actualiza',"
                         + "data: {version: $('#version').html()},"
                         + "success: function (response) {"
                         + "console.log('Respuesta del servidor actualiza ', response);"
@@ -54,10 +35,29 @@
                         + "}"
                         + "});"
                         + "});</script>");
-            }else{
-                version = act.version();
-                System.out.println("La version es: " + version);
             }
+            //System.out.println("es la version igual: " + act.findVersion("BETA 1"));
+            //Verificacmos que version de sistema tiene para poder actualizar si es diferente
+//            if(!act.findVersion("BETA 1")){
+//                out.println("<script>$(document).ready(function () {"
+//                        + "$('.load').show();"
+//                        + "$.ajax({"
+//                        + "type: 'post',"
+//                        + "url: 'actualiza',"
+//                        + "data: {version: $('#version').html()},"
+//                        + "success: function (response) {"
+//                        + "console.log('Respuesta del servidor actualiza ', response);"
+//                        + "$('.load').fadeOut();"
+//                        + "if (response === '1') {"
+//                        + "alert('Actualizado correctamente');"
+//                        + "}"
+//                        + "}"
+//                        + "});"
+//                        + "});</script>");
+//            }else{
+//                version = act.version();
+//                System.out.println("La version es: " + version);
+//            }
             
             //Si cierran sesion borramos las Variables de Session
             if(session.getAttribute("usuActivo") != null){
@@ -89,7 +89,7 @@
         %>
     </head>
     <body>
-        <div class="load"></div>
+        <!--<div class="load"></div>-->
         <div id="splash" class="oculto">
             <img src="img/logo_sijpa.png">
         </div>

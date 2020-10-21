@@ -4,6 +4,7 @@
     Author     : CARLOS.SANCHEZG
 --%>
 
+<%@page import="clasesAuxiliar.actualizador"%>
 <%@page import="clasesAuxiliar.usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,6 +15,50 @@
         <%@include file="librerias.jsp"%>
         <script type="text/javascript" src="js/fnIndex.js"></script>
         <%
+            String version = "";
+            //Verificamos si la tabla de versiones existe si no la creamos
+            actualizador act = new actualizador();
+            System.out.println("existe tabla version: " + act.findTablaVersion());
+            if(!act.findTablaVersion()){
+                out.println("<script>$(document).ready(function () {"
+                        + "$('.load').show();"
+                        + "$.ajax({"
+                        + "type: 'post',"
+                        + "url: 'actualiza',"
+                        + "data: {crear 'Si'},"
+                        + "success: function (response) {"
+                        + "console.log('Respuesta del servidor actualiza ', response);"
+                        + "$('.load').fadeOut();"
+                        + "if (response === '1') {"
+                        + "alert('Actualizado correctamente');"
+                        + "}"
+                        + "}"
+                        + "});"
+                        + "});</script>");
+            }
+            System.out.println("es la version igual: " + act.findVersion("BETA 1"));
+            //Verificacmos que version de sistema tiene para poder actualizar si es diferente
+            if(!act.findVersion("BETA 1")){
+                out.println("<script>$(document).ready(function () {"
+                        + "$('.load').show();"
+                        + "$.ajax({"
+                        + "type: 'post',"
+                        + "url: 'actualiza',"
+                        + "data: {version: $('#version').html()},"
+                        + "success: function (response) {"
+                        + "console.log('Respuesta del servidor actualiza ', response);"
+                        + "$('.load').fadeOut();"
+                        + "if (response === '1') {"
+                        + "alert('Actualizado correctamente');"
+                        + "}"
+                        + "}"
+                        + "});"
+                        + "});</script>");
+            }else{
+                version = act.version();
+                System.out.println("La version es: " + version);
+            }
+            
             //Si cierran sesion borramos las Variables de Session
             if(session.getAttribute("usuActivo") != null){
                 session.invalidate();
@@ -44,10 +89,11 @@
         %>
     </head>
     <body>
-        <div id="splash" hidden="true">
+        <div class="load"></div>
+        <div id="splash" class="oculto">
             <img src="img/logo_sijpa.png">
         </div>
-        <div id="login" hidden="true">
+        <div id="login" class="oculto">
             <img src="img/logo_sijpa.png" id="imgLogo"/>
             <form method="post" name="formLogin" id="formLogin">
                 <label for="nomUsu">Usuario</label>
@@ -56,6 +102,7 @@
                 <input type="password" id="passUsu" name="passUsu" required style="letter-spacing: 2px; font-size: 22px;"/>
                 <input type="submit" name="enviaUsu" id="enviaUsu" value="Ingresar"/>
             </form>
+            <h5 id="version"><%=version%></h5>
         </div>
     </body>
 </html>

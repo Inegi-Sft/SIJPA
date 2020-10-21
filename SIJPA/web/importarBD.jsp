@@ -25,9 +25,9 @@
             </div>
             <h1>IMPORTACIÓN DE BASE DE DATOS SIJPA</h1><br>
             <!--<h2>Caracteristicas Exportación</h2>-->
-            <form id="form_import" method="post" enctype="multipart/form-data"> 
+            <form id="formImport" method="post" enctype="multipart/form-data"> 
                 <!--enctype ="multipart/form-data"-->
-                <table  class="tablaFormu">
+                <table class="tablaFormu">
                     <%
                         if((Integer)session.getAttribute("tipoUsuario") == 1){
                             out.println("<tr>");
@@ -76,7 +76,7 @@
                                 out.println("<td>");
                             } 
                         %>
-                            <label for="nombreArchivo">Seleccionar Archivos</label>
+                            <label for="archivos">Seleccionar Archivos</label>
                             <input type="file" name="archivos" id="archivos" required/>
                         <%
                             if((Integer)session.getAttribute("tipoUsuario") == 1){
@@ -88,7 +88,6 @@
                         %>
                     </tr>
                 </table>
-                <br/>
                 <br/>
                 <input type="submit" name="importaBD" id="importaBD" value="Importar">
             </form>

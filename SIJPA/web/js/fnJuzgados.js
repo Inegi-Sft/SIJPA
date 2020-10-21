@@ -32,7 +32,7 @@ $(document).ready(function() {
     if($('#nomOrgano').val() === ''){
         $('#banderaJC').val('');
         $('#banderaJO').val('');
-        $('#banderaJOGuardar').prop('required',true);
+//        $('#banderaJOGuardar').prop('required',true);
         $('#guardar').val("Siguiente");
     }
     

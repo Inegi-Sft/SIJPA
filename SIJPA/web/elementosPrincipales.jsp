@@ -13,10 +13,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Elementos JC</title>
+        <%@include file="validaSesion.jsp" %>
         <%@include file="librerias.jsp" %>
         <%  
             showDelitos delito = new showDelitos();
@@ -45,8 +46,6 @@
             String jc = "";
             if(session.getAttribute("juzgadoClave") != null){
                 jc = (String)session.getAttribute("juzgadoClave");
-            }else{
-                response.sendRedirect("index.jsp?insert=600");
             }
             
             int y = 0;
@@ -58,9 +57,9 @@
             }
         %>
     </head>
-    <body>
+    
         <%@include file="cabecera.jsp"%>
-        <section class="contenedor">
+        
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
@@ -489,6 +488,6 @@
                     </tbody>
                 </table>
             </div>
-        </section>
-    </body>
-</html>
+        
+    
+

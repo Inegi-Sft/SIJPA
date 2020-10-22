@@ -57,9 +57,9 @@
             }
         %>
     </head>
-    
+    <body>
         <%@include file="cabecera.jsp"%>
-        
+        <section class="contenedor">
             <a class="btnCerrar" title="Cerrar" href="causasPenales.jsp" >X</a>
             <br/>
             <div class="pestana">
@@ -488,6 +488,6 @@
                     </tbody>
                 </table>
             </div>
-        
-    
-
+        </section>
+    </body>
+</html>

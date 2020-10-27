@@ -19,6 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Causas Penales JC</title>
+        <%@include file="validaSesion.jsp" %>
         <%@include file="librerias.jsp" %>
         <%
             //Unicamente lo utilizamos cuando recibimos el primer juez por juzgado

@@ -245,7 +245,6 @@
                                             out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
-                                    <option value="-9">No identificado</option>
                                 </select>
                             </td>
                            

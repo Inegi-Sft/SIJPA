@@ -66,7 +66,7 @@ $(document).ready(function () {
             alertify.alert('Importante', 'Al seleccionar "Mixto" se debe de tener al menos 2 Imputados registrados');
             $('#Tadolescentes').val('2').attr({'required': true, 'min': 2});
         }else{
-            $('#Tadolescentes').val('').attr({'required': true, 'min': 0});
+            $('#Tadolescentes').val('').attr('required', true).removeAttr('min');
         }
     });
     

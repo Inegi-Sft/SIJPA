@@ -375,7 +375,7 @@
                             </td>
                             <td>
                                 <label for="edadVi">Edad</label>
-                                <select name="edadVi" id="edadVi">
+                                <select name="edadVi" id="edadVi" required>
                                     <option value="">--Seleccione--</option>
                                     <option value="-2">-2</option>
                                     <%

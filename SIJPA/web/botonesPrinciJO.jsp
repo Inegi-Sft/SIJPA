@@ -16,7 +16,7 @@
         int avance = usu.findAvanceUsuarioJO(request.getParameter("causaClaveJO") + juzgadoClave.replace("-", ""));
         etapas = sEtapaOral.findEtapaCausaJO(request.getParameter("causaClaveJO") + juzgadoClave.replace("-", ""));
         String [] pestanas = {"Causa Penal","Delitos","Imputados","Victimas","Juicio Oral",
-            "Conclusión y/o Terminación","Tramite"};
+            "Conclusión y/o Terminación","Trámite"};
         
         out.println("<button class='pestanaLinks active' onclick=\"openPestana('btn1', 'p1')\" id='btn1'>" + pestanas[0] + "</button>");
         
@@ -60,7 +60,7 @@
     <button class="pestanaLinks" onclick="openPestana('btn4', 'p4')" id="btn4" disabled>Victimas</button>
     <button class="pestanaLinks" onclick="openPestana('btn5', 'p5')" id="btn5" disabled>Juicio Oral</button>
     <button class="pestanaLinks" onclick="openPestana('btn6', 'p6')" id="btn6" disabled>Conclusion</button>
-    <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" disabled>Tramite</button>
+    <button class="pestanaLinks" onclick="openPestana('btn7', 'p7')" id="btn7" disabled>Trámite</button>
     <button class="pestanaLinks oculto" onclick="openPestana('btn8', 'p8')" id="btn8" disabled>Volando</button>
 <%
     }

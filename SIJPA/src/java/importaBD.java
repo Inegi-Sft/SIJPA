@@ -10,8 +10,6 @@ import java.io.*;
 import clasesAuxiliar.manipulaArchivoSIJPA;
 import clasesAuxiliar.LeeSIJPA;
 import clasesAuxiliar.manejaCSV;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;

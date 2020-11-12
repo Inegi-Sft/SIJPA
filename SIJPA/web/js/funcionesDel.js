@@ -160,7 +160,7 @@ $(document).ready(function () {
                     if (response[6] === numDeli) {
                         parent.openPestana('btn3', 'p3');
                     } else {
-                        alert('Falta por capturar ' + (numDeli - response[6]) + ' delitos');
+                        //alert('Falta por capturar ' + (numDeli - response[6]) + ' delitos');
                     }
                 }
                 parent.$.fancybox.close();

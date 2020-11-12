@@ -7,7 +7,6 @@ $(document).ready(function() {
     
     //para recuperacion de bd
     if($('#opera').val() === 'actualizar'){
-        
         //muestra todos los botons habilitados
         $('#btn2, #btn3, #btn4').prop('disabled', false);
         $('#guardar').val("Guardar");
@@ -23,7 +22,7 @@ $(document).ready(function() {
         //deshabilita los campos que forman la clave para no ser editado
         $('#numOrgano').prop('readonly', true);
 //        $("#entidadJ option:not(:selected)").attr("disabled", true);
-        $("#entidadJ, #municipioJ").addClass("inactivo");
+        $("#entidadJ, #municipioJ, #funcionJuz").addClass("inactivo");
     }
     
     //para recuperacion de bd
@@ -193,7 +192,11 @@ function valida(){
             openPestana('btn5', 'p5');
             return false;// no envia formulario
         }else{
-            return true; //si envia formulario
+            var resp = confirm('Una vez guardado el Juzgado no podra ser editado el Numero del organo, Municipio, Entidad y Funcion del organo\n'
+                            + 'Seguro que desea continuar?');
+            if(!resp){
+                return false; //si envia formulario
+            }
         }
     }else if($('#funcionJuz').val() === '2'){
         if($("#btn6").is(":disabled")){
@@ -201,21 +204,27 @@ function valida(){
             openPestana('btn6', 'p6');
             return false;// no envia formulario
         }else{
-            return true; //si envia formulario
+            var resp = confirm('Una vez guardado el Juzgado no podra ser editado el Numero del organo, Municipio, Entidad y Funcion del organo\n'
+                            + 'Seguro que desea continuar?');
+            if(!resp){
+                return false; //si envia formulario
+            }
         }
     }else if($('#funcionJuz').val() === '3'){
         if($("#btn5").is(":disabled") && $("#btn6").is(":disabled")){
-            alert("no envia");
             $('#guardar').val("Guardar");
             openPestana('btn6', 'p6');
             openPestana('btn5', 'p5');
             return false;// no envia formulario
         }else{
-            alert("si envia");
-            return true; //si envia formulario
+            var resp = confirm('Una vez guardado el Juzgado no podra ser editado el Numero del organo, Municipio, Entidad y Funcion del organo\n'
+                            + 'Seguro que desea continuar?');
+            if(!resp){
+                return false; //si envia formulario
+            }
         }
     }
-} 
+}
     
 function quitaCeros(elemento){
     var valor = elemento.value.replace(/^0*/, '');

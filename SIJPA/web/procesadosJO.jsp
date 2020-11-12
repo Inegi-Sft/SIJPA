@@ -273,8 +273,12 @@
                                             if(Integer.toString(i).equals(edad)){
                                                 out.println(" selected ");
                                             }
-                                            out.println(">" + i + "</option>");
-                                                    
+                                            out.println(">" + i + "</option>");     
+                                        }
+                                        if(edad.equals("-9")){
+                                            out.println("<option value='-9' selected>No identificado</option>");
+                                        }else{
+                                            out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
                                     <option value="-9">No identificado</option>
@@ -292,8 +296,12 @@
                                             if(Integer.toString(i).equals(edadJuzgado)){
                                                 out.println(" selected ");
                                             }
-                                            out.println(">" + i + "</option>");
-                                                    
+                                            out.println(">" + i + "</option>");       
+                                        }
+                                        if(edad.equals("-9")){
+                                            out.println("<option value='-9' selected>No identificado</option>");
+                                        }else{
+                                            out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
                                     <option value="-9">No identificado</option>

@@ -303,7 +303,7 @@ $(document).ready(function() {
                     if (response[5] === numProce) {
                         parent.openPestana('btn5', 'p5');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[5]) + ' victimas');
+                        //alert('Falta por capturar ' + (numProce - response[5]) + ' victimas');
                     }
                 }
                 parent.$.fancybox.close();

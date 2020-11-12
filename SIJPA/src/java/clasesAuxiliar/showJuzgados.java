@@ -317,4 +317,22 @@ public class showJuzgados {
         return funcion;
     }
     
+    public int countTotCPJuzgados(String juzgadoClave){
+        int totCP = 0;
+        try {
+            conn.Conectar();
+            sql = "SELECT CPJC.TOTJC + CPJO.TOTJO TOTCP FROM "
+                    + "(SELECT COUNT(*) TOTJC FROM DATOS_CAUSAS_PENALES_ADOJC WHERE JUZGADO_CLAVE = '" + juzgadoClave + "') AS CPJC,"
+                    + "(SELECT COUNT(*) TOTJO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS CPJO;";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                totCP = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return totCP;
+    }
+    
 }

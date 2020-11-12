@@ -180,7 +180,7 @@ $(document).ready(function() {
                     if (response[5] === numProce) {
                         parent.openPestana('btn4', 'p4');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
+                        //alert('Falta por capturar ' + (numProce - response[5]) + ' procesados');
                     }
                 }
                 parent.$.fancybox.close();

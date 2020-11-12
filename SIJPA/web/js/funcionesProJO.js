@@ -152,7 +152,7 @@ $(document).ready(function() {
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 6; i++) {
 //                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaProcesaJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
+                        parent.$('#tablaProcesaJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
                     var enlace = parent.$('#tablaProcesaJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
@@ -160,14 +160,14 @@ $(document).ready(function() {
                     //colocamos el registro completo den etapa oral para ser llenado
                     var posicion = parent.$('#tablaJuicioJO tbody tr').length;//Posicion exacta para no generar errores
                     parent.$('#tablaJuicioJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] 
-                            + '</td><td></td><td></td><td></td><td></td><td></td>'
-                            + '<td><a class="pop" href="etapaOral.jsp?proceClaveJO=' + response[1] + '&posicion=' + posicion + '">'
+                            + '</td><td></td><td></td><td></td>'
+                            + '<td><a class="pop" href="etapaOral.jsp?proceClaveJO=' + response[1] + '&posicion=' + response[0] + '">'
                             + '<img src="img/editar.png" title="Modificar"/></a></td></tr>');
 //                    parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[2]);
                     if (response[6] === numProce) {
                         parent.openPestana('btn4', 'p4');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[6]) + ' procesados');
+                        //alert('Falta por capturar ' + (numProce - response[6]) + ' procesados');
                     }
                 }
                 parent.$.fancybox.close();

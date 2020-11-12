@@ -52,11 +52,11 @@ public class exportaReportes extends HttpServlet {
         catalogos cat = new catalogos();
         showReportes sRepor = new showReportes();
         if(request.getParameter("juzReporClave").equals("")){//Si juzgado viene vacio entonces hacemos consulta general por sistema
-            listas = sRepor.findReportesGral(request.getParameter("sisRepor"));
+            listas = sRepor.findReportesGral(request.getParameter("sisRepor"), request.getParameter("anioReporClave"));
             nomHoja = "REPORTES_GENERAL";
             nomArchivo = "REPORTES_SIJPA";
         }else{//Si juzgado viene lleno entonces hacemos consulta por sistema y por juzgado
-            listas = sRepor.findReportesJuz(request.getParameter("sisRepor"), request.getParameter("juzReporClave"));
+            listas = sRepor.findReportesJuz(request.getParameter("sisRepor"), request.getParameter("anioReporClave"), request.getParameter("juzReporClave"));
             nomHoja = "REPORTES_" + request.getParameter("juzReporClave");
             nomArchivo = "REPORTES_SIJPA_" + request.getParameter("juzReporClave");
         }

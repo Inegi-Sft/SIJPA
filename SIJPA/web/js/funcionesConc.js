@@ -216,7 +216,7 @@ $(document).ready(function() {
                     $('#tblDConclusiones tr > *:nth-child(4)').hide();
                     $('#tblDConclusiones input').prop({"checked": false, "required": true});
                 }else{
-                    alertify.alert('Mensaje Importante', 'Para el tipo de resoluci\u00F3n Mixta debe de haber por lo menos 2 delitos atribuidos al adolescente');
+                    alertify.alert('Mensaje Importante', 'Para el tipo de resolución Mixta debe de haber por lo menos 2 delitos atribuidos al adolescente');
                     $('#tipoResolucionPA').val('');
                     $('#dTipoMedidaPL,#dTipoMedidaNPL,#Dinternamiento').fadeOut("slow");
                     $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
@@ -291,7 +291,7 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopImmediatePropagation();
         if ($('#resolucion').val() === '2' && $('input[name="tipoSuspension"]:checked').length === 0) {
-            alert('Selecciona al menos una condici\u00F3n impuesta durante la suspensi\u00F3n condicional del proceso');
+            alert('Selecciona al menos una condición impuesta durante la suspensión condicional del proceso');
             $('#tipoSuspension').focus();
             return false;
         }

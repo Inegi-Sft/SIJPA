@@ -11,7 +11,6 @@ $(document).ready(function() {
     }
    
     //Se usa para la recuperacion de BD
-    // alert('Entro a balabla');
     if($('#estInvestiJO').val() === '4'){
         $('#dEspecifiqueJO').show();
     }

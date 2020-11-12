@@ -217,7 +217,7 @@ $(document).ready(function() {
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 6; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaVictimasJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
+                        parent.$('#tablaVictimasJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado con la nueva clav jo ya estando lleno
                     var enlace = parent.$('#tablaVictimasJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
@@ -226,7 +226,7 @@ $(document).ready(function() {
                     if (response[6] === numProce) {
                         parent.openPestana('btn5', 'p5');
                     } else {
-                        alert('Falta por capturar ' + (numProce - response[6]) + ' v\u00EDctimas');
+                        //alert('Falta por capturar ' + (numProce - response[6]) + ' v\u00EDctimas');
                     }
                 }
                 parent.$.fancybox.close();

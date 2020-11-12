@@ -446,7 +446,7 @@ $(document).ready(function() {
                                 }
                             }
                         } else {
-                            alert('Falta por capturar ' + (numProce - response[8]) + ' procesados');
+                            //alert('Falta por capturar ' + (numProce - response[8]) + ' procesados');
                         }
                     }
                     parent.$.fancybox.close();

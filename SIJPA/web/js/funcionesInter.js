@@ -295,7 +295,7 @@ $(document).ready(function() {
                                 }
                             }
                         } else {
-                            alert('Falta por capturar ' + (numProce - response[7]) + ' procesados');
+                            //alert('Falta por capturar ' + (numProce - response[7]) + ' procesados');
                         }
                     }
                     parent.$.fancybox.close();

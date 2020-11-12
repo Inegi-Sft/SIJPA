@@ -8,42 +8,6 @@ and open the template in the editor.
     Author     : CARLOS.SANCHEZG
 */
 
-/* IMPORTANT STUFF */
-
-/*.toggle-nav {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-
-    -webkit-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -o-transform: translate(0, 0);
-    transform: translate(0, 0);
-
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-.show-nav .toggle-nav {
-    -webkit-transform: translate(275px, 0);
-    -moz-transform: translate(275px, 0);
-    -ms-transform: translate(275px, 0);
-    -o-transform: translate(275px, 0);
-    transform: translate(275px, 0);
-
-    -webkit-transform: translate3d(275px, 0, 0);
-    -moz-transform: translate3d(275px, 0, 0);
-    -ms-transform: translate3d(275px, 0, 0);
-    -o-transform: translate3d(275px, 0, 0);
-    transform: translate3d(275px, 0, 0);
-}*/
-
 /* BASE CSS */
 nav{
     margin: 0 0 0 -280px;

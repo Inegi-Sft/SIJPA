@@ -16,13 +16,13 @@
         <li><a href="jueces.jsp">Jueces</a></li>
         <li><a href="causasPenales.jsp">Juzgado de Control</a></li>
         <li><a href="causasPenalesJO.jsp">Juicio Oral</a></li>
-        <li><a>Audiencias ...</a>
+        <li><a>Audiencias +</a>
             <ul>
                 <li><a href="audiencias.jsp">Audiencias JC</a></li>
                 <li><a href="audienciasJO.jsp">Audiencias JO</a></li>
             </ul>
         </li>
-        <li><a>Utilidades ...</a>
+        <li><a>Utilidades +</a>
             <ul>
                 <li><a href="exportarBD.jsp">Exportar BD</a></li>
                 <li><a href="importarBD.jsp">Importar BD</a></li>

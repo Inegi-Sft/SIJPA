@@ -422,7 +422,7 @@ public class exportaExcel {
 
     public void exportaTablaDroboJO() {
         SXSSFSheet hoja_DroboJO = this.mi_libro.createSheet("datos_drobo_adojo");
-        String[] metadatos_DroboJO = {"ANIO", "CAUSA_CLAVE", "DELITO_CLAVE",
+        String[] metadatos_DroboJO = {"ANIO", "CAUSA_CLAVEJO", "DELITO_CLAVE",
             "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID",
             "TIPO_COSA_ROBADA"
         };

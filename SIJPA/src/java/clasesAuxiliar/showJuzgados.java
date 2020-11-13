@@ -334,5 +334,24 @@ public class showJuzgados {
         }
         return totCP;
     }
-    
+
+    public ArrayList findEntidadExport(){
+        listaDatosJuz = new ArrayList<>();
+        try {
+            conn.Conectar();
+            sql = "SELECT J.ENTIDAD, E.DESCRIPCION FROM DATOS_JUZGADOS_ADOJC J "
+                + "INNER JOIN CATALOGOS_ENTIDADES E "
+                + "WHERE J.ENTIDAD=E.ENTIDAD_ID";
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                listaDatosJuz.add(new String[]{
+                    rs.getString(1), rs.getString(2)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaDatosJuz;
+    }
 }

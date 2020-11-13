@@ -3,7 +3,7 @@
     Created on : 7/09/2020, 05:15:00 PM
     Author     : JONATHAN.AGUIRRE
 --%>
-<%@page import="clasesAuxiliar.catalogos"%>
+<%@page import="clasesAuxiliar.showJuzgados"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,10 +34,9 @@
                             <label for="nombreArchivo">Entidad Federativa:</label>
                             <%      
                                 ArrayList<String[]> lista;
-                                catalogos cat = new catalogos();
+                                showJuzgados sj = new showJuzgados();
                                 out.println("<select name='entidad' id='entidad' required>");
-                                out.println("<option value=''>--Seleccione--</option>");
-                                lista = cat.findEntidades();
+                                lista = sj.findEntidadExport();
                                 for (String[] ls : lista) {
                                     out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                 }

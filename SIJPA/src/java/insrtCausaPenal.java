@@ -71,7 +71,7 @@ public class insrtCausaPenal extends HttpServlet {
             conn.Conectar();
             
             if(!opera.equals("actualizar")){//Si no hay causa entonces se inserta
-                sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
+                sql = "INSERT INTO DATOS_CAUSAS_PENALES_ADOJCs VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + juzgadClave + "','" + carpInvestiga + "','" + causaClave + jConcatenado + "','" + fechaIngreso + "',"
                         + nomJuez + "," + particular + ","+ InCausa +"," + competencia + "," + tipoIncompetencia + "," + acomulado + ",'" + referencia + "',"
                         + totalDeli + "," + totalAdo + "," + totalVic + ",'" + comentario + "', (select YEAR(NOW())))";

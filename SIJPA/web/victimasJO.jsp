@@ -381,7 +381,7 @@
                                     <%
                                         for (int m = 0; m <= 99; m++) {
                                             out.println("<option value='" + m + "'");
-                                            if(Integer.toString(m).equals(edadV)){
+                                            if(m == edadV){
                                                 out.println(" selected ");
                                             }
                                             out.println(">" + m + "</option>");        

@@ -47,7 +47,7 @@ public class exportaBD extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {           
         
-        //Si da clic en el botón exportaBD
+        //Si da clic en el botÃ³n exportaBD
         if(request.getParameter("exportaBD") != null){
             
             String nombre_archivo = "BD_"+request.getParameter("entidad")+"_"+request.getParameter("nombreArchivo").replace(" ","_");

@@ -34,7 +34,7 @@ $(document).ready(function() {
         $('#dPartJudicial').show();
     }
     
-    //obligamos a que el sistema siempre muestre el año aunque sea recuperacion de datos
+    //obligamos a que el sistema siempre muestre el aÃ±o aunque sea recuperacion de datos
     var anio = new Date().getFullYear();
     $('#ejercicio').append(new Option(anio, anio));
     $('#ejercicio').val(anio);

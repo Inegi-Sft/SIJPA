@@ -205,13 +205,11 @@ function valida(){
         }
     }else if($('#funcionJuz').val() === '3'){
         if($("#btn5").is(":disabled") && $("#btn6").is(":disabled")){
-            alert("no envia");
             $('#guardar').val("Guardar");
             openPestana('btn6', 'p6');
             openPestana('btn5', 'p5');
             return false;// no envia formulario
         }else{
-            alert("si envia");
             return true; //si envia formulario
         }
     }

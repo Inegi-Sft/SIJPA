@@ -48,7 +48,7 @@
             String asesor = "";
             String sexoVic = "";
             String fechaNaciV = "";
-            String edadV = "";
+            int edadV = 0;
             String vulnera = "";
             String paisNaci = "";
             String entiNaci = "";
@@ -83,7 +83,7 @@
                         asesor = victiJO.get(0)[3];
                         sexoVic = victiJO.get(0)[4];
                         fechaNaciV = victiJO.get(0)[5];
-                        edadV = victiJO.get(0)[6];
+                        edadV = Integer.parseInt(victiJO.get(0)[6]);
                         vulnera = victiJO.get(0)[7];
                         paisNaci = victiJO.get(0)[8];
                         entiNaci = victiJO.get(0)[9];
@@ -120,7 +120,7 @@
                     asesor = victiJC.get(0)[3];
                     sexoVic = victiJC.get(0)[4];
                     fechaNaciV = victiJC.get(0)[5];
-                    edadV = victiJC.get(0)[6];
+                    edadV = Integer.parseInt(victiJC.get(0)[6]);
                     vulnera = victiJC.get(0)[7];
                     paisNaci = victiJC.get(0)[8];
                     entiNaci = victiJC.get(0)[9];
@@ -381,10 +381,15 @@
                                     <%
                                         for (int m = 0; m <= 99; m++) {
                                             out.println("<option value='" + m + "'");
-                                            if(Integer.toString(m).equals(edadV)){
+                                            if(m == edadV){
                                                 out.println(" selected ");
                                             }
                                             out.println(">" + m + "</option>");        
+                                        }
+                                        if(edadV == -9){//validamos si el dato es No identificado -9
+                                            out.println("<option value='-9' selected>No identificado</option>");
+                                        }else{
+                                            out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
                                     <option value="-9">No identificado</option>

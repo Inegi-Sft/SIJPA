@@ -148,7 +148,7 @@ $(document).ready(function () {
                 if (response !== null && $.isArray(response)) {
                     for (var i = 1; i < 7; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
-                        parent.$('#tablaDeliJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
+                        parent.$('#tablaDeliJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
                     var enlace = parent.$('#tablaDeliJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
@@ -157,7 +157,7 @@ $(document).ready(function () {
                     if (response[7] === numDeli) {
                         parent.openPestana('btn3', 'p3');
                     } else {
-                        alert('Falta por capturar ' + (numDeli - response[7]) + ' delitos');
+                        //alert('Falta por capturar ' + (numDeli - response[7]) + ' delitos');
                     }
                 }
                 parent.$.fancybox.close();

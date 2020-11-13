@@ -19,18 +19,18 @@ import java.util.logging.Logger;
  */
 public class showReportes {
     Conexion_Mysql conn = new Conexion_Mysql();
+    ArrayList lista;
     ArrayList<String[]> reporte;
     String sql;
     ResultSet resul;
-    Calendar cal= Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR);
-    //Generamos el año en curso
-    String fechaIni = year + "-01-01";
-    String fechaFin = year + "-12-31";
     
     public ArrayList findReportesGral(String sistema){//Reportes generales por sistema
         try {
             conn.Conectar();
+            Calendar cal = Calendar.getInstance();
+            String anio = Integer.toString(cal.get(Calendar.YEAR)-1);
+            String fechaIni = anio + "-01-01";
+            String fechaFin = anio + "-12-31";
             reporte = new ArrayList();
             if(sistema.equals("1")){//Reportes de Juzgado de Control
                 sql = "SELECT CP.TCPIN, DE.TDI, DECO.DC, DET.DEGT, DENI.DECNI, VI.TVI, VIH.VH, VIM.VM, VIFNI.VFNI, VIPM.VPM, VIS.VS, "
@@ -234,8 +234,218 @@ public class showReportes {
         return reporte;
     }
     
-    public ArrayList findReportesJuz(String sistema, String juzgadoClave){//Reportes por sistema y por juzgado
+    public ArrayList findReportesGral(String sistema, String anio){//Reportes generales por sistema y por anio
         try {
+            conn.Conectar();
+            String fechaIni = anio + "-01-01";
+            String fechaFin = anio + "-12-31";
+            reporte = new ArrayList();
+            if(sistema.equals("1")){//Reportes de Juzgado de Control
+                sql = "SELECT CP.TCPIN, DE.TDI, DECO.DC, DET.DEGT, DENI.DECNI, VI.TVI, VIH.VH, VIM.VM, VIFNI.VFNI, VIPM.VPM, VIS.VS, "
+                        + "VIE.VE, VIO.VO, VINI.VNI, PR.TPI, PRCO.PCO, PRTR.PTR FROM "
+                        + "(SELECT COUNT(*) TCPIN FROM DATOS_CAUSAS_PENALES_ADOJC "
+                        + "WHERE COMPETENCIA = 1 "
+                        + "AND (FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND DATE '" + fechaFin + "')"
+                        + ") AS CP,"
+                        + "(SELECT COUNT(*) TDI FROM DATOS_DELITOS_ADOJC D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON D.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE D.GRADO_CONSUMACION <> -2 "
+                        + "AND (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND C.COMPETENCIA = 1) AS DE,"
+                        + "(SELECT COUNT(*) DC FROM DATOS_DELITOS_ADOJC D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON D.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND D.GRADO_CONSUMACION = 1 "
+                        + "AND C.COMPETENCIA = 1) AS DECO,"
+                        + "(SELECT COUNT(*) DEGT FROM DATOS_DELITOS_ADOJC D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON D.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND D.GRADO_CONSUMACION = 2 "
+                        + "AND C.COMPETENCIA = 1) AS DET,"
+                        + "(SELECT COUNT(*) DECNI FROM DATOS_DELITOS_ADOJC D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON D.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND D.GRADO_CONSUMACION = 9 "
+                        + "AND C.COMPETENCIA = 1) AS DENI,"
+                        + "(SELECT COUNT(*) TVI FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND C.COMPETENCIA = 1) AS VI,"
+                        + "(SELECT COUNT(*) VH FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 1 "
+                        + "AND V.SEXO = 1 "
+                        + "AND C.COMPETENCIA = 1) AS VIH,"
+                        + "(SELECT COUNT(*) VM FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 1 "
+                        + "AND V.SEXO = 2 "
+                        + "AND C.COMPETENCIA = 1) AS VIM,"
+                        + "(SELECT COUNT(*) VFNI FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 1 "
+                        + "AND V.SEXO = 9 "
+                        + "AND C.COMPETENCIA = 1) AS VIFNI,"
+                        + "(SELECT COUNT(*) VPM FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 2 "
+                        + "AND C.COMPETENCIA = 1) AS VIPM,"
+                        + "(SELECT COUNT(*) VS FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 3 "
+                        + "AND C.COMPETENCIA = 1) AS VIS,"
+                        + "(SELECT COUNT(*) VE FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 4 "
+                        + "AND C.COMPETENCIA = 1) AS VIE,"
+                        + "(SELECT COUNT(*) VO FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 5 "
+                        + "AND C.COMPETENCIA = 1) AS VIO,"
+                        + "(SELECT COUNT(*) VNI FROM DATOS_VICTIMAS_ADOJC V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON V.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 9 "
+                        + "AND C.COMPETENCIA = 1) AS VINI,"
+                        + "(SELECT COUNT(*) TPI FROM DATOS_PROCESADOS_ADOJC P "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON P.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "WHERE (C.FECHA_INGRESO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND C.COMPETENCIA = 1) AS PR,"
+                        + "(SELECT COUNT(*) PCO FROM DATOS_CONCLUSIONES_ADOJC CO "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON CO.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "INNER JOIN DATOS_PROCESADOS_ADOJC P ON CO.CAUSA_CLAVE = P.CAUSA_CLAVE "
+                        + "AND CO.PROCESADO_CLAVE = P.PROCESADO_CLAVE "
+                        + "WHERE (CO.FECHA_CONCLUSION BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND C.FECHA_INGRESO <= DATE '" + fechaFin + "') AS PRCO,"
+                        + "(SELECT COUNT(*) PTR FROM DATOS_TRAMITES_ADOJC TR "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJC C ON TR.CAUSA_CLAVE = C.CAUSA_CLAVE "
+                        + "INNER JOIN DATOS_PROCESADOS_ADOJC P ON TR.CAUSA_CLAVE = P.CAUSA_CLAVE "
+                        + "AND TR.PROCESADO_CLAVE = P.PROCESADO_CLAVE "
+                        + "WHERE (TR.FECHA_ACTO_PROCESAL BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND C.FECHA_INGRESO <= DATE '" + fechaFin + "' "
+                        + "AND TR.PROCESADO_CLAVE NOT IN(SELECT PROCESADO_CLAVE FROM DATOS_CONCLUSIONES_ADOJC)"
+                        + ") AS PRTR"
+                        + ";";
+            }else{//Reportes para Juicio Oral
+                sql = "SELECT CP.TCPIN, DE.TDI, DECO.DC, DET.DEGT, DENI.DECNI, VI.TVI, VIH.VH, VIM.VM, VIFNI.VFNI, VIPM.VPM, VIS.VS, "
+                        + "VIE.VE, VIO.VO, VINI.VNI, PR.TPI, PRCO.PCO, PRTR.PTR FROM "
+                        + "(SELECT COUNT(*) TCPIN FROM DATOS_CAUSAS_PENALES_ADOJO "
+                        + "WHERE (FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND DATE '" + fechaFin + "')"
+                        + ") AS CP,"
+                        + "(SELECT COUNT(*) TDI FROM DATOS_DELITOS_ADOJO D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE D.GRADO_CONSUMACION <> -2 "
+                        + "AND (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + ")AS DE,"
+                        + "(SELECT COUNT(*) DC FROM DATOS_DELITOS_ADOJO D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND D.GRADO_CONSUMACION = 1 "
+                        + ")AS DECO,"
+                        + "(SELECT COUNT(*) DEGT FROM DATOS_DELITOS_ADOJO D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND D.GRADO_CONSUMACION = 2 "
+                        + ") AS DET,"
+                        + "(SELECT COUNT(*) DECNI FROM DATOS_DELITOS_ADOJO D "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND D.GRADO_CONSUMACION = 9 "
+                        + ") AS DENI,"
+                        + "(SELECT COUNT(*) TVI FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + ") AS VI,"
+                        + "(SELECT COUNT(*) VH FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 1 "
+                        + "AND V.SEXO = 1 "
+                        + ") AS VIH,"
+                        + "(SELECT COUNT(*) VM FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 1 "
+                        + "AND V.SEXO = 2 "
+                        + ") AS VIM,"
+                        + "(SELECT COUNT(*) VFNI FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 1 "
+                        + "AND V.SEXO = 9 "
+                        + ") AS VIFNI,"
+                        + "(SELECT COUNT(*) VPM FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 2 "
+                        + ") AS VIPM,"
+                        + "(SELECT COUNT(*) VS FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 3 "
+                        + ") AS VIS,"
+                        + "(SELECT COUNT(*) VE FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 4 "
+                        + ") AS VIE,"
+                        + "(SELECT COUNT(*) VO FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 5 "
+                        + ") AS VIO,"
+                        + "(SELECT COUNT(*) VNI FROM DATOS_VICTIMAS_ADOJO V "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND V.TIPO_VICTIMA = 9 "
+                        + ") AS VINI,"
+                        + "(SELECT COUNT(*) TPI FROM DATOS_PROCESADOS_ADOJO P "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON P.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + ") AS PR,"
+                        + "(SELECT COUNT(*) PCO FROM DATOS_CONCLUSIONES_ADOJO CO "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON CO.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "INNER JOIN DATOS_PROCESADOS_ADOJO P ON CO.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
+                        + "AND CO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
+                        + "WHERE (CO.FECHA_CONCLUSION BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND C.FECHA_INGRESOJO <= DATE '" + fechaFin + "') AS PRCO,"
+                        + "(SELECT COUNT(*) PTR FROM DATOS_TRAMITES_ADOJO TR "
+                        + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON TR.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
+                        + "INNER JOIN DATOS_PROCESADOS_ADOJO P ON TR.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
+                        + "AND TR.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
+                        + "WHERE (TR.FECHA_ACTO_PROCESAL BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
+                        + "AND C.FECHA_INGRESOJO <= DATE '" + fechaFin + "' "
+                        + "AND TR.PROCESADO_CLAVE NOT IN(SELECT PROCESADO_CLAVEJO FROM DATOS_CONCLUSIONES_ADOJO)"
+                        + ") AS PRTR"
+                        + ";";
+            }
+            resul = conn.consultar(sql);
+            if(resul.next()) {
+                reporte.add(new String[]{
+                    resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4), resul.getString(5),
+                    resul.getString(6), resul.getString(7), resul.getString(8), resul.getString(9), resul.getString(10),
+                    resul.getString(11), resul.getString(12), resul.getString(13), resul.getString(14), resul.getString(15),
+                    resul.getString(16), resul.getString(17)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reporte;
+    }
+    
+    public ArrayList findReportesJuz(String sistema, String anio, String juzgadoClave){//Reportes por sistema, por año y por juzgado
+        try {
+            String fechaIni = anio + "-01-01";
+            String fechaFin = anio + "-12-31";
             conn.Conectar();
             reporte = new ArrayList();
             if(sistema.equals("1")){//Reportes de Juzgado de Control
@@ -352,85 +562,85 @@ public class showReportes {
                         + "VIE.VE, VIO.VO, VINI.VNI, PR.TPI, PRCO.PCO, PRTR.PTR FROM "
                         + "(SELECT COUNT(*) TCPIN FROM DATOS_CAUSAS_PENALES_ADOJO "
                         + "WHERE (FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND DATE '" + fechaFin + "') "
-                        + "AND JUZGADO_CLAVE = '" + juzgadoClave + "') AS CP,"
+                        + "AND JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS CP,"
                         + "(SELECT COUNT(*) TDI FROM DATOS_DELITOS_ADOJO D "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE D.GRADO_CONSUMACION <> -2 "
                         + "AND (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS DE,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS DE,"
                         + "(SELECT COUNT(*) DC FROM DATOS_DELITOS_ADOJO D "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND D.GRADO_CONSUMACION = 1 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS DECO,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS DECO,"
                         + "(SELECT COUNT(*) DEGT FROM DATOS_DELITOS_ADOJO D "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND D.GRADO_CONSUMACION = 2 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS DET,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS DET,"
                         + "(SELECT COUNT(*) DECNI FROM DATOS_DELITOS_ADOJO D "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON D.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND D.GRADO_CONSUMACION = 9 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS DENI,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS DENI,"
                         + "(SELECT COUNT(*) TVI FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VI,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VI,"
                         + "(SELECT COUNT(*) VH FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 1 "
                         + "AND V.SEXO = 1 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VIH,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VIH,"
                         + "(SELECT COUNT(*) VM FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 1 "
                         + "AND V.SEXO = 2 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VIM,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VIM,"
                         + "(SELECT COUNT(*) VFNI FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 1 "
                         + "AND V.SEXO = 9 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VIFNI,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VIFNI,"
                         + "(SELECT COUNT(*) VPM FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 2 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VIPM,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VIPM,"
                         + "(SELECT COUNT(*) VS FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 3 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VIS,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VIS,"
                         + "(SELECT COUNT(*) VE FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 4 "
-                        + "AND C.JUZGADO_CLAVE = " + juzgadoClave + "') AS VIE,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VIE,"
                         + "(SELECT COUNT(*) VO FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 5 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VIO,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VIO,"
                         + "(SELECT COUNT(*) VNI FROM DATOS_VICTIMAS_ADOJO V "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON V.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND V.TIPO_VICTIMA = 9 "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS VINI,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS VINI,"
                         + "(SELECT COUNT(*) TPI FROM DATOS_PROCESADOS_ADOJO P "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON P.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "WHERE (C.FECHA_INGRESOJO BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS PR,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS PR,"
                         + "(SELECT COUNT(*) PCO FROM DATOS_CONCLUSIONES_ADOJO CO "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON CO.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "INNER JOIN DATOS_PROCESADOS_ADOJO P ON CO.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
                         + "AND CO.PROCESADO_CLAVE = P.PROCESADO_CLAVEJO "
                         + "WHERE (CO.FECHA_CONCLUSION BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND C.FECHA_INGRESOJO <= DATE '" + fechaFin + "' "
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS PRCO,"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS PRCO,"
                         + "(SELECT COUNT(*) PTR FROM DATOS_TRAMITES_ADOJO TR "
                         + "INNER JOIN DATOS_CAUSAS_PENALES_ADOJO C ON TR.CAUSA_CLAVEJO = C.CAUSA_CLAVEJO "
                         + "INNER JOIN DATOS_PROCESADOS_ADOJO P ON TR.CAUSA_CLAVEJO = P.CAUSA_CLAVEJO "
@@ -438,8 +648,9 @@ public class showReportes {
                         + "WHERE (TR.FECHA_ACTO_PROCESAL BETWEEN  DATE '" + fechaIni + "' AND  DATE '" + fechaFin + "') "
                         + "AND C.FECHA_INGRESOJO <= DATE '" + fechaFin + "' "
                         + "AND TR.PROCESADO_CLAVE NOT IN(SELECT PROCESADO_CLAVEJO FROM DATOS_CONCLUSIONES_ADOJO)"
-                        + "AND C.JUZGADO_CLAVE = '" + juzgadoClave + "') AS PRTR"
+                        + "AND C.JUZGADO_CLAVEJO = '" + juzgadoClave + "') AS PRTR"
                         + ";";
+                System.out.println(sql);
             }
             resul = conn.consultar(sql);
             if(resul.next()) {
@@ -455,5 +666,25 @@ public class showReportes {
             Logger.getLogger(showProcesados.class.getName()).log(Level.SEVERE, null, ex);
         }
         return reporte;
+    }
+    
+    public ArrayList findCausasAnios(String sistema) {
+        try {
+            conn.Conectar();
+            lista = new ArrayList();
+            if(sistema.equals("1")){//Anios de Juzgado de Control
+                sql = "SELECT DISTINCT YEAR(FECHA_INGRESO) FROM DATOS_CAUSAS_PENALES_ADOJC;";
+            }else{//Anios para Juicio Oral
+                sql = "SELECT DISTINCT YEAR(FECHA_INGRESOJO) FROM DATOS_CAUSAS_PENALES_ADOJO;";
+            }
+            resul = conn.consultar(sql);
+            while (resul.next()) {
+                lista.add(resul.getString(1));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 }

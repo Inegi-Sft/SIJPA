@@ -67,7 +67,7 @@ public class obtenCausasJC extends HttpServlet {
                 }
                 resp.put("del", del);
                 
-                //Procesados JC y Etapa Oral
+                //Procesados JC
                 lisPro = sProJC.findProcesasdosCausaJCyJO(expClaveJC + juzSimple);
                 JSONArray pro = new JSONArray();
                 for (String[] lisP : lisPro) {

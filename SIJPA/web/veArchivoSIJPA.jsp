@@ -3,11 +3,13 @@
     Created on : 7/09/2020, 05:15:00 PM
     Author     : JONATHAN.AGUIRRE
 --%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.File"%>
 <%@page import="java.nio.file.FileSystems"%>
 <%@page import="java.nio.file.Path"%>
 <%@page import="org.apache.jasper.JasperException"%>
 <%@page import="java.nio.file.Paths"%>
-<%@page import="java.nio.file.Files"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,6 +25,7 @@
         <%@include file="cabecera.jsp"%>
         <%@include file="menu.jsp"%>
         <section class="contenedor">
+            <a class="btnCerrar" title="Cerrar" href="importarBD.jsp" >X</a>
             <div class="toggle-nav">
                 <div class="toggle-nav-inner"></div>
             </div>
@@ -36,13 +39,17 @@
                     url_dividido = url.split("/");
                     if(url_dividido[url_dividido.length - 1].equalsIgnoreCase("importarBD.jsp")){
                         String ruta = ".\\";
-                        List<String> archivo_sql = Files.readAllLines(Paths.get(ruta+"archivo_descifrado.sijpa"));
-                        for (String linea : archivo_sql){
+                        System.out.println("Va a leer archivo");
+                        File archivo = new File (ruta+"archivo_descifrado.sijpa");
+                        FileReader fr = new FileReader (archivo);
+                        BufferedReader br = new BufferedReader(fr);
+                        String linea;
+                         while((linea=br.readLine())!=null){
                             out.println(linea.replace("),", "),<br/>"));
                             out.println("<br/>");
                             out.println("<br/>");
-                        }
-                        Paths.get(ruta+"archivo_descifrado.sijpa").toFile().delete();
+                         }
+                         Paths.get(ruta+"archivo_descifrado.sijpa").toFile().delete();
                     }else{
                         out.println("No tienes acceso a este apartado.");
                     }

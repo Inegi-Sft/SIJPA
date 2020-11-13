@@ -67,38 +67,12 @@ public class actualiza extends HttpServlet {
 //                }
 //            }else 
             if(request.getParameter("version") != null){
-                //creamos tabla de versios del sistema
-                sql = "CREATE TABLE VERSION_SISTEMA ("
-                        + "VERSION varchar(50) COLLATE utf8_bin NOT NULL,"
-                        + "PRIMARY KEY (VERSION)"
-                        + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
-                System.out.println(sql);
-                conn.escribir(sql);
                 //insertamos la version del sistema
-                sql = "INSERT INTO VERSION_SISTEMA VALUES('BETA 1');";
+                sql = "UPDATE VERSION_SISTEMA SET VERSION = '" + request.getParameter("version") + "';";
                 System.out.println(sql);
-                //actualizamos las tablas y creams las nuevas para actualizar la base
                 if(conn.escribir(sql)){
-                    sql = "CREATE TABLE USUARIOS_JUZGADOS ("
-                            + "USUARIO varchar(150) COLLATE utf8_bin NOT NULL,"
-                            + "JUZGADO_CLAVE varchar(255) COLLATE utf8_bin NOT NULL,"
-                            + "PRIMARY KEY (USUARIO,JUZGADO_CLAVE)"
-                            + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
-                    System.out.println(sql);
-                    if(conn.escribir(sql)){
-                        sql = "RENAME TABLE TIPO_USUARIOS TO USUARIOS_TIPO;";
-                        System.out.println(sql);
-                        if(conn.escribir(sql)){
-                            out.write("1");
-                            conn.close();
-                        }else{
-                            out.write("0");
-                            conn.close();
-                        }
-                    }else{
-                        out.write("0");
-                        conn.close();
-                    }
+                    out.write("1");
+                    conn.close();
                 }else{
                     out.write("0");
                     conn.close();

@@ -7,7 +7,8 @@
 $(document).ready(function () {
     /*----------------Validamos el Navegador------------------------*/
     var es_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-    if(!es_chrome){
+    var es_edge = navigator.userAgent.toLowerCase().indexOf('edge') > -1;
+    if(!es_chrome || es_edge){
         window.location.href = "navegador.jsp";
     }
     /*----------------Fin Validamos el Navegador------------------------*/
@@ -111,7 +112,7 @@ $(document).ready(function () {
     /************************* Funcion de Actualizado *****************************/
     
     $('.estatus').click(function(){
-        var pos = $(this).closest('tr').index();//Obtenemos el indice(posicion) del registro a borrar
+        var pos = $(this).closest('tr').index();//Obtenemos el indice(posicion) del registro a actualizar
         var tabla = $(this).parents('table').attr('id');//Obtenemos el nombre de la tabla
         var clave = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(0)').html();//Obtenemos la clave del registro
         var valorEs = $(this).parents('table tbody').find('tr').eq(pos).children('td:eq(6)').html();//Obtenemos el estatus
@@ -141,7 +142,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (response) {
-                    console.log("Respuesta del servidor al borrar: ", response);
+                    console.log("Respuesta del servidor al actualizar: ", response);
                     alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
                 }
             });

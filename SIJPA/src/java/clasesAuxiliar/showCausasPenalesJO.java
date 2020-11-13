@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class showCausasPenalesJO {
 
     Conexion_Mysql conn = new Conexion_Mysql();
-    ArrayList<String[]> causas, lista;
+    ArrayList<String[]> causas, listas;
     ArrayList<String> lis;
     String sql, JCmin;
     ResultSet rs, resul;
@@ -175,7 +175,7 @@ public class showCausasPenalesJO {
     public ArrayList totalesCausaJC(String juzgadoClaveJC, String causaClaveJC){
         try {
             conn.Conectar();
-            lista = new ArrayList();
+            listas = new ArrayList();
             sql = "SELECT TOTAL_DELITOS, TOTAL_PROCESADOS, TOTAL_VICTIMAS "
                     + "FROM DATOS_CAUSAS_PENALES_ADOJC "
                     + "WHERE JUZGADO_CLAVE = '" + juzgadoClaveJC + "' "
@@ -183,7 +183,7 @@ public class showCausasPenalesJO {
                     + "ORDER BY 1";
             rs = conn.consultar(sql);
             while (rs.next()) {
-                lista.add(new String[]{
+                listas.add(new String[]{
                     rs.getString(1), rs.getString(2), rs.getString(3)
                 });
             }
@@ -191,7 +191,7 @@ public class showCausasPenalesJO {
         }catch (SQLException ex) {
             Logger.getLogger(showCausasPenales.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;
+        return listas;
     }
     
     public int countCausasPenalesJO(String juzgadoClave) {

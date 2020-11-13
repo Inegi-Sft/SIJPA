@@ -117,8 +117,7 @@ $(document).ready(function () {
         
         var actual = true;
         if($('#opera').val() !== ''){
-            actual = confirm("Al actualizar datos en Etapa Oral, se perderan los datos que se tengan guardados \n\
-                        en posteriores etapas.\n seguro que desea continuar?");    
+            actual = confirm("Al actualizar datos en Etapa Oral, se perderan los datos que se tengan guardados en posteriores etapas.\nSeguro que desea continuar?");    
         }
         if(actual){
             $.ajax({
@@ -130,7 +129,7 @@ $(document).ready(function () {
                     alert("Guardado correctamente!!!");
                     var numProce = parseInt(parent.$('#TadolescentesJO').val());
                     if (response !== null && $.isArray(response)) {
-                        for (var i = 2; i < 6; i++) {
+                        for (var i = 1; i < 6; i++) {
                             console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                             parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);
                         }
@@ -143,7 +142,7 @@ $(document).ready(function () {
                         console.log('Bandera Etapa Oral: ' + response[6]);
                         if(response[6] === 2){//Condicion para mandar al procesado a etapa conclusiones JO
                             parent.$('#tablaConcluJO tbody').append('<tr><td>' + response[1] + '</td><td>' + response[2] + '</td><td></td><td></td>\n\
-                            <td><a class="pop" href="conclusionesJO.jsp?proceClaveJO=' + response[1] + '&posicion=' + parent.$('#conclusionesJO tbody tr').length + '">\n\
+                            <td><a class="pop" href="conclusionesJO.jsp?proceClaveJO=' + response[1] + '&posicion=' + parent.$('#tablaConcluJO tbody tr').length + '">\n\
                             <img src="img/editar.png" title="Modificar"/></a></td></tr>');
                             parent.$('#btn6').addClass(' activar');
                         }else if(response[6] === 3){//Condicion para mandar al procesado a etapa tramite JO

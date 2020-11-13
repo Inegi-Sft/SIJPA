@@ -5,10 +5,21 @@
  */
 
 $(document).ready(function () {
-    //llenamos el campo del juzgado dependiendo del sistema
+    //llenamos el campo del juzgado y de los años dependiendo del sistema
     $('#sisRepor').change(function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
+        $.ajax({
+            type : 'post',
+            url : 'obtenReportes',
+            dataType: 'html',
+            data : {sisReporAnio : $(this).val()},
+            success: function (response) {
+                console.log("Respuesta obteniendo anios en reportes: ", response);
+                $('#anioReporClave').html(response);
+                $('#anioReporClave').prop('disabled', false);
+            }
+        });
         $.ajax({
             type : 'post',
             url : 'obtenReportes',
@@ -32,12 +43,17 @@ $(document).ready(function () {
             alert('Debes de seleccionar el Sistema para poder generar los reportes');
             $('#sisRepor').focus();
             return false;
+        }else if($('#anioReporClave').val() === ""){
+            alert('Debes de seleccionar el Anio para poder generar los reportes');
+            $('#sisRepor').focus();
+            return false;
         }
         $.ajax({
             type: 'post',
             url: 'obtenReportes',
             data: {
                 sisRepor : $('#sisRepor').val(),
+                anioReporClave : $('#anioReporClave').val(),
                 juzReporClave : $('#juzReporClave').val()
             },
             success: function (response) {

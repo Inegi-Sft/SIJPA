@@ -78,7 +78,12 @@
                         out.println("<td>" + lsj[5] + "</td>");
                         out.println("<td>" + lsj[6] + "</td>");
                         out.println("<td><a href='capturaJuzgado.jsp?claveJuzgado=" + lsj[0] + "'><img src='img/editar.png' title='Editar'/></a></td>");
-                        out.println("<td><a href='#' class='estatus'><img src='img/update.png' title='Cambiar Estatus'/></a></td>");
+                        //Si no tiene ninguna causa penal registrada entopnces aun podra borrarla
+                        if(sj.countTotCPJuzgados(lsj[0]) == 0){
+                            out.println("<td><img src='img/delete.png' class='borrar' title='Eliminar' onclick='borraR(this)'/></td>");
+                        }else{//Si ya contiene causas penales en cualquier sistema entonces nada mas puede cambiar estatus
+                            out.println("<td><a href='#' class='estatus'><img src='img/update.png' title='Cambiar Estatus'/></a></td>");
+                        }
                         out.println("</tr>");
                     }
                 %>

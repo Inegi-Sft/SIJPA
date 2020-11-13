@@ -53,6 +53,12 @@
                     </select>
                 </div>
                 <div class="cols">
+                    <label for="anioReporClave">Año del reporte</label>
+                    <select name="anioReporClave" id="anioReporClave" required disabled>
+                        <option value="">--Seleccione--</option>
+                    </select>
+                </div>
+                <div class="cols">
                     <label for="juzReporClave">Filtrar por Juzgado (opcional)</label>
                     <select name="juzReporClave" id="juzReporClave" disabled>
                         <option value="">--Seleccione--</option>

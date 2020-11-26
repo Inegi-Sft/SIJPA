@@ -90,9 +90,7 @@
                     <thead>
                         <tr>
                             <th>Causa Penal</th>
-                            <th>Juez 1</th>
-                            <th>Juez 2</th>
-                            <th>Juez 3</th>
+                            <th>Juez</th>
                             <th width="80">Investigacion</th>
                             <th width="80">Intermedia</th>
                             <th width="40">Editar</th>
@@ -114,8 +112,6 @@
                             <td><%=ls[1]%></td>
                             <td><%=ls[2]%></td>
                             <td><%=ls[3]%></td>
-                            <td><%=ls[4]%></td>
-                            <td><%=ls[5]%></td>
                             <td><a href="capturaAudiencias.jsp?causaClave=<%=ls[0]%>"><img src='img/editar.png' title="Editar"/></a></td>
                             <td><a href="#"><img src='img/delete.png' title="Eliminar" onclick="deleteAudiencias('<%=ls[0]%>');"/></a></td>
                         </tr>

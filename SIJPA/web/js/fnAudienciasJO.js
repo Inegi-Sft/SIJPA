@@ -16,7 +16,31 @@ $(document).ready(function () {
 
     
     //auto acompletado para las causas penales
-    $("#causaClaveJO").selectize({
+    $('#causaClaveJO').selectize({
+        render: {
+            option: function (data) {
+                return '<div data-causajc="' + data.causajc + '">' + data.text + '</div>';
+            }
+        },
+        onChange: function (value) {// Dehabilita el juez que atendio la audiencia en jc
+            $('input[name="chkJuez"]').prop("disabled",false);
+            $('input[name="chkJuez"]').prop("checked",false);
+            var causaJC = this.getOption(value).data('causajc');
+            
+            $.ajax({
+                type: 'post',
+                url: 'obtenJuezJC',
+                data: {causa_juzgado: causaJC},
+                success: function (response) {
+                    console.log("Respuesta del servidor Obten JuezJC: ", response);
+                    $('input[name="chkJuez"][value='+response+']').prop("disabled",true);
+                },
+                error: function (response) {
+                    console.log("Respuesta del servidor error Obten JuezJC: ", response);
+                    alert('Error inesperado, vuelva a intentarlo o cunsulte al administrador');
+                }
+            });
+        },
         onBlur: function () {
             this.clearCache();
         }

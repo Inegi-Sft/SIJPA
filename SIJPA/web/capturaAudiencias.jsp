@@ -88,13 +88,13 @@
                             lista = sA.findJueces(juzgadoClave, causa, operacion);
                             for (String[] ls : lista){ 
                                 if(jueces.size() != 0){
-                                    if(ls[0].equals(jueces.get(0)[0]) || ls[0].equals(jueces.get(0)[1]) || ls[0].equals(jueces.get(0)[2])){
-                                        out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"' checked/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
+                                    if(ls[0].equals(jueces.get(0)[0])){
+                                        out.println("<input type='radio' name='rdbJuez' value='"+ ls[0] +"' required checked/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
                                     }else{
-                                        out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"'/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
+                                        out.println("<input type='radio' name='rdbJuez' value='"+ ls[0] +"' required/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
                                     }
                                 }else{
-                                    out.println("<input type='checkbox' name='chkJuez' onchange='cuenta(this)' value='"+ ls[0] +"'/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
+                                    out.println("<input type='radio' name='rdbJuez' value='"+ ls[0] +"' required/>"+ ls[1] +" "+ ls[2] +" "+ ls[3] +"<br>");
                                 }
                             }
                             if(lista.isEmpty()){
@@ -102,8 +102,7 @@
                             }
                         %>
                         </div>
-                    </fieldset>
-                    <span id="msjAudi">Puedes seleccionar hasta 3 jueces</span>   
+                    </fieldset>  
                     <label class="lblExBig">Audiencias por etapas del proceso:</label>
                     <table id="tblAudiInves" border="1" class="tablasRegis colsA">
                         <tr>

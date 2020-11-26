@@ -27,6 +27,11 @@ and open the template in the editor.
     background: url("../img/checkbox-check.png");
     background-size: cover;
 }
+.contenedor input[type="radio"]{
+    margin: 0 4px 3px 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
 
 .contenedor input[type="number"].tiempo{
     width: 50px; 

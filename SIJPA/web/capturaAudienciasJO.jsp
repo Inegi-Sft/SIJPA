@@ -68,7 +68,7 @@
                         out.println("<option value=''>--Seleccione--</option>");
                             lista = sA.findCausasJO(juzgadoClave);
                             for (String[] ls : lista) {
-                                out.println("<option value='" + ls[0] + "'>" + ls[0].replace(juzLimpio, "") + "</option>");
+                                out.println("<option value='" + ls[0] + "' data-data='{\"causajc\":\"" + ls[1] +"&"+ ls[2]+"\"}'>" + ls[0].replace(juzLimpio, "") + "</option>");
                             }
                         out.println("</select>");
                     }else{
@@ -97,6 +97,12 @@
                         }
                         if(lista.isEmpty()){
                            out.println("No hay Jueces para mostrar"); 
+                        }
+                        if(operacion.equals("actualizar")){
+                           //Deshabilita el juez que que llevo las audiencias en jc
+                            String causaJC= sA.recuperaCausaJC(causa, juzgadoClave);
+                            int juezAtendio= sA.findJuezAtendioJC(causaJC, juzgadoClave);
+                            out.println("<script>$('input[name=\"chkJuez\"][value="+juezAtendio+"]').prop(\"disabled\",true);</script>");
                         }
                     %>
                     </div>

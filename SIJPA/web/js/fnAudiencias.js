@@ -42,14 +42,8 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopImmediatePropagation();
         
-        //valida que se seleccione por lo menos 1 juez
-        if ($('input[name="chkJuez"]:checked').length === 0) {
-            alert('Selecciona al menos 1 Juez y maximo 3 Jueces');
-            $('input[name="chkJuez"]').focus();
-            return false;
-        
         //valida que se seleccione por lo menos 1 audiencia
-        } else if ($('input[name="chkInves"]:checked').length === 0 && $('input[name="chkInter"]:checked').length === 0) {
+        if ($('input[name="chkInves"]:checked').length === 0 && $('input[name="chkInter"]:checked').length === 0) {
             alert('Selecciona al menos una Audiencia celebrada');
             $('#chkInves1').focus();
             return false;
@@ -90,13 +84,6 @@ function habilitaTxt(obj, idTxt1, hrs, min, chkNi1, chkNi2) {
     }
 }
 
-//cuenta cuantos jueces se han seleccionado
-function cuenta(obj) {
-    if ($('input[name="chkJuez"]:checked').length > 3) {
-        alert('Solo puedes seleccionar hasta 3 Jueces');
-        $(obj).prop("checked", false);
-    }
-}
 
 // Fechas No identificadas
 function fechaNI(obj, idTxtDate) {

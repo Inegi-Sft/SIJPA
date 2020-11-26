@@ -211,10 +211,14 @@ function valida(){
             }
         }
     }else if($('#funcionJuz').val() === '3'){
-        if($("#btn5").is(":disabled") && $("#btn6").is(":disabled")){
+        if($("#btn5").is(":disabled")){
+            openPestana('btn5', 'p5');
+            $("#btn5").focus();
+            return false;// no envia formulario
+        }else if($("#btn6").is(":disabled")){
             $('#guardar').val("Guardar");
             openPestana('btn6', 'p6');
-            openPestana('btn5', 'p5');
+            $("#btn6").focus();
             return false;// no envia formulario
         }else{
             var resp = confirm('Una vez guardado el Juzgado no podra ser editado el Numero del organo, Municipio, Entidad y Funcion del organo\n'
@@ -225,6 +229,13 @@ function valida(){
         }
     }
 }
+
+//if($("#btn5").is(":disabled") && $("#btn6").is(":disabled")){
+//            $('#guardar').val("Guardar");
+//            openPestana('btn6', 'p6');
+//            openPestana('btn5', 'p5');
+//            return false;// no envia formulario
+//        }
     
 function quitaCeros(elemento){
     var valor = elemento.value.replace(/^0*/, '');

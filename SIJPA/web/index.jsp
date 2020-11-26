@@ -36,9 +36,9 @@
 //                        + "});"
 //                        + "});</script>");
 //            }
-            System.out.println("es la version igual: " + act.findVersion("BETA 1.3"));
+            System.out.println("es la version igual: " + act.findVersion("BETA 1.4"));
             //Verificacmos que version de sistema tiene para poder actualizar si es diferente
-            if(!act.findVersion("BETA 1.3")){ 
+            if(!act.findVersion("BETA 1.4")){ 
                 out.println("<script>$(document).ready(function () {"
                         + "$('.load').show();"
                         + "$.ajax({"

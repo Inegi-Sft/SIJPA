@@ -58,6 +58,7 @@ public class actualizador {
             if(resul.next()){
                 ver = resul.getString(1);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(actualizador.class.getName()).log(Level.SEVERE, null, ex);
         }

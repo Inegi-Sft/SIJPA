@@ -34,16 +34,21 @@ public class Conexion_Mysql {
 //            String url = "jdbc:mysql://node235835-sijpacol.j.layershift.co.uk/sijpa_db";
 //            conexion = (Connection) DriverManager.getConnection(url,"root","LNCqxn74661");
             //Jalisco
-//            String url = "jdbc:mysql://node236122-sijpajalisco.j.layershift.co.uk/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","FQAmgb89616");
+//            String url = "jdbc:mysql://node236661-sijpajal.j.layershift.co.uk/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","YNXirg26154");
             //Conceptuales
 //            String url = "jdbc:mysql://node236279-sijpa.j.layershift.co.uk/sijpa_db";
 //            conexion = (Connection) DriverManager.getConnection(url,"root","PVHdpk05697");
             //Localhost
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");
-            return conexion != null; //System.out.println("Conexion oracle exitosa!");
-            //System.out.println("Conexion oracle fallida!");
+            if(conexion != null){
+                System.out.println("Conexion oracle exitosa!");
+                return true;
+            }else{
+                System.out.println("Conexion oracle fallida!");
+                return false;
+            }
         } catch (ClassNotFoundException e) { 
             System.err.println("Error: " + e);
         } catch (SQLException ex) {        
@@ -79,7 +84,7 @@ public class Conexion_Mysql {
     }
     
     public void close() throws SQLException{
-        //System.out.println("Conexion oracle Cerrada");
+        System.out.println("Conexion oracle Cerrada");
         conexion.close();
     }
     

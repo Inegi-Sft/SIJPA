@@ -147,8 +147,8 @@ public class showConclusionesJO {
     }
     
     public int countConclusionesExpJO(String causaClaveJO) {
-        int conteoConclu = 0;
         try{
+            conteoConclu = 0;
             conn.Conectar();
             sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'";
             resul = conn.consultar(sql);
@@ -163,8 +163,8 @@ public class showConclusionesJO {
     }
     public int countConclusionesProcJO(String causaClaveJO,String procesadoClaveJO) {
         try{
-            conn.Conectar();
             conteoConclu = 0;
+            conn.Conectar();
             sql = "SELECT COUNT(*) FROM DATOS_CONCLUSIONES_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "'"
                     + "AND PROCESADO_CLAVE='"+ procesadoClaveJO +"'";
             resul = conn.consultar(sql);

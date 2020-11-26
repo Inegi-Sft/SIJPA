@@ -74,7 +74,7 @@ $(document).ready(function () {
 
     //despliega ventana modal en codigo en vivo
     $('#tablaDeli, #tablaProcesa, #tablaVictimas, #tablaInicial, #tablaIntermedia, #tablaConclu, #tablaTramite,\n\
-        #tablaDeliJO, #tablaProcesaJO, #tablaVictimasJO, #tablaJuicioJO, #tablaConcluJO, #tablaTramiteJO').on('focusin', function () {
+        #tablaDeliJO, #tablaProcesaJO, #tablaVictimasJO, #tablaJuicioJO, #tablaConcluJO, #tablaTramiteJO, .agregar').on('focusin', function () {
         $('a.pop').fancybox({
             'type': 'iframe',
             'overlayShow': true,

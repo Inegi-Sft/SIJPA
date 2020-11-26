@@ -104,7 +104,7 @@
                 <fieldset>
                     <legend>Resolución</legend>
                     <div class="cols">
-                        <label for="fechaReso">Fecha en que se dictó la resolución</label>
+                        <label for="fechaReso">Fecha de lectura y explicación de la sentencia</label>
                         <input type="date" name="fechaReso" id="fechaReso" value="<%=fechaResol%>" max="<%=fechas%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaReso" onclick="fechaNoIdent('#chkFechaReso', '#fechaReso')">

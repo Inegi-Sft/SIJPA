@@ -61,7 +61,7 @@ public class exportaBD extends HttpServlet {
                 System.out.println(mi_entrada.read());
                 FileOutputStream mi_salida = new FileOutputStream(RUTA+mi_archivo);
                 int mi_caracter;
-                while((mi_caracter=mi_entrada.read())!=-1){
+                while((mi_caracter = mi_entrada.read()) != -1){
                     mi_salida.write(mi_caracter);
                 }
                 mi_salida.close();

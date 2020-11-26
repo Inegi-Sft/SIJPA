@@ -718,7 +718,7 @@
                                         </select>
                                     </div>
                                     <div class="cols oculto" id="rangoInge">
-                                        <label for="indigena">Rango de ingresos </label>
+                                        <label for="indigena">Rango de ingresos mensual</label>
                                         <select name="rangoIngresos" id="rangoIngresos">
                                             <option value="">--Seleccione--</option>
                                             <%

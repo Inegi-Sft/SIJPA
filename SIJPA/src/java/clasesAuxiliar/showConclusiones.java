@@ -186,6 +186,7 @@ public class showConclusiones {
             if(resul.isBeforeFirst()){
                 seleccionado = true;
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
         }

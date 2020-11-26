@@ -71,6 +71,15 @@ public class actualiza extends HttpServlet {
                 sql = "UPDATE VERSION_SISTEMA SET VERSION = '" + request.getParameter("version") + "';";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP PRIMARY KEY, "
+                            + "ADD PRIMARY KEY (JUZGADO_CLAVE, CAUSA_CLAVE, JUEZ_CLAVE1, AUDIENCIA_INVESTIGACION, AUDIENCIA_INTERMEDIA);"
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP FOREIGN KEY FK_AUDI_JUEZ2;"
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP INDEX FK_AUDI_JUEZ2;"
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP FOREIGN KEY FK_AUDI_JUEZ3;"
+                            + "ALTER TABLE `DATOS_AUDIENCIAS_ADOJC` DROP INDEX FK_AUDI_JUEZ3;"
+                            + "ALTER TABLE `DATOS_AUDIENCIAS_ADOJC` DROP JUEZ_CLAVE2,  DROP JUEZ_CLAVE3;";
+                    System.out.println(sql);
+                    conn.escribir(sql);
                     out.write("1");
                     conn.close();
                 }else{

@@ -66,11 +66,13 @@ public class insrtUsuario extends HttpServlet {
                             + ")";
                     System.out.println(sql);
                     if(conn.escribir(sql)){
-                        if(juzAsignado.length != 0){
-                            for(String juzAsig : juzAsignado){
-                                sql = "INSERT INTO USUARIOS_JUZGADOS VALUES('" + correo + "','" + juzAsig + "')";
-                                System.out.println(sql);
-                                conn.escribir(sql);
+                        if(juzAsignado != null){
+                            if(juzAsignado.length != 0){
+                                for(String juzAsig : juzAsignado){
+                                    sql = "INSERT INTO USUARIOS_JUZGADOS VALUES('" + correo + "','" + juzAsig + "')";
+                                    System.out.println(sql);
+                                    conn.escribir(sql);
+                                }
                             }
                         }
                         if(tipoUsuario == 1){

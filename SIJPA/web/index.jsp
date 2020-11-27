@@ -44,7 +44,7 @@
                         + "$.ajax({"
                         + "type: 'post',"
                         + "url: 'actualiza',"
-                        + "data: {version: 'BETA 1.3'},"
+                        + "data: {version: 'BETA 1.4'},"
                         + "success: function (response) {"
                         + "console.log('Respuesta del servidor actualiza ', response);"
                         + "$('.load').fadeOut();"

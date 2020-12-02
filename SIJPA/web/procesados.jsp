@@ -330,7 +330,7 @@
                                     <legend>Lugar habitual de residencia</legend>
                                     <div class="colsx">
                                         <label for="residencia">Lugar habitual de residencia</label>
-                                        <select name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#rEntidad', '#rMunicipio');" required >
+                                        <select name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#dRColonia', '#rEntidad', '#rMunicipio', '#rColonia');" required >
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
@@ -377,6 +377,14 @@
                                                         out.println(">" + ls[1] + "</option>");
                                                     }
                                                 }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="colsx oculto" id="dRColonia">
+                                        <label for="rColonia">Colonia</label>
+                                        <select name="rColonia" id="rColonia">
+                                            <%
+                                                
                                             %>
                                         </select>
                                     </div>

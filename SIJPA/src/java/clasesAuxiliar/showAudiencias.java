@@ -152,14 +152,14 @@ public class showAudiencias {
     public ArrayList recuperaAudiencias(String juzgado, String causa, String columna, String audi) {
         conn.Conectar();
         audiencias = new ArrayList<>();
-        sql = "SELECT AUDIENCIA_" + columna + ",FECHA_CELEBRACION, HORAS, MINUTOS FROM DATOS_AUDIENCIAS_ADOJC"
+        sql = "SELECT AUDIENCIA_" + columna + ",FECHA_INICIO, FECHA_FINALIZO FROM DATOS_AUDIENCIAS_ADOJC"
             + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVE = '" + causa + "' AND AUDIENCIA_" + columna + "=" + audi;
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 audiencias.add(new String[]{
-                    resul.getString("AUDIENCIA_"+columna), resul.getString("FECHA_CELEBRACION"), 
-                    resul.getString("HORAS"), resul.getString("MINUTOS")
+                    resul.getString("AUDIENCIA_"+columna), resul.getString("FECHA_INICIO"), 
+                    resul.getString("FECHA_FINALIZO")
                 });
             }
             conn.close();
@@ -251,14 +251,14 @@ public class showAudiencias {
     public ArrayList recuperaAudienciasJO(String juzgado, String causa, String audi) {
         conn.Conectar();
         audiencias = new ArrayList<>();
-        sql = "SELECT AUDIENCIA_JUICIOORAL,FECHA_CELEBRACION, HORAS, MINUTOS FROM DATOS_AUDIENCIAS_ADOJO"
+        sql = "SELECT AUDIENCIA_JUICIOORAL,FECHA_INICIO, FECHA_FINALIZO FROM DATOS_AUDIENCIAS_ADOJO"
             + " WHERE JUZGADO_CLAVE = '" + juzgado + "' AND CAUSA_CLAVEJO = '" + causa + "' AND AUDIENCIA_JUICIOORAL = " + audi;
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 audiencias.add(new String[]{
-                    resul.getString("AUDIENCIA_JUICIOORAL"), resul.getString("FECHA_CELEBRACION"),
-                    resul.getString("HORAS"), resul.getString("MINUTOS")
+                    resul.getString("AUDIENCIA_JUICIOORAL"), resul.getString("FECHA_INICIO"),
+                    resul.getString("FECHA_FINALIZO")
                 });
             }
             conn.close();

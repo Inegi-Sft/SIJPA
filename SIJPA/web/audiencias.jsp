@@ -18,7 +18,6 @@
         <script type="text/javascript" src="js/fnAudiencias.js"></script>
         <%  
             showJuzgados juz = new showJuzgados();
-            showJueces juez = new showJueces();
             showAudiencias sa = new showAudiencias();
             ArrayList<String[]> listas;
             ArrayList<String> lista;
@@ -91,8 +90,8 @@
                         <tr>
                             <th>Causa Penal</th>
                             <th>Juez</th>
-                            <th width="80">Investigacion</th>
-                            <th width="80">Intermedia</th>
+                            <th width="180">Audiencias Investigacion</th>
+                            <th width="180">Audiencias Intermedia</th>
                             <th width="40">Editar</th>
                             <th width="40">Eliminar</th>
                         </tr>

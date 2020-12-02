@@ -18,7 +18,6 @@
         <script type="text/javascript" src="js/fnAudienciasJO.js"></script>
         <%  
             showJuzgados juz = new showJuzgados();
-            showJueces juez = new showJueces();
             showAudiencias sa = new showAudiencias();
             ArrayList<String[]> listas;
             ArrayList<String> lista;

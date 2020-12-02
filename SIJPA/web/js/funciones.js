@@ -309,21 +309,26 @@ function lugarNacimiento(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
     }
 }
 
-function lugarResidencia(idSelect, idDivE, idDivM, idSelEnti, idSelMuni) {
+function lugarResidencia(idSelect, idDivE, idDivM, idDivC, idSelEnti, idSelMuni, idSelCol) {
     if ($(idSelect).val() === '1') {
         $(idDivE).fadeIn("slow");
         $(idDivM).fadeIn("slow");
+        $(idDivC).fadeIn("slow");
         $(idSelEnti).prop("required", true);
         $(idSelMuni).prop("required", true);
+        $(idSelCol).prop("required", true);
         $(idSelEnti).val("");
         $(idSelMuni).empty().append("<option value='0'>--Seleccione--</option>");
+        $(idSelCol).val("");
     } else {
         $(idDivE).fadeOut("slow");
         $(idDivM).fadeOut("slow");
         $(idSelEnti).prop("required", false);
         $(idSelMuni).prop("required", false);
+        $(idSelCol).prop("required", false);
         $(idSelEnti).val("-2");
         $(idSelMuni).val("-2");
+        $(idSelCol).val("-2");
     }
 }
 

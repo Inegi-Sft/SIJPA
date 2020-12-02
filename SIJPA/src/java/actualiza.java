@@ -76,8 +76,8 @@ public class actualiza extends HttpServlet {
                             + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP FOREIGN KEY FK_AUDI_JUEZ2;"
                             + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP INDEX FK_AUDI_JUEZ2;"
                             + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP FOREIGN KEY FK_AUDI_JUEZ3;"
-                            + "ALTER TABLE `DATOS_AUDIENCIAS_ADOJC` DROP INDEX FK_AUDI_JUEZ3;"
-                            + "ALTER TABLE `DATOS_AUDIENCIAS_ADOJC` DROP JUEZ_CLAVE2,  DROP JUEZ_CLAVE3;";
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP INDEX FK_AUDI_JUEZ3;"
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP JUEZ_CLAVE2, DROP JUEZ_CLAVE3;";
                     System.out.println(sql);
                     conn.escribir(sql);
                     out.write("1");

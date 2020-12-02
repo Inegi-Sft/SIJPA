@@ -56,13 +56,11 @@ public class insrtAudiencias extends HttpServlet {
         String causaClave = request.getParameter("causaClave");
         String juez = request.getParameter("rdbJuez");
         String[] audiInves = request.getParameterValues("chkInves");
-        String[] fechaAInves = request.getParameterValues("fechaInves");
-        String[] hrsAInves = request.getParameterValues("hrsInves");
-        String[] minAInves = request.getParameterValues("minInves");
+        String[] fechaAInvesI = request.getParameterValues("fechaInvesI");
+        String[] fechaAInvesF = request.getParameterValues("fechaInvesF");
         String[] audiInter = request.getParameterValues("chkInter");
-        String[] fechaAInter = request.getParameterValues("fechaInter");
-        String[] hrsAInter = request.getParameterValues("hrsInter");
-        String[] minAInter = request.getParameterValues("minInter");
+        String[] fechaAInterI = request.getParameterValues("fechaInterI");
+        String[] fechaAInterF = request.getParameterValues("fechaInterF");
         
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -74,7 +72,7 @@ public class insrtAudiencias extends HttpServlet {
                 if(audiInves != null){
                     for(int i=0; i<audiInves.length; i++){
                         sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"
-                            + causaClave+"', "+ juez +", "+ audiInves[i] +", -2, '"+ fechaAInves[i] +"', "+ hrsAInves[i] +","+ minAInves[i] +", (select YEAR(NOW())) );";
+                            + causaClave+"', "+ juez +", "+ audiInves[i] +", -2, '"+ fechaAInvesI[i] +"', '"+ fechaAInvesF[i] +"', (select YEAR(NOW())) );";
                         System.out.println(sql);
                         conn.escribir(sql);
                     }
@@ -82,7 +80,7 @@ public class insrtAudiencias extends HttpServlet {
                 if(audiInter != null){
                     for(int i=0; i<audiInter.length; i++){
                         sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"
-                            + causaClave+ "', "+ juez +", -2, "+ audiInter[i] +", '"+ fechaAInter[i] +"', "+ hrsAInter[i] +","+ minAInter[i] +", (select YEAR(NOW())) );";
+                            + causaClave+ "', "+ juez +", -2, "+ audiInter[i] +", '"+ fechaAInterI[i] +"', '"+ fechaAInterF[i] +"', (select YEAR(NOW())) );";
                         System.out.println(sql);
                         conn.escribir(sql);
                     }
@@ -99,7 +97,7 @@ public class insrtAudiencias extends HttpServlet {
                     if(audiInves != null){
                         for(int i=0; i<audiInves.length; i++){
                             sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"
-                                + causaClave+jConcatenado+"', "+ juez +", "+ audiInves[i] +", -2, '"+ fechaAInves[i] +"', "+ hrsAInves[i] +","+ minAInves[i] +", (select YEAR(NOW())) );";
+                                + causaClave+jConcatenado+"', "+ juez +", "+ audiInves[i] +", -2, '"+ fechaAInvesI[i] +"', '"+ fechaAInvesF[i] +"', (select YEAR(NOW())) );";
                             System.out.println(sql);
                             conn.escribir(sql);
                         }
@@ -107,7 +105,7 @@ public class insrtAudiencias extends HttpServlet {
                     if(audiInter != null){
                         for(int i=0; i<audiInter.length; i++){
                             sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"
-                                + causaClave+jConcatenado +"', "+ juez +", -2, "+ audiInter[i] +", '"+ fechaAInter[i] +"', "+ hrsAInter[i] +","+ minAInves[i] +", (select YEAR(NOW())) );";
+                                + causaClave+jConcatenado +"', "+ juez +", -2, "+ audiInter[i] +", '"+ fechaAInterI[i] +"', '"+ fechaAInterF[i] +"', (select YEAR(NOW())) );";
                             System.out.println(sql);
                             conn.escribir(sql);
                         }

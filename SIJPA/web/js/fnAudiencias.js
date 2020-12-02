@@ -1,35 +1,5 @@
 $(document).ready(function () {
-    //****************** Audiencias Iniciales desplegables **********************************
-    var iniciales='<tr class="inicio"><td><img id="imgIni" class="btnOpen" /></td>\n\
-                        <td>Audiencias Iniciales</td>\n\
-                        <td></td><td></td><td></td></tr>'; 
-    $('#tblAudiInves > tbody > tr').eq(10).after(iniciales);// Agrega una nueva fila en la tabla, sera el encabezado de audiencias iniciales
-    $('#tblAudiInves > tbody > tr').eq(17).addClass("fin");//establece una clase para delimitar donde terminan las Audi iniciales
-    
-    $('.inicio').click(function(){//crea el evento click
-        $(this).nextUntil('tr.fin').css('background-color', 'rgba(165, 255, 159, 0.6)');// ponen un color de fondo a las audi iniciales
-        $(this).nextUntil('tr.fin').toggle();//despliega las audi iniciales hasata donde tiene la clase fin
-        $('#imgIni').toggleClass('btnClosed');// cambia la imagen de despliegue
-    });
-    
-    //se usa en recuperacion de datos para mostrar u ocultar las audi iniciales
-    if($('#chkInves11').prop('checked') || $('#chkInves12').prop('checked') || $('#chkInves13').prop('checked') ||
-        $('#chkInves14').prop('checked') || $('#chkInves15').prop('checked')){
-    
-        $('.inicio').nextUntil('tr.fin').css('background-color', 'rgba(165, 255, 159, 0.6)');
-        $('.inicio').nextUntil('tr.fin').show();
-        $('#imgIni').addClass('btnClosed');
-    }else{
-        $('.inicio').nextUntil('tr.fin').hide();
-    }
-  
-    
- //Establece am pata input time y no marque error en el submit
-    $('input[name="hrsInves"]').prop({'min': '0', 'max': '30', 'maxlength':'2'});
-    $('input[name="minInves"]').prop({'min': '0', 'max': '59', 'maxlength':'2'});
-    $('input[name="hrsInter"]').prop({'min': '0', 'max': '30', 'maxlength':'2'});
-    $('input[name="minInter"]').prop({'min': '0', 'max': '59', 'maxlength':'2'});
-
+ 
     //auto acompletado para las causas penales
     $("#causaClave").selectize({
         onBlur: function () {
@@ -68,17 +38,15 @@ $(document).ready(function () {
 });
 
 // habilita las audiencias de acuaerdo si el checkbox esta checkeado
-function habilitaTxt(obj, idTxt1, hrs, min, chkNi1, chkNi2) {
+function habilitaTxtJC(obj, idTxt1, idTxt2, chkNi1, chkNi2) {
     if (obj.checked) {
         $(idTxt1).prop({"required": true, "disabled": false});
-        $(hrs).prop({"required": true, "disabled": false});
-        $(min).prop({"required": true, "disabled": false});
+        $(idTxt2).prop({"required": true, "disabled": false});
         $(chkNi1).prop("disabled", false);
         $(chkNi2).prop("disabled", false);
     } else {
         $(idTxt1).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(hrs).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(min).prop({"required": false, "disabled": true, "readonly": false}).val("");
+        $(idTxt2).prop({"required": false, "disabled": true, "readonly": false}).val("");
         $(chkNi1).prop({"disabled": true, "checked": false});
         $(chkNi2).prop({"disabled": true, "checked": false});
     }
@@ -86,21 +54,11 @@ function habilitaTxt(obj, idTxt1, hrs, min, chkNi1, chkNi2) {
 
 
 // Fechas No identificadas
-function fechaNI(obj, idTxtDate) {
+function fechaNIJC(obj, idTxtDate) {
     if (obj.checked) {
         $(idTxtDate).prop("readonly", true).val("1899-09-09");
     } else {
         $(idTxtDate).prop("readonly", false).val("");
-    }
-}
-//duracion no identificada
-function duracionNI(obj, hrs, min) {
-    if (obj.checked) {
-        $(hrs).prop("readonly", true).val("99");
-        $(min).prop("readonly", true).val("99");
-    } else {
-        $(hrs).prop("readonly", false).val("");
-        $(min).prop("readonly", false).val("");
     }
 }
 
@@ -127,4 +85,16 @@ function deleteAudiencias(causa) {
     }   
 }
 
-
+//valida la duracion de la audiencia
+function duracion(fchIni, fchFin){
+    var inicio = $(fchIni).val();
+    var fin = $(fchFin).val();
+    if(inicio!=='' && inicio!=='1899-09-09' && fin!=='' && fin!=='1899-09-09'){
+        if(inicio > fin){
+            alert("La fecha en que inicia esta audiencia, no puede ser mayor a la fecha en que finaliza");
+            $(fchIni).val('');
+            $(fchFin).val('');
+            $(fchIni).focus();
+        }
+    }
+}

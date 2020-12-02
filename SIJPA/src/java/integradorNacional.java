@@ -33,7 +33,9 @@ public class integradorNacional extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            
+//            INSERT INTO newDatabase.table1 (Column1, Column2) 
+//SELECT column1, column2 FROM oldDatabase.table1;
+//INSERT INTO [ServidorRemoto].[Table] SELECT * FROM [ServidorLocal].[Table]
         }
     }
 

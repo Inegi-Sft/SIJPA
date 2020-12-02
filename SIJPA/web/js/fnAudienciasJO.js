@@ -1,19 +1,4 @@
 $(document).ready(function () {
-    //Establece am pata input time y no marque error en el submit
-    $('input[name="hrsJO"]').prop({'min': '0', 'max': '30', 'maxlength':'2'});
-    $('input[name="minJO"]').prop({'min': '0', 'max': '59', 'maxlength':'2'});
-    
-    /*----------------Cabecera despliega cerrar cesion------------------------*/
-    $('#usu img').click(function () {
-        $('#usu #enlace').animate({
-            right: "0",
-            width: "toggle",
-            opacity: "toggle"
-        }, 800);
-    });
-    
-    $(".load").fadeOut("slow");//proceso de carga para causas penales
-
     
     //auto acompletado para las causas penales
     $('#causaClaveJO').selectize({
@@ -83,17 +68,15 @@ $(document).ready(function () {
 });
 
 // habilita las audiencias de acuaerdo si el checkbox esta checkeado
-function habilitaTxt(obj, idTxt1, hrs, min, chkNi1, chkNi2) {
+function habilitaTxtJO(obj, idTxt1, idTxt2, chkNi1, chkNi2) {
     if (obj.checked) {
         $(idTxt1).prop({"required": true, "disabled": false});
-        $(hrs).prop({"required": true, "disabled": false});
-        $(min).prop({"required": true, "disabled": false});
+        $(idTxt2).prop({"required": true, "disabled": false});
         $(chkNi1).prop("disabled", false);
         $(chkNi2).prop("disabled", false);
     } else {
         $(idTxt1).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(hrs).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(min).prop({"required": false, "disabled": true, "readonly": false}).val("");
+        $(idTxt2).prop({"required": false, "disabled": true, "readonly": false}).val("");
         $(chkNi1).prop({"disabled": true, "checked": false});
         $(chkNi2).prop({"disabled": true, "checked": false});
     }
@@ -113,16 +96,6 @@ function fechaNI(obj, idTxtDate) {
         $(idTxtDate).prop("readonly", true).val("1899-09-09");
     } else {
         $(idTxtDate).prop("readonly", false).val("");
-    }
-}
-//duracion no identificada
-function duracionNI(obj, hrs, min) {
-    if (obj.checked) {
-        $(hrs).prop("readonly", true).val("99");
-        $(min).prop("readonly", true).val("99");
-    } else {
-        $(hrs).prop("readonly", false).val("");
-        $(min).prop("readonly", false).val("");
     }
 }
 
@@ -146,5 +119,19 @@ function deleteAudienciasJO(causa) {
                 alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
             }
         });
+    }
+}
+
+//valida la duracion de la audiencia
+function duracion(fchIni, fchFin){
+    var inicio = $(fchIni).val();
+    var fin = $(fchFin).val();
+    if(inicio!=='' && inicio!=='1899-09-09' && fin!=='' && fin!=='1899-09-09'){
+        if(inicio > fin){
+            alert("La fecha en que inicia esta audiencia, no puede ser mayor a la fecha en que finaliza");
+            $(fchIni).val('');
+            $(fchFin).val('');
+            $(fchIni).focus();
+        }
     }
 }

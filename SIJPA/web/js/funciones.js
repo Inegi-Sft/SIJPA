@@ -259,13 +259,14 @@ function llenaMun(idEnt, idMun) {
                 enti: enti
             },
             success: function (response) {
-                console.log("Respuesta del servidor: ", response);
+                console.log("Respuesta del servidor Municipios: ", response);
             }
         }).done(function (data) {
             $(idMun).html(data);
         });
     } else {
         $(idMun).empty().append("<option value='0'>--Seleccione--</option>");
+        $('#rColonia').empty().append("<option value='0'>--Seleccione--</option>");
     }
 }
 /***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************/
@@ -323,12 +324,36 @@ function lugarResidencia(idSelect, idDivE, idDivM, idDivC, idSelEnti, idSelMuni,
     } else {
         $(idDivE).fadeOut("slow");
         $(idDivM).fadeOut("slow");
+        $(idDivC).fadeOut("slow");
         $(idSelEnti).prop("required", false);
         $(idSelMuni).prop("required", false);
         $(idSelCol).prop("required", false);
         $(idSelEnti).val("-2");
         $(idSelMuni).val("-2");
         $(idSelCol).val("-2");
+    }
+}
+
+function llenaColonia(idEntidad, idMun, idColonia){
+    var enti = $(idEntidad).val();
+    var mun = $(idMun).val();
+    if (mun !== '') {
+        $.ajax({
+            url: "obtenColonias",
+            dataType: 'html',
+            type: "post",
+            data: {
+                enti: enti,
+                mun: mun
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor Colonias: ", response);
+            }
+        }).done(function (data) {
+            $(idColonia).html(data);
+        });
+    } else {
+        $('#rColonia').empty().append("<option value='0'>--Seleccione--</option>");
     }
 }
 

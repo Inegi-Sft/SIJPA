@@ -1589,5 +1589,22 @@ public class catalogos {
         }
         return lista;
     }
+    
+    public ArrayList findColonias(int entidad, int muni) {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT COLONIA_ID, DESCRIPCION FROM CATALOGOS_COLONIASMUN WHERE ENTIDAD_ID = " + entidad + " "
+                + "AND MUNICIPIO_ID = " + muni + " ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 
 }

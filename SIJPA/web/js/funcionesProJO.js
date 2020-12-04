@@ -28,12 +28,18 @@ $(document).ready(function() {
     if($('#nPais').val() === '1'){
         $('#dNEntidad').show();
         $('#dNMunicipio').show();
+        $('#nEntidad').prop("required", true);
+        $('#nMunicipio').prop("required", true);
     }
     
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#residencia').val() === '1'){
         $('#dREntidad').show();
         $('#dRMunicipio').show();
+        $('#dRColonia').show();
+        $('#rEntidad').prop("required", true);
+        $('#rMunicipio').prop("required", true);
+        $('#rColonia').prop("required", true);
     }
     
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
@@ -150,8 +156,8 @@ $(document).ready(function() {
                 alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#TadolescentesJO').val());
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i < 6; i++) {
-//                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
+                    for (var i = 1; i < 5; i++) {
+                        console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaProcesaJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado ya estando lleno
@@ -164,7 +170,7 @@ $(document).ready(function() {
                             + '<td><a class="pop" href="etapaOral.jsp?proceClaveJO=' + response[1] + '&posicion=' + response[0] + '">'
                             + '<img src="img/editar.png" title="Modificar"/></a></td></tr>');
 //                    parent.$('#tablaJuicioJO tbody').find('tr').eq(response[0]).children('td').eq(1).html(response[2]);
-                    if (response[6] === numProce) {
+                    if (response[5] === numProce) {
                         parent.openPestana('btn4', 'p4');
                     } else {
                         //alert('Falta por capturar ' + (numProce - response[6]) + ' procesados');

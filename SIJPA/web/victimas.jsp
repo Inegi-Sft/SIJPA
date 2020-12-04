@@ -447,7 +447,7 @@
                                     </div>
                                     <div class="cols oculto" id="estaResi">   
                                         <label for="Ereside">Entidad</label>
-                                        <select name="Ereside" id="Ereside" name="Ereside" onchange="llenaMun('#Ereside', '#Mreside')">
+                                        <select name="Ereside" id="Ereside" onchange="llenaMun('#Ereside', '#Mreside')">
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findEntidades();

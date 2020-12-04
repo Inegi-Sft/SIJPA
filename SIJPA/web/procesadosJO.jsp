@@ -57,6 +57,7 @@
             String resiPais = "";
             String resiEnti = "";
             String resiMuni = "";
+            String resiCol = "";
             String edoCivil = "";
             String discapaci = "";
             String condAlfabeto = "";
@@ -103,31 +104,32 @@
                         resiPais = procesado.get(0)[12];
                         resiEnti = procesado.get(0)[13];
                         resiMuni = procesado.get(0)[14];
-                        edoCivil = procesado.get(0)[15];
-                        discapaci = procesado.get(0)[16];
-                        condAlfabeto = procesado.get(0)[17];
-                        gradoEstu = procesado.get(0)[18];
-                        condiEstudi = procesado.get(0)[19];
-                        hablaEspa = procesado.get(0)[20];
-                        poblaIndi = procesado.get(0)[21];
-                        tiPoblaIndi = procesado.get(0)[22];
-                        hablaIndi = procesado.get(0)[23];
-                        lenguaIndi = procesado.get(0)[24];
-                        lenguaExtra = procesado.get(0)[25];
-                        interprete = procesado.get(0)[26];
-                        ingresos = procesado.get(0)[27];
-                        rangoIngre = procesado.get(0)[28];
-                        ocupacion = procesado.get(0)[29];
-                        condiActi = procesado.get(0)[30];
-                        gradoParti = procesado.get(0)[31];
-                        reinciden = procesado.get(0)[32];
-                        edoPsicofi = procesado.get(0)[33];
-                        gpoDeli = procesado.get(0)[34];
-                        nomGpoDeli = procesado.get(0)[35];
-                        defensor = procesado.get(0)[36];
-                        personaRes = procesado.get(0)[37];
-                        comen = procesado.get(0)[38];
-                        edadJuzgado=procesado.get(0)[39];
+                        resiCol = procesado.get(0)[15];
+                        edoCivil = procesado.get(0)[16];
+                        discapaci = procesado.get(0)[17];
+                        condAlfabeto = procesado.get(0)[18];
+                        gradoEstu = procesado.get(0)[19];
+                        condiEstudi = procesado.get(0)[20];
+                        hablaEspa = procesado.get(0)[21];
+                        poblaIndi = procesado.get(0)[22];
+                        tiPoblaIndi = procesado.get(0)[23];
+                        hablaIndi = procesado.get(0)[24];
+                        lenguaIndi = procesado.get(0)[25];
+                        lenguaExtra = procesado.get(0)[26];
+                        interprete = procesado.get(0)[27];
+                        ingresos = procesado.get(0)[28];
+                        rangoIngre = procesado.get(0)[29];
+                        ocupacion = procesado.get(0)[30];
+                        condiActi = procesado.get(0)[31];
+                        gradoParti = procesado.get(0)[32];
+                        reinciden = procesado.get(0)[33];
+                        edoPsicofi = procesado.get(0)[34];
+                        gpoDeli = procesado.get(0)[35];
+                        nomGpoDeli = procesado.get(0)[36];
+                        defensor = procesado.get(0)[37];
+                        personaRes = procesado.get(0)[38];
+                        comen = procesado.get(0)[39];
+                        edadJuzgado=procesado.get(0)[40];
                     }else{
                         out.println("<script>alert('Procesado " + proceClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
@@ -388,7 +390,7 @@
                                     <legend>Lugar habitual de residencia</legend>
                                     <div class="colsx">
                                         <label for="residencia">Lugar de residencia</label>
-                                        <select name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#rEntidad', '#rMunicipio');" required >
+                                        <select name="residencia" id="residencia" onchange="lugarResidencia('#residencia', '#dREntidad', '#dRMunicipio', '#dRColonia', '#rEntidad', '#rMunicipio', '#rColonia');" required >
                                             <option value="">--Seleccione--</option>
                                             <%
                                                 lista = cat.findPais();
@@ -420,7 +422,7 @@
                                     </div>
                                     <div class="colsx oculto" id="dRMunicipio">
                                         <label for="rMunicipio">Municipio (Para CDMX Demarcación Territorial)</label>
-                                        <select name="rMunicipio" id="rMunicipio">
+                                        <select name="rMunicipio" id="rMunicipio" onchange="llenaColonia('#rEntidad', '#rMunicipio', '#rColonia')">
                                             <%
                                                 if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
                                                     out.println("<option value=''>--Seleccione--</option>");
@@ -430,6 +432,26 @@
                                                     for (String[] ls : lista) {
                                                         out.println("<option value='" + ls[0] + "'");
                                                         if(ls[0].equals(resiMuni)){
+                                                            out.println(" selected ");
+                                                        }
+                                                        out.println(">" + ls[1] + "</option>");
+                                                    }
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="colsx oculto" id="dRColonia">
+                                        <label for="rColonia">Colonia</label>
+                                        <select name="rColonia" id="rColonia">
+                                            <%
+                                                if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                }else{//Si el pais es mexico entonces se llena el catalogo con municipios del estado
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                    lista = cat.findColonias(Integer.parseInt(resiEnti), Integer.parseInt(resiMuni));
+                                                    for (String[] ls : lista) {
+                                                        out.println("<option value='" + ls[0] + "'");
+                                                        if(ls[0].equals(resiCol)){
                                                             out.println(" selected ");
                                                         }
                                                         out.println(">" + ls[1] + "</option>");

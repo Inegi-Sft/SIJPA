@@ -53,6 +53,7 @@
             String resiPais = "";
             String resiEnti = "";
             String resiMuni = "";
+            String resiCol = "";
             String edoCivil = "";
             String discapaci = "";
             String condAlfabeto = "";
@@ -101,34 +102,35 @@
                         resiPais = procesado.get(0)[12];
                         resiEnti = procesado.get(0)[13];
                         resiMuni = procesado.get(0)[14];
-                        edoCivil = procesado.get(0)[15];
-                        discapaci = procesado.get(0)[16];
-                        condAlfabeto = procesado.get(0)[17];
-                        gradoEstu = procesado.get(0)[18];
-                        condiEstudi = procesado.get(0)[19];
-                        hablaEspa = procesado.get(0)[20];
-                        poblaIndi = procesado.get(0)[21];
-                        tiPoblaIndi = procesado.get(0)[22];
-                        hablaIndi = procesado.get(0)[23];
-                        lenguaIndi = procesado.get(0)[24];
-                        lenguaExtra = procesado.get(0)[25];
-                        interprete = procesado.get(0)[26];
-                        ingresos = procesado.get(0)[27];
-                        rangoIngre = procesado.get(0)[28];
-                        ocupacion = procesado.get(0)[29];
-                        condiActi = procesado.get(0)[30];
-                        inicioPro = procesado.get(0)[31];
-                        tipoDeten = procesado.get(0)[32];
-                        formaCondu = procesado.get(0)[33];
-                        gradoParti = procesado.get(0)[34];
-                        reinciden = procesado.get(0)[35];
-                        edoPsicofi = procesado.get(0)[36];
-                        gpoDeli = procesado.get(0)[37];
-                        nomGpoDeli = procesado.get(0)[38];
-                        defensor = procesado.get(0)[39];
-                        personaRes = procesado.get(0)[40];
-                        comen = procesado.get(0)[41];
-                        edadJuzgado=procesado.get(0)[42];
+                        resiCol = procesado.get(0)[15];
+                        edoCivil = procesado.get(0)[16];
+                        discapaci = procesado.get(0)[17];
+                        condAlfabeto = procesado.get(0)[18];
+                        gradoEstu = procesado.get(0)[19];
+                        condiEstudi = procesado.get(0)[20];
+                        hablaEspa = procesado.get(0)[21];
+                        poblaIndi = procesado.get(0)[22];
+                        tiPoblaIndi = procesado.get(0)[23];
+                        hablaIndi = procesado.get(0)[24];
+                        lenguaIndi = procesado.get(0)[25];
+                        lenguaExtra = procesado.get(0)[26];
+                        interprete = procesado.get(0)[27];
+                        ingresos = procesado.get(0)[28];
+                        rangoIngre = procesado.get(0)[29];
+                        ocupacion = procesado.get(0)[30];
+                        condiActi = procesado.get(0)[31];
+                        inicioPro = procesado.get(0)[32];
+                        tipoDeten = procesado.get(0)[33];
+                        formaCondu = procesado.get(0)[34];
+                        gradoParti = procesado.get(0)[35];
+                        reinciden = procesado.get(0)[36];
+                        edoPsicofi = procesado.get(0)[37];
+                        gpoDeli = procesado.get(0)[38];
+                        nomGpoDeli = procesado.get(0)[39];
+                        defensor = procesado.get(0)[40];
+                        personaRes = procesado.get(0)[41];
+                        comen = procesado.get(0)[42];
+                        edadJuzgado=procesado.get(0)[43];
                     }else{
                         out.println("<script>alert('Procesado " + proceClave + " no encontrado dentro de la Causa Penal "  + causaClave + "'); "
                                 + "window.location.href = 'elementosPrincipales.jsp'</script>");
@@ -362,7 +364,7 @@
                                     </div>
                                     <div class="colsx oculto" id="dRMunicipio">
                                         <label for="rMunicipio">Municipio (Para CDMX Demarcación Territorial)</label>
-                                        <select name="rMunicipio" id="rMunicipio">
+                                        <select name="rMunicipio" id="rMunicipio" onchange="llenaColonia('#rEntidad', '#rMunicipio', '#rColonia')">
                                             <%
                                                 if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
                                                     out.println("<option value=''>--Seleccione--</option>");
@@ -384,7 +386,19 @@
                                         <label for="rColonia">Colonia</label>
                                         <select name="rColonia" id="rColonia">
                                             <%
-                                                
+                                                if(!resiPais.equals("1")){//Si es diferente de mexico se muestra vacio para ser llenado con jquery
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                }else{//Si el pais es mexico entonces se llena el catalogo con municipios del estado
+                                                    out.println("<option value=''>--Seleccione--</option>");
+                                                    lista = cat.findColonias(Integer.parseInt(resiEnti), Integer.parseInt(resiMuni));
+                                                    for (String[] ls : lista) {
+                                                        out.println("<option value='" + ls[0] + "'");
+                                                        if(ls[0].equals(resiCol)){
+                                                            out.println(" selected ");
+                                                        }
+                                                        out.println(">" + ls[1] + "</option>");
+                                                    }
+                                                }
                                             %>
                                         </select>
                                     </div>

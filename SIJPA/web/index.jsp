@@ -18,33 +18,16 @@
             String version = "";
             //Verificamos si la tabla de versiones existe si no la creamos
             actualizador act = new actualizador();
-//            System.out.println("existe tabla version: " + act.findTablaVersion());
-//            if(!act.findTablaVersion()){
-//                out.println("<script>$(document).ready(function () {"
-//                        + "$('.load').show();"
-//                        + "$.ajax({"
-//                        + "type: 'post',"
-//                        + "url: 'actualiza',"
-//                        + "data: {version: $('#version').html()},"
-//                        + "success: function (response) {"
-//                        + "console.log('Respuesta del servidor actualiza ', response);"
-//                        + "$('.load').fadeOut();"
-//                        + "if (response === '1') {"
-//                        + "alert('Actualizado correctamente');"
-//                        + "}"
-//                        + "}"
-//                        + "});"
-//                        + "});</script>");
-//            }
-            System.out.println("es la version igual: " + act.findVersion("BETA 1.4"));
+            System.out.println("es la version igual: " + act.findVersion("BETA 1.5.4"));
             //Verificacmos que version de sistema tiene para poder actualizar si es diferente
-            if(!act.findVersion("BETA 1.4")){ 
+            if(!act.findVersion("BETA 1.5.4")){ 
                 out.println("<script>$(document).ready(function () {"
                         + "$('.load').show();"
                         + "$.ajax({"
+                        + "async: false,"
                         + "type: 'post',"
                         + "url: 'actualiza',"
-                        + "data: {version: 'BETA 1.4'},"
+                        + "data: {version: 'BETA 1.5.4'},"
                         + "success: function (response) {"
                         + "console.log('Respuesta del servidor actualiza ', response);"
                         + "$('.load').fadeOut();"
@@ -54,10 +37,9 @@
                         + "}"
                         + "});"
                         + "});</script>");
-            }else{
-                version = act.version();
-                System.out.println("La version es: " + version);
             }
+            version = act.version();
+            System.out.println("La version es: " + version);
             
             //Si cierran sesion borramos las Variables de Session
             if(session.getAttribute("usuActivo") != null){

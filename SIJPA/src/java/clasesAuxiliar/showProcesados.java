@@ -37,7 +37,7 @@ public class showProcesados {
                     resul.getString("P.CURP"), resul.getString("P.FECHA_NACIMIENTO"), resul.getString("P.SEXO"), resul.getString("P.EDAD_DELITO"),
                     resul.getString("P.NACIMIENTO_PAIS"), resul.getString("P.NACIMIENTO_ENTIDAD"), resul.getString("P.NACIMIENTO_MUNICIPIO"),
                     resul.getString("P.NACIONALIDAD"), resul.getString("P.RESIDENCIA_PAIS"), resul.getString("P.RESIDENCIA_ENTIDAD"),
-                    resul.getString("P.RESIDENCIA_MUNICIPIO"), resul.getString("P.ESTADO_CIVIL"), resul.getString("P.DISCAPACIDAD"),
+                    resul.getString("P.RESIDENCIA_MUNICIPIO"), resul.getString("P.RESIDENCIA_COL"), resul.getString("P.ESTADO_CIVIL"), resul.getString("P.DISCAPACIDAD"),
                     resul.getString("P.CONDICION_ALFABETISMO"), resul.getString("P.ULTIMO_GRADO_ESTUDIOS"), resul.getString("P.CONDICION_ESTUDIANTE"),
                     resul.getString("P.HABLA_ESPANOL"), resul.getString("P.POBLACION_INDIGENA"), resul.getString("P.TIPO_PUEBLO_INDIGENA"),
                     resul.getString("P.HABLA_INDIGENA"), resul.getString("P.FAMILIA_LINGUISTICA"), resul.getString("P.LENGUA_EXTRANJERA"),

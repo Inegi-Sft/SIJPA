@@ -43,45 +43,63 @@ public class actualiza extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             conn.Conectar();
-            //System.out.println("variable: " + request.getParameter("actualizar"));
             System.out.println("variable: " + request.getParameter("version:"));
-//            if(request.getParameter("crear") != null){
-//                sql = "CREATE TABLE VERSION_SISTEMA ("
-//                        + "VERSION varchar(50) COLLATE utf8_bin NOT NULL,"
-//                        + "PRIMARY KEY (VERSION)"
-//                        + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
-//                System.out.println(sql);
-//                if(conn.escribir(sql)){
-//                    sql = "INSERT INTO VERSION_SISTEMA VALUES('BETA');";
-//                    System.out.println(sql);
-//                    if(conn.escribir(sql)){
-//                        out.write("1");
-//                        conn.close();
-//                    }else{
-//                        out.write("0");
-//                        conn.close();
-//                    }
-//                }else{
-//                    out.write("0");
-//                    conn.close();
-//                }
-//            }else 
             if(request.getParameter("version") != null){
                 //insertamos la version del sistema
                 sql = "UPDATE VERSION_SISTEMA SET VERSION = '" + request.getParameter("version") + "';";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP PRIMARY KEY, "
-                            + "ADD PRIMARY KEY (JUZGADO_CLAVE, CAUSA_CLAVE, JUEZ_CLAVE1, AUDIENCIA_INVESTIGACION, AUDIENCIA_INTERMEDIA);"
-                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP FOREIGN KEY FK_AUDI_JUEZ2;"
-                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP INDEX FK_AUDI_JUEZ2;"
-                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP FOREIGN KEY FK_AUDI_JUEZ3;"
-                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP INDEX FK_AUDI_JUEZ3;"
-                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP JUEZ_CLAVE2, DROP JUEZ_CLAVE3;";
-                    System.out.println(sql);
+                    sql = "CREATE TABLE CATALOGOS_COLONIASMUN ("
+                            + "ENTIDAD_ID int(2) NOT NULL,"
+                            + "MUNICIPIO_ID int(5) NOT NULL,"
+                            + "COLONIA_ID int(7) NOT NULL,"
+                            + "DESCRIPCION varchar(150) COLLATE utf8_bin NOT NULL,"
+                            + "PRIMARY KEY (COLONIA_ID)"
+                            + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
                     conn.escribir(sql);
-                    out.write("1");
-                    conn.close();
+                    sql = "ALTER TABLE DATOS_PROCESADOS_ADOJC ADD RESIDENCIA_COL VARCHAR(30) NOT NULL AFTER RESIDENCIA_MUNICIPIO;"
+                            + "ALTER TABLE DATOS_PROCESADOS_ADOJO ADD RESIDENCIA_COL VARCHAR(30) NOT NULL AFTER RESIDENCIA_MUNICIPIO;";
+                    conn.escribir(sql);
+                    sql = "TRUNCATE DATOS_AUDIENCIAS_ADOJC;"
+                            + "DELETE FROM CATALOGOS_AUDIENCIAS_INVESTIGACION;"
+                            + "TRUNCATE DATOS_AUDIENCIAS_ADOJO;"
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJO DROP HORAS, DROP MINUTOS;"
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJO CHANGE FECHA_CELEBRACION FECHA_INICIO DATE NOT NULL;"
+                            + "ALTER TABLE DATOS_AUDIENCIAS_ADOJO ADD FECHA_FINALIZO DATE NOT NULL AFTER FECHA_INICIO;";
+                    System.out.println(sql);
+                    if(conn.escribir(sql)){
+                        sql = "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (-2,'No aplica');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (1,'Audiencias relacionadas con la competencia');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (2,'Audiencias relacionadas con técnicas de investigación');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (3,'Audiencias de prueba anticipada');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (4,'Audiencias de acumulación de procesos');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (5,'Audiencias de separación de procesos');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (6,'Audiencias de citación ');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (7,'Audiencias de comparecencia');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (8,'Audiencias de aprehensión');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (9,'Audiencias de desistimiento de la acción penal');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (10,'Audiencias relacionadas con las medidas de protección');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (11,'Audiencia inicial');" 
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (12,'Audiencias de medida cautelar (revisión)');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (13,'Audiencias relacionadas con el procedimiento abreviado');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (14,'Audiencias relacionadas con la suspensión condicional del proceso');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (15,'Audiencias de cierre de la investigación complementaria');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (16,'Audiencias relacionadas con impugnaciones a determinaciones del ministerio público');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (17,'Audiencias relacionadas con acuerdos reparatorios');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (18,'Audiencias de solicitud y/o determinación de sobreseimiento');"
+                                + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION VALUES (19,'Otras (especifique)');";
+                        conn.escribir(sql);
+                        sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP HORAS, DROP MINUTOS;"
+                                + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC CHANGE FECHA_CELEBRACION FECHA_INICIO DATE NOT NULL;"
+                                + "ALTER TABLE DATOS_AUDIENCIAS_ADOJC ADD FECHA_FINALIZO DATE NOT NULL AFTER FECHA_INICIO;";
+                        System.out.println(sql);
+                        conn.escribir(sql);
+                        out.write("1");
+                        conn.close();
+                    }else{
+                        out.write("0");
+                        conn.close();
+                    }
                 }else{
                     out.write("0");
                     conn.close();

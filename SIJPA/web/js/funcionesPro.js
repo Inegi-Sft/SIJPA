@@ -25,12 +25,18 @@ $(document).ready(function() {
     if($('#nPais').val() === '1'){
         $('#dNEntidad').show();
         $('#dNMunicipio').show();
+        $('#nEntidad').prop("required", true);
+        $('#nMunicipio').prop("required", true);
     }
     
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#residencia').val() === '1'){
         $('#dREntidad').show();
         $('#dRMunicipio').show();
+        $('#dRColonia').show();
+        $('#rEntidad').prop("required", true);
+        $('#rMunicipio').prop("required", true);
+        $('#rColonia').prop("required", true);
     }
     
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios

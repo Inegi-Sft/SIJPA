@@ -69,12 +69,16 @@ $(document).ready(function() {
     if($('#Pnacimiento').val() === '1'){
         $('#estaNaci').show();
         $('#munNaci').show();
+        $('#Enacimiento').prop('required', true);
+        $('#Mnacimiento').prop('required', true);   
     }
     
     //Se usa para la recuperacion de BD
     if($('#Preside').val() === '1'){
         $('#estaResi').show();
         $('#munResi').show();
+        $('#Ereside').prop('required', true);
+        $('#Mreside').prop('required', true); 
     }
     
     //Se usa para la recuperacion de BD

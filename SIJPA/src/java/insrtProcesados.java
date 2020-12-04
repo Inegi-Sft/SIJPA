@@ -77,6 +77,7 @@ public class insrtProcesados extends HttpServlet {
         String residencia = request.getParameter("residencia");
         String rEntidad = request.getParameter("rEntidad");
         String rMunicipio = verificaVariable(request.getParameter("rMunicipio"));
+        String rColonia = verificaVariable(request.getParameter("rColonia"));
         String edoCivil = request.getParameter("edoCivil");
         String discapacidad = request.getParameter("discapacidad");
         String alfabet = request.getParameter("alfabet");
@@ -123,7 +124,7 @@ public class insrtProcesados extends HttpServlet {
                         + "ALIAS = '" + alias + "',CURP = '" + curp + "',FECHA_NACIMIENTO = '" + fNacimiento + "',SEXO = " + sexo + ","
                         + "EDAD_DELITO = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
                         + "NACIONALIDAD = " + nacionalidad + ",RESIDENCIA_PAIS = " + residencia + ",RESIDENCIA_ENTIDAD = " + rEntidad + ","
-                        + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
+                        + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",RESIDENCIA_COL = '" + rColonia + "',ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
                         + "CONDICION_ALFABETISMO = " + alfabet + ",ULTIMO_GRADO_ESTUDIOS = " + estudios + ",CONDICION_ESTUDIANTE = " + condiEstudiante + ","
                         + "HABLA_ESPANOL = " + hablaEsp + ",POBLACION_INDIGENA = " + poblaIndigena + ",TIPO_PUEBLO_INDIGENA = " + puebloIndigena + ","
                         + "HABLA_INDIGENA = " + hablaIndigena + ",FAMILIA_LINGUISTICA = " + lenguaIndigena + ",LENGUA_EXTRANJERA = " + lenExtranjera + ","
@@ -180,7 +181,7 @@ public class insrtProcesados extends HttpServlet {
                         + "ALIAS = '" + alias + "',CURP = '" + curp + "',FECHA_NACIMIENTO = '" + fNacimiento + "',SEXO = " + sexo + ","
                         + "EDAD_DELITO = " + edad + ",NACIMIENTO_PAIS = " + nPais + ",NACIMIENTO_ENTIDAD = " + nEntidad + ",NACIMIENTO_MUNICIPIO = " + nMunicipio + ","
                         + "NACIONALIDAD = " + nacionalidad + ",RESIDENCIA_PAIS = " + residencia + ",RESIDENCIA_ENTIDAD = " + rEntidad + ","
-                        + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
+                        + "RESIDENCIA_MUNICIPIO = " + rMunicipio + ",RESIDENCIA_COL = '" + rColonia + "',ESTADO_CIVIL = " + edoCivil + ",DISCAPACIDAD = " + discapacidad + ","
                         + "CONDICION_ALFABETISMO = " + alfabet + ",ULTIMO_GRADO_ESTUDIOS = " + estudios + ",CONDICION_ESTUDIANTE = " + condiEstudiante + ","
                         + "HABLA_ESPANOL = " + hablaEsp + ",POBLACION_INDIGENA = " + poblaIndigena + ",TIPO_PUEBLO_INDIGENA = " + puebloIndigena + ","
                         + "HABLA_INDIGENA = " + hablaIndigena + ",FAMILIA_LINGUISTICA = " + lenguaIndigena + ",LENGUA_EXTRANJERA = " + lenExtranjera + ","

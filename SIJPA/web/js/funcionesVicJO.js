@@ -215,15 +215,15 @@ $(document).ready(function() {
                 alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#TvictimasJO').val());
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i < 6; i++) {
+                    for (var i = 1; i < 5; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaVictimasJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }
                     //editamos enlance para que pueda ser actualizado con la nueva clav jo ya estando lleno
                     var enlace = parent.$('#tablaVictimasJO tbody tr').eq(response[0]).find('a').attr('href') + '&edita=Si';
                     parent.$('#tablaVictimasJO tbody tr').eq(response[0]).find('a').attr('href',enlace);
-                    console.log('Captu: ' + response[6] + ' Existen: ' + numProce);
-                    if (response[6] === numProce) {
+                    console.log('Captu: ' + response[5] + ' Existen: ' + numProce);
+                    if (response[5] === numProce) {
                         parent.openPestana('btn5', 'p5');
                     } else {
                         //alert('Falta por capturar ' + (numProce - response[6]) + ' v\u00EDctimas');

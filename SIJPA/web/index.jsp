@@ -18,16 +18,16 @@
             String version = "";
             //Verificamos si la tabla de versiones existe si no la creamos
             actualizador act = new actualizador();
-            System.out.println("es la version igual: " + act.findVersion("BETA 1.5.4"));
+            System.out.println("es la version igual: " + act.findVersion("BETA 1.5"));
             //Verificacmos que version de sistema tiene para poder actualizar si es diferente
-            if(!act.findVersion("BETA 1.5.4")){ 
+            if(!act.findVersion("BETA 1.5")){ 
                 out.println("<script>$(document).ready(function () {"
                         + "$('.load').show();"
                         + "$.ajax({"
                         + "async: false,"
                         + "type: 'post',"
                         + "url: 'actualiza',"
-                        + "data: {version: 'BETA 1.5.4'},"
+                        + "data: {version: 'BETA 1.5'},"
                         + "success: function (response) {"
                         + "console.log('Respuesta del servidor actualiza ', response);"
                         + "$('.load').fadeOut();"

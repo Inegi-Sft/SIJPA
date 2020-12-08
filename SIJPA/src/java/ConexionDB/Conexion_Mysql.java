@@ -34,11 +34,11 @@ public class Conexion_Mysql {
 //            String url = "jdbc:mysql://node235835-sijpacol.j.layershift.co.uk/sijpa_db";
 //            conexion = (Connection) DriverManager.getConnection(url,"root","LNCqxn74661");
             //Jalisco
-//            String url = "jdbc:mysql://node236661-sijpajal.j.layershift.co.uk/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","YNXirg26154");
+//            String url = "jdbc:mysql://node237484-sijpajalis.j.layershift.co.uk/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","CMAatv94804");
             //Conceptuales
-//            String url = "jdbc:mysql://node237036-sijpaconce.j.layershift.co.uk/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","RQZcks05124");
+//            String url = "jdbc:mysql://node237647-env-6168060.j.layershift.co.uk/sijpa_db";
+//            conexion = (Connection) DriverManager.getConnection(url,"root","GGKgkr63456");
             //Localhost
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");

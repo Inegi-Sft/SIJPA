@@ -229,13 +229,6 @@ function valida(){
         }
     }
 }
-
-//if($("#btn5").is(":disabled") && $("#btn6").is(":disabled")){
-//            $('#guardar').val("Guardar");
-//            openPestana('btn6', 'p6');
-//            openPestana('btn5', 'p5');
-//            return false;// no envia formulario
-//        }
     
 function quitaCeros(elemento){
     var valor = elemento.value.replace(/^0*/, '');

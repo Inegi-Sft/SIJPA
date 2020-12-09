@@ -175,6 +175,29 @@ public class showJuzgados {
         return conteo;
     }
     
+    public int countCausasTram(String juzgado, int funJuzgado){
+        int conteo = 0;
+        try {
+            conn.Conectar();
+            if(funJuzgado == 1){
+                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJC CP "
+                    + "INNER JOIN DATOS_TRAMITES_ADOJC T ON T.CAUSA_CLAVE=CP.CAUSA_CLAVE WHERE CP.JUZGADO_CLAVE='"+juzgado+"'";
+            }else{
+                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJO CP "
+                    + "INNER JOIN DATOS_TRAMITES_ADOJO T ON T.CAUSA_CLAVEJO=CP.CAUSA_CLAVEJO WHERE CP.JUZGADO_CLAVEJO='"+juzgado+"'";
+            }
+            
+            rs = conn.consultar(sql);
+            while (rs.next()) {
+                conteo = rs.getInt(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showJuzgados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conteo;
+    }
+    
     public boolean findJuzgadoExist(String juzgadoClave){
         try{
             conn.Conectar();
@@ -252,24 +275,30 @@ public class showJuzgados {
         try {
             conn.Conectar();
             listaDatosJuz = new ArrayList<>();
-            String tabla;
+            
             if(funJuz.equalsIgnoreCase("2")){
-                tabla = "DATOS_INFORME_ADOJO"; 
+                sql = "SELECT CAUSAS_PENALES_INGRESADAS, EXCUSAS, RECUSACIONES, OTRAS, CAUSAS_TRAMITE, CAUSAS_BAJAS, ANIO "
+                        + "FROM DATOS_INFORME_ADOJO "
+                        + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' ORDER BY 1;";
+                rs = conn.consultar(sql);
+                while (rs.next()) {
+                    listaDatosJuz.add(new String[]{
+                        rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+                    });
+                }
             }else{
-                tabla = "DATOS_INFORME_ADOJC";
-            }
-            sql = "SELECT CAUSAS_PENALES_INGRESADAS, MEDIDAS_PROTECCION_ASIG, PROVIDENCIAS_PRECAUTORIAS, PRUEBA_ANTICIPADA,"
-                    + "ORDENES_JUDICIALES, ACTOS_INVESTIGA, IMPUGNACION_MP, OTROS, CAUSAS_TRAMITE, CAUSAS_BAJAS, ANIO "
-                    + "FROM " + tabla + " "
-                    + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' "
-                    + "ORDER BY 1;";
-            rs = conn.consultar(sql);
-            while (rs.next()) {
-                listaDatosJuz.add(new String[]{
-                    rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),
-                    rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),
-                    rs.getString(11)
-                });
+                sql = "SELECT CAUSAS_PENALES_INGRESADAS, MEDIDAS_PROTECCION_ASIG, PROVIDENCIAS_PRECAUTORIAS, PRUEBA_ANTICIPADA,"
+                        + "ORDENES_JUDICIALES, ACTOS_INVESTIGA, IMPUGNACION_MP, OTROS, CAUSAS_TRAMITE, CAUSAS_BAJAS, ANIO "
+                        + "FROM DATOS_INFORME_ADOJC "
+                        + "WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' ORDER BY 1;";
+                rs = conn.consultar(sql);
+                while (rs.next()) {
+                    listaDatosJuz.add(new String[]{
+                        rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),
+                        rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),
+                        rs.getString(11)
+                    });
+                }
             }
             conn.close();
         } catch (SQLException ex) {

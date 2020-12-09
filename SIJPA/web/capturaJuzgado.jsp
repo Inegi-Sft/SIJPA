@@ -71,13 +71,9 @@
             String causaTramJC = "";
             String causaBajaJC = "";
             String causaPenaInJO = "";
-            String medidasProJO = "";
-            String proviPreJO = "";
-            String pruAnticipaJO = "";
-            String ordenJudiciJO = "";
-            String actosInvesJO = "";
-            String impugnaMpJO = "";
-            String otrosJO = "";
+            String excusasJO = "";
+            String recusacionesJO = "";
+            String otrasJO = "";
             String causaTramJO = "";
             String causaBajaJO = "";
             ////////////////
@@ -126,28 +122,20 @@
                         causaTramJC = informeJuzJC.get(0)[8];
                         causaBajaJC = informeJuzJC.get(0)[9];
                         causaPenaInJO = informeJuzJO.get(0)[0];
-                        medidasProJO = informeJuzJO.get(0)[1];
-                        proviPreJO = informeJuzJO.get(0)[2];
-                        pruAnticipaJO = informeJuzJO.get(0)[3];
-                        ordenJudiciJO = informeJuzJO.get(0)[4];
-                        actosInvesJO = informeJuzJO.get(0)[5];
-                        impugnaMpJO = informeJuzJO.get(0)[6];
-                        otrosJO = informeJuzJO.get(0)[7];
-                        causaTramJO = informeJuzJO.get(0)[8];
-                        causaBajaJO = informeJuzJO.get(0)[9];
+                        excusasJO = informeJuzJO.get(0)[1];
+                        recusacionesJO = informeJuzJO.get(0)[2];
+                        otrasJO = informeJuzJO.get(0)[3];
+                        causaTramJO = informeJuzJO.get(0)[4];
+                        causaBajaJO = informeJuzJO.get(0)[5];
                     }else if(juzFun.equalsIgnoreCase("2")){
                         ArrayList<String[]> informeJuzJO;
                         informeJuzJO  = sJuzgado.findInformeJuz(juzClave,"2");
                         causaPenaInJO = informeJuzJO.get(0)[0];
-                        medidasProJO = informeJuzJO.get(0)[1];
-                        proviPreJO = informeJuzJO.get(0)[2];
-                        pruAnticipaJO = informeJuzJO.get(0)[3];
-                        ordenJudiciJO = informeJuzJO.get(0)[4];
-                        actosInvesJO = informeJuzJO.get(0)[5];
-                        impugnaMpJO = informeJuzJO.get(0)[6];
-                        otrosJO = informeJuzJO.get(0)[7];
-                        causaTramJO = informeJuzJO.get(0)[8];
-                        causaBajaJO = informeJuzJO.get(0)[9];
+                        excusasJO = informeJuzJO.get(0)[1];
+                        recusacionesJO = informeJuzJO.get(0)[2];
+                        otrasJO = informeJuzJO.get(0)[3];
+                        causaTramJO = informeJuzJO.get(0)[4];
+                        causaBajaJO = informeJuzJO.get(0)[5];
                     }else if(juzFun.equalsIgnoreCase("1")){
                         ArrayList<String[]> informeJuzJC;
                         informeJuzJC  = sJuzgado.findInformeJuz(juzClave,"1");
@@ -466,7 +454,11 @@
                             </td>
                             <td>
                                 <label for="causasTramJC">Causas penales pendientes de conclusión y/o terminación</label>
-                                <input type="number" name="causasTramJC" id="causasTramJC" value="<%=causaTramJC%>" min="0">
+                                <%
+                                    int conteoCausaTramJC;
+                                    conteoCausaTramJC = sJuzgado.countCausasTram(juzClave, 1);
+                                %>
+                                <input type="number" name="causasTramJC" id="causasTramJC" value="<%=conteoCausaTramJC%>" min="0" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -491,58 +483,37 @@
                                 <label for="causasIngresaJO" id="causasPinfoJO">Causas penales ingresadas</label>
                                 <%
                                     int conteoCausaPenaInJO;
-                                    if(request.getParameter("insert") != null){
-                                        conteoCausaPenaInJO = sJuzgado.countCausasPenIn(juzClave, 2);
-                                    }else{
-                                        conteoCausaPenaInJO = 0;
-                                    }
+                                    conteoCausaPenaInJO = sJuzgado.countCausasPenIn(juzClave, 2);
+                                    
                                 %>
                                 <input type="number" name="causasIngresaJO" id="causasIngresaJO" value="<%=conteoCausaPenaInJO%>" min="0" readonly>
                             </td>
                             <td>
-                                <label for="mediProteccionJO">Medidas de protección (solicitudes)</label>
-                                <input type="number" name="mediProteccionJO" id="mediProteccionJO" value="<%=medidasProJO%>" min="0">
+                                <label for="excusasJO">Excusa</label>
+                                <input type="number" name="excusasJO" id="excusasJO" value="<%=excusasJO%>" min="0">
                             </td>
                             <td>
-                                <label for="providenPrecautoJO">Providencias precautorias (solicitudes)</label>
-                                <input type="number" name="providenPrecautoJO" id="providenPrecautoJO" value="<%=proviPreJO%>" min="0">
+                                <label for="recusacionesJO">Recusación</label>
+                                <input type="number" name="recusacionesJO" id="recusacionesJO" value="<%=recusacionesJO%>" min="0">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="pruebaAntiJO">Pruebas anticipadas <br>(solicitudes)</label>
-                                <input type="number" name="pruebaAntiJO" id="pruebaAntiJO" value="<%=pruAnticipaJO%>" min="0">
+                                <label for="otrosJO">Otras cargas de trabajo del órgano jurisdiccional <br>(distintas a las anteriores)</label>
+                                <input type="number" name="otrosJO" id="otrosJO" value="<%=otrasJO%>" min="0">
                             </td>
                             <td>
-                                <label for="ordenesJudiJO">Órdenes judiciales <br>(solicitudes)</label>
-                                <input type="number" name="ordenesJudiJO" id="ordenesJudiJO" value="<%=ordenJudiciJO%>" min="0">
+                                <label for="causasTramJO">Causas penales pendientes de conclusión</label>
+                                <%
+                                    int conteoCausaTramJO;
+                                    conteoCausaTramJO = sJuzgado.countCausasTram(juzClave, 2);
+                                %>
+                                <input type="number" name="causasTramJO" id="causasTramJO" value="<%=conteoCausaTramJO%>" min="0" readonly>
                             </td>
-                            <td>
-                                <label for="actosInvestigaJO">Actos de investigación que requieren control judicial <br>(solicitudes)</label>
-                                <input type="number" name="actosInvestigaJO" id="actosInvestigaJO" value="<%=actosInvesJO%>" min="0">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="impugnaMpJO">Impugnaciones a las determinaciones del MP <br>(solicitudes)</label>
-                                <input type="number" name="impugnaMpJO" id="impugnaMpJO" value="<%=impugnaMpJO%>" min="0">
-                            </td>
-                            <td>
-                                <label for="otrosJO">Otros asuntos <br>(solicitudes distintas a las anteriores)</label>
-                                <input type="number" name="otrosJO" id="otrosJO" value="<%=otrosJO%>" min="0">
-                            </td>
-                            <td>
-                                <label for="causasTramJO">Causas penales pendientes de conclusión y/o terminación</label>
-                                <input type="number" name="causasTramJO" id="causasTramJO" value="<%=causaTramJO%>" min="0">
-                            </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <label for="causasBajaJO">Causas penales que causaron baja en el sistema</label>
                                 <input type="number" name="causasBajaJO" id="causasBajaJO" value="<%=causaBajaJO%>" min="0">
                             </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </table>
                 </div> 

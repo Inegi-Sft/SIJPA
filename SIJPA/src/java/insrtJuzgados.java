@@ -90,12 +90,8 @@ public class insrtJuzgados extends HttpServlet {
         String causasBajaJC = verificaVariable(request.getParameter("causasBajaJC"));
         //Informción General Juicio Oral
         String causasIngresaJO = verificaVariable(request.getParameter("causasIngresaJO"));
-        String mediProteccionJO = verificaVariable(request.getParameter("mediProteccionJO"));
-        String providenPrecautoJO = verificaVariable(request.getParameter("providenPrecautoJO"));
-        String pruebaAntiJO = verificaVariable(request.getParameter("pruebaAntiJO"));
-        String ordenesJudiJO = verificaVariable(request.getParameter("ordenesJudiJO"));
-        String actosInvestigaJO = verificaVariable(request.getParameter("actosInvestigaJO"));
-        String impugnaMpJO = verificaVariable(request.getParameter("impugnaMpJO"));
+        String excusasJO = verificaVariable(request.getParameter("excusasJO"));
+        String recusacionesJO = verificaVariable(request.getParameter("recusacionesJO"));
         String otrosJO = verificaVariable(request.getParameter("otrosJO"));
         String causasTramJO = verificaVariable(request.getParameter("causasTramJO"));
         String causasBajaJO = verificaVariable(request.getParameter("causasBajaJO"));
@@ -124,8 +120,7 @@ public class insrtJuzgados extends HttpServlet {
                     }
                     if(funcionJuz.equals("2") || funcionJuz.equals("3")){//Enjuiciamiento o Mixto
                         sql = "INSERT INTO DATOS_INFORME_ADOJO VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
-                                + causasIngresaJO + "," + mediProteccionJO + "," + providenPrecautoJO + "," + pruebaAntiJO + "," + ordenesJudiJO + ","
-                                + actosInvestigaJO + "," + impugnaMpJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
+                                + causasIngresaJO + "," + excusasJO + "," + recusacionesJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
                                 + ")";
                         System.out.println(sql);
                         resul = conn.escribir(sql);
@@ -182,8 +177,7 @@ public class insrtJuzgados extends HttpServlet {
                     if(funcionJuz.equals("2")){//Enjuiciamiento
                         sql2 = "DELETE FROM DATOS_INFORME_ADOJC WHERE JUZGADO_CLAVE='"+jClaveR+"'";
                         sql =  "REPLACE INTO DATOS_INFORME_ADOJO VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
-                                + causasIngresaJO + "," + mediProteccionJO + "," + providenPrecautoJO + "," + pruebaAntiJO + "," + ordenesJudiJO + ","
-                                + actosInvestigaJO + "," + impugnaMpJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
+                                + causasIngresaJO + "," + excusasJO + "," + recusacionesJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
                                 + ")";
                         System.out.println(sql);
                     }
@@ -193,8 +187,7 @@ public class insrtJuzgados extends HttpServlet {
                                 + actosInvestigaJC + "," + impugnaMpJC + "," + otrosJC + "," + causasTramJC + ","+ causasBajaJC + ",(select YEAR(NOW()))"
                                 + ")";
                         sql2 = "REPLACE INTO DATOS_INFORME_ADOJO VALUES(" + entidadJ + "," + municipioJ + "," + numOrgano + ",'" + juzgadoClave + "',"
-                                + causasIngresaJO + "," + mediProteccionJO + "," + providenPrecautoJO + "," + pruebaAntiJO + "," + ordenesJudiJO + ","
-                                + actosInvestigaJO + "," + impugnaMpJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
+                                + causasIngresaJO + "," + excusasJO + "," + recusacionesJO + "," + otrosJO + "," + causasTramJO + ","+ causasBajaJO + ",(select YEAR(NOW()))"
                                 + ")";
                     }
                     if(conn.escribir(sql) && conn.escribir(sql2)){

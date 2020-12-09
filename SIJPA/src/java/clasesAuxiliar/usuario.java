@@ -276,7 +276,7 @@ public class usuario {
             for(x = 1; x <= totPro; x++){
                 sql = "INSERT INTO DATOS_PROCESADOS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-P" + x + jConcatenado + "'," 
-                        + "-2,-2,-2,-2,-2,'1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,"
+                        + "-2,-2,-2,-2,-2,'1899-09-09',-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,"
                         + "-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,'REGNUEVO',(select YEAR(NOW())) )";
                 System.out.println(sql);
                 conn.escribir(sql);

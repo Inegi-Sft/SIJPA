@@ -73,6 +73,7 @@ $(document).ready(function() {
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#grupoDelictivo').val() === '1'){
         $('#gruDeli').show();
+        $('#delictivo').prop('required', true);
     }
     
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios

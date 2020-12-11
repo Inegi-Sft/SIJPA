@@ -243,7 +243,7 @@
                                                         //figuras presenta
                                                         out.println("<td><select name='figuraMP' id='figuraMP1'>");
                                                         out.println("<option value=''>---Seleccione---</option>");
-                                                        lista = cat.findFiguraMprueba();
+                                                        lista = cat.findMediosPrueba();
                                                         for (String[] ls : lista) {
                                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                         }
@@ -251,7 +251,7 @@
                                                         //tipos medios
                                                         out.println("<td><select name='tipoMP' id='tipoMP1'>");
                                                         out.println("<option value=''>---Seleccione---</option>");
-                                                        lista = cat.findMediosPrueba();
+                                                        lista = cat.findFiguraMprueba();
                                                         for (String[] ls : lista) {
                                                             out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                                                         }

@@ -60,6 +60,21 @@ public class obtenCatalogo extends HttpServlet {
                     for (String[] ls : lista) {
                         out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
                     }   break;
+                case "mediosPrueba":
+                    lista = cat.findMediosPrueba();
+                    for (String[] ls : lista) {
+                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                    }   break;
+                case "figuraMP":
+                    lista = cat.findFiguraMprueba();
+                    for (String[] ls : lista) {
+                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                    }   break;
+                case "resolucionMP":
+                    lista = cat.findResolucionMprueba();
+                    for (String[] ls : lista) {
+                        out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                    }   break;
                 default:
                     break;
             }

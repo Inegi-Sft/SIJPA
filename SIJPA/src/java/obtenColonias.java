@@ -50,6 +50,7 @@ public class obtenColonias extends HttpServlet {
             for (String[] ls : lista) {
                 out.println("<option value='" + ls[0] + "'>" + ls[1] + "</option>");
             }
+            out.println("<option value='9999-9999'>No identificado</option>");
         }
     }
 

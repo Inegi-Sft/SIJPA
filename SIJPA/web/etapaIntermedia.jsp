@@ -35,9 +35,6 @@
             String fechaAudiInter = "";
             String separaAcusa = "";
             String presentaMprueba = "";
-            String presenMinisterio = "";
-            String presenAsesor = "";
-            String presenDefensa = "";
             String acuerdoProba = "";
             String aperJO = "";
             String comen = "";
@@ -54,12 +51,9 @@
                         fechaAudiInter = intermedia.get(0)[4];
                         separaAcusa = intermedia.get(0)[5];
                         presentaMprueba = intermedia.get(0)[6];
-                        presenMinisterio = intermedia.get(0)[7];
-                        presenAsesor = intermedia.get(0)[8];
-                        presenDefensa = intermedia.get(0)[9];
-                        acuerdoProba = intermedia.get(0)[10];
-                        aperJO = intermedia.get(0)[11];
-                        comen = intermedia.get(0)[12];
+                        acuerdoProba = intermedia.get(0)[7];
+                        aperJO = intermedia.get(0)[8];
+                        comen = intermedia.get(0)[9];
                     }
                 }
             }
@@ -168,35 +162,125 @@
                         <tr>
                             <td colspan="3">
                                 <fieldset id="fmediosPrueba" class="oculto">
-                                    <legend>Medios Prueba</legend>
-                                    <table class="tablaFormu">
-                                        <tr>
-                                            <td colspan="3">
-                                                <div id="dmediosPrueba">
-                                                    <label for="mediosPrueba">¿Hubo presentación de medios de prueba?</label>
-                                                    <select name="mediosPrueba" id="mediosPrueba">
-                                                        <option value="">--Seleccione--</option>
-                                                        <%
-                                                            lista = cat.findRespuestaSimple();
+                                    <legend>Medios Prueba</legend>      
+                                    <div class="cols" id="dmediosPrueba">
+                                        <label for="mediosPrueba">¿Hubo presentación de medios de prueba?</label>
+                                        <select name="mediosPrueba" id="mediosPrueba">
+                                            <option value="">--Seleccione--</option>
+                                            <%
+                                                lista = cat.findRespuestaSimple();
+                                                for (String[] ls : lista) {
+                                                    out.println("<option value='" + ls[0] + "'");
+                                                    if(ls[0].equals(presentaMprueba)){
+                                                        out.println(" selected ");
+                                                    }
+                                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                                }
+                                            %> 
+                                        </select>
+                                    </div>
+                                    <div class="oculto" id="dTblmediosPrueba">
+                                        <label for="tblMediosPru">Medios de Prueba Presentados</label>        
+                                        <table class="tablasRegis" id="tblMediosPru">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Tipos de Medios</th>
+                                                    <th>Figura que lo Presentó</th>
+                                                    <th>Resolución</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%
+                                                    medioPru = sInter.findMediosPrueba(causaClave, proceClave + juzgadoClave.replace("-", ""));
+                                                    if(medioPru.size() != 0){
+                                                        int y = 1;
+                                                        for(String[] medioP : medioPru){
+                                                            out.println("<tr>");
+                                                            out.println("<td>" + medioP[0] + "</td>");
+                                                            //tipos medios
+                                                            out.println("<td><select name='tipoMP' id='tipoMP" + y + "'>");
+                                                            out.println("<option value=''>---Seleccione---</option>");
+                                                            lista = cat.findMediosPrueba();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'");
-                                                                if(ls[0].equals(presentaMprueba)){
+                                                                if(ls[0].equals(medioP[1])){
                                                                     out.println(" selected ");
                                                                 }
                                                                 out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
-                                                        %> 
-                                                    </select>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
+                                                            out.println("</select></td>");
+                                                            //figuras presenta
+                                                            out.println("<td><select name='figuraMP' id='figuraMP" + y + "'>");
+                                                            out.println("<option value=''>---Seleccione---</option>");
+                                                            lista = cat.findFiguraMprueba();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'");
+                                                                if(ls[0].equals(medioP[2])){
+                                                                    out.println(" selected ");
+                                                                }
+                                                                out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                            out.println("</select></td>");
+                                                            //resolucion
+                                                            out.println("<td><select name='resoluMP' id='resoluMP" + y + "'>");
+                                                            out.println("<option value=''>---Seleccione---</option>");
+                                                            lista = cat.findResolucionMprueba();
+                                                            for (String[] ls : lista) {
+                                                                out.println("<option value='" + ls[0] + "'");
+                                                                if(ls[0].equals(medioP[3])){
+                                                                    out.println(" selected ");
+                                                                }
+                                                                out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                                            }
+                                                            out.println("</select></td>");
+                                                            out.println("</tr>");
+                                                            y++;
+                                                        }
+                                                    }else{
+                                                        out.println("<tr>");
+                                                        out.println("<td>1</td>");
+                                                        //figuras presenta
+                                                        out.println("<td><select name='figuraMP' id='figuraMP1'>");
+                                                        out.println("<option value=''>---Seleccione---</option>");
+                                                        lista = cat.findFiguraMprueba();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                        }
+                                                        out.println("</select></td>");
+                                                        //tipos medios
+                                                        out.println("<td><select name='tipoMP' id='tipoMP1'>");
+                                                        out.println("<option value=''>---Seleccione---</option>");
+                                                        lista = cat.findMediosPrueba();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                        }
+                                                        out.println("</select></td>");
+                                                        //resolucion
+                                                        out.println("<td><select name='resoluMP' id='resoluMP1'>");
+                                                        out.println("<option value=''>---Seleccione---</option>");
+                                                        lista = cat.findResolucionMprueba();
+                                                        for (String[] ls : lista) {
+                                                            out.println("<option value='" + ls[0] + "'>" + ls[0] + ".- " + ls[1] + "</option>");
+                                                        }
+                                                        out.println("</select></td>");
+                                                        out.println("</tr>");
+                                                    }
+                                                %>
+                                            </tbody>
+                                        </table>
+                                        <a id="addMedioPrueba" style="cursor: pointer; font-weight: bold">
+                                            <img src="img/add.png" title="Agregar Medio Prueba" style="vertical-align: bottom">
+                                            AGREGAR 1 MEDIO DE PRUEBA
+                                        </a>
+                                    </div>
+                                        <!-- <tr>
                                             <td>
                                                 <div class="oculto" id="dpruebaMP">
                                                     <label for="pruebaMP">Medios de prueba presentados por el Ministerio Público</label>
                                                     <select name="pruebaMP" id="pruebaMP">
                                                         <option value="">--Seleccione--</option>
-                                                        <%
+                                                        <%--
                                                             lista = cat.findRespuestaSimple();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'");
@@ -205,7 +289,7 @@
                                                                 }
                                                                 out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
-                                                        %> 
+                                                        --%> 
                                                     </select>
                                                 </div>
                                             </td>
@@ -214,7 +298,7 @@
                                                     <label for="pruebaAJ">Medios de prueba presentados por el asesor jurídico</label>
                                                     <select name="pruebaAJ" id="pruebaAJ">
                                                         <option value="">--Seleccione--</option>
-                                                        <%
+                                                        <%--
                                                             lista = cat.findRespuestaSimple();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'");
@@ -223,7 +307,7 @@
                                                                 }
                                                                 out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
-                                                        %> 
+                                                        --%> 
                                                     </select>
                                                 </div>
                                             </td>
@@ -232,7 +316,7 @@
                                                     <label for="pruebaDF">Medios de prueba presentados por la defensa</label>
                                                     <select name="pruebaDF" id="pruebaDF">
                                                         <option value="">--Seleccione--</option>
-                                                        <%
+                                                        <%--
                                                             lista = cat.findRespuestaSimple();
                                                             for (String[] ls : lista) {
                                                                 out.println("<option value='" + ls[0] + "'");
@@ -241,7 +325,7 @@
                                                                 }
                                                                 out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                                             }
-                                                        %> 
+                                                        --%> 
                                                     </select>
                                                 </div>
                                             </td>
@@ -255,7 +339,7 @@
                                                         <th>Presentado</th>
                                                         <th>Resolución</th>
                                                     </tr>
-                                                    <%
+                                                    <%--
                                                         lista = cat.findMediosPrueba();
                                                         for (String[] ls : lista) {
                                                             out.println("<tr>");
@@ -286,7 +370,7 @@
                                                             out.println("</td>");
                                                             out.println("</tr>");
                                                         }
-                                                    %>
+                                                    --%>
                                                 </table>
                                             </td>
                                             <td>
@@ -297,7 +381,7 @@
                                                         <th>Presentado</th>
                                                         <th>Resolución</th>
                                                     </tr>
-                                                    <%
+                                                    <%--
                                                         lista = cat.findMediosPrueba();
                                                         for (String[] ls : lista) {
                                                             out.println("<tr>");
@@ -328,7 +412,7 @@
                                                             out.println("</td>");
                                                             out.println("</tr>");
                                                         }
-                                                    %>
+                                                    --%>
                                                 </table>
                                             </td>
                                             <td>
@@ -339,7 +423,7 @@
                                                         <th>Presentado</th>
                                                         <th>Resolución</th>
                                                     </tr>
-                                                    <%
+                                                    <%--
                                                         lista = cat.findMediosPrueba();
                                                         for (String[] ls : lista) {
                                                             out.println("<tr>");
@@ -370,11 +454,11 @@
                                                             out.println("</td>");
                                                             out.println("</tr>");
                                                         }
-                                                    %>
+                                                    --%>
                                                 </table>
                                             </td>
                                         </tr>
-                                    </table>
+                                    </table>-->
                                 </fieldset>
                             </td>
                         </tr>

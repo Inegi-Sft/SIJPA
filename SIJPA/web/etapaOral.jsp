@@ -184,89 +184,108 @@
                             </select>
                         </div>
                     </fieldset>
-                    <fieldset class="subField">
-                        <legend>Tipos de pruebas desahogadas durante la Audiencia</legend>
-                        <div class="colsA">
-                            <label for="testimonial">Testimonial</label>
-                            <select name="testimonial" id="testimonial" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findRespuestaSimple();
-                                    for (String[] ls : lista) {
-                                        out.print("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(testimonial)){
-                                            out.print(" selected ");
+                    <table class="tablasRegis" id="pruebasD" style="width: 600px">
+                        <tr><th colspan="3">Tipos de pruebas desahogadas durante la Audiencia</th></tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>Cantidad</td>
+                        </tr>
+                        <tr>
+                            <td>Testimonial</td>
+                            <td>
+                                <select name="testimonial" id="testimonial" class="txtMedia" onchange="habilita(this,'#cantTesti')" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findRespuestaSimple();
+                                        for (String[] ls : lista) {
+                                            out.print("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(testimonial)){
+                                                out.print(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
-                                        out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                        <div class="colsA">
-                            <label for="pericial">Pericial</label>
-                            <select name="pericial" id="pericial" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findRespuestaSimple();
-                                    for (String[] ls : lista) {
-                                        out.print("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(pericial)){
-                                            out.print(" selected ");
+                                    %> 
+                                </select>
+                            </td>
+                            <td><input type="number" name="cantTesti" id="cantTesti" class="txtMedia" readonly/></td>
+                        </tr>
+                        <tr>
+                            <td>Pericial</td>
+                            <td>
+                                <select name="pericial" id="pericial" class="txtMedia" onchange="habilita(this,'#cantPeri')" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findRespuestaSimple();
+                                        for (String[] ls : lista) {
+                                            out.print("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(pericial)){
+                                                out.print(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
-                                        out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                        <div class="colsA">
-                            <label for="declaracion">Declaración del acusado</label>
-                            <select name="declaracion" id="declaracion" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findRespuestaSimple();
-                                    for (String[] ls : lista) {
-                                        out.print("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(declaracion)){
-                                            out.print(" selected ");
+                                    %> 
+                                </select>
+                            </td>
+                            <td><input type="number" name="cantPeri" id="cantPeri" class="txtMedia" readonly/></td>
+                        </tr>
+                        <tr>
+                            <td>Declaración del acusado</td>
+                            <td>
+                                <select name="declaracion" id="declaracion" class="txtMedia" onchange="habilita(this,'#cantDeclara')" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findRespuestaSimple();
+                                        for (String[] ls : lista) {
+                                            out.print("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(declaracion)){
+                                                out.print(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
-                                        out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                        <div class="colsA">
-                            <label for="documental">Documental y material</label>
-                            <select name="documental" id="documental" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findRespuestaSimple();
-                                    for (String[] ls : lista) {
-                                        out.print("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(documental)){
-                                            out.print(" selected ");
+                                    %> 
+                                </select>
+                            </td>
+                            <td><input type="number" name="cantDeclara" id="cantDeclara" class="txtMedia" readonly/></td>
+                        </tr>
+                        <tr>
+                            <td>Documental y material</td>
+                            <td>
+                                <select name="documental" id="documental" class="txtMedia" onchange="habilita(this,'#cantDocumen')" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findRespuestaSimple();
+                                        for (String[] ls : lista) {
+                                            out.print("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(documental)){
+                                                out.print(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
-                                        out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                        <div class="colsA">
-                            <label for="otro">Otro tipo de prueba</label>
-                            <select name="otro" id="otro" required>
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findRespuestaSimple();
-                                    for (String[] ls : lista) {
-                                        out.print("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(otro)){
-                                            out.print(" selected ");
+                                    %> 
+                                </select>
+                            </td>
+                            <td><input type="number" name="cantDocumen" id="cantDocumen" class="txtMedia" readonly/></td>
+                        </tr>
+                        <tr>
+                            <td>Otro tipo de prueba</td>
+                            <td>
+                                <select name="otro" id="otro" class="txtMedia" onchange="habilita(this,'#cantOtro')" required>
+                                    <option value="">--Seleccione--</option>
+                                    <%
+                                        lista = cat.findRespuestaSimple();
+                                        for (String[] ls : lista) {
+                                            out.print("<option value='" + ls[0] + "'");
+                                            if(ls[0].equals(otro)){
+                                                out.print(" selected ");
+                                            }
+                                            out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                         }
-                                        out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
-                        </div>
-                    </fieldset>
+                                    %> 
+                                </select>
+                            </td>
+                            <td><input type="number" name="cantOtro" id="cantOtro" class="txtMedia" readonly/></td>
+                        </tr>
+                    </table><br>     
                     <fieldset class="subField colsA">        
                         <div class="colsA">
                             <label for="suspencionA">¿Hubo suspensión de Audiencia de Juicio?</label>

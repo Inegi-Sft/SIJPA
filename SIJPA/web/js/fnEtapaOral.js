@@ -9,6 +9,10 @@ $(document).ready(function () {
         $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
     }
     
+    $('#pruebasD select option[value="9"]').hide();
+    $('#pruebasD input').attr("min","1").val("0");
+    
+    
     //Se usa para la recuperacion de datos de DB
     if($('#medidasDis').val() === '1'){
         $('#dTipoMedida').show();
@@ -176,3 +180,14 @@ $(document).ready(function () {
     });
     
 });
+
+function habilita(sel, txt){
+    if($(sel).val()==='1'){
+        $(txt).prop('readonly',false);
+        $(txt).val("1");
+    }
+    else{
+        $(txt).prop('readonly',true);
+        $(txt).val("0");
+    }
+}

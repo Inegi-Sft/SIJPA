@@ -249,6 +249,7 @@ function fechaEnProceso(idChkNi, idChkEP, idTxtDate) {
  * @returns {undefined}
  */
 function llenaMun(idEnt, idMun) {
+    $('#rColonia').empty().append("<option value='0'>--Seleccione--</option>");
     var enti = $(idEnt).val();
     if (enti !== '') {
         $.ajax({
@@ -266,7 +267,6 @@ function llenaMun(idEnt, idMun) {
         });
     } else {
         $(idMun).empty().append("<option value='0'>--Seleccione--</option>");
-        $('#rColonia').empty().append("<option value='0'>--Seleccione--</option>");
     }
 }
 /***************************** FIN DE FUNCIONES LLENAR MUNICIPIOS***************/
@@ -320,7 +320,7 @@ function lugarResidencia(idSelect, idDivE, idDivM, idDivC, idSelEnti, idSelMuni,
         $(idSelCol).prop("required", true);
         $(idSelEnti).val("");
         $(idSelMuni).empty().append("<option value='0'>--Seleccione--</option>");
-        $(idSelCol).val("");
+        $(idSelCol).empty().append("<option value='0'>--Seleccione--</option>");
     } else {
         $(idDivE).fadeOut("slow");
         $(idDivM).fadeOut("slow");

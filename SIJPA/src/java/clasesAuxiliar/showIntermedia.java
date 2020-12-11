@@ -37,9 +37,8 @@ public class showIntermedia {
                 ini.add(new String[]{
                     resul.getString("FECHA_ESCRITO_ACUSACION"), resul.getString("FECHA_CONTESTACION"), resul.getString("DESCUBRIMIENTO_PROBATORIO"),
                     resul.getString("AUDIENCIA_INTERMEDIA"), resul.getString("FECHA_AUDIENCIA_INTERMEDIA"), resul.getString("SEPARACION_ACUSACION"),
-                    resul.getString("PRESENTACION_MPRUEBA"), resul.getString("PRESENTA_MP_MINISTERIO"), resul.getString("PRESENTA_MP_ASESOR"),
-                    resul.getString("PRESENTA_MP_DEFENSA"), resul.getString("ACUERDOS_PROBATORIOS"), resul.getString("APERTURA_JUICIO_ORAL"),
-                    resul.getString("COMENTARIOS")
+                    resul.getString("PRESENTACION_MPRUEBA"), resul.getString("ACUERDOS_PROBATORIOS"), 
+                    resul.getString("APERTURA_JUICIO_ORAL"), resul.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -155,20 +154,24 @@ public class showIntermedia {
         return valor;
     }
     
-    public ArrayList findMediosPrueba(String causaClave, String proceClave, String figuraPru, String medioPrueba){
+    public ArrayList findMediosPrueba(String causaClave, String proceClave){
         medioPru = new ArrayList();
         try {
             conn.Conectar();
-            sql = "SELECT MEDIO_PRUEBA, RESOLUCION_PRUEBA FROM DATOS_PRESENTA_MP_ADOJC "
+//            sql = "SELECT MEDIO_PRUEBA, RESOLUCION_PRUEBA FROM DATOS_PRESENTA_MP_ADOJC "
+//                    + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
+//                    + "AND PROCESADO_CLAVE = '" + proceClave + "' "
+//                    + "AND FIGURA_MPRUEBA = " + figuraPru + " "
+//                    + "AND MEDIO_PRUEBA = " + medioPrueba + " "
+//                    + "ORDER BY 1;";
+            sql = "SELECT NUM_MPRUEBA, MEDIO_PRUEBA, FIGURA_MPRUEBA, RESOLUCION_PRUEBA FROM DATOS_PRESENTA_MP_ADOJC "
                     + "WHERE CAUSA_CLAVE = '" + causaClave + "' "
                     + "AND PROCESADO_CLAVE = '" + proceClave + "' "
-                    + "AND FIGURA_MPRUEBA = " + figuraPru + " "
-                    + "AND MEDIO_PRUEBA = " + medioPrueba + " "
                     + "ORDER BY 1;";
             resul = conn.consultar(sql);
-            if(resul.next()) {
+            while(resul.next()) {
                medioPru.add(new String[]{
-                   resul.getString(1), resul.getString(2)
+                   resul.getString(1), resul.getString(2), resul.getString(3), resul.getString(4)
                });
             }
             conn.close();

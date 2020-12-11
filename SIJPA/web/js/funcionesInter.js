@@ -35,9 +35,8 @@ $(document).ready(function() {
     
     //Se usa para la recuperacion de BD
     if($('#mediosPrueba').val() === '1'){
-        $('#dpruebaMP').show();
-        $('#dpruebaAJ').show();
-        $('#dpruebaDF').show();
+        $('#dTblmediosPrueba').show();
+        $('#tipoMP1, #figuraMP1, #resoluMP1').prop('required', true);
     }
     
     //Se usa para la recuperacion de BD
@@ -96,11 +95,13 @@ $(document).ready(function() {
 
     $('#mediosPrueba').change(function () {
         if ($(this).val() === '1') {
-            $('#dpruebaMP, #dpruebaAJ, #dpruebaDF').fadeIn('slow');
-            $('#pruebaMP, #pruebaAJ, #pruebaDF').val('').prop('required', true);
+            $('#dTblmediosPrueba').fadeIn();
+//            $('#dpruebaMP, #dpruebaAJ, #dpruebaDF').fadeIn('slow');
+            $('#tipoMP1, #figuraMP1, #resoluMP1').val('').prop('required', true);
         } else {
-            $('#dpruebaMP, #dpruebaAJ, #dpruebaDF,#tblpruebaMP, #tblpruebaAJ, #tblpruebaDF').fadeOut('slow');
-            $('#pruebaMP, #pruebaAJ, #pruebaDF').val('-2').prop('required', false);
+            $('#dTblmediosPrueba').fadeOut();
+//            $('#dpruebaMP, #dpruebaAJ, #dpruebaDF,#tblpruebaMP, #tblpruebaAJ, #tblpruebaDF').fadeOut('slow');
+            $('#tipoMP1, #figuraMP1, #resoluMP1').prop('required', false);
         }
     });
 
@@ -165,6 +166,68 @@ $(document).ready(function() {
             $('#tipoPruebaDF' + indi).prop({'disabled': true, 'required': false});
         }
     });
+    
+    $('#addMedioPrueba').click(function(){
+        var ultimoReg = $('#tblMediosPru tbody tr').length + 1;
+        var tag = '<tr>'
+                + '<td>' + ultimoReg + '</td>'
+                + '<td><select name="tipoMP" id="tipoMP' + ultimoReg + '">'
+                + '<option value="">---Seleccione---</option>'
+                + '</select></td>'
+                + '<td><select name="figuraMP" id="figuraMP' + ultimoReg + '">'
+                + '<option value="">---Seleccione---</option>'
+                + '</select></td>'
+                + '<td><select name="resoluMP" id="resoluMP' + ultimoReg + '">'
+                + '<option value="">---Seleccione---</option>'
+                + '</select></td>'
+                + '</tr>';
+        $('#tblMediosPru tbody').append(tag);
+        //Llenamos catalogos de medios prueba
+        $.ajax({
+            async:true,
+            url: "obtenCatalogo",
+            dataType: 'html',
+            type: "post",
+            data: {
+                cat: "mediosPrueba"
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor Medios Prueba: ", response);
+            }
+        }).done(function (data) {
+            $('#tipoMP' + ultimoReg).html(data);
+        });
+        //Llenamos catalogos de figura presenta medio prueba
+        $.ajax({
+            async:true,
+            url: "obtenCatalogo",
+            dataType: 'html',
+            type: "post",
+            data: {
+                cat: "figuraMP"
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor Figura MP: ", response);
+            }
+        }).done(function (data) {
+            $('#figuraMP' + ultimoReg).html(data);
+        });
+        //Llenamos catalogos de resolucion de medios prueba
+        $.ajax({
+            async:true,
+            url: "obtenCatalogo",
+            dataType: 'html',
+            type: "post",
+            data: {
+                cat: "resolucionMP"
+            },
+            success: function (response) {
+                console.log("Respuesta del servidor Resolucions MP: ", response);
+            }
+        }).done(function (data) {
+            $('#resoluMP' + ultimoReg).html(data);
+        });
+    });
 
 //    $('#chkpruebaAJ9').change(function () {
 //        if ($(this).is(":checked")) {
@@ -202,7 +265,7 @@ $(document).ready(function() {
 
     $('#aperturaJO').change(function () {
         if ($(this).val() === '1') {
-            alert("Causa Penal Concluida. Registre la informaci\u00F3n complementaria en el apartado de resoluciones");
+            alert("Causa Penal Concluida. Registre la información complementaria en el apartado de resoluciones");
         }else{
             alert("Esta Causa Penal debe ser registrada en Resoluciones o Tramite segun corresponda");
         }
@@ -212,29 +275,8 @@ $(document).ready(function() {
     $('#formuMedia').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if ($('#pruebaMP').val() === '1') {
-            if ($('input[name="chkpruebaMP"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por el ministerio público');
-                $('#pruebaMP').focus();
-                return false;
-            }
-        }
-        if ($('#pruebaAJ').val() === '1') {
-            if ($('input[name="chkpruebaAJ"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por el asesor jur\u00EDdico');
-                $('#pruebaAJ').focus();
-                return false;
-            }
-        }
-        if ($('#pruebaDF').val() === '1') {
-            if ($('input[name="chkpruebaDF"]:checked').length === 0) {
-                alert('Selecciona al menos una opcion de prueba presentadas por la defensa');
-                $('#pruebaDF').focus();
-                return false;
-            }
-        }
 
-        if($('#mediosPrueba').val() === '1' && ($('#pruebaMP').val() !== '1' && $('#pruebaAJ').val() !== '1' && $('#pruebaDF').val() !== '1')) {
+        if($('#mediosPrueba').val() === '1' && $('#tblMediosPru tbody tr').length === 0) {
             alert('Revisar los medios de prueba');
             $('#mediosPrueba').focus();
             return false;
@@ -242,8 +284,8 @@ $(document).ready(function() {
         
         var actual = true;
         if($('#opera').val() !== ''){
-            actual = confirm("Al actualizar datos en Etapa Intermedia, se perderan los datos que se tengan guardados \n\
-                        en posteriores etapas.\n seguro que desea continuar?");    
+            actual = confirm("Al actualizar datos en Etapa Intermedia, se perderan los datos que se tengan guardados"
+                    + "en posteriores etapas.\nSeguro que desea continuar?");    
         }
         if(actual){
             $.ajax({

@@ -441,7 +441,7 @@ public class catalogos {
     public ArrayList findFiguraMprueba() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM CATALOGOS_FIGURA_MPRUEBA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_FIGURA_MPRUEBA WHERE FIGURA_MPRU_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -795,7 +795,7 @@ public class catalogos {
     public ArrayList findMediosPrueba() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM CATALOGOS_MEDIOS_PRUEBA WHERE PRUEBA_ID <> -2 ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_MEDIOS_PRUEBA WHERE PRUEBA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
@@ -1120,7 +1120,7 @@ public class catalogos {
     public ArrayList findResolucionMprueba() {
         conn.Conectar();
         lista = new ArrayList();
-        sql = " SELECT * FROM CATALOGOS_RESOLUCION_MPRUEBA ORDER BY 1";
+        sql = "SELECT * FROM CATALOGOS_RESOLUCION_MPRUEBA WHERE MPRUEBA_ID <> -2 ORDER BY 1";
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

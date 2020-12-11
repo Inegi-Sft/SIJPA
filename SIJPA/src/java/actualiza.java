@@ -49,30 +49,30 @@ public class actualiza extends HttpServlet {
                 sql = "UPDATE VERSION_SISTEMA SET VERSION = '" + request.getParameter("version") + "';";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
-                    sql = "CREATE TABLE CATALOGOS_COLONIASMUN ("
-                            + "ENTIDAD_ID int(2) NOT NULL,"
-                            + "MUNICIPIO_ID int(5) NOT NULL,"
-                            + "COLONIA_ID varchar(30) NOT NULL,"
-                            + "DESCRIPCION varchar(150) COLLATE utf8_bin NOT NULL,"
-                            + "PRIMARY KEY (COLONIA_ID)"
-                            + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_PROCESADOS_ADOJC ADD RESIDENCIA_COL VARCHAR(30) NOT NULL AFTER RESIDENCIA_MUNICIPIO;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_PROCESADOS_ADOJO ADD RESIDENCIA_COL VARCHAR(30) NOT NULL AFTER RESIDENCIA_MUNICIPIO;";
-                    conn.escribir(sql);
+//                    sql = "CREATE TABLE CATALOGOS_COLONIASMUN ("
+//                            + "ENTIDAD_ID int(2) NOT NULL,"
+//                            + "MUNICIPIO_ID int(5) NOT NULL,"
+//                            + "COLONIA_ID varchar(30) NOT NULL,"
+//                            + "DESCRIPCION varchar(150) COLLATE utf8_bin NOT NULL,"
+//                            + "PRIMARY KEY (COLONIA_ID)"
+//                            + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
+//                    conn.escribir(sql);
+//                    sql = "ALTER TABLE DATOS_PROCESADOS_ADOJC ADD RESIDENCIA_COL VARCHAR(30) NOT NULL AFTER RESIDENCIA_MUNICIPIO;";
+//                    conn.escribir(sql);
+//                    sql = "ALTER TABLE DATOS_PROCESADOS_ADOJO ADD RESIDENCIA_COL VARCHAR(30) NOT NULL AFTER RESIDENCIA_MUNICIPIO;";
+//                    conn.escribir(sql);
                     sql = "TRUNCATE DATOS_AUDIENCIAS_ADOJC;";
                     conn.escribir(sql);
                     sql = "DELETE FROM CATALOGOS_AUDIENCIAS_INVESTIGACION;";
                     conn.escribir(sql);
                     sql = "TRUNCATE DATOS_AUDIENCIAS_ADOJO;";
                     conn.escribir(sql);
-                    sql ="ALTER TABLE DATOS_AUDIENCIAS_ADOJO DROP HORAS, DROP MINUTOS;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO CHANGE FECHA_CELEBRACION FECHA_INICIO DATE NOT NULL;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO ADD FECHA_FINALIZO DATE NOT NULL AFTER FECHA_INICIO;";
-                    conn.escribir(sql);
+//                    sql ="ALTER TABLE DATOS_AUDIENCIAS_ADOJO DROP HORAS, DROP MINUTOS;";
+//                    conn.escribir(sql);
+//                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO CHANGE FECHA_CELEBRACION FECHA_INICIO DATE NOT NULL;";
+//                    conn.escribir(sql);
+//                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO ADD FECHA_FINALIZO DATE NOT NULL AFTER FECHA_INICIO;";
+//                    conn.escribir(sql);
                     sql = "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION (AUDIENCIA_ID, DESCRIPCION) VALUES(-2,'No aplica');"
                             + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION (AUDIENCIA_ID, DESCRIPCION) VALUES(1,'Audiencias relacionadas con la competencia');"
                             + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION (AUDIENCIA_ID, DESCRIPCION) VALUES(2,'Audiencias relacionadas con técnicas de investigación');"
@@ -95,12 +95,12 @@ public class actualiza extends HttpServlet {
                             + "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION (AUDIENCIA_ID, DESCRIPCION) VALUES(19,'Otras(especifique)');";
                     System.out.println(sql);
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP HORAS, DROP MINUTOS;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC CHANGE FECHA_CELEBRACION FECHA_INICIO DATE NOT NULL;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC ADD FECHA_FINALIZO DATE NOT NULL AFTER FECHA_INICIO;";
-                    conn.escribir(sql);
+//                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP HORAS, DROP MINUTOS;";
+//                    conn.escribir(sql);
+//                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC CHANGE FECHA_CELEBRACION FECHA_INICIO DATE NOT NULL;";
+//                    conn.escribir(sql);
+//                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC ADD FECHA_FINALIZO DATE NOT NULL AFTER FECHA_INICIO;";
+//                    conn.escribir(sql);
                     out.write("1");
                     conn.close();
                 }else{

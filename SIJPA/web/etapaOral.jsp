@@ -18,7 +18,7 @@
         <%
             catalogos cat = new catalogos();
             showJuicio eO = new showJuicio();
-            ArrayList<String[]> lista, oral;
+            ArrayList<String[]> lista, oral, pruebas;
             
             String proceClaveJO = "", posicion = "", edicion = "";
             if (request.getParameter("proceClaveJO") != null || request.getParameter("posicion") != null) {
@@ -37,10 +37,15 @@
             String resoIncidente = "";
             String promueveIncidente = "";
             String testimonial = "";
+            String cantTesti = "";
             String pericial = "";
+            String cantPeri = "";
             String declaracion = "";
+            String cantDecla = "";
             String documental = "";
+            String cantDocu = "";
             String otro = "";
+            String cantOtro = "";
             String suspencionA = "";
             String fechaSuspencion = "";
             String fechaReanudacion = "";
@@ -48,6 +53,11 @@
             String fechaDeliberacion = "";
             String sentidoFallo = "";
             String comen = "";
+            
+            //Consulta para extraer la informacion de intermedia
+            String proceClaveJC = eO.findProcesadoJC(causaClaveJO, proceClaveJO + juzgadoClaveJO.replace("-", ""));
+            pruebas = eO.findPruebasIntermedia(proceClaveJC);
+            
             if(request.getParameter("edita") != null){//Sabremos si es para edicion de datos o captura de datos
                 edicion = request.getParameter("edita");
                 if(edicion.equals("Si")){
@@ -62,20 +72,50 @@
                         resoIncidente = oral.get(0)[5];
                         promueveIncidente = oral.get(0)[6];
                         testimonial = oral.get(0)[7];
-                        pericial = oral.get(0)[8];
-                        declaracion = oral.get(0)[9];
-                        documental = oral.get(0)[10];
-                        otro = oral.get(0)[11];
-                        suspencionA = oral.get(0)[12];
-                        fechaSuspencion = oral.get(0)[13];
-                        fechaReanudacion = oral.get(0)[14];
-                        deliberacion = oral.get(0)[15];
-                        fechaDeliberacion = oral.get(0)[16];
-                        sentidoFallo = oral.get(0)[17];
-                        comen = oral.get(0)[18];
+                        cantTesti = oral.get(0)[8];
+                        pericial = oral.get(0)[9];
+                        cantPeri = oral.get(0)[10];
+                        declaracion = oral.get(0)[11];
+                        cantDecla = oral.get(0)[12];
+                        documental = oral.get(0)[13];
+                        cantDocu = oral.get(0)[14];
+                        otro = oral.get(0)[15];
+                        cantOtro = oral.get(0)[16];
+                        suspencionA = oral.get(0)[17];
+                        fechaSuspencion = oral.get(0)[18];
+                        fechaReanudacion = oral.get(0)[19];
+                        deliberacion = oral.get(0)[20];
+                        fechaDeliberacion = oral.get(0)[21];
+                        sentidoFallo = oral.get(0)[22];
+                        comen = oral.get(0)[23];
                     }else{
                         out.println("<script>alert('Procesado " + proceClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
+                    }
+                }
+            }else{// es nueva insercion, traemos las pruebas de intermedia
+                if(!pruebas.isEmpty()){
+                    for(String[] ls: pruebas){
+                        if(ls[0].equals("1")){
+                            testimonial = "1";
+                            cantTesti = ls[1];
+                        }
+                        if(ls[0].equals("2")){
+                            pericial = "1";;
+                            cantPeri = ls[1];
+                        }
+                        if(ls[0].equals("3")){
+                            declaracion = "1";;
+                            cantDecla = ls[1];
+                        }
+                        if(ls[0].equals("4")){
+                            documental = "1";;
+                            cantDocu = ls[1];
+                        }
+                        if(ls[0].equals("5")){
+                            otro = "1";;
+                            cantOtro = ls[1];
+                        }
                     }
                 }
             }
@@ -207,7 +247,7 @@
                                     %> 
                                 </select>
                             </td>
-                            <td><input type="number" name="cantTesti" id="cantTesti" class="txtMedia" readonly/></td>
+                            <td><input type="number" name="cantTesti" id="cantTesti" class="txtMedia" value="<%=cantTesti %>" required/></td>
                         </tr>
                         <tr>
                             <td>Pericial</td>
@@ -226,7 +266,7 @@
                                     %> 
                                 </select>
                             </td>
-                            <td><input type="number" name="cantPeri" id="cantPeri" class="txtMedia" readonly/></td>
+                            <td><input type="number" name="cantPeri" id="cantPeri" class="txtMedia" value="<%=cantPeri %>" required/></td>
                         </tr>
                         <tr>
                             <td>Declaración del acusado</td>
@@ -245,7 +285,7 @@
                                     %> 
                                 </select>
                             </td>
-                            <td><input type="number" name="cantDeclara" id="cantDeclara" class="txtMedia" readonly/></td>
+                            <td><input type="number" name="cantDeclara" id="cantDeclara" class="txtMedia" value="<%=cantDecla %>" required/></td>
                         </tr>
                         <tr>
                             <td>Documental y material</td>
@@ -264,7 +304,7 @@
                                     %> 
                                 </select>
                             </td>
-                            <td><input type="number" name="cantDocumen" id="cantDocumen" class="txtMedia" readonly/></td>
+                            <td><input type="number" name="cantDocumen" id="cantDocumen" class="txtMedia" value="<%=cantDocu %>" required/></td>
                         </tr>
                         <tr>
                             <td>Otro tipo de prueba</td>
@@ -283,7 +323,7 @@
                                     %> 
                                 </select>
                             </td>
-                            <td><input type="number" name="cantOtro" id="cantOtro" class="txtMedia" readonly/></td>
+                            <td><input type="number" name="cantOtro" id="cantOtro" class="txtMedia" value="<%=cantOtro %>" required/></td>
                         </tr>
                     </table><br>     
                     <fieldset class="subField colsA">        
@@ -372,5 +412,52 @@
                 <input type="submit" name="guardar" value="Guardar" class="btnFlotante"/>
             </form>
         </section>
+        <% 
+            //variables auxiliares para extraer nuevamente las pruebas de intermedia
+            String auxCantTesti="";
+            String auxTestimonial="";
+            String auxCantPeri="";
+            String auxPericial="";
+            String auxCantDecla="";
+            String auxDeclaracion="";
+            String auxCantDocu="";
+            String auxDocumental="";
+            String auxCantOtro="";
+            String auxOtro="";
+            if(!pruebas.isEmpty()){
+                for(String[] ls: pruebas){
+                    if(ls[0].equals("1")){
+                        auxTestimonial = "1";
+                        auxCantTesti = ls[1];
+                        out.println("<input type='hidden' id='hideTesti' value='"+auxTestimonial+"'/>");
+                        out.println("<input type='hidden' id='hideCantTesti' value='"+auxCantTesti+"'/>");
+                    }
+                    if(ls[0].equals("2")){
+                        auxPericial = "1";;
+                        auxCantPeri = ls[1];
+                        out.println("<input type='hidden' id='hidePeri' value='"+auxPericial+"'/>");
+                        out.println("<input type='hidden' id='hideCantPeri' value='"+auxCantPeri+"'/>");
+                    }
+                    if(ls[0].equals("3")){
+                        auxDeclaracion = "1";;
+                        auxCantDecla = ls[1];
+                        out.println("<input type='hidden' id='hideDecla' value='"+auxDeclaracion+"'/>");
+                        out.println("<input type='hidden' id='hideCantDecla' value='"+auxCantDecla+"'/>");
+                    }
+                    if(ls[0].equals("4")){
+                        auxDocumental = "1";;
+                        auxCantDocu = ls[1];
+                        out.println("<input type='hidden' id='hideDocu' value='"+auxDocumental+"'/>");
+                        out.println("<input type='hidden' id='hideCantDocu' value='"+auxCantDocu+"'/>");
+                    }
+                    if(ls[0].equals("5")){
+                        auxOtro = "1";;
+                        auxCantOtro = ls[1];
+                        out.println("<input type='hidden' id='hideOtro' value='"+auxOtro+"'/>");
+                        out.println("<input type='hidden' id='hideOtro' value='"+auxCantOtro+"'/>");
+                    }
+                }
+            }
+        %>
     </body>
 </html>

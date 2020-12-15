@@ -184,7 +184,7 @@ $(document).ready(function() {
         $('#tblMediosPru tbody').append(tag);
         //Llenamos catalogos de medios prueba
         $.ajax({
-            async:true,
+            async:false,
             url: "obtenCatalogo",
             dataType: 'html',
             type: "post",
@@ -199,7 +199,7 @@ $(document).ready(function() {
         });
         //Llenamos catalogos de figura presenta medio prueba
         $.ajax({
-            async:true,
+            async:false,
             url: "obtenCatalogo",
             dataType: 'html',
             type: "post",
@@ -214,7 +214,7 @@ $(document).ready(function() {
         });
         //Llenamos catalogos de resolucion de medios prueba
         $.ajax({
-            async:true,
+            async:false,
             url: "obtenCatalogo",
             dataType: 'html',
             type: "post",

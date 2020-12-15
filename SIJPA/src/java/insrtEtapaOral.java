@@ -68,10 +68,15 @@ public class insrtEtapaOral extends HttpServlet {
         String resoIncidente = request.getParameter("resoIncidente");
         String promueveIncidente = request.getParameter("promueveIncidente");
         String testimonial = request.getParameter("testimonial");
+        String cantTesti = request.getParameter("cantTesti");
         String pericial = request.getParameter("pericial");
+        String cantPeri = request.getParameter("cantPeri");
         String declaracion = request.getParameter("declaracion");
+        String cantDeclara = request.getParameter("cantDeclara");
         String documental = request.getParameter("documental");
+        String cantDocumen = request.getParameter("cantDocumen");
         String otro = request.getParameter("otro");
+        String cantOtro = request.getParameter("cantOtro");
         String suspencionA = request.getParameter("suspencionA");
         String fechaSuspencion = request.getParameter("fechaSuspencion");
         String fechaReanudacion = request.getParameter("fechaReanudacion");
@@ -97,7 +102,8 @@ public class insrtEtapaOral extends HttpServlet {
                 sql = "INSERT INTO DATOS_ETAPA_ORAL_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                         + causaClaveJO + "','" + proceClave + jConcatenado + "','" + autoApertura + "','" + celebracionA + "',"
                         + medidasDis + ","+ tipoMedida + "," + incidentes + ",'" + resoIncidente + "'," + promueveIncidente + ","
-                        + testimonial + "," + pericial + "," + declaracion + "," + documental + "," + otro + "," + suspencionA +",'"
+                        + testimonial + ","+cantTesti+"," + pericial + ","+cantPeri+"," + declaracion + ","+cantDeclara +"," 
+                        + documental + ","+cantDocumen+"," + otro + ","+cantOtro+"," + suspencionA +",'"
                         + fechaSuspencion + "','" + fechaReanudacion + "'," + deliberacion + ",'" + fechaDeliberacion + "',"
                         + sentidoFallo + ",'" + comentarios + "', (select YEAR(NOW()))," + banderaEtapa + ")";
                 System.out.println(sql);
@@ -130,8 +136,9 @@ public class insrtEtapaOral extends HttpServlet {
                 sql = "UPDATE DATOS_ETAPA_ORAL_ADOJO SET FECHA_APERTURA_JUICIOORAL = '"+ autoApertura +"', FECHA_AUDIENCIA_JUICIO = '" + celebracionA + "',"
                         + "MEDIDAS_DISCIPLINARIAS = " + medidasDis + ", TIPO_DISCIPLINARIA = " + tipoMedida + ", INCIDENTES_AUDIENCIA = " + incidentes + ","
                         + "FECHA_RESOLUCION_INCIDENTE = '" + resoIncidente + "', PROMUEVE_INCIDENTE = " + promueveIncidente + ", PD_TESTIMONIAL = " + testimonial + ","
-                        + "PD_PERICIAL = " + pericial + ", PD_DECLARACION_ACUSADO = "+ declaracion + ", PD_DOCUMENTAL_MATERIAL = " + documental + ","
-                        + "PD_OTRA_PRUEBA = " + otro + ", SUSPENCION_AUDIENCIA = "+ suspencionA + ", FECHA_SUSPENCION = '" + fechaSuspencion + "',"
+                        + "CANTIDAD_TEST = "+ cantTesti + ", PD_PERICIAL = " + pericial + ", CANTIDAD_PERI = " + cantPeri +", PD_DECLARACION_ACUSADO = "+ declaracion + ","
+                        + "CANTIDAD_DECLA = "+ cantDeclara +", PD_DOCUMENTAL_MATERIAL = " + documental + ", CANTIDAD_DOCU = " + cantDocumen + ", PD_OTRA_PRUEBA = " + otro + ","
+                        + "CANTIDAD_OTRO = " + cantOtro + ", SUSPENCION_AUDIENCIA = "+ suspencionA + ", FECHA_SUSPENCION = '" + fechaSuspencion + "',"
                         + "FECHA_REANUDACION = '" + fechaReanudacion + "', DELIBERACION = " + deliberacion + ", FECHA_DELIBERACION = '" + fechaDeliberacion + "',"
                         + "SENTIDO_FALLO = " + sentidoFallo + ", COMENTARIOS = '" + comentarios + "', ETAPA = " + banderaEtapa
                         + " WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "

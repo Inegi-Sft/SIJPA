@@ -9,10 +9,6 @@ $(document).ready(function () {
         $('#proceClave').css('background-color', 'rgba(80,255,120,.6)');
     }
     
-    $('#pruebasD select option[value="9"]').hide();
-    $('#pruebasD input').attr("min","1").val("0");
-    
-    
     //Se usa para la recuperacion de datos de DB
     if($('#medidasDis').val() === '1'){
         $('#dTipoMedida').show();
@@ -60,6 +56,38 @@ $(document).ready(function () {
         $('#chkFechaDeliberacion').prop('checked', true);
     }
     
+    //Se usa para la recuperacion de datos de DB en la tabla de pruebas desahogadas
+    $('#pruebasD input[value="0"]').prop("readonly",true);
+    
+    $('#pruebasD select option[value="9"]').hide();// oculta el no identificado de los select de pruebas desahogadas
+    
+    //********automatiza la info de medios prueba proveniente de intermedia
+    if($('#hideTesti').val()==="1"){
+        $('#testimonial').addClass("inactivo");
+        $('#cantTesti').attr("min",$('#hideCantTesti').val());
+    }else
+        $('#cantTesti').attr("min","1");
+    if($('#hidePeri').val()==="1"){
+        $('#pericial').addClass("inactivo");
+        $('#cantPeri').attr("min",$('#hideCantPeri').val());
+    }else
+        $('#cantPeri').attr("min","1");
+    if($('#hideDecla').val()==="1"){
+        $('#declaracion').addClass("inactivo");
+        $('#cantDeclara').attr("min",$('#hideCantDecla').val());
+    }else
+        $('#cantDeclara').attr("min","1");
+    if($('#hideDocu').val()==="1"){
+        $('#documental').addClass("inactivo");
+        $('#cantDocumen').attr("min",$('#hideCantDocu').val());
+    }else
+        $('#cantDocumen').attr("min","1");
+    if($('#hideOtro').val()==="1"){
+        $('#otro').addClass("inactivo");
+        $('#cantOtro').attr("min",$('#hideCantOtro').val());
+    }else
+        $('#cantOtro').attr("min","1");
+    //********************************************************************
     
     $('#medidasDis').change(function(){
         if ($('#medidasDis').val() === '1') {

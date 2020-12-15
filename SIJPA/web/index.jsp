@@ -15,19 +15,19 @@
         <%@include file="librerias.jsp"%>
         <script type="text/javascript" src="js/fnIndex.js"></script>
         <%
-            String version = "";
+            String version = "BETA 1.5.9";
             //Verificamos si la tabla de versiones existe si no la creamos
             actualizador act = new actualizador();
-            System.out.println("es la version igual: " + act.findVersion("BETA 1.5.2"));
+            System.out.println("es la version igual: " + act.findVersion("BETA 1.5.9"));
             //Verificacmos que version de sistema tiene para poder actualizar si es diferente
-            if(!act.findVersion("BETA 1.5.2")){ 
+            if(!act.findVersion("BETA 1.5.9")){ 
                 out.println("<script>$(document).ready(function () {"
                         + "$('.load').show();"
                         + "$.ajax({"
                         + "async: false,"
                         + "type: 'post',"
                         + "url: 'actualiza',"
-                        + "data: {version: 'BETA 1.5.2'},"
+                        + "data: {version: '" + version + "'},"
                         + "success: function (response) {"
                         + "console.log('Respuesta del servidor actualiza ', response);"
                         + "$('.load').fadeOut();"
@@ -38,8 +38,6 @@
                         + "});"
                         + "});</script>");
             }
-            version = act.version();
-            System.out.println("La version es: " + version);
             
             //Si cierran sesion borramos las Variables de Session
             if(session.getAttribute("usuActivo") != null){

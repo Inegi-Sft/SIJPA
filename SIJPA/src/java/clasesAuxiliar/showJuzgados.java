@@ -84,7 +84,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(tipoUsu == 1){
+            if(tipoUsu == 1 || tipoUsu > 3){
                 sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
                         + "WHERE JUZGADO_FUNCION IN(1,3) "
                         + "AND ESTATUS = 1 "
@@ -112,7 +112,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(tipoUsu == 1){
+            if(tipoUsu == 1 || tipoUsu > 3){
                 sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
                         + "WHERE JUZGADO_FUNCION IN(2,3) "
                         + "AND ESTATUS = 1 "

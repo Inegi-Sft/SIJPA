@@ -457,6 +457,11 @@
                                                         }
                                                         out.println(">" + ls[1] + "</option>");
                                                     }
+                                                    if(resiCol.equals("9999-9999")){
+                                                        out.println("<option value='-9' selected>No identificado</option>");
+                                                    }else{
+                                                        out.println("<option value='-9'>No identificado</option>");
+                                                    }
                                                 }
                                             %>
                                         </select>
@@ -691,7 +696,7 @@
                                         </select>
                                     </div>
                                     <div class="colsA oculto" id="rangoIngePro">
-                                        <label for="indigena">Rango de ingresos </label>
+                                        <label for="indigena">Rango de ingresos mensual</label>
                                         <select name="rangoIngresosPro" id="rangoIngresosPro">
                                             <option value="">--Seleccione--</option>
                                             <%

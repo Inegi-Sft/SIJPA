@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -49,9 +50,16 @@ public class importaBD extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        System.out.println("funcion");
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
+        
+        LeeSIJPA leeSijpa = new LeeSIJPA();
+        //Si los SU importan entonces debemos de borrar la base antes de importar otra
+        HttpSession sesion = request.getSession();
+        if((Integer)sesion.getAttribute("tipoUsuario") > 3){
+            leeSijpa.borraBase();
+        }
+        
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         List<FileItem> items = upload.parseRequest(request);
@@ -92,7 +100,6 @@ public class importaBD extends HttpServlet {
                                 mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar1 = new File(RUTA+fileName);
                                 archivo_borrar1.delete();
-                                LeeSIJPA leeSijpa = new LeeSIJPA();
                                 leeSijpa.ejecutaScript(RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar2 = new File(RUTA + "archivo_descifrado.sijpa");
                                 archivo_borrar2.delete();

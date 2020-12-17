@@ -166,7 +166,7 @@ public class insrtProcesadosJO extends HttpServlet {
                         lis = pro.findProcesasdosTablaJO(proceClaveJO + jConcatenado);
                         JSONArray resp = new JSONArray();
                         resp.add(posicion);
-                        //resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                         resp.add(lis.get(0)[1]);
                         resp.add(lis.get(0)[2]);
                         resp.add(lis.get(0)[3]);
@@ -224,7 +224,7 @@ public class insrtProcesadosJO extends HttpServlet {
                         lis = pro.findProcesasdosTablaJO(proceClaveJO + jConcatenado);
                         JSONArray resp = new JSONArray();
                         resp.add(posicion);
-                        //resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                        resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                         resp.add(lis.get(0)[1]);
                         resp.add(lis.get(0)[2]);
                         resp.add(lis.get(0)[3]);

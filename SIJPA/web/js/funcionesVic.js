@@ -264,6 +264,7 @@ $(document).ready(function() {
             if($('input[name="chkRelaProce' + c + '"]:checked').length === 0){
                 alert('Selecciona al menos una opcion de Relacion de la Víctima con el Procesado en la fila ' + (c+1));
                 $('input[name=chkRelaProce' + c + ']').focus();
+                return false;
             }
         }
         if ($('.RelaProceChk:checked').length === 0) {

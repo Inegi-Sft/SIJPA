@@ -89,9 +89,9 @@ public class actualiza extends HttpServlet {
                     sql = "ALTER TABLE DATOS_ETAPA_INTERMEDIA_ADOJC DROP FOREIGN KEY FK_EINTERMEDIA_PRESENTA_MP_DEFENSA;";
                     conn.escribir(sql);
                     sql = "ALTER TABLE DATOS_ETAPA_INTERMEDIA_ADOJC "
-                            + "DROP 'PRESENTA_MP_MINISTERIO',"
-                            + "DROP 'PRESENTA_MP_ASESOR',"
-                            + "DROP 'PRESENTA_MP_DEFENSA';";
+                            + "DROP PRESENTA_MP_MINISTERIO,"
+                            + "DROP PRESENTA_MP_ASESOR,"
+                            + "DROP PRESENTA_MP_DEFENSA;";
                     conn.escribir(sql);
                     sql = "ALTER TABLE DATOS_ETAPA_ORAL_ADOJO ADD CANTIDAD_TEST INT NOT NULL AFTER PD_TESTIMONIAL;";
                     conn.escribir(sql);

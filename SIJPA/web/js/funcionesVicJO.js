@@ -215,7 +215,7 @@ $(document).ready(function() {
                 alert("Guardado correctamente!!!");
                 var numProce = parseInt(parent.$('#TvictimasJO').val());
                 if (response !== null && $.isArray(response)) {
-                    for (var i = 1; i < 5; i++) {
+                    for (var i = 0; i < 5; i++) {
                         console.log('Fila recibida: ' + response[0] + ', Columna: ' + i + ', Valor de la columna: ' + response[i]);
                         parent.$('#tablaVictimasJO tbody').find('tr').eq(response[0]).children('td').eq(i).html(response[i]);
                     }

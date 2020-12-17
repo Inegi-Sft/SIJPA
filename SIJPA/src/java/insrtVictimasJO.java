@@ -162,7 +162,7 @@ public class insrtVictimasJO extends HttpServlet {
                     lis = vic.findVictimasTablaJO(victiClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
-                    //resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);
@@ -239,7 +239,7 @@ public class insrtVictimasJO extends HttpServlet {
                     lis = vic.findVictimasTablaJO(victiClaveJO + jConcatenado);
                     JSONArray resp = new JSONArray();
                     resp.add(posicion);
-                    //resp.add(lis.get(0)[0].replace(jConcatenado, ""));
+                    resp.add(lis.get(0)[0].replace(jConcatenado, ""));
                     resp.add(lis.get(0)[1]);
                     resp.add(lis.get(0)[2]);
                     resp.add(lis.get(0)[3]);

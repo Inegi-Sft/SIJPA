@@ -6,13 +6,13 @@
 $(document).ready(function () {
 
     if ($('#tipo_operacion').val() === 'importar') {
-        $('#tipoArchivo').prepend("<option value='csv'>CSV(.csv)</option>");
+        $('#tipoArchivo').append("<option value='csv'>CSV(.csv)</option>");
         $('#importaBD').val('Importar');
     }
 
     $('#tipo_operacion').change(function () {
         if ($('#tipo_operacion').val() === 'importar') {
-            $('#tipoArchivo').prepend("<option value='csv'>CSV(.csv)</option>");
+            $('#tipoArchivo').append("<option value='csv'>CSV(.csv)</option>");
             $('#importaBD').val('Importar');
         } else if ($('#tipo_operacion').val() === 'ver') {
             $("#tipoArchivo").find("[value='csv']").remove();

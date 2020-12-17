@@ -318,11 +318,11 @@ public class showCausasPenalesJO {
         String FechaIngreso = "";
         try {
             conn.Conectar();
-            sql = "SELECT FECHA_INGRESO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVE = '" + juzgadoClave + "' AND "
+            sql = "SELECT FECHA_INGRESOJO FROM DATOS_CAUSAS_PENALES_ADOJO WHERE JUZGADO_CLAVEJO = '" + juzgadoClave + "' AND "
                     + "CAUSA_CLAVEJO = '" + causaClaveJO + "'";
             rs = conn.consultar(sql);
             if (rs.next()) {
-                FechaIngreso = rs.getString("FECHA_INGRESO");
+                FechaIngreso = rs.getString("FECHA_INGRESOJO");
             }
             conn.close();
         } catch (SQLException ex) {

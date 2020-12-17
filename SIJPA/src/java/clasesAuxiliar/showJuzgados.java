@@ -84,7 +84,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(tipoUsu == 1){
+            if(tipoUsu == 1 || tipoUsu > 3){
                 sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
                         + "WHERE JUZGADO_FUNCION IN(1,3) "
                         + "AND ESTATUS = 1 "
@@ -112,7 +112,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(tipoUsu == 1){
+            if(tipoUsu == 1 || tipoUsu > 3){
                 sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
                         + "WHERE JUZGADO_FUNCION IN(2,3) "
                         + "AND ESTATUS = 1 "
@@ -180,10 +180,10 @@ public class showJuzgados {
         try {
             conn.Conectar();
             if(funJuzgado == 1){
-                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJC CP "
+                sql = "SELECT COUNT(DISTINCT T.CAUSA_CLAVE) FROM DATOS_CAUSAS_PENALES_ADOJC CP "
                     + "INNER JOIN DATOS_TRAMITES_ADOJC T ON T.CAUSA_CLAVE=CP.CAUSA_CLAVE WHERE CP.JUZGADO_CLAVE='"+juzgado+"'";
             }else{
-                sql = "SELECT COUNT(*) FROM DATOS_CAUSAS_PENALES_ADOJO CP "
+                sql = "SELECT COUNT(DISTINCT T.CAUSA_CLAVEJO) FROM DATOS_CAUSAS_PENALES_ADOJO CP "
                     + "INNER JOIN DATOS_TRAMITES_ADOJO T ON T.CAUSA_CLAVEJO=CP.CAUSA_CLAVEJO WHERE CP.JUZGADO_CLAVEJO='"+juzgado+"'";
             }
             

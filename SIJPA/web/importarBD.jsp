@@ -24,13 +24,11 @@
                 <div class="toggle-nav-inner"></div>
             </div>
             <h1>IMPORTACIÓN DE BASE DE DATOS SIJPA</h1><br>
-            <!--<h2>Caracteristicas Exportación</h2>-->
             <form id="formImport" method="post" enctype="multipart/form-data"> 
-                <!--enctype ="multipart/form-data"-->
                 <table class="tablaFormu">
+                    <tr>
                     <%
-                        if((Integer)session.getAttribute("tipoUsuario") == 1){
-                            out.println("<tr>");
+                        if((Integer)session.getAttribute("tipoUsuario") > 3){
                             out.println("<td>");
                             out.println("<label for='operacion'>Operación:</label>");
                             out.println("<select name='tipo_operacion' id='tipo_operacion'>");
@@ -43,49 +41,28 @@
                             out.println("<select name='tipoArchivo' id='tipoArchivo'>");
                             out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
                             out.println("</select>");
-                            out.println("</td>");        
-                            out.println("</tr>");
+                            out.println("</td>");
                         }else{
-                            out.println("<tr>");
                             out.println("<td>");
-                            out.println("<div class='colsx oculto' id='EspecifiqueOperacion'>");
                             out.println("<label for='operacion'>Operación:</label>");
-                            out.println("<select name='tipo_operacion' id='tipo_operacion'>");
+                            out.println("<select name='tipo_operacion' id='tipo_operacion' disabled>");
                             out.println("<option value='importar'>Importar archivo SIJPA</option>");
-                            out.println("<option value='ver'>Ver archivo SIJPA</option>");
                             out.println("</select>");
-                            out.println("</div>");
                             out.println("</td>");
                             out.println("<td>");
-                            out.println("<div class='colsx oculto' id='EspecifiqueTipoArchivo'>");
                             out.println("<label for='tipoArchivo'>Tipo de Archivo</label>");
-                            out.println("<select name='tipoArchivo' id='tipoArchivo'>");
+                            out.println("<select name='tipoArchivo' id='tipoArchivo' disabled>");
                             out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
                             out.println("</select>");
-                            out.println("</div>");
                             out.println("</td>");
-                            out.println("</tr>");
                         }
                     %>
+                    </tr>
                     <tr>
-                        <%
-                            if((Integer)session.getAttribute("tipoUsuario") == 1){
-                                out.println("<td colspan = '3'>");
-                                out.println("<center>");
-                            }else{
-                                out.println("<td>");
-                            } 
-                        %>
+                        <td colspan="2">
                             <label for="archivos">Seleccionar Archivos</label>
                             <input type="file" name="archivos" id="archivos" required/>
-                        <%
-                            if((Integer)session.getAttribute("tipoUsuario") == 1){
-                                out.println("</center>");
-                                out.println("</td>");
-                            }else{
-                                out.println("</td>");
-                            }
-                        %>
+                        </td>
                     </tr>
                 </table>
                 <br/>

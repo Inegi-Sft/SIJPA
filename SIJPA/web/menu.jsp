@@ -33,7 +33,7 @@
         </li>
         <% 
             //Si es un administrador entonces le mostramos el boton para agregar usuarios
-            if((Integer)session.getAttribute("tipoUsuario") == 1){
+            if((Integer)session.getAttribute("tipoUsuario") == 1 || (Integer)session.getAttribute("tipoUsuario") > 3){
                 out.println("<li><a href='usuario.jsp'>Usuarios</a></li>"); 
             }
         %>

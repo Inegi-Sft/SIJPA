@@ -115,8 +115,8 @@ public class insrtIntermedia extends HttpServlet {
                     if (mediosPrueba == 1) {
                         for (int x = 0; x < tipoMP.length; x++) {
                             sql = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                    + causaClave + "','" + proceClave + jConcatenado + "'," + (x+1) + "," + tipoMP[x] + ","
-                                    + figuraMP[x] + "," + resoluMP[x] + ",(select YEAR(NOW())))";
+                                    + causaClave + "','" + proceClave + jConcatenado + "'," + (x+1) + "," + figuraMP[x] + ","
+                                    + tipoMP[x] + "," + resoluMP[x] + ",(select YEAR(NOW())))";
                             System.out.println(sql);
                             insertMP = conn.escribir(sql);
                         }
@@ -185,8 +185,8 @@ public class insrtIntermedia extends HttpServlet {
                             //los vacios no los insertara para no generar errorres
                             if(!tipoMP[x].equals("") && !figuraMP[x].equals("") && !resoluMP[x].equals("")){
                                 sql = "INSERT INTO DATOS_PRESENTA_MP_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
-                                        + causaClave + "','" + proceClave + jConcatenado + "'," + (x+1) + "," + tipoMP[x] + ","
-                                        + figuraMP[x] + "," + resoluMP[x] + ",(select YEAR(NOW())))";
+                                        + causaClave + "','" + proceClave + jConcatenado + "'," + (x+1) + "," + figuraMP[x] + ","
+                                        + tipoMP[x] + "," + resoluMP[x] + ",(select YEAR(NOW())))";
                                 System.out.println(sql);
                                 insertMP = conn.escribir(sql);
                             }

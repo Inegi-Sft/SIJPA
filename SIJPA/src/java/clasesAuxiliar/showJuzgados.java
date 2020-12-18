@@ -59,7 +59,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             lista = new ArrayList();
-            if(tipoUsu == 1){
+            if(tipoUsu == 1 || tipoUsu > 3){
                 sql = "SELECT JUZGADO_CLAVE FROM DATOS_JUZGADOS_ADOJC "
                         + "WHERE ESTATUS = 1 "
                         + "ORDER BY 1;";
@@ -215,7 +215,7 @@ public class showJuzgados {
         try {
             conn.Conectar();
             listaTabla = new ArrayList<>();
-            if(tipoUsu == 1){
+            if(tipoUsu == 1 || tipoUsu > 3){
                 sql = "SELECT DJ.JUZGADO_CLAVE, DJ.JUZGADO_NOMBRE, DJ.JUZGADO_NUMERO, CJ.DESCRIPCION, CEN.DESCRIPCION, CM.DESCRIPCION, CE.DESCRIPCION "
                         + "FROM DATOS_JUZGADOS_ADOJC DJ "
                         + "JOIN CATALOGOS_JURISDICCION CJ ON DJ.JUZGADO_JURISDICCION = CJ.JURISDICCION_ID "

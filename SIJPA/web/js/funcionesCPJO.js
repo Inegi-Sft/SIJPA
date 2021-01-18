@@ -157,23 +157,6 @@ $(document).ready(function () {
         });
     });
     
-//    $('#difeOrgano').change(function(){
-//        if($(this).val() === '2'){
-//            $('#regCantJuez').fadeIn();
-//            $('#cantJuez').val('').prop('required', true);
-//            
-//            $('#divOrgDif').fadeOut();
-//            $('#orgDif').val('-2').prop('required', false);
-//        }else{
-//            $('#divOrgDif').fadeIn();
-//            $('#orgDif').val('').prop('required', true);
-//            
-//            $('#regCantJuez').fadeOut();
-//            $('#divJuezJO1,#divJuezJO2,#divJuezJO3').fadeOut();
-//            $('#cantJuez,#juezJO1,#juezJO2,#juezJO3').val('-2').prop('required', false);
-//        }
-//    });
-    
     $('#cantJuez').change(function(){
         $("#juezJO1 option:not(:selected), #juezJO2 option:not(:selected),#juezJO3 option:not(:selected)").attr("disabled", false);
         switch ($('#cantJuez').val()){
@@ -272,7 +255,7 @@ $(document).ready(function () {
     $('#formCausaPenalJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        var resp = confirm("Una vez guardada la Causa Penal no podre hacer niingun cambio,\n"
+        var resp = confirm("Una vez guardada la Causa Penal no podrá  hacer niingun cambio,\n"
                     + "Esta seguro que los datos son los correctos?");
         if(resp){
             $.ajax({
@@ -325,10 +308,10 @@ $(document).ready(function () {
                                     <td><a class="pop" href="procesadosJO.jsp?proceClaveJC=--&proceClaveJO=' + expeJO + '-P' + (x+1) + '&posicion=' + x + '">\n\
                                     <img src="img/editar.png" title="Modificar"/></a></td>\n\
                                     </tr>');
-                            $('#tablaJuicioJO').append('<tr><td>' + expeJO + '-P' + (x+1) + '</td><td></td><td></td><td></td><td></td>\n\
-                                    <td><a class="pop" href="etapaOral.jsp?proceClaveJC=--&proceClaveJO=' + expeJO + '-P' + (x+1) + '&posicion=' + x + '">\n\
-                                    <img src="img/editar.png" title="Modificar"/></a></td>\n\
-                                    </tr>');
+//                            $('#tablaJuicioJO').append('<tr><td>' + expeJO + '-P' + (x+1) + '</td><td></td><td></td><td></td><td></td>\n\
+//                                    <td><a class="pop" href="etapaOral.jsp?proceClaveJC=--&proceClaveJO=' + expeJO + '-P' + (x+1) + '&posicion=' + x + '">\n\
+//                                    <img src="img/editar.png" title="Modificar"/></a></td>\n\
+//                                    </tr>');
                         }
                         
                         //Victimas

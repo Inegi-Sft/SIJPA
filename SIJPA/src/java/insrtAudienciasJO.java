@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.simple.JSONArray;
 
 /**
  *
@@ -46,18 +45,19 @@ public class insrtAudienciasJO extends HttpServlet {
         HttpSession sesion = request.getSession();
         
         String operacion = request.getParameter("operacion");//Control para saber si se inserta o se actualiza
-        String juzgadClave = (String) sesion.getAttribute("juzgadoClave");
-        String jDividido[] = juzgadClave.split("-"); //Esto separa en un array basandose en el separador que le pases
+        String idAudi = request.getParameter("idAudiencia");//numero de la audiencia (id) que se va eliminar
+        
+        String juzgado = (String) sesion.getAttribute("juzgadoClave");
+        String jDividido[] = juzgado.split("-"); //Esto separa en un array basandose en el separador que le pases
         String jEntidad = jDividido[0];
         String jMunicipio = jDividido[1];
         String jNumero = jDividido[2];
-        String jConcatenado=jEntidad+jMunicipio+jNumero;
         
-        String causaClave = request.getParameter("causaClaveJO");
-        String[] jueces = request.getParameterValues("chkJuez");
-        String[] audiJO = request.getParameterValues("chkJO");
-        String[] fechaAIJO = request.getParameterValues("fechaIJO");
-        String[] fechaAFJO = request.getParameterValues("fechaFJO");
+        String causaClave = request.getParameter("causaJO");
+        String[] jueces = request.getParameterValues("juezJO");
+        String audiJO = request.getParameter("audiJO");
+        String fechaAIJO = request.getParameter("fechaIJO");
+        String fechaAFJO = request.getParameter("fechaFJO");
         
         String juez1 = "-2", juez2="-2", juez3="-2";
         
@@ -78,43 +78,27 @@ public class insrtAudienciasJO extends HttpServlet {
             conn.Conectar();
             
             //****************************  I N S E R T A  *******************************************
-            if (operacion.equals("insertar")){
+            if(operacion.equals("insertar")){
                 
-                if(audiJO != null){
-                    for(int i=0; i<audiJO.length; i++){
-                        sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"
-                            + causaClave+"', "+ juez1 +", "+ juez2 +", "+ juez3 +", "+ audiJO[i] +", '"+ fechaAIJO[i] +"','"+ fechaAFJO[i] +"', (select YEAR(NOW())) );";
-                        System.out.println(sql);
-                        conn.escribir(sql);
-                    }
+                int maxAudi=0;
+                sql = "SELECT IFNULL(MAX(NUM_AUDI),0) + 1 FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_ENTIDAD_ID='"+juzgado+"'";
+                rs=conn.consultar(sql);
+                while(rs.next()){
+                    maxAudi=rs.getInt(1);
                 }
-                conn.close();
                 
-            //****************************  A C T U A L I Z A  ***************************************    
-            }else if (operacion.equals("actualizar")){
-                
-                sql = "DELETE FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE='"+juzgadClave+"'"
-                    + " AND CAUSA_CLAVEJO = '"+ causaClave+jConcatenado +"'";
+                sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgado + "','"
+                    + causaClave+"', "+ juez1 +", "+ juez2 +", "+ juez3 +", "+maxAudi+", "+ audiJO +", '"+ fechaAIJO +"','"+ fechaAFJO +"', (select YEAR(NOW())) );";
                 System.out.println(sql);
-                if(conn.escribir(sql)){
-                    if(audiJO != null){
-                        for(int i=0; i<audiJO.length; i++){
-                            sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgadClave + "','"
-                                + causaClave+jConcatenado+"', "+ juez1 +", "+ juez2 +", "+ juez3 +", "+ audiJO[i] +", '"+ fechaAIJO[i] +"', '"+ fechaAFJO[i] +"', (select YEAR(NOW())) );";
-                            System.out.println(sql);
-                            conn.escribir(sql);
-                        }
-                    }
-                }else{
-                    conn.close();
-                }
-                conn.close();
+                conn.escribir(sql);
                 
+                conn.close();
+                                
             //*******************************  E L I M I N A  *********************************    
             }else if(operacion.equals("eliminar")){
                 
-                sql = "DELETE FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE='"+juzgadClave+"'"
-                    + " AND CAUSA_CLAVEJO = '" + causaClave + "'";
+                sql = "DELETE FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE='"+juzgado+"'"
+                    + " AND CAUSA_CLAVEJO = '" + causaClave + "' AND NUM_AUDI="+idAudi;
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                     out.write("AudienciasDeleted");
@@ -124,8 +108,6 @@ public class insrtAudienciasJO extends HttpServlet {
                 conn.close();
             }
         
-        } catch (IOException ex) {
-            Logger.getLogger(insrtAudienciasJO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(insrtAudienciasJO.class.getName()).log(Level.SEVERE, null, ex);
         }

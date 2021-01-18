@@ -9,6 +9,7 @@ import clasesAuxiliar.showAudiencias;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -34,10 +36,11 @@ public class obtenJuezJC extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     showAudiencias sa= new showAudiencias();
+     ArrayList<String> list;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             String causa_juzgado = request.getParameter("causa_juzgado");
@@ -45,9 +48,13 @@ public class obtenJuezJC extends HttpServlet {
             String causaJC=cjDividido[0];
             String juzgadoJO=cjDividido[1];
             
-            int juezAtendio= sa.findJuezAtendioJC(causaJC, juzgadoJO);
-            out.print(juezAtendio);
-            System.out.println("juez atiende jc: "+juezAtendio);
+            list= sa.findJuezAtendioJC(causaJC, juzgadoJO);
+            JSONArray resp = new JSONArray();
+            for(String juez: list){
+                resp.add(juez);
+            }
+            out.write(resp.toJSONString());
+            System.out.println("juez atiende jc: "+list);
             
             
         }

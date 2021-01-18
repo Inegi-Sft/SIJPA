@@ -45,7 +45,7 @@
             <%
                 //Control de usuarios si es administrador entonces mostramos la opcion de Usuarios
                 if(session.getAttribute("tipoUsuario") != null){
-                    if((Integer)session.getAttribute("tipoUsuario") == 1){
+                    if((Integer)session.getAttribute("tipoUsuario") == 1 || (Integer)session.getAttribute("tipoUsuario") > 3){
                         out.print("<button class='btnSisCap' id='btnUsuario' name='btnUsuario'>Usuarios</button>");
                     }
                 }else{

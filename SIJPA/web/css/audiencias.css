@@ -27,21 +27,12 @@ and open the template in the editor.
     background: url("../img/checkbox-check.png");
     background-size: cover;
 }
-.contenedor input[type="radio"]{
-    margin: 0 4px 3px 0;
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-.contenedor input[type="number"].tiempo{
-    width: 50px; 
-}
 
 .contenedor input.audiFecha{
     width: 145px;
 }
 
-.contenedor input.audiFecha, .contenedor input.tiempo{
+.contenedor input.audiFecha{
     margin: 1px 1px 1px 1px;
     height: 27px;
 }
@@ -51,28 +42,7 @@ and open the template in the editor.
     text-align: left;
     height: 110px;
     overflow:  auto;
-}
-
-#fstJueces{
-    display: inline-block;
-    vertical-align: top;
-    width: auto;
-    height: 150px;
-    margin-top:20px;
-    background-color: rgba(235,250,250,0.5);
-}
-
-#fstJueces legend{
-    font-size: 18px;
-    color: #003057
-}
-
-#msjAudi{
-    font-size: 12px;
-    color:#ff0000;
-    position: absolute;
-    top: 345px;
-    right: 220px;
+    margin: 3px 3px 3px 3px;
 }
 
 .noIden{
@@ -91,9 +61,6 @@ and open the template in the editor.
     padding: 3px 5px;
 }
 
-#btnCerrar{
-    margin: 20px 25px 0 0;
-}
 
 .contenedor img {
      width: 20px;
@@ -114,4 +81,23 @@ a.addJuez{
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}
+.contenedor .largo{
+    width: 430px;
+}
+
+.contenedor .addAudi{
+    width: 80px !important;
+    height: 35px !important;
+}
+#tblAudiInves_length label, #tblAudiInves_filter label, #tblAudiInter_length label, #tblAudiInter_filter label,
+#tblAudiJO_length label, #tblAudiJO_filter label{
+    width: auto;
+    margin: 20px 10px 20px 0;
+    text-align: left;
+}
+
+#tblAudiInves_length, #tblAudiInves_filter, #tblAudiInter_length, #tblAudiInter_filter,
+#tblAudiJO_length, #tblAudiJO_filter {
+    height: 60px;
 }

@@ -1,28 +1,26 @@
 $(document).ready(function () {
- 
+    
+    //abre la pestaña 2 cuando se inserta de intermedia
+    if($("#banderaInter").val()==='inter'){
+        openPestana('btn2', 'p2');
+    }
+    
     //auto acompletado para las causas penales
-    $("#causaClave").selectize({
+    $(".autoComp").selectize({
         onBlur: function () {
             this.clearCache();
         }
     });
     
-    //Guarda Audiencias
-    $('#formAudiencias').submit(function (e) {
+    //Guarda Audiencias Investigacion
+    $('#formAudienciasInves').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        
-        //valida que se seleccione por lo menos 1 audiencia
-        if ($('input[name="chkInves"]:checked').length === 0 && $('input[name="chkInter"]:checked').length === 0) {
-            alert('Selecciona al menos una Audiencia celebrada');
-            $('#chkInves1').focus();
-            return false;
-        }
-        
+
         $.ajax({
             type: 'post',
             url: 'insrtAudiencias',
-            data: $('#formAudiencias').serialize(),
+            data: $('#formAudienciasInves').serialize(),
             success: function (response) {
                 console.log("Respuesta del servidor Audiencias guardar: ", response);
                 alert("Guardado correctamente!!!");
@@ -35,23 +33,60 @@ $(document).ready(function () {
         });
     });
     
+    //Guarda Audiencias Intermedia
+    $('#formAudienciasInter').submit(function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        $.ajax({
+            type: 'post',
+            url: 'insrtAudiencias',
+            data: $('#formAudienciasInter').serialize(),
+            success: function (response) {
+                console.log("Respuesta del servidor Audiencias guardar: ", response);
+                alert("Guardado correctamente!!!");
+                window.location='audiencias.jsp?banderaInter=inter';
+            },
+            error: function (response) {
+                console.log("Respuesta del servidor Audiencias error: ", response);
+                alert('Error al guardar, posible audiencia duplicada');
+            }
+        });
+    });
+    
+    //manda a capturar un nuevo juez
+    $('.captuJuez').change(function(){
+        if($(this).val() === '100'){
+            alert('Favor de capturar el Juez y regresar a capturar la audiencia');
+            window.location.href = 'capturaJuez.jsp';
+        }
+    });
+    
+    //bloque para data tables
+    $('#tblAudiInves, #tblAudiInter').DataTable({
+        "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "Todo"]],
+        "language": {
+            "decimal": "",
+            "emptyTable": "No hay registros",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            "infoEmpty": "Mostrando 0 to 0 of 0 registros",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
 });
-
-// habilita las audiencias de acuaerdo si el checkbox esta checkeado
-function habilitaTxtJC(obj, idTxt1, idTxt2, chkNi1, chkNi2) {
-    if (obj.checked) {
-        $(idTxt1).prop({"required": true, "disabled": false});
-        $(idTxt2).prop({"required": true, "disabled": false});
-        $(chkNi1).prop("disabled", false);
-        $(chkNi2).prop("disabled", false);
-    } else {
-        $(idTxt1).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(idTxt2).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(chkNi1).prop({"disabled": true, "checked": false});
-        $(chkNi2).prop({"disabled": true, "checked": false});
-    }
-}
-
 
 // Fechas No identificadas
 function fechaNIJC(obj, idTxtDate) {
@@ -63,18 +98,25 @@ function fechaNIJC(obj, idTxtDate) {
 }
 
 //Elimina Audiencias
-function deleteAudiencias(causa) {
+function deleteAudiencias(causa, idAudi, bandera) {
     var resp = confirm("Realmente deseas eliminar este resgistro?");
     if (resp) {
         $.ajax({
             type: 'post',
             url: 'insrtAudiencias',
-            data: {causaClave: causa, operacion: 'eliminar'},
+            data: {
+                causa: causa, 
+                idAudiencia: idAudi, 
+                operacion: 'eliminar'
+            },
             success: function (response) {
                 console.log("Respuesta del servidor al borrar: ", response);
                 if (response === "AudienciasDeleted") {
-                    alert("Audiencias de la Causa Penal: " + causa + " Eliminadas!!!"); 
-                    location.reload();
+                    alert("Audiencia Id: "+idAudi+" de la Causa Penal: " + causa + " Eliminada!!!");
+                    if(bandera==='inter')
+                        window.location='audiencias.jsp?banderaInter=inter';
+                    else
+                        window.location='audiencias.jsp';
                 }
             },
             error: function (response) {
@@ -96,5 +138,14 @@ function duracion(fchIni, fchFin){
             $(fchFin).val('');
             $(fchIni).focus();
         }
+    }
+}
+
+function validaJuzAdd() {
+    if ($("#juzgado").val() === "") {
+        alertify.alert('Juzgado Clave sin seleccionar','Favor de seleccionar un Juzgado Clave para poder continuar con la captura');
+        return false;
+    } else {
+        return true;
     }
 }

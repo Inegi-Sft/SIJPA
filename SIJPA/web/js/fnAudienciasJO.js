@@ -1,15 +1,15 @@
 $(document).ready(function () {
     
     //auto acompletado para las causas penales
-    $('#causaClaveJO').selectize({
+    $('#causaJO').selectize({
         render: {
             option: function (data) {
                 return '<div data-causajc="' + data.causajc + '">' + data.text + '</div>';
             }
         },
-        onChange: function (value) {// Dehabilita el juez que atendio la audiencia en jc
-            $('input[name="chkJuez"]').prop("disabled",false);
-            $('input[name="chkJuez"]').prop("checked",false);
+        onChange: function (value) {// Deshabilita el juez que atendio la audiencia en jc
+            $('input[name="juezJO"]').prop("disabled",false);
+            $('input[name="juezJO"]').prop("checked",false);
             var causaJC = this.getOption(value).data('causajc');
             
             $.ajax({
@@ -18,7 +18,15 @@ $(document).ready(function () {
                 data: {causa_juzgado: causaJC},
                 success: function (response) {
                     console.log("Respuesta del servidor Obten JuezJC: ", response);
-                    $('input[name="chkJuez"][value='+response+']').prop("disabled",true);
+                    if (response !== null && $.isArray(response)) {
+                        
+                        if(!causaJC.includes('-2&')){//cuando la cuasa es no especificada permite seleccionar cualquier juez
+                            for (var i = 0; i < response.length; i++) {
+                                console.log('juez: ' + response[i]);
+                                $('input[name="juezJO"][value='+response[i]+']').prop("disabled",true);
+                            }
+                        }
+                    }
                 },
                 error: function (response) {
                     console.log("Respuesta del servidor error Obten JuezJC: ", response);
@@ -37,15 +45,9 @@ $(document).ready(function () {
         e.stopImmediatePropagation();
         
         //valida que se seleccione por lo menos 1 juez
-        if ($('input[name="chkJuez"]:checked').length === 0) {
-            alert('Selecciona al menos 1 Juez y maximo 3 Jueces');
-            $('input[name="chkJuez"]').focus();
-            return false;
-        
-        //valida que se seleccione por lo menos 1 audiencia
-        } else if ($('input[name="chkJO"]:checked').length === 0) {
-            alert('Selecciona al menos una Audiencia celebrada');
-            $('#chkJO1').focus();
+        if ($('input[name="juezJO"]:checked').length === 0) {
+            alert('Selecciona al menos 1 Juez y maximo 3');
+            $('input[name="juezJO"]').focus();
             return false;
         }
         
@@ -65,26 +67,39 @@ $(document).ready(function () {
         });
     });
     
+    
+    //bloque para data tables
+    $('#tblAudiJO').DataTable({
+        "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "Todo"]],
+        "language": {
+            "decimal": "",
+            "emptyTable": "No hay registros",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            "infoEmpty": "Mostrando 0 to 0 of 0 registros",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+    
+    
 });
 
-// habilita las audiencias de acuaerdo si el checkbox esta checkeado
-function habilitaTxtJO(obj, idTxt1, idTxt2, chkNi1, chkNi2) {
-    if (obj.checked) {
-        $(idTxt1).prop({"required": true, "disabled": false});
-        $(idTxt2).prop({"required": true, "disabled": false});
-        $(chkNi1).prop("disabled", false);
-        $(chkNi2).prop("disabled", false);
-    } else {
-        $(idTxt1).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(idTxt2).prop({"required": false, "disabled": true, "readonly": false}).val("");
-        $(chkNi1).prop({"disabled": true, "checked": false});
-        $(chkNi2).prop({"disabled": true, "checked": false});
-    }
-}
 
 //cuenta cuantos jueces se han seleccionado
 function cuenta(obj) {
-    if ($('input[name="chkJuez"]:checked').length > 3) {
+    if ($('input[name="juezJO"]:checked').length > 3) {
         alert('Solo puedes seleccionar hasta 3 Jueces');
         $(obj).prop("checked", false);
     }
@@ -100,17 +115,21 @@ function fechaNI(obj, idTxtDate) {
 }
 
 //Elimina Audiencias
-function deleteAudienciasJO(causa) {
+function deleteAudienciasJO(causa, idAudi) {
     var resp = confirm("Realmente deseas eliminar este resgistro?");
     if (resp) {
         $.ajax({
             type: 'post',
             url: 'insrtAudienciasJO',
-            data: {causaClaveJO: causa, operacion: 'eliminar'},
+            data: {
+                causaJO: causa, 
+                idAudiencia: idAudi, 
+                operacion: 'eliminar'
+            },
             success: function (response) {
                 console.log("Respuesta del servidor al borrar: ", response);
                 if (response === "AudienciasDeleted") {
-                    alert("Audiencias de la Causa Penal: " + causa + " Eliminadas!!!"); 
+                    alert("Audiencia Id: "+idAudi+" de la Causa Penal: " + causa + " Eliminada!!!"); 
                     location.reload();
                 }
             },
@@ -133,5 +152,14 @@ function duracion(fchIni, fchFin){
             $(fchFin).val('');
             $(fchIni).focus();
         }
+    }
+}
+
+function validaJuzAdd() {
+    if ($("#juzgado").val() === "") {
+        alertify.alert('Juzgado Clave sin seleccionar','Favor de seleccionar un Juzgado Clave para poder continuar con la captura');
+        return false;
+    } else {
+        return true;
     }
 }

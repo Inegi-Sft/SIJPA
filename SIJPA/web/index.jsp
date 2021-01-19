@@ -15,12 +15,12 @@
         <%@include file="librerias.jsp"%>
         <script type="text/javascript" src="js/fnIndex.js"></script>
         <%
-            String version = "BETA 1.5.12";
+            String version = "BETA 1.5.13";
             //Verificamos si la tabla de versiones existe si no la creamos
             actualizador act = new actualizador();
-            System.out.println("es la version igual: " + act.findVersion("BETA 1.5.12"));
+            System.out.println("es la version igual: " + act.findVersion("BETA 1.5.13"));
             //Verificacmos que version de sistema tiene para poder actualizar si es diferente
-            if(!act.findVersion("BETA 1.5.12")){ 
+            if(!act.findVersion("BETA 1.5.13")){ 
                 out.println("<script>$(document).ready(function () {"
                         + "$('.load').show();"
                         + "$.ajax({"

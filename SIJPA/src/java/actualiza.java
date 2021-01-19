@@ -49,6 +49,8 @@ public class actualiza extends HttpServlet {
                 sql = "UPDATE VERSION_SISTEMA SET VERSION = '" + request.getParameter("version") + "';";
                 System.out.println(sql);
                 if(conn.escribir(sql)){
+                    sql = "TRUNCATE DATOS_AUDIENCIAS_ADOJC;";
+                    conn.escribir(sql);
                     sql = "DELETE FROM CATALOGOS_AUDIENCIAS_INVESTIGACION;";
                     conn.escribir(sql);
                     sql = "INSERT INTO CATALOGOS_AUDIENCIAS_INVESTIGACION (AUDIENCIA_ID, DESCRIPCION) VALUES(-2,'No aplica'),"
@@ -62,46 +64,35 @@ public class actualiza extends HttpServlet {
                             + "(8,'Audiencias de aprehensión'),"
                             + "(9,'Audiencias de desistimiento de la acción penal'),"
                             + "(10,'Audiencias relacionadas con las medidas de protección'),"
-                            + "(11,'Audiencia inicial'),"
-                            + "(12,'Audiencias de medida cautelar (revisión)'),"
-                            + "(13,'Audiencias relacionadas con el procedimiento abreviado'),"
-                            + "(14,'Audiencias relacionadas con la suspensión condicional del proceso'),"
-                            + "(15,'Audiencias de cierre de la investigación complementaria'),"
-                            + "(16,'Audiencias relacionadas con impugnaciones a determinaciones del ministerio público'),"
-                            + "(17,'Audiencias relacionadas con acuerdos reparatorios'),"
-                            + "(18,'Audiencias de solicitud y/o determinación de sobreseimiento'),"
-                            + "(19,'Otras(especifique)');";
+                            + "(11,'Audiencia inicial - control de detención'),"
+                            + "(12,'Audiencia inicial - formulación de la imputación'),"
+                            + "(13,'Audiencia inicial - vinculación a proceso'),"
+                            + "(14,'Audiencia inicial - imposición de medida cautelar'),"
+                            + "(15,'Audiencia inicial - otras'),"
+                            + "(16,'Audiencias de medida cautelar (revisión)'),"
+                            + "(17,'Audiencias relacionadas con el procedimiento abreviado'),"
+                            + "(18,'Audiencias relacionadas con la suspensión condicional del proceso'),"
+                            + "(19,'Audiencias de cierre de la investigación complementaria'),"
+                            + "(20,'Audiencias relacionadas con impugnaciones a determinaciones del ministerio público'),"
+                            + "(21,'Audiencias relacionadas con acuerdos reparatorios'),"
+                            + "(22,'Audiencias de solicitud y/o determinación de sobreseimiento'),"
+                            + "(23,'Otras');";
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_INFORME_ADOJO CHANGE MEDIDAS_PROTECCION_ASIG EXCUSAS INT(5) NOT NULL;";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP FOREIGN KEY FK_AUDI_CAUSACLAVE;";
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_INFORME_ADOJO CHANGE PROVIDENCIAS_PRECAUTORIAS RECUSACIONES INT(5) NOT NULL, CHANGE PRUEBA_ANTICIPADA OTRAS INT(5) NOT NULL;";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP INDEX FK_AUDI_CAUSACLAVE;";
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_INFORME_ADOJO DROP ORDENES_JUDICIALES,  DROP ACTOS_INVESTIGA,  DROP IMPUGNACION_MP,  DROP OTROS;";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC ADD NUM_AUDI INT(11) NOT NULL AFTER JUEZ_CLAVE1;";
                     conn.escribir(sql);
-                    sql = "INSERT INTO CATALOGOS_COLONIASMUN ('ENTIDAD_ID', 'MUNICIPIO_ID', 'COLONIA_ID', 'DESCRIPCION') VALUES ('99', '99999', '9999-9999', 'No identificado');";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJC DROP PRIMARY KEY, ADD PRIMARY KEY (JUZGADO_CLAVE, CAUSA_CLAVE, JUEZ_CLAVE1, NUM_AUDI, AUDIENCIA_INVESTIGACION, AUDIENCIA_INTERMEDIA) USING BTREE;";
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_PRESENTA_MP_ADOJC ADD NUM_MPRUEBA INT(2) NOT NULL AFTER PROCESADO_CLAVE;";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO DROP FOREIGN KEY FK_AUDI_CAUSACLAVEJO;";
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_INTERMEDIA_ADOJC DROP FOREIGN KEY FK_EINTERMEDIA_MP_MP;";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO DROP INDEX FK_AUDI_CAUSACLAVEJO;";
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_INTERMEDIA_ADOJC DROP FOREIGN KEY FK_EINTERMEDIA_PRESENTA_MP_ASESOR;";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO ADD NUM_AUDI INT(11) NOT NULL AFTER JUEZ_CLAVE3;";
                     conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_INTERMEDIA_ADOJC DROP FOREIGN KEY FK_EINTERMEDIA_PRESENTA_MP_DEFENSA;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_INTERMEDIA_ADOJC "
-                            + "DROP PRESENTA_MP_MINISTERIO,"
-                            + "DROP PRESENTA_MP_ASESOR,"
-                            + "DROP PRESENTA_MP_DEFENSA;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_ORAL_ADOJO ADD CANTIDAD_TEST INT NOT NULL AFTER PD_TESTIMONIAL;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_ORAL_ADOJO ADD CANTIDAD_PERI INT NOT NULL AFTER PD_PERICIAL;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_ORAL_ADOJO ADD CANTIDAD_DECLA INT NOT NULL AFTER PD_DECLARACION_ACUSADO;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_ORAL_ADOJO ADD CANTIDAD_DOCU INT NOT NULL AFTER PD_DOCUMENTAL_MATERIAL;";
-                    conn.escribir(sql);
-                    sql = "ALTER TABLE DATOS_ETAPA_ORAL_ADOJO ADD CANTIDAD_OTRO INT NOT NULL AFTER PD_OTRA_PRUEBA;";
+                    sql = "ALTER TABLE DATOS_AUDIENCIAS_ADOJO DROP PRIMARY KEY, ADD PRIMARY KEY (JUZGADO_CLAVE, CAUSA_CLAVEJO, JUEZ_CLAVE1, JUEZ_CLAVE2, JUEZ_CLAVE3, NUM_AUDI, AUDIENCIA_JUICIOORAL) USING BTREE;";
                     conn.escribir(sql);
                     out.write("1");
                     conn.close();

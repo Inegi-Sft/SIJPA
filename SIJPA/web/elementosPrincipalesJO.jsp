@@ -230,11 +230,11 @@
                 </table>
             </div>
             <div id="p4" class="pestanaContent">
-                <h2>Victimas</h2>
+                <h2>Víctimas</h2>
                 <table class="tablasRegis" id="tablaVictimasJO">
                     <thead> 
                         <tr>
-                            <th>Victima clave</th>
+                            <th>Víctima clave</th>
                             <th>Tipo de Víctima</th>
                             <th>Sexo</th>
                             <th>Fecha nacimiento</th>

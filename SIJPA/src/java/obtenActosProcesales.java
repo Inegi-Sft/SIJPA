@@ -4,25 +4,23 @@
  * and open the template in the editor.
  */
 
-import ConexionDB.Conexion_Mysql;
+import clasesAuxiliar.showAudiencias;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author CARLOS.SANCHEZG
+ * @author FERMIN.GOMEZ
  */
-@WebServlet(urlPatterns = {"/actualiza"})
-public class actualiza extends HttpServlet {
+@WebServlet(urlPatterns = {"/obtenActosProcesales"})
+public class obtenActosProcesales extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,30 +32,27 @@ public class actualiza extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    Conexion_Mysql conn = new Conexion_Mysql();
-    String sql;
-    ResultSet rs;
+    showAudiencias sA = new showAudiencias();
+    ArrayList<String[]> lista;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession sesion = request.getSession();
+        String juzgado = (String) sesion.getAttribute("juzgadoClave");
+        String anio = request.getParameter("anio");
+        String idAudi = request.getParameter("idAudi");
+         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            conn.Conectar();
-            System.out.println("variable: " + request.getParameter("version"));
-            if(request.getParameter("version") != null){
-                //insertamos la version del sistema
-                sql = "UPDATE VERSION_SISTEMA SET VERSION = '" + request.getParameter("version") + "';";
-                System.out.println(sql);
-                if(conn.escribir(sql)){
-                    out.write("1");
-                    conn.close();
-                }else{
-                    out.write("0");
-                    conn.close();
-                }
-            } 
-        } catch (SQLException ex) {
-            Logger.getLogger(actualiza.class.getName()).log(Level.SEVERE, null, ex);
+            
+            lista = sA.recuperaActosProcesales(juzgado, anio, idAudi);
+            for (String[] ls : lista) {
+                out.println("<tr>");
+                out.println("<td>"+ ls[0] + ".- " + ls[1] + "</td>");
+                out.println("<td style='text-align:center'>"+ ls[2] + ":" + ls[3] + "</td>");
+                out.println("</tr>");
+            }
         }
     }
 

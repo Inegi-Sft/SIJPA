@@ -75,6 +75,9 @@ public class insrtConclusionesJO extends HttpServlet {
         String personaImpugna = request.getParameter("personaImpugna");
         String comentarios = request.getParameter("comentarios");
         
+        //variables Medidas noprivativas
+        String[] medidaNopriva = request.getParameterValues("chkMedidaNPL");
+        
         // variables DCONCLUSIONES
         String[] delitoClave = request.getParameterValues("delitoConclu");
         
@@ -100,6 +103,13 @@ public class insrtConclusionesJO extends HttpServlet {
                                     + proceClaveJO + jConcatenado + "','" + delitoClave[i] + "'," + tipoSentencia + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu = conn.escribir(sql);
+                        }
+                        if(tipoSentencia.equals("2")){
+                            for(String medidaNopriv : medidaNopriva){
+                                sql = "INSERT INTO DATOS_MEDIDA_NOPRIVATIVA_ADOJO VALUES('" + causaClaveJO + "','" + proceClaveJO + jConcatenado +"'," + medidaNopriv + ")";
+                                System.out.println(sql);
+                                conn.escribir(sql);
+                            }
                         }
                     }
                     if(insrtDConclu){
@@ -140,6 +150,10 @@ public class insrtConclusionesJO extends HttpServlet {
                             + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
                     System.out.println(sql);
                     conn.escribir(sql);
+                    sql = "DELETE FROM DATOS_MEDIDA_NOPRIVATIVA_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClaveJO + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClaveJO + jConcatenado + "';";
+                    System.out.println(sql);
+                    conn.escribir(sql);
                     if(resolucion.equals("2")){
                         insrtDConclu=false;
                         for (int i = 0; i < delitoClave.length; i++){
@@ -148,6 +162,13 @@ public class insrtConclusionesJO extends HttpServlet {
                                     + proceClaveJO + jConcatenado + "','" + delitoClave[i] + "'," + tipoSentencia + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu=conn.escribir(sql);
+                        }
+                        if(tipoSentencia.equals("2")){
+                            for(String medidaNopriv : medidaNopriva){
+                                sql = "INSERT INTO DATOS_MEDIDA_NOPRIVATIVA_ADOJO VALUES('" + causaClaveJO + "','" + proceClaveJO + jConcatenado +"'," + medidaNopriv + ")";
+                                System.out.println(sql);
+                                conn.escribir(sql);
+                            }
                         }
                     }
                     if(insrtDConclu){

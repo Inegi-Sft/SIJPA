@@ -46,6 +46,7 @@ public class insrtAudienciasJO extends HttpServlet {
         
         String operacion = request.getParameter("operacion");//Control para saber si se inserta o se actualiza
         String idAudi = request.getParameter("idAudiencia");//numero de la audiencia (id) que se va eliminar
+        String anio = request.getParameter("anio");//año de la audiencia para eliminar, forma clave con el idAudi y el juzgado
         
         String juzgado = (String) sesion.getAttribute("juzgadoClave");
         String jDividido[] = juzgado.split("-"); //Esto separa en un array basandose en el separador que le pases
@@ -56,8 +57,9 @@ public class insrtAudienciasJO extends HttpServlet {
         String causaClave = request.getParameter("causaJO");
         String[] jueces = request.getParameterValues("juezJO");
         String audiJO = request.getParameter("audiJO");
-        String fechaAIJO = request.getParameter("fechaIJO");
-        String fechaAFJO = request.getParameter("fechaFJO");
+        String fechaCJO = request.getParameter("fechaCJO");
+        String hrsJO = request.getParameter("hrsJO");
+        String minJO = request.getParameter("minJO");
         
         String juez1 = "-2", juez2="-2", juez3="-2";
         
@@ -81,14 +83,14 @@ public class insrtAudienciasJO extends HttpServlet {
             if(operacion.equals("insertar")){
                 
                 int maxAudi=0;
-                sql = "SELECT IFNULL(MAX(NUM_AUDI),0) + 1 FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_ENTIDAD_ID='"+juzgado+"'";
+                sql = "SELECT IFNULL(MAX(NUM_AUDI),0) + 1 FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_ENTIDAD_ID='"+juzgado+"' AND ANIO=(select YEAR(NOW()))";
                 rs=conn.consultar(sql);
                 while(rs.next()){
                     maxAudi=rs.getInt(1);
                 }
                 
                 sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJO VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgado + "','"
-                    + causaClave+"', "+ juez1 +", "+ juez2 +", "+ juez3 +", "+maxAudi+", "+ audiJO +", '"+ fechaAIJO +"','"+ fechaAFJO +"', (select YEAR(NOW())) );";
+                    + causaClave+"', "+ juez1 +", "+ juez2 +", "+ juez3 +", "+maxAudi+", "+ audiJO +", '"+ fechaCJO +"', "+ hrsJO +",'"+ minJO +"', (select YEAR(NOW())) );";
                 System.out.println(sql);
                 conn.escribir(sql);
                 
@@ -98,7 +100,7 @@ public class insrtAudienciasJO extends HttpServlet {
             }else if(operacion.equals("eliminar")){
                 
                 sql = "DELETE FROM DATOS_AUDIENCIAS_ADOJO WHERE JUZGADO_CLAVE='"+juzgado+"'"
-                    + " AND CAUSA_CLAVEJO = '" + causaClave + "' AND NUM_AUDI="+idAudi;
+                    + " AND ANIO = " + anio + " AND NUM_AUDI="+idAudi;
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                     out.write("AudienciasDeleted");

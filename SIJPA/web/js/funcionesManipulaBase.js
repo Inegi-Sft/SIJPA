@@ -5,21 +5,21 @@
  */
 $(document).ready(function () {
 
-    if ($('#tipo_operacion').val() === 'importar') {
-        $('#tipoArchivo').append("<option value='csv'>CSV(.csv)</option>");
-        $('#importaBD').val('Importar');
-    }
+//    if ($('#tipo_operacion').val() === 'importar') {
+//        $('#tipoArchivo').append("<option value='csv'>CSV(.csv)</option>");
+//        $('#importaBD').val('Importar');
+//    }
 
-    $('#tipo_operacion').change(function () {
-        if ($('#tipo_operacion').val() === 'importar') {
-            $('#tipoArchivo').append("<option value='csv'>CSV(.csv)</option>");
-            $('#importaBD').val('Importar');
-        } else if ($('#tipo_operacion').val() === 'ver') {
-            $("#tipoArchivo").find("[value='csv']").remove();
-            $('#importaBD').val('Ver');
-        }
-
-    });
+//    $('#tipo_operacion').change(function () {
+//        if ($('#tipo_operacion').val() === 'importar') {
+//            $('#tipoArchivo').append("<option value='csv'>CSV(.csv)</option>");
+//            $('#importaBD').val('Importar');
+//        } else if ($('#tipo_operacion').val() === 'ver') {
+//            $("#tipoArchivo").find("[value='csv']").remove();
+//            $('#importaBD').val('Ver');
+//        }
+//    });
+    
     $('#tipoArchivo').change(function () {
         if ($('#tipoArchivo').val() === 'csv') {
             $('#EspecifiqueTabla').fadeIn();

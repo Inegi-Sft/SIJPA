@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::ResolucionesJO</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesConcJO.js"></script>
+        <script type="text/javascript" src="js/funcionesConcJO.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showConclusionesJO sConclu = new showConclusionesJO();
@@ -104,7 +104,7 @@
                 <fieldset>
                     <legend>Resolución</legend>
                     <div class="cols">
-                        <label for="fechaReso">Fecha de lectura y explicación de la sentencia</label>
+                        <label for="fechaReso">Fecha en que se dictó la resolución (conclusión y/o terminación de la causa penal)</label>
                         <input type="date" name="fechaReso" id="fechaReso" value="<%=fechaResol%>" max="<%=fechas%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaReso" onclick="fechaNoIdent('#chkFechaReso', '#fechaReso')">
@@ -227,19 +227,36 @@
                         </div>
                         <div class="cols oculto" id="dTipoMedidaNPL">
                             <label for="tipoMedidaNPL" class="lblExBig">Tipo de medida no privativa de la libertad</label>
-                            <select name="tipoMedidaNPL" id="tipoMedidaNPL" >
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findNoprivativas();
-                                    for (String[] ls : lista) {
-                                        out.print("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(medidaNoPriva)){
-                                            out.println(" selected ");
+                            <div id="multiselect">
+                                <div class="selectBox" onclick="showCheckboxes()">
+                                    <select name="tipoMedidaNPL" id="tipoMedidaNPL">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            if(!medidaNoPriva.equals("")){
+                                                out.println("<option value='" + medidaNoPriva + "'");
+                                                out.println( "selected>" + medidaNoPriva + " Elementos seleccionados</option>");
+                                            }
+                                        %>
+                                        <option value="-2">No aplica</option>
+                                    </select>
+                                    <div class="overSelect"></div>
+                                </div>
+                                <div id="checkboxes" class="hide">
+                                    <%
+                                        lista = cat.findNoprivativas();
+                                        for (String[] ls : lista) {
+                                            if(!ls[0].equals("-2")){
+                                                String medidaNP = sConclu.medidaNoPrivativaJO(causaClaveJO, proceClaveJO + juzgadClaveJO.replace("-", ""), ls[0]);
+                                                out.println("<label><input type='checkbox' name='chkMedidaNPL' class='chkMedidaNPL' value='" + ls[0] + "'");
+                                                if(!medidaNP.equals("")){
+                                                    out.println(" checked ");
+                                                }
+                                                out.println( ">" + ls[0]+ ".- " + ls[1] + "</label>");
+                                            }
                                         }
-                                        out.println( ">" + ls[0]+ ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
+                                    %>
+                                </div>
+                            </div>
                         </div>
                         <div class="cols oculto" id="dInternamiento">
                             <label for="internamiento">Tiempo en internamiento</label>

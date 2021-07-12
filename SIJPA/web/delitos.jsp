@@ -17,7 +17,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Delitos</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesDel.js"></script>
+        <script type="text/javascript" src="js/funcionesDel.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showDelitos delitos = new showDelitos();
@@ -145,7 +145,7 @@
                         <tr>
                             <td colspan="2">
                                 <label class="lblExBig" for="articuloCP">Señalamiento normativo (Artículo, fracción, párrafo, inciso del código penal)</label>
-                                <input class="txtExBig" type="text"  name="articuloCP" id="articuloCP" value="<%=articuloCP%>" required>
+                                <input class="txtExBig" type="text"  name="articuloCP" id="articuloCP" value="<%=articuloCP%>" onkeypress="return /[[0-9]|[A-Z Ñ]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)" required>
                             </td>
                             <td rowspan="2">
                                 <fieldset>

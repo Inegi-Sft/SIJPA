@@ -20,6 +20,7 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 public class exportaExcel {
 
     ArrayList<String[]> causasJC;
+	ArrayList<String[]> datosActosProcesalesJC;
     ArrayList<String[]> audienciasJC;
     ArrayList<String[]> audienciasJO;
     ArrayList<String[]> causasJO;
@@ -41,6 +42,8 @@ public class exportaExcel {
     ArrayList<String[]> datosInformeJO;
     ArrayList<String[]> datosJuecesJC;
     ArrayList<String[]> datosJuzgadosJC;
+	ArrayList<String[]> datosMedidaNoPrivativaJC;
+	ArrayList<String[]> datosMedidaNoPrivativaJO;
     ArrayList<String[]> datosPdelitosJC;
     ArrayList<String[]> datosPdelitosJO;
     ArrayList<String[]> datosPfuenteIngresosJC;
@@ -65,6 +68,7 @@ public class exportaExcel {
     CellStyle mi_estilo;
     SXSSFWorkbook mi_libro;
     showDatos mis_datos;
+    showErrores errores;
 
     public exportaExcel(SXSSFWorkbook libro) {
         CellStyle estilo = libro.createCellStyle();
@@ -75,15 +79,70 @@ public class exportaExcel {
         this.mi_libro = libro;
         showDatos datos = new showDatos();
         this.mis_datos = datos;
+        showErrores errores = new showErrores();
+        this.errores = errores;
     }
-
+    
+    public void exportarTablasFaltantes(String id){
+        ArrayList<String[]> tablas_faltantes = errores.findErroresFaltanTablas(id);
+        SXSSFSheet hoja_tablasFaltantes = this.mi_libro.createSheet("Tablas Faltantes");
+        SXSSFRow mi_registro = hoja_tablasFaltantes.createRow(0);
+        SXSSFCell mi_celda = mi_registro.createCell(0);
+        mi_celda.setCellValue("Faltan las siguientes tablas en el archivo zip:");
+        for(int i=0;i<tablas_faltantes.size();i++){
+            hoja_tablasFaltantes.createRow(i+1).createCell(0).setCellValue(tablas_faltantes.get(i)[0]);
+        }
+    }
+    
+    public void exportarColumnasFaltantes(String id){
+        ArrayList<String[]> columnas_faltantes = errores.findErroresFaltanColumnas(id);
+        SXSSFSheet hoja_columnasFaltantes = this.mi_libro.createSheet("Columnas Faltantes");
+        SXSSFRow mi_registro = hoja_columnasFaltantes.createRow(0);
+        SXSSFCell mi_celda = mi_registro.createCell(0);
+        mi_celda.setCellValue("Faltan las siguientes columnas de las tablas subidas:");
+        for(int i=0;i<columnas_faltantes.size();i++){
+            hoja_columnasFaltantes.createRow(i+1).createCell(0).setCellValue(columnas_faltantes.get(i)[0]+":   "+columnas_faltantes.get(i)[1]);
+        }
+    }
+    
+    public void exportarTablasConErroresAlImportar(String id){
+        ArrayList<String[]> tablas_errores = errores.findErroresImportacionDatos(id);
+        SXSSFSheet hoja_tablasConErrores = this.mi_libro.createSheet("Tablas con Errores de importación");
+        SXSSFRow mi_registro = hoja_tablasConErrores.createRow(0);
+        SXSSFCell mi_celda = mi_registro.createCell(0);
+        mi_celda.setCellValue("Las siguientes tablas mandan error al importar sus datos:");
+        for(int i=0;i<tablas_errores.size();i++){
+            hoja_tablasConErrores.createRow(i+1).createCell(0).setCellValue(tablas_errores.get(i)[0]+":   "+tablas_errores.get(i)[1]);
+        } 
+    }
+	
+	public void exportaTablaActosProcesalesJC() {
+        SXSSFSheet hoja_actosProcesalesJC = this.mi_libro.createSheet("datos_actos_procesales_adojc");
+        String[] metadatos_actosProcesalesJC = new String[]{"ANIO", "HRS_DURACION", "ID_ACTO",
+            "JUZGADO_CLAVE", "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID",
+            "JUZGADO_NUMERO_ID", "MIN_DURACION", "NUM_AUDI"
+        };
+        datosActosProcesalesJC = this.mis_datos.findActosProcesalesJC();
+        for (int i = 0; i <= datosActosProcesalesJC.size(); i++) {
+            SXSSFRow mi_registro = hoja_actosProcesalesJC.createRow(i);
+            for (int k = 0; k < metadatos_actosProcesalesJC.length; k++) {
+                if (i == 0) {
+                    SXSSFCell mi_celda = mi_registro.createCell(k);
+                    mi_celda.setCellStyle(this.mi_estilo);
+                    mi_celda.setCellValue(metadatos_actosProcesalesJC[k]);
+                } else {
+                    SXSSFCell mi_celda = mi_registro.createCell(k);
+                    mi_celda.setCellValue(datosActosProcesalesJC.get(i - 1)[k]);
+                }
+            }
+        }
+    }
     public void exportaTablaAudienciasJC() {
         SXSSFSheet hoja_audienciasJC = this.mi_libro.createSheet("datos_audiencias_adojc");
         String[] metadatos_audienciasJC = new String[]{"ANIO", "AUDIENCIA_INTERMEDIA", "AUDIENCIA_INVESTIGACION",
-            "CAUSA_CLAVE", "FECHA_CELEBRACION", "HORAS",
-            "JUEZ_CLAVE1", "JUEZ_CLAVE2", "JUEZ_CLAVE3",
-            "JUZGADO_CLAVE", "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID",
-            "JUZGADO_NUMERO", "MINUTOS"
+            "CAUSA_CLAVE", "HRS_DURACION", "FECHA_CELEBRACION",
+            "JUEZ_CLAVE1", "JUZGADO_CLAVE", "JUZGADO_ENTIDAD_ID", 
+            "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID", "NUM_AUDI", "MIN_DURACION"
         };
         audienciasJC = this.mis_datos.findAudienciasJC();
         for (int i = 0; i <= audienciasJC.size(); i++) {
@@ -104,10 +163,10 @@ public class exportaExcel {
     public void exportaTablaAudienciasJO() {
         SXSSFSheet hoja_audienciasJO = this.mi_libro.createSheet("datos_audiencias_adojo");
         String[] metadatos_audienciasJO = {"ANIO", "AUDIENCIA_JUICIOORAL", "CAUSA_CLAVEJO",
-            "FECHA_CELEBRACION", "HORAS", "JUEZ_CLAVE1",
+            "HRS_DURACION", "FECHA_CELEBRACION", "JUEZ_CLAVE1",
             "JUEZ_CLAVE2", "JUEZ_CLAVE3", "JUZGADO_CLAVE",
-            "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO",
-            "MINUTOS"
+            "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID",
+            "NUM_AUDI", "MIN_DURACION"
         };
         audienciasJO = this.mis_datos.findAudienciasJO();
         for (int i = 0; i <= audienciasJO.size(); i++) {
@@ -448,9 +507,9 @@ public class exportaExcel {
             "CAUSA_CLAVE", "CAUSA_SUSPENSION_PROCESO", "COMENTARIOS",
             "CTRL_DETENCION", "DETENCION_LEGAL", "ETAPA",
             "FECHA_CIERRE_INVESTIGACION", "FECHA_DECLARACION", "FECHA_IMPUTACION",
-            "FECHA_LIBERTAD", "FECHA_PLAZO_INVESTIGACION", "FECHA_REAPERTURA_PROCESO",
+            "FECHA_LIBERTAD", "FECHA_REAPERTURA_PROCESO",
             "FECHA_VINCULACION", "FORMULACION_IMPUTACION", "FORMULO_ACUSACION",
-            "IMPUSO_MCAUTELARES", "IMPUTADO_DECLARO", "INVESTIGACION_COMPLEMENTARIA",
+            "IMPUSO_MCAUTELARES", "IMPUTADO_DECLARO",
             "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID",
             "PLAZO_CIERRE_INVESTIGACION", "PLAZO_CONSTITUCIONAL", "PROCESADO_CLAVE",
             "PRORROGA_PLAZO_CIERRE", "REAPERTURA_PROCESO", "SOBRESEIMIENTO_CAUSAP",
@@ -478,9 +537,8 @@ public class exportaExcel {
             "AUDIENCIA_INTERMEDIA", "CAUSA_CLAVE", "COMENTARIOS",
             "DESCUBRIMIENTO_PROBATORIO", "FECHA_AUDIENCIA_INTERMEDIA", "FECHA_CONTESTACION",
             "FECHA_ESCRITO_ACUSACION", "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID",
-            "JUZGADO_NUMERO_ID", "PRESENTACION_MPRUEBA", "PRESENTA_MP_ASESOR",
-            "PRESENTA_MP_DEFENSA", "PRESENTA_MP_MINISTERIO", "PROCESADO_CLAVE",
-            "SEPARACION_ACUSACION"
+            "JUZGADO_NUMERO_ID", "PRESENTACION_MPRUEBA",
+            "PROCESADO_CLAVE", "SEPARACION_ACUSACION"
         };
         etapaIntermediaJC = this.mis_datos.findEtapaIntermediaJC();
         for (int i = 0; i <= etapaIntermediaJC.size(); i++) {
@@ -508,7 +566,8 @@ public class exportaExcel {
             "MEDIDAS_DISCIPLINARIAS", "PD_DECLARACION_ACUSADO", "PD_DOCUMENTAL_MATERIAL",
             "PD_OTRA_PRUEBA", "PD_PERICIAL", "PD_TESTIMONIAL",
             "PROCESADO_CLAVE", "PROMUEVE_INCIDENTE", "SENTIDO_FALLO",
-            "SUSPENCION_AUDIENCIA", "TIPO_DISCIPLINARIA"
+            "SUSPENCION_AUDIENCIA", "TIPO_DISCIPLINARIA", "NUEVO_MEDIO", "CANTIDAD_TEST",
+            "CANTIDAD_DOCU", "CANTIDAD_PERI", "CANTIDAD_DECLA", "CANTIDAD_OTRO"
         };
         etapaOralJO = this.mis_datos.findEtapaOralJO();
         for (int i = 0; i <= etapaOralJO.size(); i++) {
@@ -552,11 +611,11 @@ public class exportaExcel {
 
     public void exportaTablaInformeJO() {
         SXSSFSheet hoja_InformeJO = this.mi_libro.createSheet("datos_informe_adojo");
-        String[] metadatos_InformeJO = {"ACTOS_INVESTIGA", "ANIO", "CAUSAS_BAJAS",
-            "CAUSAS_PENALES_INGRESADAS", "CAUSAS_TRAMITE", "IMPUGNACION_MP",
+        String[] metadatos_InformeJO = {"ANIO", "CAUSAS_BAJAS",
+            "CAUSAS_PENALES_INGRESADAS", "CAUSAS_TRAMITE",
             "JUZGADO_CLAVE", "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID",
-            "JUZGADO_NUMERO_ID", "MEDIDAS_PROTECCION_ASIG", "ORDENES_JUDICIALES",
-            "OTROS", "PROVIDENCIAS_PRECAUTORIAS", "PRUEBA_ANTICIPADA"
+            "JUZGADO_NUMERO_ID", "EXCUSAS",
+            "OTRAS", "RECUSACIONES"
         };
         datosInformeJO = this.mis_datos.findInformeJO();
         for (int i = 0; i <= datosInformeJO.size(); i++) {
@@ -625,6 +684,48 @@ public class exportaExcel {
             }
         }
     }
+	
+	public void exportaTablaMedidaNoPrivativaJC() {
+        SXSSFSheet hoja_MedidaNoPrivativaJC = this.mi_libro.createSheet("datos_medida_noprivativa_adojc");
+        String[] metadatos_MedidaNoPrivativaJC = {"CAUSA_CLAVE", "JUZGADO_ENTIDAD_ID", 
+            "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID", "MEDIDA_NOPRIVATIVA", "PROCESADO_CLAVE"
+        };
+        datosMedidaNoPrivativaJC = this.mis_datos.findMedidaNoPrivativaJC();
+        for (int i = 0; i <= datosMedidaNoPrivativaJC.size(); i++) {
+            SXSSFRow mi_registro = hoja_MedidaNoPrivativaJC.createRow(i);
+            for (int k = 0; k < metadatos_MedidaNoPrivativaJC.length; k++) {
+                if (i == 0) {
+                    SXSSFCell mi_celda = mi_registro.createCell(k);
+                    mi_celda.setCellStyle(this.mi_estilo);
+                    mi_celda.setCellValue(metadatos_MedidaNoPrivativaJC[k]);
+                } else {
+                    SXSSFCell mi_celda = mi_registro.createCell(k);
+                    mi_celda.setCellValue(datosMedidaNoPrivativaJC.get(i - 1)[k]);
+                }
+            }
+        }
+    }
+	
+	public void exportaTablaMedidaNoPrivativaJO() {
+        SXSSFSheet hoja_MedidaNoPrivativaJO = this.mi_libro.createSheet("datos_medida_noprivativa_adojo");
+        String[] metadatos_MedidaNoPrivativaJO = {"CAUSA_CLAVEJO", "JUZGADO_ENTIDAD_ID", 
+            "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID","MEDIDA_NOPRIVATIVA", "PROCESADO_CLAVE"
+        };
+        datosMedidaNoPrivativaJO = this.mis_datos.findMedidaNoPrivativaJO();
+        for (int i = 0; i <= datosMedidaNoPrivativaJO.size(); i++) {
+            SXSSFRow mi_registro = hoja_MedidaNoPrivativaJO.createRow(i);
+            for (int k = 0; k < metadatos_MedidaNoPrivativaJO.length; k++) {
+                if (i == 0) {
+                    SXSSFCell mi_celda = mi_registro.createCell(k);
+                    mi_celda.setCellStyle(this.mi_estilo);
+                    mi_celda.setCellValue(metadatos_MedidaNoPrivativaJO[k]);
+                } else {
+                    SXSSFCell mi_celda = mi_registro.createCell(k);
+                    mi_celda.setCellValue(datosMedidaNoPrivativaJO.get(i - 1)[k]);
+                }
+            }
+        }
+    }
 
     public void exportaTablaPdelitosJC() {
         SXSSFSheet hoja_PdelitosJC = this.mi_libro.createSheet("datos_pdelitos_adojc");
@@ -671,7 +772,7 @@ public class exportaExcel {
     }
 
     public void exportaTablaPfuenteIngresosJC() {
-        SXSSFSheet hoja_PfuenteIngresosJC = this.mi_libro.createSheet("datos_pfuentes__ingresos_adojc");
+        SXSSFSheet hoja_PfuenteIngresosJC = this.mi_libro.createSheet("datos_pfuente_ingresos_adojc");
         String[] metadatos_PfuenteIngresosJC = {"ANIO", "CAUSA_CLAVE", "INGRESO",
             "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID",
             "PROCESADO_CLAVE"
@@ -693,7 +794,7 @@ public class exportaExcel {
     }
 
     public void exportaTablaPfuenteIngresosJO() {
-        SXSSFSheet hoja_PfuenteIngresosJO = this.mi_libro.createSheet("datos_pfuentes__ingresos_adojo");
+        SXSSFSheet hoja_PfuenteIngresosJO = this.mi_libro.createSheet("datos_pfuente_ingresos_adojo");
         String[] metadatos_PfuenteIngresosJO = {"ANIO", "CAUSA_CLAVEJO", "INGRESO",
             "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID",
             "PROCESADO_CLAVE"
@@ -741,7 +842,7 @@ public class exportaExcel {
         SXSSFSheet hoja_PresentaMPJC = this.mi_libro.createSheet("datos_presenta_mp_adojc");
         String[] metadatos_PresentaMPJC = {"ANIO", "CAUSA_CLAVE", "FIGURA_MPRUEBA",
             "JUZGADO_ENTIDAD_ID", "JUZGADO_MUNICIPIO_ID", "JUZGADO_NUMERO_ID",
-            "MEDIO_PRUEBA", "PROCESADO_CLAVE", "RESOLUCION_PRUEBA"
+            "MEDIO_PRUEBA", "PROCESADO_CLAVE", "RESOLUCION_PRUEBA", "NUM_MPRUEBA"
         };
         datosPresentaMPJC = this.mis_datos.findPresentaMPJC();
         for (int i = 0; i <= datosPresentaMPJC.size(); i++) {
@@ -777,7 +878,7 @@ public class exportaExcel {
             "RANGO_INGRESOS", "REINCIDENCIA", "RESIDENCIA_ENTIDAD",
             "RESIDENCIA_MUNICIPIO", "RESIDENCIA_PAIS", "SEXO",
             "TIPO_DEFENSOR", "TIPO_DETENCION", "TIPO_PUEBLO_INDIGENA",
-            "ULTIMO_GRADO_ESTUDIOS"
+            "ULTIMO_GRADO_ESTUDIOS", "RESIDENCIA_COL"
         };
         datosProcesadosJC = this.mis_datos.findProcesadosJC();
         for (int i = 0; i <= datosProcesadosJC.size(); i++) {
@@ -812,7 +913,7 @@ public class exportaExcel {
             "POBLACION_INDIGENA", "PROCESADO_CLAVEJC", "PROCESADO_CLAVEJO",
             "RANGO_INGRESOS", "REINCIDENCIA", "RESIDENCIA_ENTIDAD",
             "RESIDENCIA_MUNICIPIO", "RESIDENCIA_PAIS", "SEXO",
-            "TIPO_DEFENSOR", "TIPO_PUEBLO_INDIGENA", "ULTIMO_GRADO_ESTUDIOS"
+            "TIPO_DEFENSOR", "TIPO_PUEBLO_INDIGENA", "ULTIMO_GRADO_ESTUDIOS","RESIDENCIA_COL"
         };
         datosProcesadosJO = this.mis_datos.findProcesadosJO();
         for (int i = 0; i <= datosProcesadosJO.size(); i++) {

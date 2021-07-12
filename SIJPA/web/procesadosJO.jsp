@@ -17,7 +17,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::ProcesadosJO</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesProJO.js"></script>
+        <script type="text/javascript" src="js/funcionesProJO.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showDelitosJO sDeli = new showDelitosJO();
@@ -231,6 +231,10 @@
                             <td>
                                 <label for="alias">Alias</label>
                                 <input type="text" name="alias" id="alias" value="<%=alias%>" required>
+                                <div class='noIdentificada'>
+                                    <input type='checkbox' id='chkAlias' onclick="chkNoApl('#chkAlias', '#alias')">
+                                    <label>No Aplica</label>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -284,7 +288,6 @@
                                             out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
-                                    <option value="-9">No identificado</option>
                                 </select>
                             </td>
                         </tr>
@@ -307,7 +310,6 @@
                                             out.println("<option value='-9'>No identificado</option>");
                                         }
                                     %>
-                                    <option value="-9">No identificado</option>
                                 </select>
                             </td>
                         <tr>
@@ -855,7 +857,7 @@
                         </div>
                         <div class="colsx oculto" id="gruDeli">
                             <label for="presentAdo">Grupo delictivo del que forma parte</label>
-                            <input type="text" class="txtLong"  name="delictivo" id="delictivo" value="<%=nomGpoDeli%>">
+                            <input type="text" class="txtLong"  name="delictivo" id="delictivo" value="<%=nomGpoDeli%>" onkeypress="return /[[A-Z Ñ]|[Á,É,Í,Ó,Ú,Ä,Ë,Ï,Ö,Ü]/i.test(event.key)">
                             <div class="noIdentificada">
                                 <input type="checkbox" id="chkdelictivo">
                                 <label>No identificada</label>

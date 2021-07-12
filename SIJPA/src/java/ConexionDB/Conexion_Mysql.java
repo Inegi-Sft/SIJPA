@@ -30,16 +30,6 @@ public class Conexion_Mysql {
     public boolean Conectar() { 
         try { 
             Class.forName("com.mysql.jdbc.Driver");
-            //Colima
-//            String url = "jdbc:mysql://node235835-sijpacol.j.layershift.co.uk/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","LNCqxn74661");
-            //Jalisco
-//            String url = "jdbc:mysql://node237484-sijpajalis.j.layershift.co.uk/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","CMAatv94804");
-            //Conceptuales
-//            String url = "jdbc:mysql://node237647-env-6168060.j.layershift.co.uk/sijpa_db";
-//            conexion = (Connection) DriverManager.getConnection(url,"root","GGKgkr63456");
-            //Localhost
             String url = "jdbc:mysql://localhost:3306/sijpa_db";
             conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");
             if(conexion != null){
@@ -55,7 +45,26 @@ public class Conexion_Mysql {
             Logger.getLogger(Conexion_Mysql.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false; 
-    } 
+    }
+    public boolean Conectar_espejo() { 
+        try { 
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/sijpa_db_espejo";
+            conexion = (Connection) DriverManager.getConnection(url,"root","InegiSijpa2020");
+            if(conexion != null){
+                //System.out.println("Conexion oracle exitosa!");
+                return true;
+            }else{
+                //System.out.println("Conexion oracle fallida!");
+                return false;
+            }
+        } catch (ClassNotFoundException e) { 
+            System.err.println("Error: " + e);
+        } catch (SQLException ex) {        
+            Logger.getLogger(Conexion_Mysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false; 
+    }
     
     public boolean escribir(String sql) { 
         try {
@@ -100,22 +109,18 @@ public class Conexion_Mysql {
         return rst;
     }
     
-    public ArrayList<String[]> obtenerColumnasDeTabla(String tabla){
-        Conectar();
-        ResultSet rst;
-        ArrayList<String[]> encabezado = new ArrayList<>();
+    public ArrayList<String> obtenerColumnasDeTabla(String tabla){
+        this.Conectar();
+        ResultSet rst = null;
+         ArrayList<String> encabezado = new ArrayList<>();
         try {
-            Statement sentencia; 
-            sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            rst = sentencia.executeQuery("SELECT * FROM "+tabla);
+            rst = this.consultar("SELECT * FROM "+tabla);
             ResultSetMetaData metadatos = rst.getMetaData();
             int numero_columna = metadatos.getColumnCount();
             for (int i=1; i<=numero_columna; i++) {
-                encabezado.add(new String[]{
-                        metadatos.getColumnName(i).toUpperCase()
-                    });
+                encabezado.add(metadatos.getColumnName(i).toUpperCase());
             }
-            close();
+            this.close();
         } catch (SQLException ex) {
             Logger.getLogger(Conexion_Mysql.class.getName()).log(Level.SEVERE, null, ex);
         }

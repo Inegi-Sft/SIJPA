@@ -47,8 +47,8 @@ public class showAudiencias {
         conn.Conectar();
         audiencias = new ArrayList<>();
         
-        sql = "SELECT A.NUM_AUDI, CONCAT(I.AUDIENCIA_ID,'.- ',I.DESCRIPCION), CONCAT(J.APELLIDOP_JUEZ,' ',J.APELLIDOM_JUEZ,' ', J.NOMBRE_JUEZ), "
-            + "A.CAUSA_CLAVE, A.FECHA_INICIO, A.FECHA_FINALIZO FROM DATOS_AUDIENCIAS_ADOJC A "
+        sql = "SELECT A.NUM_AUDI, I.AUDIENCIA_ID, I.DESCRIPCION, CONCAT(J.APELLIDOP_JUEZ,' ',J.APELLIDOM_JUEZ,' ', J.NOMBRE_JUEZ), "
+            + "A.CAUSA_CLAVE, A.FECHA_CELEBRACION, A.HRS_DURACION, A.MIN_DURACION, A.ANIO FROM DATOS_AUDIENCIAS_ADOJC A "
             + "INNER JOIN CATALOGOS_AUDIENCIAS_INVESTIGACION I ON A.AUDIENCIA_INVESTIGACION=I.AUDIENCIA_ID "
             + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUEZ_CLAVE=A.JUEZ_CLAVE1 "
             + "WHERE A.JUZGADO_CLAVE = '" + juzgado + "' AND J.JUZGADO_CLAVE='" + juzgado + "' AND A.AUDIENCIA_INVESTIGACION <>-2";
@@ -56,8 +56,33 @@ public class showAudiencias {
         try {
             while (resul.next()) {
                 audiencias.add(new String[]{
-                    resul.getString(1),resul.getString(2), resul.getString(3), 
-                    resul.getString(4),resul.getString(5),resul.getString(6)
+                    resul.getString(1),resul.getString(2), resul.getString(3),resul.getString(4), 
+                    resul.getString(5),resul.getString(6), resul.getString(7),resul.getString(8),
+                    resul.getString(9)
+                });
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return audiencias;
+    }
+    
+    public ArrayList recuperaActosProcesales(String juzgado, String anio, String idAudi) {
+        conn.Conectar();
+        audiencias = new ArrayList<>();
+        
+        sql = "SELECT A.ID_ACTO, AP.DESCRIPCION, A.HRS_DURACION, A.MIN_DURACION "
+            + "FROM DATOS_ACTOS_PROCESALES_ADOJC A "
+            + "INNER JOIN CATALOGOS_ACTOS_PROCESALES AP ON AP.ACTOS_ID=A.ID_ACTO "
+            + "WHERE A.JUZGADO_CLAVE = '"+juzgado+"' AND A.ANIO="+anio+" AND A.NUM_AUDI="+idAudi;
+        
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                audiencias.add(new String[]{
+                    resul.getString(1),resul.getString(2), 
+                    resul.getString(3),resul.getString(4), 
                 });
             }
             conn.close();
@@ -72,17 +97,17 @@ public class showAudiencias {
         audiencias = new ArrayList<>();
         
         sql = "SELECT A.NUM_AUDI, CONCAT(I.AUDIENCIA_ID,'.- ',I.DESCRIPCION), CONCAT(J.APELLIDOP_JUEZ,' ',J.APELLIDOM_JUEZ,' ', J.NOMBRE_JUEZ), "
-            + "A.CAUSA_CLAVE, A.FECHA_INICIO, A.FECHA_FINALIZO FROM DATOS_AUDIENCIAS_ADOJC A "
+            + "A.CAUSA_CLAVE, A.FECHA_CELEBRACION, A.HRS_DURACION, A.MIN_DURACION, A.ANIO FROM DATOS_AUDIENCIAS_ADOJC A "
             + "INNER JOIN CATALOGOS_AUDIENCIAS_INTERMEDIA I ON A.AUDIENCIA_INTERMEDIA=I.AUDIENCIA_ID "
             + "INNER JOIN DATOS_JUECES_ADOJC J ON J.JUEZ_CLAVE=A.JUEZ_CLAVE1 "
             + "WHERE A.JUZGADO_CLAVE = '" + juzgado + "' AND J.JUZGADO_CLAVE='" + juzgado + "' AND A.AUDIENCIA_INTERMEDIA <>-2";
-        
+            
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {
                 audiencias.add(new String[]{
-                    resul.getString(1),resul.getString(2), resul.getString(3), 
-                    resul.getString(4),resul.getString(5),resul.getString(6)
+                    resul.getString(1),resul.getString(2), resul.getString(3),resul.getString(4), 
+                    resul.getString(5), resul.getString(6), resul.getString(7),resul.getString(8)
                 });
             }
             conn.close();
@@ -147,11 +172,11 @@ public class showAudiencias {
     public ArrayList recuperaAudienciasJO(String juzgado) {
         conn.Conectar();
         lista = new ArrayList<>();
-        sql = "SELECT NUM_AUDI, CONCAT(JO.AUDIENCIA_ID,'.- ',JO.DESCRIPCION), CAUSA_CLAVEJO, "
+        sql = "SELECT A.NUM_AUDI, CONCAT(JO.AUDIENCIA_ID,'.- ',JO.DESCRIPCION), A.CAUSA_CLAVEJO, "
             + " CONCAT(J.APELLIDOP_JUEZ,' ', J.APELLIDOM_JUEZ,' ',J.NOMBRE_JUEZ) AS JUEZ1,"
             + " CONCAT(J2.APELLIDOP_JUEZ,' ', J2.APELLIDOM_JUEZ,' ',J2.NOMBRE_JUEZ) AS JUEZ2,"
             + " CONCAT(J3.APELLIDOP_JUEZ,' ', J3.APELLIDOM_JUEZ,' ',J3.NOMBRE_JUEZ) AS JUEZ3,"
-            + " FECHA_INICIO, FECHA_FINALIZO"
+            + " A.FECHA_CELEBRACION, A.HRS_DURACION, A.MIN_DURACION, A.ANIO"
             + " FROM DATOS_AUDIENCIAS_ADOJO A "
             + " INNER JOIN CATALOGOS_AUDIENCIAS_JUICIOORAL JO ON A.AUDIENCIA_JUICIOORAL=JO.AUDIENCIA_ID "
             + " INNER JOIN DATOS_JUECES_ADOJC J ON A.JUZGADO_CLAVE=J.JUZGADO_CLAVE AND A.JUEZ_CLAVE1=J.JUEZ_CLAVE"
@@ -172,9 +197,10 @@ public class showAudiencias {
                 }
                    
                 lista.add(new String[]{
-                    resul.getString("NUM_AUDI"), resul.getString(2), resul.getString("CAUSA_CLAVEJO"),
+                    resul.getString(1), resul.getString(2), resul.getString(3),
                     resul.getString("JUEZ1"), juez2, juez3, 
-                    resul.getString("FECHA_INICIO"), resul.getString("FECHA_FINALIZO")
+                    resul.getString(7), resul.getString(8), resul.getString(9),
+                    resul.getString(10)
                 });
             }
             conn.close();
@@ -232,7 +258,7 @@ public class showAudiencias {
         conn.Conectar();
         sql = "SELECT DISTINCT JUEZ_CLAVE1 FROM DATOS_AUDIENCIAS_ADOJC WHERE CAUSA_CLAVE='"+causa+"' "
             + "AND JUZGADO_CLAVE='"+juzgadoJO+"'";
-        System.out.println(sql);
+        
         resul = conn.consultar(sql);
         try {
             while (resul.next()) {

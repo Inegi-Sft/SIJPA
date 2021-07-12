@@ -12,27 +12,29 @@ $(document).ready(function () {
             $('input[name="juezJO"]').prop("checked",false);
             var causaJC = this.getOption(value).data('causajc');
             
-            $.ajax({
-                type: 'post',
-                url: 'obtenJuezJC',
-                data: {causa_juzgado: causaJC},
-                success: function (response) {
-                    console.log("Respuesta del servidor Obten JuezJC: ", response);
-                    if (response !== null && $.isArray(response)) {
-                        
-                        if(!causaJC.includes('-2&')){//cuando la cuasa es no especificada permite seleccionar cualquier juez
-                            for (var i = 0; i < response.length; i++) {
-                                console.log('juez: ' + response[i]);
-                                $('input[name="juezJO"][value='+response[i]+']').prop("disabled",true);
+            if(validaJuzAdd()){
+                $.ajax({
+                    type: 'post',
+                    url: 'obtenJuezJC',
+                    data: {causa_juzgado: causaJC},
+                    success: function (response) {
+                        console.log("Respuesta del servidor Obten JuezJC: ", response);
+                        if (response !== null && $.isArray(response)) {
+
+                            if(!causaJC.includes('-2&')){//cuando la cuasa es no especificada permite seleccionar cualquier juez
+                                for (var i = 0; i < response.length; i++) {
+                                    console.log('juez: ' + response[i]);
+                                    $('input[name="juezJO"][value='+response[i]+']').prop("disabled",true);
+                                }
                             }
                         }
+                    },
+                    error: function (response) {
+                        console.log("Respuesta del servidor error Obten JuezJC: ", response);
+                        alert('Error inesperado, vuelva a intentarlo o cunsulte al administrador');
                     }
-                },
-                error: function (response) {
-                    console.log("Respuesta del servidor error Obten JuezJC: ", response);
-                    alert('Error inesperado, vuelva a intentarlo o cunsulte al administrador');
-                }
-            });
+                });
+            }
         },
         onBlur: function () {
             this.clearCache();
@@ -115,14 +117,14 @@ function fechaNI(obj, idTxtDate) {
 }
 
 //Elimina Audiencias
-function deleteAudienciasJO(causa, idAudi) {
-    var resp = confirm("Realmente deseas eliminar este resgistro?");
+function deleteAudienciasJO(causa, anio, idAudi) {
+    var resp = confirm("Realmente deseas eliminar este registro?");
     if (resp) {
         $.ajax({
             type: 'post',
             url: 'insrtAudienciasJO',
             data: {
-                causaJO: causa, 
+                anio: anio, 
                 idAudiencia: idAudi, 
                 operacion: 'eliminar'
             },
@@ -141,17 +143,28 @@ function deleteAudienciasJO(causa, idAudi) {
     }
 }
 
-//valida la duracion de la audiencia
-function duracion(fchIni, fchFin){
-    var inicio = $(fchIni).val();
-    var fin = $(fchFin).val();
-    if(inicio!=='' && inicio!=='1899-09-09' && fin!=='' && fin!=='1899-09-09'){
-        if(inicio > fin){
-            alert("La fecha en que inicia esta audiencia, no puede ser mayor a la fecha en que finaliza");
-            $(fchIni).val('');
-            $(fchFin).val('');
-            $(fchIni).focus();
-        }
+// Duracion No identificada
+function duracionNIJO(obj, hrs, min) {
+    if (obj.checked) {
+        $(hrs).addClass("inactivo").val("99");
+        $(min).addClass("inactivo").val("99");
+        $(hrs +' [value="99"]').prop("hidden",false);
+        $(min +' [value="99"]').prop("hidden",false);
+    } else {
+        $(hrs).removeClass("inactivo").val("");
+        $(min).removeClass("inactivo").val("");
+        $(hrs +' [value="99"]').prop("hidden",true);
+        $(min +' [value="99"]').prop("hidden",true);
+    }
+}
+
+// Validad que las hrs y min de la duracion no sean ceros
+function duracionCeroJO(hrs, min){
+     
+    if($(hrs).val()==="0" && $(min).val()==="00"){
+        alert("La duracion (horas y minutos) de la audiencia no pueden ser cero");
+        $(hrs).val('');
+        $(min).val('');
     }
 }
 

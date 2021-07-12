@@ -255,7 +255,7 @@ $(document).ready(function () {
     $('#formCausaPenalJO').submit(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        var resp = confirm("Una vez guardada la Causa Penal no podrá  hacer niingun cambio,\n"
+        var resp = confirm("Una vez guardada la Causa Penal no podrá realizar cambios,\n"
                     + "Esta seguro que los datos son los correctos?");
         if(resp){
             $.ajax({

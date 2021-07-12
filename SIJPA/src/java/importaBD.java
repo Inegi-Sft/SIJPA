@@ -7,9 +7,10 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
+import ConexionDB.Conexion_Mysql;
 import clasesAuxiliar.manipulaArchivoSIJPA;
 import clasesAuxiliar.LeeSIJPA;
-import clasesAuxiliar.manejaCSV;
+import clasesAuxiliar.manejaCSVComprimido;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,7 +20,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -35,7 +35,7 @@ public class importaBD extends HttpServlet {
     //private final String[] ruta_dividida = ruta_absoluta.toString().split(":");
     //private final String RUTA = ruta_dividida[0]+":\\xampp\\inegi_conf\\Archivos\\";
     private final String RUTA = ".\\";
-    String operacion,tabla,tipo_archivo;
+    String operacion,idSubida,tipo_archivo;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,14 +52,6 @@ public class importaBD extends HttpServlet {
             throws ServletException, IOException, Exception {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-        
-        LeeSIJPA leeSijpa = new LeeSIJPA();
-        //Si los SU importan entonces debemos de borrar la base antes de importar otra
-        HttpSession sesion = request.getSession();
-        if((Integer)sesion.getAttribute("tipoUsuario") > 3){
-            leeSijpa.borraBase();
-        }
-        
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         List<FileItem> items = upload.parseRequest(request);
@@ -75,8 +67,8 @@ public class importaBD extends HttpServlet {
                 if (name.equalsIgnoreCase("tipo_operacion")) {
                     operacion = value;
                 }
-                if(name.equalsIgnoreCase("tabla")){
-                    tabla = value;
+                if(name.equalsIgnoreCase("idSubida")){
+                    idSubida = value;
                 }
                 if(name.equalsIgnoreCase("tipoArchivo")){
                     tipo_archivo = value;
@@ -84,7 +76,7 @@ public class importaBD extends HttpServlet {
 
             } else {
                 String fileName = item.getName();
-                if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
+                if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".zip") == true) {
                     if (fileName.lastIndexOf("\\") >= 0) {
                         file = new File(RUTA + fileName.substring(fileName.lastIndexOf("\\")));
                     } else {
@@ -93,49 +85,87 @@ public class importaBD extends HttpServlet {
                     item.write(file);
                 }
                 manipulaArchivoSIJPA mi_archivoSIJPA = new manipulaArchivoSIJPA();
-                if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".csv") == true) {
+                if (fileName.endsWith(".sijpa") == true || fileName.endsWith(".zip") == true) {
                     if (operacion.equalsIgnoreCase("importar")) {
                         if(fileName.endsWith(".sijpa") == true && tipo_archivo.equalsIgnoreCase("sijpa")){
                             try{
                                 mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar1 = new File(RUTA+fileName);
                                 archivo_borrar1.delete();
+                                LeeSIJPA leeSijpa = new LeeSIJPA();
                                 leeSijpa.ejecutaScript(RUTA + "archivo_descifrado.sijpa");
                                 File archivo_borrar2 = new File(RUTA + "archivo_descifrado.sijpa");
                                 archivo_borrar2.delete();
-                                System.out.println("acabó");
                                 out.write("1");
                             }catch(Exception e){
                                 File archivo_borrar1 = new File(RUTA+fileName);
                                 archivo_borrar1.delete();
-                                Logger.getLogger(manejaCSV.class.getName()).log(Level.SEVERE, null, e);
-                                out.write("6");
-                            }
-                        }else if((fileName.endsWith(".sijpa") == true && tipo_archivo.equalsIgnoreCase("csv")) || (fileName.endsWith(".csv") == true && tipo_archivo.equalsIgnoreCase("sijpa"))){
-                            out.write("7");
-                        }else{
-                            if(tabla.length() < 1){
+                                Logger.getLogger(importaBD.class.getName()).log(Level.SEVERE, null, e);
                                 out.write("4");
                             }
-                            else{
-                                if(manejaCSV.validaArchivoVacio(RUTA+fileName)){
-                                    out.write("6");
-                                }else{
-                                    manejaCSV lee_csv = new manejaCSV(RUTA+fileName, tabla);
-                                    if(lee_csv.encabezadosCorrectos()){
-                                        if(lee_csv.importaCSV() == true){
-                                            lee_csv.cerrarArchivo();
-                                            File archivo_borrar1 = new File(RUTA+fileName);
-                                            archivo_borrar1.delete();
-                                            out.write("1");
-                                        }else{
-                                            File archivo_borrar1 = new File(RUTA+fileName);
-                                            archivo_borrar1.delete();
-                                            out.write("5");
-                                        }
-                                    }else{
-                                        out.write("3");
+                        }else if((fileName.endsWith(".sijpa") == true && tipo_archivo.equalsIgnoreCase("zip")) || (fileName.endsWith(".zip") == true && tipo_archivo.equalsIgnoreCase("sijpa"))){
+                            File archivo_borrar1 = new File(RUTA+fileName);
+                            archivo_borrar1.delete();
+                            out.write("5");
+                        }else{
+                            
+                            manejaCSVComprimido maneja_csv = new manejaCSVComprimido(RUTA+fileName,RUTA); 
+                            String resultado_contieneTodasLasTablas = maneja_csv.contieneTodaLasTablas();
+                            if(resultado_contieneTodasLasTablas.equalsIgnoreCase("No se puede leer")){
+                                File archivo_borrar1 = new File(RUTA+fileName);
+                                archivo_borrar1.delete();
+                                out.write("4");
+                            }else{
+                                maneja_csv.ExtraeComprimido();
+                                maneja_csv.cambiaNombreArchivosMayusculas();
+                                File archivo_borrar1 = new File(RUTA+fileName);
+                                archivo_borrar1.delete();
+                                String resultado_validaColumnas = maneja_csv.validaColumnasCSVs(maneja_csv.obtenerTablasFaltantes());
+                                if(resultado_contieneTodasLasTablas.equalsIgnoreCase("Faltan") || resultado_validaColumnas.equalsIgnoreCase("Faltan")){
+                                    Conexion_Mysql conn = new Conexion_Mysql();
+                                    conn.Conectar_espejo();
+                                    for(int i=0;i<maneja_csv.obtenerTablasFaltantes().size();i++){
+                                        conn.escribir("INSERT INTO TABLA_ERRORES_TABLASFALTANTES VALUES('"+idSubida+"','"+maneja_csv.obtenerTablasFaltantes().get(i)+"')");
                                     }
+                                    for(int i=0;i<maneja_csv.obtenerColumnasFaltantes().size();i++){
+                                        conn.escribir("INSERT INTO TABLA_ERRORES_COLUMNASFALTANTES VALUES('"+idSubida+"','"+maneja_csv.obtenerColumnasFaltantes().get(i).getKey()+"','"+maneja_csv.obtenerColumnasFaltantes().get(i).getValue()+"')");
+                                    }
+                                    conn.close();
+                                    File directorio_borrar = new File(RUTA+maneja_csv.obtenerDirectorio());
+                                    String[]archivos = directorio_borrar.list();
+                                    for(String a: archivos){
+                                        File archivo_a_borrar = new File(directorio_borrar.getPath()+"\\",a);
+                                        archivo_a_borrar.delete();
+                                    }
+                                    directorio_borrar.delete();
+                                    out.write("3");
+                                }else{
+                                    Conexion_Mysql conn = new Conexion_Mysql();
+                                    conn.Conectar_espejo();
+                                    if(maneja_csv.importaCSVs().equalsIgnoreCase("Error")){
+                                        for(int i=0;i<maneja_csv.obtenerTablasConErrorEnImportacion().size();i++){
+                                            conn.escribir("INSERT INTO TABLA_ERRORES_EXCEPCIONES VALUES('"+idSubida+"','"+maneja_csv.obtenerTablasConErrorEnImportacion().get(i).getKey()+"','"+maneja_csv.obtenerTablasConErrorEnImportacion().get(i).getValue().replace("\'", "\"")+"')");
+                                        }
+                                        conn.close();
+                                        File directorio_borrar = new File(RUTA+maneja_csv.obtenerDirectorio());
+                                        String[]archivos = directorio_borrar.list();
+                                        for(String a: archivos){
+                                            File archivo_a_borrar = new File(directorio_borrar.getPath(),a);
+                                            archivo_a_borrar.delete();
+                                        }
+                                        directorio_borrar.delete();
+                                        out.write("3");
+                                    }else{
+                                        File directorio_borrar = new File(RUTA+maneja_csv.obtenerDirectorio());
+                                        String[]archivos = directorio_borrar.list();
+                                        for(String a: archivos){
+                                            File archivo_a_borrar = new File(directorio_borrar.getPath(),a);
+                                            archivo_a_borrar.delete();
+                                        }
+                                        directorio_borrar.delete();
+                                        out.write("1");
+                                    }
+                                    conn.close();
                                 }
                             }
                         }
@@ -143,6 +173,7 @@ public class importaBD extends HttpServlet {
                         mi_archivoSIJPA.extraeArchivo(RUTA + fileName, RUTA + "archivo_descifrado.sijpa");
                         File archivo_borrar1 = new File(RUTA+fileName);
                         archivo_borrar1.delete();
+                        System.out.println("Genero archivo descifrado y redirecciona a ver");
                         out.write("2");
                     }
                 } else {

@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>SIJPA::Integracion Nacional</title>
         <%@include file="librerias.jsp"%>
-        <script type="text/javascript" src="js/fnIntegracion.js"></script>
+        <script type="text/javascript" src="js/fnIntegracion.js?v=<%=(int)(Math.random()*10+1)%>"></script>
     </head>
     <body>
         <%@include file="cabecera.jsp"%>

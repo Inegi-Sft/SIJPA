@@ -20,6 +20,7 @@ public class showDatos {
     
     Conexion_Mysql conn = new Conexion_Mysql();
     ArrayList<String[]> causasJC;
+	ArrayList<String[]> datosActosProcesalesJC;
     ArrayList<String[]> audienciasJC;
     ArrayList<String[]> audienciasJO;
     ArrayList<String[]> causasJO;
@@ -41,6 +42,8 @@ public class showDatos {
     ArrayList<String[]> datosInformeJO;
     ArrayList<String[]> datosJuecesJC;
     ArrayList<String[]> datosJuzgadosJC;
+	ArrayList<String[]> datosMedidaNoPrivativaJC;
+	ArrayList<String[]> datosMedidaNoPrivativaJO;
     ArrayList<String[]> datosPdelitosJC;
     ArrayList<String[]> datosPdelitosJO;
     ArrayList<String[]> datosPfuenteIngresosJC;
@@ -86,6 +89,26 @@ public class showDatos {
             return causasJC;
     
     }
+	public ArrayList findActosProcesalesJC(){
+        try{
+            conn.Conectar();
+            datosActosProcesalesJC = new ArrayList();
+            String sql = "SELECT * FROM DATOS_ACTOS_PROCESALES_ADOJC";
+            ResultSet rs = conn.consultar(sql);
+            while (rs.next()) {
+                datosActosProcesalesJC.add(new String[]{
+                    rs.getString("ANIO"), rs.getString("HRS_DURACION"), rs.getString("ID_ACTO"),
+                    rs.getString("JUZGADO_CLAVE"), rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"),
+                    rs.getString("JUZGADO_NUMERO_ID"), rs.getString("MIN_DURACION"), rs.getString("NUM_AUDI")
+                });
+            }
+            conn.close();
+             } catch (SQLException ex) {
+            Logger.getLogger(showDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return datosActosProcesalesJC;
+    
+    }
     public ArrayList findAudienciasJC(){
         try{
             conn.Conectar();
@@ -95,10 +118,10 @@ public class showDatos {
             while (rs.next()) {
                 audienciasJC.add(new String[]{
                     rs.getString("ANIO"), rs.getString("AUDIENCIA_INTERMEDIA"), rs.getString("AUDIENCIA_INVESTIGACION"),
-                    rs.getString("CAUSA_CLAVE"), rs.getString("FECHA_CELEBRACION"), rs.getString("HORAS"),
-                    rs.getString("JUEZ_CLAVE1"), rs.getString("JUEZ_CLAVE2"), rs.getString("JUEZ_CLAVE3"),
-                    rs.getString("JUZGADO_CLAVE"), rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"),
-                    rs.getString("JUZGADO_NUMERO"), rs.getString("MINUTOS")
+                    rs.getString("CAUSA_CLAVE"), rs.getString("HRS_DURACION"), rs.getString("FECHA_CELEBRACION"),
+                    rs.getString("JUEZ_CLAVE1"), rs.getString("JUZGADO_CLAVE"), rs.getString("JUZGADO_ENTIDAD_ID"), 
+                    rs.getString("JUZGADO_MUNICIPIO_ID"), rs.getString("JUZGADO_NUMERO_ID"), rs.getString("NUM_AUDI"),
+                    rs.getString("MIN_DURACION")
                 });
             }
             conn.close();
@@ -117,10 +140,10 @@ public class showDatos {
             while (rs.next()) {
                 audienciasJO.add(new String[]{
                     rs.getString("ANIO"), rs.getString("AUDIENCIA_JUICIOORAL"), rs.getString("CAUSA_CLAVEJO"),
-                    rs.getString("FECHA_CELEBRACION"), rs.getString("HORAS"), rs.getString("JUEZ_CLAVE1"),
+                    rs.getString("HRS_DURACION"), rs.getString("FECHA_CELEBRACION"), rs.getString("JUEZ_CLAVE1"),
                     rs.getString("JUEZ_CLAVE2"), rs.getString("JUEZ_CLAVE3"), rs.getString("JUZGADO_CLAVE"),
-                    rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"), rs.getString("JUZGADO_NUMERO"),
-                    rs.getString("MINUTOS")
+                    rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"), rs.getString("JUZGADO_NUMERO_ID"),
+                    rs.getString("NUM_AUDI"), rs.getString("MIN_DURACION")
                 });
             }
             conn.close();
@@ -409,9 +432,9 @@ public class showDatos {
                     rs.getString("CAUSA_CLAVE"), rs.getString("CAUSA_SUSPENSION_PROCESO"), rs.getString("COMENTARIOS"),
                     rs.getString("CTRL_DETENCION"), rs.getString("DETENCION_LEGAL"), rs.getString("ETAPA"),
                     rs.getString("FECHA_CIERRE_INVESTIGACION"), rs.getString("FECHA_DECLARACION"), rs.getString("FECHA_IMPUTACION"),
-                    rs.getString("FECHA_LIBERTAD"), rs.getString("FECHA_PLAZO_INVESTIGACION"), rs.getString("FECHA_REAPERTURA_PROCESO"),
+                    rs.getString("FECHA_LIBERTAD"), rs.getString("FECHA_REAPERTURA_PROCESO"),
                     rs.getString("FECHA_VINCULACION"), rs.getString("FORMULACION_IMPUTACION"), rs.getString("FORMULO_ACUSACION"),
-                    rs.getString("IMPUSO_MCAUTELARES"), rs.getString("IMPUTADO_DECLARO"), rs.getString("INVESTIGACION_COMPLEMENTARIA"),
+                    rs.getString("IMPUSO_MCAUTELARES"), rs.getString("IMPUTADO_DECLARO"),
                     rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"), rs.getString("JUZGADO_NUMERO_ID"),
                     rs.getString("PLAZO_CIERRE_INVESTIGACION"), rs.getString("PLAZO_CONSTITUCIONAL"), rs.getString("PROCESADO_CLAVE"),
                     rs.getString("PRORROGA_PLAZO_CIERRE"), rs.getString("REAPERTURA_PROCESO"), rs.getString("SOBRESEIMIENTO_CAUSAP"),
@@ -437,9 +460,8 @@ public class showDatos {
                     rs.getString("AUDIENCIA_INTERMEDIA"), rs.getString("CAUSA_CLAVE"), rs.getString("COMENTARIOS"),
                     rs.getString("DESCUBRIMIENTO_PROBATORIO"), rs.getString("FECHA_AUDIENCIA_INTERMEDIA"), rs.getString("FECHA_CONTESTACION"),
                     rs.getString("FECHA_ESCRITO_ACUSACION"), rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"),
-                    rs.getString("JUZGADO_NUMERO_ID"), rs.getString("PRESENTACION_MPRUEBA"), rs.getString("PRESENTA_MP_ASESOR"),
-                    rs.getString("PRESENTA_MP_DEFENSA"), rs.getString("PRESENTA_MP_MINISTERIO"), rs.getString("PROCESADO_CLAVE"),
-                    rs.getString("SEPARACION_ACUSACION")
+                    rs.getString("JUZGADO_NUMERO_ID"), rs.getString("PRESENTACION_MPRUEBA"),
+                    rs.getString("PROCESADO_CLAVE"), rs.getString("SEPARACION_ACUSACION")
                 });
             }
             conn.close();
@@ -465,7 +487,9 @@ public class showDatos {
                     rs.getString("MEDIDAS_DISCIPLINARIAS"), rs.getString("PD_DECLARACION_ACUSADO"), rs.getString("PD_DOCUMENTAL_MATERIAL"),
                     rs.getString("PD_OTRA_PRUEBA"), rs.getString("PD_PERICIAL"), rs.getString("PD_TESTIMONIAL"),
                     rs.getString("PROCESADO_CLAVE"), rs.getString("PROMUEVE_INCIDENTE"), rs.getString("SENTIDO_FALLO"),
-                    rs.getString("SUSPENCION_AUDIENCIA"), rs.getString("TIPO_DISCIPLINARIA")
+                    rs.getString("SUSPENCION_AUDIENCIA"), rs.getString("TIPO_DISCIPLINARIA"), rs.getString("NUEVO_MEDIO"),
+                    rs.getString("CANTIDAD_TEST"), rs.getString("CANTIDAD_DOCU"), rs.getString("CANTIDAD_PERI"), rs.getString("CANTIDAD_DECLA"),
+                    rs.getString("CANTIDAD_OTRO")
                 });
             }
             conn.close();
@@ -505,11 +529,11 @@ public class showDatos {
             ResultSet rs = conn.consultar(sql);
             while (rs.next()) {
                 datosInformeJO.add(new String[]{
-                    rs.getString("ACTOS_INVESTIGA"), rs.getString("ANIO"), rs.getString("CAUSAS_BAJAS"),
-                    rs.getString("CAUSAS_PENALES_INGRESADAS"), rs.getString("CAUSAS_TRAMITE"), rs.getString("IMPUGNACION_MP"),
+                    rs.getString("ANIO"), rs.getString("CAUSAS_BAJAS"),
+                    rs.getString("CAUSAS_PENALES_INGRESADAS"), rs.getString("CAUSAS_TRAMITE"),
                     rs.getString("JUZGADO_CLAVE"), rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"),
-                    rs.getString("JUZGADO_NUMERO_ID"), rs.getString("MEDIDAS_PROTECCION_ASIG"), rs.getString("ORDENES_JUDICIALES"),
-                    rs.getString("OTROS"), rs.getString("PROVIDENCIAS_PRECAUTORIAS"), rs.getString("PRUEBA_ANTICIPADA")
+                    rs.getString("JUZGADO_NUMERO_ID"), rs.getString("EXCUSAS"),
+                    rs.getString("OTRAS"), rs.getString("RECUSACIONES")
                 });
             }
             conn.close();
@@ -565,6 +589,47 @@ public class showDatos {
             Logger.getLogger(showDatos.class.getName()).log(Level.SEVERE, null, ex);
             }
             return datosJuzgadosJC;
+    
+    }
+	
+	public ArrayList findMedidaNoPrivativaJC(){
+        try{
+            conn.Conectar();
+            datosMedidaNoPrivativaJC = new ArrayList();
+            String sql = "SELECT * FROM DATOS_MEDIDA_NOPRIVATIVA_ADOJC";
+            ResultSet rs = conn.consultar(sql);
+            while (rs.next()) {
+                datosMedidaNoPrivativaJC.add(new String[]{
+                    rs.getString("CAUSA_CLAVE"), rs.getString("JUZGADO_ENTIDAD_ID"),
+                    rs.getString("JUZGADO_MUNICIPIO_ID"),rs.getString("JUZGADO_NUMERO_ID"),
+                    rs.getString("MEDIDA_NOPRIVATIVA"), rs.getString("PROCESADO_CLAVE")
+                });
+            }
+            conn.close();
+             } catch (SQLException ex) {
+            Logger.getLogger(showDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return datosMedidaNoPrivativaJC;
+    
+    }
+	public ArrayList findMedidaNoPrivativaJO(){
+        try{
+            conn.Conectar();
+            datosMedidaNoPrivativaJO = new ArrayList();
+            String sql = "SELECT * FROM DATOS_MEDIDA_NOPRIVATIVA_ADOJO";
+            ResultSet rs = conn.consultar(sql);
+            while (rs.next()) {
+                datosMedidaNoPrivativaJO.add(new String[]{
+                    rs.getString("CAUSA_CLAVEJO"), rs.getString("JUZGADO_ENTIDAD_ID"),
+                    rs.getString("JUZGADO_MUNICIPIO_ID"),rs.getString("JUZGADO_NUMERO_ID"),
+                    rs.getString("MEDIDA_NOPRIVATIVA"), rs.getString("PROCESADO_CLAVE")
+                });
+            }
+            conn.close();
+             } catch (SQLException ex) {
+            Logger.getLogger(showDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return datosMedidaNoPrivativaJO;
     
     }
     public ArrayList findPdelitosJC(){
@@ -678,7 +743,7 @@ public class showDatos {
                 datosPresentaMPJC.add(new String[]{
                     rs.getString("ANIO"), rs.getString("CAUSA_CLAVE"), rs.getString("FIGURA_MPRUEBA"),
                     rs.getString("JUZGADO_ENTIDAD_ID"), rs.getString("JUZGADO_MUNICIPIO_ID"), rs.getString("JUZGADO_NUMERO_ID"),
-                    rs.getString("MEDIO_PRUEBA"), rs.getString("PROCESADO_CLAVE"), rs.getString("RESOLUCION_PRUEBA")
+                    rs.getString("MEDIO_PRUEBA"), rs.getString("PROCESADO_CLAVE"), rs.getString("RESOLUCION_PRUEBA"), rs.getString("NUM_MPRUEBA")
                 });
             }
             conn.close();
@@ -712,7 +777,7 @@ public class showDatos {
                     rs.getString("RANGO_INGRESOS"), rs.getString("REINCIDENCIA"), rs.getString("RESIDENCIA_ENTIDAD"),
                     rs.getString("RESIDENCIA_MUNICIPIO"), rs.getString("RESIDENCIA_PAIS"), rs.getString("SEXO"),
                     rs.getString("TIPO_DEFENSOR"), rs.getString("TIPO_DETENCION"), rs.getString("TIPO_PUEBLO_INDIGENA"),
-                    rs.getString("ULTIMO_GRADO_ESTUDIOS")
+                    rs.getString("ULTIMO_GRADO_ESTUDIOS"), rs.getString("RESIDENCIA_COL")
                 });
             }
             conn.close();
@@ -745,7 +810,8 @@ public class showDatos {
                     rs.getString("POBLACION_INDIGENA"), rs.getString("PROCESADO_CLAVEJC"), rs.getString("PROCESADO_CLAVEJO"),
                     rs.getString("RANGO_INGRESOS"), rs.getString("REINCIDENCIA"), rs.getString("RESIDENCIA_ENTIDAD"),
                     rs.getString("RESIDENCIA_MUNICIPIO"), rs.getString("RESIDENCIA_PAIS"), rs.getString("SEXO"),
-                    rs.getString("TIPO_DEFENSOR"), rs.getString("TIPO_PUEBLO_INDIGENA"), rs.getString("ULTIMO_GRADO_ESTUDIOS")
+                    rs.getString("TIPO_DEFENSOR"), rs.getString("TIPO_PUEBLO_INDIGENA"), rs.getString("ULTIMO_GRADO_ESTUDIOS"),
+                    rs.getString("RESIDENCIA_COL")
                 });
             }
             conn.close();

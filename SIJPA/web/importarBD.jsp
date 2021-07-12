@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Importa BD</title>       
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesManipulaBase.js"></script>
+        <script type="text/javascript" src="js/funcionesManipulaBase.js?v=<%=(int)(Math.random()*10+1)%>"></script>
     </head>
     <body>
         <div class="load"></div>
@@ -40,18 +40,19 @@
                             out.println("<label for='tipoArchivo'>Tipo de Archivo</label>");
                             out.println("<select name='tipoArchivo' id='tipoArchivo'>");
                             out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
+                            out.println("<option value='csv'>CSV(.csv)</option>");
                             out.println("</select>");
                             out.println("</td>");
                         }else{
                             out.println("<td>");
                             out.println("<label for='operacion'>Operación:</label>");
-                            out.println("<select name='tipo_operacion' id='tipo_operacion' disabled>");
+                            out.println("<select name='tipo_operacion' id='tipo_operacion' readonly>");
                             out.println("<option value='importar'>Importar archivo SIJPA</option>");
                             out.println("</select>");
                             out.println("</td>");
                             out.println("<td>");
                             out.println("<label for='tipoArchivo'>Tipo de Archivo</label>");
-                            out.println("<select name='tipoArchivo' id='tipoArchivo' disabled>");
+                            out.println("<select name='tipoArchivo' id='tipoArchivo' readonly>");
                             out.println("<option value='sijpa'>SIJPA(.sijpa)</option>");
                             out.println("</select>");
                             out.println("</td>");

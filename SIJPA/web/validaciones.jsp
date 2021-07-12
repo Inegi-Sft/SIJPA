@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
         <title>Validaciones</title>
         <%@include file="librerias.jsp"%>
-        <script type="text/javascript" src="js/fnValidaciones.js"></script>
+        <script type="text/javascript" src="js/fnValidaciones.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             showValidaciones sV = new showValidaciones();
             ArrayList<String[]> lista;

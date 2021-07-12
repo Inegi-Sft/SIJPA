@@ -51,10 +51,33 @@ and open the template in the editor.
     font-weight: bold;
 }
 
-.noIden input[type="checkbox"]{
+.noIden input[type="checkbox"], .emergente .noIden input[type="checkbox"]{
     height: 15px;
     width: 15px;
     cursor: pointer;
+}
+
+ .emergente input[type=button]{
+    background-color: #0077CB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 110px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.emergente input[type=button]:hover{
+    background-color: #00CBCB;
+    color: #FFFFFF;
+    transform: scale(1.1);
 }
 
 .selectize-input {
@@ -100,4 +123,59 @@ a.addJuez{
 #tblAudiInves_length, #tblAudiInves_filter, #tblAudiInter_length, #tblAudiInter_filter,
 #tblAudiJO_length, #tblAudiJO_filter {
     height: 60px;
+}
+
+div.emergente {
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    text-align: center;
+    padding: 25px;
+}
+
+div.emergente .tablasRegis {
+    display: block;
+    width: auto;
+}
+
+div.emergente .tablasRegis td{
+    text-align: left;
+}
+
+div.emergente input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    margin: 0 4px 0 0;
+    border: none;
+    vertical-align: text-bottom;
+}
+.emergente select{
+    background-color: #27251F;
+    color: #fff;
+    border: 1px solid #0077CB;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 2px 5px;
+    margin:0 20px 20px 20px;
+    font-weight: bold;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.emergente select:focus{
+    box-shadow: 0 0 5px 5px rgba(0, 119, 203, 0.3);
+}
+
+.contenedor .vew{
+    width:25px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+select.inactivo{
+    pointer-events:none;
+    background-color: rgba(239, 239, 239, 0.3);
+    border: 1px solid rgba(118, 118, 118, 0.3);
+    color: rgb(84, 84, 84);
 }

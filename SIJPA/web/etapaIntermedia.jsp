@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Etapa Intermedia</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesInter.js"></script>
+        <script type="text/javascript" src="js/funcionesInter.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showIntermedia sInter = new showIntermedia();

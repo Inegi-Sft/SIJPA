@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Etapa Juicio Oral</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/fnEtapaOral.js"></script>
+        <script type="text/javascript" src="js/fnEtapaOral.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showJuicio eO = new showJuicio();
@@ -36,6 +36,7 @@
             String incidentes = "";
             String resoIncidente = "";
             String promueveIncidente = "";
+            String nuevoMedio = "";
             String testimonial = "";
             String cantTesti = "";
             String pericial = "";
@@ -71,23 +72,24 @@
                         incidentes = oral.get(0)[4];
                         resoIncidente = oral.get(0)[5];
                         promueveIncidente = oral.get(0)[6];
-                        testimonial = oral.get(0)[7];
-                        cantTesti = oral.get(0)[8];
-                        pericial = oral.get(0)[9];
-                        cantPeri = oral.get(0)[10];
-                        declaracion = oral.get(0)[11];
-                        cantDecla = oral.get(0)[12];
-                        documental = oral.get(0)[13];
-                        cantDocu = oral.get(0)[14];
-                        otro = oral.get(0)[15];
-                        cantOtro = oral.get(0)[16];
-                        suspencionA = oral.get(0)[17];
-                        fechaSuspencion = oral.get(0)[18];
-                        fechaReanudacion = oral.get(0)[19];
-                        deliberacion = oral.get(0)[20];
-                        fechaDeliberacion = oral.get(0)[21];
-                        sentidoFallo = oral.get(0)[22];
-                        comen = oral.get(0)[23];
+                        nuevoMedio = oral.get(0)[7];
+                        testimonial = oral.get(0)[8];
+                        cantTesti = oral.get(0)[9];
+                        pericial = oral.get(0)[10];
+                        cantPeri = oral.get(0)[11];
+                        declaracion = oral.get(0)[12];
+                        cantDecla = oral.get(0)[13];
+                        documental = oral.get(0)[14];
+                        cantDocu = oral.get(0)[15];
+                        otro = oral.get(0)[16];
+                        cantOtro = oral.get(0)[17];
+                        suspencionA = oral.get(0)[18];
+                        fechaSuspencion = oral.get(0)[19];
+                        fechaReanudacion = oral.get(0)[20];
+                        deliberacion = oral.get(0)[21];
+                        fechaDeliberacion = oral.get(0)[22];
+                        sentidoFallo = oral.get(0)[23];
+                        comen = oral.get(0)[24];
                     }else{
                         out.println("<script>alert('Procesado " + proceClaveJO + " no encontrado dentro de la Causa Penal "  + causaClaveJO + "'); "
                                 + "parent.$.fancybox.close();</script>");
@@ -224,6 +226,23 @@
                             </select>
                         </div>
                     </fieldset>
+                    <br>    
+                    <div class="colsA">
+                        <label for="nueMedioPru">¿Se admitieron nuevos medios de pruebas?</label>
+                        <select name="nueMedioPru" id="nueMedioPru" required>
+                            <option value="">--Seleccione--</option>
+                            <%
+                                lista = cat.findRespuestaSimple();
+                                for (String[] ls : lista) {
+                                    out.println("<option value='" + ls[0] + "'");
+                                    if(ls[0].equals(nuevoMedio)){
+                                        out.println(" selected ");
+                                    }
+                                    out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
+                                }
+                            %> 
+                        </select>
+                    </div>
                     <table class="tablasRegis" id="pruebasD" style="width: 600px">
                         <tr><th colspan="3">Tipos de pruebas desahogadas durante la Audiencia</th></tr>
                         <tr>

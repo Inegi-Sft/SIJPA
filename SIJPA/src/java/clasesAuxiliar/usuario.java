@@ -283,7 +283,7 @@ public class usuario {
                 sql = "INSERT INTO DATOS_ETAPA_INICIAL_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" 
                         + causaClave + jConcatenado + "','" + causaClave + "-P" + x + jConcatenado + "'," 
                         + "-2,-2,-2,'1899-09-09',-2,'1899-09-09',-2,'1899-09-09',-2,-2,-2,'1899-09-09',-2,-2,"
-                        + "'1899-09-09',-2,-2,'1899-09-09',-2,-2,-2,-2,'1899-09-09',-2,-2,'REGNUEVO',(select YEAR(NOW())),0)";
+                        + "-2,'1899-09-09',-2,-2,-2,-2,'1899-09-09',-2,-2,'REGNUEVO',(select YEAR(NOW())),0)";
                 System.out.println(sql);
                 conn.escribir(sql);
             }

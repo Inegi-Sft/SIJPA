@@ -17,7 +17,7 @@
         <title>SIJPA::AudienciasJO</title>
         <%@include file="librerias.jsp" %>
         <link type="text/css" href="css/audiencias.css" rel="stylesheet"/>
-        <script type="text/javascript" src="js/fnAudienciasJO.js"></script>
+        <script type="text/javascript" src="js/fnAudienciasJO.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%  
             showJuzgados juz = new showJuzgados();
             catalogos cat = new catalogos();
@@ -91,8 +91,8 @@
                             <th>Audiencias de Juicio Oral</th>
                             <th>Causa Relacionada</th>
                             <th>Jueces Celebran</th>
-                            <th width="168">Fecha inicia</th>
-                            <th width="168">Fecha finaliza</th>
+                            <th width="168">Fecha Celebración</th>
+                            <th width="168">Duración Hrs. / Min.</th>
                             <th>Acción</th>
                         </tr>
                     <thead>
@@ -139,16 +139,37 @@
                                 </div>
                             </td>
                             <td>
-                                <input type="date" name="fechaIJO" id="fechaIJO" class="audiFecha" onblur="duracion(this,'#fechaFJO')" required/>
+                                <input type="date" name="fechaCJO" id="fechaCJO" class="audiFecha" required/>
                                 <div class="noIden">
-                                    <input type="checkbox" id="chkFINI" onclick="fechaNI(this, '#fechaIJO')" />N/I
+                                    <input type="checkbox" id="chkFNI" onclick="fechaNI(this, '#fechaCJO')" />N/I
                                 </div>
                             </td>
                             <td>
-                                <input type="date" name="fechaFJO" id="fechaFJO" class="audiFecha" onblur="duracion('#fechaIJO',this)" required/>
-                                <div class="noIden">
-                                    <input type="checkbox" id="chkFFNI" onclick="fechaNI(this, '#fechaFJO')" />N/I
-                                </div>
+                                <select name="hrsJO" id="hrsJO" class="lblExBig" onchange="duracionCeroJO('#hrsJO','#minJO');" required>
+                                        <option value="">hrs</option>
+                                    <%
+                                        for(int i=0;i<=98;i++){
+                                            out.println("<option value='"+i+"'>"+i+"</option>");
+                                        }
+                                    %>
+                                        <option value="99" hidden>99</option>
+                                    </select>
+                                    <select name="minJO" id="minJO" class="lblExBig" onchange="duracionCeroJO('#hrsJO','#minJO');" required>
+                                        <option value="">min</option>
+                                    <%
+                                        for(int i=0;i<=59;i++){
+                                            if(i<10){
+                                                out.println("<option value='0"+i+"'>0"+i+"</option>");
+                                            }else{
+                                                out.println("<option value='"+i+"'>"+i+"</option>");
+                                            }
+                                        }
+                                    %>
+                                    <option value="99" hidden>99</option>
+                                    </select>
+                                    <div class="noIden">
+                                        <input type="checkbox" id="chkDNI" onclick="duracionNIJO(this, '#hrsJO','#minJO')" />N/I
+                                    </div>
                             </td>
                             <td>
                                 <input type="submit" name="addAudi" id="addAudi" class="addAudi" value="Agregar" onclick="validaJuzAdd()"/> 
@@ -164,8 +185,8 @@
                             out.println("<td>"+ls[2].replace(juzLimpio, "")+"</td>");
                             out.println("<td>"+ls[3]+", "+ ls[4] + ", "+ ls[5]+"</td>");
                             out.println("<td>"+ls[6]+"</td>");
-                            out.println("<td>"+ls[7]+"</td>");
-                            out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' onclick=\"deleteAudienciasJO('"+ls[2]+"',"+ls[0]+");\"/></a></td>");
+                            out.println("<td>"+ls[7]+":"+ls[8]+"</td>");
+                            out.println("<td><a href='#'><img src='img/delete.png' title='Eliminar' onclick=\"deleteAudienciasJO('"+ls[2]+"',"+ls[9]+","+ls[0]+");\"/></a></td>");
                             out.println("</tr>");
                         }
                     %>

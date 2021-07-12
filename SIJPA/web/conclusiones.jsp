@@ -17,13 +17,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Resoluciones</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesConc.js"></script>
+        <script type="text/javascript" src="js/funcionesConc.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showConclusiones sConclu = new showConclusiones();
             showInicial inicial = new showInicial();
             showProcesados proce = new showProcesados();
-            ArrayList<String[]> lista, conclusiones,concluPA = new ArrayList();
+            ArrayList<String[]> lista, conclusiones, concluPA = new ArrayList();
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();
             
@@ -49,6 +49,7 @@
             String fechaSuspen = "";
             String mecanisAcuer = "";
             String fechaAcuerdo = "";
+            String fechaSentencia = "";
             String tipoProceAb = "";
             String medidaPriva = "";
             String medidaNoPriva = "";
@@ -75,18 +76,20 @@
                         fechaSuspen = conclusiones.get(0)[5];
                         mecanisAcuer = conclusiones.get(0)[6];
                         fechaAcuerdo = conclusiones.get(0)[7];
-                        tipoProceAb = conclusiones.get(0)[8];
-                        medidaPriva = conclusiones.get(0)[9];
-                        medidaNoPriva = conclusiones.get(0)[10];
-                        tiempoInter = conclusiones.get(0)[11];
-                        reparaDanio = conclusiones.get(0)[12];
-                        tipoRepara = conclusiones.get(0)[13];
-                        montoRepara = conclusiones.get(0)[14];
-                        impugna = conclusiones.get(0)[15];
-                        tipoImpugna = conclusiones.get(0)[16];
-                        fechaImpugna = conclusiones.get(0)[17];
-                        persoImpugna = conclusiones.get(0)[18];
-                        comen = conclusiones.get(0)[19];
+                        fechaSentencia = conclusiones.get(0)[8];
+                        System.out.println("fecha sentencia: " + conclusiones.get(0)[8]);
+                        tipoProceAb = conclusiones.get(0)[9];
+                        medidaPriva = conclusiones.get(0)[10];
+                        medidaNoPriva = conclusiones.get(0)[11];
+                        tiempoInter = conclusiones.get(0)[12];
+                        reparaDanio = conclusiones.get(0)[13];
+                        tipoRepara = conclusiones.get(0)[14];
+                        montoRepara = conclusiones.get(0)[15];
+                        impugna = conclusiones.get(0)[16];
+                        tipoImpugna = conclusiones.get(0)[17];
+                        fechaImpugna = conclusiones.get(0)[18];
+                        persoImpugna = conclusiones.get(0)[19];
+                        comen = conclusiones.get(0)[20];
                     }
                 }
             }
@@ -126,7 +129,7 @@
                 <fieldset>
                     <legend>Resolución</legend>
                     <div class="cols">
-                        <label for="fechaReso">Fecha de lectura y explicación de la sentencia</label>
+                        <label for="fechaReso" class="lblExBig">Fecha en que se dictó la resolución (conclusión y/o terminación de la causa penal)</label>
                         <input type="date" name="fechaReso" id="fechaReso" value="<%=fechaResol%>" max="<%=fechas%>" required>
                         <div class="noIdentificada">
                             <input type="checkbox" id="chkFechaReso" onclick="fechaNoIdent('#chkFechaReso', '#fechaReso')">
@@ -266,6 +269,14 @@
                     </fieldset>
                     <fieldset class="oculto subField" id="flsProceAbreviado">
                         <legend>Procedimiento abreviado</legend>
+                        <div class="cols" id="dFechaSenten">
+                            <label for="fechaSenten">Fecha de lectura y explicación de la sentencia</label>
+                            <input type="date" name="fechaSenten" id="fechaSenten" value="<%=fechaSentencia%>" required>
+                            <div class="noIdentificada">
+                                <input type="checkbox" id="chkFechaSenten" onclick="fechaNoIdent('#chkFechaSenten', '#fechaSenten')">
+                                <label>No identificada</label>
+                            </div>
+                        </div>
                         <div class="cols" id="dTipoResolucionPA" >
                             <label for="tipoResolucionPA">Tipo de resolución en el procedimiento abreviado</label>
                             <select name="tipoResolucionPA" id="tipoResolucionPA">
@@ -300,19 +311,36 @@
                         </div>
                         <div class="cols oculto" id="dTipoMedidaNPL">
                             <label for="tipoMedidaNPL" id="DtipoMedidaNPL">Tipo de medidas no privativa de la libertad</label>
-                            <select name="tipoMedidaNPL" id="tipoMedidaNPL" >
-                                <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findNoprivativas();
-                                    for (String[] ls : lista) {
-                                        out.println("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(medidaNoPriva)){
-                                            out.println(" selected ");
+                            <div id="multiselect">
+                                <div class="selectBox" onclick="showCheckboxes()">
+                                    <select name="tipoMedidaNPL" id="tipoMedidaNPL">
+                                        <option value="">--Seleccione--</option>
+                                        <%
+                                            if(!medidaNoPriva.equals("")){
+                                                out.println("<option value='" + medidaNoPriva + "'");
+                                                out.println( "selected>" + medidaNoPriva + " Elementos seleccionados</option>");
+                                            }
+                                        %>
+                                        <option value="-2">No aplica</option>
+                                    </select>
+                                    <div class="overSelect"></div>
+                                </div>
+                                <div id="checkboxes" class="hide">
+                                    <%
+                                        lista = cat.findNoprivativas();
+                                        for (String[] ls : lista) {
+                                            if(!ls[0].equals("-2")){
+                                                String medidaNP = sConclu.medidaNoPrivativa(causaClave, proceClave + jConcatenado, ls[0]);
+                                                out.println("<label><input type='checkbox' name='chkMedidaNPL' class='chkMedidaNPL' value='" + ls[0] + "'");
+                                                if(!medidaNP.equals("")){
+                                                    out.println(" checked ");
+                                                }
+                                                out.println( ">" + ls[0]+ ".- " + ls[1] + "</label>");
+                                            }
                                         }
-                                        out.println( ">" + ls[0]+ ".- " + ls[1] + "</option>");
-                                    }
-                                %> 
-                            </select>
+                                    %>
+                                </div>
+                            </div>
                         </div>
                         <div class="cols oculto" id="Dinternamiento">
                             <label for="internamiento">Tiempo en internamiento</label>
@@ -330,7 +358,6 @@
                                 %> 
                             </select>
                         </div>
-                        <br/>
                         <table class="tablasRegis" id="tblDConclusiones">
                             <tr>
                                 <th>Delitos atribuidos al adolescente</th>

@@ -15,6 +15,12 @@ $(document).ready(function() {
         $('#chkFechaNac').prop("checked", true);
     }
     
+    //Se usa para la recuperacion de datos mostrar el campo Alias no aplica
+    if($('#alias').val() === '-2'){
+        $('#alias').prop("readonly", true);
+        $('#chkAlias').prop("checked", true);
+    }
+    
     //Se usa para la recuperacion de datos mostrar el campo Curp no identificado
     if($('#curp').val() === '-9'){
         $('#curp').prop("readonly", true);
@@ -75,7 +81,7 @@ $(document).ready(function() {
     
     //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
     if($('#delictivo').val() === '-9'){
-        $('#delictivo').prop("disabled", true);
+        $('#delictivo').prop("readonly", true);
         $('#chkdelictivo').prop("checked", true);
     }
     
@@ -122,10 +128,10 @@ $(document).ready(function() {
     $('#chkdelictivo').change(function (e) {
         if ($(this).is(":checked")) {
             $('#delictivo').val("-9");
-            $('#delictivo').prop("disabled", true);
+            $('#delictivo').prop("readonly", true);
         } else {
             $('#delictivo').val("");
-            $('#delictivo').prop("disabled", false);
+            $('#delictivo').prop("readonly", false);
         }
     });
 
@@ -204,6 +210,17 @@ $(document).ready(function() {
 function curpNoIdent(idChk, idTxt) {
     if ($(idChk).is(":checked")) {
         $(idTxt).val("-9");
+        $(idTxt).prop("readonly", true);
+    } else {
+        $(idTxt).val("");
+        $(idTxt).prop("readonly", false);
+    }
+}
+
+// alias no aplica
+function chkNoApl(idChk, idTxt) {
+    if ($(idChk).is(":checked")) {
+        $(idTxt).val("-2");
         $(idTxt).prop("readonly", true);
     } else {
         $(idTxt).val("");

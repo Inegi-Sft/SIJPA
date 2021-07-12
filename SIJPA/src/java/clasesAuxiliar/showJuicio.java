@@ -126,11 +126,11 @@ public class showJuicio {
                 juicio.add(new String[]{
                     resul.getString("FECHA_APERTURA_JUICIOORAL"), resul.getString("FECHA_AUDIENCIA_JUICIO"), resul.getString("MEDIDAS_DISCIPLINARIAS"),
                     resul.getString("TIPO_DISCIPLINARIA"), resul.getString("INCIDENTES_AUDIENCIA"), resul.getString("FECHA_RESOLUCION_INCIDENTE"),
-                    resul.getString("PROMUEVE_INCIDENTE"), resul.getString("PD_TESTIMONIAL"), resul.getString("CANTIDAD_TEST"), resul.getString("PD_PERICIAL"),
-                    resul.getString("CANTIDAD_PERI"), resul.getString("PD_DECLARACION_ACUSADO"), resul.getString("CANTIDAD_DECLA"), resul.getString("PD_DOCUMENTAL_MATERIAL"),
-                    resul.getString("CANTIDAD_DOCU"), resul.getString("PD_OTRA_PRUEBA"), resul.getString("CANTIDAD_OTRO"), resul.getString("SUSPENCION_AUDIENCIA"), 
-                    resul.getString("FECHA_SUSPENCION"), resul.getString("FECHA_REANUDACION"), resul.getString("DELIBERACION"), resul.getString("FECHA_DELIBERACION"),
-                    resul.getString("SENTIDO_FALLO"),resul.getString("COMENTARIOS")
+                    resul.getString("PROMUEVE_INCIDENTE"), resul.getString("NUEVO_MEDIO"), resul.getString("PD_TESTIMONIAL"), resul.getString("CANTIDAD_TEST"),
+                    resul.getString("PD_PERICIAL"), resul.getString("CANTIDAD_PERI"), resul.getString("PD_DECLARACION_ACUSADO"), resul.getString("CANTIDAD_DECLA"),
+                    resul.getString("PD_DOCUMENTAL_MATERIAL"), resul.getString("CANTIDAD_DOCU"), resul.getString("PD_OTRA_PRUEBA"), resul.getString("CANTIDAD_OTRO"),
+                    resul.getString("SUSPENCION_AUDIENCIA"), resul.getString("FECHA_SUSPENCION"), resul.getString("FECHA_REANUDACION"),
+                    resul.getString("DELIBERACION"), resul.getString("FECHA_DELIBERACION"), resul.getString("SENTIDO_FALLO"),resul.getString("COMENTARIOS")
                 });
             }
             conn.close();

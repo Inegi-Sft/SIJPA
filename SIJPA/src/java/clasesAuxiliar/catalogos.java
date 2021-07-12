@@ -1456,6 +1456,25 @@ public class catalogos {
 
     }
     
+    public ArrayList findActosProcesales() {
+        conn.Conectar();
+        lista = new ArrayList();
+        sql = "SELECT * FROM CATALOGOS_ACTOS_PROCESALES WHERE ACTOS_ID <> -2 ORDER BY 1";
+        resul = conn.consultar(sql);
+        try {
+            while (resul.next()) {
+                lista.add(new String[]{resul.getString(1), resul.getString(2)});
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+ 
+
+    }
+    
     public ArrayList findAudienciasIntermedia() {
         conn.Conectar();
         lista = new ArrayList();
@@ -1472,6 +1491,7 @@ public class catalogos {
         return lista;
 
     }
+    
     public ArrayList findAudienciasJuicioOral() {
         conn.Conectar();
         lista = new ArrayList();

@@ -19,5 +19,5 @@
 <script type="text/javascript" src="js/funcion-DataTable.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript" src="js/pestanas.js"></script>
-<script type="text/javascript" src="js/funciones.js"></script>
+<script type="text/javascript" src="js/funciones.js?v=<%=(int)(Math.random()*10+1)%>"></script>
 <script type="text/javascript" src="js/alertify.js"></script>

@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Registro Usuarios</title>
         <%@include file="librerias.jsp"%>
-        <script type="text/javascript" src="js/fnUsuarios.js"></script>
+        <script type="text/javascript" src="js/fnUsuarios.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             ArrayList<String[]> listas, sUsuario;

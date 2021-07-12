@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Juzgados</title>
         <%@include file="librerias.jsp"%>
-        <script type="text/javascript" src="js/fnJuzgados.js"></script>
+        <script type="text/javascript" src="js/fnJuzgados.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <% 
             //Unicamente lo utilizamos cuando recibimos la variable de Bienvenida
             if(request.getParameter("insert") != null){

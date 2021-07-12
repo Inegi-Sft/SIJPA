@@ -130,7 +130,7 @@ $(document).ready(function () {
     $('#formCausaPenal').submit(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        var resp = confirm("Una vez guardada la Causa Penal no se podra editar,\n"
+        var resp = confirm("Una vez guardada la Causa Penal no se podrá realizar cambios,\n"
                         + "Esta seguro que los datos son los correctos?");
         if(resp){
             $.ajax({

@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Captura Causa Penal</title>
-        <script type="text/javascript" src="js/funcionesCP.js"></script>
+        <script type="text/javascript" src="js/funcionesCP.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%            
             FechaMax fecha =new FechaMax();
             String fechas= fecha.FechaValida();

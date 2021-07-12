@@ -86,12 +86,12 @@ $(document).ready(function() {
                             <td>' + response[2] + '</td><td>' + response[3] + '</td><td>' + response[4] + '</td>\n\
                             <td><a class="pop" href="tramite.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaTramite tbody tr').length +
                             '&edita=Si"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        if(parent.$('#tablaConclu tbody tr').length === 0){
+                        if(parent.$('#tablaConclu tbody tr').length === 0 && parent.$('#tablaVolando tbody tr').length === 0){
                             parent.$('#btn7').prop('disabled', true);
                         }
-                        if(parent.$('#tablaTramite tbody tr').length === 0){
-                            parent.$('#btn8').prop('disabled', true);
-                        }
+//                        if(parent.$('#tablaTramite tbody tr').length === 0){
+//                            parent.$('#btn8').prop('disabled', true);
+//                        }
                     }else{
                         for (var i = 2; i <= 4; i++) {//pone filas correspondientes en la tabla de inicial
                             parent.$('#tablaTramite tbody').find('tr').eq(response[0]).children('td').eq(i-1).html(response[i]);

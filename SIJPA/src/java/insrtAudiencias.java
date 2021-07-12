@@ -47,6 +47,7 @@ public class insrtAudiencias extends HttpServlet {
         String operacion = request.getParameter("operacion");//Control para saber si se inserta o se actualiza
         String tipoAudiencia = request.getParameter("tipoAudiencia");//Control para saber si se inserta inicial o intermedia
         String idAudi = request.getParameter("idAudiencia");//numero de la audiencia (id) que se va eliminar
+        String anio = request.getParameter("anio");//año de la audiencia para eliminar, forma clave con el idAudi y el juzgado
         
         String juzgado = (String) sesion.getAttribute("juzgadoClave");
         String jDividido[] = juzgado.split("-"); //Esto separa en un array basandose en el separador que le pases
@@ -56,12 +57,15 @@ public class insrtAudiencias extends HttpServlet {
         String causa = request.getParameter("causa");
         String juez = request.getParameter("juez");
         String audiInves = request.getParameter("audiInves");
-        String fechaAInvesI = request.getParameter("fInvesI");
-        String fechaAInvesF = request.getParameter("fInvesF");
+        String fechaCelebra = request.getParameter("fCelebracion");
+        String hrs = request.getParameter("hrs");
+        String min = request.getParameter("min");
+        
+        String[] actosP = request.getParameterValues("actosP");
+        String[] hrsAP = request.getParameterValues("hrsAP");
+        String[] minAP = request.getParameterValues("minAP");
         
         String audiInter = request.getParameter("audiInter");
-        String fechaAInterI = request.getParameter("fInterI");
-        String fechaAInterF = request.getParameter("fInterF");
         
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -71,20 +75,33 @@ public class insrtAudiencias extends HttpServlet {
             //****************************  I N S E R T A  *******************************************
             if(operacion.equals("insertar")){
                 int maxAudi=0;
-                sql = "SELECT IFNULL(MAX(NUM_AUDI),0) + 1 FROM DATOS_AUDIENCIAS_ADOJC WHERE JUZGADO_ENTIDAD_ID='"+juzgado+"'";
+                sql = "SELECT IFNULL(MAX(NUM_AUDI),0) + 1 FROM DATOS_AUDIENCIAS_ADOJC WHERE JUZGADO_ENTIDAD_ID='"+juzgado+"' AND ANIO=(select YEAR(NOW()))";
                 rs=conn.consultar(sql);
                 while(rs.next()){
                     maxAudi=rs.getInt(1);
                 }
+                
                 if(tipoAudiencia.equals("Investigacion")){
                     sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgado + "','"
-                        + causa+"', "+ juez +","+maxAudi+", "+ audiInves +", -2, '"+ fechaAInvesI +"', '"+ fechaAInvesF +"', (select YEAR(NOW())) );";
+                        + causa+"', "+ juez +","+maxAudi+", "+ audiInves +", -2, '"+ fechaCelebra +"', "+ hrs +", '"+ min +"', (select YEAR(NOW())) );";
                     System.out.println(sql);
                     conn.escribir(sql);
                     
-                }else{
+                    //insertara actos procesales cuando sean audiencias iniciales
+                    if(audiInves.equals("11")){
+                        for(int i=0; i<actosP.length; i++){
+                            int j = Integer.parseInt(actosP[i]) - 1;
+                            sql = "INSERT INTO DATOS_ACTOS_PROCESALES_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgado + "',"
+                                + maxAudi +", "+ actosP[i] +", "+ hrsAP[j] +", '"+ minAP[j] +"', (select YEAR(NOW())) );";
+                            System.out.println(sql);
+                            conn.escribir(sql); 
+                        }
+                    }
+                    
+                }
+                else{
                     sql = "INSERT INTO DATOS_AUDIENCIAS_ADOJC VALUES(" + jEntidad + "," + jMunicipio + "," + jNumero + ",'" + juzgado + "','"
-                        + causa+ "', "+ juez +","+maxAudi+", -2, "+ audiInter +", '"+ fechaAInterI +"', '"+ fechaAInterF +"', (select YEAR(NOW())) );";
+                        + causa+ "', "+ juez +","+maxAudi+", -2, "+ audiInter +", '"+ fechaCelebra +"',"+ hrs +" ,'"+ min +"', (select YEAR(NOW())) );";
                     System.out.println(sql);
                     conn.escribir(sql);
                 }   
@@ -95,7 +112,7 @@ public class insrtAudiencias extends HttpServlet {
             }else if(operacion.equals("eliminar")){
                 
                 sql = "DELETE FROM DATOS_AUDIENCIAS_ADOJC WHERE JUZGADO_CLAVE='"+juzgado+"'"
-                    + " AND CAUSA_CLAVE = '" + causa + "' AND NUM_AUDI="+idAudi;
+                    + " AND ANIO = " + anio + " AND NUM_AUDI="+idAudi;
                 System.out.println(sql);
                 if(conn.escribir(sql)){
                     out.write("AudienciasDeleted");

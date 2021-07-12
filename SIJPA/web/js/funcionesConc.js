@@ -19,18 +19,19 @@ $(document).ready(function() {
     switch ($('#resolucion').val()){
         case '1':
             $('#flsSobreseimto').show();
-            $('#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select').val('-2');
-            $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09');
+            $('#flsReparaDanio').hide();
+            $('#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select, #flsReparaDanio select').val('-2');
+            $('#fechaExtSCP,#fechaExtinAR,#fechaSenten').val('1799-09-09');
             break;
         case '2':
             $('#flsSuspCP').show();
             $('#flsSobreseimto select,#tipoMecanismoAR,#flsProceAbreviado select').val('-2');
-            $('#fechaExtinAR').val('1799-09-09');
+            $('#fechaExtinAR,#fechaSenten').val('1799-09-09');
             break;
         case '3':
             $('#flsAcuerdoR').show();
             $('#flsSobreseimto select,#tipoCondiSCP,#flsProceAbreviado select').val('-2');
-            $('#fechaExtSCP').val('1799-09-09');
+            $('#fechaExtSCP,#fechaSenten').val('1799-09-09');
             break;
         case '4':
             $('#flsProceAbreviado').show();
@@ -40,10 +41,9 @@ $(document).ready(function() {
         case '5':
             $('#flsImpugnacion').show();
             $('#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
-
             $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();
             $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
-            $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);
+            $('#fechaExtSCP,#fechaExtinAR,#fechaSenten').val('1799-09-09').prop("required", false);
             break;
         default :
             $('#flsReparaDanio,#flsImpugnacion').hide();
@@ -57,16 +57,22 @@ $(document).ready(function() {
         $('#dExcluAccion').show();
     }
     
-    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    //Se usa para la recuperacion de datos
     if($('#fechaExtSCP').val() === '1899-09-09'){
         $('#fechaExtSCP').prop("readonly", true);
         $('#chkFechaExtSCP').prop("checked", true);
     }
     
-    //Se usa para la recuperacion de datos mostrar el campo de estados y municipios
+    //Se usa para la recuperacion de datos
     if($('#fechaExtinAR').val() === '1899-09-09'){
         $('#fechaExtinAR').prop("readonly", true);
         $('#chkFechaExtinAR').prop("checked", true);
+    }
+    
+    //Se usa para la recuperacion de datos
+    if($('#fechaSenten').val() === '1899-09-09'){
+        $('#fechaSenten').prop("readonly", true);
+        $('#chkFechaSenten').prop("checked", true);
     }
     
     //Se usa para la recuperacion de BD
@@ -125,15 +131,15 @@ $(document).ready(function() {
         $('#tblDConclusiones input').prop("required", false);
         $('#tblDConclusiones input.radValCambia').val("-2").prop("checked", true);
         if ($('#resolucion').val() === '1') {
-            $('#flsSobreseimto,#flsImpugnacion,#flsReparaDanio').fadeIn("slow");
-            $('#flsSobreseimto select,#flsImpugnacion select,#flsReparaDanio select').val('').prop("required", true);
+            $('#flsSobreseimto,#flsImpugnacion').fadeIn("slow");
+            $('#flsSobreseimto select,#flsImpugnacion select').val('').prop("required", true);
             $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
             $('#chkFechaImpugnacion').prop("checked", false);
 
             $('#dExcluAccion,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna,\n\
-                #flsSuspCP,#flsAcuerdoR,#flsProceAbreviado').hide();
-            $('#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select').val('-2').prop("required", false);
-            $('#fechaExtSCP,#fechaExtinAR').val('1899-09-09').prop("required", false);
+                #flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();
+            $('#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
+            $('#fechaExtSCP,#fechaExtinAR,#fechaSenten').val('1899-09-09').prop("required", false);
 
         } else if ($('#resolucion').val() === '2') {
             $('#flsSuspCP,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
@@ -144,7 +150,7 @@ $(document).ready(function() {
             $('#flsSobreseimto,#flsAcuerdoR,#flsProceAbreviado,\n\
                 #dTipoRepara,#dMontoRepara,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
             $('#flsSobreseimto select,#tipoMecanismoAR,#flsProceAbreviado select').val('-2').prop("required", false);
-            $('#fechaExtinAR').val('1799-09-09').prop("required", false);
+            $('#fechaExtinAR,#fechaSenten').val('1799-09-09').prop("required", false);
 
         } else if ($('#resolucion').val() === '3') {
             $('#flsAcuerdoR,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
@@ -155,13 +161,13 @@ $(document).ready(function() {
             $('#flsSobreseimto,#flsSuspCP,#flsProceAbreviado,\n\
                 #dTipoRepara,#dMontoRepara,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
             $('#flsSobreseimto select,#tipoCondiSCP,#flsProceAbreviado select').val('-2').prop("required", false);
-            $('#fechaExtSCP').val('1799-09-09').prop("required", false);
+            $('#fechaExtSCP,#fechaSenten').val('1799-09-09').prop("required", false);
 
         } else if ($('#resolucion').val() === '4') {
             $('#flsProceAbreviado,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
             $('#flsProceAbreviado select,#flsReparaDanio select,#flsImpugnacion select').val('').prop("required", true);
-            $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
-            $('#chkFechaImpugnacion').prop("checked", false);
+            $('#fechaImpugnacion,#fechaSenten').val('').prop({"required": true, "readonly": false});
+            $('#chkFechaImpugnacion,#chkFechaSenten').prop("checked", false);
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
 
             $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,\n\
@@ -176,12 +182,12 @@ $(document).ready(function() {
             $('#dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
             $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio').hide();
             $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select').val('-2').prop("required", false);
-            $('#fechaExtSCP,#fechaExtinAR').val('1799-09-09').prop("required", false);
+            $('#fechaExtSCP,#fechaExtinAR,#fechaSenten').val('1799-09-09').prop("required", false);
 
         } else {
             $('#flsSobreseimto,#flsSuspCP,#flsAcuerdoR,#flsProceAbreviado,#flsReparaDanio,#flsImpugnacion').fadeOut("slow");
             $('#flsSobreseimto select,#tipoCondiSCP,#tipoMecanismoAR,#flsProceAbreviado select,#flsReparaDanio select,#flsImpugnacion select').val('-2').prop("required", false);
-            $('#fechaExtSCP,#fechaExtinAR,#fechaImpugnacion').val('1799-09-09').prop("required", false);
+            $('#fechaExtSCP,#fechaExtinAR,#fechaImpugnacion,#fechaSenten').val('1799-09-09').prop("required", false);
         }
     });
     
@@ -201,6 +207,7 @@ $(document).ready(function() {
                 $('#dTipoMedidaPL').hide();
                 $('#dTipoMedidaNPL').fadeIn("slow");
                 $('#tipoMedidaNPL').val('').prop("required", true);
+                $('.chkMedidaNPL').prop("checked", false);
                 $('#tipoMedidaPL').val('-2').prop("required", false);
                 $('#Dinternamiento').hide();
                 $('#internamiento').val('-2').prop("required", false);
@@ -311,10 +318,10 @@ $(document).ready(function() {
                             <td>' + response[2] + '</td><td>' + response[3] + '</td><td>' + response[4] + '</td>\n\
                             <td><a class="pop" href="conclusiones.jsp?proceClave=' + response[1] + '&posicion=' + parent.$('#tablaConclu tbody tr').length +
                             '&edita=Si"><img src="img/editar.png" title="Modificar"/></a></td></tr>');
-                        if(parent.$('#tablaConclu tbody tr').length === 0){
-                            parent.$('#btn7').prop('disabled', true);
-                        }
-                        if(parent.$('#tablaTramite tbody tr').length === 0){
+//                        if(parent.$('#tablaConclu tbody tr').length === 0){
+//                            parent.$('#btn7').prop('disabled', true);
+//                        }
+                        if(parent.$('#tablaTramite tbody tr').length === 0 && parent.$('#tablaVolando tbody tr').length === 0){
                             parent.$('#btn8').prop('disabled', true);
                         }
                     }else{

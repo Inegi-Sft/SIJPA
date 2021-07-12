@@ -77,8 +77,8 @@ public class insrtInicial extends HttpServlet {
         String[] soliMedida = request.getParameterValues("soliMedida");
         String[] duraMedida = request.getParameterValues("duraMedida");
 
-        String cierreinvestiga = request.getParameter("soliPlazo");
-        String fechaplazo = request.getParameter("fechSoliPlazo");
+        //String cierreinvestiga = request.getParameter("soliPlazo");
+        //String fechaplazo = request.getParameter("fechSoliPlazo");
         String soliProrroga = request.getParameter("soliProrroga");
         String plazofijado = request.getParameter("plazoFijadoC");
         String fechCierreI = request.getParameter("fechCierreI");
@@ -118,8 +118,7 @@ public class insrtInicial extends HttpServlet {
                         + "DETENCION_LEGAL = " + legaldetencion + ",FECHA_LIBERTAD = '" + fechaAutoLiber + "',FORMULACION_IMPUTACION = " + formuImputa + ","
                         + "FECHA_IMPUTACION = '" + fechaFormuImpu + "',IMPUTADO_DECLARO = " + declaro + ",FECHA_DECLARACION = '" + fechDeclara + "',"
                         + "PLAZO_CONSTITUCIONAL = " + huboPlazo + ",TIEMPO_PLAZO = " + Plazo + ",AUTO_VINCULACION = " + autovincula + ","
-                        + "FECHA_VINCULACION = '" + fechavincula + "',IMPUSO_MCAUTELARES = " + drecretaMC + ",INVESTIGACION_COMPLEMENTARIA = " + cierreinvestiga + ","
-                        + "FECHA_PLAZO_INVESTIGACION = '" + fechaplazo + "',PRORROGA_PLAZO_CIERRE = " + soliProrroga + ","
+                        + "FECHA_VINCULACION = '" + fechavincula + "',IMPUSO_MCAUTELARES = " + drecretaMC + ",PRORROGA_PLAZO_CIERRE = " + soliProrroga + ","
                         + "PLAZO_CIERRE_INVESTIGACION = " + plazofijado + ",FECHA_CIERRE_INVESTIGACION = '" + fechCierreI + "',"
                         + "SOBRESEIMIENTO_CAUSAP = " + dictoSobresei + ",SUSPENSION_PROCESO = " + suspenProceso + ","
                         + "CAUSA_SUSPENSION_PROCESO = " + causasSuspension + ",REAPERTURA_PROCESO = " + huboReapertura + ","
@@ -180,8 +179,7 @@ public class insrtInicial extends HttpServlet {
                         + "DETENCION_LEGAL = " + legaldetencion + ",FECHA_LIBERTAD = '" + fechaAutoLiber + "',FORMULACION_IMPUTACION = " + formuImputa + ","
                         + "FECHA_IMPUTACION = '" + fechaFormuImpu + "',IMPUTADO_DECLARO = " + declaro + ",FECHA_DECLARACION = '" + fechDeclara + "',"
                         + "PLAZO_CONSTITUCIONAL = " + huboPlazo + ",TIEMPO_PLAZO = " + Plazo + ",AUTO_VINCULACION = " + autovincula + ","
-                        + "FECHA_VINCULACION = '" + fechavincula + "',IMPUSO_MCAUTELARES = " + drecretaMC + ",INVESTIGACION_COMPLEMENTARIA = " + cierreinvestiga + ","
-                        + "FECHA_PLAZO_INVESTIGACION = '" + fechaplazo + "',PRORROGA_PLAZO_CIERRE = " + soliProrroga + ","
+                        + "FECHA_VINCULACION = '" + fechavincula + "',IMPUSO_MCAUTELARES = " + drecretaMC + ",PRORROGA_PLAZO_CIERRE = " + soliProrroga + ","
                         + "PLAZO_CIERRE_INVESTIGACION = " + plazofijado + ",FECHA_CIERRE_INVESTIGACION = '" + fechCierreI + "',"
                         + "SOBRESEIMIENTO_CAUSAP = " + dictoSobresei + ",SUSPENSION_PROCESO = " + suspenProceso + ","
                         + "CAUSA_SUSPENSION_PROCESO = " + causasSuspension + ",REAPERTURA_PROCESO = " + huboReapertura + ","

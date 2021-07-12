@@ -76,10 +76,16 @@ $(document).ready(function () {
     $('#tablaDeli, #tablaProcesa, #tablaVictimas, #tablaInicial, #tablaIntermedia, #tablaConclu, #tablaTramite,\n\
         #tablaDeliJO, #tablaProcesaJO, #tablaVictimasJO, #tablaJuicioJO, #tablaConcluJO, #tablaTramiteJO, .agregar').on('focusin', function () {
         $('a.pop').fancybox({
+            'hideOnOverlayClick': false,
+            'hideOnContentClick': false,
+            'closeClick': false,
             'type': 'iframe',
             'overlayShow': true,
             'toolbar': false,
             'smallBtn': true,
+            'helpers':{
+                'overlay':{'closeClick': false}
+            },
             'iframe': {
                 'css': {
                     'width': '100%',
@@ -149,6 +155,34 @@ $(document).ready(function () {
         }
     });
     /************************* Fin Funcion de Actualizado *****************************/
+    
+    /********************* Funcion de Multiselect en Conclusiones ***********************/
+//    $(window).scroll(function (){
+//        if(!$('#checkboxes').hasClass('hide')){
+//            $('#checkboxes').addClass('hide');
+//        }
+//    });
+    
+    $(document).on("click", function (e){
+        var ele = $("#multiselect");
+        if(!$('#checkboxes').hasClass('hide')){
+            if (!ele.is(e.target) && ele.has(e.target).length === 0) { 
+                $('#checkboxes').addClass('hide');
+            }
+        }
+    });
+    
+    $('input[name=chkMedidaNPL]').change(function(){
+        var numElemen = $('input[name=chkMedidaNPL]:checked').length;
+        if(numElemen > 0){
+            $('#tipoMedidaNPL').prepend("<option value='" + numElemen + "'>" + numElemen + " Elementos seleccionados</option>");
+            $('#tipoMedidaNPL').val(numElemen);
+        }else{
+            $('#tipoMedidaNPL').val('');
+        }
+        
+    });
+    /********************* Fin Funcion de Multiselect en Conclusiones ***********************/
 });
 
 /******************************FUNCIONES ETAPA INTERMEDIA***************************/
@@ -504,13 +538,13 @@ function buscaYremplaza(proceClave, etapaProce){
                             parent.$('.agregar').hide();//Escondemos el boton de agregar
                             parent.$('.indicador2 span').text(numReg);//Lo mostramos con la cantidad actualizada
                             //Si no hay procesados volando ni en conclusiones entonces desactivamos conclusiones
-                            if(parent.$('#tablaConclu tbody tr').length === 0){
-                                parent.$('#btn7').prop('disabled', true);
-                            }
-                            //Si no hay procesados volando ni en tramite entonces desactivamos tramite
-                            if(parent.$('#tablaTramite tbody tr').length === 0){
-                                parent.$('#btn8').prop('disabled', true);
-                            }
+//                            if(parent.$('#tablaConclu tbody tr').length === 0){
+//                                parent.$('#btn7').prop('disabled', true);
+//                            }
+//                            //Si no hay procesados volando ni en tramite entonces desactivamos tramite
+//                            if(parent.$('#tablaTramite tbody tr').length === 0){
+//                                parent.$('#btn8').prop('disabled', true);
+//                            }
                         } else {//Aun tenemos procesados volando
                             parent.$('.indicador2 span').text(numReg);//Lo mostramos con la cantidad actualizada
                         }
@@ -870,3 +904,11 @@ function borraR(elemento){
     }
 }
 /************************* Fin Funcion de borrado general *****************************/
+
+function showCheckboxes() {
+    if($('#checkboxes').hasClass('hide')){
+        $('#checkboxes').removeClass('hide');
+    }else{
+        $('#checkboxes').addClass('hide');
+    }
+}

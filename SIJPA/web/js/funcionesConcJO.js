@@ -24,13 +24,14 @@ $(document).ready(function() {
     //Se usa para la recuperacion de BD
     switch ($('#resolucion').val()){
         case '1':
-            $('#flsSobreseimto,#flsImpugnacion,#flsReparaDanio').show();
+            $('#flsSobreseimto,#flsImpugnacion').show();
             $('#fechaSenten').val('1799-09-09');
             break;
         case '2':
-            $('#flsSentencia,#flsImpugnacion,#flsReparaDanio').show();
-            $('#flsSobreseimto select').val('-2');
-            $('#fechaSenten').val('1799-09-09');
+            $('#flsSentencia,#flsImpugnacion,#flsReparaDanio,#dFechaSenten').show();
+            $('#flsReparaDanio').hide();
+            $('#flsSobreseimto select,#flsReparaDanio select').val('-2');
+            //$('#fechaSenten').val('1799-09-09');
             break;
         case '3':
             $('#flsImpugnacion,#dFechaSenten').show();
@@ -51,13 +52,13 @@ $(document).ready(function() {
     //Se usa para la recuperacion de BD
     switch ($('#tipoSentencia').val()) {
         case '1':
-            $('#dTipoMedidaPL').fadeIn("slow");
-            $('#tblDConclusiones tr > *:nth-child(2)').fadeIn('slow');
+            $('#dTipoMedidaPL').show();
+            $('#tblDConclusiones tr > *:nth-child(2)').show();
             $('#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
             break;
         case '2':
-            $('#dTipoMedidaNPL').fadeIn("slow");
-            $('#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');
+            $('#dTipoMedidaNPL').show();
+            $('#tblDConclusiones tr > *:nth-child(3)').show();
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(4)').hide();
             break;
         case '3':
@@ -104,26 +105,26 @@ $(document).ready(function() {
         $('#tblDConclusiones input').prop("required", false);
         $('#tblDConclusiones input.radValCambia').val("-2").prop("checked", true);
         if ($('#resolucion').val() === '1') {
-            $('#flsSobreseimto,#flsImpugnacion,#flsReparaDanio').fadeIn("slow");
-            $('#flsSobreseimto select,#flsImpugnacion select,#flsReparaDanio select').val('').prop("required", true);
+            $('#flsSobreseimto,#flsImpugnacion').fadeIn("slow");
+            $('#flsSobreseimto select,#flsImpugnacion select').val('').prop("required", true);
             $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
             $('#chkFechaImpugnacion').prop("checked", false);
 
-            $('#flsSentencia,#dExcluAccion,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna,#dTipoRepara,#dMontoRepara,#dFechaSenten').hide();
-            $('#flsSentencia select').val('-2').prop("required", false);
+            $('#flsSentencia,#dExcluAccion,#dTipoImpugna,#dFechaImpugna,#dQuienImpugna,#dTipoRepara,#dMontoRepara,#dFechaSenten,#flsReparaDanio').hide();
+            $('#flsSentencia select,#flsReparaDanio select').val('-2').prop("required", false);
             $('#fechaSenten').val('1799-09-09').prop("required", false);
 
         } else if ($('#resolucion').val() === '2') {
-            $('#flsSentencia,#flsReparaDanio,#flsImpugnacion').fadeIn("slow");
+            $('#flsSentencia,#flsReparaDanio,#flsImpugnacion,#dFechaSenten').fadeIn("slow");
             $('#flsSentencia select,#flsReparaDanio select,#flsImpugnacion select').val('').prop("required", true);
-            $('#fechaImpugnacion').val('').prop({"required": true, "readonly": false});
+            $('#fechaImpugnacion,#fechaSenten').val('').prop({"required": true, "readonly": false});
             $('#chkFechaImpugnacion').prop("checked", false);
             $('#tblDConclusiones tr > *:nth-child(2),#tblDConclusiones tr > *:nth-child(3),#tblDConclusiones tr > *:nth-child(4)').hide();
 
             $('#flsSobreseimto,#dTipoMedidaPL,#dTipoMedidaNPL,#dInternamiento,#dTipoRepara,#dMontoRepara,\n\
-            #dTipoImpugna,#dFechaImpugna,#dQuienImpugna,#dFechaSenten').hide();
+            #dTipoImpugna,#dFechaImpugna,#dQuienImpugna').hide();
             $('#flsSobreseimto select').val('-2').prop("required", false);
-            $('#fechaSenten').val('1799-09-09').prop("required", false);
+            //$('#fechaSenten').val('1799-09-09').prop("required", false);
 
         } else if ($('#resolucion').val() === '3') {
             $('#flsImpugnacion,#dFechaSenten').fadeIn("slow");
@@ -169,6 +170,7 @@ $(document).ready(function() {
                 $('#dTipoMedidaNPL').fadeIn("slow");
                 $('#tipoMedidaNPL').val('').prop("required", true);
                 $('#tipoMedidaPL').val('-2').prop("required", false);
+                $('.chkMedidaNPL').prop("checked", false);
                 $('#dInternamiento').hide();
                 $('#internamiento').val('-2').prop("required", false);
                 $('#tblDConclusiones tr > *:nth-child(3)').fadeIn('slow');

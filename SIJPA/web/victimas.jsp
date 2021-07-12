@@ -16,8 +16,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Víctimas</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesVic.js"></script>
-        <script type="text/javascript" src="js/fnVictimaDelito.js"></script>
+        <script type="text/javascript" src="js/funcionesVic.js?v=<%=(int)(Math.random()*10+1)%>"></script>
+        <script type="text/javascript" src="js/fnVictimaDelito.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showDelitos sDelitos = new showDelitos();

@@ -13,14 +13,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Ingreso</title>
         <%@include file="librerias.jsp"%>
-        <script type="text/javascript" src="js/fnIndex.js"></script>
+        <script type="text/javascript" src="js/fnIndex.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
-            String version = "BETA 1.5.13";
+            String version = "V1.0";
             //Verificamos si la tabla de versiones existe si no la creamos
             actualizador act = new actualizador();
-            System.out.println("es la version igual: " + act.findVersion("BETA 1.5.13"));
+            System.out.println("es la version igual: " + act.findVersion(version));
             //Verificacmos que version de sistema tiene para poder actualizar si es diferente
-            if(!act.findVersion("BETA 1.5.13")){ 
+            if(!act.findVersion(version)){ 
                 out.println("<script>$(document).ready(function () {"
                         + "$('.load').show();"
                         + "$.ajax({"

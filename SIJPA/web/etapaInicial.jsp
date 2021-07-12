@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Etapa Inicial</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesIni.js"></script>
+        <script type="text/javascript" src="js/funcionesIni.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             catalogos cat = new catalogos();
             showInicial sIni = new showInicial();
@@ -41,8 +41,8 @@
             String autoVincula = "";
             String fechaAutoVin = "";
             String impusoMCaute = "";
-            String inveComplemen = "";
-            String fechaPlazoIn = "";
+            //String inveComplemen = "";
+            //String fechaPlazoIn = "";
             String prorroPlazo = "";
             String plazoCierre = "";
             String fechaCierre = "";
@@ -73,19 +73,19 @@
                         autoVincula = inicial.get(0)[10];
                         fechaAutoVin = inicial.get(0)[11];
                         impusoMCaute = inicial.get(0)[12];
-                        inveComplemen = inicial.get(0)[13];
-                        fechaPlazoIn = inicial.get(0)[14];
-                        prorroPlazo = inicial.get(0)[15];
-                        plazoCierre = inicial.get(0)[16];
-                        fechaCierre = inicial.get(0)[17];
-                        sobreseim = inicial.get(0)[18];
-                        suspenProce = inicial.get(0)[19];
-                        causaSuspen = inicial.get(0)[20];
-                        huboReaper = inicial.get(0)[21];
-                        fechaReaper = inicial.get(0)[22];
-                        soliReaper = inicial.get(0)[23];
-                        acusacion = inicial.get(0)[24];
-                        comen = inicial.get(0)[25];
+                        //inveComplemen = inicial.get(0)[13];
+                        //fechaPlazoIn = inicial.get(0)[14];
+                        prorroPlazo = inicial.get(0)[13];
+                        plazoCierre = inicial.get(0)[14];
+                        fechaCierre = inicial.get(0)[15];
+                        sobreseim = inicial.get(0)[16];
+                        suspenProce = inicial.get(0)[17];
+                        causaSuspen = inicial.get(0)[18];
+                        huboReaper = inicial.get(0)[19];
+                        fechaReaper = inicial.get(0)[20];
+                        soliReaper = inicial.get(0)[21];
+                        acusacion = inicial.get(0)[22];
+                        comen = inicial.get(0)[23];
                     }
                 }
             }
@@ -365,15 +365,15 @@
                         </table>
                     </fieldset>
                     <fieldset class="colsA subField oculto" id="fPlazo">
-                        <div class="colsA">
-                            <label for="soliPlazo">¿Se solicitó el plazo para el cierre de investigación complementaria?</label>
-                            <select name="soliPlazo" id="soliPlazo" required>
+                        <div class="colsA" id="dplazoFijadoC">
+                            <label for="plazoFijadoC">Plazo fijado para el cierre de la investigación</label>
+                            <select name="plazoFijadoC" id="plazoFijadoC">
                                 <option value="">--Seleccione--</option>
                                 <%
-                                    lista = cat.findRespuestaSimple();
+                                    lista = cat.findPlazoCierre();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(inveComplemen)){
+                                        if(ls[0].equals(plazoCierre)){
                                             out.println(" selected ");
                                         }
                                         out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
@@ -381,15 +381,7 @@
                                 %> 
                             </select>
                         </div>
-                        <div class="colsA oculto" id="dfechSoliPlazo1">
-                            <label for="fechSoliPlazo" id="lbfechSoliPlazo"> Fecha de la solicitud del plazo para el cierre de la investigación</label>
-                            <input type="date" name="fechSoliPlazo" id="fechSoliPlazo" value="<%=fechaPlazoIn%>">
-                            <div class="noIdentificada" id="chkfechSoliPlazo">
-                                <input type="checkbox" id="chkFechSoliPlazo" onclick="fechaNoIdent('#chkFechSoliPlazo', '#fechSoliPlazo')">
-                                <label>No identificada</label>
-                            </div>
-                        </div>
-                        <div class="colsA oculto" id="dsoliProrroga">
+                        <div class="colsA" id="dsoliProrroga">
                             <label for="soliProrroga">¿Se autorizo prórroga del plazo para el cierre de la investigación?</label>
                             <select name="soliProrroga" id="soliProrroga">
                                 <option value="">--Seleccione--</option>
@@ -405,33 +397,41 @@
                                 %> 
                             </select>
                         </div>
-                        <div class="colsA oculto" id="dplazoFijadoC">
-                            <label for="plazoFijadoC" id="idplazoFijadoC">Plazo fijado para el cierre de la investigación</label>
-                            <select name="plazoFijadoC" id="plazoFijadoC">
+                        <div class="colsA" id="dCierre">
+                            <label for="fechCierreI" >Fecha del cierre de la investigación</label>
+                            <input type="date" name="fechCierreI" id="fechCierreI" value="<%=fechaCierre%>"/>
+                            <div class="noIdentificada">
+                                <input type="checkbox" id="chkFechCierreI" onclick="fechaEnProceso('#chkFechCierreI', '#chkEnProceso', '#fechCierreI')">
+                                <label>No identificada</label><br/>
+                                <input type="checkbox"  id="chkEnProceso" onclick="fechaEnProceso('#chkFechCierreI', '#chkEnProceso', '#fechCierreI')">
+                                <label>En proceso de investigación</label>
+                            </div>
+                        </div>
+<!--                        <div class="colsA">
+                            <label for="soliPlazo">¿Se solicitó el plazo para el cierre de investigación complementaria?</label>
+                            <select name="soliPlazo" id="soliPlazo" required>
                                 <option value="">--Seleccione--</option>
-                                <%
-                                    lista = cat.findPlazoCierre();
+                                <%--
+                                    lista = cat.findRespuestaSimple();
                                     for (String[] ls : lista) {
                                         out.println("<option value='" + ls[0] + "'");
-                                        if(ls[0].equals(plazoCierre)){
+                                        if(ls[0].equals(inveComplemen)){
                                             out.println(" selected ");
                                         }
                                         out.println(">" + ls[0] + ".- " + ls[1] + "</option>");
                                     }
-                                %> 
+                                --%> 
                             </select>
                         </div>
+                        <div class="colsA oculto" id="dfechSoliPlazo1">
+                            <label for="fechSoliPlazo" id="lbfechSoliPlazo"> Fecha de la solicitud del plazo para el cierre de la investigación</label>
+                            <input type="date" name="fechSoliPlazo" id="fechSoliPlazo" value="<%--=fechaPlazoIn--%>">
+                            <div class="noIdentificada" id="chkfechSoliPlazo">
+                                <input type="checkbox" id="chkFechSoliPlazo" onclick="fechaNoIdent('#chkFechSoliPlazo', '#fechSoliPlazo')">
+                                <label>No identificada</label>
+                            </div>
+                        </div>-->
                     </fieldset>
-                    <div class="colsA oculto" id="dCierre">
-                        <label for="fechCierreI" >Fecha del cierre de la investigación</label>
-                        <input type="date" name="fechCierreI" id="fechCierreI" value="<%=fechaCierre%>"/>
-                        <div class="noIdentificada">
-                            <input type="checkbox" id="chkFechCierreI" onclick="fechaEnProceso('#chkFechCierreI', '#chkEnProceso', '#fechCierreI')">
-                            <label>No identificada</label><br/>
-                            <input type="checkbox"  id="chkEnProceso" onclick="fechaEnProceso('#chkFechCierreI', '#chkEnProceso', '#fechCierreI')">
-                            <label>En proceso de investigación</label>
-                        </div>
-                    </div>
                 </fieldset>
                 <fieldset class="oculto" id="consePlazo">
                     <legend>Consecuencias de la conclusión del plazo de la investigación complementaria</legend>

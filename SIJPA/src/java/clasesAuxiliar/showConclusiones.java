@@ -38,10 +38,11 @@ public class showConclusiones {
                     resul.getString("FECHA_CONCLUSION"), resul.getString("TIPO_RESOLUCION"),resul.getString("TIPO_SOBRESEIMIENTO"),
                     resul.getString("PROCEDENCIA_SOBRESEIMIENTO"),resul.getString("EXCLUSION_ACCIONP"),
                     resul.getString("FECHA_SUSPENCION"), resul.getString("MECANISMO_ACUERDO"), resul.getString("FECHA_ACUERDO"),
-                    resul.getString("TIPO_CONCLUSION_PA"), resul.getString("MEDIDA_PRIVATIVA"), resul.getString("MEDIDA_NOPRIVATIVA"),
-                    resul.getString("TIEMPO_INTERNAMIENTO"), resul.getString("REPARACION_DANIO"), resul.getString("TIPO_REPARACION_DANIO"),
-                    resul.getString("MONTO_REPARA"), resul.getString("IMPUGNACION"), resul.getString("TIPO_IMPUGNACION"),
-                    resul.getString("FECHA_IMPUGNACION"), resul.getString("PERSONA_IMPUGNA"), resul.getString("COMENTARIOS")
+                    resul.getString("FECHA_SENTENCIA"), resul.getString("TIPO_CONCLUSION_PA"), resul.getString("MEDIDA_PRIVATIVA"),
+                    resul.getString("MEDIDA_NOPRIVATIVA"), resul.getString("TIEMPO_INTERNAMIENTO"), resul.getString("REPARACION_DANIO"),
+                    resul.getString("TIPO_REPARACION_DANIO"), resul.getString("MONTO_REPARA"), resul.getString("IMPUGNACION"),
+                    resul.getString("TIPO_IMPUGNACION"), resul.getString("FECHA_IMPUGNACION"), resul.getString("PERSONA_IMPUGNA"),
+                    resul.getString("COMENTARIOS")
                 });
             }
             conn.close();
@@ -191,6 +192,23 @@ public class showConclusiones {
             Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
         }
         return seleccionado;
+    }
+    
+    public String medidaNoPrivativa(String causaClave, String procesadoClave, String tipoMedida){
+        String mediNPL = "";
+        try{
+            conn.Conectar();
+            sql = "SELECT MEDIDA_NOPRIVATIVA FROM DATOS_MEDIDA_NOPRIVATIVA_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "'"
+                        + "AND PROCESADO_CLAVE='"+ procesadoClave +"' AND MEDIDA_NOPRIVATIVA = " +tipoMedida;
+            resul = conn.consultar(sql);
+            if(resul.next()){
+                mediNPL = resul.getString(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mediNPL;
     }
     
 }

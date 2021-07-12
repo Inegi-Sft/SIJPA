@@ -67,6 +67,7 @@ public class insrtConclusiones extends HttpServlet {
         String fechaExtSCP = request.getParameter("fechaExtSCP");
         String tipoMecanismoAR = request.getParameter("tipoMecanismoAR");
         String fechaExtinAR = request.getParameter("fechaExtinAR");
+        String fechaSentencia = request.getParameter("fechaSenten");
         String tipoResolucionPA = request.getParameter("tipoResolucionPA");
         String privativa = request.getParameter("tipoMedidaPL");
         String noprivativa = request.getParameter("tipoMedidaNPL");
@@ -79,6 +80,9 @@ public class insrtConclusiones extends HttpServlet {
         String fechaImpugna = request.getParameter("fechaImpugnacion");
         String personaImpugna = request.getParameter("personaImpugna");
         String comentario = request.getParameter("comentarios");
+        
+        //variables Medidas noprivativas
+        String[] medidaNopriva = request.getParameterValues("chkMedidaNPL");
 
         // variables DCONCLUSIONES
         String[] delitoClave = request.getParameterValues("delitoConclu");
@@ -91,7 +95,7 @@ public class insrtConclusiones extends HttpServlet {
             if (!opera.equals("actualizar")) {//Se inserta el dato ya que es nuevo
                 sql = "INSERT INTO DATOS_CONCLUSIONES_ADOJC VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                         + causaClave + "','" + proceClave + jConcatenado + "','" + fechaResolu + "'," + tipoResolu + "," + tipoSobre + "," + proceSobre + ","
-                        + excluAccion + ",'" + fechaExtSCP + "'," + tipoMecanismoAR + ",'" + fechaExtinAR + "'," + tipoResolucionPA + ","
+                        + excluAccion + ",'" + fechaExtSCP + "'," + tipoMecanismoAR + ",'" + fechaExtinAR + "'," + tipoResolucionPA + ",'" + fechaSentencia + "',"
                         + privativa + "," + noprivativa + "," + internamiento + "," + reparacion + "," + tipoRepara + "," + multa + "," + impugnacion + ","
                         + tipoImpugnacion + ",'" + fechaImpugna + "'," + personaImpugna + ",'" + comentario + "', (select YEAR(NOW())) )";
                 System.out.println(sql);
@@ -104,8 +108,14 @@ public class insrtConclusiones extends HttpServlet {
                             System.out.println(sql);
                             insrtDConclu = conn.escribir(sql);
                         }
-                    }
-                    else if(tipoResolu.equals("2")){
+                        if(tipoResolucionPA.equals("2")){
+                            for(String medidaNopriv : medidaNopriva){
+                                sql = "INSERT INTO DATOS_MEDIDA_NOPRIVATIVA_ADOJC VALUES('" + causaClave + "','" + proceClave + jConcatenado +"'," + medidaNopriv + ")";
+                                System.out.println(sql);
+                                conn.escribir(sql);
+                            }
+                        }
+                    }else if(tipoResolu.equals("2")){
                         for (String tipo_suspension1 : tipo_suspension) {
                             sql_suspension = "INSERT INTO DATOS_CSUSPENSION_ADOJC VALUES('"+causaClave+"','"+proceClave+ jConcatenado +"'," + tipo_suspension1 + jEntidad + "," + jMunicipio + "," + jNumero + ")";
                             conn.escribir(sql_suspension);
@@ -151,7 +161,8 @@ public class insrtConclusiones extends HttpServlet {
             } else {//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_CONCLUSIONES_ADOJC SET FECHA_CONCLUSION = '" + fechaResolu + "',TIPO_RESOLUCION = " + tipoResolu + ","
                         + "TIPO_SOBRESEIMIENTO = " + tipoSobre + ",PROCEDENCIA_SOBRESEIMIENTO = " + proceSobre + ",EXCLUSION_ACCIONP = " + excluAccion + ","
-                        +"FECHA_SUSPENCION = '"+ fechaExtSCP +"',MECANISMO_ACUERDO = " + tipoMecanismoAR + ",FECHA_ACUERDO = '" + fechaExtinAR + "',TIPO_CONCLUSION_PA = " + tipoResolucionPA + ","
+                        + "FECHA_SUSPENCION = '"+ fechaExtSCP +"',MECANISMO_ACUERDO = " + tipoMecanismoAR + ",FECHA_ACUERDO = '" + fechaExtinAR + "',"
+                        + "TIPO_CONCLUSION_PA = " + tipoResolucionPA + ",FECHA_SENTENCIA = '" + fechaSentencia + "',"
                         + "MEDIDA_PRIVATIVA = " + privativa + ",MEDIDA_NOPRIVATIVA = " + noprivativa + ",TIEMPO_INTERNAMIENTO = " + internamiento + ","
                         + "REPARACION_DANIO = " + reparacion + ",TIPO_REPARACION_DANIO = " + tipoRepara + ",MONTO_REPARA = " + multa + ","
                         + "IMPUGNACION = " + impugnacion + ",TIPO_IMPUGNACION = " + tipoImpugnacion + ",FECHA_IMPUGNACION = '" + fechaImpugna + "',"
@@ -167,6 +178,9 @@ public class insrtConclusiones extends HttpServlet {
                     sql = "DELETE FROM DATOS_CSUSPENSION_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
                             + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
                     conn.escribir(sql);
+                    sql = "DELETE FROM DATOS_MEDIDA_NOPRIVATIVA_ADOJC WHERE CAUSA_CLAVE = '" + causaClave + "' "
+                            + "AND PROCESADO_CLAVE = '" + proceClave + jConcatenado + "';";
+                    conn.escribir(sql);
                     if (tipoResolu.equals("4")) {
                         for (int i = 0; i < delitoClave.length; i++) {
                             String resolDelito = request.getParameter("resolDelito" + i);
@@ -174,6 +188,13 @@ public class insrtConclusiones extends HttpServlet {
                                     + proceClave + jConcatenado + "','" + delitoClave[i] + "'," + tipoResolucionPA + "," + resolDelito + ", (select YEAR(NOW())) )";
                             System.out.println(sql);
                             insrtDConclu = conn.escribir(sql);
+                        }
+                        if(tipoResolucionPA.equals("2")){
+                            for(String medidaNopriv : medidaNopriva){
+                                sql = "INSERT INTO DATOS_MEDIDA_NOPRIVATIVA_ADOJC VALUES('" + causaClave + "','" + proceClave + jConcatenado +"'," + medidaNopriv + ")";
+                                System.out.println(sql);
+                                conn.escribir(sql);
+                            }
                         }
                     }
                     else if(tipoResolu.equals("2")){

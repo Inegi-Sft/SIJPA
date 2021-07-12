@@ -67,6 +67,7 @@ public class insrtEtapaOral extends HttpServlet {
         String incidentes = request.getParameter("incidentes");
         String resoIncidente = request.getParameter("resoIncidente");
         String promueveIncidente = request.getParameter("promueveIncidente");
+        String nueMedioPru = request.getParameter("nueMedioPru");
         String testimonial = request.getParameter("testimonial");
         String cantTesti = request.getParameter("cantTesti");
         String pericial = request.getParameter("pericial");
@@ -102,8 +103,8 @@ public class insrtEtapaOral extends HttpServlet {
                 sql = "INSERT INTO DATOS_ETAPA_ORAL_ADOJO VALUES (" + jEntidad + "," + jMunicipio + "," + jNumero + ",'"
                         + causaClaveJO + "','" + proceClave + jConcatenado + "','" + autoApertura + "','" + celebracionA + "',"
                         + medidasDis + ","+ tipoMedida + "," + incidentes + ",'" + resoIncidente + "'," + promueveIncidente + ","
-                        + testimonial + ","+cantTesti+"," + pericial + ","+cantPeri+"," + declaracion + ","+cantDeclara +"," 
-                        + documental + ","+cantDocumen+"," + otro + ","+cantOtro+"," + suspencionA +",'"
+                        + nueMedioPru + "," + testimonial + ","+cantTesti+"," + pericial + ","+cantPeri+"," + declaracion + ","
+                        + cantDeclara +"," + documental + ","+cantDocumen+"," + otro + ","+cantOtro+"," + suspencionA +",'"
                         + fechaSuspencion + "','" + fechaReanudacion + "'," + deliberacion + ",'" + fechaDeliberacion + "',"
                         + sentidoFallo + ",'" + comentarios + "', (select YEAR(NOW()))," + banderaEtapa + ")";
                 System.out.println(sql);
@@ -135,9 +136,10 @@ public class insrtEtapaOral extends HttpServlet {
             }else{//Se actualiza el dato que viene de recuperacion
                 sql = "UPDATE DATOS_ETAPA_ORAL_ADOJO SET FECHA_APERTURA_JUICIOORAL = '"+ autoApertura +"', FECHA_AUDIENCIA_JUICIO = '" + celebracionA + "',"
                         + "MEDIDAS_DISCIPLINARIAS = " + medidasDis + ", TIPO_DISCIPLINARIA = " + tipoMedida + ", INCIDENTES_AUDIENCIA = " + incidentes + ","
-                        + "FECHA_RESOLUCION_INCIDENTE = '" + resoIncidente + "', PROMUEVE_INCIDENTE = " + promueveIncidente + ", PD_TESTIMONIAL = " + testimonial + ","
-                        + "CANTIDAD_TEST = "+ cantTesti + ", PD_PERICIAL = " + pericial + ", CANTIDAD_PERI = " + cantPeri +", PD_DECLARACION_ACUSADO = "+ declaracion + ","
-                        + "CANTIDAD_DECLA = "+ cantDeclara +", PD_DOCUMENTAL_MATERIAL = " + documental + ", CANTIDAD_DOCU = " + cantDocumen + ", PD_OTRA_PRUEBA = " + otro + ","
+                        + "FECHA_RESOLUCION_INCIDENTE = '" + resoIncidente + "', PROMUEVE_INCIDENTE = " + promueveIncidente + ", NUEVO_MEDIO = " + nueMedioPru + ","
+                        + "PD_TESTIMONIAL = " + testimonial + "," + "CANTIDAD_TEST = "+ cantTesti + ", PD_PERICIAL = " + pericial + ","
+                        + "CANTIDAD_PERI = " + cantPeri +", PD_DECLARACION_ACUSADO = "+ declaracion + "," + "CANTIDAD_DECLA = "+ cantDeclara +","
+                        + "PD_DOCUMENTAL_MATERIAL = " + documental + ", CANTIDAD_DOCU = " + cantDocumen + ", PD_OTRA_PRUEBA = " + otro + ","
                         + "CANTIDAD_OTRO = " + cantOtro + ", SUSPENCION_AUDIENCIA = "+ suspencionA + ", FECHA_SUSPENCION = '" + fechaSuspencion + "',"
                         + "FECHA_REANUDACION = '" + fechaReanudacion + "', DELIBERACION = " + deliberacion + ", FECHA_DELIBERACION = '" + fechaDeliberacion + "',"
                         + "SENTIDO_FALLO = " + sentidoFallo + ", COMENTARIOS = '" + comentarios + "', ETAPA = " + banderaEtapa

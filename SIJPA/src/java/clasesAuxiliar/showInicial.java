@@ -41,11 +41,10 @@ public class showInicial {
                     resul.getString("FECHA_LIBERTAD"), resul.getString("FORMULACION_IMPUTACION"), resul.getString("FECHA_IMPUTACION"),
                     resul.getString("IMPUTADO_DECLARO"), resul.getString("FECHA_DECLARACION"), resul.getString("PLAZO_CONSTITUCIONAL"),
                     resul.getString("TIEMPO_PLAZO"), resul.getString("AUTO_VINCULACION"), resul.getString("FECHA_VINCULACION"),
-                    resul.getString("IMPUSO_MCAUTELARES"), resul.getString("INVESTIGACION_COMPLEMENTARIA"), resul.getString("FECHA_PLAZO_INVESTIGACION"),
-                    resul.getString("PRORROGA_PLAZO_CIERRE"), resul.getString("PLAZO_CIERRE_INVESTIGACION"), resul.getString("FECHA_CIERRE_INVESTIGACION"),
-                    resul.getString("SOBRESEIMIENTO_CAUSAP"), resul.getString("SUSPENSION_PROCESO"), resul.getString("CAUSA_SUSPENSION_PROCESO"),
-                    resul.getString("REAPERTURA_PROCESO"), resul.getString("FECHA_REAPERTURA_PROCESO"), resul.getString("SOLICITO_REAPERTURA"),
-                    resul.getString("FORMULO_ACUSACION"), resul.getString("COMENTARIOS")
+                    resul.getString("IMPUSO_MCAUTELARES"), resul.getString("PRORROGA_PLAZO_CIERRE"), resul.getString("PLAZO_CIERRE_INVESTIGACION"),
+                    resul.getString("FECHA_CIERRE_INVESTIGACION"), resul.getString("SOBRESEIMIENTO_CAUSAP"), resul.getString("SUSPENSION_PROCESO"),
+                    resul.getString("CAUSA_SUSPENSION_PROCESO"), resul.getString("REAPERTURA_PROCESO"), resul.getString("FECHA_REAPERTURA_PROCESO"),
+                    resul.getString("SOLICITO_REAPERTURA"), resul.getString("FORMULO_ACUSACION"), resul.getString("COMENTARIOS")
                 });
             }
             conn.close();

@@ -178,4 +178,21 @@ public class showConclusionesJO {
         return conteoConclu;
     }
     
+    public String medidaNoPrivativaJO(String causaClave, String procesadoClave, String tipoMedida){
+        String mediNPL = "";
+        try{
+            conn.Conectar();
+            sql = "SELECT MEDIDA_NOPRIVATIVA FROM DATOS_MEDIDA_NOPRIVATIVA_ADOJO WHERE CAUSA_CLAVEJO = '" + causaClave + "'"
+                        + "AND PROCESADO_CLAVE='"+ procesadoClave +"' AND MEDIDA_NOPRIVATIVA = " +tipoMedida;
+            resul = conn.consultar(sql);
+            if(resul.next()){
+                mediNPL = resul.getString(1);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(showConclusiones .class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mediNPL;
+    }
+    
 }

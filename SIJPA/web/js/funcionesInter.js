@@ -267,7 +267,7 @@ $(document).ready(function() {
         if ($(this).val() === '1') {
             alert("Causa Penal Concluida. Registre la información complementaria en el apartado de resoluciones");
         }else{
-            alert("Esta Causa Penal debe ser registrada en Resoluciones o Tramite segun corresponda");
+            alert("Esta Causa Penal debe ser registrada en Resoluciones o Trámite de acuerdo a lo que corresponda");
         }
     });
     

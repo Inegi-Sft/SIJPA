@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>SIJPA::Reportes</title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/fnReportes.js"></script>
+        <script type="text/javascript" src="js/fnReportes.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%
             HttpSession sesion = request.getSession();
             

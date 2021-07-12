@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIJPA::Pendientes de resolución </title>
         <%@include file="librerias.jsp" %>
-        <script type="text/javascript" src="js/funcionesTramJO.js"></script>
+        <script type="text/javascript" src="js/funcionesTramJO.js?v=<%=(int)(Math.random()*10+1)%>"></script>
         <%  
             catalogos cat = new catalogos();
             showTramiteJO sTramite = new showTramiteJO();
